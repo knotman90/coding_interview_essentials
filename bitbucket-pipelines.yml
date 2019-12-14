@@ -14,6 +14,9 @@ pipelines:
           # BUILDING
           - echo "Creating PDF"
           - make
+        artifacts:
+          - build/*.pdf
+
     - step:
         name: Notifications
         script:    
