@@ -1,0 +1,187 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+% https://www.geeksforgeeks.org/count-pairs-with-given-sum/
+% https://algorithms.tutorialhorizon.com/given-an-array-and-a-number-k-check-for-pair-in-array-with-sum-as-k-in-onlgn/
+% https://coderbyte.com/algorithm/two-sum-problem
+% https://en.wikipedia.org/wiki/Subset_sum_problem
+%
+% Difficulty: Easy
+% Companies: Microsoft, Amazon, Google
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapterimage{header4} % Table of contents heading image
+
+\chapter{Two numbers sum problem}
+\label{ch:two_numbers_sum}
+\section*{Introduction}
+This problem is used often as a interview question and it is mostly asked during the early online stages of the hiring process because it is easy to explain, to understand and its solution fits in a few lines. It is a great question because it allows you to clearly show to the interviewer your thought process and how you can incrementally improve and refine your solution until it reaches the optimum.
+
+This chapter will investigate a number of solutions in the order which they should be presented to the interviewer:
+\begin{itemize}
+	\item[-] Brute-force
+	\item[-] Sorting
+	\item[-] Hashing
+	\item[-] Two pointers
+\end{itemize}
+
+\section{Problem statement}
+
+\begin{exercise}
+Write a function that takes a collection of integers and a number $T$, and return \textbf{true} if the sum of two distinct elements of the collection is equal to $T$, \textbf{false} otherwise.
+\end{exercise}
+
+
+\begin{example}
+\\ \hfill
+	\begin{itemize}
+		\item[-] 	$A=\{9, 4, 17, 42, 36, -3 ,15}\}$
+		\item[-] 	$T = 14$
+	\end{itemize}
+The answer in this case is \textbf{true} because elements we can obtain $14=17+ (-3)$. 
+If $T=17$ then the answer would be \textbf{false} as there is no way we can sum two numbers together and obtain $17$
+\end{example}
+
+More formally, what the problem asks is:
+\begin{exercise}
+	Given an array $A=\{a1...an\}$ and $T$, where $a_i, T \in \mathcal{N}$, return:
+	\begin{itemize}
+		\item[-] \textbf{true }if $\exists \;i,j \: i \neq j$ s.t. $a_i+a_j = T$
+		\item[-] \textbf{false} otherwise
+	\end{itemize}
+\end{exercise}	
+	
+
+\section{Clarification Questions}
+What are the questions that are good to ask?
+List a number of relevant question and for each of them give a possible answer from the interview
+
+- What is the size of the input?
+- Is the collection sorted?
+- Are duplicates allowed?
+
+
+\section{Discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%        quadratic solution
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Brute-force}
+The brute force solution is fairly straightforward because it consists in applying the search method described in the formal problem statement. The solution spaces consists of all possible ordered and distinct pairs $(a_i,A_j)$, $i < j$ of element of $A$. Two nested loops can be used to enumerate all the pairs and for each of them we can check whether their sum is equal to $T$: if yes we immediately return \textbf{True} (see Algorithm \ref{algo:two_number_sum_bruteforce} and Listing \ref{list:two_number_sum_bruteforce}).
+The complexity of this solution is quadratic $O(n^2)$ because there is a quadratic number of ordered pairs.\footnote{The number of iteration of the internal loop depends on the value of $i$ and it is described by the following function: $f(i) = n-i-1$. The total number of iteration the second loop runs in the worst case is the the sum over all values of $i$: $\sum_{0}^{n-2}f(i) = (n-1) + (n-2) + (n-3) \dots + 1$ = $\sum_{1}^{n-1} = \frac{n(n-1)}{2} = O(n^2)$}
+\begin{algorithm}
+	\SetAlgoLined
+	\SetKwFunction{FMain}{solveQuadratic}
+	
+	\KwIn{$ A $ \tcp{An array $A$ of length $n$}}
+	\KwIn{$ T $ \tcp{An integer $T$}}
+
+	\Fn{\FMain{$A,T$}}{
+	
+		\Output{true if two distinct element of $A$ sum to $T$}
+		
+		\For{$i\leftarrow 0$ \KwTo $n-1$}
+		{
+			\For{$j\leftarrow i+1$ \KwTo $n$}
+			{
+				\If{$a_i + a_j = T$}{
+					\Return True \;
+				}
+			}
+		}
+		\Return False \;
+	}\textbf{End Function}
+	
+	\label{algo:two_number_sum_bruteforce}
+	\caption{Two loops, quadratic solution to the question in Section \ref{ch:two_numbers_sum} }
+\end{algorithm}
+The following code implements this idea:
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/brute_force.cpp}
+
+\subsection{Hash-table Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% two_numbers_sum_hashset       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{algorithm}[H]
+	%	\KwData{}
+	%	\KwResult{Tr }
+	\KwIn{$ A $ \tcp{An array $A$ of length $n$}}
+	\KwIn{$ T $ \tcp{An integer $T$}}
+	\KwOut{true if two distinct element of $A$ sum to $T$, False otherwise}
+	\SetKwFunction{FMain}{solveHashSet}
+	
+    \Fn{\FMain{$A,T$}}{
+	    \Let H $\longleftarrow$ \CreateHashSet \;
+	
+		\For{$i\leftarrow 0$ \KwTo $n$}
+		{
+			target $\leftarrow$ $(T-a_i)$
+			\eIf{H.find(target)}
+				{\Return True}
+				{H.insert($a_i$)}
+		}
+		\Return False\;
+    }\textbf{End Function}
+
+	\label{algo:two_number_sum_hashset}
+	\caption{Hashset, linear solution to the \textit{two number sum} question in Section \ref{ch:two_numbers_sum}.}
+\end{algorithm}
+
+
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/hashset.cpp}
+
+
+A common mistake when solving this problem is when the whole input array is inserted into the hash-table and only after search for the target value $T-a_i$ (see Algorithm \ref{algo:two_numbers_sum_hashset_wrong}). The problem with this approach is that if the target is an even number i.e. $ 2 | T$ and $\frac{T}{2} \in A$ exactly once, say it is the element $a_k$, then $H.find(T-a_k=\frac{T}{2})$ returns true. The following example exposesthe problem:
+\begin{example}
+	\\ \hfill
+	\begin{itemize}
+		\item[] $A=\{1,2,5,4}\}$
+	\item[] $T = 10$
+\end{itemize}
+The Algorithm \ref{algo:two_numbers_sum_hashset_wrong} return True even if there are not two distinct elements in $A$ whose sum is $T$.
+\end{example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% two_numbers_sum_hashset_wrong       
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{algorithm}
+	\SetKwInOut{Input}{input}
+	\SetKwInOut{Output}{output}
+	\SetKwFunction{CreateHashSet}{CreateHashSet<int>}
+	\Input{An array $A$ of length $n$}
+	\Input{An integer $T$}
+	\Output{true if two distinct element of $A$ sum to $T$}
+	
+	\SetKwFunction{FMain}{solveHashSet}
+	\Fn{\FMain{$A,T$}}{
+		\Let H $\longleftarrow$ \CreateHashSet \;
+		\tcp{Add the whole array in the hashset}
+		\For{$i\leftarrow 0$ \KwTo $n$} 
+		{
+			H.insert($a_i$)\;
+		}
+		
+		\For{$i\leftarrow 0$ \KwTo $n$}
+		{
+			target $\leftarrow$ $T-a_i$ \;
+			\If{H.find(target)}
+			{\Return True}
+		}
+		\Return False\;
+	}\textbf{End Function}
+	\label{algo:two_numbers_sum_hashset_wrong}
+	\caption{Hashset, linear solution to the \textit{two number sum} question in Section \ref{ch:two_numbers_sum} }
+\end{algorithm}
+
+
+
+
+
+\section{Common variations}
+What are the common variation to a the problem?
+List each of them and comment on the implication of the variations if any.
+
+\section{Conclusion}
