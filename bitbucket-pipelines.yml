@@ -1,0 +1,26 @@
+# This is a sample build configuration for Other.
+# Check our guides at https://confluence.atlassian.com/x/5Q4SMw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: atlassian/default-image:2
+
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "Everything is awesome!"
+          - pipe: atlassian/email-notify:0.3.8
+            variables:
+              USERNAME: 'spataro.davide@gmx.com'
+              PASSWORD: 'AwV5ou3DqiLm'
+              FROM: 'spataro.davide@gmx.com'
+              TO: 'davide90.spatato@gmail.com'
+              HOST: 'mail.gmx.com'
+              PORT: '587' # Optional.
+              TLS: 'true' # Optional.
+              SUBJECT: 'Book Status'
+              ATTACHMENTS: 'build/main.pdf' 
+              # BODY_PLAIN: '<string>'
+              # BODY_HTML: '<string>'
+              # DEBUG: '<boolean>'
