@@ -1,0 +1,101 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty: Easy/Medium
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapterimage{header}
+
+\chapter{Square root of an integer}
+\label{ch:square_root}
+\section*{Introduction}
+Calculation of the square root of an integer is a problem that is very often asked in coding interview question mostly because there exists a quite obvious solution that is not trivial to implement and a faster solution that works for larger input. It is a very good question to showcase implementation skills and algorithmic thinking.
+
+\section{Problem statement}
+Write a function (with signature: \lstinline[columns=fixed]{int my_sqrt(const int n)} ) calculates the square root of an integer rounded down to the nearest integer without using any library call.
+
+\begin{example}
+	\hfill \\
+	\begin{itemize}
+		\item[-] 	\lstinline[columns=fixed]{my_sqrt(9)=3}: $\Longleftarrow $ $\ceil{\sqrt{9}}=3$
+		\item[-] 	\lstinline[columns=fixed]{my_sqrt(11)=3}: $\Longleftarrow $ $\ceil{\sqrt{11}}\approx\ceil{3.316624}=3$
+		\item[-] 	\lstinline[columns=fixed]{my_sqrt(18)=4}: $\Longleftarrow $ $\ceil{\sqrt{11}}\approx\ceil{4.242640}=4$
+	\end{itemize}
+
+\end{example}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item What is the maximum value the parameter $n$ can take?
+	\begin{answered}
+		\textit{The maximum number of element smaller than $2^{32}$.}
+	\end{answered}
+	
+	\item Is $n$ guaranteed to be always positive?
+	\begin{answered}
+		\textit{Yes, there is no need to check for invalid input.}
+	\end{answered}
+\end{QandA}
+
+\section{Discussion}
+The interviewer is very likely expecting to see a brute force solution appear on the whiteboard within the first 5-7 minutes. The reason is that the brute force approach for this problem is quite easy conceptually but its implementation in a concise manner requires some thinking. 
+
+\subsection{Brute-Force}
+The square root of a number can be found by testing all numbers from $k=0,1,2,\ldots$ until a solution is found i.e. $k^2\leq n$ and $(k+1)(k+1) > n$ . A solution is guaranteed to be found, and it should be immediately noticed that no more than $\sqrt{n}$ numbers will be tested. Therefore the time complexity of this approach is $O(\sqrt{n})$.
+Listing \ref{list:square_root_brute_force} shows a possible implementation. Note that the variable $i$ has a type in C++ that is larger in size than $int$. This prevents overflows during the calculation of $i^2$ in the while condition if the input $n=2^{32}$.
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption=$O(\sqrt{n})$ solution to the problem of finding the square root of an integer.,label=list:square_root_brute_force]{sources/square_root/square_root_brute_force.cpp}
+\end{minipage}
+
+\subsection{Logarithmic Solution}
+Binary search can be effectively used to solve this problem. In order to show that, it is beneficial to look at the problem from a slightly different angle. 
+Let 
+\begin{equation}
+	F(k)=\begin{cases} 
+0 & k^2 \leq n \\
+1 & k^2 > n
+\end{cases}
+\label{eq:square_root_piecewice}
+\end{equation} 
+be a piece-wise function that partition the search space $[0\ldots n]$ into two sets (See Table \ref{tab:sqrt_split_space}):
+	\begin{itemize}
+      \item [-] the numbers  less or equal than $\sqrt{n}$
+      \item [-] the numbers strictly greater or equal than $\sqrt{n}$
+	\end{itemize}
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		$0$ & $1$ & $2$   & $\sqrt{n}$ & $\sqrt{n}+1$ & \ldots   & $n$ \\ \hline
+		$0$ & $0$ & \ldots & $1$ & $1$ & \ldots & $1$   \\ \hline
+	\end{tabular}
+\label{tab:sqrt_split_space}
+\caption{Partition of the search space according to the function in Eq. \ref{eq:square_root_piecewice}}
+\end{table}
+What the function should return is basically the greatest $k$ s.t. $F(k)=0$. 
+
+Because of the peculiarity of the function $F(k)$ i.e. (divided into two partition) we can use binary search to find the end of the first partition as shown in Listing \ref{list:square_root_binary_search}. Note how a the algorithm works by iteratively searching in a smaller subinterval defined by the variables $l$ and $r$. At each iteration test the middle element of the subinterval (variable $middle$), and this can lead to three scenarios:
+
+\begin{enumerate}
+ 	\item $(middle)^2  = n \longrightarrow$. $middle$ is the solution. $n$ is a perfect square and $\sqrt(n)=middle$
+ 	\item $(middle)^2  > n \longrightarrow$. $middle$ is not the solution and we can also exclude all numbers $k \geq middle$ (by doing $r = middle-1$).
+ 	\item $(middle)^2  < n \longrightarrow$. $middle$ is the best guess we have found so far. we can also exclude all numbers $k < middle$ from the next iterations (by doing $l = middle+1$).
+\end{enumerate}
+As a bonus it might be also good to point out to the interviewer the fact that the middle element is not calculated as it is commonly done i.e. $(l+r)/2$ in order to prevent overflow when $l+r$ is calculated.
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption=$O(log_2(n))$ solution to the problem of finding the square root of an integer.,label=list:square_root_brute_force]{sources/square_root/square_root_binary_search.cpp}
+\end{minipage}
+
+\subsection{Backtracking}
+
+
+
+\section{Common variations}
+
+\section{Conclusion}
