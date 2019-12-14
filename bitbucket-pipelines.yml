@@ -19,7 +19,21 @@ pipelines:
               USERNAME: 'spataro.davide@gmx.com'
               PASSWORD: 'AwV5ou3DqiLm'
               FROM: 'spataro.davide@gmx.com'
-              TO: 'davide90.spatato@gmail.com'
+              TO: 'davide90.spataro@gmail.com'
+              HOST: 'mail.gmx.com'
+              PORT: '587' # Optional.
+              TLS: 'true' # Optional.
+              SUBJECT: 'Book Status'
+              ATTACHMENTS: 'build/main.pdf' 
+              # BODY_PLAIN: '<string>'
+              # BODY_HTML: '<string>'
+              # DEBUG: '<boolean>'
+          - pipe: atlassian/email-notify:0.3.8
+            variables:
+              USERNAME: 'spataro.davide@gmx.com'
+              PASSWORD: 'AwV5ou3DqiLm'
+              FROM: 'spataro.davide@gmx.com'
+              TO: 'pranav656@gmail.com '
               HOST: 'mail.gmx.com'
               PORT: '587' # Optional.
               TLS: 'true' # Optional.
