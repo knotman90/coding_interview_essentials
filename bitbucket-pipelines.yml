@@ -5,13 +5,18 @@
 # You can specify a custom docker image from Docker Hub as your build environment.
 #image: atlassian/default-image:2
 image: aergus/latex
+
 pipelines:
   default:
     - step:
+        name: Build
         script:
           # BUILDING
           - echo "Creating PDF"
-          - make    
+          - make
+    - step:
+        name: Notifications
+        script:    
           # NOTIFICATIONS
           - echo "Sending email notification"
           - pipe: atlassian/email-notify:0.3.8
@@ -23,9 +28,9 @@ pipelines:
               HOST: 'mail.gmx.com'
               PORT: '587' # Optional.
               TLS: 'true' # Optional.
-              SUBJECT: 'Book Status'
+              SUBJECT: '[BITBUCKET][BOOK] New Build'
               ATTACHMENTS: 'build/main.pdf' 
-              # BODY_PLAIN: '<string>'
+              BODY_PLAIN: 'A new successful build has been performed. Attached the Book PDF'
               # BODY_HTML: '<string>'
               # DEBUG: '<boolean>'
           - pipe: atlassian/email-notify:0.3.8
@@ -37,8 +42,8 @@ pipelines:
               HOST: 'mail.gmx.com'
               PORT: '587' # Optional.
               TLS: 'true' # Optional.
-              SUBJECT: 'Book Status'
+              SUBJECT: '[BITBUCKET][BOOK] New Build'
               ATTACHMENTS: 'build/main.pdf' 
-              # BODY_PLAIN: '<string>'
+              BODY_PLAIN: 'A new successful build has been performed. Attached the Book PDF'
               # BODY_HTML: '<string>'
               # DEBUG: '<boolean>'
