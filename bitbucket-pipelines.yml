@@ -9,7 +9,11 @@ pipelines:
   default:
     - step:
         script:
-          - echo "Everything is awesome!"
+          # BUILDING
+          - echo "Creating PDF"
+          - make    
+          # NOTIFICATIONS
+          - echo "Sending email notification"
           - pipe: atlassian/email-notify:0.3.8
             variables:
               USERNAME: 'spataro.davide@gmx.com'
