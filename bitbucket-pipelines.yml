@@ -28,7 +28,7 @@ pipelines:
               HOST: 'mail.gmx.com'
               PORT: '587' # Optional.
               TLS: 'true' # Optional.
-              SUBJECT: '[BITBUCKET][BOOK] New Build'
+              SUBJECT: 'BITBUCKET-BOOK - New Build'
               ATTACHMENTS: 'build/main.pdf' 
               BODY_PLAIN: 'Hi Davide, A new successful build of the book has been performed. Attached  you will find the Book PDF'
               # BODY_HTML: '<string>'
@@ -42,7 +42,7 @@ pipelines:
               HOST: 'mail.gmx.com'
               PORT: '587' # Optional.
               TLS: 'true' # Optional.
-              SUBJECT: '[BITBUCKET][BOOK] New Build'
+              SUBJECT: 'BITBUCKET-BOOK - New Build'
               ATTACHMENTS: 'build/main.pdf' 
               BODY_PLAIN: 'Hi Pranav, A new successful build of the book has been performed. Attached  you will find the Book PDF'
               # BODY_HTML: '<string>'
