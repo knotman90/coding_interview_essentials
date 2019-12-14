@@ -30,7 +30,7 @@ pipelines:
               TLS: 'true' # Optional.
               SUBJECT: '[BITBUCKET][BOOK] New Build'
               ATTACHMENTS: 'build/main.pdf' 
-              BODY_PLAIN: 'Hi Pranav, A new successful build of the book has been performed. Attached  you'll find the Book PDF'
+              BODY_PLAIN: 'Hi Davide, A new successful build of the book has been performed. Attached  you will find the Book PDF'
               # BODY_HTML: '<string>'
               # DEBUG: '<boolean>'
           - pipe: atlassian/email-notify:0.3.8
@@ -44,6 +44,6 @@ pipelines:
               TLS: 'true' # Optional.
               SUBJECT: '[BITBUCKET][BOOK] New Build'
               ATTACHMENTS: 'build/main.pdf' 
-              BODY_PLAIN: 'Hi Pranav, A new successful build of the book has been performed. Attached  you'll find the Book PDF'
+              BODY_PLAIN: 'Hi Pranav, A new successful build of the book has been performed. Attached  you will find the Book PDF'
               # BODY_HTML: '<string>'
               # DEBUG: '<boolean>'
