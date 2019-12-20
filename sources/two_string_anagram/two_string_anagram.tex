@@ -1,0 +1,94 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty: Easy/Medium
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapterimage{header}
+
+\chapter{Square root of an integer}
+\label{ch:square_root}
+\section*{Introduction}
+This problem is very frequently asked during software engineer  interview because there are different ways to tackle it, and reaching a neat, elegant yet fast solution requires making appropriate use of data structure and the problem characteristics.
+
+
+\section{Problem statement}
+You are given two string a and b  length n and m respectively.  Determine the minimum number of operations C(s, i, c) necessary to make string a the anagram of string b.  Two strings are said to be anagrams of one another if you can turn the first string into
+the second by rearranging its letters.
+C(s,i,c) modifies the input string s, changing its ith character into c. deletion or addition of characters is not allowed.
+
+In other words,what is the minimum number of  characters of the input strings that  need to be modified (again no addition or deletion is allowed)  so a becomes an anagram of b?
+
+The function should return -1 in all the cases where it is not possible to make a an anagram of b.
+
+\begin{example}
+	\hfill \\
+	\begin{itemize}
+		\item[] 	a = "aaa"
+		\item[] 	b = "bbb"
+	\end{itemize}
+	 The answer for this case is: 3
+
+\end{example}
+
+\begin{example}
+	\hfill \\
+	\begin{itemize}
+		\item[] 	a = "tear"
+		\item[] 	b = "fear"
+	\end{itemize}
+	 The answer for this case is: 1
+
+\end{example}
+
+\begin{example}
+	\hfill \\
+	\begin{itemize}
+		\item[] 	a = "Protectional"
+		\item[] 	b = "Lactoprotein"
+	\end{itemize}
+	 The answer for this case is: 0
+
+\end{example}
+
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Are the letters of the string always only letters from the English alphabeth? 
+	\begin{answered}
+		\textit{Yes, letters are always from the english alphabet.}
+	\end{answered}
+	
+	\item Should the function be case sensitive? 
+	\begin{answered}
+		\textit{No, in particular the letters are always lower case.}
+	\end{answered}
+	\item Can the input string be modified? No, the input is immutable.
+	\begin{answered}
+		\textit{No, the input strings are immutable.}
+	\end{answered}
+\end{QandA}
+
+\section{Discussion}
+Let's start by first quickly review what the word anagram means in this case. For a to be an anagram of b, it has to be the case that exists an arrangements of characters in a that is equal to b. In other words, is it possible to shuffle the character of a such that we obtain b? For this to be case, is must be that a and b contains the same set of characters meaning that sorting both a and b lead to two equal strings. As a consequence, also considering the  fact that no addition or deletion is allowed then a and b must have the same length. If they have the same length then it is always possible to solve this problem, in the worst case by changing all the characters of a.
+
+ This provides a good starting point. The only case when the problem has no solution has been isolated i.e. when the input string differes in length, thus the  very first check that needs to be performed in the solution is like the following: \lstinline[columns=fixed]{if(a.length() != b.length())  return -1;}
+
+
+
+\subsection{Brute-Force}
+One of the first option that should be evaluated and discussed during the interview is the brute force solution. For this problem, brute force simply means listing all the permutations of a, and comparing each of them to b until a match is found. Despite its conceptual simplicity this is considered to be a very poor solution because the number of permutation grows very fast with the length of the input string (as fast as $n!$).  Moreover, its implementation  is not straightforward because the generation of all permutation is not easy do to by hand (some languages like C++ offer library functions for this purpose, like \lstinline[columns=fixed]{std::next_permutation(...)}\footnote{\url{https://en.cppreference.com/w/cpp/algorithm/next_permutation }})
+
+Listings XX shows an implementation of the idea above using C++ and \lstinline[columns=fixed]{std::next_permutation}.
+
+
+
+
+
+\subsection{Logarithmic Solution}
+
+
+\section{Conclusion}
