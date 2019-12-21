@@ -15,20 +15,20 @@
 \chapter{Two numbers sum problem}
 \label{ch:two_numbers_sum}
 \section*{Introduction}
-This problem is used often as a interview question and it is mostly asked during the early online stages of the hiring process because it is easy to explain, to understand and its solution fits in a few lines. It is a great question because it allows you to clearly show to the interviewer your thought process and how you can incrementally improve and refine your solution until it reaches the optimum.
+The problem described in this section is a classical one, often used as a interview question and it is mostly asked during the early online stages of the hiring process because it is easy to explain, to understand and its solution fits in a few lines. It is a great question because it allows you to clearly show to the interviewer your thought process and how you can incrementally improve and refine your solution until it reaches the optimum.
 
 This chapter will investigate a number of solutions in the order which they should be presented to the interviewer:
 \begin{itemize}
 	\item[-] Brute-force
-	\item[-] Sorting
 	\item[-] Hashing
+	\item[-] Sorting	
 	\item[-] Two pointers
 \end{itemize}
 
 \section{Problem statement}
 
 \begin{exercise}
-Write a function that takes a collection of integers and a number $T$, and return \textbf{true} if the sum of two distinct elements of the collection is equal to $T$, \textbf{false} otherwise.
+Write a function that takes an array of integers and a number $T$, and return \textbf{true} if the sum of two distinct elements of the array is equal to $T$, \textbf{false} otherwise.
 \end{exercise}
 
 
@@ -42,6 +42,17 @@ The answer in this case is \textbf{true} because elements we can obtain $14=17+ 
 If $T=17$ then the answer would be \textbf{false} as there is no way we can sum two numbers together and obtain $17$
 \end{example}
 
+\begin{example}
+\\ \hfill
+	\begin{itemize}
+		\item[-] 	$A=\{1,3,7}\}$
+		\item[-] 	$T = 8$
+	\end{itemize}
+The answer in this case is \textbf{true} because elements we can obtain $8=1+7$. 
+If $T=6$ then the answer would be \textbf{false}.
+\end{example}
+
+
 More formally, what the problem asks is:
 \begin{exercise}
 	Given an array $A=\{a1...an\}$ and $T$, where $a_i, T \in \mathcal{N}$, return:
@@ -53,12 +64,37 @@ More formally, what the problem asks is:
 	
 
 \section{Clarification Questions}
-What are the questions that are good to ask?
-List a number of relevant question and for each of them give a possible answer from the interview
-
-- What is the size of the input?
-- Is the collection sorted?
-- Are duplicates allowed?
+\begin{QandA}
+	\item is the input array modifiable?
+	\begin{answered}
+		\textit{Yes, the input array can be modified.}
+	\end{answered}
+	
+	\item Are the integers always positive of negative?  
+	\begin{answered}
+		\textit{No, input numbers can be either positive or negative.}
+	\end{answered}
+	\item Are the input integer always from a certain range?
+	\begin{answered}
+		\textit{No, the input is arbitrary. No assumption can be made.}
+	\end{answered}
+	\item Can a pair be considered made from an element and itself?
+	\begin{answered}
+		\textit{No, elements should be distincts.}
+	\end{answered}
+	\item Are all elements in the array unique?
+	\begin{answered}
+		\textit{No, repetition is allowed.}
+	\end{answered}
+	\item Is the input sorted?
+	\begin{answered}
+		\textit{No, array ordering is arbitrary.}
+	\end{answered}
+	\item Shall integer overflow be considered when performing the sum of two integer? 
+	\begin{answered}
+		\textit{No, the input elements are such that no overflow can occur..}
+	\end{answered}
+\end{QandA}
 
 
 \section{Discussion}
@@ -67,8 +103,8 @@ List a number of relevant question and for each of them give a possible answer f
 %        quadratic solution
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Brute-force}
-The brute force solution is fairly straightforward because it consists in applying the search method described in the formal problem statement. The solution spaces consists of all possible ordered and distinct pairs $(a_i,A_j)$, $i < j$ of element of $A$. Two nested loops can be used to enumerate all the pairs and for each of them we can check whether their sum is equal to $T$: if yes we immediately return \textbf{True} (see Algorithm \ref{algo:two_number_sum_bruteforce} and Listing \ref{list:two_number_sum_bruteforce}).
-The complexity of this solution is quadratic $O(n^2)$ because there is a quadratic number of ordered pairs.\footnote{The number of iteration of the internal loop depends on the value of $i$ and it is described by the following function: $f(i) = n-i-1$. The total number of iteration the second loop runs in the worst case is the the sum over all values of $i$: $\sum_{0}^{n-2}f(i) = (n-1) + (n-2) + (n-3) \dots + 1$ = $\sum_{1}^{n-1} = \frac{n(n-1)}{2} = O(n^2)$}
+The brute force solution is fairly straightforward because it consists in applying the search method described in the formal problem statement. The solution spaces consists of all possible ordered and distinct pairs $(a_i,A_j)$, $i < j$ of element of $A$. Two nested loops can be used to enumerate all the pairs and for each of them we can check whether their sum is equal to $T$: if that is the case then   \textbf{True} can be immediately returned (see Algorithm \ref{algo:two_number_sum_bruteforce} and Listing \ref{list:two_number_sum_bruteforce}).
+
 \begin{algorithm}
 	\SetAlgoLined
 	\SetKwFunction{FMain}{solveQuadratic}
@@ -96,10 +132,13 @@ The complexity of this solution is quadratic $O(n^2)$ because there is a quadrat
 	\caption{Two loops, quadratic solution to the question in Section \ref{ch:two_numbers_sum} }
 \end{algorithm}
 The following code implements this idea:
+
 \lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/brute_force.cpp}
 
-\subsection{Hash-table Solution}
+The time complexity of this solution is quadratic $O(n^2)$ because there is a quadratic number of ordered pairs.\footnote{The number of iteration of the internal loop depends on the value of $i$ and it is described by the following function: $f(i) = n-i-1$. The total number of iteration the second loop runs in the worst case is the the sum over all values of $i$: $\sum_{0}^{n-2}f(i) = (n-1) + (n-2) + (n-3) \dots + 1$ = $\sum_{1}^{n-1} = \frac{n(n-1)}{2} = O(n^2)$}. The space complexity of is $O(1)$.
 
+\subsection{Hash-table Solution}
+The internal loop of Listing \ref{list:two_number_sum_bruteforce} can be faster if an hashtable is used. The idea is that the input array is scanned one element at the time and a solution exists involving $a_i$ is the element $a_j  = a_i-T$ with $j < i$ exists. The key idea here is that all the A[j] can be stored in the hash table making the lookup operation lighting fast. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % two_numbers_sum_hashset       
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -132,7 +171,7 @@ The following code implements this idea:
 \lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/hashset.cpp}
 
 
-A common mistake when solving this problem is when the whole input array is inserted into the hash-table and only after search for the target value $T-a_i$ (see Algorithm \ref{algo:two_numbers_sum_hashset_wrong}). The problem with this approach is that if the target is an even number i.e. $ 2 | T$ and $\frac{T}{2} \in A$ exactly once, say it is the element $a_k$, then $H.find(T-a_k=\frac{T}{2})$ returns true. The following example exposesthe problem:
+A common mistake when solving this problem is when the whole input array is inserted into the hash-table and only after search for the target value $T-a_i$ (see Algorithm \ref{algo:two_numbers_sum_hashset_wrong}). The problem with this approach is that if the target is an even number i.e. $ 2 | T$ and $\frac{T}{2} \in A$ exactly once, say it is the element $a_k$, then $H.find(T-a_k=\frac{T}{2})$ returns true. The following example exposes the problem:
 \begin{example}
 	\\ \hfill
 	\begin{itemize}
@@ -176,12 +215,20 @@ The Algorithm \ref{algo:two_numbers_sum_hashset_wrong} return True even if there
 	\caption{Hashset, linear solution to the \textit{two number sum} question in Section \ref{ch:two_numbers_sum} }
 \end{algorithm}
 
+The time complexity of this approach is $O(n)$ because the input array is scanned once and for each of its element only one lookup and insertion is performed in the hash-table.  The space complexity is also $O(n)$, as in the worst case the whole input array is stored in the lookup table.
+
+\subsection{Sorting + binary search}
+As always when an array problem is presented, the opportuinity to sort the array often open the possibility for fast and efficient solution. 
+In this case a good question to ask is, what happens when the array is sorted? This should immediately lead to binary search. In particular, again, the internal loop of Listing \ref{list:two_number_sum_bruteforce} can be turned into a binary search if the input array is sorted thus lowering the overall complexity down to $O(n log(n))$ becaue it takes $O(n log(n))$ to sort the input array in the first place and the actual search costs $n$ binary search, each costing $log(n)$.
+The space complexity is $O(1)$ because no additional space is required since the array is sorted in place. 
+
+Listing \ref{list:two_number_sum_sorting} shows a C++ implementation of the idea above using the \texttt{std::binary_search} c++ stardard library function.
 
 
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
 
 
-\section{Common variations}
-What are the common variation to a the problem?
-List each of them and comment on the implication of the variations if any.
+\subsection{Two pointers}
+
 
 \section{Conclusion}
