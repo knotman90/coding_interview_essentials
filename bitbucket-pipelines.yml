@@ -9,14 +9,31 @@ image: aergus/latex
 pipelines:
   default:
     - step:
+          name: Software installation
+          script:    
+            # CMAKE
+            - sudo apt-get install cmake
+            - git clone --depth=1 -b master -q https://github.com/google/googletest.git /googletest
+            - mkdir -p /googletest/build
+            - cd /googletest/build
+            - cmake ..
+            - make
+            - make install
+            - rm -rf /googletest
+    - step:
         name: Build
         script:
           # BUILDING
-          - echo "Creating PDF"
+          - echo "Creating PDF and Building UTs"
           - make
         artifacts:
           - build/*.pdf
-
+    - step:
+        name: Run UT
+        script:
+          # Run UT
+          - echo "Running UTs"
+          - bash run_all_tests.sh 
     - step:
         name: Notifications
         script:    
