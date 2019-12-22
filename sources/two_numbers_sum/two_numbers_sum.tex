@@ -139,6 +139,7 @@ The time complexity of this solution is quadratic $O(n^2)$ because there is a qu
 
 \subsection{Hash-table Solution}
 The internal loop of Listing \ref{list:two_number_sum_bruteforce} can be faster if an hashtable is used. The idea is that the input array is scanned one element at the time and a solution exists involving $a_i$ is the element $a_j  = a_i-T$ with $j < i$ exists. The key idea here is that all the A[j] can be stored in the hash table making the lookup operation lighting fast. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % two_numbers_sum_hashset       
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -218,17 +219,30 @@ The Algorithm \ref{algo:two_numbers_sum_hashset_wrong} return True even if there
 The time complexity of this approach is $O(n)$ because the input array is scanned once and for each of its element only one lookup and insertion is performed in the hash-table.  The space complexity is also $O(n)$, as in the worst case the whole input array is stored in the lookup table.
 
 \subsection{Sorting + binary search}
+\label{sect:two_number_problem_binary_search}
 As always when an array problem is presented, the opportuinity to sort the array often open the possibility for fast and efficient solution. 
 In this case a good question to ask is, what happens when the array is sorted? This should immediately lead to binary search. In particular, again, the internal loop of Listing \ref{list:two_number_sum_bruteforce} can be turned into a binary search if the input array is sorted thus lowering the overall complexity down to $O(n log(n))$ becaue it takes $O(n log(n))$ to sort the input array in the first place and the actual search costs $n$ binary search, each costing $log(n)$.
 The space complexity is $O(1)$ because no additional space is required since the array is sorted in place. 
 
-Listing \ref{list:two_number_sum_sorting} shows a C++ implementation of the idea above using the \texttt{std::binary_search} c++ stardard library function.
+Listing \ref{list:two_number_sum_sorting} shows a C++ implementation of the idea above using the \texttt{std::binary\_search} c++ stardard library function.
 
 
 \lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
 
 
-\subsection{Two pointers}
+\subsection{Sorting + two pointers tecnique}
+There is a variation to the approach described in Section \ref{sect:two_number_problem_binary_search} which still involves sorting but uses two pointers tecnique instead of binary search.
+The key idea of this approach is that once the array is sorted two pointers, one starting at the beginning and the other at the end, of the array, respectively.
 
+The algorithm works by looking at the sum of the elements pointed by the pointers and moving one of the two at each step using the following logic. Let $p_s$ and $p_e$ be the starting and ending pointers, respectively, then:
+\begin{itemize}
+	\item[-] if $a[p_s]+a[p_e] = T$ a solution has been found. The algorithm returns true.
+	\item[-] if $a[p_s]+a[p_e] > T$, $p_e=p_e-1$. The rightend pointer is moved to the left. Moving $p_e$ to the right makes the sum smaller in the next iteration. 
+	\item[-] if $a[p_s]+a[p_e] < T$, $p_s=p_s+1$. The rightend pointer is moved to the left. Moving $p_s$ to the right makes the sum higher in the next iteration. 
+\end{itemize}
 
-\section{Conclusion}
+Listing \ref{list:two_number_sum_two_pointers} shows an implementation of the idea above.  Note that this solution has an additional strenght i.e.  it is short and simple to write. 
+
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
+
+Despite the oveall complexity is still $O(n log(n))$ this solution is it likely to be faster than the one presented in Section \ref{sect:two_number_problem_binary_search}, mostly because in this case the array is search somehow linearly and not in a scattered way as in the case of binary search.
