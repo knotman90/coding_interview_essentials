@@ -18,7 +18,6 @@
 %----------------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-\usepackage{qtree}
 
 \usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
 
@@ -239,8 +238,10 @@
 \newtheorem{theoremeT}[dummy]{Theorem}
 
 \newtheorem{problem}{Exercise}[chapter]
+\newtheorem{exerciseT}{Problem}
 \theoremstyle{blacknumex}
 \newtheorem{solution}{Solution}[chapter]
+\newtheorem{solutionT}{solution}[chapter]
 \theoremstyle{blacknumex}
 \newtheorem{exampleT}{Example}[chapter]
 \theoremstyle{blacknumbox}
@@ -521,7 +522,14 @@ addtohook={%
 \definecolor{bgcolor}{rgb}{0.98,0.98,0.98}
 
 
+%----------------------------------------------------------------------------------------
 
+%	QandA
+
+%----------------------------------------------------------------------------------------
+
+\newenvironment{QandA}{\begin{enumerate}[label=\bfseries Q.\arabic*.,leftmargin=2em,rightmargin=2em]\bfseries}{\end{enumerate}}
+\newenvironment{answered}{\par\normalfont}{}
 %----------------------------------------------------------------------------------------
 %	ALGORITHM
 %----------------------------------------------------------------------------------------
