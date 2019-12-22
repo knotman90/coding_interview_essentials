@@ -3,7 +3,7 @@
 # Created by https://www.gitignore.io/api/latex
 #Build
 build
-
+bin/
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
 *.aux
