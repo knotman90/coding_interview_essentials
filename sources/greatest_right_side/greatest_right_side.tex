@@ -1,0 +1,69 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty: Easy/Medium
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapterimage{header}
+
+\chapter{Greatest element on the right side}
+\label{ch:greatest_right}
+\section*{Introduction}
+This chapter discusses a farily common problem asked during the on-site interview at Amazon.
+
+\section{Problem statement}
+\begin{exercise}
+You are given an array $A$ of size $n$. You have to modify $A$ in place s.t. $A[i] = max(A[i+1], A[i+2],\ldots, A[n-1])$. In other words $A[i]$ should be substituted with  the maximum value among all elements $A[j], j > i$. If such element does not exists set $A[i] = -1$.
+\end{exercise}
+
+
+\begin{example}
+	\hfill \\
+	Given the input array $A = \{15, 22, 12, 13, 12, 19, 0, 2\}$, the output of the function in this case shluld be  $A = \{22, 19, 19, 19, 19, 2, 2, -1\}$.
+\end{example}
+
+\begin{example}
+	\hfill \\
+	Given the input array $A = \{2, 3, 1, 9\}$, the output of the function in this case shluld be  $A = \{9, 9, 9, -1\}$.
+\end{example}
+
+
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Are the element of the array sorted?
+	\begin{answered}
+		\textit{No, the input array is not sorted.}
+	\end{answered}
+	
+	\item Are the element always positive or negative?
+	\begin{answered}
+		\textit{The elements can be either positive or negative.}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+Since this is a quite an easy problem, hence it is very important to  to focus on making a good impression on the interviewer by showing a clean reasoning and elegant implementation of the solution. This problem is considered not very challengind because it already has all the information required to solve it in its statement. 
+
+\subsection{Brute Force}
+As usual one should always start talking to the interviewer right away about the bruteforce solution which in this case is quite straightforward. All it is necessary is scanning the array from left ro right and for each element finding the greatest element among all the elements on its right.
+This can be very easily implemented in C++ using the \texttt{std::max\_element()} function as shown in Listing \ref{list::greatest_right_bruteforce}. Note how the search on the right side is enforced by using as starting point $begin(A)+i+1$ for the range in the \texttt{std::max\_element()} function.
+
+	\lstinputlisting[language=c++, caption=C++ bruteforce solution to the problem of modifying an array in place with the greatest element on the right side.,label=list::greatest_right_bruteforce]{sources/greatest_right_side/greatest_right_bruteforce.cpp}
+
+
+
+Note also that the last element will always be modified into $-1$ because, it is the only element which does not have any element on its right side and according to the statement in this case it should be modified into $-1$.
+
+This solution is considered poor because it has a time complexity of $O(n^2)$. 
+
+\subsection{Linear solution}
+The approach used in Listing \ref{list::greatest_right_bruteforce} can be greately improved if instead of looping from left to right, the scan is performed from right to left (from $A.size()-2$ to $0$). This allows for the maximum element on the right side to be calculated in constant time because:
+
+\begin{itemize}
+	\item[-]
+\end{itemize}
