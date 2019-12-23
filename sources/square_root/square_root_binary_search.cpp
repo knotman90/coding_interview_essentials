@@ -1,4 +1,4 @@
-int my_sqrt(const int A)
+int square_root_binary_search(const int A)
 {
     long l = 0, r = A;
     int ans = 0;

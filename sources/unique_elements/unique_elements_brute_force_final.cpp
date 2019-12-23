@@ -1,13 +1,17 @@
-bool all_unique(const string& s, const size_t ALPH_SIZE=128)
+bool unique_elements_final(const std::string& s)
 {
+    constexpr size_t ALPH_SIZE=128;
+
     if(s.size() > ALPH_SIZE)
     	return false;
     	
     std::array<bool, ALPH_SIZE> F = {false};    
-    for(int i = 0 ; i != ALPH_SIZE ; i++)
+    for(size_t i = 0 ; i != s.size() ; i++)
     {
-        if(F[s[i]])
+        const int idx = s[i]-'a';
+        if(F[idx])
             return false;
-        F[s[i]]++;
+        F[idx]++;
     }
     return true;
+}
