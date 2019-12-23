@@ -4,17 +4,14 @@
      docker:
        - image: aergus/latex
      steps:
-       - checkout
        - run: echo "Install software"
        - run: apt-get update -qq
        - run: apt-get install -qq -y cmake
        - run: git clone --depth=1 -b master -q https://github.com/google/googletest.git /googletest
        - run: mkdir -p /googletest/build
-       - run: cd /googletest/build
-       - run: cmake ..
-       - run: make
-       - run: make install
+       - run: cd /googletest/build && cmake .. && make && make install
        - run: rm -rf /googletest
        - run: echo "Creating PDF and Building UTs"
+       - checkout
        - run: make
        - run: bash run_all_tests.sh
