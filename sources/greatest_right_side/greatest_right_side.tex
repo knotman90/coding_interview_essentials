@@ -59,11 +59,21 @@ This can be very easily implemented in C++ using the \texttt{std::max\_element()
 
 Note also that the last element will always be modified into $-1$ because, it is the only element which does not have any element on its right side and according to the statement in this case it should be modified into $-1$.
 
-This solution is considered poor because it has a time complexity of $O(n^2)$. 
+This solution is considered poor because it has a time complexity of $O(n^2)$ and a linear solution exists. 
 
 \subsection{Linear solution}
-The approach used in Listing \ref{list::greatest_right_bruteforce} can be greately improved if instead of looping from left to right, the scan is performed from right to left (from $A.size()-2$ to $0$). This allows for the maximum element on the right side to be calculated in constant time because:
-
+The approach used in Listing \ref{list::greatest_right_bruteforce} can be greately improved if instead of looping from left to right, the scan is performed from right to left (from $A.size()-2$ to $0$)\footnote{the starting point is $A.size()-2$ because $A.size()-1$ is always turned into $-1$}. This allows for keeping track of the maximum element on the right  side of the element currenlty analyzed, $M$, to be calculated in constant time because:
 \begin{itemize}
-	\item[-]
+	\item[-] at first the maximum element on the right of $A.size()-2$ is $A.size()-1$ i.e. $M = A[A.size()-1]$.
+	\item[-] when $A.size()-2$ is processed $M$ can be updated by only using the the \textbf{old} value in $A[A.size()-2]$ i.e. $M= max(M, A_{old}[A.size()-2])$
+	\item[-] after each element $i$ is processed: $M= max(M, A_{old}[i+1])$
 \end{itemize}
+
+The idea above is implemented in Listing \ref{list:greatest_right_final1}
+
+	\lstinputlisting[language=c++, caption=C++ linear time solution to the problem of modifying an array in place with the greatest element on the right side.,label=list:greatest_right_final1]{sources/greatest_right_side/greatest_right_final.cpp}
+
+Please note how in Listing \ref{list:greatest_right_final1}the variable $m$ is used to keep track of the old value of the element of A currenlty processed and how the  last element of $A$ is always turned into $-1$.
+An alternative and more condensed implementation  is shown in Listing \ref{list:greatest_right_final2}.
+
+	\lstinputlisting[language=c++, caption=Alternative Listing \ref{list:greatest_right_final1} implementation of C++ linear time solution to the problem of modifying an array in place with the greatest element on the right side.,label=list:greatest_right_final2]{sources/greatest_right_side/greatest_right_final2.cpp}
