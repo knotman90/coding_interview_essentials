@@ -35,7 +35,7 @@ echo "%!TEX root = ../main.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 " >> $TEX_FILE
 
-echo "\chapter{$NAME}
+echo "\chapter{TITLE OF THE CHAPTER}
 \label{ch:$NAME}
 \section*{Introduction}
 " >> $TEX_FILE
