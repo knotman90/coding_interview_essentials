@@ -71,7 +71,7 @@ The complexity of the backtrack solution is exponential i.e. $O(2^n)$ which is a
 Another approach that can be used to solve this problem is based on the fact that the values of the bits of the numbers $\{0,1,2,\ldots, s^n-1\}$  already provide all the information necessary to make decision weather to include or not an element from the input. In other words the set of numbers $P=\{0,1,2,\ldots, s^n-1\}$ is a powerset of $n$ bits. The binary representation of the numbers can be used to build one subset. For instance
 given the input $S={a,b,c}$ the Table \ref{tab:mapping_value_bits} shows how numbers maps to their bit representation on how that can be used to construct one subset of the power-set of $S$. A $1$ means the corresponding element is taken, while a $0$ means it is excluded.
 
-\begin{table}[H]
+\begin{table}
 	\centering
 	\begin{tabular}{|l|l|l|}
 		\hline
