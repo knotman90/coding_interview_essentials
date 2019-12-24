@@ -3,15 +3,15 @@ constexpr inline bool is_bit_set(const int n, const unsigned p)
     return (n>>p) & 1;
 }
 
-vector<vector<int>> power_set_number(const vector<int>& A)
+std::vector<std::vector<int>> power_set_bit_manipulation(const std::vector<int>& A)
 {
     const size_t limit = (1ll<<A.size())-1;    
-    vector<vector<int>> PS;
+    std::vector<std::vector<int>> PS;
     PS.reserve(limit+1);
     
     for(int i = 0 ; i < limit ; i++)
     {
-        vector<int> subset = {};
+        std::vector<int> subset = {};
         for(int p = 0 ; p < 32 ; p++)
             if(is_bit_set(i,p))
             {

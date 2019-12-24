@@ -1,6 +1,6 @@
-bool all_unique(const string& s)
+bool unique_elements_map(const std::string& s)
 {
-    unordered_set<char> L;
+    std::unordered_set<char> L;
     for(int i = 0 ; i != s.size() ; i++)
     {
         if(L.find(s[i]) != L.end())
