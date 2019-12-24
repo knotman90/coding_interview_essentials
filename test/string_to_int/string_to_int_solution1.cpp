@@ -1,0 +1,1 @@
+../../sources/string_to_int/string_to_int_solution1.cpp
