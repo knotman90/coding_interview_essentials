@@ -13,7 +13,7 @@ The problem discussed in this chapter is an extremely popular one often used as 
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that given a string $s$ containing only numbers (characters from [0-9]), parse it into its integer representation without using any library specific functions (like \texttt{atoi()} in C++ or  \texttt{Integer.parseInt()} in Java).
+Write a function that given a string $s$ containing only numbers (characters from the range [0-9]), parse it into its integer representation without using any library specific functions (like \texttt{atoi()} in C++ or  \texttt{Integer.parseInt()} in Java).
 \end{exercise}
 
 
@@ -61,9 +61,9 @@ This is considered a good solution, as its complexity is linear in the size of t
 
 \subsection{Common Variation}
 \begin{itemize}
-	\item[-] Add support for negative numbers. One optional char which could either be + or -, at the beginning of the string  signals the sign. See Listing \ref{list:string_to_int_negative} 
+	\item[-] Add support for negative numbers. One optional char which could either be + or -, at the beginning of the string  signals the sign. See Listing \ref{list:string_to_int_negative}.
 	\item[-] Return $0$ when the answer does not fit into an int.
-	\item[-] Raise an exception in case of bad input. For instance when letters are present in the string e.g. $s=123f456$.  
+	\item[-] Raise an exception (or return a certain value) in case of bad input. For instance when letters are present in the string e.g. $s=123f456$.  
 \end{itemize}
 
 \lstinputlisting[language=c++, caption=C++ solution to the string to integer problem with negative number support.,label=list:string_to_int_negative]{sources/string_to_int/string_to_int_solution2.cpp}
