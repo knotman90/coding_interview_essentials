@@ -1,0 +1,1 @@
+../../sources/greatest_right_side/greatest_right_bruteforce.cpp

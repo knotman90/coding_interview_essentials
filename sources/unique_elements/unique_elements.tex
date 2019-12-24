@@ -1,0 +1,87 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty: Easy
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapterimage{header}
+
+\chapter{Unique Elements in a collection}
+\label{ch:unique_elements}
+\section*{Introduction}
+The problem presented in this section is probably one of the most asked problem during interviews probably because its statement is simple to understand and it is easy to come up with a brute force solution that can be used a starting point towards the asymptotically optimal one. 
+
+\section{Problem statement}
+Given a string $s$ of length $n$, determine whether it does not contains duplicate character. 
+
+\begin{example}
+\hfill
+	\begin{itemize}
+		\item [-] $s=$"graph" $ \longrightarrow$ TRUE
+		\item [-] $s=$"tree" $ \longrightarrow$ FALSE
+		\item [-] $s=$"Einstein" $ \longrightarrow$ FALSE
+	\end{itemize}
+	
+\end{example}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item What is the maximum size of the input?
+	\begin{answered}
+		\textit{The maximum length for the input string is $10^6$.}
+	\end{answered}
+	
+	\item Are all character upper or lower case?
+	\begin{answered}
+		\textit{No, both upper and lower case might be present.}
+	\end{answered}
+
+	\item Is the function case sensitive?
+	\begin{answered}
+		\textit{Yes.}
+	\end{answered}
+
+	\item Can I assume characters only alphanumeric characters are present in the input?
+	\begin{answered}
+		\textit{Yes. Upper and lower case latin letters and numbers only.}
+	\end{answered}
+\end{QandA}
+
+\section{Discussion}
+Being this problem so popular, when asked, the interviewer is expecting the candidate to come up with a good solution in a small time window. For this reason the obvious $O(n^2)$ solution should be immediately put on the whiteboard.
+\subsection{Brute Force}
+The brute force solution to this problem works by looping over each character $s_i$ once, and for each of them checking if it is present in any of the subsequent position of $s$ i.e. checking if the following is true: $\exists \; j $ s.t.  $s_j=s_i \; j>i$.
+This idea can be implemented as shown in Listing \ref{list:unique_elements_brute_force1} using two nested loops.
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique.",label=list:unique_elements_brute_force1]{sources/unique_elements/unique_elements_brute_force.cpp}
+\end{minipage}
+
+As a stylistic improvements to the code in Listing \ref{list:unique_elements_brute_force1}, Listing \ref{list:unique_elements_brute_force2}  uses the C++ standard library function \texttt{find} to search for a duplicate  of the character $s_i$. This not only makes the code shorter and cleaner, but also shows that the candidate is able to use the standard library and do not reinvent the wheel (in this case the ubiquitous \texttt{find} function).
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique using \texttt{std::find}",label=list:unique_elements_brute_force2]{sources/unique_elements/unique_elements_brute_force_std.cpp}
+\end{minipage}
+
+In Listing \ref{list:unique_elements_brute_force1} the internal loop is doing the hard work of searching for a duplicate of the character at index $i$. We can trade space for time and reduce the complexity of the duplicate search of a single character down to $O(1)$. The idea is that when the duplicate search is over for character $s_i$, then $s_i$ is inserted into a set. The set keeps track of all the characters seen so far. The internal loop can be modified to simply be a lookup into the map as shown in Listing \ref{list:unique_elements_brute_force_map}.
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_map]{sources/unique_elements/unique_elements_brute_force_map.cpp}
+\end{minipage}
+
+This approach seems to effectively lower the time complexity down to linear, but at the cost of some space. But how much space exactly? The intuition would say $n$ because that is the size of the  input string. But the string is made of characters from an alphabet $\Sigma$ which has a very limited size, at most $128$ (size of the ASCII table) elements. The insert instruction will not be executed more than $|\Sigma|$ times. Because of this the space complexity of this solution if $O(1)$. 
+
+The previous argument can be expanded further more with the following idea: \textbf{Every string with more than $|\Sigma|$ character contains at least one duplicate}(follows from the pigeon principle\footnote{The pigeonhole principle states that if n items are put into m containers, with $n > m$, then at least one container must contain more than one item.}). The longest string with only unique characters is one of the permutation of "abcde\ldots zABCD \ldots Z123 \ldots 9".
+Thus the solution using the hashset has complexity of $O(1)$ because in the worst case after $|\Sigma|$ lookups the next one will be positive. For this reason the checks can be limited to the first $|\Sigma|$ character. Note that this observation suddenly makes the brute force approach also $O(1)$ if $i$ and $j$ in Listing \ref{list:unique_elements_brute_force1} are forced to stay below $|\Sigma|$.
+
+Armed with these new arguments, the solution we suggest to present during the interview only uses a stack allocated array of bool of size $|\Sigma|$ storing
+the information regarding the presence of a character in the characters examined so far. If at any time the currenclty examined character has been already seen, then there is a duplicate. See Listing \ref{list:unique_elements_brute_force_final} for a possible implementation of this idea.
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_final]{sources/unique_elements/unique_elements_brute_force_final.cpp}
+\end{minipage}
+
+\section{Common variations}
