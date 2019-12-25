@@ -1,15 +1,16 @@
 %!TEX root = ../main.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Links:
+% Links: https://www.toptal.com/algorithms/interview-questions
 %
 % Difficulty:
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Exponentiation}
+\chapter{Exponentiation by squaring}
 \label{ch:exponentiation}
 \section*{Introduction}
 This chatper addresses a common problem for which it is fairly easy to come up with a good solution that works in linear time and that if implemented properly can already be good enough to get the green light from the interviewer. However, in order to be sure to ace this problem a time of complexity of  $O(log_2)$ should be achieved.
+The idea behind exponentiation by squaring can be applied not only to integer numbers but to many other mathematical objects such as polynomials or matrices. For instance, it can be used to calculate the $k^{th}$ fibonacci number in $log_2(k)$ steps. 
 
 \section{Problem statement}
 \begin{exercise}
@@ -44,7 +45,7 @@ Implement a function that given two positive integers $n$ and $k$ calculates $n^
 
 \section{Discussion}
 \label{exponentiation:sec:discussion}
-After just reading the problem discussion the obvious solution should immediately be discussed. This approach simply consist in performing $k$ consecutive multiplications as per the definition of exponentiation i.e. $n^k = \underbrace{n \times n \times n \times \ldots \times n}_\text{k times}$. This idea can be implemented in just a few lines as shown in Listing \ref{list:exponentiation_linear}
+After just reading the problem discussion the obvious solution should immediately be discussed. This approach simply consist in performing $k$ consecutive multiplications as per the definition of exponentiation i.e. $n^k = \underbrace{n \times n \times n \times \ldots \times n}\text{k times}$. This idea can be implemented in just a few lines as shown in Listing \ref{list:exponentiation_linear}
 
 \lstinputlisting[language=c++, caption=Sample Caption,label=list:exponentiation_linear]{sources/exponentiation/exponentiation_solution1.cpp}
 
@@ -53,7 +54,7 @@ After just reading the problem discussion the obvious solution should immediatel
 The problem can be solved much faster by expoiting the fact that:
 \begin{itemize}
 	\item[-] if $x+y=k$ then, $n^k = n^x * n^y = n^{x+y}$ 
-	\item[-] if $x \times y=k$ then, $ n^k = (n^x)^y$
+	\item[-] if $x \times y=k$ then, $n^k = (n^x)^y$
 \end{itemize}
 The idea is that if depending on the parity of $k$ (whether $k$ is even or odd):
   \[
@@ -62,8 +63,25 @@ The idea is that if depending on the parity of $k$ (whether $k$ is even or odd):
         		n \times n^{k-1}, & \text{if k odd}\\
 	        \end{cases}
   \]
-This allows for the number of multilication to be reduced by a half all the times that $k$ is even. Also note that all the times that $k$ is odd then $n^{k-1}$ can be calculated again reducing the number of multiplication by half becuase $k-1$ is even. This approach is inherintly recursive and can be coded as shown in Listing \ref{list:exponentiation_fast} but an interative solution is also quite easy to write as can be seen in Listing \ref{list:exponentiation_fast_iterative}.
+This allows for the number of multilication to be reduced by a half all the times that $k$ is even. Also note that all the times that $k$ is odd then $n^{k-1}$ can be calculated again reducing the number of multiplication by half becuase $k-1$ is even. This approach is inherintly recursive and can be coded as shown in Listing \ref{list:exponentiation_fast}.
 
 \lstinputlisting[language=c++, caption=Sample Caption,label=list:exponentiation_fast]{sources/exponentiation/exponentiation_solution2.cpp}
 
+\subsection{Iterative implementation}
+Another way to tackle this problem is by looking at the binary representation of the exponent $k = b_0 \times 2^0 + b_1 \times 2^1 + \ldots + b_l \times 2^l$ where $b_i$ is a binary digit. 
+When plugging $k$ into $n^k$ the following is obtained:
+\[
+\begin{array}{lcl}
+n^k & = &  x^{b_0 \times 2^0 + b_1 \times 2^1 + \ldots + b_l \times 2^l} \\
+& = & x^{b_0 \times 2^0} \times x^{b_1 \times 2^1} \times \ldots \times x^{b_l \times 2^l} \\
+& = & (x^{2^0})^{b_0} \times  (x^{2^1})^{b_1} \times \ldots \times (x^{2^l})^{b_l} \\
+& = & (x^{2^0})^{b_0} \times  (x^{2^1})^{b_1} \times \ldots \times (x^{2^l})^{b_l} 
+\end{array}
+\]
+Immediately it can be noticed that a term contribute the the final result only when the corrensponding $b_i$ is set to $1$, because if it is $0$ then the term contribution is $1$. Additionally as $i$ increases $n$ get squared at each step.
+The idea above can be used to implement a fast exponentiation iterative solution as shown in Listing \ref{list:exponentiation_fast_iterative}.
 \lstinputlisting[language=c++, caption=Sample Caption,label=list:exponentiation_fast_iterative]{sources/exponentiation/exponentiation_solution3.cpp}
+Note how at each iteration the value of $x$ is squared and a bit of $k$ is discaterd and that only when the current bit is set to $1$ the term is calculated and included in the result. 
+
+The complexity of this method is $O(log_2(n))$ because as can be clearly seen in the iterative solution in Listing \ref{list:exponentiation_fast_iterative}, the algorithm does not perform more iteration than the number of bits of the exponent $k$.
+Thus at most $\floor{log(k)}$ squaring and multiplication are performed.
