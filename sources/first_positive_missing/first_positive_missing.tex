@@ -76,3 +76,27 @@ This is indeed all it is needed to solve this problem by sorting as shown in Lis
 
 \lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_sorting]{sources/first_positive_missing/first_positive_missing_solution1.cpp}
 
+Note that:
+\begin{itemize}
+	\item[] \texttt{it} is the iterator pointing at the current element. It is initialized to the smallest positive in the sorted array if present, or to the end of the array otherwise. This is done so that negative numbers are simply ignored.
+	\item[] \texttt{expected} is the positive integer that it is expected to be found where \texttt{it} is pointing to.
+	\item[] if no positive numbers are present $0$ is correctly returned.
+\end{itemize}
+
+This is considered a decent solution with complexity $O(nlog(n))$ but it is not time optimal as a linear time solution exists. 
+
+\subsection{$O(n)$ time and space solution}
+\label{first_positive_missing:sec:linear_space}
+
+Looking at the problem a bit closer we can immediately notice that the missing number will always be in the range $[0-N]$ where $N$ is the size of the input array. Why is this the case? Because, among all possible inputs of size $N$ only one configuration leads to the highest missing number i.e. $A = \{0,1,2,3,4, \ldots ,N-1\}$ which has answer $N$. All the other configuration contains duplicates, negative or numbers higher than $N$ which forces the input to have ``holes'' in the range $[0-N]$. 
+
+This fact can be exploited to keep track, in an additional array of boolean, of which numbers from $0$ to $N$ are found in the unsorted array (ignoring negatives or elements larger than $N$). The array of flags can then be scanned and the index at which $false$ is found first can be returned. An implementation of the idea above is found in Listing \ref{list:first_positive_missing_linear_space}.
+
+
+\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{sources/first_positive_missing/first_positive_missing_solution2.cpp}
+
+\subsection{$O(n)$ time and $O(1)$ space solution}
+\label{first_positive_missing:sec:linear_space}
+The optimal solution does not use any additional space but shared the idea of keeping track of which elements has been found with the solution described in Section \ref{first_positive_missing:sec:linear_space}. All it is necessary if to store this information in the input array itself. This can be done by storing the information about an element $0 \leq x < N$ by marking the array at index $x$. Marking can be done by changing the sign at index $x$ to negative.
+In other words 
+
