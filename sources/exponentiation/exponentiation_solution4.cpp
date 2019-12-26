@@ -9,7 +9,7 @@ unsigned exponentiation_fast_iterative( unsigned n,  unsigned k)
 		if( k&1 ) //bit set
 			ans*= n;
 
-        k>>=1;
+    	k>>=1;
 		n*=n;
 	}
 	return n*ans;
