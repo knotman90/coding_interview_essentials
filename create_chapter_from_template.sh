@@ -75,7 +75,7 @@ echo "\section{Discussion}
 \subsection{Brute-force}
 \label{$NAME:sec:bruteforce}
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:$NAME]{$SOURCE_FOLDER/$SOLUTION_FILE}
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
 " >>  $TEX_FILE
 
 ####################################
@@ -129,6 +129,6 @@ echo "cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 
 add_executable(test_${NAME} `basename $TEST_FILE`)
-target_link_libraries(test_${NAME} pthread \${GTEST_BOTH_LIBRARIES})
+target_link_libraries(test_${NAME} \${GTEST_BOTH_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 target_include_directories(test_${NAME} PUBLIC \${GTEST_INCLUDE_DIRS})
 " >> $CMAKE_FILE
