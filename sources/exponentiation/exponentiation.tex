@@ -6,7 +6,7 @@
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Exponentiation by squaring}
+\chapter{Exponentiation}
 \label{ch:exponentiation}
 \section*{Introduction}
 This chatper addresses a common problem for which it is fairly easy to come up with a good solution that works in linear time and that if implemented properly can already be good enough to get the green light from the interviewer. However, in order to be sure to ace this problem a time of complexity of  $O(log_2)$ should be achieved.
@@ -16,7 +16,7 @@ The idea behind exponentiation by squaring can be applied not only to integer nu
 \begin{exercise}
 Implement a function that given two positive integers $n$ and $k$ calculates $n^k$.
 \end{exercise}
-
+f
 
 \begin{example}
 	\hfill \\
@@ -92,6 +92,6 @@ Thus at most $\floor{log(k)}$ squaring and multiplication are performed.
 An alternative iterative implementation solution is shown in Listing \ref{list:exponentiation_fast_iterative}
 \lstinputlisting[language=c++, caption=Alternative implementation of the iterative $O(log_2())$  solution for the fast exponentiation problem.,label=list:exponentiation_fast_iterative_alternative]{sources/exponentiation/exponentiation_solution4.cpp}
 
-Note that in practice the $O(log_2())$  solution might not provide big speed advantage versus the linear one because of the data type (texttt{unsigned}) used which limits the maximum value the exponent $k$ can take. That is not a problem because the above approach can be quickly extended or templatized for any type supponting the \texttt{operator*()},\texttt{operator>>()} and the \texttt{operator\&()}.
+Note that in practice the $O(log_2())$  solution might not provide big speed advantage versus the linear one because of the data type (\texttt{unsigned}) used which limits the maximum value the exponent $k$ can take. That is not a problem because the above approach can be quickly extended or templatized for any type supponting the \texttt{operator*()},\texttt{operator>>()} and the \texttt{operator\&()}.
 
 %\subsection{Fast $k^{th}$ Fibonacci calculation}
