@@ -1,4 +1,4 @@
-std::vector<int> wave(std::vector<int> &A) 
+std::vector<int> wave_sorting(const std::vector<int> &A) 
 {
     std::vector<int> B(A);
     std::sort(begin(B), end(B));
