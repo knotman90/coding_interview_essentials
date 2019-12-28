@@ -9,6 +9,7 @@
 \chapter{Wave Array}
 \label{ch:wave_array}
 \section*{Introduction}
+The problem described in this chapter is often asked during one of the first stages of the onsite interview. It is not an hard problem and its implementation fits a few lines. and can therefore be completed very quickly if the right idea pops into the brain. 
 
 \section{Problem statement}
 \begin{exercise}
@@ -19,30 +20,67 @@ In other words, sort the elements into a sequence such that $a_1 \geq a_2 \leq a
 
 \begin{example}
 	\hfill \\
+	Given $A= \{10, 5, 6, 3, 2, 20, 100, 80\}$ the followings are all valid output:
+	\begin{itemize}
+		\item[-]  \{20, 5, 10, 2, 80, 6, 100, 3\}
+		\item[-]  \{10, 5, 6, 2, 20, 3, 100, 80\}
+	\end{itemize}
+\end{example}
+
+\begin{example}
+	\hfill \\
+		Given $A= \{20, 10, 8, 6, 4, 2\}$ the followings are all valid output:
+	\begin{itemize}
+		\item[-] \{20, 8, 10, 4, 6, 2\}
+		\item[-]  \{10, 8, 20, 2, 6, 4\}
+	\end{itemize}
 	
 \end{example}
 
 \begin{example}
 	\hfill \\
-	
+	Given $A= \{10,9,8,7,6,5,4,3,2,1\}$ the following is a output: $\{10, 8, 9, 6, 7, 4, 5, 2, 3, 0, 1 \}$
+
 \end{example}
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
+	\item Is the input only made of positive numbers?
 	\begin{answered}
-		\textit{}
+		\textit{No, the numbers can be positive or negative.}
 	\end{answered}
-	
+	\item Are duplicates allowed?
+	\begin{answered}
+		\textit{Yes, duplicates might be present.}
+	\end{answered}
+	\item Do the numbers all lie in a particular range? If yes which one?
+	\begin{answered}
+		\textit{No assumptions can be made on the numbers.}
+	\end{answered}
 \end{QandA}
 
 \section{Discussion}
 \label{wave_array:sec:discussion}
+The problem asks to return a copy of an array which elements are arranged in a particular form which reminds the one of a wave.
+As usual with array problems, the first question should be asked is: how the problem become if the array is sorted?
 
+\subsection{Sorting solution}
+\label{wave_array:sec:sorting}
 
-\subsection{Brute-force}
-\label{wave_array:sec:bruteforce}
+It turns out that in this case sorting the input makes the problem very easy. For all sorted array $A=\{a_1,a_2,\ldots\}$  the following holds: $A=\{a_0 \leq a-2 \leq \ldots \leq a_{n-1}\}$. If all elements with even index are swapped with the elements on their right the array as follows: $A=\{a_0 \geq a_2 \leq a_3 \geq a_4 \leq \ldots\}$ which is exactly how valid results are arranged. We can use this fact to solve this problem efficiently as shown in Listing \ref{list:wave_array_sorting}
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:wave_array]{sources/wave_array/wave_array_solution1.cpp}
+\lstinputlisting[language=c++, caption=Solution to the wave array problem using sorting.,label=list:wave_array_sorting]{sources/wave_array/wave_array_solution1.cpp}
 
+This is considered a good solution with time and space complexity of the code above is $O(nlog(n))$ and $O(n)$, respectively.
+Note how only pairs of the form $(2i, 2i+1)$ are swapped (the variable $i$ is incremented by $2$ at the end of each iteration).
+
+In some cases, the interviewer might, whenever there is more than one possible answer for a given input to return the lexicographically smallest. If it is the case the solution proposed below won't work and it should not be attempted.
+
+\subsection{Linear time solution}
+Despite the solution presented in Section \ref{wave_array:sec:sorting} is already good enough to impress the interviewer, there exists a solution that work in linear time and that is also easy to implementet as well as to explain. The core idea is that  elements at even index should always be greater than their adjacents neighbors. This can be enforced with a single pass on the array, by swapping elements at even indices if they happen to be smaller than their left and right neighbors. See Listing \ref{list:wave_array_linear} for a possible implementation of this idea.
+
+\lstinputlisting[language=c++, caption=Linear time solutionto the wave array problem.,label=list:wave_array_linear]{sources/wave_array/wave_array_solution2.cpp}
+
+This is considered a good solution\footnote{It will not work if the lexicographically smallest solution should be returned.} with optimal asymptotic complexity of $O(n)$ both in time and space.
+Note how also in this case only pairs of the form $(2i, 2i+1)$ are swapped, and that each iteration takes case of arranging in a wave like fashion i.e. $A_{i-1} \geq A_i \leq A_{i+1}$.

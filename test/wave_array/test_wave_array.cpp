@@ -34,7 +34,6 @@ TEST(wave_array, test_sorted_inverse)
 
 	{
 		std::vector<int> result_sorting = wave_linear(A);
-		std::cout<<result_sorting<<std::endl;
 		EXPECT_TRUE(is_wave_sorted(result_sorting));
 	}
 }
@@ -48,6 +47,10 @@ TEST(wave_array, test_custom2)
 		std::vector<int> result_sorting = wave_sorting(A);
 		EXPECT_TRUE(is_wave_sorted(result_sorting));
 	}
+	{
+		std::vector<int> result_sorting = wave_linear(A);
+		EXPECT_TRUE(is_wave_sorted(result_sorting));
+	}
 }
 
 TEST(wave_array, test_custom3)
@@ -57,6 +60,10 @@ TEST(wave_array, test_custom3)
 
 	{
 		std::vector<int> result_sorting = wave_sorting(A);
+		EXPECT_TRUE(is_wave_sorted(result_sorting));
+	}
+	{
+		std::vector<int> result_sorting = wave_linear(A);
 		EXPECT_TRUE(is_wave_sorted(result_sorting));
 	}
 }
@@ -70,6 +77,10 @@ TEST(wave_array, test_custom4)
 		std::vector<int> result_sorting = wave_sorting(A);
 		EXPECT_TRUE(is_wave_sorted(result_sorting));
 	}
+	{
+		std::vector<int> result_sorting = wave_linear(A);
+		EXPECT_TRUE(is_wave_sorted(result_sorting));
+	}
 }
 
 TEST(wave_array, test_custom_all_same)
@@ -79,6 +90,10 @@ TEST(wave_array, test_custom_all_same)
 
 	{
 		std::vector<int> result_sorting = wave_sorting(A);
+		EXPECT_TRUE(is_wave_sorted(result_sorting));
+	}
+	{
+		std::vector<int> result_sorting = wave_linear(A);
 		EXPECT_TRUE(is_wave_sorted(result_sorting));
 	}
 }
@@ -92,6 +107,10 @@ TEST(wave_array, test_custom1)
 		std::vector<int> result_sorting = wave_sorting(A);
 		EXPECT_TRUE(is_wave_sorted(result_sorting));
 	}
+	{
+		std::vector<int> result_sorting = wave_linear(A);
+		EXPECT_TRUE(is_wave_sorted(result_sorting));
+	}
 }
 
 TEST(wave_array, test_empty)
@@ -101,6 +120,10 @@ TEST(wave_array, test_empty)
 
 	{
 		std::vector<int> result_sorting = wave_sorting(A);
+		EXPECT_TRUE(is_wave_sorted(result_sorting));
+	}
+	{
+		std::vector<int> result_sorting = wave_linear(A);
 		EXPECT_TRUE(is_wave_sorted(result_sorting));
 	}
 }
