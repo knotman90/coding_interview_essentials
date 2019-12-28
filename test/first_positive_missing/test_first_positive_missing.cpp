@@ -3,14 +3,20 @@
 
 #include "first_positive_missing_solution1.cpp"
 #include "first_positive_missing_solution2.cpp"
+#include "first_positive_missing_solution3.cpp"
+#include "first_positive_missing_solution4.cpp"
 
 
 TEST(first_positive_missing, test_0)
 {
-	std::vector<int> A = {0};
 	const int expected = 1;
-	EXPECT_EQ(expected,first_positive_missing_sorting(A));
-		EXPECT_EQ(expected,first_positive_missing_linear_space(A));
+	std::vector<int> A = {0};
+	
+	EXPECT_EQ(expected,first_positive_missing_sorting(std::vector<int>(A)));
+	EXPECT_EQ(expected,first_positive_missing_linear_space(std::vector<int>(A)));
+	EXPECT_EQ(expected,first_positive_missing_bruteforce1(std::vector<int>(A)));
+	EXPECT_EQ(expected,first_positive_missing_bruteforce2(std::vector<int>(A)));
+	EXPECT_EQ(expected,first_positive_missing_constant_space(std::vector<int>(A)));
 }
 
 

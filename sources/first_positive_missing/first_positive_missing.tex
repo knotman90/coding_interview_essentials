@@ -62,6 +62,13 @@ Its problem statement is really small and a bit, probably on purpouse, vague, so
 \label{first_positive_missing:sec:discussion}
 This is actually a very interesting problem with application to the real life. Imagine for instance the OS has to assign PID to processes. One approach would be to keep a set of all the PID for all the processes running, and one a new one is fired up, the OS will assign to it the smallest PID not taken by any other process\footnote{In Unix, process IDs are usually allocated on a sequential basis, beginning at 0 and rising to a maximum value (usually 65535) which varies from system to system. Once this limit is reached, allocation restarts at zero and again increases. However, for this and subsequent passes any PIDs still assigned to processes are skipped.}.
 
+\subsection{Bruteforce}
+The simplest approach is to blindly search for the missing number incrementally from $0$. This mean that a for each number from $0$ onward a search in the input array is performed and if the number is \textbf{not} found, then this means that is the missing one. This idea is shown in Listing \ref{list:first_positive_missing_sorting_bruteforce}.
+
+\lstinputlisting[language=c++, caption=Two bruteforce solution implementations the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_bruteforce]{sources/first_positive_missing/first_positive_missing_solution4.cpp}
+
+This is considered to be a poor solution (as in general all the bruteforce solutions are) and has a complexity of $O(n^2)$ time and $O(1)$ space. The advantage of this approach is that it is extremely easy and fast to code right. 
+
 \subsection{Sorting}
 \label{first_positive_missing:sec:sorting}
 Probably, the most intuitive way to solve this problem is by thinking about sorting the input.\footnote{One should always ask, if the problem would be easier when the input was sorted}. Having the numbers sorted is helpful and makes the problem much easier because all it is needed is traversing the array from the smallest to the largest number and stopping as soon as the numbers do not appear in sequence. 
@@ -92,11 +99,15 @@ Looking at the problem a bit closer we can immediately notice that the missing n
 
 This fact can be exploited to keep track, in an additional array of boolean, of which numbers from $0$ to $N$ are found in the unsorted array (ignoring negatives or elements larger than $N$). The array of flags can then be scanned and the index at which $false$ is found first can be returned. An implementation of the idea above is found in Listing \ref{list:first_positive_missing_linear_space}.
 
-
 \lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{sources/first_positive_missing/first_positive_missing_solution2.cpp}
+
+The idea above is considered a fairly good solution with time and space complexity equal to $O(n)$. 
+Alternatively to the additional array, one can use an hashmap to keep track of which element has been already seen as the array is scanned from left to right.
 
 \subsection{$O(n)$ time and $O(1)$ space solution}
 \label{first_positive_missing:sec:linear_space}
-The optimal solution does not use any additional space but shared the idea of keeping track of which elements has been found with the solution described in Section \ref{first_positive_missing:sec:linear_space}. All it is necessary if to store this information in the input array itself. This can be done by storing the information about an element $0 \leq x < N$ by marking the array at index $x$. Marking can be done by changing the sign at index $x$ to negative.
-In other words 
+The optimal solution does not use any additional space but shares the idea of keeping track of which elements has been found with the solution described in Section \ref{first_positive_missing:sec:linear_space}. All it is necessary is to use the input array itself as storage space. This can be done by storing the information about an element $0 \leq x < N$ by marking the array at index $x$ in some way, for instance, it can be done by changing the sign at index $x$ to negative.
 
+
+
+\lstinputlisting[language=c++, caption=Linear time and constantspace solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{sources/first_positive_missing/first_positive_missing_solution3.cpp}
