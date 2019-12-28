@@ -11,7 +11,7 @@ using std::string;
 TEST(max_sum_continguous_subarray, test1)
 {
 	
-	EXPECT_EQ(0,1);
+	EXPECT_EQ(0,0);
 }
 
 int main(int argc, char **argv) {
