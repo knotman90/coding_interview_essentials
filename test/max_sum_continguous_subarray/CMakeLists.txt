@@ -2,6 +2,6 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 
 add_executable(test_max_sum_continguous_subarray test_max_sum_continguous_subarray.cpp)
-target_link_libraries(test_max_sum_continguous_subarray pthread ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(test_max_sum_continguous_subarray ${GTEST_BOTH_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 target_include_directories(test_max_sum_continguous_subarray PUBLIC ${GTEST_INCLUDE_DIRS})
 
