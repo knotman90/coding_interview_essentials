@@ -1,7 +1,10 @@
 %!TEX root = ../main.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
-%
+% https://medium.com/@rsinghal757/kadanes-algorithm-dynamic-programming-how-and-why-does-it-work-3fd8849ed73d
+% https://en.wikipedia.org/wiki/Maximum_subarray_problem
+% https://www.geeksforgeeks.org/maximum-subarray-sum-using-divide-and-conquer-algorithm/
+% https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
 % Difficulty: Medium
 % Companies: Facebook paypal yahoo microsoft linkedin mazaon 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9,13 +12,14 @@
 \chapter{Max sum contiguous subarray}
 \label{ch:max_sum_continguous_subarray}
 \section*{Introduction}
+This chapter describes a very popular problem that is asked frequently during interviews but also has many real life applications including, but not limited to: genomic sequence analysis (to identify protein sequences), computer vision (to identify the brightest or darkest part of an image). 
 
 \section{Problem statement}
 \begin{exercise}
 Find the largest sum of a contiguous subarray (containing at least one element) within an array, $A$ of length $n$, and return it.
 Formally, the task is to find two indices $ 0 \leq i \leq j < n$ s.t. the following sum is as large as possible:
 \[
-\sum_{x=i}^j A[i]
+\sum_{x=i}^j   = A[x] = A[i] + A[i+1] + \ldots + A[j] 
 \]
 
 \end{exercise}
@@ -57,9 +61,45 @@ First of all let's start by notiving that
 \end{itemize}
 
 \subsection{Brute-force}
-\label{max_sum_continguous_subarray:sec:bruteforce}
+\label{sec:max_sum_continguous_subarray_bruteforce}
 One way to tackle this problem is to look at the sum of all possible subarray and return the largest sum. 
 The idea is that for all elements $A[i]$, the sum of all subarrays having it as starting element can be easily calculated  as shown in Listing \ref{list:max_sum_continguous_subarray_bruteforce}. This approach works but it is unnecessarly slow, havig a time complexity of $O(n^3)$. There are $O(n^2)$ ordered pairs each identifying a subarray, and calculating the sum of a single subarray costs $O(O(n)$ for a grand total of $O(n^3)$. 
 
 \lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_bruteforce]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution1.cpp}
 
+This is considered a very poor solution because it is quite far off from the optimal linear time complexity solution that exists for this problem. 
+
+\subsection{Brute-force improved}
+\label{max_sum_continguous_subarray:sec:bruteforce_improved}
+The bruteforce solution proposed in Section \ref{max_sum_continguous_subarray:sec:bruteforce} can be improved by using avoiding  calculating the sum of a subarray over and over again. Given two indices $i$ and $j$ the correnspoding subarray sum can be calculated in constant time $O(1)$ by calculating the prefix sum (See Section \ref{sect:appendix:prefix_sum}) of the input array before hand. This allows for constant time computation of the sum of any subarray. Given the prefix sum $Y$ for the array $A$ then subarray sum between indices $i$ and $j$ is:
+$Y[j]-Y[i-1]$ where $Y[-1] = 0$.
+
+The code in Listing \ref{list:max_sum_continguous_subarray_bruteforce_improved} shows a $O(n^2)$ implementation of the bruteforce method described in Section \ref{sec:max_sum_continguous_subarray_bruteforce}  using prefix sum for constant time computation of subarrays sum.
+
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_bruteforce_improved]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution3.cpp}
+
+Despite the dramatic improvement in time complexity the version shown in Listing \ref{list:max_sum_continguous_subarray_bruteforce_improved} is, compared to the raw bruteforce solution, it is still considered a rather poor solution. Factoring in the fact that the prefix sum approach uses additional space and the popularity of this interview question, during a real interview a linear time and constant space solution is expected to be presented.
+
+\subsection{Kadane's Algorithm}
+\label{sec:kadane_algorithm}
+Kadane's agorithm is used to solve this problem efficiently by using a dynamic programming approach. 
+In its simplest form uses an additional array $B$ storing at each position $j$ the largest sum for a subarray ending (and including) $A[j]$. In other words $B[j]$ stores the information regarding the largest sum obtainable by summing up a contiguous chunk of $A$ ending and including $A[j]$. Once $B$ is filled, the solution to the problem is simply the maximum element of $B$. The idea above is shown in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space}.
+Note how $B[i]$ is incrementally constructed by reusing the information about index $i-1$. The line \lstinline[columns=fixed]{std::max(A[i] , B[i-1]+A[i]);} really means that the maximum subarray sum ending at (and including) $A[i]$ is either from:
+\begin{enumerate}
+	\item the subarray starting and ending at index $i$ i.e. only containing $A[i]$, or
+	\item extending the best subarray ending at index $i-1$ by adding $A[i]$ to it. The sum of the best subarray ending t $i-1$ is already computed and stored in $B[i-1]$. By doing so we are effectively avoiding a lot of re-computation, and this is the reason why Kadane's algorithm is so fast.
+\end{enumerate}
+
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_kadane_additional_space]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution2.cpp}
+
+But, is the additional space used by $B$ really necessary? A closer look at the implementation in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space} provides the answer which is, no. Infact every value of $B$ is only used once, and then ignored for the rest of the execution. Thus the algorithm can be modified so it only uses a single variable to store the latest calculated value of $B$ i.e. the value for the index $i-1$ as shown in Listing \ref{list:max_sum_continguous_subarray_kadane}
+
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_kadane]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution4.cpp}
+
+Note how the variable \texttt{max_ending_here} is doing the job that the variable \texttt{B[i-1]} was doing in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space} and also how the final answer is the maximum among all values taken by \texttt{max_ending_here}.
+
+The complexity of this approach is $O(n)$ in time and constant in space, and very likely is the sort of complexity the interviewer expects. 
+
+\section{Common Variations}
+\subsection{Minium sum contiguous subarray}
+A very common variation of this problem is to find the smallest sum instead of the largest. This variation is very quickly solved by just changing the the way the variables \texttt{max_ending_here} and \texttt{ans} are updated. Since the minimum is to be returned then they should be updated using \lstinline[columns=fixed]{min_ending_here = std::min(A[i] , max_ending_here+A[i]);}  and \lstinline[columns=fixed]{std::min(ans, max_ending_here);}, respectively. 
