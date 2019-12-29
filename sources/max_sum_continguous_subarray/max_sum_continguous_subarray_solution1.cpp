@@ -1,4 +1,4 @@
-int maxSubArray(const std::vector<int> &A) 
+int max_sum_contiguous_subarray_kadane(const std::vector<int> &A) 
 {
     std::vector<int>B(A.size(),-10001);
     B[0] = A[0];
