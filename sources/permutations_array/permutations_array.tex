@@ -1,0 +1,54 @@
+
+\chapterimage{header}
+
+\chapter{Permutations of an array}
+\label{ch:permutations_array}
+\section*{Introduction}
+One of the topics that are commonly asked in interviews are finding certain permutations and combinations of data structures like arrays/vectors,etc. These topics really test the logical thinking abilities of a candidate and also help to gauge how good the candidate is in computer science fundamentals like recursion.
+
+\section{Problem statement}
+\begin{exercise}
+Write a function (with signature: \lstinline[columns=fixed]{std::vector<std::vector<int> > array_permutations(std::vector<int> arr)} ) which takes in an array and returns all possible permutations of the input array.
+\end{exercise}
+
+\begin{example}
+	   \hfill \\
+	   Given $A=\{1,2,3\}$, the answer is 
+	   $\{\{1,2,3\},\{1,3,2\},\{2,1,3\},\{2,3,1\},\{3,2,1\},\{3,1,2\}\}$
+\end{example}
+
+\section{Clarification Questions}
+\begin{QandA}
+	\item Are the inputs unique?
+	\begin{answered}
+		\textit{Yes, you can assume that the inputs are unique.}
+	\end{answered}
+	\item Can the array be empty?
+	\begin{answered}
+		\textit{No, It will contain atleast one element.}
+	\end{answered}
+\end{QandA}
+
+\section{Discussion}
+
+In order to compute all possible permutations, we need to first think about how the numbers can be arranged. Think that you have an array of size three, then for the first spot, you have three possible candidates. Once you place a candidate in the first spot, then for the second spot you are left with two possible candidates. Once the second spot is filled, you will have just one possible candidate for the last spot.So, the number of possible permutations for an array of size three would be $3 \times 2 \times \1 $. If you would remember from high school, the permutations of a given arrangement of size $n$ is given by $n!$. 
+
+\subsection{Recursion}
+
+One of the ways to compute the permutations of any arrangement is to approach this problem recursively. So, you could take the input array, swap the subsequent elements with the first element in the array. Then, you  could recursively do this until you reach the end of the array.
+
+\lstinputlisting[language=c++, caption=Recursive solution to finding the permutations of an array ,label=list:permutations_array_recursive]{sources/permutations_array/permutations_array_recursive.cpp}
+
+
+Another simple approach to this problem would be to just use \lstinline[columns=fixed]{std::next_permutation} from the standard template library. Though most interviewers would not accept this solution, mentioning this would give an impression that you are aware of the features of standard C++.
+
+\lstinputlisting[language=c++, caption=Solution using C++ standard library]{sources/permutations_array/permutations_array_simple.cpp}
+
+\section{Common Variations}
+\subsection{Strings}
+This same problem can be asked with strings as well. You can use the exact same approach for strings with no variations.
+\subsection{Non unique Elements}
+In this case, all that you would need to do is to keep only single occurence of non-unique elements in the array and generate permutations for the updated array.
+
+\subsection{Permutations of exactly $k$ elements}
+There could be instances where you could be asked to produce permutations of size $k$. In this case, you would need to  choose subarrays of size $k$ and then produce permutations for these sub-arrays.
