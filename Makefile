@@ -17,5 +17,5 @@ $(BUILD_DIR):
 
 clean:
 	(cd build && $(MAKE) clean) && cd build && rm -f *.nlo *.lot *.bcf *.acn *.glsdefs *.aux *.log *.lof \
-                    *.toc *.bak *.sav *.ist *.nls  *.nlo *.xml *.xdy 
+                    *.toc *.bak *.sav *.ist *.nls  *.nlo *.xml *.xdy *.idx *.pdf
 
