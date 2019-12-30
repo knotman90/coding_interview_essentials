@@ -129,6 +129,6 @@ echo "cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 
 add_executable(test_${NAME} `basename $TEST_FILE`)
-target_link_libraries(test_${NAME} \${GTEST_BOTH_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(test_${NAME} \${GTEST_BOTH_LIBRARIES} \${CMAKE_THREAD_LIBS_INIT}) 
 target_include_directories(test_${NAME} PUBLIC \${GTEST_INCLUDE_DIRS})
 " >> $CMAKE_FILE
