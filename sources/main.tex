@@ -1,4 +1,4 @@
-\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+\documentclass[11pt,fleqn, oneside,openany]{book} % Default font size and left-justified equations
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               Structure
@@ -10,9 +10,9 @@
 	%\frontmatter
 	\input{sources/front_cover.tex}
 
-	%\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
+	\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
 
-	\chapterimage{images/header} % Table of contents heading image
+	%\chapterimage{images/header} % Table of contents heading image
 	
 	\pagestyle{empty} % No headers
 	
@@ -20,9 +20,8 @@
 	
 	%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
 	
-	\pagestyle{fancy} % Print headers again
+	%pagestyle{fancy} % Print headers again
 	
-
 	\input{sources/power_set/power_set.tex}
 	\input{sources/square_root/square_root.tex}
 	\input{sources/two_string_anagram/two_string_anagram.tex}
