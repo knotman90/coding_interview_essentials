@@ -1,0 +1,113 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{First positive missing}
+\label{ch:first_positive_missing}
+\section*{Introduction}
+This chapter addressed a farily common problem that is asked during on-site interview. This problem has a number of solutions different in time and space complexity. What is considered the best solution both in terms of time and space complexity might seem a bit challenging but if well explained and coded during and interview will for sure impress positively the interviewer. 
+Its problem statement is really small and a bit, probably on purpouse, vague, so especially with this problem it is important to ask clarification questions and summarize the problem for the interviewer before actually starting to solve it so to make sure the statement is understood fully.
+
+\section{Problem statement}
+\begin{exercise}
+	Given an unsorted integer array $A$, find the smallest missing positive integer.
+\end{exercise}
+
+
+\begin{example}
+	\hfill \\
+	Given $A=\{2, 3, 7, 6, 8, -1, -10, 15\}$ the answer is $1$.
+\end{example}
+
+\begin{example}
+	\hfill \\
+	Given $A=\{ 2, 3, -7, 6, 8, 1, -10, 15\}$ the answer is $4$.
+\end{example}
+
+\begin{example}
+	\hfill \\
+	Given $A=\{ 1, 0, -1, -2\}$ the answer is $2$.
+\end{example}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Are the input numbers always positive?
+	\begin{answered}
+		\textit{No, the array contains positive and negative numbers.}
+	\end{answered}
+
+	\item Are all the elements distinct?
+	\begin{answered}
+		\textit{No, the array might contains duplicates.}
+	\end{answered}
+	
+	\item Can be the input array be modified?
+	\begin{answered}
+		\textit{Yes.}
+	\end{answered}
+
+	\item Can the size of the array be zero? Can the array be empty?
+	\begin{answered}
+		\textit{No, the input array contains at least one element.}
+	\end{answered}
+
+\end{QandA}
+
+\section{Discussion}
+\label{first_positive_missing:sec:discussion}
+This is actually a very interesting problem with application to the real life. Imagine for instance the OS has to assign PID to processes. One approach would be to keep a set of all the PID for all the processes running, and one a new one is fired up, the OS will assign to it the smallest PID not taken by any other process\footnote{In Unix, process IDs are usually allocated on a sequential basis, beginning at 0 and rising to a maximum value (usually 65535) which varies from system to system. Once this limit is reached, allocation restarts at zero and again increases. However, for this and subsequent passes any PIDs still assigned to processes are skipped.}.
+
+\subsection{Bruteforce}
+The simplest approach is to blindly search for the missing number incrementally from $0$. This mean that a for each number from $0$ onward a search in the input array is performed and if the number is \textbf{not} found, then this means that is the missing one. This idea is shown in Listing \ref{list:first_positive_missing_sorting_bruteforce}.
+
+\lstinputlisting[language=c++, caption=Two bruteforce solution implementations the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_bruteforce]{sources/first_positive_missing/first_positive_missing_solution4.cpp}
+
+This is considered to be a poor solution (as in general all the bruteforce solutions are) and has a complexity of $O(n^2)$ time and $O(1)$ space. The advantage of this approach is that it is extremely easy and fast to code right. 
+
+\subsection{Sorting}
+\label{first_positive_missing:sec:sorting}
+Probably, the most intuitive way to solve this problem is by thinking about sorting the input.\footnote{One should always ask, if the problem would be easier when the input was sorted}. Having the numbers sorted is helpful and makes the problem much easier because all it is needed is traversing the array from the smallest to the largest number and stopping as soon as the numbers do not appear in sequence. 
+For instance consider the array $A=\{ 9,-7,4,5,2,1\}$. When sorted the array becomes $A=\{ -7,1,2,4,5,9\}$ and two things appear obvious:
+
+\begin{enumerate}
+	\item all the negative numbers can be ignored as the statement explicitely asks for \textbf{positive} numbers
+	\item the answer is $3$ because all the positive numbers smaller than $3$ are present but $3$ itself is not. All the other numbers are for sure higher than $3$ so looking forward is not necessary.
+\end{enumerate}
+
+This is indeed all it is needed to solve this problem by sorting as shown in Listing \ref{list:first_positive_missing_sorting}.
+
+\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_sorting]{sources/first_positive_missing/first_positive_missing_solution1.cpp}
+
+Note that:
+\begin{itemize}
+	\item[] \texttt{it} is the iterator pointing at the current element. It is initialized to the smallest positive in the sorted array if present, or to the end of the array otherwise. This is done so that negative numbers are simply ignored.
+	\item[] \texttt{expected} is the positive integer that it is expected to be found where \texttt{it} is pointing to.
+	\item[] if no positive numbers are present $0$ is correctly returned.
+\end{itemize}
+
+This is considered a decent solution with complexity $O(nlog(n))$ but it is not time optimal as a linear time solution exists. 
+
+\subsection{$O(n)$ time and space solution}
+\label{first_positive_missing:sec:linear_space}
+
+Looking at the problem a bit closer we can immediately notice that the missing number will always be in the range $[0-N]$ where $N$ is the size of the input array. Why is this the case? Because, among all possible inputs of size $N$ only one configuration leads to the highest missing number i.e. $A = \{0,1,2,3,4, \ldots ,N-1\}$ which has answer $N$. All the other configuration contains duplicates, negative or numbers higher than $N$ which forces the input to have ``holes'' in the range $[0-N]$. 
+
+This fact can be exploited to keep track, in an additional array of boolean, of which numbers from $0$ to $N$ are found in the unsorted array (ignoring negatives or elements larger than $N$). The array of flags can then be scanned and the index at which $false$ is found first can be returned. An implementation of the idea above is found in Listing \ref{list:first_positive_missing_linear_space}.
+
+\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{sources/first_positive_missing/first_positive_missing_solution2.cpp}
+
+The idea above is considered a fairly good solution with time and space complexity equal to $O(n)$. 
+Alternatively to the additional array, one can use an hashmap to keep track of which element has been already seen as the array is scanned from left to right.
+
+\subsection{$O(n)$ time and $O(1)$ space solution}
+\label{first_positive_missing:sec:linear_space}
+The optimal solution does not use any additional space but shares the idea of keeping track of which elements has been found with the solution described in Section \ref{first_positive_missing:sec:linear_space}. All it is necessary is to use the input array itself as storage space. This can be done by storing the information about an element $0 \leq x < N$ by marking the array at index $x$ in some way, for instance, it can be done by changing the sign at index $x$ to negative.
+
+
+
+\lstinputlisting[language=c++, caption=Linear time and constantspace solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{sources/first_positive_missing/first_positive_missing_solution3.cpp}
