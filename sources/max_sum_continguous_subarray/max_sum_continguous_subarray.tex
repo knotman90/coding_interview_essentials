@@ -96,10 +96,13 @@ But, is the additional space used by $B$ really necessary? A closer look at the 
 
 \lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_kadane]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution4.cpp}
 
-Note how the variable \texttt{max_ending_here} is doing the job that the variable \texttt{B[i-1]} was doing in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space} and also how the final answer is the maximum among all values taken by \texttt{max_ending_here}.
+Note how the variable \texttt{max\_ending\_here} is doing the job that the variable \texttt{B[i-1]} was doing in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space} and also how the final answer is the maximum among all values taken by \texttt{max\_ending\_here}.
 
 The complexity of this approach is $O(n)$ in time and constant in space, and very likely is the sort of complexity the interviewer expects. 
 
 \section{Common Variations}
 \subsection{Minium sum contiguous subarray}
-A very common variation of this problem is to find the smallest sum instead of the largest. This variation is very quickly solved by just changing the the way the variables \texttt{max_ending_here} and \texttt{ans} are updated. Since the minimum is to be returned then they should be updated using \lstinline[columns=fixed]{min_ending_here = std::min(A[i] , max_ending_here+A[i]);}  and \lstinline[columns=fixed]{std::min(ans, max_ending_here);}, respectively. 
+A very common variation of this problem is to find the smallest sum instead of the largest. This variation is very quickly solved by just changing the the way the variables \texttt{min\_ending\_here} (the variable is names min insteda of max so to reflect the nature of the problem) and \texttt{ans} are updated. Since the minimum is to be returned then they should be updated using \lstinline[columns=fixed]{min_ending_here = std::min(A[i] , max_ending_here+A[i]);}  and \lstinline[columns=fixed]{std::min(ans, in_ending_here);}, respectively.  
+
+\subsection{Longest positive/negative contiguous subarray}
+Another common variation of the max/min sum contiguous subarray is to find the longest subarray only made of positive or negative numbers. The same core idea used for the other variant can be used here as well. At each iteration $i$ the variable \texttt{longest\_ending\_here} represents the longest positive subarray up to that iteration and including the element $A[i]$ and can be updated as follows: \lstinline[columns=fixed]{longest_ending_here = A[i] >= 0 ? longest_ending_here+1 : 0;}.
