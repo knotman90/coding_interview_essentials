@@ -10,61 +10,6 @@
 	%\frontmatter
 	\input{sources/front_cover.tex}
 
-	
-	%\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
-
-	\chapterimage{images/header} % Table of contents heading image
-	
-	\pagestyle{empty} % No headers
-	
-	\tableofcontents % Print the table of contents itself
-	
-	\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
-	
-	\pagestyle{fancy} % Print headers again
-	
-	\input{sources/sum_strings/sum_strings.tex}
-	\input{sources/two_string_anagram/two_string_anagram.tex}
-	\input{sources/two_numbers_sum/two_numbers_sum.tex}
-	
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%               BIBLIOGRAPHY
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\chapter*{Bibliography}
-	\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
-	\section*{Books}
-	\addcontentsline{toc}{section}{Books}
-	\printbibliography[heading=bibempty,type=book]
-	\section*{Articles}
-	\addcontentsline{toc}{section}{Articles}
-	\printbibliography[heading=bibempty,type=article]
-	
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%               INDEX
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	\cleardoublepage
-	\phantomsection
-	\setlength{\columnsep}{0.75cm}
-	\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
-	\printindex
-
-
-	%\backmatter
-	
-=======
-\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%               Structure
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{sources/preamble.tex}
-
-\begin{document}
-	
-	%\frontmatter
-	\input{sources/front_cover.tex}
-
 	%\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
 
 	\chapterimage{images/header} % Table of contents heading image
@@ -79,13 +24,26 @@
 	
 
 	\input{sources/power_set/power_set.tex}
+	\input{sources/sum_strings/sum_strings.tex}
 	\input{sources/square_root/square_root.tex}
 	\input{sources/two_string_anagram/two_string_anagram.tex}
 	\input{sources/two_numbers_sum/two_numbers_sum.tex}
 	\input{sources/unique_elements/unique_elements.tex}
 	\input{sources/greatest_right_side/greatest_right_side.tex}
 	\input{sources/string_to_int/string_to_int.tex}
+	\input{sources/stairs_climbing/stairs_climbing.tex}
+	\input{sources/first_positive_missing/first_positive_missing.tex}
+	\input{sources/exponentiation/exponentiation.tex}
+	\input{sources/max_sum_continguous_subarray/max_sum_continguous_subarray.tex}
+
+
 	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%               Appendices
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\chapter{Appendices}
+	\input{sources/appendices/prefix_sum.tex}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%               BIBLIOGRAPHY
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,4 +68,5 @@
 
 
 	%\backmatter
+
 \end{document}
