@@ -1,12 +1,14 @@
-int maxSubArray(const std::vector<int> &A) 
+int max_sum_contiguous_subarray_bruteforce(const std::vector<int> &A) 
 {
-    std::vector<int>B(A.size(),-10001);
-    B[0] = A[0];
-    int ans = B[0];
-    for(int i = 1 ; i < A.size() ; i++)
+	int ans = std::numeric_limits<int>::min();
+    for(auto i = begin(A) ; i != end(A) ; i++)
     {
-        B[i] = std::max(A[i] , B[i-1]+A[i]);
-        ans = std::max(ans, B[i]);
+    	for(auto j = i ; j != end(A); j++)
+    	{
+    		const int subarray_sum = 
+    			std::accumulate(i, j+1, 0);
+    		ans = std::max(ans, subarray_sum);
+    	}
     }
     return ans;
 }
