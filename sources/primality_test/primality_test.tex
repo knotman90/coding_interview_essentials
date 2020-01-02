@@ -1,0 +1,70 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links: https://www.topcoder.com/community/competitive-programming/tutorials/mathematics-for-topcoders/
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Primality of a number}
+\label{ch:primality_test}
+\section*{Introduction}
+Primality test is a well known problem in the field of mathematics and computer science. Though it is not a commonly asked question, it is always good to know some basic concepts related to prime numbers. One such concept is checking whether a given number is prime.
+
+\section{Problem statement}
+Write a function (with signature: \lstinline[columns=fixed]{bool is_prime(const int n)} ) that returns whether $n$ is a prime or not.
+
+\begin{exercise}
+
+\end{exercise}
+
+
+\begin{example}
+	\hfill \\
+	Given $n = 3$, return \lstinline[columns=fixed]{true}.
+\end{example}
+
+\begin{example}
+	\hfill \\
+	Given $n = 4$, return \lstinline[columns=fixed]{false}.
+\end{example}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item What is the maximum value the parameter $n$ can take?
+	\begin{answered}
+		\textit{The maximum value is smaller than the range of int which is $2^{31} - 1$}.
+	\end{answered}
+	
+	\item Is $n$ guaranteed to be always positive?
+	\begin{answered}
+		\textit{Yes, there is no need to check for invalid input.}
+	\end{answered}
+\end{QandA}
+
+\section{Discussion}
+\label{primality_test:sec:discussion}
+As you might remember from high school, a prime number is a number which divides nothing but itself and one. There are multiple ways in which this could be done.
+
+\subsection{Brute-force}
+\label{primality_test:sec:bruteforce}
+
+The simplest solution would be to iterate from 2 to the given number and check if any of the numbers divide the given number. 
+\lstinputlisting[language=c++, caption=Brute Force solution,label=list:primality_test]{sources/primality_test/primality_test_solution1.cpp}
+
+\subsection{Optimizations}
+
+One optimization that you could do is, if the give number is even, you automatically know that it is not a prime. So, the first check you could do is check for divisibility by 2.
+
+\lstinputlisting[language=c++, caption=Simple even number optimization,label=list:primality_test]{sources/primality_test/primality_test_solution2.cpp}
+
+There are two other optimizations that could be done. First, optimiztion is that for a given
+number $n$, you do not need to check for divisibility uporo the given number. It is enough if you check till $\sqrt{n}$, because you can be sure that there is no whole number greater than $\sqrt{n}$, which will be a divisor of $n$. The second optimization that you could do is you do not need to check for other even numbers because you already checked for divisibility by two and it will be only odd numbers that you need to check for. So, in the
+loop you could just skip the divisibility check by even numbers.
+
+\lstinputlisting[language=c++, caption= Other optimizations added,label=list:primality_test]{sources/primality_test/primality_test_solution3.cpp}
+
+\section{Conclusions}
+These are the three simplest possible implementations for primality checking that could be made during an interview. There are other ones such as Fermat primality test and Miller-Rabin test, however one could read about them and not expect any specific questions
+on these algorithms.
