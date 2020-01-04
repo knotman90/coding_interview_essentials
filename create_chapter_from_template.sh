@@ -102,10 +102,14 @@ touch "$TEST_FILE"
 echo "#include <gtest/gtest.h>
 #include <bits/stdc++.h>
 
+using std::string;
+using std::swap;
+using std::cout;
+using std::endl;
+
 #include \"${NAME}_solution1.cpp\"
 #include \"${NAME}_solution2.cpp\"
 
-using std::string;
 
 
 
