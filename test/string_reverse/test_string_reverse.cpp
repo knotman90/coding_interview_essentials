@@ -1,65 +1,59 @@
-#include <gtest/gtest.h>
 #include <bits/stdc++.h>
+#include <gtest/gtest.h>
 
-using std::string;
-using std::swap;
 using std::cout;
 using std::endl;
+using std::string;
+using std::swap;
 
 #include "string_reverse_solution1.cpp"
 #include "string_reverse_solution2.cpp"
 #include "string_reverse_solution3.cpp"
 #include "string_reverse_solution4.cpp"
 
-
-
-TEST(string_reverse, test_empty)
-{
-	std::string s ="";
-	const std::string expected(s);
-	EXPECT_EQ(expected,reverse_string_outplace_raw_loop(s));
-	EXPECT_EQ(expected,reverse_string_outplace_iterator(s));
-	{	
-		std::string scopy(s);
-		reverse_string_inplace(scopy);
-		EXPECT_EQ(expected,scopy);
-	}
-	{	
-		std::string scopy(s);
-		reverse_string_inplace_recursive(scopy);
-		EXPECT_EQ(expected,scopy);
-	}
+TEST(string_reverse, test_empty) {
+  std::string s = "";
+  const std::string expected(s);
+  EXPECT_EQ(expected, reverse_string_outplace_raw_loop(s));
+  EXPECT_EQ(expected, reverse_string_outplace_iterator(s));
+  {
+    std::string scopy(s);
+    reverse_string_inplace(scopy);
+    EXPECT_EQ(expected, scopy);
+  }
+  {
+    std::string scopy(s);
+    reverse_string_inplace_recursive(scopy);
+    EXPECT_EQ(expected, scopy);
+  }
 }
 
-TEST(string_reverse, test_single)
-{
-	std::string s ="a";
-	const std::string expected(s);
-	EXPECT_EQ(expected,reverse_string_outplace_raw_loop(s));
-	EXPECT_EQ(expected,reverse_string_outplace_iterator(s));
-	{	
-		std::string scopy(s);
-		reverse_string_inplace(scopy);
-		EXPECT_EQ(expected,scopy);
-	}
+TEST(string_reverse, test_single) {
+  std::string s = "a";
+  const std::string expected(s);
+  EXPECT_EQ(expected, reverse_string_outplace_raw_loop(s));
+  EXPECT_EQ(expected, reverse_string_outplace_iterator(s));
+  {
+    std::string scopy(s);
+    reverse_string_inplace(scopy);
+    EXPECT_EQ(expected, scopy);
+  }
 }
 
-TEST(string_reverse, test_abcde)
-{
-	std::string s ="abcde";
-	const std::string expected="edcba";
-	EXPECT_EQ(expected,reverse_string_outplace_raw_loop(s));
-	EXPECT_EQ(expected,reverse_string_outplace_iterator(s));
-	{	
-		std::string scopy(s);
-		reverse_string_inplace(scopy);
-		EXPECT_EQ(expected,scopy);
-	}
+TEST(string_reverse, test_abcde) {
+  std::string s = "abcde";
+  const std::string expected = "edcba";
+  EXPECT_EQ(expected, reverse_string_outplace_raw_loop(s));
+  EXPECT_EQ(expected, reverse_string_outplace_iterator(s));
+  {
+    std::string scopy(s);
+    reverse_string_inplace(scopy);
+    EXPECT_EQ(expected, scopy);
+  }
 }
 
-TEST(string_reverse, test_dante_inferno)
-{
-	std::string s =R"(Midway upon the journey of our life
+TEST(string_reverse, test_dante_inferno) {
+  std::string s = R"(Midway upon the journey of our life
   I found myself within a forest dark,
   For the straightforward pathway had been lost.
 
@@ -83,7 +77,7 @@ Upward I looked, and I beheld its shoulders,
   Vested already with that planet's rays
   Which leadeth others right by every road.)";
 
-	const std::string expected=R"(.daor yreve yb thgir srehto htedael hcihW  
+  const std::string expected = R"(.daor yreve yb thgir srehto htedael hcihW  
 syar s'tenalp taht htiw ydaerla detseV  
 ,sredluohs sti dleheb I dna ,dekool I drawpU
 
@@ -107,19 +101,16 @@ yas ot si ti gniht a drah woh !em hA
 ,krad tserof a nihtiw flesym dnuof I  
 efil ruo fo yenruoj eht nopu yawdiM)";
 
-
-	EXPECT_EQ(expected,reverse_string_outplace_raw_loop(s));
-	EXPECT_EQ(expected,reverse_string_outplace_iterator(s));
-	{	
-		std::string scopy(s);
-		reverse_string_inplace(scopy);
-		EXPECT_EQ(expected,scopy);
-	}
+  EXPECT_EQ(expected, reverse_string_outplace_raw_loop(s));
+  EXPECT_EQ(expected, reverse_string_outplace_iterator(s));
+  {
+    std::string scopy(s);
+    reverse_string_inplace(scopy);
+    EXPECT_EQ(expected, scopy);
+  }
 }
-
 
 int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv); 
-    return RUN_ALL_TESTS();
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
-
