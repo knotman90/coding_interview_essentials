@@ -13,7 +13,7 @@ pipelines:
           script:    
             # CMAKE
             - apt-get update -qq
-            - apt-get install -qq -y cmake install build-essential g++
+            - apt-get install -qq -y cmake build-essential g++
             - git clone --depth=1 -b master -q https://github.com/google/googletest.git /googletest
             - mkdir -p /googletest/build
             - cd /googletest/build
