@@ -10,7 +10,7 @@ tests:
 	mkdir -p build && cd build && cmake .. && $(MAKE)
 
 $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf: sources/$(MAIN_FILE_NAME).tex $(BUILD_DIR)
-	biber build/*.bcf && pdflatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
+	pdflatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
