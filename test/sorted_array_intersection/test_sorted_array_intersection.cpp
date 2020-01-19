@@ -10,12 +10,29 @@ using std::endl;
 #include "sorted_array_intersection_solution2.cpp"
 
 
-
-
-TEST(sorted_array_intersection, test1)
+TEST(sorted_array_intersection, test_empty_intersection)
 {
 	
-	EXPECT_EQ(0,1);
+	std::vector<int> A1= {1,2,3,4};
+	std::vector<int> A2= {5,6,7,8};
+
+	const std::vector<int> expected;
+	
+	EXPECT_EQ(expected, sorted_arrays_intersection_bruteforce(A1,A2));
+	
+}
+
+
+TEST(sorted_array_intersection, test_empty)
+{
+	
+	std::vector<int> A1= {};
+	std::vector<int> A2= {};
+
+	std::vector<int> expected;
+	
+	EXPECT_EQ(expected, sorted_arrays_intersection_bruteforce(A1,A2));
+	
 }
 
 int main(int argc, char **argv) {
