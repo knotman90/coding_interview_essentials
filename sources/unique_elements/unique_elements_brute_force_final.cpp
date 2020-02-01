@@ -9,7 +9,7 @@ bool unique_elements_final(const std::string &s) {
     const int idx = s[i] - 'a';
     if (F[idx])
       return false;
-    F[idx]++;
+    F[idx] = true;
   }
   return true;
 }
