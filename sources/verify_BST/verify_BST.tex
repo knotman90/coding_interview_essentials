@@ -9,6 +9,7 @@
 \chapter{Verify BST property}
 \label{ch:verify_BST}
 \section*{Introduction}
+This problem is binary search trees, which are one of the most discussed data structures during coding interviews. This problem has been asked at \textbf{Microsoft, Google, Amazon, Ebay} and it is among the group of questions that should be well understood and digested because its solution's structure can be applied to many others on binary trees.
 
 \section{Problem statement}
 \begin{exercise}
@@ -23,7 +24,7 @@ You can assume that the tree structure is defined as shown in Listing \ref{list:
 
 \end{exercise}
 
-\begin{lstlisting}[language=c++, caption=Binary tree definition used in this exercice.,label=ist:verify_BST:tree_structure]
+\begin{lstlisting}[language=c++, caption=Binary tree definition used in this exercice.,label=list:verify_BST:tree_structure]
 
  struct TreeNode {
      int val;
@@ -66,9 +67,9 @@ You can assume that the tree structure is defined as shown in Listing \ref{list:
 	   / \
 	  1   14
 	 / \    \
-    0  9     16
-            /  \
-           15   19
+0  9     16
+        /  \
+       15   19
 	\end{verbatim}
 	
 \end{example}
@@ -89,24 +90,53 @@ You can assume that the tree structure is defined as shown in Listing \ref{list:
 
 \section{Discussion}
 \label{verify_BST:sec:discussion}
-The problem is asking for a function that verifies whether a givan tree is a binary search tree. In other words does the given tree satisfy the BST property?  But what does it mean exactly? The BST property says that:
-A tree T is a binary search tree if:
+The question is asking for a function that verifies whether a given tree is a binary search tree or not. But what does it mean exactly?
+A tree $T$ is a binary search tree if:
 \begin{enumerate}
-	\item Every node has two subtree (named left and right, respectively)
-	\item given a node $n$ in the tree all the nodes in its left subtree are smaller than the value in $n$.
-	\item additionally, all nodes in the right subtree are larger.
+	\item Every node has two subtree (named left and right, respectively) i.e. $T$ is a binary tree
+	\item given a node $n$ in the tree \textbf{all} the nodes in its left subtree are smaller than the value in $n$.
+	\item additionally,  \textbf{all} nodes in the right subtree are larger.
 \end{enumerate}
+For instance the tree in the example \ref{ex:verify_BST:no_BST} is not a valid BST because node $15$ is a right descendent of the root but is it not greater than it. 
+\begin{lstlisting}[frame=single,caption=Binary tree, but not a binary search tree.,label=ex:verify_BST:no_BST, numbers=none]
+	    20
+	    / \
+	   10 30
+	     / \
+	    15  40
+\end{lstlisting}
 
+
+\subsection{A common mistake}
+When solving this question a very common mistake is to use the following greedy algorithm to verify the BST property: for each node $n$ of the tree verify that \lstinline[columns=fixed]{n.val > n->left.val && n.val < n->right.val} i.e. that the value of the node curreclty analyzed is greater than the value of its left child but smaller than its right one. This algorithm might work even for some trees but fails on others, and it is thus not correct. For instance the algorithm described above fails on the example \ref{ex:verify_BST:no_BST} as it will say that it is a valid BST.
+
+It is clear at this point that all nodes in the tree need to be visited in order to verify whether the BST property holds and that somehow the information about the values from nodes higher in the tree need to be passed down to the children and descendants. Let's see how this can be done.
 
 \subsection{Top Down approach}
 \label{verify_BST:sec:topdown}
-First of all let's notice that there we need to be able to visit all nodes in order to verify whether the BST property holds. A top down approach can be used to solve this problem. A top down approach on a tree should immediatly ring a bell on recursion. Infact this problem becomes almost trivial once two key considerations are made:
+When talking about tree, one should immediately think about a top down approach and recursion. This problem is no different and in-fact  becomes almost trivial if approached using recursione and the following key considerations are made:
 \begin{enumerate}
-	\item every node can be thought as a separate tree for which the BST property needs to hold. if the property is verified for all nodes
+	\item every node can be thought as the root of a tree for which the BST property needs to hold (and thus verified). 
 	\item empty trees satisfy the BST property
-	\item every nodes must be within a certain range that is determined by its parent nodes. For instance given the node $15$ in the example \ref{example:verify_BST_:one}. In order to be a valid tree this node must be within the range $(14,16)$ because.  The node $9$ must be within the range $(1,10)$.
+	\item every nodes must be within a certain range that is determined by its parent. For instance, given the node $15$ in the example \ref{example:verify_BST_:one}, in order for the tree to be a valid it must be within the range $(14,16)$. Why is that? Because its parent, the node $16$ must be within the range $(14,+\infty)$ and additionally node $15$, being the left subtree of node $16$ must be lower than its parent. The same reasoning can be applied recusively up to the root of the tree where the range of the value is simply $(-\infty, +\infty)$ (no constraints). 
+
+	The node $9$ in the example \ref{example:verify_BST_:one} must be within the range $(1,10)$ for similar reasons.
 \end{enumerate}
 
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:verify_BST]{sources/verify_BST/verify_BST_solution1.cpp}
+To summarize, we can visit the tree in a top-down fashion and maintain a range that the current node must satisfy starting with a range equal to $(-\infty, +\infty)$ for the root (meaning that de-facto there is no restriction on the value the root can take). Once the value is checked against the range, then the same function can be applied to the right and left children but making sure that the range is modified accordingly when recurring on the children. 
 
+But how does such a range change when visiting down the tree? The idea is simple: Given a node $n$ with parent $p$ and range \( (l_p, u_p) \) then:
+\begin{itemize}
+	\item if $n$ is the right child of $p$, then the range for $n$ is: $(p, u_p)$: all nodes in the right subtree of $p$ must be \textbf{higher} than $p$. Note that $p > l_p$ (otherwise the BST property would be violeted when checking $p$) and thus the range for $n$ becomes smaller meaning that all the constrains coming from the ancestors of $p$ will also be satisfied with the new range $(p, u_p)$.
+	\item A similar reasoning applies if $n$ is the left child of $p$. The range for $n$ is then : $(l_u,p)$.
+\end{itemize}
+
+The idea above is shown in Listing \ref{list:verify_BST}. Note how short and concise the code can be implemented with recursion.  The complexity of this approach is $O(n)$ time and $O(1)$ space (if you do not count the space on the stack taken by the recursion.
+\lstinputlisting[language=c++, caption=Linear time recursive solution to the problem of verifying the BST property.,label=list:verify_BST]{sources/verify_BST/verify_BST_solution1.cpp}
+
+
+\subsection{Brute force}
+Another way to solve this problem is to read carefully the definition of BST and realize that, for each node $n$ we need to check if the left subtree contains any element greater than $n$ and whether its right subtree contains any element smaller than $n$. This problem becomes almost trivial provided two functions are available, \lstinline[columns=fixed]{min_tree(TreeNode* root)} and \lstinline[columns=fixed]{max_tree(TreeNode* root)} for retrieving the min and max value respectively of a tree. The idea above can be implemented as shown in Listing \ref{list:verify_BST_bruteforce}
+
+\lstinputlisting[language=c++, caption=Quadratic solution to the problem of verifying the BST property.,label=list:verify_BST_rbuteforce]{sources/verify_BST/verify_BST_solution2.cpp}
