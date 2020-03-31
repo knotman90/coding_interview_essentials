@@ -26,7 +26,8 @@ pipelines:
         script:
           # BUILDING
           - echo "Creating PDF and Building UTs"
-          - make
+          - make build/main.pdf
+          - mkdir -p build && cd build && cmake .. && make
         artifacts:
           - build/*.pdf
     - step:
