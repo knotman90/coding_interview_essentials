@@ -1,0 +1,80 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Minimum element in rotated sorted array}
+\label{ch:min_rotated_array}
+\section*{Introduction}
+The problem described in this chapter is a very popular interview question that has a surprisingly short statement in length and has a very obvious linear time solution. But, despite being quite short and having a trivial  brute-force solution, solving this problem efficently is not easy and requires a bit of thinking and careful coding to implement it elegantly. 
+
+\section{Problem statement}
+\begin{exercise}
+Given a ascending sorted array with no duplicates and rotated around a pivot, return the minimum element.
+\end{exercise}
+
+
+\begin{example}
+	\hfill \\
+	Given the rotated array $\{3,4,5,6,1,2\}$ the function returns $1$
+\end{example}
+
+\begin{example}
+	\hfill \\
+	Given the rotated array $\{0,2,3\}$ the function returns $0$
+\end{example}
+
+\begin{example}
+	\hfill \\
+	Given the rotated array $\{3,2,1\}$ the function returns $1$
+\end{example}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Are all the elements unique? 
+	\begin{answered}
+		\textit{Yes, you can assume all the elements are unique}
+	\end{answered}
+	\item Can the input array be empty?
+	\begin{answered}
+		\textit{No, you might assume the array contains at least one element.}
+	\end{answered}
+\end{QandA}
+
+\section{Discussion}
+\label{min_rotated_array:sec:discussion}
+What does it really mean for a sorted array to be rotated around an element? Given a sorted array $A=\{a_0, a_1, \ldots,a_{n-1}\}$ s.t. $ \forall \: 0 \leq i < n: a_i < a_{i+1}$, rotating A around the pivot element at index $p$ results in: $A_p=\{a_p, a_{p+1}, \ldots,a_{n-1}, a_0, a_1, \ldots, a_{p-1}\}$. In  nutshell all the elements are rotated in such a way that the element at index $p$ becomes the first element of the array. For instance, rotating the array $X=\{1,2,3,4,5\}$ around the element at index $2$, results in $X=\{3,4,5,1,2\}$.  There is also an array rotation algorithm in the C++ STL\cite{cit::std::rotate}.
+
+
+\subsection{Brute-force}
+\label{min_rotated_array:sec:bruteforce}
+The brute force is trivial and consist in simply looping through the array and keeping record of the smallest element encountered. In C++ this can be implemented with a one-liner as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual}.
+Both implementations have a $O(n)$ time and constant space complexity.
+
+\lstinputlisting[language=c++, caption=One-linear brute force (using C++ STL) soluion to the problem of finding the minimum element in a sorted rotated array.,label=list:min_rotated_array_bf]{sources/min_rotated_array/min_rotated_array_solution1.cpp}
+
+\lstinputlisting[language=c++, caption=One-linear brute force soluion to the problem of finding the minimum element in a sorted rotated array.,label=list:min_rotated_array_bf_manual]{sources/min_rotated_array/min_rotated_array_solution2.cpp}
+
+This approach should just be mentioned during the interview but no time should be spent in the actual implementation of this idea, as the interwier is assuming you know how to trivially search for the minimum in an unsorted array. He is clearly looking for a more advanced solution that takes advantage of the fact that the array is sorted (even if rotated).
+
+\subsection{Logarithimc solution}
+\label{min_rotated_array:sec:log}
+As usual, when in the problem stament the word "sorted" makes its appearance the first thought that should cross our brain is: \textbf{binary search}(see Appendix \ref{sect:appendix:binary_search}). In this case, we are almost forced to think about binary search immedately as the problem is about searching the word sorted is mentioned in the statement. So, binary search can be employed to solve this problem. The idea is simple, as for all the binary search application we need to:
+
+\begin{enumerate}
+	\item keep track of a range of element that are currently under examination. Initially this range is the following closed interval: $[l=0, r=A.size()-1]$
+	\item analyze the element on the middle of this range.
+	\item if the middle element is the element we are looking for we are done
+	\item otherwise, the search proceed either to the left or to the right or the range. 
+\end{enumerate}
+The key point of this problem lies at steps:
+\begin{itemize}
+	\item $2$ because we need to be able to test whether an element is the minimum or not
+	\item $3$ because we need to be somehow able to decide how to split the space range into two.
+\end{itemize}
+
+
