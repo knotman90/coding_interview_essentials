@@ -45,7 +45,7 @@ For instance the list: $[(7,-1),(13,0),(11,4),(10,2),(1,0)]$ represent the list 
 \begin{figure}
 	\label{fig:clone_list_random_pointer:list1}
 	\centering
-	\includegraphics[scale=0.2]{sources/clone_list_random_pointer/images/random_list1}
+	\includegraphics[scale=0.6]{sources/clone_list_random_pointer/images/random_list_1}
 	\caption{Linked list wit random pointer.}
 \end{figure}
 
@@ -84,3 +84,40 @@ The idea above can be implemented as shown in the Listing \ref{list:clone_list_r
 
 \lstinputlisting[language=c++, caption={Linear Memory solution to the problem of copying a linked list with random pointers.},label=list:clone_list_random_pointer_1]{sources/clone_list_random_pointer/clone_list_random_pointer_solution1.cpp}
 
+This approach has a complexity of $O(n)$ for both time and space. The time complexity is already optimal as we cannot do better than linear time, considering that to do a copy we need to look at all the nodes at least once. The space complexity can be improved though, and as we will see in Section \ref{clone_list_random_pointer:sec:interleaved_lists} it can be brought down to constant.
+
+\subsection{Constant memory solution}
+\label{clone_list_random_pointer:sec:interleaved_lists}
+\subsubsection{Copy interleaved with the original list}
+The idea behind the solution presented in this section is to construct the copy such that its nodes are interleaved with the ones from the original list. For instance given the input list\footnote{Remember that $(x,-1)$ is a node containing the value $x$ and with random pointer set to \lstinline[columns=fixed]{nullptr}}: $A = [(7,-1),(13,0),(11,4),(10,2),(1,0)]$ we want to have an interleaved list that look like the following: $A' = [(7,-1),(7,-1),(13,0),(13,-1),(11,4),,(11,-1),(10,2),(10,-1),(1,0),(1,0)]$ (see Figure \ref{fig:clone_list_random_pointer:interleaved}) where every node at even indexes is a copy of its predecessor with a random pointer set to \lstinline[columns=fixed]{nullptr}.  See function \lstinline[columns=fixed]{fix_random_pointers} in Listing \ref{list:clone_list_random_pointer_2}.
+
+
+\begin{figure}
+	\label{fig:clone_list_random_pointer:interleaved}
+	\centering
+	\includegraphics[scale=0.5]{sources/clone_list_random_pointer/images/random_list_2}
+	\caption{Intermediate interleaved list.}
+\end{figure}
+
+
+In more abstract terms given:
+\begin{itemize}
+	\item[-] the input list  $A= a_0 \rightarrow a_1 \rightarrow \ldots \rightarrow a{n-1}$
+	\item[-] a copy of A  $B = b_0 \rightarrow b_1 \rightarrow \ldots \rightarrow b{n-1}$ 
+\end{itemize}
+
+\subsubsection{Fix the random pointers in the interleaved list}
+Then we want to get a list $I$ of size $2n$: $I=a_0 \rightarrow b_0 \rightarrow a_1 \rightarrow b_1 \rightarrow a_2 \rightarrow b_2 \rightarrow \ldots \rightarrow a_{n-1} \rightarrow b_{n-1}$. Having the two lists arranged this ways is quite useful because we can still visit the original lists and at the same time operate on its mirror one by simply modifying the nodes at odd indexes. An interleaved list has a even number of nodes. All the ones at even positions $(0,2,\ldots)$ belong to the original lists while all the nodes with odd indexes $(1,3,\ldots)$ to the copy. Given a node $n_{2k}=(x,r)$ at an even index $2k$, we can fix the random pointer for the clone of this node $n_{2k+1}=(x,-1)$ at index $2k+1$ by simply fixing its random pointer to the value pointed by $n_{2k}$\lstinline[columns=fixed]{->random->next}. See Figure \ref{fig:clone_list_random_pointer:interleaved_fixed} where the red lines represent the mirrored for the random pointers in the original list and function \lstinline[columns=fixed]{split_fix_random_pointers} in Listing \ref{list:clone_list_random_pointer_2}.
+
+\begin{figure}
+	\label{fig:clone_list_random_pointer:interleaved_fixed}
+	\centering
+	\includegraphics[scale=0.5]{sources/clone_list_random_pointer/images/random_list_3}
+	\caption{Interleaved list with fixed random pointers.}
+\end{figure}
+
+\subsubsection{Extract the cloned list}
+Once we reach this point we have basically two copies of the original list (with random pointers fixed) interleaved with each other. All is it necessary at this point is pull out the cloned list from the interleaved one. This is easily achievable as all we need to do is to remove all the odd nodes, and in the process connect all together (see function \lstinline[columns=fixed]{split_list} in Listing \ref{list:clone_list_random_pointer_2}).
+
+
+\lstinputlisting[language=c++, caption={Constant memory solution to the problem of copying a linked list with random pointers using an interleaved list.},label=list:clone_list_random_pointer_2]{sources/clone_list_random_pointer/clone_list_random_pointer_solution2.cpp}
