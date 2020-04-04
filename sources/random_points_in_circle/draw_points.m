@@ -4,12 +4,17 @@ function draw_points(n)
   px = zeros(1,n);
   py = zeros(1,n);
   
+  tries = 0;
   for i =0:n
-    [x,y] = buggy_random_point(1,0,0);
-    %[x,y] = random_point_loop(1,0,0);
+    %[x,y] = buggy_random_point(1,0,0);
+   % [x,y,t] = random_point_loop(1,0,0);
+   [x,y] = random_sqrt_area(1,0,0);
+   % tries = tries + t;
     px(i+1) = x;
     py(i+1) = y;
   endfor
+  
+  average = tries/n
  
   
   % Plot a circle.
