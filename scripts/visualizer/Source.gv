@@ -1,0 +1,191 @@
+
+    digraph G {
+        nodesep=.1;
+        ranksep=.1;
+        rankdir=LR;
+        node [penwidth="0.5", shape=box, width=.1, height=.1];
+
+    
+{ rank=same;
+// FRAME globals
+node139806207403072 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#D9E6F5", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">globals</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="YELLOW_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">YELLOW </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="YELLOW" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> '#fefecd'</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="BLUE_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">BLUE </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="BLUE" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> '#D9E6F5'</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="GREEN_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">GREEN </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="GREEN" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> '#cfe2d4'</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="print_function_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">print_function </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="print_function" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="prefs_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">prefs </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="prefs" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="head_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">head </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="head" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+</table>
+>];
+// FRAME fact
+node139806206700608 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#D9E6F5", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">fact</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="n_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">n </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="n" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 4</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="result_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">result </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="result" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 4</font></td>
+</tr>
+</table>
+>];
+// FRAME fact
+node139806203938992 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#D9E6F5", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">fact</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="n_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">n </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="n" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 3</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="result_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">result </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="result" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 12</font></td>
+</tr>
+</table>
+>];
+// FRAME fact
+node139806203949632 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#D9E6F5", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">fact</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="n_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">n </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="n" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 2</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="result_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">result </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="result" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 24</font></td>
+</tr>
+</table>
+>];
+// FRAME fact
+node139806203935296 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#D9E6F5", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">fact</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="n_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">n </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="n" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 1</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#D9E6F5"></td></tr><tr><td port="result_label" cellspacing="0" cellpadding="0" bgcolor="#D9E6F5" border="1" sides="r" align="right"><font face="Times-Italic" color="#444443" point-size="11">result </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="result" cellspacing="0" cellpadding="1" bgcolor="#D9E6F5" border="0" align="left"><font color="#444443" point-size="11"> 24</font></td>
+</tr>
+</table>
+>];
+node139806207403072 -> node139806206700608 [style=invis, weight=100]
+node139806206700608 -> node139806203938992 [style=invis, weight=100]
+node139806203938992 -> node139806203949632 [style=invis, weight=100]
+node139806203949632 -> node139806203935296 [style=invis, weight=100]
+}
+
+subgraph cluster1 {style=invis penwidth=.7 pencolor="#cfe2d4"
+// Node OBJECT with fields
+node139806206914816 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#fefecd", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#fefecd" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">Node</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="value_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">value </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="value" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 'xue'</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="next_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">next </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="next" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+</table>
+>];
+// Node OBJECT with fields
+node139806207448880 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#fefecd", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#fefecd" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">Node</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="value_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">value </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="value" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 'tombu'</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="next_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">next </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="next" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+</table>
+>];
+// Node OBJECT with fields
+node139806206877552 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#fefecd", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#fefecd" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">Node</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="value_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">value </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="value" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 'parrt'</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="next_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">next </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="next" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+</table>
+>];
+
+}
+// _Feature OBJECT with fields
+node139806206334432 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#fefecd", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#fefecd" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">_Feature</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="compiler_flag_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">compiler_flag </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="compiler_flag" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 65536</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="optional_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">optional </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="optional" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="mandatory_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">mandatory </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="mandatory" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11">    </font></td>
+</tr>
+</table>
+>];
+// LIST or ITERATABLE of atoms
+node139806206350576 [shape="box", space="0.0", margin="0.01", fontcolor="#444443", fontname="Helvetica", label=<<table BORDER="0" CELLBORDER="0" CELLSPACING="0">
+<tr>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">0</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">1</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">2</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">3</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="b" valign="top"><font color="#444443" point-size="9">4</font></td>
+</tr>
+<tr>
+<td port="0" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">2</font></td>
+<td port="1" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">6</font></td>
+<td port="2" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">0</font></td>
+<td port="3" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">'alpha'</font></td>
+<td port="4" bgcolor="#fefecd" border="0" align="center"><font point-size="11">2</font></td>
+</tr></table>
+>];
+// LIST or ITERATABLE of atoms
+node139806206350336 [shape="box", space="0.0", margin="0.01", fontcolor="#444443", fontname="Helvetica", label=<<table BORDER="0" CELLBORDER="0" CELLSPACING="0">
+<tr>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">0</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">1</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">2</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="br" valign="top"><font color="#444443" point-size="9">3</font></td>
+<td cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="b" valign="top"><font color="#444443" point-size="9">4</font></td>
+</tr>
+<tr>
+<td port="0" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">3</font></td>
+<td port="1" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">0</font></td>
+<td port="2" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">0</font></td>
+<td port="3" bgcolor="#fefecd" border="1" sides="r" align="center"><font point-size="11">'alpha'</font></td>
+<td port="4" bgcolor="#fefecd" border="0" align="center"><font point-size="11">0</font></td>
+</tr></table>
+>];
+// Prefs OBJECT with fields
+node139806206333040 [margin="0.03", color="#444443", fontcolor="#444443", fontname="Helvetica", style=filled, fillcolor="#fefecd", label=<<table BORDER="0" CELLPADDING="0" CELLBORDER="1" CELLSPACING="0">
+<tr><td cellspacing="0" colspan="3" cellpadding="0" bgcolor="#fefecd" border="1" sides="b" align="center"><font color="#444443" FACE="Times-Italic" point-size="11">Prefs</font></td></tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="max_str_len_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">max_str_len </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="max_str_len" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 20</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="max_horiz_array_len_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">max_horiz_array_len </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="max_horiz_array_len" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 40</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="max_list_elems_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">max_list_elems </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="max_list_elems" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 10</font></td>
+</tr>
+<tr><td colspan="3" cellpadding="1" border="0" bgcolor="#fefecd"></td></tr><tr><td port="float_precision_label" cellspacing="0" cellpadding="0" bgcolor="#fefecd" border="1" sides="r" align="right"><font face="Helvetica" color="#444443" point-size="11">float_precision </font></td>
+<td cellspacing="0" cellpadding="0" border="0"></td><td port="float_precision" cellspacing="0" cellpadding="1" bgcolor="#fefecd" border="0" align="left"><font color="#444443" point-size="11"> 5</font></td>
+</tr>
+</table>
+>];
+node139806206334432:optional:c -> node139806206350576 [dir=both, tailclip=false, arrowtail=dot, penwidth="0.5", color="#444443", arrowsize=.4]
+node139806206334432:mandatory:c -> node139806206350336 [dir=both, tailclip=false, arrowtail=dot, penwidth="0.5", color="#444443", arrowsize=.4]
+node139806206914816:next:c -> node139806206877552 [dir=both, tailclip=false, arrowtail=dot, penwidth="0.5", color="#444443", arrowsize=.4]
+node139806206877552:next:c -> node139806207448880 [dir=both, tailclip=false, arrowtail=dot, penwidth="0.5", color="#444443", arrowsize=.4]
+node139806207403072:print_function:c -> node139806206334432 [dir=both, tailclip=false, arrowtail=dot, penwidth="0.5", color="#444443", arrowsize=.4]
+node139806207403072:prefs:c -> node139806206333040 [dir=both, tailclip=false, arrowtail=dot, penwidth="0.5", color="#444443", arrowsize=.4]
+node139806207403072:head:c -> node139806206914816 [dir=both, tailclip=false, arrowtail=dot, penwidth="0.5", color="#444443", arrowsize=.4]
+}
