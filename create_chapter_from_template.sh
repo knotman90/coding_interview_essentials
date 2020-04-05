@@ -75,7 +75,7 @@ echo "\section{Discussion}
 \subsection{Brute-force}
 \label{$NAME:sec:bruteforce}
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
 " >>  $TEX_FILE
 
 ####################################
