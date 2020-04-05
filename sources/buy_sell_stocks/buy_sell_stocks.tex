@@ -12,12 +12,11 @@
 The problem discussed in this Chapter is considered an easy one and as we will see, it is easily solvable in quadratic time using a brute force algorithm but, the problem is also easy enough to allow for an easy discovery more efficient approaches. This problem is an excellent example of problems that you need to be able to solve fast and it is therefore imperative to get familiar with this type of problems.
 
 \section{Problem statement}
+\label{sec:buy_sell_stocks:statement1}
 \begin{exercise}
-You are given prices for a stack for a number $n$ of days. The prices are stored in an array $P$ of length $n$ where each cell $i$ of the array contains the price for the stock on the $i^{th}$ day. You are only permitted to perform one buy and one sell operations. What is the maximum profit you can achieve given the prices for the stock in $P$?
+You are given prices for a stack for a number $n$ of days. The prices are stored in an array $P$ of length $n$ where each cell $i$ of the array contains the price for the stock on the $i^{th}$ day. You are only permitted to perform \textbf{one} buy and \textbf{one} sell operations. What is the maximum profit you can achieve given the prices for the stock in $P$?
 
 You have to perform the buy operation \textbf{before} the sell operation. You cannot buy the stock on the \nth{10} day and sell on the \nth{9}.
-
-
 
 \begin{example}
 	\hfill \\
@@ -59,3 +58,6 @@ The implementation of theidea above is shown in Listing \ref{list:buy_sell_stock
 
 \lstinputlisting[language=c++, caption={Dynamic programming linear time, constant space solution to the problem of buying and selling stock.},label=list:buy_sell_stocks:linear]{sources/buy_sell_stocks/buy_sell_stocks_solution2.cpp}
 
+
+%Multiple transaction variation
+\input{sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2.tex}
