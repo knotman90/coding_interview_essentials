@@ -1,5 +1,5 @@
 template<typename T>
-Node<T>* detect_cycle_linear_time(Node<T> *head)
+Node<T>* detect_cycle_linear_time_space(Node<T> *head)
 {
 	using Node_ptr = Node<T>*;	
 	std::unordered_set<Node_ptr> visited;
