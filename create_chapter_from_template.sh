@@ -43,19 +43,24 @@ echo "\chapter{TITLE OF THE CHAPTER}
 
 echo "\section{Problem statement}
 \begin{exercise}
+\label{example:$NAME:exercice1}
+
+	%example1
+	\begin{example}
+		\label{example:$NAME:example1}
+		\hfill \\
+	}
+		
+	\end{example}
+
+	%example2
+	\begin{example}
+		\label{example:$NAME:example2}
+		\hfill \\
+		
+	\end{example}
 
 \end{exercise}
-
-
-\begin{example}
-	\hfill \\
-	
-\end{example}
-
-\begin{example}
-	\hfill \\
-	
-\end{example}
 
 \section{Clarification Questions}
 
