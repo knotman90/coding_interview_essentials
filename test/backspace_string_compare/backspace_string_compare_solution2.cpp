@@ -1,0 +1,1 @@
+../../sources/backspace_string_compare/backspace_string_compare_solution2.cpp
