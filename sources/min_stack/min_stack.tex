@@ -9,17 +9,17 @@
 \chapter{Min stack}
 \label{ch:min_stack}
 \section*{Introduction}
-This chapter introduces a very popoular question among among companies like Amazon and Google. The question is very simple and is about designing a data structure for performing stack operations and that is also able to keep track of the minimum element that is currently present in the stack. This problem has a simple, short and elegant solution. It is important to lean how to solve this problem as it is not unlikely we will be asked a very similar problem during the online screening steps of the interview process.
+This chapter introduces a very popular question among among companies like Yahoo , Amazon , Adobe and Microsoft. The question is very simple and is about designing a data structure for performing stack operations and that is also able to keep track of the minimum element that is currently present in the stack. This problem has a simple, short and elegant solution. It is important to learn how to solve this problem as it is not unlikely we will be asked a very similar problem during the on-line screening steps of the interview process.
 
 \section{Problem statement}
 \begin{exercise}
-Design  a stack that supports:
+Design a stack that supports:
 
 \begin{itemize}
 	\item \lstinline[columns=fixed]{push(x)}: the element $x$ is pushed onto the stack
 	\item \lstinline[columns=fixed]{pop()}: removes the top of the stack
 	\item \lstinline[columns=fixed]{top()}: retrieve the top of the stack
-	\item \lstinline[columns=fixed]{min()}: retrieve the minimum among all elements present in the stack.
+	\item \lstinline[columns=fixed]{get_min()}: retrieve the minimum among all elements present in the stack.
 \end{itemize}
 
 
@@ -32,9 +32,9 @@ Design  a stack that supports:
 			\item[-] \lstinline[columns=fixed]{push(3)}: $S=[3,5,1]$
 			\item[-] \lstinline[columns=fixed]{top()}: $S=[3,5,1]$, returns $3$
 			\item[-] \lstinline[columns=fixed]{pop()}: $S=[5,1]$
-			\item[-] \lstinline[columns=fixed]{min()}: $S=[5,1]$, return $1$
+			\item[-] \lstinline[columns=fixed]{get_min()}: $S=[5,1]$, return $1$
 			\item[-] \lstinline[columns=fixed]{push(0)}: $S=[0,5,1]$
-			\item[-] \lstinline[columns=fixed]{min()}: $S=[0,5,1]$, returns $0$
+			\item[-] \lstinline[columns=fixed]{get_min()}: $S=[0,5,1]$, returns $0$
 		\end{itemize}
 
 	\end{example}
@@ -46,9 +46,9 @@ Design  a stack that supports:
 			\item[-] \lstinline[columns=fixed]{push(3)}: $S=[3]$
 			\item[-] \lstinline[columns=fixed]{push(5)}: $S=[5,3]$
 			\item[-] \lstinline[columns=fixed]{push(1)}: $S=[1,5,3]$
-			\item[-] \lstinline[columns=fixed]{min}: $S=[1,5,3]$, return $1$
+			\item[-] \lstinline[columns=fixed]{get_min}: $S=[1,5,3]$, return $1$
 			\item[-] \lstinline[columns=fixed]{pop()}: $S=[5,3]$, returns $3$
-			\item[-] \lstinline[columns=fixed]{min()}: $S=[5,3]$, return $3$
+			\item[-] \lstinline[columns=fixed]{get_min()}: $S=[5,3]$, return $3$
 			\item[-] \lstinline[columns=fixed]{pop()}: $S=[1]$, return $1$
 			\item[-] \lstinline[columns=fixed]{pop()}: $S=[]$
 			\item[-] \lstinline[columns=fixed]{pop()}: raise \lstinline[columns=fixed]{std::logic_error}
@@ -60,7 +60,7 @@ Design  a stack that supports:
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item What should be done when min() or top() or pop() are performed on an empty stack?
+	\item What should be done when \lstinline[columns=fixed]{get_min()} or \lstinline[columns=fixed]{top()} or \lstinline[columns=fixed]{pop()} are performed on an empty stack?
 	\begin{answered}
 		\textit{You should throw a \lstinline[columns=fixed]{std::logic_error} exception with a sensible and short description.}
 	\end{answered}
@@ -69,10 +69,50 @@ Design  a stack that supports:
 
 \section{Discussion}
 \label{min_stack:sec:discussion}
+This problem can become quite tricky if approached from the wrong angle. We will discuss two solutions to this problem, both of which are good candidates for you to use during an actual interview. 
+
+\subsection{Linear Space solutions}
+\label{min_stack:sec:double_stack}
+
+\subsubsection{Stack of pairs}
+\label{min_stack:sec:stackpairs}
+The first solution we discuss uses an additional space ($2\times$) to store  for each element of the stack the information about the minimum still present in the stack. So we will have a stack of pairs of elements, where the first element of each pair is the actual element of the stack and the second is the minimum. The operations can then be implemented as follows:
+
+\begin{itemize}
+	\item[-]\lstinline[columns=fixed]{push(x)}. We will store on top of the stack of pair either the pair $\{x,x\}$ if the stack is empty or \lstinline[columns=fixed]{{std::min(x,get_min())}.
+	\item[-]\lstinline[columns=fixed]{top(x)}  returns the \textbf{first} element of the top of the stack of pair if the stack is not empty, otherwise it throws an exception.
+	\item[-]\lstinline[columns=fixed]{pop(x)} will call pop on the stack of pairs if the stack is not empty, otherwise raises an exception.
+	\item[-]\lstinline[columns=fixed]{get_min(x)}  returns the \textbf{second} element of the top of the stack of pair if the stack is not empty, otherwise it throws an exception.
+\end{itemize}
+
+Listing \ref{list:min_stack:stackpairs} shows a possible implementation of this idea.
+\lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a stack of pairs.},label=list:min_stack:stackpairs]{sources/min_stack/min_stack_solution1.cpp}
+
+\subsubsection{Two stacks}
+The solution presented in Section \ref{min_stack:sec:stackpairs} can be improved in the average case (even if will remain asymptotically the same in the worst case) by realizing that there is no need to have a copy of the minimum element for each element of the stack. What we really need is to have a second stack that contains the sequence of minimum elements as they are inserted. 
+
+Thus, by using an additional stack to store the minimums we can implement all the operations as follows:
+\begin{itemize}
+	\item[-]\lstinline[columns=fixed]{push(x)}. We will store $x$ on top of the \nth{1} stack (where we store the actual elements are they are given to us)  and only if  \lstinline[columns=fixed]{x <= get_min()} we will also push $x$ to the stack of minimums. This way we keep the information about the current minimum without losing the information about the previous ones, that will be useful whenever in the future will be removed from the stack (if $x$ is the new minimum).
+	\item[-]\lstinline[columns=fixed]{top(x)}  returns the \textbf{first} element of the top of the \nth{1} stack if is not empty, otherwise it throws an exception.
+	\item[-]\lstinline[columns=fixed]{pop(x)} if the stack is not empty, it will call pop on the \nth{1} stack, and if the element we are popping is equal to the top of the stack of minimums we will also pop from that stack. We need to react to the fact that the current minimum is changing.
+	\item[-]\lstinline[columns=fixed]{get_min(x)}  returns the top of the \nth{2} stack (the stack of minimums) if the stack is not empty, otherwise it throws an exception.
+\end{itemize}
+This solution has the advantage of not using as much space as the one presented in Section \ref{min_stack:sec:stackpairs} when for instance a sequence of  increasing number is pushed. In that case the minimum will be the first element, and it will never change.
+
+This idea can be implemented as shown in Listing \ref{list:min_stack:doublestack}
+
+ \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a two stacks.},label=list:min_stack:doublestack]{sources/min_stack/min_stack_solution2.cpp}
 
 
-\subsection{Brute-force}
-\label{min_stack:sec:bruteforce}
+\subsection{Common Variations}
+\begin{exercise}
+	 Design and implement a max stack data structure supporting the following operations:
+\begin{itemize}
+	\item \lstinline[columns=fixed]{push(x)}: the element $x$ is pushed onto the stack
+	\item \lstinline[columns=fixed]{pop()}: removes the top of the stack
+	\item \lstinline[columns=fixed]{top()}: retrieve the top of the stack
+	\item \lstinline[columns=fixed]{get_max()}: retrieve the maximum among all elements present in the stack.
+\end{itemize}
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:min_stack]{sources/min_stack/min_stack_solution1.cpp}
-
+\end{exercise}
