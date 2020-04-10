@@ -1,6 +1,6 @@
-template <typename T> Node<T> *detect_cycle_constant_time(Node<T> *head)
+template <typename T>
+Node<T> *detect_cycle_constant_time(Node<T> *head)
 {
-
   Node<T> *n1, *n2;
   n1 = n2 = head;
 

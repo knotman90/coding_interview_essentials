@@ -1,6 +1,8 @@
-void power_set_backtracking_helper(const std::vector<int> &S, const int idx,
+void power_set_backtracking_helper(const std::vector<int> &S,
+                                   const int idx,
                                    std::vector<int> &curr,
-                                   std::vector<std::vector<int>> &ans) {
+                                   std::vector<std::vector<int>> &ans)
+{
   if (idx >= S.size())
   // base case
   {
@@ -17,8 +19,8 @@ void power_set_backtracking_helper(const std::vector<int> &S, const int idx,
   power_set_backtracking_helper(S, idx + 1, curr, ans);
 }
 
-std::vector<std::vector<int>>
-power_set_backtracking(const std::vector<int> &S) {
+std::vector<std::vector<int>> power_set_backtracking(const std::vector<int> &S)
+{
   std::vector<std::vector<int>> ans;
   std::vector<int> current;
   power_set_backtracking_helper(S, 0, current, ans);

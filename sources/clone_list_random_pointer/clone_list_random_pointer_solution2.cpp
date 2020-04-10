@@ -1,4 +1,4 @@
-template<typename T>
+template <typename T>
 Node<T> *interleave_list(Node<T> *head)
 {
   Node<T> *h = head;
@@ -14,7 +14,7 @@ Node<T> *interleave_list(Node<T> *head)
   return head;
 }
 
-template<typename T>
+template <typename T>
 void fix_random_pointers(Node<T> *head)
 {
   Node<T> *o = head;
@@ -25,13 +25,13 @@ void fix_random_pointers(Node<T> *head)
     {
       Node<T> *pointed   = o->random;
       Node<T> *pointed_c = pointed->next;
-      c->random       = pointed_c;
+      c->random          = pointed_c;
     }
     o = o->next->next;
   }
 }
 
-template<typename T>
+template <typename T>
 Node<T> *split_list(Node<T> *head)
 {
   Node<T> *o   = head;
@@ -49,7 +49,7 @@ Node<T> *split_list(Node<T> *head)
   return ans;
 }
 
-template<typename T>
+template <typename T>
 Node<T> *clone_random_list_interleave_lists(Node<T> *head)
 {
   if (!head)

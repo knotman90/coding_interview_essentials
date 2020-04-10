@@ -1,7 +1,7 @@
-template <class T> 
+template <class T>
 class min_stack_two_stacks
 {
-    public:
+ public:
   void push(T &&x)
   {
     if (x <= getMin() || minimums.size() == 0)
@@ -29,14 +29,14 @@ class min_stack_two_stacks
     return minimums.top();
   }
 
-    protected:
+ protected:
   void guard_empty_stack()
   {
     if (elements.size() < 0)
       throw std::logic_error("Invalid operation on an empty stack");
   }
 
-    private:
+ private:
   std::stack<int> elements;
   std::stack<int> minimums;
 };

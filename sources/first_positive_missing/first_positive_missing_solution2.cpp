@@ -1,7 +1,9 @@
-int first_positive_missing_linear_space(std::vector<int> A) {
+int first_positive_missing_linear_space(std::vector<int> A)
+{
   std::vector<bool> F(A.size(), false);
 
-  for (const auto &x : A) {
+  for (const auto &x : A)
+  {
     if (x >= 0 && x < A.size())
       F[x] = true;
   }
