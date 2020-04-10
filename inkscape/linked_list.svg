@@ -20,6 +20,33 @@
    inkscape:version="0.92.4 5da689c313, 2019-01-14">
   <defs
      id="defs2">
+    <marker
+       inkscape:stockid="Scissors"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Scissors"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="schere"
+         d="M 9.0898857,-3.6061018 C 8.1198849,-4.7769976 6.3697607,-4.7358294 5.0623558,-4.2327734 L -3.1500488,-1.1548705 C -5.5383421,-2.4615840 -7.8983361,-2.0874077 -7.8983361,-2.7236578 C -7.8983361,-3.2209742 -7.4416699,-3.1119800 -7.5100293,-4.4068519 C -7.5756648,-5.6501286 -8.8736064,-6.5699315 -10.100428,-6.4884954 C -11.327699,-6.4958500 -12.599867,-5.5553341 -12.610769,-4.2584343 C -12.702194,-2.9520479 -11.603560,-1.7387447 -10.304005,-1.6532027 C -8.7816644,-1.4265411 -6.0857470,-2.3487593 -4.8210600,-0.082342643 C -5.7633447,1.6559151 -7.4350844,1.6607341 -8.9465707,1.5737277 C -10.201445,1.5014928 -11.708664,1.8611256 -12.307219,3.0945882 C -12.885586,4.2766744 -12.318421,5.9591904 -10.990470,6.3210002 C -9.6502788,6.8128279 -7.8098011,6.1912892 -7.4910978,4.6502760 C -7.2454393,3.4624530 -8.0864637,2.9043186 -7.7636052,2.4731223 C -7.5199917,2.1477623 -5.9728246,2.3362771 -3.2164999,1.0982979 L 5.6763468,4.2330688 C 6.8000164,4.5467672 8.1730685,4.5362646 9.1684433,3.4313614 L -0.051640930,-0.053722219 L 9.0898857,-3.6061018 z M -9.2179159,-5.5066058 C -7.9233569,-4.7838060 -8.0290767,-2.8230356 -9.3743431,-2.4433169 C -10.590861,-2.0196559 -12.145370,-3.2022863 -11.757521,-4.5207817 C -11.530373,-5.6026336 -10.104134,-6.0014137 -9.2179159,-5.5066058 z M -9.1616516,2.5107591 C -7.8108215,3.0096239 -8.0402087,5.2951947 -9.4138723,5.6023681 C -10.324932,5.9187072 -11.627422,5.4635705 -11.719569,4.3902287 C -11.897178,3.0851737 -10.363484,1.9060805 -9.1616516,2.5107591 z "
+         style="fill:#000000;stroke:#000000;stroke-opacity:1;fill-opacity:1" />
+    </marker>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="StopL"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path6241"
+         d="M 0.0,5.65 L 0.0,-5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
     <linearGradient
        id="linearGradient9258"
        osb:paint="solid">
@@ -124,6 +151,221 @@
          offset="0"
          id="stop4524" />
     </linearGradient>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="StopL-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6241-7"
+         d="M 0,5.65 V -5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker20099"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path20097"
+         d="M 0,5.65 V -5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="StopL-1-2"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6241-7-4"
+         d="M 0,5.65 V -5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker21173"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path21171"
+         d="M 0,5.65 V -5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="StopL-0"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6241-6"
+         d="M 0,5.65 V -5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker21179"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path21177"
+         d="M 0,5.65 V -5.65"
+         style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6072-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6980-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path6978-0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker7026-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7024-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-2"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6075-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6980-1-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path6978-0-4" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker7026-4-4"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7024-2-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-2-9"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6075-2-3"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-2-9-4"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6075-2-3-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -132,9 +374,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="283.86898"
-     inkscape:cy="815.34728"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="227.74188"
+     inkscape:cy="972.37278"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -143,7 +385,7 @@
      inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:snap-global="false" />
+     inkscape:snap-global="true" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -161,46 +403,55 @@
      id="layer1">
     <path
        style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
-       d="m 22.445807,50.293522 a 5.8314199,5.7209258 0 0 1 -5.831419,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.831419,5.720926 z"
-       id="path3717" />
+       d="m 42.932016,64.605805 a 5.8314199,5.7209258 0 0 1 -5.831419,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.831419,5.720926 z"
+       id="path3717"
+       inkscape:connector-curvature="0" />
     <path
        style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
-       d="m 48.801845,50.293522 a 5.8314199,5.7209258 0 0 1 -5.83142,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,5.720926 z"
-       id="path3717-6" />
+       d="m 69.288054,64.605805 a 5.8314199,5.7209258 0 0 1 -5.83142,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,5.720926 z"
+       id="path3717-6"
+       inkscape:connector-curvature="0" />
     <path
        style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
-       d="m 72.485183,50.293522 a 5.8314199,5.7209258 0 0 1 -5.83142,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,5.720926 z"
-       id="path3717-6-7" />
+       d="m 92.971392,64.605805 a 5.8314199,5.7209258 0 0 1 -5.83142,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,5.720926 z"
+       id="path3717-6-7"
+       inkscape:connector-curvature="0" />
     <path
        style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
-       d="m 97.504867,50.293522 a 5.8314199,5.7209258 0 0 1 -5.83142,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,5.720926 z"
-       id="path3717-6-5" />
+       d="m 117.99108,64.605805 a 5.8314199,5.7209258 0 0 1 -5.83142,5.720926 5.8314199,5.7209258 0 0 1 -5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,-5.720926 5.8314199,5.7209258 0 0 1 5.83142,5.720926 z"
+       id="path3717-6-5"
+       inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
-       d="m 22.206019,48.670228 15.12599,0.163665"
+       d="m 42.692228,62.982511 15.12599,0.163665"
        id="path6870"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       inkscape:export-ydpi="96"
+       inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7026)"
-       d="m 48.641941,48.963192 12.306273,0.14818"
+       d="m 69.12815,63.275475 12.306273,0.14818"
        id="path6872"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       inkscape:export-ydpi="96"
+       inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6980)"
-       d="M 72.398519,49.311033 85.882872,49.61843"
+       d="m 92.884728,63.623316 13.484352,0.307397"
        id="path6874"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       inkscape:export-ydpi="96"
+       inkscape:connector-curvature="0" />
     <g
        aria-label="3"
        style="font-style:normal;font-weight:normal;font-size:6.16622543px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
-       id="text6886">
+       id="text6886"
+       transform="translate(20.486209,14.312283)">
       <path
          d="m 67.165585,49.753098 q 0.436573,0.09334 0.680452,0.3884 0.24689,0.295063 0.24689,0.728626 0,0.665399 -0.457649,1.029712 -0.45765,0.364313 -1.300688,0.364313 -0.283021,0 -0.584106,-0.05721 -0.298074,-0.0542 -0.617224,-0.165597 V 51.45423 q 0.252911,0.147531 0.553996,0.222803 0.301086,0.07527 0.629268,0.07527 0.572062,0 0.870137,-0.225814 0.301085,-0.225814 0.301085,-0.656366 0,-0.397432 -0.280009,-0.620235 -0.276999,-0.225814 -0.773789,-0.225814 h -0.523889 v -0.499802 h 0.547976 q 0.448617,0 0.686474,-0.17764 0.237857,-0.180651 0.237857,-0.517867 0,-0.346248 -0.24689,-0.52991 -0.243879,-0.186672 -0.701528,-0.186672 -0.249901,0 -0.535932,0.05419 -0.286031,0.05419 -0.629268,0.168608 v -0.541954 q 0.346248,-0.09635 0.647333,-0.144521 0.304096,-0.04817 0.572062,-0.04817 0.692496,0 1.09595,0.316139 0.403454,0.313129 0.403454,0.84906 0,0.373346 -0.21377,0.632279 -0.213771,0.255923 -0.608192,0.355281 z"
          style="stroke-width:0.15415563"
-         id="path8173" />
+         id="path8173"
+         inkscape:connector-curvature="0" />
     </g>
     <flowRoot
        xml:space="preserve"
@@ -215,139 +466,1449 @@
          id="flowPara6898"></flowPara></flowRoot>    <g
        aria-label="4"
        style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
-       id="text6886-3">
+       id="text6886-3"
+       transform="translate(20.486209,14.312283)">
       <path
          d="m 92.187951,48.641713 -1.535534,2.39965 h 1.535534 z m -0.159575,-0.52991 h 0.764757 v 2.92956 h 0.641311 v 0.505823 h -0.641311 v 1.05982 h -0.605182 v -1.05982 H 90.158637 V 50.96007 Z"
          style="stroke-width:0.15415563"
-         id="path8170" />
+         id="path8170"
+         inkscape:connector-curvature="0" />
     </g>
     <g
        aria-label="2"
        style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
-       id="text6886-6">
+       id="text6886-6"
+       transform="translate(20.486209,14.312283)">
       <path
          d="m 42.197311,51.880073 h 2.122651 v 0.511845 h -2.854288 v -0.511845 q 0.346248,-0.358291 0.942396,-0.960462 0.59916,-0.605181 0.752714,-0.77981 0.292052,-0.328183 0.406465,-0.553997 0.117423,-0.228825 0.117423,-0.448617 0,-0.358292 -0.252912,-0.584106 -0.2499,-0.225814 -0.653355,-0.225814 -0.286031,0 -0.605181,0.09936 -0.31614,0.09936 -0.677442,0.301086 v -0.614214 q 0.367324,-0.147532 0.686474,-0.222803 0.319151,-0.07527 0.584106,-0.07527 0.698518,0 1.114015,0.349259 0.415498,0.349259 0.415498,0.933365 0,0.276998 -0.10538,0.526899 -0.102369,0.24689 -0.376356,0.584105 -0.07527,0.08732 -0.478726,0.505823 -0.403454,0.415498 -1.138102,1.1652 z"
          style="stroke-width:0.15415563"
-         id="path8167" />
+         id="path8167"
+         inkscape:connector-curvature="0" />
     </g>
     <g
        aria-label="1"
        style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
-       id="text6886-9">
+       id="text6886-9"
+       transform="translate(20.486209,14.312283)">
       <path
          d="m 15.38594,52.310249 h 0.993581 v -3.429361 l -1.080896,0.216781 V 48.543673 L 16.3735,48.326891 h 0.608192 v 3.983358 h 0.993581 v 0.511845 H 15.38594 Z"
          style="stroke-width:0.15415563"
-         id="path8164" />
+         id="path8164"
+         inkscape:connector-curvature="0" />
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart)"
-       d="m 48.801845,50.293522 c 12.249724,15.908477 24.612585,13.262613 37.040182,0"
+       d="m 69.288054,64.605805 c 12.249724,15.908477 24.612585,13.262613 37.040186,0"
        id="path7104"
        sodipodi:nodetypes="cc"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       inkscape:export-ydpi="96"
+       inkscape:connector-curvature="0" />
     <use
        x="0"
        y="0"
        xlink:href="#path3717"
        id="use8332"
-       transform="translate(17.372519,39.021351)"
+       transform="translate(-3.1136903,24.709068)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#path3717-6"
        id="use8334"
-       transform="translate(17.372519,39.021351)"
+       transform="translate(-3.1136903,24.709068)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#path3717-6-7"
        id="use8336"
-       transform="translate(17.372519,39.021351)"
+       transform="translate(-3.1136903,24.709068)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#path3717-6-5"
        id="use8338"
-       transform="translate(17.372519,39.021351)"
+       transform="translate(-3.1136903,24.709068)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#path6870"
        id="use8340"
-       transform="translate(17.372519,40.509245)"
+       transform="translate(-3.1136903,26.196962)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#path6872"
        id="use8342"
-       transform="translate(17.372519,40.234954)"
+       transform="translate(-3.1136903,25.922671)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#path6874"
        id="use8344"
-       transform="translate(17.372519,39.755981)"
+       transform="translate(-3.1136903,25.443698)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#text6886"
        id="use8346"
-       transform="translate(17.372519,39.382631)"
+       transform="translate(-3.1136903,25.070348)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#text6886-3"
        id="use8348"
-       transform="translate(17.372519,38.955469)"
+       transform="translate(-3.1136903,24.643186)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#text6886-6"
        id="use8350"
-       transform="translate(17.372519,39.211201)"
+       transform="translate(-3.1136903,24.898918)"
        width="100%"
-       height="100%" />
+       height="100%"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <use
        x="0"
        y="0"
        xlink:href="#text6886-9"
        id="use8352"
-       transform="translate(17.372519,38.740381)"
-       width="100%"
-       height="100%" />
-    <use
-       x="0"
-       y="0"
-       xlink:href="#path3717-6-5"
-       id="use8338-2"
-       transform="translate(33.208239,38.436698)"
+       transform="translate(-3.1136903,24.428098)"
        width="100%"
        height="100%"
-       style="fill:#28170b;fill-rule:nonzero;opacity:1;stroke:#000000;stroke-opacity:1" />
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
     <path
-       style="opacity:1;fill:#28170b;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.25253814;stroke-opacity:1"
-       d="m 467.38844,356.59284 c -13.89785,-3.11792 -21.34438,-17.54925 -15.52871,-30.09452 2.20543,-4.75744 5.5794,-8.22317 10.24991,-10.52868 11.05215,-5.45569 24.55346,-0.89853 29.80814,10.06128 1.52173,3.1739 1.90345,4.77839 2.04422,8.59238 0.10146,2.74892 0.0351,3.64458 -0.40823,5.50567 -1.94125,8.1504 -8.20534,14.35097 -16.50914,16.34174 -2.47192,0.59263 -7.2875,0.65353 -9.65619,0.12213 z"
-       id="path9285"
+       style="fill:none;stroke:#000000;stroke-width:0.165;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Scissors);stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 114.87739,89.314871 11.47428,-0.05011 v 0"
+       id="path9434"
        inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/cycle_in_list/images/example2.png"
+       inkscape:export-xdpi="207.7999"
+       inkscape:export-ydpi="207.7999" />
+    <rect
+       style="opacity:1;fill:#28170b;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.62362206;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect9516"
+       width="0"
+       height="0"
+       x="0"
+       y="0"
        transform="scale(0.26458333)" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819"
+       width="6.6234145"
+       height="6.6234145"
+       x="40.923088"
+       y="154.20349"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1"
+       width="6.6234145"
+       height="6.6234145"
+       x="47.546501"
+       y="154.20349"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5"
+       width="6.6234145"
+       height="6.6234145"
+       x="54.169914"
+       y="154.20349"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9"
+       width="6.6234145"
+       height="6.6234145"
+       x="60.793327"
+       y="154.20349"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="44.034225"
+       y="157.17242"
+       id="text19410"><tspan
+         sodipodi:role="line"
+         id="tspan19408"
+         x="44.034225"
+         y="166.53619"
+         style="stroke-width:0.26458332"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="42.560646"
+       y="159.50116"
+       id="text19470"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468"
+         x="42.560646"
+         y="159.50116"
+         style="stroke-width:0.13253216">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="49.269863"
+       y="159.50116"
+       id="text19470-4"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8"
+         x="49.269863"
+         y="159.50116"
+         style="stroke-width:0.13253216">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="55.97908"
+       y="159.42609"
+       id="text19470-1"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2"
+         x="55.97908"
+         y="159.42609"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="60.609432"
+       y="159.42609"
+       id="text19470-9"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3"
+         x="60.609432"
+         y="159.42609"
+         style="stroke-width:0.13253216">10</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-9"
+       width="6.6234145"
+       height="6.6234145"
+       x="40.969135"
+       y="161.82184"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-0"
+       width="6.6234145"
+       height="6.6234145"
+       x="47.592548"
+       y="161.82184"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5-8"
+       width="6.6234145"
+       height="6.6234145"
+       x="54.215961"
+       y="161.82184"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215687;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9-8"
+       width="6.6234145"
+       height="6.6234145"
+       x="60.839375"
+       y="161.82184"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="42.606693"
+       y="166.94994"
+       id="text19470-5"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0"
+         x="42.606693"
+         y="166.94994"
+         style="stroke-width:0.13253216">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="49.31591"
+       y="166.94994"
+       id="text19470-4-9"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8-6"
+         x="49.31591"
+         y="166.94994"
+         style="stroke-width:0.13253216">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="56.025127"
+       y="166.94994"
+       id="text19470-1-3"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2-8"
+         x="56.025127"
+         y="166.94994"
+         style="stroke-width:0.13253216">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="62.734348"
+       y="166.94994"
+       id="text19470-9-5"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-6"
+         x="62.734348"
+         y="166.94994"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461539;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-9-1"
+       width="6.6234145"
+       height="6.6234145"
+       x="40.868572"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-0-1"
+       width="6.6234145"
+       height="6.6234145"
+       x="47.55444"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461539;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5-8-5"
+       width="6.6234145"
+       height="6.6234145"
+       x="54.115398"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461539;fill-rule:evenodd;stroke:#009600;stroke-width:0.966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect819-1-9-8-9"
+       width="6.6234145"
+       height="6.6234145"
+       x="60.738811"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="42.50613"
+       y="175.66527"
+       id="text19470-5-8"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-4"
+         x="42.50613"
+         y="175.66527"
+         style="stroke-width:0.13253216">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="49.215347"
+       y="175.66527"
+       id="text19470-4-9-8"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8-6-1"
+         x="49.215347"
+         y="175.66527"
+         style="stroke-width:0.13253216">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="55.924564"
+       y="175.66527"
+       id="text19470-1-3-0"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2-8-3"
+         x="55.924564"
+         y="175.66527"
+         style="stroke-width:0.13253216">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="62.633785"
+       y="175.66527"
+       id="text19470-9-5-0"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-6-4"
+         x="62.633785"
+         y="175.66527"
+         style="stroke-width:0.13253216">4</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461539;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-0-1-4"
+       width="6.6234145"
+       height="6.6234145"
+       x="73.985641"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5-8-5-4"
+       width="6.6234145"
+       height="6.6234145"
+       x="80.691109"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461539;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9-8-9-7"
+       width="6.6234145"
+       height="6.6234145"
+       x="87.232468"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="68.999786"
+       y="175.66527"
+       id="text19470-5-8-6"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-4-3"
+         x="68.999786"
+         y="175.66527"
+         style="stroke-width:0.13253216">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="75.709"
+       y="175.66527"
+       id="text19470-4-9-8-1"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8-6-1-7"
+         x="75.709"
+         y="175.66527"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="82.418228"
+       y="175.66527"
+       id="text19470-1-3-0-5"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2-8-3-9"
+         x="82.418228"
+         y="175.66527"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="87.010773"
+       y="175.66527"
+       id="text19470-9-5-0-6"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-6-4-2"
+         x="87.010773"
+         y="175.66527"
+         style="stroke-width:0.13253216">10</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461539;fill-rule:evenodd;stroke:#009600;stroke-width:0.966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect819-9-1-4"
+       width="6.6234145"
+       height="6.6234145"
+       x="67.362228"
+       y="170.53717"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#StopL);marker-end:url(#StopL)"
+       d="M 40.911198,179.33075 H 60.821093"
+       id="path19683"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#StopL-1);marker-end:url(#StopL-1)"
+       d="M 74.047865,179.33074 H 93.95776"
+       id="path19683-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.29683876px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.05742097"
+       x="50.139973"
+       y="181.23322"
+       id="text21006"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan21004"
+         x="50.139973"
+         y="181.23322"
+         style="stroke-width:0.05742097">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.29683876px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.05742097"
+       x="83.276642"
+       y="181.23322"
+       id="text21006-5"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan21004-7"
+         x="83.276642"
+         y="181.23322"
+         style="stroke-width:0.05742097">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="29.934189"
+       y="164.63477"
+       id="text21070"><tspan
+         sodipodi:role="line"
+         id="tspan21068"
+         x="29.934189"
+         y="173.99854"
+         style="stroke-width:0.26458332"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.75721"
+       y="170.56638"
+       id="text21107"><tspan
+         sodipodi:role="line"
+         id="tspan21105"
+         x="28.75721"
+         y="179.93015"
+         style="stroke-width:0.26458332" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="31.995943"
+       y="159.1185"
+       id="text19470-5-5"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-3"
+         x="31.995943"
+         y="159.1185"
+         style="stroke-width:0.13253216">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="33.769501"
+       y="164.44768"
+       id="text21133"><tspan
+         sodipodi:role="line"
+         id="tspan21131"
+         x="33.769501"
+         y="173.81145"
+         style="stroke-width:0.26458332"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="31.916994"
+       y="167.31544"
+       id="text19470-5-5-8"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-3-8"
+         x="31.916994"
+         y="167.31544"
+         style="stroke-width:0.13253216">B</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="28.122225"
+       y="176.2957"
+       id="text19470-5-5-3"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example1.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-3-1"
+         x="28.122225"
+         y="176.2957"
+         style="stroke-width:0.13253216">A+B</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-2"
+       width="6.6234145"
+       height="6.6234145"
+       x="37.60223"
+       y="193.33353"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-99"
+       width="6.6234145"
+       height="6.6234145"
+       x="44.225643"
+       y="193.33353"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5-0"
+       width="6.6234145"
+       height="6.6234145"
+       x="50.849056"
+       y="193.33353"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9-81"
+       width="6.6234145"
+       height="6.6234145"
+       x="57.472466"
+       y="193.33353"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="39.239788"
+       y="198.6312"
+       id="text19470-3"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-1"
+         x="39.239788"
+         y="198.6312"
+         style="stroke-width:0.13253216">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="45.949005"
+       y="198.6312"
+       id="text19470-4-1"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8-0"
+         x="45.949005"
+         y="198.6312"
+         style="stroke-width:0.13253216">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="52.658222"
+       y="198.55612"
+       id="text19470-1-34"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2-0"
+         x="52.658222"
+         y="198.55612"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="57.28857"
+       y="198.55612"
+       id="text19470-9-3"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-9"
+         x="57.28857"
+         y="198.55612"
+         style="stroke-width:0.13253216">10</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-9-19"
+       width="6.6234145"
+       height="6.6234145"
+       x="37.648277"
+       y="200.95187"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-0-6"
+       width="6.6234145"
+       height="6.6234145"
+       x="44.27169"
+       y="200.95187"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5-8-9"
+       width="6.6234145"
+       height="6.6234145"
+       x="50.895103"
+       y="200.95187"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#fcff00;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9-8-3"
+       width="6.6234145"
+       height="6.6234145"
+       x="57.518513"
+       y="200.95187"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="39.285835"
+       y="206.07997"
+       id="text19470-5-3"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-8"
+         x="39.285835"
+         y="206.07997"
+         style="stroke-width:0.13253216">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="45.995052"
+       y="206.07997"
+       id="text19470-4-9-0"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8-6-5"
+         x="45.995052"
+         y="206.07997"
+         style="stroke-width:0.13253216">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="52.704269"
+       y="206.07997"
+       id="text19470-1-3-6"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2-8-6"
+         x="52.704269"
+         y="206.07997"
+         style="stroke-width:0.13253216">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="59.413486"
+       y="206.07997"
+       id="text19470-9-5-4"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-6-0"
+         x="59.413486"
+         y="206.07997"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-9-1-0"
+       width="6.6234145"
+       height="6.6234145"
+       x="37.547714"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-0-1-46"
+       width="6.6234145"
+       height="6.6234145"
+       x="44.233582"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5-8-5-2"
+       width="6.6234145"
+       height="6.6234145"
+       x="50.79454"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461542;fill-rule:evenodd;stroke:#000000;stroke-width:0.166;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect819-1-9-8-9-6"
+       width="6.6234145"
+       height="6.6234145"
+       x="57.417953"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="39.185272"
+       y="214.7953"
+       id="text19470-5-8-7"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-4-5"
+         x="39.185272"
+         y="214.7953"
+         style="stroke-width:0.13253216">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="45.894489"
+       y="214.7953"
+       id="text19470-4-9-8-6"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8-6-1-9"
+         x="45.894489"
+         y="214.7953"
+         style="stroke-width:0.13253216">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="52.603706"
+       y="214.7953"
+       id="text19470-1-3-0-8"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2-8-3-7"
+         x="52.603706"
+         y="214.7953"
+         style="stroke-width:0.13253216">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="59.312927"
+       y="214.7953"
+       id="text19470-9-5-0-2"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-6-4-8"
+         x="59.312927"
+         y="214.7953"
+         style="stroke-width:0.13253216">4</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-0-1-4-2"
+       width="6.6234145"
+       height="6.6234145"
+       x="70.664787"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-5-8-5-4-9"
+       width="6.6234145"
+       height="6.6234145"
+       x="77.370247"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9-8-9-7-9"
+       width="6.6234145"
+       height="6.6234145"
+       x="83.911606"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="65.678932"
+       y="214.7953"
+       id="text19470-5-8-6-6"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-4-3-0"
+         x="65.678932"
+         y="214.7953"
+         style="stroke-width:0.13253216">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="72.388138"
+       y="214.7953"
+       id="text19470-4-9-8-1-2"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-8-6-1-7-7"
+         x="72.388138"
+         y="214.7953"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="79.097366"
+       y="214.7953"
+       id="text19470-1-3-0-5-6"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-2-8-3-9-1"
+         x="79.097366"
+         y="214.7953"
+         style="stroke-width:0.13253216">6</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="83.689911"
+       y="214.7953"
+       id="text19470-9-5-0-6-3"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-6-4-2-2"
+         x="83.689911"
+         y="214.7953"
+         style="stroke-width:0.13253216">10</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#009600;stroke-width:0.96600002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect819-9-1-4-1"
+       width="6.6234145"
+       height="6.6234145"
+       x="64.041374"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.30394363px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#StopL-0);marker-end:url(#StopL-0)"
+       d="m 37.635447,218.4608 h 26.27424"
+       id="path19683-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.30474284px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#StopL-1-2);marker-end:url(#StopL-1-2)"
+       d="M 70.773095,218.46079 H 97.185691"
+       id="path19683-8-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.29683876px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.05742097"
+       x="50.046394"
+       y="220.36325"
+       id="text21006-9"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan21004-1"
+         x="50.046394"
+         y="220.36325"
+         style="stroke-width:0.05742097">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.29683876px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.05742097"
+       x="83.25322"
+       y="220.36325"
+       id="text21006-5-4"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan21004-7-9"
+         x="83.25322"
+         y="220.36325"
+         style="stroke-width:0.05742097">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="28.675085"
+       y="198.24854"
+       id="text19470-5-5-1"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-3-0"
+         x="28.675085"
+         y="198.24854"
+         style="stroke-width:0.13253216">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="28.596136"
+       y="206.44548"
+       id="text19470-5-5-8-7"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-3-8-5"
+         x="28.596136"
+         y="206.44548"
+         style="stroke-width:0.13253216">B</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="24.801367"
+       y="215.42574"
+       id="text19470-5-5-3-8"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-0-3-1-7"
+         x="24.801367"
+         y="215.42574"
+         style="stroke-width:0.13253216">A+B</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9-81-0"
+       width="6.6234145"
+       height="6.6234145"
+       x="64.095879"
+       y="193.33353"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="63.957436"
+       y="198.55667"
+       id="text19470-9-3-4"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-9-8"
+         x="63.957436"
+         y="198.55667"
+         style="stroke-width:0.13253216">15</tspan></text>
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00d700;fill-opacity:0.38461543;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-1-9-8-9-7-9-0"
+       width="6.6234145"
+       height="6.6234145"
+       x="90.535019"
+       y="209.66721"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.3012867px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.13253216"
+       x="90.617569"
+       y="214.73984"
+       id="text19470-9-5-0-6-3-4"
+       inkscape:export-xdpi="748.72894"
+       inkscape:export-ydpi="748.72894"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/median_sorted_arrays/images/example2.png"><tspan
+         sodipodi:role="line"
+         id="tspan19468-3-6-4-2-2-2"
+         x="90.617569"
+         y="214.73984"
+         style="stroke-width:0.13253216">15</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="M 41.32689,14.396397 A 5.8314198,5.7209259 0 0 1 35.495471,20.117324 5.8314198,5.7209259 0 0 1 29.66405,14.396397 5.8314198,5.7209259 0 0 1 35.495471,8.6754715 5.8314198,5.7209259 0 0 1 41.32689,14.396397 Z"
+       id="path3717-0" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="m 67.682929,14.396397 a 5.8314198,5.7209259 0 0 1 -5.831422,5.720927 5.8314198,5.7209259 0 0 1 -5.831419,-5.720927 5.8314198,5.7209259 0 0 1 5.831419,-5.7209255 5.8314198,5.7209259 0 0 1 5.831422,5.7209255 z"
+       id="path3717-6-55" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="m 91.366267,14.396397 a 5.8314198,5.7209259 0 0 1 -5.831422,5.720927 5.8314198,5.7209259 0 0 1 -5.831419,-5.720927 5.8314198,5.7209259 0 0 1 5.831419,-5.7209255 5.8314198,5.7209259 0 0 1 5.831422,5.7209255 z"
+       id="path3717-6-7-2" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="m 116.38595,14.396397 a 5.8314198,5.7209259 0 0 1 -5.83142,5.720927 5.8314198,5.7209259 0 0 1 -5.83142,-5.720927 5.8314198,5.7209259 0 0 1 5.83142,-5.7209255 5.8314198,5.7209259 0 0 1 5.83142,5.7209255 z"
+       id="path3717-6-5-9" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-2)"
+       d="m 41.087102,12.773103 15.125989,0.163665"
+       id="path6870-0"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7026-4)"
+       d="m 67.523025,13.066067 12.306271,0.14818"
+       id="path6872-2"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6980-1)"
+       d="m 91.279603,13.413908 13.484357,0.307397"
+       id="path6874-8"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <g
+       transform="translate(18.881083,-35.897126)"
+       aria-label="3"
+       style="font-style:normal;font-weight:normal;font-size:6.16622543px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-38">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 67.165585,49.753098 q 0.436573,0.09334 0.680452,0.3884 0.24689,0.295063 0.24689,0.728626 0,0.665399 -0.457649,1.029712 -0.45765,0.364313 -1.300688,0.364313 -0.283021,0 -0.584106,-0.05721 -0.298074,-0.0542 -0.617224,-0.165597 V 51.45423 q 0.252911,0.147531 0.553996,0.222803 0.301086,0.07527 0.629268,0.07527 0.572062,0 0.870137,-0.225814 0.301085,-0.225814 0.301085,-0.656366 0,-0.397432 -0.280009,-0.620235 -0.276999,-0.225814 -0.773789,-0.225814 h -0.523889 v -0.499802 h 0.547976 q 0.448617,0 0.686474,-0.17764 0.237857,-0.180651 0.237857,-0.517867 0,-0.346248 -0.24689,-0.52991 -0.243879,-0.186672 -0.701528,-0.186672 -0.249901,0 -0.535932,0.05419 -0.286031,0.05419 -0.629268,0.168608 v -0.541954 q 0.346248,-0.09635 0.647333,-0.144521 0.304096,-0.04817 0.572062,-0.04817 0.692496,0 1.09595,0.316139 0.403454,0.313129 0.403454,0.84906 0,0.373346 -0.21377,0.632279 -0.213771,0.255923 -0.608192,0.355281 z"
+         style="stroke-width:0.15415563"
+         id="path8173-0" />
+    </g>
+    <g
+       transform="translate(18.881083,-35.897126)"
+       aria-label="4"
+       style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-3-4">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 92.187951,48.641713 -1.535534,2.39965 h 1.535534 z m -0.159575,-0.52991 h 0.764757 v 2.92956 h 0.641311 v 0.505823 h -0.641311 v 1.05982 h -0.605182 v -1.05982 H 90.158637 V 50.96007 Z"
+         style="stroke-width:0.15415563"
+         id="path8170-0" />
+    </g>
+    <g
+       transform="translate(18.881083,-35.897126)"
+       aria-label="2"
+       style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-6-9">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 42.197311,51.880073 h 2.122651 v 0.511845 h -2.854288 v -0.511845 q 0.346248,-0.358291 0.942396,-0.960462 0.59916,-0.605181 0.752714,-0.77981 0.292052,-0.328183 0.406465,-0.553997 0.117423,-0.228825 0.117423,-0.448617 0,-0.358292 -0.252912,-0.584106 -0.2499,-0.225814 -0.653355,-0.225814 -0.286031,0 -0.605181,0.09936 -0.31614,0.09936 -0.677442,0.301086 v -0.614214 q 0.367324,-0.147532 0.686474,-0.222803 0.319151,-0.07527 0.584106,-0.07527 0.698518,0 1.114015,0.349259 0.415498,0.349259 0.415498,0.933365 0,0.276998 -0.10538,0.526899 -0.102369,0.24689 -0.376356,0.584105 -0.07527,0.08732 -0.478726,0.505823 -0.403454,0.415498 -1.138102,1.1652 z"
+         style="stroke-width:0.15415563"
+         id="path8167-1" />
+    </g>
+    <g
+       transform="translate(18.881083,-35.897126)"
+       aria-label="1"
+       style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-9-9">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 15.38594,52.310249 h 0.993581 v -3.429361 l -1.080896,0.216781 V 48.543673 L 16.3735,48.326891 h 0.608192 v 3.983358 h 0.993581 v 0.511845 H 15.38594 Z"
+         style="stroke-width:0.15415563"
+         id="path8164-6" />
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot22801"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion22803"><rect
+           id="rect22805"
+           width="90.823784"
+           height="83.320198"
+           x="257"
+           y="98.519684" /></flowRegion><flowPara
+         id="flowPara22807"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:20.07856941px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:0.98431373;stroke:none;stroke-width:0.50196421;opacity:0.44;"
+       x="74.37365"
+       y="24.022743"
+       id="text22811"
+       transform="scale(1.0374195,0.96393022)"><tspan
+         sodipodi:role="line"
+         id="tspan22809"
+         x="74.37365"
+         y="24.022743"
+         style="font-size:24.09428215px;fill:#ff0000;fill-opacity:0.98431373;stroke-width:0.50196421;">X</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="m 42.201914,36.839622 a 5.8314198,5.7209259 0 0 1 -5.83142,5.720927 5.8314198,5.7209259 0 0 1 -5.831421,-5.720927 5.8314198,5.7209259 0 0 1 5.831421,-5.720926 5.8314198,5.7209259 0 0 1 5.83142,5.720926 z"
+       id="path3717-0-6" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="m 68.557952,36.839622 a 5.8314198,5.7209259 0 0 1 -5.831422,5.720927 5.8314198,5.7209259 0 0 1 -5.831418,-5.720927 5.8314198,5.7209259 0 0 1 5.831418,-5.720926 5.8314198,5.7209259 0 0 1 5.831422,5.720926 z"
+       id="path3717-6-55-0" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="m 92.24129,36.839622 a 5.8314198,5.7209259 0 0 1 -5.831422,5.720927 5.8314198,5.7209259 0 0 1 -5.831419,-5.720927 5.8314198,5.7209259 0 0 1 5.831419,-5.720926 5.8314198,5.7209259 0 0 1 5.831422,5.720926 z"
+       id="path3717-6-7-2-5" />
+    <path
+       inkscape:connector-curvature="0"
+       style="opacity:0.08399999;fill:#f40000;fill-opacity:1;stroke:#000000;stroke-width:0.04804923;stroke-opacity:1"
+       d="m 117.26097,36.839622 a 5.8314198,5.7209259 0 0 1 -5.83142,5.720927 5.8314198,5.7209259 0 0 1 -5.83142,-5.720927 5.8314198,5.7209259 0 0 1 5.83142,-5.720926 5.8314198,5.7209259 0 0 1 5.83142,5.720926 z"
+       id="path3717-6-5-9-0" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-2-9)"
+       d="m 41.962126,35.216328 15.125988,0.163665"
+       id="path6870-0-2"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7026-4-4)"
+       d="m 68.398048,35.509292 12.306271,0.14818"
+       id="path6872-2-9"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6980-1-5)"
+       d="M 92.154626,35.857133 105.63898,36.16453"
+       id="path6874-8-4"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <g
+       transform="translate(19.756105,-13.453902)"
+       aria-label="3"
+       style="font-style:normal;font-weight:normal;font-size:6.16622543px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-38-3">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 67.165585,49.753098 q 0.436573,0.09334 0.680452,0.3884 0.24689,0.295063 0.24689,0.728626 0,0.665399 -0.457649,1.029712 -0.45765,0.364313 -1.300688,0.364313 -0.283021,0 -0.584106,-0.05721 -0.298074,-0.0542 -0.617224,-0.165597 V 51.45423 q 0.252911,0.147531 0.553996,0.222803 0.301086,0.07527 0.629268,0.07527 0.572062,0 0.870137,-0.225814 0.301085,-0.225814 0.301085,-0.656366 0,-0.397432 -0.280009,-0.620235 -0.276999,-0.225814 -0.773789,-0.225814 h -0.523889 v -0.499802 h 0.547976 q 0.448617,0 0.686474,-0.17764 0.237857,-0.180651 0.237857,-0.517867 0,-0.346248 -0.24689,-0.52991 -0.243879,-0.186672 -0.701528,-0.186672 -0.249901,0 -0.535932,0.05419 -0.286031,0.05419 -0.629268,0.168608 v -0.541954 q 0.346248,-0.09635 0.647333,-0.144521 0.304096,-0.04817 0.572062,-0.04817 0.692496,0 1.09595,0.316139 0.403454,0.313129 0.403454,0.84906 0,0.373346 -0.21377,0.632279 -0.213771,0.255923 -0.608192,0.355281 z"
+         style="stroke-width:0.15415563"
+         id="path8173-0-5" />
+    </g>
+    <g
+       transform="translate(19.756105,-13.453902)"
+       aria-label="4"
+       style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-3-4-1">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 92.187951,48.641713 -1.535534,2.39965 h 1.535534 z m -0.159575,-0.52991 h 0.764757 v 2.92956 h 0.641311 v 0.505823 h -0.641311 v 1.05982 h -0.605182 v -1.05982 H 90.158637 V 50.96007 Z"
+         style="stroke-width:0.15415563"
+         id="path8170-0-7" />
+    </g>
+    <g
+       transform="translate(19.756105,-13.453902)"
+       aria-label="2"
+       style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-6-9-4">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 42.197311,51.880073 h 2.122651 v 0.511845 h -2.854288 v -0.511845 q 0.346248,-0.358291 0.942396,-0.960462 0.59916,-0.605181 0.752714,-0.77981 0.292052,-0.328183 0.406465,-0.553997 0.117423,-0.228825 0.117423,-0.448617 0,-0.358292 -0.252912,-0.584106 -0.2499,-0.225814 -0.653355,-0.225814 -0.286031,0 -0.605181,0.09936 -0.31614,0.09936 -0.677442,0.301086 v -0.614214 q 0.367324,-0.147532 0.686474,-0.222803 0.319151,-0.07527 0.584106,-0.07527 0.698518,0 1.114015,0.349259 0.415498,0.349259 0.415498,0.933365 0,0.276998 -0.10538,0.526899 -0.102369,0.24689 -0.376356,0.584105 -0.07527,0.08732 -0.478726,0.505823 -0.403454,0.415498 -1.138102,1.1652 z"
+         style="stroke-width:0.15415563"
+         id="path8167-1-3" />
+    </g>
+    <g
+       transform="translate(19.756105,-13.453902)"
+       aria-label="1"
+       style="font-style:normal;font-weight:normal;font-size:6.16622591px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.15415563"
+       id="text6886-9-9-1">
+      <path
+         inkscape:connector-curvature="0"
+         d="m 15.38594,52.310249 h 0.993581 v -3.429361 l -1.080896,0.216781 V 48.543673 L 16.3735,48.326891 h 0.608192 v 3.983358 h 0.993581 v 0.511845 H 15.38594 Z"
+         style="stroke-width:0.15415563"
+         id="path8164-6-4" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:20.07856941px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.43999999;fill:#ff0000;fill-opacity:0.98431373;stroke:none;stroke-width:0.50196421"
+       x="26.705536"
+       y="47.208733"
+       id="text22811-6"
+       transform="scale(1.0374195,0.96393021)"><tspan
+         sodipodi:role="line"
+         id="tspan22809-9"
+         x="26.705536"
+         y="47.208733"
+         style="font-size:24.09428215px;fill:#ff0000;fill-opacity:0.98431373;stroke-width:0.50196421">X</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.16500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend-2-9-4)"
+       d="m 46.90719,42.611098 15.125988,0.163665"
+       id="path6870-0-2-2"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 62.06256,42.523253 -0.02938,0.25151"
+       id="path24505"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#path3717-6-55-0" />
+    <rect
+       style="opacity:0.194;fill:#000000;fill-opacity:0.21474358;fill-rule:nonzero;stroke:#000000;stroke-width:0.266;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect24509"
+       width="7.8577237"
+       height="6.0336094"
+       x="52.431599"
+       y="46.48827" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="54.302486"
+       y="49.247829"
+       id="text24555"><tspan
+         sodipodi:role="line"
+         id="tspan24553"
+         x="54.302486"
+         y="49.247829"
+         style="stroke-width:0.26458332">head</tspan></text>
   </g>
 </svg>
