@@ -89,6 +89,7 @@ Listing \ref{list:min_stack:stackpairs} shows a possible implementation of this 
 \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a stack of pairs.},label=list:min_stack:stackpairs]{sources/min_stack/min_stack_solution1.cpp}
 
 \subsubsection{Two stacks}
+\label{min_stack:sec:twostacks}
 The solution presented in Section \ref{min_stack:sec:stackpairs} can be improved in the average case (even if will remain asymptotically the same in the worst case) by realizing that there is no need to have a copy of the minimum element for each element of the stack. What we really need is to have a second stack that contains the sequence of minimum elements as they are inserted. 
 
 Thus, by using an additional stack to store the minimums we can implement all the operations as follows:
@@ -104,15 +105,45 @@ This idea can be implemented as shown in Listing \ref{list:min_stack:doublestack
 
  \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a two stacks.},label=list:min_stack:doublestack]{sources/min_stack/min_stack_solution2.cpp}
 
+\subsection{Constant space}
+\label{min_stack:sec:constantspace}
+Despite the fact that the solution presented in Section \ref{min_stack:sec:twostacks} is most likely already good enough for any coding interview, we will present here a solution that works only for integral types and that work in constant space. This is a big improvement w.r.t. to the other solutions presented so far, but the downside is that only works for a very limited number of types.
+
+As already discussed, the main challenge of this question is that we need somehow to be able for each element present in the stack to retrieve the current minimum. How can we store such information without using additional space? The answer is that we need to encode such information  in the elements themselves. 
+
+The idea is simple: We will store the elements in a \lstinline[columns=fixed]{std::stack}, $S$, and we will also keep track of the \textbf{current} minimum element in a variable, \lstinline[columns=fixed]{min_el}. The operations on the data structure can be implemented as follows:
+
+\begin{itemize}
+	\item[-]\lstinline[columns=fixed]{push(x)} we have two cases here:
+		\begin{enumerate}
+			\item if the stack is empty: push $x$ to $S$ and set \inline{min_el = x}
+			\item otherwise: 
+			\begin{itemize}
+					\item if \inline{x >= min_el} just push x to $S$ leaving \inline{min_el} untouched. 
+					\item if \inline{min_el > x}, push \inline{2*x-min_el} to $S$ and set  \inline{min_el = x}.
+			\end{itemize}
+		\end{enumerate}
+	\item[-]\lstinline[columns=fixed]{pop()} two cases here as well depending on the element to be removed $y$ (at the top of the stack):
+		\begin{enumerate}
+			\item if \inline{y >= min_el}, $y$ is removed from the stack leaving \inline{min_el} untouched
+			\item otherwise: if \inline{y < min_el}, set \inline{min_el = 2*min_el -y}			
+		\end{enumerate} 
+		The key idea  here is that we can  retrieve the the previous minimum element given the current one and the value that is currently on the stack. 
+	\item[-]\lstinline[columns=fixed]{top()} veri similar to the \inline{pop} operation, without the update on the variable \inline{min_el} 
+	\item[-]\lstinline[columns=fixed]{get_min(x)}, returns \inline{min_el}
+\end{itemize}
+
+
+
 
 \subsection{Common Variations}
 \begin{exercise}
 	 Design and implement a max stack data structure supporting the following operations:
-\begin{itemize}
-	\item \lstinline[columns=fixed]{push(x)}: the element $x$ is pushed onto the stack
-	\item \lstinline[columns=fixed]{pop()}: removes the top of the stack
-	\item \lstinline[columns=fixed]{top()}: retrieve the top of the stack
-	\item \lstinline[columns=fixed]{get_max()}: retrieve the maximum among all elements present in the stack.
-\end{itemize}
+	\begin{itemize}
+		\item \lstinline[columns=fixed]{push(x)}: the element $x$ is pushed onto the stack
+		\item \lstinline[columns=fixed]{pop()}: removes the top of the stack
+		\item \lstinline[columns=fixed]{top()}: retrieve the top of the stack
+		\item \lstinline[columns=fixed]{get_max()}: retrieve the maximum among all elements present in the stack.
+	\end{itemize}
 
 \end{exercise}

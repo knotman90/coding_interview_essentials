@@ -2,9 +2,9 @@ template <class T>
 class min_stack_stack_pair
 {
  public:
-  void push(T&& x)
+  void push(const T& x)
   {
-    const auto nm = q.size() > 0 ? min(x, getMin()) : x;
+    const auto nm = q.size() > 0 ? std::min(x, getMin()) : x;
     q.push({ x, nm });
   }
 
