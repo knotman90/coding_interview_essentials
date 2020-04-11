@@ -1,4 +1,5 @@
-int max_sum_contiguous_subarray_kadane_space(const std::vector<int> &A) {
+int max_sum_contiguous_subarray_kadane_space(const std::vector<int> &A)
+{
   std::vector<int> B(A.size(), std::numeric_limits<int>::min());
 
   B[0] = A[0];

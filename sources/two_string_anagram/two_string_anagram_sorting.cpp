@@ -1,5 +1,6 @@
 
-int solution_sorting(const std::string &a, const std::string &b) {
+int solution_sorting(const std::string &a, const std::string &b)
+{
   if (a.length() != b.length())
     return -1;
 

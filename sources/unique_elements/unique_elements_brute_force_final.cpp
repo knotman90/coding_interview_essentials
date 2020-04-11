@@ -1,11 +1,13 @@
-bool unique_elements_final(const std::string &s) {
+bool unique_elements_final(const std::string &s)
+{
   constexpr size_t ALPH_SIZE = 128;
 
   if (s.size() > ALPH_SIZE)
     return false;
 
-  std::array<bool, ALPH_SIZE> F = {false};
-  for (size_t i = 0; i != s.size(); i++) {
+  std::array<bool, ALPH_SIZE> F = { false };
+  for (size_t i = 0; i != s.size(); i++)
+  {
     const int idx = s[i] - 'a';
     if (F[idx])
       return false;

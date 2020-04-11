@@ -6,6 +6,8 @@ MAIN_FILE_NAME = main
 
 all: $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf tests
 
+pdf: $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf
+
 tests:
 	mkdir -p build && cd build && cmake .. && $(MAKE)
 
