@@ -1,4 +1,5 @@
-std::vector<int> prefix_sum(const std::vector<int> &A) {
+std::vector<int> prefix_sum(const std::vector<int> &A)
+{
   assert(A.size() > 0);
 
   std::vector<int> Y(A.size());
@@ -9,16 +10,18 @@ std::vector<int> prefix_sum(const std::vector<int> &A) {
   return Y;
 }
 
-int max_sum_contiguous_subarray_bruteforce_prefix_sum(
-    const std::vector<int> &A) {
+int max_sum_contiguous_subarray_bruteforce_prefix_sum(const std::vector<int> &A)
+{
   const std::vector<int> Y = prefix_sum(A);
 
   int ans = std::numeric_limits<int>::min();
-  for (size_t i = 0; i < A.size(); i++) {
-    for (size_t j = i; j < A.size(); j++) {
-      int subarray_sum = Y[j]; // 0 to j
+  for (size_t i = 0; i < A.size(); i++)
+  {
+    for (size_t j = i; j < A.size(); j++)
+    {
+      int subarray_sum = Y[j];  // 0 to j
       if (i > 0)
-        subarray_sum -= Y[i - 1]; // 0 to i
+        subarray_sum -= Y[i - 1];  // 0 to i
 
       ans = std::max(ans, subarray_sum);
     }

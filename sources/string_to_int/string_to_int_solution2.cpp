@@ -1,4 +1,5 @@
-int string_to_int_negative(const std::string &s) {
+int string_to_int_negative(const std::string &s)
+{
   if (s.size() == 0)
     return 0;
   const int sign = s[0] == '-' ? -1 : 1;

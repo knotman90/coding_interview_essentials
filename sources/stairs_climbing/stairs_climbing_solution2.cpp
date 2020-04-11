@@ -1,4 +1,5 @@
-int stair_climbing_arbitrary(const int n, const std::vector<int> &steps) {
+int stair_climbing_arbitrary(const int n, const std::vector<int> &steps)
+{
   if (n < 0)
     return 0;
   if (n == 0)

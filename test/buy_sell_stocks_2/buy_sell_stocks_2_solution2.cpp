@@ -1,0 +1,1 @@
+../../sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2_solution2.cpp
