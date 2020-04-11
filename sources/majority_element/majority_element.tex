@@ -1,0 +1,50 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{TITLE OF THE CHAPTER}
+\label{ch:majority_element}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+Given an array $A$ of size $n$, find the majority element i.e. that element that appears more than $\floor(\frac{n}{2})$ times.
+
+You may assume that the array is non-empty and the majority element always exist in the array.
+
+	\begin{example}
+		\hfill \\
+		Given the array $[1,2,3,2,2,1,1,1]$, the function returns $1$ because it appears $4$ times in an array of length $8$.
+		
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given the input array $[2, 1, 2]$ the function return $2$ because it is greater than $\frac{3}{2}$.
+		
+	\end{example}
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item 
+	\begin{answered}
+		\textit{}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{majority_element:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{majority_element:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:majority_element]{sources/majority_element/majority_element_solution1.cpp}
+
