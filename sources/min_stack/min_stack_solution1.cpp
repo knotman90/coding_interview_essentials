@@ -29,7 +29,7 @@ class min_stack_stack_pair
  protected:
   void guard_empty_stack()
   {
-    if (q.size() < 0)
+    if (q.size() <= 0)
       throw std::logic_error("Invalid operation on an empty stack");
   }
 
