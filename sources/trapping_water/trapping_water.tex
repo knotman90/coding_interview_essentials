@@ -99,17 +99,63 @@ Listing \ref{list:trapping_water:bruteforce} shows a possible implementation of 
 
 
 
-
 \subsection{Dynamic Programming}
 \label{trapping_water:sec:dp}
-The solution proposed in Section \ref{trapping_water:sec:bruteforce} is far from optimal, but it can be transformed into a good one, if we realize that:
+The solution proposed in Section \ref{trapping_water:sec:bruteforce} is far from optimal, but it can be transformed into a good one, if we realize that
 for each element of the array, we can calculate and \textbf{store} the values for its max element on its right and on its left. As already discussed in Chapter \ref{ch:greatest_right}, this task can be accomplished in linear time. Thus all it is necessary is to keep two additional arrays, $R$, and $L$, of  length $n$ (same length of the input). 
 
 \begin{itemize}
 	\item $R[i]$ contains the value of the highest bar among all elements of the input with index $j > i$ (on the right of, and not considering, $i$).
-	\item simmetrically, $L[i]$ contains the value of the highest bar among all elements of the input with index $j < i$ (on the left of, and not considering, $i$).
+	\item symmetrically, $L[i]$ contains the value of the highest bar among all elements of the input with index $j < i$ (on the left of, and not considering, $i$).
 \end{itemize}
 
 Armed with this information, the same algorithm used in the Section \ref{trapping_water:sec:bruteforce} can be turned into an elegant and efficient solution that will make any interviewer happy. Listing \ref{list:trapping_water:dp} shows a possible implementation of this idea. Note that we can calculate $R$, given a function, \inline{max_left} that is able to calculate $L$, by simply providing its input reversed and reversing the results once again. This is how $R$ is calculated in Listing \ref{list:trapping_water:dp}.
 
+Figures \ref{fig:trapping_water_DPL} and \ref{fig:trapping_water_DPR} show a representation of $L$ and $R$. As we can see in Figure \ref{fig:trapping_water_DPLR} the amount of trapped water can be visualized by superimposing the two figures and taking the intersection of the shadowed cells.
+
+
+\begin{figure}
+\centering
+\begin{subfigure}[b]{0.95\textwidth}
+   \includegraphics[width=1\linewidth]{sources/trapping_water/images/DPR}
+   \caption{Representation of the highest value on the right of each element. A cell colored in \textcolor[HTML]{3268d5}{$\blacksquare$} have at least a pile with height higher or equal to the cell itself on its \textbf{right}. }
+   \label{fig:trapping_water_DPL}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.95\textwidth}
+   \includegraphics[width=1\linewidth]{sources/trapping_water/images/DPL}
+   \caption{Representation of the highest value on the right of each element. A cell colored in \textcolor[HTML]{32d579}{$\blacksquare$} have at least a pile with height higher or equal to the cell itself on its \textbf{left}.}
+   \label{fig:trapping_water_DPR}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.95\textwidth}
+   \includegraphics[width=1\linewidth]{sources/trapping_water/images/DPLR}
+   \caption{Superimposition of Figures \ref{fig:trapping_water_DPL} and \ref{fig:trapping_water_DPR}. Cells colored in \textcolor[HTML]{5aa1c7}{$\blacksquare$} represent the intersection between cells colored in \textcolor[HTML]{3268d5}{$\blacksquare$} in Figure \ref{fig:trapping_water_DPL} and cells colored in \textcolor[HTML]{32d579}{$\blacksquare$} in Figure \ref{fig:trapping_water_DPR}. Those cells are the ones that can be filled up with water.}
+   \label{fig:trapping_water_DPRL}
+\end{subfigure}
+
+\end{figure}
+
+
 \lstinputlisting[language=c++, caption={Dynamic programming, $O(n)$ time and space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:dp]{sources/trapping_water/trapping_water_solution2.cpp}
+
+This solution has a time complexity of $O(n)$ because the computation of $L$ and $R$ can be done in linear time, while calculating the final answer can be done in a single pass over the array. The space complexity if linear as well because the arrays $L$ and $R$ are both of size proportional to the size of $n$.
+
+
+\subsection{Two pointers solution}
+\label{trapping_water:sec:two_pointers}
+Despite the fact that the solution presented in Section \ref{trapping_water:sec:dp} is already a good one, we can definitely do better and lower the space complexity down to $O(1)$. The key idea is that, we do not really need to store $L$ and $R$ in their entirety. All of time, we only need one element from both $L$ and $R$ and nothing else. Once an element of the input array is processed we can discard the corresponding element in $L$ and $R$ because they are of no use anymore in the future. They do not play a role in the calculation of any other element of the input array $H$. Therefore the solution proposed in this section will use a two pointer technique and will keep two \textit{rolling} maximum value $m_l$ and $m_r$, one for the left and one for the right. When processing the cell at index $i$ of the input array, $m_l$ and $m_r$ will contain the maximum value on the left  and on the right of $i$, respectively.
+
+The input arrays is traversed from left to right using two pointers $l$ and $r$, pointing at first to the beginning and the end of the input array.$m_l$ and $m_r$ are set to $0$ respectively. At each iteration only one of the two pointers is moved towards the center depending on whether \inline{H[i] <= H[j]} is:
+\begin{description}
+\item[true]  then the contribution of \inline{H[i]} is bounded by \inline{m_l} (because \inline{H[r] >= H[l]}. the left pointer is moved towards the center (we have considered the contribution of this cell and we can move forward).\\
+\item[false] then the contribution of \inline{H[j]} is bounded by \inline{m_r} (because \inline{H[l] > H[r]}. The right pointer is moved towards the center (we have considered the contribution of this cell and we can move forward). \\
+\end{description}
+
+While moving the pointers the variables $m_l$ or $m_r$ are updated and the contribution of every single element summed up.
+
+An implementation of the idea above is shown in Listing \ref{list:trapping_water:two_pointers}. Note that all the elements of the input array will be eventually considered because $l$ and $r$ are moved one by one against each other. 
+
+\lstinputlisting[language=c++, caption={Two pointers solution, $O(n)$ time and  $O(1)$ space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:two_pointers]{sources/trapping_water/trapping_water_solution3.cpp}
+
+This approach has a time complexity of $O(n)$ (we cannot do better than this because at least we have to touch all the elements of the input at least once) and a space complexity of $O(1)$. This is therefore the optimal approach to solve this problem  and we believe this should be your solution during an actual interview.
