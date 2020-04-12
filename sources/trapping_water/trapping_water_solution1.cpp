@@ -1,51 +1,17 @@
-std::vector<int> max_right(const std::vector<int> &h)
+int trapping_water_brute_force(const std::vector<int> &height)
 {
-  std::vector<int> maxR(h.size(), 0);
-
-  int i    = h.size() - 1;
-  int cmax = h[i];
-  for (--i; i >= 0; i--)
+  const int size = height.size();
+  int ans        = 0;
+  for (int i = 1; i < size - 1; i++)
   {
-    maxR[i] = cmax;
-    cmax    = std::max(cmax, h[i]);
-  }
-  return maxR;
-}
+    const int b_l = *std::max_element(std::begin(height), std::begin(height) + i);
+    const int b_r = *std::max_element(std::begin(height) + i + 1, std::end(height));
+    
+    const int min_max_on_side = std::min(b_l, b_r);   
+    //equivalent to 
+    //if(min_max_on_side - height[i] > 0) ans+=min_max_on_side - height[i]
+    ans += std::max(0 , min_max_on_side - height[i]);
 
-auto unwind(std::stack<int> &w, const int target)
-{
-  int ans   = 0;
-  int steps = 0;
-  while (!w.empty() && w.top() <= target)
-  {
-    ans += w.top();
-    w.pop();
-    ++steps;
-  }
-  return std::make_tuple(ans, steps);
-}
-
-int trapping_water_stack(const std::vector<int> &height)
-{
-  const size_t len = height.size();
-  if (len < 2)
-    return 0;
-
-  std::stack<int> w;
-  std::vector<int> maxR(max_right(height));
-
-  w.push(std::min(height[0], maxR[0]));
-  int m   = w.top();
-  int ans = 0;
-  for (int i = 1; i < len; i++)
-  {
-    if (height[i] >= m)
-    {
-      auto [v, l] = unwind(w, m);
-      ans += (m * l) - v;
-      m = std::min(height[i], maxR[i]);
-    }
-    w.push(height[i]);
   }
   return ans;
 }

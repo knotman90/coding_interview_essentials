@@ -9,66 +9,107 @@
 \chapter{Trapping Water}
 \label{ch:trapping_water}
 \section*{Introduction}
-This chapter describes a quite challenging and fun problem that is often asked at big companies like Google and Microsoft. 
-In a nutshell the problem asks to find the amount of water that can be trapped in the cavities of a given histogram.
+This chapter describes a quite challenging and extremely popular and fun problem that is asked at big companies like Google and Microsoft. 
 
 
 \section{Problem statement}
 \begin{exercise}
-Given $n$ non-negative integers representing an elevation map (or an histogram) where the width of each bar is $1$, find out how much water it is able to trap after raining.
+Write a function that takes as input an array of length $n$ of non-negative integers representing an elevation map (or an histogram) where the width of each bar is $1$. The function should return the amount of water that is trapped in the histogram after an heavy rain overnight. 
+
+	\begin{example}
+		\label{ex:trapping_water:exmaple1}
+		\hfill \\
+		Given the array $H=[0,1,0,2,1,0,1,3,2,1,2,1]$ (see Figure \ref{fig:trapping_water_example1}), the function return $8$
+	\end{example}
+
+	\begin{example}
+		\label{ex:trapping_water:exmaple2}
+		\hfill \\
+		Given the array $H=[1,0,2,1,0,1]$ (see Figure \ref{fig:trapping_water_example2}), the function return $14$
+	\end{example}
+
 \end{exercise}
 
-
-\begin{example}
-\label{ex:trapping_water:exmaple1}
-	\hfill \\
-	\begin{itemize}
-		\item[-] Input: $[0,1,0,2,1,0,1,3,2,1,2,1]$
-		\item[-] Output: $6$ (See Figure \ref{fig:trapping_water_example1})
-	\end{itemize}
-
-	\begin{figure}
+\begin{figure}
 		\label{fig:trapping_water_example1}
 		\centering
-		\includegraphics[scale=0.5]{sources/trapping_water/images/example1}
-		\caption{Visual representation of the example \ref{ex:trapping_water:exmaple1}}
+		\includegraphics[scale=1.0]{sources/trapping_water/images/example1}
+		\caption{Visual representation of the example \ref{ex:trapping_water:exmaple1}. Blue squares represent water, while the red ones, bricks.}
 \end{figure}
-\end{example}
 
-\begin{example}
-	\hfill \\
-	\begin{itemize}
-		\item[-] Input: $[1,0,2,1,0,1]  $
-		\item[-] Output: $2$
-	\end{itemize}
-\end{example}
 
-\section{Clarification Questions}
 
-\begin{QandA}
-	\item 
-	\begin{answered}
-		\textit{}
-	\end{answered}
-	
-\end{QandA}
+\begin{figure}
+		\label{fig:trapping_water_example2}
+		\centering
+		\includegraphics[scale=1.0]{sources/trapping_water/images/example2}
+		\caption{Visual representation of the example \ref{ex:trapping_water:exmaple2}. Blue squares represent water, while the red ones, bricks.}
+\end{figure}
+
+%\section{Clarification Questions}
+%
+%\begin{QandA}
+%	\item 
+%	\begin{answered}
+%		\textit{}
+%	\end{answered}
+%	
+%\end{QandA}
 
 \section{Discussion}
 \label{trapping_water:sec:discussion}
+There are at least $3$ of ways we can solve this challenge in a way that will satisfy our interviewer:
+
+\begin{enumerate}
+	\item Dynamic programming
+	\item Stack based solution
+	\item Two pointers
+\end{enumerate}
+We will start investigating this problem by using a brute force approach, for then to pass on more sophisticated and better solutions.
 
 
 \subsection{Brute-force}
 \label{trapping_water:sec:bruteforce}
-The naive approach consist in for each array element
 
-	\begin{enumerate}
-		\item Find the highest bars on left and right sides
-		\item add to the final solution the different between the height of the current element minus the minimum between the two hihest bars on left and right
-	\end{enumerate}
+The brute-force approach is easy once we realize that each element of the array can potentially be holding some water provided that there are other two bars, one on its left and one on its right, with height equal or higher than its. It that is the case then, we can safely add enough water so the its level reach the minimum between the highest bar on the left and on the right.
+For instance w.r.t. to \ref{ex:trapping_water:exmaple2}, we can see that for the element at index $6$ having height $1$, the highest bars on its left and right sides are both respectively of height $3$ and $4$. We can fill with water the boxes at index $6$ up to an height of $3$ (the minimum between $3$ and $4$).
+If the current element is higher than both the highest bars on its left and right side, then it is not possible to fit any water on it (for instance, this is the case when processing the highest bar on the histogram).  Figure \ref{fig:trapping_water_example3} depicts how one element (the one marked with the question mark) of the array can be processed using this approach i.e. by calculating the minimum between $b_l$ and $b_r$.
 
-Why does this work? Because that difference is the amount of water that specific bar can trap.
 
-The complexity of this approach is $O(n^2)$. Finding the maximum elements on left and right costs n, and it needs to be done for all the bars.
+\begin{figure}
+		\label{fig:trapping_water_example3}
+		\centering
+		\includegraphics[scale=1.0]{sources/trapping_water/images/example3}
+		\caption{This figure shows how the contribution of a single element of the histogram can be calculated using the information about the highest bar on its left and right.}
+\end{figure}
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:trapping_water]{sources/trapping_water/trapping_water_solution1.cpp}
+To summarize, we can calculate the answer to this problem by:
+\begin{enumerate}
+	\item For each element of the array \inline{H[i]}
+	\item calculate the highest bar on its left \inline{b_l} and the highest bar on its right \inline{b_r}.
+	\item add \inline{std::max(0, std::min(b_l, b_r) - H[i])}
+\end{enumerate}
 
+Step $2$ of this approach can be implemented with a simple linear search with a cost of $O(n)$ making the complexity of whole algorithm equal to $O(n^2)$. Finding the maximum elements on left and right costs has a linear complexity, and it needs to be done for all the bars.
+Moreover note that the first and the last element will never be able to contain any water as those elements have no bars on their left and right, respectively.
+
+Listing \ref{list:trapping_water:bruteforce} shows a possible implementation of this idea. Note how the \inline{std::max_element} function from C++ STL can be employed elegantly to calculate $b_l$ and $b_r$.
+
+\lstinputlisting[language=c++, caption=Brute-force solution to the problem of calculating the amount of water trapped between buildings.,label=list:trapping_water:bruteforce]{sources/trapping_water/trapping_water_solution1.cpp}
+
+
+
+
+\subsection{Dynamic Programming}
+\label{trapping_water:sec:dp}
+The solution proposed in Section \ref{trapping_water:sec:bruteforce} is far from optimal, but it can be transformed into a good one, if we realize that:
+for each element of the array, we can calculate and \textbf{store} the values for its max element on its right and on its left. As already discussed in Chapter \ref{ch:greatest_right}, this task can be accomplished in linear time. Thus all it is necessary is to keep two additional arrays, $R$, and $L$, of  length $n$ (same length of the input). 
+
+\begin{itemize}
+	\item $R[i]$ contains the value of the highest bar among all elements of the input with index $j > i$ (on the right of, and not considering, $i$).
+	\item simmetrically, $L[i]$ contains the value of the highest bar among all elements of the input with index $j < i$ (on the left of, and not considering, $i$).
+\end{itemize}
+
+Armed with this information, the same algorithm used in the Section \ref{trapping_water:sec:bruteforce} can be turned into an elegant and efficient solution that will make any interviewer happy. Listing \ref{list:trapping_water:dp} shows a possible implementation of this idea. Note that we can calculate $R$, given a function, \inline{max_left} that is able to calculate $L$, by simply providing its input reversed and reversing the results once again. This is how $R$ is calculated in Listing \ref{list:trapping_water:dp}.
+
+\lstinputlisting[language=c++, caption={Dynamic programming, $O(n)$ time and space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:dp]{sources/trapping_water/trapping_water_solution2.cpp}
