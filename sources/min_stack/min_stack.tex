@@ -135,6 +135,9 @@ The idea is simple: We will store the elements in a \lstinline[columns=fixed]{st
 
 When an element $x$ is less than the current minimum i.e. \inline{x < min_el}, the value \inline{2*x-min_el} will be inserted in the stack and the minimum set to $x$. The fact that \inline{2*x-min_el < x} (remember that \inline{min_el > x}) is really important because, when this element will be popped out from the stack we will be able to tell that the minimum is changing because we will see that \inline{2*x-min_el < x} and therefore we will update the minimum element accordingly.
 
+The idea above is shown in Listing \ref{list:min_stack:constspace}.
+
+ \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack of integer working in constant space and linear time. },label=list:min_stack:constspace]{sources/min_stack/min_stack_solution3.cpp}
 
 \subsection{Common Variations}
 \begin{exercise}

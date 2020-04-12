@@ -4,7 +4,7 @@ class min_stack_int_constant_time
  public:
   void push(const T&x)
   {
-    int new_min_el = min_el;
+    T new_min_el = min_el;
     if (elements.size() == 0)
     {
       elements.push(x);
@@ -26,7 +26,7 @@ class min_stack_int_constant_time
   void pop()
   {
     guard_empty_stack();
-    int top_el = elements.top();
+    const T top_el = elements.top();
     elements.pop();
 
     if (top_el < min_el)
@@ -38,7 +38,7 @@ class min_stack_int_constant_time
   T top()
   {
     guard_empty_stack();
-    int top_el = elements.top();
+    const T top_el = elements.top();
     if (top_el >= min_el)
       return top_el;
     else
@@ -59,6 +59,6 @@ class min_stack_int_constant_time
   }
 
  private:
-  std::stack<int> elements;
-  int min_el;
+  std::stack<T> elements;
+  T min_el;
 };

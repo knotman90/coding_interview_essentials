@@ -5,6 +5,8 @@ project(Book)
 
 set(EXTRA_WARNING_GNU "-march=native -Wextra -Wdisabled-optimization  -Wunsafe-loop-optimizations -funsafe-loop-optimizations -Wshadow -Wpointer-arith -Wcast-qual -Wunreachable-code ")
 
+#set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=-*,cppcoreguidelines-*, -header-filter=.;)
+
 set (CMAKE_CXX_STANDARD 20)
 if ( CMAKE_COMPILER_IS_GNUCC  OR CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall ${EXTRA_WARNING_GNU}")
