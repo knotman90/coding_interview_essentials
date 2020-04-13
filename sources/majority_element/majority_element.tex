@@ -6,20 +6,18 @@
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{TITLE OF THE CHAPTER}
+\chapter{Find the majority element}
 \label{ch:majority_element}
 \section*{Introduction}
 
 \section{Problem statement}
 \begin{exercise}
-Given an array $A$ of size $n$, find the majority element i.e. that element that appears more than $\floor(\frac{n}{2})$ times.
-
-You may assume that the array is non-empty and the majority element always exist in the array.
-
+Given an array $A$ of size $n$, find the majority element i.e. that element that appears more than $\floor{\frac{n}{2}}$ times.
+If such element does not exists, returns $-1$.
 	\begin{example}
 		\hfill \\
 		Given the array $[1,2,3,2,2,1,1,1]$, the function returns $1$ because it appears $4$ times in an array of length $8$.
-		
+	
 	\end{example}
 
 	\begin{example}
@@ -27,6 +25,13 @@ You may assume that the array is non-empty and the majority element always exist
 		Given the input array $[2, 1, 2]$ the function return $2$ because it is greater than $\frac{3}{2}$.
 		
 	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given the input array $[2, 1, 2,3,4,5]$ the function return $-1$no element appear more thn $3$ times.
+		
+	\end{example}
+
 \end{exercise}
 
 \section{Clarification Questions}
