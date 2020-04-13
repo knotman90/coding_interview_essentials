@@ -1,67 +1,24 @@
-
-std::vector<int> max_left(const std::vector<int> &h)
+int trapping_water_stack(const std::vector<int> &H)
 {
-  std::vector<int> maxR(h.size(), 0);
-
-  int i    = 0;
-  int cmax = h[i];
-  for (++i; i < h.size(); i++)
-  {
-    maxR[i] = cmax;
-    cmax    = std::max(cmax, h[i]);
-  }
-  return maxR;
-}
-
-
-std::vector<int> max_right(const std::vector<int> &h)
-{
-  std::vector<int> maxR(h.size(), 0);
-
-  int i    = h.size() - 1;
-  int cmax = h[i];
-  for (--i; i >= 0; i--)
-  {
-    maxR[i] = cmax;
-    cmax    = std::max(cmax, h[i]);
-  }
-  return maxR;
-}
-
-auto unwind(std::stack<int> &w, const int target)
-{
-  int ans   = 0;
-  int steps = 0;
-  while (!w.empty() && w.top() <= target)
-  {
-    ans += w.top();
-    w.pop();
-    ++steps;
-  }
-  return std::make_tuple(ans, steps);
-}
-
-int trapping_water_stack(const std::vector<int> &height)
-{
-  const size_t len = height.size();
-  if (len < 2)
-    return 0;
-
+  int ans = 0, current = 0;
+  //w store indexes of the bars
   std::stack<int> w;
-  std::vector<int> maxR(max_right(height));
 
-  w.push(std::min(height[0], maxR[0]));
-  int m   = w.top();
-  int ans = 0;
-  for (int i = 1; i < len; i++)
+  for(size_t bar_right = 0 ; bar_right < H.size() ; bar_right++)
   {
-    if (height[i] >= m)
+    
+    while (!w.empty() && H[bar_right] > H[w.top()])
     {
-      auto [v, l] = unwind(w, m);
-      ans += (m * l) - v;
-      m = std::min(height[i], maxR[i]);
+      const int old_top = w.top();
+      w.pop();
+      if (w.empty())
+        break;
+      const int bar_left = w.top();
+      const int distance       = bar_right - bar_left - 1;
+      const int bounded_height = std::min(H[bar_right], H[bar_left]) - H[old_top];
+      ans += distance * bounded_height;
     }
-    w.push(height[i]);
+    w.push(bar_right);
   }
   return ans;
 }

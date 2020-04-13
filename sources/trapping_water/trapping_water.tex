@@ -159,3 +159,15 @@ An implementation of the idea above is shown in Listing \ref{list:trapping_water
 \lstinputlisting[language=c++, caption={Two pointers solution, $O(n)$ time and  $O(1)$ space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:two_pointers]{sources/trapping_water/trapping_water_solution3.cpp}
 
 This approach has a time complexity of $O(n)$ (we cannot do better than this because at least we have to touch all the elements of the input at least once) and a space complexity of $O(1)$. This is therefore the optimal approach to solve this problem  and we believe this should be your solution during an actual interview.
+
+
+\subsection{Stack based solution}
+\label{trapping_water:sec:stack}
+There is another way of solving this problem that uses an additional stack. At any moment the stack will contains indexes of bars that are bounded on the left by some other bar. It means that the stack will contain bars in a decreasing order (from the bottom to the top). The idea is that we start with an empty stack $S$ and iterate thought the input array from start to end, and for each bar $b_i$:
+we check whether it is lower than the top of the stack $S_{top}$. If that is the case, the current top of the stack is higher than this element and so it means that the current top bounds the current element from the left. In this case we simply add it to the  top of the stack. If it not the case then we have a bar that is higher or equal to the top. Thus  all the bars in the stack that are smaller or equal of $i$ can trap some water because they are bound from left (by other taller elements in the stack) and to the right by $i$ itself.
+Given the stack $S=[s_0, s_1,s_2]$ where $s_0 \geq s_1 \geqs_2$ (remember they are increasing from top to bottom) we know that we can use bar $i$ and bar $s_1$ to calculate the contribution of $s_2$ to the final answer and we can use bar $i$ and bar $s_0$ to calculate the contribution of $s_1$. The contribution of each element is calculated as the rectangle of base equal to the distance between the two bounding bars and height that is equal to the minimum of the heights between the two bounding bars \textf{minus} the height of the bar we are calculating the contribution. 
+
+A possible implementation of this idea is shown in Listing \ref{list:trapping_water:stack}. Note how all the real work happens inside the \inline{while} loop and that the bar we calculate the contribution is named top while the bar on the left and right are named \inline{bar_left} and \inline{bar_right} respectively. Moreover, no matter the stack is unwounded or not the \inline{bar_right} is \textbf{added} to the stack because when controls reaches line $21$ it will be either the only bar in the stack of it will be smaller than the current top.
+
+
+\lstinputlisting[language=c++, caption={Stack based solution, $O(n)$ time and  space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:stack]{sources/trapping_water/trapping_water_solution4.cpp}
