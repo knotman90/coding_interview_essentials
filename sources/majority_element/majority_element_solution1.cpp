@@ -1,28 +1,11 @@
-int find_majority_element_linear(const std::vector<int>& nums)
+int find_majority_element_brute_force(const std::vector<int>& N)
 {
-  if (nums.size() <= 0)
-    return -1;
-
-  int el    = nums.front();
-  int count = 0;
-  for (size_t i = 0; i < nums.size(); i++)
+  const size_t threshold = N.size() / 2;
+  for (const auto x : N)
   {
-    if (nums[i] == el)
-    {
-      count++;
-    }
-    else
-    {
-      count--;
-    }
-    if (count == 0)
-    {
-      el    = nums[i];
-      count = 1;
-    }
+    const size_t countx = std::count(begin(N), end(N), x);
+    if (countx > threshold)
+      return x;
   }
-  //check that el appears > n/2 times
-  if (std::count(begin(nums), end(nums), el) > nums.size() / 2)
-    return el;
   return -1;
 }
