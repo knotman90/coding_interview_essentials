@@ -57,31 +57,51 @@ We will have a look at three different solution for this problem. We will start 
 \subsection{Brute-force}
 \label{majority_element:sec:bruteforce}
 The brute force solution is brutally simple and consist in, looping through the array, and for each element counting how many times it occurs in the input array. This approach, despite its simplicity should not be the one provided to the interviewer, as it is far from the optimum and the interviewer is certainly expecting more from us.
-Listing \ref{list:majority_element} shows a possible implementation of this idea. 
+Listing \ref{list:majority_element:bruteforce} shows a possible implementation of this idea. 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:majority_element]{sources/majority_element/majority_element_solution1.cpp}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:majority_element:bruteforce]{sources/majority_element/majority_element_solution1.cpp}
 
 
 \subsection{Hash-map approach}
 \label{majority_element:sec:hashmap}
 
-A possible implementation of this approach is shown in Listing \ref{list:majority_element}.
 The idea described in section \ref{majority_element:sec:bruteforce} can be improved by using an hash-map to store the number of occurrence of each element in the input array. There cannot be more than $n$ different numbers in the the array $N$, thus with a single pass of the input and with a linear cost in space we can calculate the number of occurrence of each element and check if any of the counters at any points gets higher than $\floor{\frac{n}{2}}$.
 
+A possible implementation of this approach is shown in Listing \ref{list:majority_element:hashmap}.
 The complexity of this approach is $O(n)$ for both space and time. In-fact, in the worst case all the element of the input array are only read and stored once.
 
-\lstinputlisting[language=c++, caption={Solution to the problem of finding the majority element in an array using hash-map.},label=list:sorting]{sources/majority_element/majority_element_solution2.cpp}
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the majority element in an array using hash-map.},label=list:majority_element:hashmap]{sources/majority_element/majority_element_solution2.cpp}
 
-\subsection{Sorting}
+\subsection{Sorting - Counting}
 \label{majority_element:sec:sorting}
-The approach described in section \ref{majority_element:sec:hashmap} is definitely faster then the quadratic brute-force but at a linear price in space. IN order not to pay the price in space but to lower the time complexity down from quadratic, we could rely on the fact that in a sort collection of elements all equal elements appear grouped together e.g. in $[1,1,2,2,3,3,3,4,4,9,9]$, all the $1$s appear at the beginning of the array, followed by all the $2$s, etc.
+The approach described in section \ref{majority_element:sec:hashmap} is definitely faster then the quadratic brute-force but at a linear price in space. In order not to pay the price in space but to lower the time complexity down from quadratic, we could rely on the fact that in a sort collection of elements all equal elements appear grouped together e.g. in $[1,1,2,2,3,3,3,4,4,9,9]$, all the $1$s appear at the beginning of the array, followed by all the $2$s, etc. We can then count the number of occurrences of each element in constant space as shown in Listing \ref{list:majority_element:sorting}. The complexity of this approach is bounded by the sorting which costs $O(nlog(n)$ time.
 
-\lstinputlisting[language=c++, caption={Solution  to the problem of finding the majority element in an array using sorting.},label=list:sorting]{sources/majority_element/majority_element_solution3.cpp}
+\lstinputlisting[language=c++, caption={Solution  to the problem of finding the majority element in an array using sorting.},label=list:majority_element:sorting]{sources/majority_element/majority_element_solution3.cpp}
 
+\subsection{Sorting - Median}
+\label{majority_element:sec:median}
+There is however, another way of taking advantage of the fact that we have a sorted collection. The key idea here is that if a majority element exists than, this element \textbf{must be the median}. After all, by definition , the median if the element that is right in the middle of the sorted collection. Since the majority element will be occupy \textbf{more} than half positions of the array, it also occupies the median position.
+All is necessary after sorting the array, is to check if the median value appear more than $\floor{\frac{n}{2}}$ times. 
+This idea is implemented in Listing \ref{list:majority_element:median} and has a complexity of $O(nlog(n)$ due to sorting.
 
-\subsection{Linear time}
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:median]{sources/majority_element/majority_element_solution4.cpp}
+
+\subsection{Boyer-Moore algorithm}
 \label{majority_element:sec:linear}
+There is however better way of solving this problem in linear time and constant space i.e. using the Boyer-Moore algorithm\cite{Boyer1991}.
 
-\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:linear]{sources/majority_element/majority_element_solution4.cpp}
+The algorithm uses two variables to maintain an candidate element $el$ of the sequence and its current count $count=0$ (initialized to $0$). It processes the elements one by one and will perform the following operations:
+\begin{itemize}
+	\item if we are processing the very first element  of the sequence or \inline{count=0}, it will set $count=1$ and $el$ to that element (this is out first candidate).
+	\item otherwise, if the element currently processed is equal to \inline{el}it increments the counter i.e. \inline{count = count+1}
+	\item if the element currently processed is different, then it decrements the counter i.e. \inline{count = count -1};
+\end{itemize}
+
+
+At the end of this process the variable \inline{el} will contain a candidate majority element. If the array contains a majority element then \inline{el} \textbf{is} the one. The algorithm correctness can be derived from the fact that the counter will be incremented more times than it will be decremented for the majority element. If we cannot assume that a majority element \textbf{always} exists then a second pass  on the array is then necessary, in order to count the number of occurrences of \inline{el} in the input array.
+
+Listing \ref{list:majority_element:moore} shows a possible implementation of the Boyer-Moore algorithm. The complexity of this approach is $O(n)$ time and $O(1)$ space because the input array is scanned twice and only two additional integer variables are used.
+
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:moore]{sources/majority_element/majority_element_solution5.cpp}
 
 
