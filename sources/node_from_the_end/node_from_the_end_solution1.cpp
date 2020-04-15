@@ -1,32 +1,33 @@
-ListNode *removeNthFromEnd(ListNode *head, int n)
+int list_length(ListNode* head)
 {
-  if (n == 0)
-    return head;
-  ListNode *s, *f, *p = nullptr;
-  s = f = head;
+  int ans = 0;
+  while (head)
+  {
+    ans++;
+    head = head->next;
+  }
+  return ans;
+}
+ListNode* remove_nth_node_from_end_bruteforce(ListNode* head, int n)
+{
+  const int length = list_length(head);
+  // we can assume it is always valid/positive
 
-  while (n)
+  ListNode *prec = nullptr, *curr = head;
+
+  int index = length - n-1;
+  while (index--)
   {
-    s = s->next;
-    n--;
-  }
-  while (s)
-  {
-    ListNode *oldf = f;
-    f              = f->next;
-    s              = s->next;
-    p              = oldf;
+    prec = curr;
+    curr = curr->next;
   }
 
-  ListNode *next = f ? f->next : nullptr;
-  if (!p)
-  {
-    head = next;
-  }
+  ListNode* next = curr->next;
+  ListNode* ans  = head;
+  if (!prec)
+    ans = next; //we are removing the first node 
   else
-  {
-    p->next = next;
-  }
+    prec->next = next;
 
-  return head;
+  return ans;
 }
