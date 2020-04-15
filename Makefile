@@ -13,6 +13,7 @@ tests:
 
 $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf: sources/$(MAIN_FILE_NAME).tex $(BUILD_DIR)
 	pdflatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
+	biber build/main.bcf
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
