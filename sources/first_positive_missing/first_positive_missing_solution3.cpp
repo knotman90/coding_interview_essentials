@@ -1,7 +1,9 @@
-int divide_pos_neg(std::vector<int> N) {
+int divide_pos_neg(std::vector<int> N)
+{
   int s = 0;
   int e = N.size() - 1;
-  while (s <= e) {
+  while (s <= e)
+  {
     while (s <= e && N[s] > 0)
       s++;
     while (s <= e && N[e] <= 0)
@@ -14,9 +16,11 @@ int divide_pos_neg(std::vector<int> N) {
   return s;
 }
 
-int first_positive_missing_constant_space(std::vector<int> N) {
+int first_positive_missing_constant_space(std::vector<int> N)
+{
   const int num_pos = divide_pos_neg(N);
-  for (int i = 0; i < num_pos; i++) {
+  for (int i = 0; i < num_pos; i++)
+  {
     const int ni = abs(N[i]);
     if (ni > 0 && ni - 1 < num_pos)
       N[ni - 1] *= -1;
