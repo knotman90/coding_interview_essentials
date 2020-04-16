@@ -1,0 +1,60 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Validate Parenthesised String}
+\label{ch:valid_parenthesis}
+
+\section{Problem statement}
+\begin{exercise}
+ Given a string $s$ containing only three types of characters:
+ \begin{enumerate}
+	 \item \textit{(}
+	 \item \textit{)}
+	 \item \textit{*}
+ \end{enumerate}
+ write a function to check whether a string is valid. A string is valid if the following  holds:
+
+  \begin{itemize}
+	\item  Any left parenthesis \textit{(} must have a corresponding  right parenthesis \textit{)}.
+    \item Any right parenthesis \textit{)}  must have a corresponding left parenthesis \textit{)}.
+    \item Left parenthesis \textit{(} must appear before the corresponding right parenthesis \textit{)}.
+    \item The character \textit{*} could be treated as a jolly, and can be modified into a single right parenthesis  \textit{)} or a single left parenthesis \textit{)} or deleted.
+ \end{itemize}  
+
+\end{exercise}
+
+
+\begin{example}
+	\hfill \
+	
+\end{example}
+
+\begin{example}
+	\hfill \
+	
+\end{example}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Is the empty string considered valid?
+	\begin{answered}
+		\textit{An empty string is also valid.}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{valid_parenthesis:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{valid_parenthesis:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:valid_parenthesis]{sources/valid_parenthesis/valid_parenthesis_solution1.cpp}
+
