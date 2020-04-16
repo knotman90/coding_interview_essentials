@@ -8,6 +8,7 @@ int list_length(ListNode* head)
   }
   return ans;
 }
+
 ListNode* remove_nth_node_from_end_bruteforce(ListNode* head, int n)
 {
   const int length = list_length(head);

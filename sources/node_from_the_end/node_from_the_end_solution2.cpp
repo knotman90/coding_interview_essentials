@@ -5,11 +5,14 @@ ListNode *remove_nth_node_from_end_two_pointers(ListNode *head, int n)
   ListNode *s, *f, *p = nullptr;
   s = f = head;
 
+  // advance s n times
   while (n)
   {
     s = s->next;
     n--;
   }
+
+  // now s is at a distance of l-n  from the tail
   while (s)
   {
     ListNode *oldf = f;
@@ -17,6 +20,7 @@ ListNode *remove_nth_node_from_end_two_pointers(ListNode *head, int n)
     s              = s->next;
     p              = oldf;
   }
+  // f points to the node l-n of the list
 
   ListNode *next = f ? f->next : nullptr;
   if (!p)
