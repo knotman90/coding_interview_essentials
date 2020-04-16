@@ -1,0 +1,1 @@
+../../sources/node_from_the_end/node_from_the_end_solution1.cpp

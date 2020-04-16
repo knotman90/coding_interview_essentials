@@ -6,15 +6,12 @@ using std::endl;
 using std::string;
 using std::swap;
 
-template <typename T> struct Node
-{
-  T val;
-  Node *next;
-  Node(T x) : val(x), next(nullptr) {}
-};
+#include "list.h"
+using Book::List::Node;
 
 #include "cycle_in_list_solution1.cpp"
 #include "cycle_in_list_solution2.cpp"
+
 
 template <typename T>
 Node<T> *create_list_from(std::vector<int> &vec, const int loop = -1)

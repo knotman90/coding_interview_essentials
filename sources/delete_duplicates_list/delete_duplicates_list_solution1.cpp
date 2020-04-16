@@ -1,5 +1,5 @@
 template <typename T>
-std::vector<T> to_vector(Node<T> *head)
+std::vector<T> list_to_vector(Node<T> *head)
 {
   std::vector<T> ans;
   for (; head; head = head->next)
@@ -9,7 +9,7 @@ std::vector<T> to_vector(Node<T> *head)
 }
 
 template <typename T>
-Node<T> *from_vector(const std::vector<T> &Vs)
+Node<T> *list_from_vector(const std::vector<T> &Vs)
 {
   Node<T> *tail = nullptr;
   Node<T> *head = nullptr;
@@ -28,9 +28,9 @@ Node<T> *from_vector(const std::vector<T> &Vs)
 template <typename T>
 Node<T> *remove_duplicates_from_linked_list_1(Node<T> *head)
 {
-  auto vec_list = to_vector<int>(head);
+  auto vec_list = list_to_vector<int>(head);
   // std::sort(std::begin(vec_list), std::end(vec_list)); //not necessary. List is sorted already
   vec_list.erase(std::unique(std::begin(vec_list), std::end(vec_list)), std::end(vec_list));
 
-  return from_vector(vec_list);
+  return list_from_vector(vec_list);
 }

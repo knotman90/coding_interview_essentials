@@ -7,12 +7,10 @@ using std::string;
 using std::swap;
 using std::vector;
 
-template <typename T> struct Node
-{
-  T val;
-  Node *next;
-  Node(T x) : val(x), next(nullptr) {}
-};
+#include "list.h"
+using Book::List::Node;
+
+
 
 #include "delete_duplicates_list_solution1.cpp"
 #include "delete_duplicates_list_solution2.cpp"
@@ -27,7 +25,7 @@ TEST(delete_duplicates_list, test_to_vector_1)
   c.next = &d;
   d.next = &e;
 
-  auto v              = to_vector(&a);
+  auto v              = Book::List::to_vector(&a);
   const auto expected = std::vector<int>({1, 2, 3, 4, 5});
   EXPECT_EQ(v, expected);
 }
@@ -40,7 +38,7 @@ TEST(delete_duplicates_list, test_to_vector_2)
   c.next = &d;
   d.next = &e;
 
-  const auto v        = to_vector(&a);
+  const auto v        = Book::List::to_vector(&a);
   const auto expected = std::vector<int>({1, 1, 1, -1, -1});
   EXPECT_EQ(v, expected);
 }
@@ -49,7 +47,7 @@ TEST(delete_duplicates_list, test_from_vector_2)
 {
   const auto input = std::vector<int>({1, 1, 1, -1, -1});
 
-  Ni *list = from_vector(input);
+  Ni *list = Book::List::from_vector(input);
   for (const auto x : input)
   {
     EXPECT_NE(nullptr, list);
@@ -63,7 +61,7 @@ TEST(delete_duplicates_list, test_from_vector_1)
 {
   const auto input = std::vector<int>({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
 
-  Ni *list = from_vector(input);
+  Ni *list = Book::List::from_vector(input);
   for (const auto x : input)
   {
     EXPECT_NE(nullptr, list);
@@ -77,7 +75,7 @@ TEST(delete_duplicates_list, test_from_vector_empty)
 {
   const auto input = std::vector<int>();
 
-  Ni *list = from_vector(input);
+  Ni *list = Book::List::from_vector(input);
   EXPECT_EQ(nullptr, list);
 }
 
@@ -85,7 +83,7 @@ TEST(delete_duplicates_list, test_remove_dupliacate_1)
 {
   const vector<int> V        = {1, 1, 2, 2, 3, 3, 3, 3, 4};
   const vector<int> expected = {1, 2, 3, 4};
-  Ni *list                   = from_vector(V);
+  Ni *list                   = Book::List::from_vector(V);
   EXPECT_NE(nullptr, list);
   Ni *list_unique_bf  = remove_duplicates_from_linked_list_1(list);
   Ni *list_unique_lin = remove_duplicates_from_linked_list_linear_space(list);
@@ -133,7 +131,7 @@ TEST(delete_duplicates_list, test_remove_duplicate_up_100)
       69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
       86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100};
 
-  Ni *list = from_vector(V);
+  Ni *list = Book::List::from_vector(V);
   EXPECT_NE(nullptr, list);
   Ni *list_unique = remove_duplicates_from_linked_list_1(list);
   Ni *list_unique_lin = remove_duplicates_from_linked_list_linear_space(list);
