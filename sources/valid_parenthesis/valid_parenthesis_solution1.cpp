@@ -9,18 +9,18 @@ bool validate_parenthesized_string_bruteforce_helper(std::string s,
   if (closed > open)
     return false;
 
-  //cout<<pos<<" "<<open<<" "<<closed<<endl;
 
   const char curr = s[pos];
   bool ans = false;
-  if (curr != '{')
+  if (curr != '{') //either } or *: add a right parenthesis
     ans = validate_parenthesized_string_bruteforce_helper(s, pos + 1, open, closed + 1);
 
-  if (curr != '}' && !ans)
+  if (curr != '}' && !ans) //either {} or *: add a left parenthesis
     ans = validate_parenthesized_string_bruteforce_helper(s, pos + 1, open + 1, closed);
 
-  if (curr == '*' && !ans)
+  if (curr == '*' && !ans) //if neither { nor } worked, then ignore this *
     ans = validate_parenthesized_string_bruteforce_helper(s, pos + 1, open, closed);
+
   return ans;
 }
 
