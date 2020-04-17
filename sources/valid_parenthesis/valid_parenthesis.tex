@@ -1,17 +1,21 @@
 %!TEX root = ../main.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
-%
+https://leetcode.com/problems/valid-parenthesis-string/
+https://leetcode.com/problems/valid-parenthesis-string/discuss/582134/C%2B%2B-2-Pointer-Approach-Explained-O(1)-Space-O(N)-Time
+https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3301/discuss/582074/C%20%20-Using-Two-Stacks
+https://leetcode.com/problems/valid-parenthesis-string/discuss/543521/Java-Count-Open-Parenthesis-O(n)-time-O(1)-space-Clean-Explain
+https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3301/discuss/582134/C++-2-Pointer-Approach-Explained-O(1)-Space-O(N)-Time
 % Difficulty:
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Validate Parenthesised String}
+\chapter{Validate Parenthesized String}
 \label{ch:valid_parenthesis}
 
 \section{Problem statement}
 \begin{exercise}
- Given a string $s$ containing only three types of characters:
+ Given a string \textit{s} containing only three types of characters:
  \begin{enumerate}
 	 \item \textit{(}
 	 \item \textit{)}
@@ -26,18 +30,17 @@
     \item The character \textit{*} could be treated as a jolly, and can be modified into a single right parenthesis  \textit{)} or a single left parenthesis \textit{)} or deleted.
  \end{itemize}  
 
+
+	\begin{example}
+		\hfill \\
+		Given the input string \textit{s="(**))"} the function returns \textbf{true} because it is possible to obtain from \textit{s} the string \textit{(())} by deleting the first \textit{*} and by turning the second one into a left parenthesis \textit{)}.
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given the input string s=\textit{"*(*)()(()"} the function returns \textbf{false} because no matter how the 	\inline{*} are arranged there is no way to obtain a well balanced string of parenthesis.
+	\end{example}
 \end{exercise}
-
-
-\begin{example}
-	\hfill \
-	
-\end{example}
-
-\begin{example}
-	\hfill \
-	
-\end{example}
 
 \section{Clarification Questions}
 
@@ -55,6 +58,13 @@
 
 \subsection{Brute-force}
 \label{valid_parenthesis:sec:bruteforce}
+
+\subsection{Dynamic Programming}
+\label{valid_parenthesis:sec:twostacks}
+
+
+\subsection{Stack based solution}
+\label{valid_parenthesis:sec:twostacks}
 
 \lstinputlisting[language=c++, caption={Sample Caption},label=list:valid_parenthesis]{sources/valid_parenthesis/valid_parenthesis_solution1.cpp}
 
