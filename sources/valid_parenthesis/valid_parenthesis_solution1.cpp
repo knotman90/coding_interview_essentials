@@ -1,5 +1,5 @@
 bool validate_parenthesized_string_bruteforce_helper(std::string s,
-                                                     const int pos,
+                                                     const size_t pos,
                                                      const int open,
                                                      const int closed)
 {

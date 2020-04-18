@@ -36,12 +36,12 @@ void generate_well_parenthesized_combinations_helper(vector<std::string>& ans,
 
   if (open > closed)
   {
-    s[pos] = '}';
+    s[pos] = ')';
     generate_well_parenthesized_combinations_helper(ans, s, pos + 1, size, open, closed + 1);
   }
   if (open < size)
   {
-    s[pos] = '{';
+    s[pos] = '(';
     generate_well_parenthesized_combinations_helper(ans, s, pos + 1, size, open + 1, closed);
   }
 }
