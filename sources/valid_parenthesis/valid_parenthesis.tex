@@ -160,4 +160,6 @@ If at any point the maximum number of open parenthesis falls under $0$ then we a
 
 When all the characters are processed, the only thing that is left to check is that $0$ is contained in the range defined by \inline{min} and \inline{max}. If it is, it means that exists a way to turn the string into a valid one, otherwise it is impossible (imagine the case where \inline{min>0} meaning that no matter what we do, the minimum amount of open parenthesis we end up with is still more than one meaning that there is at least one unmatched open parenthesis.
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:valid_parenthesis]{sources/valid_parenthesis/valid_parenthesis_solution3.cpp}
+Listing \ref{list:valid_parenthesis:linear} shows a possible implementation of this idea. Note how every decrement of \inline{min} is guarded by a check, so to avoid that it goes below $0$.
+
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:linear]{sources/valid_parenthesis/valid_parenthesis_solution3.cpp}
