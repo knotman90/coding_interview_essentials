@@ -1,10 +1,11 @@
 using cell = std::pair<int, int>;
-void visit(const cell& c, vector<vector<char>>& grid)
+
+void visit(const cell& c, std::vector<std::vector<bool>>& grid)
 {
   const int n = grid.size();
   const int m = grid[0].size();
 
-  stack<pair<int, int>> S;
+  std::stack<cell> S;
   S.push(c);
   while (!S.empty())
   {
@@ -12,23 +13,22 @@ void visit(const cell& c, vector<vector<char>>& grid)
     S.pop();
 
     const auto [x, y] = p;
-    grid[x][y]        = '0'; //mark the original map
+    grid[x][y]        = false;  // mark the original map
 
-    constexpr array<cell, 4> cross = { cell{ -1, 0 }, cell{ 1, 0 }, cell{ 0, -1 }, cell{ 0, 1 } };
+    constexpr std::array<cell, 4> cross = {cell{-1, 0}, cell{1, 0}, cell{0, -1}, cell{0, 1}};
     for (const auto& inc : cross)
     {
       const auto nx = x + inc.first;
       const auto ny = y + inc.second;
-      if (nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == '1')
+      if (nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny])
       {
-        S.push({ nx, ny });
+        S.push({nx, ny});
       }
-    }
-  }
+    }  // for
+  }    // while
 }
 
-public:
-int count_island_iterative_DFS_improved(vector<vector<char>>& grid)
+int count_island_iterative_DFS_improved(std::vector<std::vector<bool>>& grid)
 {
   if (grid.size() == 0 || grid[0].size() == 0)
     return 0;
@@ -41,14 +41,12 @@ int count_island_iterative_DFS_improved(vector<vector<char>>& grid)
   {
     for (int j = 0; j < m; j++)
     {
-     //visited cells are turned into water during the visit
-      if (grid[i][j] == '0')
+      // visited cells are turned into water during the visit
+      if (!grid[i][j])
         continue;
       ans++;
-      visit({ i, j }, grid);
+      visit({i, j}, grid);
     }
   }
   return ans;
 }
-}
-;
