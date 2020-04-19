@@ -1,0 +1,165 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%https://leetcode.com/problems/valid-parenthesis-string/
+%https://leetcode.com/problems/valid-parenthesis-string/discuss/582134/C%2B%2B-2-Pointer-Approach-Explained-O(1)-Space-O(N)-Time
+%https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3301/discuss/582074/C%20%20-Using-Two-Stacks
+%https://leetcode.com/problems/valid-parenthesis-string/discuss/543521/Java-Count-Open-Parenthesis-O(n)-time-O(1)-space-Clean-Explain
+%https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3301/discuss/582134/C++-2-Pointer-Approach-Explained-O(1)-Space-O(N)-Time
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Validate Parenthesized String}
+\label{ch:valid_parenthesis}
+
+\section{Problem statement}
+\begin{exercise}
+ Given a string \textit{s} containing only three types of characters:
+ \begin{enumerate}
+	 \item \textit{(}
+	 \item \textit{)}
+	 \item \textit{*}
+ \end{enumerate}
+ write a function to check whether a string is valid. A string is valid if the following  holds:
+
+  \begin{itemize}
+	\item  Any left parenthesis \textit{(} must have a corresponding  right parenthesis \textit{)}.
+    \item Any right parenthesis \textit{)}  must have a corresponding left parenthesis \textit{)}.
+    \item Left parenthesis \textit{(} must appear before the corresponding right parenthesis \textit{)}.
+    \item The character \textit{*} could be treated as a jolly, and can be modified into a single right parenthesis  \textit{)} or a single left parenthesis \textit{)} or deleted.
+ \end{itemize}  
+
+
+	\begin{example}
+		\hfill \\
+		Given the input string \textit{s="(**))"} the function returns \textbf{true} because it is possible to obtain from \textit{s} the string \textit{(())} by deleting the first \textit{*} and by turning the second one into a left parenthesis \textit{)}.
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given the input string s=\textit{"*(*)()(()"} the function returns \textbf{false} because no matter how the 	\inline{*} are arranged there is no way to obtain a well balanced string of parenthesis.
+	\end{example}
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Is the empty string considered valid?
+	\begin{answered}
+		\textit{An empty string is also valid.}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{valid_parenthesis:sec:discussion}
+This is an extremely interesting and quite challenging problem that can be solved in different ways. We will start by having a look at the brute-force solution in Section \ref{valid_parenthesis:sec:bruteforce} will will allow us to develop a dynamic programming solution that works much better. Section \ref{valid_parenthesis:sec:linear} presents a totally different solution that improves dramatically the time and space complexity compared to the previous approaches. Section \ref{valid_parenthesis:sec:twostacks} presents a linear time and space clever solution based on stacks.
+
+We will highly advice to use the solution shown in Section \ref{valid_parenthesis:sec:linear} as a reference and use that during an actual interview.
+
+\subsection{Brute-force}
+\label{valid_parenthesis:sec:bruteforce}
+If the input string does not contains  wild-cards, this problem is quite trivial and becomes easily solvable by using a stack. When wild-cards are present things can get more complicated because now for each of them there are three options. In the brute-force approach we will try all possible options for all wild-cards. 
+The idea is that the input string $s$ is traversed from left to right. As we traverse the string we will keep track of how many open \inline{open} and closed \inline{closed} parenthesis we have encountered. We do this because if at any moment we find that the number of closed parenthesis is greater than the number of open ones, the string is invalid (it violates the constraint that any left parenthesis should appear before any right one). Depending on the character $c$ we are processing:
+\begin{enumerate}
+	\item If $c$is a \textit{(} then we increase the number of open parenthesis \inline{open++}found so far and we recursively check the rest of the string. 
+	\item Similarly, if $c$ is a \textit{)} then we increase the number of closed parenthesis and proceed checking the rest of the string. 
+	\item If the current character is a \textit{*} then we have the option to:
+	\begin{itemize}
+		\item consider it as an open parenthesis
+		\item  consider it as a closed parenthesis
+		\item ignore it
+	\end{itemize}
+\end{enumerate}
+
+The recursion terminates when either:
+ \begin{itemize}
+	\item the number of closed parenthesis is larger than the number of open ones
+	\item  we have processed the whole string. In this case we return true only if the number of open parenthesis so far is equal to the closed ones (necessary condition for a well balanced string).
+\end{itemize}
+
+
+Listing \ref{list:valid_parenthesis:bruteforce} shows a possible recursive implementation of the idea above. The complexity of this approach is exponential in the number of \textit{*}, i.e. $O(3^{n})$, where $n$ is the length of $s$.
+
+\lstinputlisting[language=c++, caption={Brute-force, exponential time solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:bruteforce]{sources/valid_parenthesis/valid_parenthesis_solution1.cpp}
+
+\subsection{Dynamic Programming}
+\label{valid_parenthesis:sec:dp}
+Another way of solving this problem is to still try all possibilities like in the brute-force solution, but doing it in a smart way, making sure no work is done more than once. In a string of length $n$ there are $O(n^2)$ possible substring. 
+Given a substring starting at $i$ and ending at $j$, from now on identified by $s(i,j)$ we can solve this problem by processing one character $c$ at the time. A substring $s(i,j)$ is valid when
+\begin{itemize}
+	\item if $c$ is an \textit{*} and $s(i+1,j)$ is valid. We try to ignore the character $c$.
+	\item if $c$ is either \textit{*} or \textit{(}, then we search for a character $k$ in $s(i+1,k)$ s.t. it can be turn into a closing parenthesis. If $k$ exists (in case multiple $k$ exists, then we try all of them) then, $s(i,j)$ is valid if $s(i+1,k-1)$ and $s(k+1,j)$ are valid. Basically what we do here is to match an open parenthesis with a closing one that appears further in the range. Remember that each open parenthesis must be paired up with a closing one.
+	\item if $c$ \textit{)} we return false because we have in this case an unmatched closing parenthesis.
+\end{itemize}
+The result for a substring $s(i,j)$ is saved in a map, and when the algorithm asks for the validation of the same substring again, the value returned in the map is returned instead of doing the computation again. This technique is called memoization, and allows us to avoid the re-computation of the same subproblem over and over again. The approach described in this section can be implemented as shown in Listing \ref{list:valid_parenthesis:dp} and it has a time complexity of $O(n^3)$. There are $O(n^2)$ possible substrings and for each of them a work proportional to $n$ is performed. The space complexity is bound by the amount of substrings that we can potentially store in the Hash-set i.e. $O(n^2)$.
+
+Note that this solution is nothing else than another way of solving this problem by brute-force. In-fact a pure brute-force solution can be obtained by just removing the DP variable and not storing the result of the validation for any intermediate substring.  This is very common in many DP solution where the brute-force approach can be easily turned into a faster DP by simply remembering the result of intermediate subproblems (in  this case the substring of the input string $s$). 
+
+The DP solution is definitely a better solution than the brute-force but it is still far from the optimal. In the next section we will investigate a much faster solution that has the additional benefit of being also much shorter in length and therefore less error prone than the ones presented so far.
+
+\lstinputlisting[language=c++, caption={Dynamic programming solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:dp]{sources/valid_parenthesis/valid_parenthesis_solution2.cpp}
+
+Also note that the structure \inline{pair_hash} is necessary so that the \inline{std::unordered_map} knows how to  correctly calculate a hash value for  \inline{std::pair}s. 
+
+\subsection{Greedy - Linear time}
+\label{valid_parenthesis:sec:linear}
+The two previous approaches do much more than the problem asks for. They not only are able to determine whether the input string is valid or not, but they actually also calculate one. They solve the problem by manufacturing a valid string by trying out all possibilities until either one or none of them is good. What if we can come up with a way of determining whether the input string can be turned into a good one without having to actually come up with a specific valid string obtainable from the input? This is the idea behind the solution presented in this section.
+
+The main idea  is that for a valid string it has to be true that the balance between open $o$ and closed $c$ parenthesis is perfect i.e. $o-c=0$ has to hold. $o-c=0$ represents the number of open unmatched open parenthesis. Because the \fbox{*} can be either a \fbox{(} or a \fbox{)} we cannot simply loop through the string and count the number of open and closed parenthesis. What we can do is to store all possible values \textbf{for} $o-c$ parenthesis that can be obtained. As we will see this values change in a fairly predictably way depending on what character we process.
+For instance given the input string \fbox{s=(*()*} when processing the $i^{th}$ character, the number of $c-o$ possible values $P$ can be:
+\begin{enumerate}
+	\item $P=\{1\}$ 
+	\item $P=\{0,1,2\}$ because considering only the first two character of $s$ \fbox{(*} we can obtain 
+	\begin{itemize}
+		\item  \fbox{((} by turning the \fbox{*} into a \fbox{(}.
+		\item \fbox{(} by deleting the \fbox{*}.
+		\item \fbox{()} by turning the \fbox{*} into a \fbox{)}.
+	\end{itemize}
+	\item $P=\{1,2,3\}$ because considering only the first three character of $s$ \fbox{(*(} we can obtain
+	\begin{itemize}
+		\item \fbox{(((} by turning the \fbox{*} into a \fbox{(}
+		\item \fbox{(\aspace(} by deleting the \fbox{*}.
+		\item \fbox{(((} by turning the \fbox{*} into a \fbox{(}
+	\end{itemize}
+	\item $P=\{0,1,2\}$ because considering only the first four character of $s$ \fbox{(*()} we can obtain 
+	\begin{itemize}
+		\item \fbox{()()} by turning the \fbox{*} into a \fbox{)}
+		\item \fbox{(\aspace()} by deleting the \fbox{*}
+		\item \fbox{((()} by turning the \fbox{*} into a \fbox{(}.
+	\end{itemize}
+	\item $P=\{-1,0,1,2,3\}$ because considering only the first four character of $s$ \fbox{(*()*} we can obtain 
+	\begin{itemize}
+		\item \fbox{()()\aspace} by turning the first \fbox{*} into a \fbox{)} and deleting the second one.
+		\item \fbox{(\aspace()\aspace} by deleting both the \fbox{*}
+		\item \fbox{((()(} by turning both the \fbox{*} into a \fbox{(}.
+		\item finally we can obtain $-1$ with this string \fbox{((()(} by turning both the \fbox{*} into a \fbox{)}.
+	\end{itemize}
+\end{enumerate}
+Note that values in the list $P$ can be obtained with different combinations of substitutions and that $P$ is always made of contiguous element. This last piece of information is important because it allows us to describe $P$ by only using its maximum and minimum value. We are interested in seeing whether at the end of the process we can obtain a value of $0$ meaning that the string is balanced. Note that if the maximum value at any point goes under $0$ it means that we reached a place where we have an excess of closed parenthesis that we cannot fix using all the asterics we encountered so far. For instance consider the string \fbox{s="(*)))"}. When processing the element number the max and min values for the difference between the open and closed parenthesis will be:
+\begin{enumerate}
+	\item $(1,1)$
+	\item $(0,2)$
+	\item $(-1,1)$
+	\item $(-2,0)$ 
+	\item $(-2,-1)$ 
+\end{enumerate}
+When we reach the \nth{6} character the maximum number of open parenthesis we can obtain in the best case is $-1$, meaning that we are short one for a balanced string. This mean that the string, as it is is invalid because there is an excess of closed parenthesis. This is a violation of the rule stating that every closed parenthesis must have a proceeding open one.
+
+We can use the idea described above to derive an algorithm  that works as follows:
+Let \inline{min}, \inline{max} respectively be the smallest and largest possible number of open left brackets after processing the $i^{th}$ character in the string $s$.
+
+If we encounter:
+\begin{itemize}
+	\item a left parenthesis \fbox{(}, then we can increment both \inline{min} and \inline{max}.
+	\item similarly, a right parenthesis \fbox{)}, then we can decrement both \inline{min} and \inline{max}.
+	\item an asterix \fbox{*} we can choose to either consider this as an open parenthesis (increasing the max number of obtainable open ones), delete it (leaving the balance unvaried) or convert it into a closed parenthesis (reducing \inline{min} )
+\end{itemize}
+If at any point the maximum number of open parenthesis falls under $0$ then we are forced to consider the string invalid, for the reason we pointed out earlier (at least an unmatched closed parenthesis). Similarly we need to make sure that \inline{min} does not go below zero, because we do not need to consider strings which have this count of open parenthesis as they would invalid for the same reason as above.
+
+When all the characters are processed, the only thing that is left to check is that $0$ is contained in the range defined by \inline{min} and \inline{max}. If it is, it means that exists a way to turn the string into a valid one, otherwise it is impossible (imagine the case where \inline{min>0} meaning that no matter what we do, the minimum amount of open parenthesis we end up with is still more than one meaning that there is at least one unmatched open parenthesis.
+
+Listing \ref{list:valid_parenthesis:linear} shows a possible implementation of this idea. Note how every decrement of \inline{min} is guarded by a check, so to avoid that it goes below $0$.
+
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:linear]{sources/valid_parenthesis/valid_parenthesis_solution3.cpp}
