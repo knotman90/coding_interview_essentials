@@ -79,7 +79,12 @@ The complexity of this implementation if $O(n\times m)$ for time and space becau
 
 \lstinputlisting[language=c++, caption={Iterative DFS solution to the problem of counting the number of islands in a map.},label=list:number_islands:iterative]{sources/number_islands/number_islands_solution1.cpp}
 
-Do we really need to mark the cell as visited by using another different grid? After all, what we need to do is to avoid visiting cells that have been already visited. We can do it by just turning the value in the grid for that cell from land to water and that cell will never be considered part of an island. If we do that, the space complexity does not change because we still use space to store the cells to be visited in the stack, but the amount of space used will be lower in practice. 
+Do we really need to mark the cell as visited by using another different grid? After all, what we need to do is to avoid visiting cells that have been already visited. We can do it by just turning the value in the grid for that cell from land to water and that cell will never be considered part of an island in the future. If we do that, the space complexity does not change because we still use space to store the cells to be visited in the stack, but the amount of space used will be lower in practice and the overall solution will look cleaner and simpler which is always a plus during an interview. 
 
-\lstinputlisting[language=c++, caption={Alternative iterative DFS solution, without dedicated space for marking visited cells,  to the problem of counting the number of islands in a map.},label=list:number_islands:iterative]{sources/number_islands/number_islands_solution2.cpp}
+\lstinputlisting[language=c++, caption={Alternative iterative DFS solution, without dedicated space for marking visited cells,  to the problem of counting the number of islands in a map.},label=list:number_islands:iterative_1]{sources/number_islands/number_islands_solution2.cpp}
 
+
+\subsubsection{DFS recursive}
+The same idea can also be implemented recursively. In our opinion doing that recursively makes the overall implementation more expressive, shorter and easier to reason about as well as to explain. We highly suggest to use this approach when dealing with problem similar to this. Listing \ref{list:number_islands:recursive} shows a possible implementation of a recursive DFS solution for this problem. Note that the recursion only happens during the DFS itself and that the driver function \inline{count_island_recursive_DFS} is basically the same as the ones we showed in the previous two solutions \ref{list:number_islands:iterative} and \ref{list:number_islands:iterative_1}.
+
+\lstinputlisting[language=c++, caption={Recursive DFS solution, to the problem of counting the number of islands in a map.},label=list:number_islands:recursive]{sources/number_islands/number_islands_solution3.cpp}
