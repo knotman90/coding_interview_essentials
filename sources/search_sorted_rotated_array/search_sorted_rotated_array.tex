@@ -1,0 +1,66 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Search in sorted and rotated array}
+\label{ch:search_sorted_rotated_array}
+\section*{Introduction}
+The problem presented in this chapter is considered one of the classic among interview questions as has been asked in countless interviews. It can be considered an evolution of the problem of finding the minimum element in a sorted and rotated array which was covered in chapter \ref{ch:min_rotated_array} at page \pageref{ch:min_rotated_array}. The two problems are so linked together that in-fact, it is possible to solve this problem by using the other. 
+
+\section{Problem statement}
+\begin{exercise}
+Write a function that given an ascending sorted array $A$ with no duplicates and rotated around a pivot, and an integer $t$, returns:
+\begin{itemize}
+	\item if $t$ does not exists in $A$ it returns $-1$ 
+	\item otherwise the index of $A$ where $t$ appears.
+\end{itemize}
+
+
+	\begin{example}
+		\hfill \\
+		Given $A=\{3,4,5,6,1,2\}$ and $t=5$ the function returns $2$.
+		
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given $A=\{3,4,5,6,1,2\}$ and $t=7$ the function returns $-1$.
+		
+	\end{example}
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Are all the elements unique? 
+	\begin{answered}
+		\textit{Yes, you can assume all the elements are unique}
+	\end{answered}
+	\item Can the input array be empty?
+	\begin{answered}
+		\textit{No, you might assume the array contains at least one element.}
+	\end{answered}
+\end{QandA}
+
+
+\section{Discussion}
+\label{search_sorted_rotated_array:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{search_sorted_rotated_array:sec:bruteforce}
+As for the problem of finding the minimum in a sorted and rotated array (Chapter \ref{ch:min_rotated_array}) the brute-force solution is trivial and consist of simply running a linear search in the entire array as shown in Listing \ref{list:search_sorted_rotated_array:bruteforce}.
+Not surprisingly, the complexity of this implementation if linear in time and constant in space.
+
+\lstinputlisting[language=c++, caption={Brute force solution (linear search) to the problem of finding an element in a sorted and potentially rotated array.},label=list:search_sorted_rotated_array:bruteforce]{sources/search_sorted_rotated_array/search_sorted_rotated_array_solution1.cpp}
+
+\subsection{Logarithmic time solution}
+\label{search_sorted_rotated_array:sec:log}
+The solution presented in Section \ref{search_sorted_rotated_array:sec:bruteforce} is far from being optimal because we can solve this problem in logarithmic time and constant space (as we did for the problem in Chapter \ref{ch:min_rotated_array})
+
+\lstinputlisting[language=c++, caption={Log time solution (using binary search) to the problem of finding an element in a sorted and rotated array.},label=list:search_sorted_rotated_array:log]{sources/search_sorted_rotated_array/search_sorted_rotated_array_solution2.cpp}
+
