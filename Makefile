@@ -2,7 +2,7 @@ TEXFLAGS = -bibtex -pdf -interaction=nonstopmode -use-make
 BUILD_DIR = build
 MAIN_FILE_NAME = main
 
-.PHONY: all clean $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf
+.PHONY: all clean pdf $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf
 
 all: $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf tests
 
@@ -17,6 +17,8 @@ $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf: sources/$(MAIN_FILE_NAME).tex $(BUILD_DIR)
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
+
+full: clean pdf pdf
 
 clean:
 	(cd build && $(MAKE) clean) && cd build && rm -f *.nlo *.lot *.bcf *.acn *.glsdefs *.aux *.log *.lof \
