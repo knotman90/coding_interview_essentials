@@ -11,13 +11,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
-   version="1.1"
-   id="svg8"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"
    sodipodi:docname="linked_list.svg"
-   inkscape:version="0.92.4 5da689c313, 2019-01-14">
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm">
   <defs
      id="defs2">
     <linearGradient
@@ -396,14 +396,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="299.35078"
-     inkscape:cy="64.352604"
+     inkscape:zoom="0.5"
+     inkscape:cx="-577.74927"
+     inkscape:cy="-470.08718"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2560"
-     inkscape:window-height="1080"
+     inkscape:window-width="2550"
+     inkscape:window-height="1039"
      inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -1909,7 +1909,7 @@
        sodipodi:nodetypes="cc" />
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 62.062562,42.523253 -0.02938,0.25151"
+       d="m 62.062566,42.523254 -0.02938,0.251509"
        id="path24505"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
@@ -2242,7 +2242,7 @@
            height="55.507881"
            x="70.003571"
            y="970.4917" /></flowRegion><flowPara
-         id="flowPara1671"></flowPara></flowRoot>    <rect
+         id="flowPara1671" /></flowRoot>    <rect
        style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect819-3-92"
        width="6.6234145"
@@ -3104,7 +3104,7 @@
            height="255.5"
            x="273"
            y="530.01965" /></flowRegion><flowPara
-         id="flowPara3024"></flowPara></flowRoot>    <rect
+         id="flowPara3024" /></flowRoot>    <rect
        style="opacity:1;vector-effect:none;fill:#c00000;fill-opacity:0.39215686;fill-rule:evenodd;stroke:#000000;stroke-width:0.16558534;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect819-3-92-88"
        width="6.6234145"
@@ -4392,5 +4392,211 @@
        inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/DPLR.png"
        inkscape:export-xdpi="301.52478"
        inkscape:export-ydpi="301.52478" />
+    <path
+       d="M 304.58035,-1.4967094 V 295.50328 M 307.22619,-1.4967094 V 295.50328 M 309.87202,-1.4967094 V 295.50328 M 312.51785,-1.4967094 V 295.50328 M 315.16369,-1.4967094 V 295.50328 M 317.80952,-1.4967094 V 295.50328 M 320.45535,-1.4967094 V 295.50328 M 323.10119,-1.4967094 V 295.50328 M 325.74702,-1.4967094 V 295.50328 M 328.39285,-1.4967094 V 295.50328 M 331.03869,-1.4967094 V 295.50328 M 333.68452,-1.4967094 V 295.50328 M 336.33035,-1.4967094 V 295.50328 M 338.97619,-1.4967094 V 295.50328 M 341.62202,-1.4967094 V 295.50328 M 344.26785,-1.4967094 V 295.50328 M 346.91369,-1.4967094 V 295.50328 M 349.55952,-1.4967094 V 295.50328 M 352.20535,-1.4967094 V 295.50328 M 354.85119,-1.4967094 V 295.50328 M 357.49702,-1.4967094 V 295.50328 M 360.14285,-1.4967094 V 295.50328 M 362.78869,-1.4967094 V 295.50328 M 365.43452,-1.4967094 V 295.50328 M 368.08035,-1.4967094 V 295.50328 M 370.72619,-1.4967094 V 295.50328 M 373.37202,-1.4967094 V 295.50328 M 376.01785,-1.4967094 V 295.50328 M 378.66369,-1.4967094 V 295.50328 M 381.30952,-1.4967094 V 295.50328 M 383.95535,-1.4967094 V 295.50328 M 386.60118,-1.4967094 V 295.50328 M 389.24702,-1.4967094 V 295.50328 M 391.89285,-1.4967094 V 295.50328 M 394.53868,-1.4967094 V 295.50328 M 397.18452,-1.4967094 V 295.50328 M 399.83035,-1.4967094 V 295.50328 M 402.47618,-1.4967094 V 295.50328 M 405.12201,-1.4967094 V 295.50328 M 407.76785,-1.4967094 V 295.50328 M 410.41368,-1.4967094 V 295.50328 M 413.05951,-1.4967094 V 295.50328 M 415.70535,-1.4967094 V 295.50328 M 418.35118,-1.4967094 V 295.50328 M 420.99701,-1.4967094 V 295.50328 M 423.64285,-1.4967094 V 295.50328 M 426.28868,-1.4967094 V 295.50328 M 428.93451,-1.4967094 V 295.50328 M 431.58035,-1.4967094 V 295.50328 M 434.22618,-1.4967094 V 295.50328 M 436.87201,-1.4967094 V 295.50328 M 439.51785,-1.4967094 V 295.50328 M 442.16368,-1.4967094 V 295.50328 M 444.80951,-1.4967094 V 295.50328 M 447.45535,-1.4967094 V 295.50328 M 450.10118,-1.4967094 V 295.50328 M 452.74701,-1.4967094 V 295.50328 M 455.39285,-1.4967094 V 295.50328 M 458.03868,-1.4967094 V 295.50328 M 460.68451,-1.4967094 V 295.50328 M 463.33035,-1.4967094 V 295.50328 M 465.97618,-1.4967094 V 295.50328 M 468.62201,-1.4967094 V 295.50328 M 471.26785,-1.4967094 V 295.50328 M 473.91368,-1.4967094 V 295.50328 M 476.55951,-1.4967094 V 295.50328 M 479.20535,-1.4967094 V 295.50328 M 481.85118,-1.4967094 V 295.50328 M 484.49701,-1.4967094 V 295.50328 M 487.14285,-1.4967094 V 295.50328 M 489.78868,-1.4967094 V 295.50328 M 492.43451,-1.4967094 V 295.50328 M 495.08035,-1.4967094 V 295.50328 M 497.72618,-1.4967094 V 295.50328 M 500.37201,-1.4967094 V 295.50328 M 503.01785,-1.4967094 V 295.50328 M 505.66368,-1.4967094 V 295.50328 M 508.30951,-1.4967094 V 295.50328 M 510.95535,-1.4967094 V 295.50328 M 513.60118,-1.4967094 V 295.50328 M 304.58035,-1.4967094 h 210 m -210,2.6458333 h 210 m -210,2.6458332 h 210 m -210,2.6458333 h 210 m -210,2.6458332 h 210 m -210,2.6458334 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645834 h 210 m -210,2.645833 h 210 m -210,2.645833 h 210 m -210,2.645829 h 210 m -210,2.645839 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210 m -210,2.64583 h 210 m -210,2.64583 h 210 m -210,2.64584 h 210"
+       style="fill:none;stroke:#000000;stroke-width:0.18520799px"
+       id="path2503"
+       inkscape:connector-curvature="0" />
+    <path
+       d="M 15.239413,336.5228 V 633.52279 M 41.697746,336.5228 V 633.52279 M 68.156078,336.5228 V 633.52279 M 94.614411,336.5228 V 633.52279 M 121.07274,336.5228 V 633.52279 M 147.53107,336.5228 V 633.52279 M 173.98941,336.5228 V 633.52279 M 200.44774,336.5228 V 633.52279 M 15.239413,336.5228 H 225.23941 M 15.239413,362.98113 H 225.23941 M 15.239413,389.43946 H 225.23941 M 15.239413,415.89779 H 225.23941 M 15.239413,442.35613 H 225.23941 M 15.239413,468.81446 H 225.23941 M 15.239413,495.2728 H 225.23941 M 15.239413,521.73113 H 225.23941 M 15.239413,548.18946 H 225.23941 M 15.239413,574.64779 H 225.23941 M 15.239413,601.10613 H 225.23941 M 15.239413,627.56446 H 225.23941"
+       style="fill:none;stroke:#000000;stroke-width:0.18520799px"
+       id="path2511"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#9cd3ff;fill-opacity:0.50840334;fill-rule:nonzero;stroke:none;stroke-width:5.58429098;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.39215686"
+       id="rect819-3-6-3-6-8-3-0-7"
+       width="185.09914"
+       height="184.77173"
+       x="15.239413"
+       y="336.5228"
+       inkscape:export-xdpi="301.52478"
+       inkscape:export-ydpi="301.52478"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example2.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#006b00;fill-opacity:0.58403367;fill-rule:evenodd;stroke:none;stroke-width:0.6586501;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56"
+       width="26.346006"
+       height="26.346008"
+       x="15.239413"
+       y="336.5228"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#006b00;fill-opacity:0.58403367;fill-rule:evenodd;stroke:none;stroke-width:0.65865016;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9"
+       width="26.346006"
+       height="26.346008"
+       x="41.697746"
+       y="336.5228"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#006b00;fill-opacity:0.58403367;fill-rule:evenodd;stroke:none;stroke-width:0.65865022;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-1"
+       width="26.346006"
+       height="26.346008"
+       x="68.043755"
+       y="336.5228"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#006b00;fill-opacity:0.58403367;fill-rule:evenodd;stroke:none;stroke-width:0.65865022;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2"
+       width="26.346006"
+       height="26.346008"
+       x="41.697746"
+       y="362.8688"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#006b00;fill-opacity:0.58403367;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7"
+       width="26.346006"
+       height="26.346008"
+       x="41.697746"
+       y="389.21481"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#006b00;fill-opacity:0.58403367;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0"
+       width="26.346006"
+       height="26.346008"
+       x="68.043755"
+       y="389.21481"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#860000;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9"
+       width="26.346006"
+       height="26.346008"
+       x="68.043755"
+       y="415.56082"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00008e;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-3"
+       width="26.346006"
+       height="26.346008"
+       x="120.96956"
+       y="389.345"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00008e;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-6"
+       width="26.346006"
+       height="26.346008"
+       x="147.31557"
+       y="389.345"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00008e;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-0"
+       width="26.346006"
+       height="26.346008"
+       x="120.96956"
+       y="415.69101"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png"
+       inkscape:transform-center-x="-15.902537"
+       inkscape:transform-center-y="-15.71544" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#00008e;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-62"
+       width="26.346006"
+       height="26.346008"
+       x="147.31557"
+       y="415.69101"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#860000;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-62-6"
+       width="26.346006"
+       height="26.346008"
+       x="41.643978"
+       y="468.67059"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#860000;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-62-1"
+       width="26.346006"
+       height="26.346008"
+       x="67.989983"
+       y="468.67059"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#860000;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-62-8"
+       width="26.346006"
+       height="26.346008"
+       x="41.643978"
+       y="442.32458"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#860000;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-62-7"
+       width="26.346006"
+       height="26.346008"
+       x="94.335991"
+       y="495.0166"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#860000;fill-opacity:0.58403361;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-62-9"
+       width="26.346006"
+       height="26.346008"
+       x="67.989983"
+       y="495.0166"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#000000;fill-opacity:0.58403362;fill-rule:evenodd;stroke:none;stroke-width:0.65865028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect819-3-6-5-9-0-6-56-9-2-7-0-9-62-2"
+       width="26.346006"
+       height="26.346008"
+       x="147.53616"
+       y="468.29642"
+       inkscape:export-xdpi="294.7814"
+       inkscape:export-ydpi="294.7814"
+       inkscape:export-filename="/home/knotman/git/algorithm_articles/sources/trapping_water/images/example1.png" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.97899157;stroke:none;stroke-width:0.25593805;stroke-opacity:0"
+       id="rect2801"
+       width="35.403267"
+       height="318.55835"
+       x="200.60507"
+       y="318.96042" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.97899158;stroke:none;stroke-width:0.37771717;stroke-opacity:0"
+       id="rect2801-0"
+       width="201.15282"
+       height="122.11528"
+       x="8.8894129"
+       y="521.73114" />
   </g>
 </svg>
