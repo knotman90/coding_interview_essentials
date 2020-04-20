@@ -38,6 +38,9 @@
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
 
+
+\usepackage{subcaption}
+\usepackage{graphicx}
 %----------------------------------------------------------------------------------------
 %	FONTS
 %----------------------------------------------------------------------------------------
@@ -586,3 +589,13 @@ addtohook={%
 \usepackage[super]{nth}
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 \newcommand{\inline}[1]{\ \lstinline[columns=fixed]{#1}}
+
+%explicit space
+\usepackage{fancyvrb}
+\fvset{showspaces=true}
+\SaveVerb{verbspace}! !
+\newcommand{\aspace}{\UseVerb{verbspace}}%
+
+
+\usepackage{framed}
+\newcommand*{\mybox}[1]{\framebox{#1}}

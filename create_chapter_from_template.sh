@@ -106,6 +106,9 @@ using std::string;
 using std::swap;
 using std::cout;
 using std::endl;
+using std::begin;
+using std::end;
+using std::vector;
 
 #include \"${NAME}_solution1.cpp\"
 #include \"${NAME}_solution2.cpp\"

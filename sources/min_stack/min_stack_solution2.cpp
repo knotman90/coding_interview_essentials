@@ -2,7 +2,7 @@ template <class T>
 class min_stack_two_stacks
 {
  public:
-  void push(T &&x)
+  void push(const T&x)
   {
     if (x <= getMin() || minimums.size() == 0)
       minimums.push(x);
@@ -32,7 +32,7 @@ class min_stack_two_stacks
  protected:
   void guard_empty_stack()
   {
-    if (elements.size() < 0)
+    if (elements.size() <= 0)
       throw std::logic_error("Invalid operation on an empty stack");
   }
 
