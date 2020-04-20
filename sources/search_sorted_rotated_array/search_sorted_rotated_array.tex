@@ -81,5 +81,8 @@ This algorithm can be implemented as shown in Listing \ref{list:search_sorted_ro
 
 Also note that the function \inline{midpoint} is not implemented as \inline{(l+r)/2} because that might cause overflow during the computation of \inline{(l+r)} even if the final result fits in a \inline{int}. Specifically, it fails if the sum of low and high is greater than the maximum positive \inline{int} value ($2^{31} - 1$ in most C++ implementation). The sum overflows to a negative value, and the value stays negative when divided by two. In C++ this causes an array index out of bounds with unpredictable results. In Java, it throws \inline{ArrayIndexOutOfBoundsException}.
 
+Finally, the function \inline{binary_search} implements a simple and canonical recursive binary search. 
+The complexity of the overall implementation is $O(log(n))$ in time and $O(1)$ in space.
+
 \lstinputlisting[language=c++, caption={Log time solution (using binary search) to the problem of finding an element in a sorted and rotated array.},label=list:search_sorted_rotated_array:log]{sources/search_sorted_rotated_array/search_sorted_rotated_array_solution2.cpp}
 
