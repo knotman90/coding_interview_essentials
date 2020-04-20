@@ -1,15 +1,12 @@
 using Range = std::pair<int, int>;
-inline int midpoint(const int l, const int r)
+inline unsigned midpoint(const unsigned l, const unsigned r)
 {
   return l + (r - l) / 2;
 }
 
 inline int positive_modulo(const int n, const int m)
 {
-  int ans = n;
-  while (ans < 0)
-    ans += m;
-  return ans % m;
+  return (n + m) % m;
 }
 
 int find_idx_min(const vector<int>& A)
@@ -37,13 +34,11 @@ int find_idx_min(const vector<int>& A)
   return l;
 }
 
-int binary_search(const vector<int>& A, const Range& range, const int t)
+int binary_search(const std::vector<int>& A, const Range& range, const int t)
 {
   auto [l, r] = range;
   if (l > r)
     return -1;
-  if (l == r)
-    return A[l] == t ? l : -1;
 
   const int mid = midpoint(l, r);
   if (A[mid] == t)
@@ -54,7 +49,7 @@ int binary_search(const vector<int>& A, const Range& range, const int t)
   else
     r = mid - 1;
 
-  return binary_search(A, { l, r }, t);
+  return binary_search(A, {l, r}, t);
 }
 
 int search_sorted_rotated_array_log(const vector<int>& A, int t)

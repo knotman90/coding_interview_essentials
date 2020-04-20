@@ -13,7 +13,7 @@ The problem presented in this chapter is considered one of the classic among int
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that given an ascending sorted array $A$ with no duplicates and rotated around a pivot, and an integer $t$, returns:
+Write a function that given an ascending sorted array $A$ of lenght $n$ with no duplicates and rotated around a pivot $p$ (meaning that the array has been rotated such that the smallest element of $A$ ends up at index $p$), and an integer $t$, returns:
 \begin{itemize}
 	\item if $t$ does not exists in $A$ it returns $-1$ 
 	\item otherwise the index of $A$ where $t$ appears.
@@ -60,7 +60,26 @@ Not surprisingly, the complexity of this implementation if linear in time and co
 
 \subsection{Logarithmic time solution}
 \label{search_sorted_rotated_array:sec:log}
-The solution presented in Section \ref{search_sorted_rotated_array:sec:bruteforce} is far from being optimal because we can solve this problem in logarithmic time and constant space (as we did for the problem in Chapter \ref{ch:min_rotated_array})
+The solution presented in Section \ref{search_sorted_rotated_array:sec:bruteforce} is far from being optimal because we can solve this problem in logarithmic time and constant space (as we did for the problem in Chapter \ref{ch:min_rotated_array}).
+
+The main idea is that we need to take advantage of the fact that the array is sorted and that if we know the pivot location, $p$ then we can logically divide the array into two starting and ending at indices:
+\begin{enumerate}
+	\item $0$ and $p-1$
+	\item $p$ and $n-1$ ($n$ is the size of the array)
+\end{enumerate}
+Both arrays are sorted and thus binary search can be applied in each of the subarrays separately. This is why we can reuse the solution to the problem of finding the minimum element in a sorted and rotated array to solve this one.
+
+To summarize the algorithm proceed as follows:
+\begin{itemize}
+	\item search for the pivot index $p$
+	\item search for $t$ in $A[0,p-1]$. If the search is successful return the found index for $t$.
+	\item search for $t$ in $A[p,n-1]$.  If the search is successful return the found index for $t$.
+	\item None of the searches had success. $t$ is not in the array. Return $-1$.
+\end{itemize}
+
+This algorithm can be implemented as shown in Listing \ref{list:search_sorted_rotated_array:log}. Note that the function \inline{find_idx_min} is almost identical to the one in Listing \ref{list:min_rotated_array_log} and has been modified so to return the index instead of the value for the smallest element in the array.
+
+Also note that the function \inline{midpoint} is not implemented as \inline{(l+r)/2} because that might cause overflow during the computation of \inline{(l+r)} even if the final result fits in a \inline{int}. Specifically, it fails if the sum of low and high is greater than the maximum positive \inline{int} value ($2^{31} - 1$ in most C++ implementation). The sum overflows to a negative value, and the value stays negative when divided by two. In C++ this causes an array index out of bounds with unpredictable results. In Java, it throws \inline{ArrayIndexOutOfBoundsException}.
 
 \lstinputlisting[language=c++, caption={Log time solution (using binary search) to the problem of finding an element in a sorted and rotated array.},label=list:search_sorted_rotated_array:log]{sources/search_sorted_rotated_array/search_sorted_rotated_array_solution2.cpp}
 
