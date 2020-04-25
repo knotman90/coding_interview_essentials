@@ -1,0 +1,58 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Jump Game}
+\label{ch:can_jump}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Determine if you are able to reach the last index.
+
+
+	\begin{example}
+		\hfill \\
+		Given the array $A=[2,3,1,1,4]$ the function retuns \textbf{true}
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given the array $A=[3,2,1,0,4]$ the function retuns \textbf{false} because no matter to reach any cells with index higher than $3$ and from $3$ you cannot jump anywhere else.
+		
+	\end{example}
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item 
+	\begin{answered}
+		\textit{}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{can_jump:sec:discussion}
+
+
+\subsection{Brute-force - Implicit graph}
+\label{can_jump:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Quadratic time and linear space DFS solution on the implicit graph having indexes as vertices and jump lenghts defining the arcs between them. },label=list:can_jump]{sources/can_jump/can_jump_solution1.cpp}
+
+\subsection{Linear time solution}
+\label{can_jump:sec:linear}
+
+\lstinputlisting[language=c++, caption={Linear time solution to the problem of the jump game.},label=list:can_jump]{sources/can_jump/can_jump_solution2.cpp}
+
+
