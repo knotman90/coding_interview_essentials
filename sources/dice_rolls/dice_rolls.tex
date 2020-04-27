@@ -1,0 +1,62 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Number of Dice Rolls With Target Sum}
+\label{ch:dice_rolls}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+You have $d$ dice, and each die has $f$ faces numbered $1, 2, \ldots..., f$.
+
+Return the number of possible ways (out of $f^d$ total ways) modulo $10^9 + 7$ to roll the dice so the sum of the face up numbers equals a given number $t$.
+
+	\begin{example}
+		\hfill \\
+		Given $d=1$, $f=6$ and $t=6$ the function should return $1$. There is only one way of obtaining $6$ with $1$ $6$-faced dice.
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given $d=2$, $f=6$ and $t=7$ the function should return $6$. The following are the possible way of obtaining $7$ from $2$ $6$-faced dices.
+		\begin{enumerate}
+			\item $1+6$
+			\item $2+5$
+			\item $3+4$
+			\item $4+3$
+			\item $5+2$
+			\item $6+1$
+		\end{enumerate}
+		
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given $d=2$, $f=3$ and $t=7$ the function should return $0$ because the highest number obtainable by rolling two dices with $3$ faces is $6$.
+	\end{example}
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item 
+	\begin{answered}
+		\textit{}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{dice_rolls:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{dice_rolls:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:dice_rolls]{sources/dice_rolls/dice_rolls_solution1.cpp}
+
