@@ -1,0 +1,80 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Largest square in a binary matrix}
+\label{ch:square_in_matrix}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+Given a 2D boolean matrix containing only ones and zeros, return the area of the largest square containing only one cells.
+
+
+	\begin{example}
+		\hfill \\
+		Given the following matrix the function returns $9$. The largest square is shown in green.
+
+		\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		0 & 0                                  & 1                                  & 1                                  & 1 \\ \hline
+		0 & 0                                  & 1                                  & 1                                  & 0 \\ \hline
+		0 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
+		1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
+		1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
+		\end{tabular}
+		
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given the following matrix the function returns $4$. The largest square is shown in green.
+
+		\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		1 & 0 & 1                                  & 0                                  & 0 \\ \hline
+		1 & 0 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 1 \\ \hline
+		1 & 1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 1 \\ \hline
+		1 & 0 & 0                                  & 1                                  & 0 \\ \hline
+\end{tabular}
+
+	\end{example}
+
+\end{exercise}
+
+
+\section{Discussion}
+\label{square_in_matrix:sec:discussion}
+
+\subsection{Brute-force}
+\label{square_in_matrix:sec:bruteforce}
+
+\subsubsection{Brute-force 1}
+
+The simplest approach consists of trying to find out every possible square of ones that can be formed from within the matrix. We can achieve this goal by visiting each true cell and by treating it as the top-left most cells of a square. We can then calculate the largest square we can build by starting from that cell. Given a true cell with coordinate $(i,j$) we can do that by:
+
+\begin{itemize}
+	 \item count the number of consecutive ones in the right direction starting at $(i,j)$. In other words how many steps we can take from $(i,j)$ in the right direction  before we either find a $0$ or hit the limit of the matrix? 
+	 \item count the number of consecutive ones in the downwards direction starting at $(i,j)$. In other words how many steps we can take from $(i,j)$ in the down direction before we either find a $0$ or hit the limit of the matrix? 
+\end{itemize}
+The minimum between this number ($s_{i,j}$) will give us an indication of the biggest square that can be created from $(i,j)$. We can then proceed and check if all the cells in the square having as top-left corner $(i,j)$ and down-right corner $(i+s_{i,j},j+s_{i,j})$ are all set to $1$. If that is the case we have found a square of size $s_{i,j}$ starting at $(i,j)$. 
+
+Among all squares, we shall return the largest one. 
+
+
+
+
+\subsubsection{Brute-force 1}
+
+Another bruteforce approach could be to start from the left uppermost point in the matrix (cell $(0,0)$, and whenever a 1 is found, say at cell $(i,j)$, (no operation needs to be done for a 0), we try to find out the largest square that can be formed including that $1$. For this, we move diagonally (both right and downwards, i.e. we increment the row index and column index) and then check whether all the elements of that row and column are 1 or not. If all the elements happen to be 1, we move diagonally further and repeat the check. If even one element turns out to be 0, we stop this diagonal movement. If we were able to perform $k$ diagonal steps, it means we have found out that $(i,j)$ is part of a $k\times k$ square. 
+We can then continue the traversal of the matrix from the element next to the initial 1 found i.e. $(i,j+1)$, till all the elements of the matrix have been traversed.
+
+Also in this case, among all squares, we shall return the largest one. 
+
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:square_in_matrix]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
+
