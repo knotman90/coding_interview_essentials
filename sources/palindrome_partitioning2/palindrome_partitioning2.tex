@@ -1,0 +1,65 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Palindrome Partitioning \rom{2}}
+\label{ch:palindrome_partitioning2}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+Given a string s, partition s such that every substring of the partition is a palindrome. A partition for a string $s$ is a collection of cutpoints $c_0 < c_1 \ldots < c_k$ that split the string $s$ into $k+1$ sustrings:
+\begin{itemize}
+	\item $s(0 \ldots c_0)$
+	\item $s(c_0+1 \ldots c_1)$
+	\item \ldots
+	\item $s(k-1 \ldots c_k)$
+\end{itemize}
+
+Return the minimum cuts needed s.t. the obtained partitions consist only of palindrome substrings.
+
+	\begin{example}
+		\hfill \\
+		Input: "aab"
+		Output: 1
+		Explanation: The palindrome partitioning $["aa","b"]$ could be produced using $1$ cut.
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Input: "itopinonavevnonipoti"
+		Output: 0
+		Explanation: The input is already palindrome
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Input: "ababbbabbababa"
+		Output: 3
+		Explanation: The palindrome partitioning $["a","bbabbbab","b","ababa"]$ could be produced using $3$ cut.
+
+	\end{example}
+\end{exercise}
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item 
+	\begin{answered}
+		\textit{}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{palindrome_partitioning2:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{palindrome_partitioning2:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
+
