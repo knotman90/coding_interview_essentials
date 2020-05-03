@@ -1,0 +1,58 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Word Break}
+\label{ch:word_break}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+Given a non-empty string $s$ and a dictionary \textit{dict} containing a list of non-empty words, determine if $s$ can be segmented into a space-separated sequence of one or more words s.t. that each subword is present in the dictionary.
+
+	\begin{example}
+		\hfill \\
+		Given:
+		\begin{itemize}
+			\item \textit{s="ilovecoding"}
+			\item and \textit{dict=["i","coding", "love"]}
+		\end{itemize}
+		the function returns \textbf{true} because it is possible to split $s$
+		into: $s_1$ = "i", $s_2$ = "love", $s_1$ = "coding" and each of the $s_i$ is a word present in the dictionary-
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given:
+		\begin{itemize}
+			\item \textit{s="catsandog"}
+			\item and \textit{dict=["dog","cats", "and", "dog"]}
+		\end{itemize}
+		the function returns \textbf{false} because it not  possible to split $s$ into a sequence of words all present in the dictionary.
+	\end{example}
+
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item Does $s$ only contains lower-case letters?
+	\begin{answered}
+		\textit{No, $s$ might contains also upper-case letters and numbers}.
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{word_break:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{word_break:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:word_break]{sources/word_break/word_break_solution1.cpp}
+
