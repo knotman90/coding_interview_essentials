@@ -8,8 +8,10 @@ class SudokuSolver
   }
   auto solve()
   {
+      printSudoku();
     getBlankCells();
     solve_helper(0);
+    printSudoku();
     return problem;
   }
 
@@ -89,7 +91,7 @@ char intToChar(const char num)
       return true;
     }
     auto pos = blankCells[i];
-  //  cout<<pos<<" +++++++   "<<endl;
+    cout<<pos<<" +++++++   "<<endl;
    // printSudoku();
   //  cout<<endl;
     for (char x = '1'; x <= '9'; x++)
@@ -114,5 +116,6 @@ char intToChar(const char num)
 std::string solve_sudoku_backtracking(std::string& sudoku)
 {
     SudokuSolver solver(sudoku);
+    solver.solve();
     return solver.solve();
 }
