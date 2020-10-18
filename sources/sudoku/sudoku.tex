@@ -20,10 +20,12 @@ $3\times3$ subgrids) with digits so that each:
 \end{itemize}
 contain number between $1$ and $9$, with the constraint that each number can appear only once in
 each section. The puzzle is given as a incomplete grid where only some of the cells are filled (See
-Figure \ref{fig:sudoku:example}). This chapter describes how to write a very basic and simple sudoku
+Figure \ref{fig:sudoku:example}).
+
+This chapter describes how to write a very basic and simple sudoku
 solver based on backtracking that can be implemented fast enough during a programming interview.
 Having played this puzzle before might help during the interview but it is not fundamental because
-the puzzle is easy enough to understand.
+the rules are easy enough to understand in the span of a couple of minutes.
 
 \begin{figure}
 	\label{fig:sudoku:example}
@@ -80,19 +82,31 @@ cells are represented by the character '0'.
 
 \section{Discussion}
 \label{sudoku:sec:discussion}
-The general problem of solving a sudoku (of size $n\times m$) is NP-complete and thus an efficient
+The general problem of solving a sudoku (of size $n\times m$) is
+NP-complete\footnote{NP stands for Non-deterministic Polynomial time. A problem
+that can be solved in polynomial time (efficiently) by a non-deterministic
+turing machine and for which its solution can be efficiently verified to be
+correct by a deterministic turing machine. A problem in NP is complete if by
+solving it you are able to solve every other problem in NP. This means that an
+NP-complete problem is at least as hard as every other problem in NP.} and thus
+an efficient
 (polynomial-time) solution is not yet known. The naive bruteforce algorithm would have to try each
 available number across all empty cells and therefore would have a runtime complexity of
-$O(N^(N^2))$, where $N$ is size of the Sudoku puzzle. For a classic  $9 \times 9$ puzzle $N = 9$ and
-the number of operations required would be at most $2 \times 10^77$ operations to find a solution
-which would make this approach pretty-much impractical. In practice the number of operations vary
+$O(N^{(N^2)})$, where $N$ is size of the Sudoku puzzle. For a classic  $9 \times 9$ puzzle $N = 9$ and
+the number of operations required would be at most $2 \times 10^{77}$ operations to find a solution
+which would make this approach pretty-much impractical. 
+
+In practice the number of operations vary
 hugely according to the difficulty of the puzzle itself and especially according to the number of
 given clues which in turn limit the options for each empty cell. Clues reduces the number of
 possible states the grid can be and in which the rules of the puzzle are not violated. The more
 clues the more are those invalid states. An algorithm can take advantage of that and avoid those
-states. For example, a 17-clue puzzle with diagonal symmetry is one of the hardest to solve due to
-the large number of candidates and branches\footnote{$17$ clues is also the lower bound for having a
-puzzle with a unique solution}. 
+states. For example, a $17$-clue puzzle with diagonal symmetry is one of the hardest to solve due to
+the large number of candidates and branches\footnote{$17$ clues has been proved
+to be the lower-bound for having a puzzle with a \textbf{unique} solution}. 
+
+\subsection{Backtacking}
+\label{sudoku:sec:bruteforce}
 
 Backtracking is therefore a good approach to use to solve this problem considering that the problem
 has the following characteristics:
@@ -116,14 +130,70 @@ first empty cell and checking if it is allowed to be there i.e. no rules are bro
 there are no violations (checking row, column, and box constraints) then the algorithm advances to
 the next cell and places a '1' in the next empty cell. When checking for violations, if it is discovered that
 the "1" is not allowed, the value is advanced to "2". If a cell is discovered where none of the 9
-digits is allowed, then the algorithm leaves that cell blank and moves back to the previous cell.
-The value in that cell is then incremented by one.
-
+digits is allowed, then the algorithm leaves that cell blank and moves \textbf{back} to the previous cell.
+The value in that cell is then incremented by one and the whole process repeats.
 Clearly, this method will eventually find a solution if the puzzle is valid
 because all possible valid state for the grid will be visited. 
 
-\subsection{Brute-force}
-\label{sudoku:sec:bruteforce}
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:sudoku]{sources/sudoku/sudoku_solution1.cpp}
+Listing \ref{list:sudoku} shows a possible implementation of the backttracking
+idea described above. The public interfact of the SudokuSolver class consists
+only of a constructor \lstinline[columns=fixed]{SudokuSolver::SudokuSolver(std :: string} taking a
+a sole input a \lstinline[columns=fixed]{std::string}, the problem input, and
+the \lstinline[columns=fixed]{std::strings SudokuSolver::solve()} function
+that is responsible for returning the solution. The constructor is responsible
+for analyzing the input and storing in a vector (\lstinline[columns=fixed]{std :: vector < int >blankCells}) the indices of all the empty
+cells i.e. the cells the backtracking function is going to try to fill.
+
+The core implementation function is the \lstinline[columns=fixed]{bool
+solve\_helper(const int i)} recursive function that takes an input an integer
+\lstinline[columns=fixed]{cell} representing the index of an empty cell in the
+input string. The base case for this function is when
+\lstinline[columns=fixed]{i >= blankCells . size ()} i.e. there is no more empty
+cell to be filled. The rest of the function is pretty straightforward because it
+only consists of a loop trying all possible numbers for that cell from '1' to
+'9'. Whether or not a number can be inserted in a cell is asserted  by the
+\lstinline[columns=fixed]{canInsert(char x, int pos)} function that is
+responsible for deciding whether a character \lstinline[columns=fixed]{x} can be places at a certain
+cell \lstinline[columns=fixed]{pos}. THe check is performed by checking whether
+any of the rules described above would be broken by having
+\lstinline[columns=fixed]{x} at cell \lstinline[columns=fixed]{pos}. If no rules
+are broken then the function \lstinline[columns=fixed]{solve_helper} calls
+itself recursively on the \textbf{next} empty cells i.e.
+\lstinline[columns=fixed]{cell+1}. If none of the values tried in the loop yield
+a valid solution then the function returns false (no value can be inserted at
+this location without violating one or more rules).
+
+The code is further complicated by calculation that are necessary to locate the
+cells belonging to a row, column or a subsquare:
+\begin{itemize}
+	\item \lstinline[columns=fixed]{canInsertInRow} function has to check all cells
+	belonging to the same row. Given a row $r$ then all $9$ cells belonging to it start
+	at index $9*r$ (in other words $x-1$ rows are skipped) and they are one next
+	to each other.
+	\item Things complicates  when it comes to checking columns. Because the puzzle
+	is stored in a row-major fashion cells belonging to the same column $c$ starts
+	at index $c$ and each element of the same column is at $9$ cells distance from
+	each other.
+	\item The hardest check is possibly the one that involves subsquares.
+	\lstinline[columns=fixed]{canInsertInSquare(char x, int s)} has to
+	check whether it is legal to insert $x$ in the subsquare $s$. Turns out that
+	the top left index of the square $s$ can be found by using the following
+	formula:
+	\[f = (27 \times \frac{s}{3}) + (3\times (s \mod 3))\]
+	
+\end{itemize} The
+
+
+\tiny\texttt{"431567289729481653\textcolor{blue}{865329174}986243517257198346143756892612975438374812965598634721"}}
+\normalsize
+
+
+
+
+
+\lstinputlisting[language=c++, caption={Backtracking solution to the Sudoku problem.},label=list:sudoku]{sources/sudoku/sudoku_solution1.cpp}
+
+
+
 
