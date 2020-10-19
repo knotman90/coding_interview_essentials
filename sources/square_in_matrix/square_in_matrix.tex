@@ -2,44 +2,64 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
 %
-% Difficulty:
-% Companies: 
+% Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Largest square in a binary matrix}
+% type of problem why can be useful in real life (image segmentation) dynamic programming
 \label{ch:square_in_matrix}
 \section*{Introduction}
+Imagine you are given a black and white image represented as a boolean matrix of size $N\times M$
+where $0$ and $1$ in the matrix correnspond to a black and white pixel respectively. Such type of
+image are less uncommon that might be thought at first because they are often the output of digital
+image processing algorithm such as masking or thresholding. Further analyzing this kind of images
+often requires to identify homogeneous portions of the image. The problem described in this chapter
+deals with a simple type of image processing algorithm that involves determining the size of the
+largest square area of white pixel of a binary bitmap. We will walk through a number of solutions,
+starting from a naive brute-force one, to a more sophisticated, more complex and definitely more
+efficine one.
+ 
 
 \section{Problem statement}
 \begin{exercise}
-Given a 2D boolean matrix containing only ones and zeros, return the area of the largest square containing only one cells.
-
-
+Given a 2D boolean matrix, return the area of the largest square containing only one cells.
 	\begin{example}
 		\hfill \\
-		Given the following matrix the function returns $9$. The largest square is shown in green.
+		Given the following matrix the function returns $9$. The largest square has side lenght of
+		$3$ and the coordinate of the top-left corner are $(2,1)$. Cells belonging to the largest
+		square are highlighted.
 
 		\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		0 & 0                                  & 1                                  & 1                                  & 1 \\ \hline
-		0 & 0                                  & 1                                  & 1                                  & 0 \\ \hline
-		0 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
-		1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
-		1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
+		0 & 0                                  & 1                                  & 1 & 1 \\
+		\hline
+		0 & 0                                  & 1                                  & 1 & 0 \\
+		\hline
+		0 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} &
+		\cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
+		1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} &
+		\cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
+		1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} &
+		\cellcolor[HTML]{32CB00}\textbf{1} & 0 \\ \hline
 		\end{tabular}
 		
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Given the following matrix the function returns $4$. The largest square is shown in green.
-
+		Given the following matrix the function returns $4$. The side of the largest square is $2$
+		and the top-left coordinates are $(2,2)$. Cells belonging to the largest square are
+		highlighted.
 		\begin{tabular}{|l|l|l|l|l|}
 		\hline
-		1 & 0 & 1                                  & 0                                  & 0 \\ \hline
-		1 & 0 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 1 \\ \hline
-		1 & 1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 1 \\ \hline
-		1 & 0 & 0                                  & 1                                  & 0 \\ \hline
+		1 & 0 & 1                                  & 0                                  & 0 \\
+		\hline
+		1 & 0 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 1 \\
+		\hline
+		1 & 1 & \cellcolor[HTML]{32CB00}\textbf{1} & \cellcolor[HTML]{32CB00}\textbf{1} & 1 \\
+		\hline
+		1 & 0 & 0                                  & 1                                  & 0 \\
+		\hline
 \end{tabular}
 
 	\end{example}
@@ -49,19 +69,73 @@ Given a 2D boolean matrix containing only ones and zeros, return the area of the
 
 \section{Discussion}
 \label{square_in_matrix:sec:discussion}
+In the next section we will analyze a number of possible approaches to this problem. We start by
+looking at a few brute-force approaches so to then move towards more elaborate and more time and
+space efficient dynamic programming solutions
 
-\subsection{Brute-force}
-\label{square_in_matrix:sec:bruteforce}
+\subsubsection{Brute-force - Incremental side}
+\label{square_in_matrix:sec:incremental_side}
+The first brute-force approach consists of trying to find the largest square made entirely of
+set(holding a value of $1$) cell by visiting each set cell and by treating it as the top-left corner
+of a square. Because calculating the largest square having that cell as top-left corner is easy the
+answer is just the largest value calculated over all set cells in the matrix. In order to find out
+what the value of the largest square having a cell with coordinate $(x,y)$ as top-left corner we can
+try build squares of larger sides incrementally. At first we try to build a square of size $1$. If
+that is possible we try size $2$, and so on, until it is impossible. Clearly the answer for the cell
+$(x,y)$ is the greater value for a side for which a square is constructible. 
 
-\subsubsection{Brute-force 1}
+This approach is clearly correct because eventually we will try all possible squares, and has a
+complexity of (assuming $N \leq M$) $O(N^4M)$ because there are $O(NM)$ possible starting point for
+a square, $O(N)$ possible values for a side of a square and actually checking whether a square is
+valid costs $O(N^2)$ (all cells in the square needs to be checked). A possible implementation is
+shown in the Listing \ref{list:square_in_matrix:bruteforce1}
 
-The simplest approach consists of trying to find out every possible square of ones that can be formed from within the matrix. We can achieve this goal by visiting each true cell and by treating it as the top-left most cells of a square. We can then calculate the largest square we can build by starting from that cell. Given a true cell with coordinate $(i,j$) we can do that by:
 
+\lstinputlisting[language=c++, caption={Brute force soltuion solution to the "largest square in matrix" problem using incremental side approach.},label=list:square_in_matrix:bruteforce1]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
+
+
+\subsubsection{Brute-force improved}
+The idea presented in the Section \ref{square_in_matrix:sec:incremental_side}
+can be significantly improved by noticing that is it really not necessary to
+check all possible sides lenght for a square having the top-left corner located
+at cell $(x,y)$. We also keep a number that identify the largest side $b$ of the
+square we can construct from $(x,y)$. The idea is that we can walk diagonally (to the bottom-right)
+from $(x,y)$ (by incrementing the both $x$ and $y$). For every step $i$ we take,
+we check whether all the elements of to the left of $(x+i, y+i)$  and to the
+right of  $y$ are set, and also whether all the cells in the columns above
+$(x+i, y+i)$ and below the cell $(x,y+i)$ are set. If both conditions are true
+it means that we can construct a square of side $k$. We can then proceed to
+check the next $k$ until a $0$ is found or the limit of the matrix are hit. If
+we were able to perform $t$ diagonal steps,
+it means we have found out that the largest square having $(i,j)$ as top-left
+corner has an area of $t^2$. The final answer is the largest value we calculated
+this way across all cell that are set. 
+
+The time complexity of this approach is lower than the previous case i.e. $N^3M$
+because as in the solution shown in Section
+\ref{square_in_matrix:sec:incremental_side} there are $NM$ potential top-left
+corner for a square and for each of them $O(N)$ diagonal steps. Each diagonal
+steps costs $O(N)$ as in the worst case we must only check one entire row and
+column. 
+
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:square_in_matrix]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
+
+
+
+look for 
 \begin{itemize}
-	 \item count the number of consecutive ones in the right direction starting at $(i,j)$. In other words how many steps we can take from $(i,j)$ in the right direction  before we either find a $0$ or hit the limit of the matrix? 
-	 \item count the number of consecutive ones in the downwards direction starting at $(i,j)$. In other words how many steps we can take from $(i,j)$ in the down direction before we either find a $0$ or hit the limit of the matrix? 
+	 \item count the number of consecutive ones in the right direction starting at $(i,j)$. In other
+	 words how many steps we can take from $(i,j)$ in the right direction  before we either find a
+	 $0$ or hit the limit of the matrix? 
+	 \item count the number of consecutive ones in the downwards direction starting at $(i,j)$. In
+	 other words how many steps we can take from $(i,j)$ in the down direction before we either find
+	 a $0$ or hit the limit of the matrix? 
 \end{itemize}
-The minimum between this number ($s_{i,j}$) will give us an indication of the biggest square that can be created from $(i,j)$. We can then proceed and check if all the cells in the square having as top-left corner $(i,j)$ and down-right corner $(i+s_{i,j},j+s_{i,j})$ are all set to $1$. If that is the case we have found a square of size $s_{i,j}$ starting at $(i,j)$. 
+The minimum between this number ($s_{i,j}$) will give us an indication of the biggest square that
+can be created from $(i,j)$. We can then proceed and check if all the cells in the square having as
+top-left corner $(i,j)$ and down-right corner $(i+s_{i,j},j+s_{i,j})$ are all set to $1$. If that is
+the case we have found a square of size $s_{i,j}$ starting at $(i,j)$. 
 
 Among all squares, we shall return the largest one. 
 
@@ -70,11 +144,4 @@ Among all squares, we shall return the largest one.
 
 \subsubsection{Brute-force 1}
 
-Another bruteforce approach could be to start from the left uppermost point in the matrix (cell $(0,0)$, and whenever a 1 is found, say at cell $(i,j)$, (no operation needs to be done for a 0), we try to find out the largest square that can be formed including that $1$. For this, we move diagonally (both right and downwards, i.e. we increment the row index and column index) and then check whether all the elements of that row and column are 1 or not. If all the elements happen to be 1, we move diagonally further and repeat the check. If even one element turns out to be 0, we stop this diagonal movement. If we were able to perform $k$ diagonal steps, it means we have found out that $(i,j)$ is part of a $k\times k$ square. 
-We can then continue the traversal of the matrix from the element next to the initial 1 found i.e. $(i,j+1)$, till all the elements of the matrix have been traversed.
-
-Also in this case, among all squares, we shall return the largest one. 
-
-
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:square_in_matrix]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
 
