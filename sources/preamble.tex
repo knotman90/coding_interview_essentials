@@ -600,3 +600,7 @@ addtohook={%
 
 \usepackage{framed}
 \newcommand*{\mybox}[1]{\framebox{#1}}
+
+\renewcommand{\thefootnote}{\textit{\alph{footnote}}}
+\usepackage{pifont}
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
