@@ -78,64 +78,81 @@ space efficient dynamic programming solutions
 The first brute-force approach consists of trying to find the largest square made entirely of set
 (i.e. holding a value of $1$) cell by visiting each set cell and by treating it as if it was the
 top-left corner of a square. Because calculating the largest square having that cell as top-left
-corner is easy the answer is just the largest value calculated over all the set cells in the matrix.
+corner is easy the answer to the problem is just the largest value over all the set cells in the matrix.
 In order to find out what the value of the largest square having cell $(x,y)$ as top-left corner we
 can try build squares of incrementally larger sides around it, starting from side lenght $1$. At
 first we try to build a square of size $1$. If that is possible we try size $2$, then $3$, and so
 on, until it is impossible or we hit the boundaries of the matrix. The answer for the cell $(x,y)$
 is the last value for a side for which we were able to construct a square.
-
-This approach is clearly correct because eventually we find all possible squares in the matrix, and
+Consider for instance Figure \ref{fig:square_in_matrix:squa_matrix_incremental}
+where in order to find the value of the largest square can be built from cell
+$(0,1)$, all squares highlighted have to be fully checked.
+This approach is clearly correct because eventually we find all squares in the matrix, and
 has a complexity of (assuming, with no loss in generality, $N \leq M$) $O(N^4M)$. This is because
-there are $O(NM)$ possible starting point for a square, $O(N)$ possible values for a side of a
-square and checking whether a square is valid costs $O(N^2)$ (all cells in the square needs to be
-checked). See Figure \ref{fig:square_in_matrix:squa_matrix_incremental} where 3 squares are
-highlighted, each of them is fully checked by this approach. A possible implementation of such idea
+there are $O(NM)$ possible starting point for a square, $O(N)$ possible values
+for the side value and checking whether a square is valid costs $O(N^2)$ (all cells in the square needs to be
+checked). A possible implementation of this idea
 is shown in the Listing \ref{list:square_in_matrix:bruteforce1}.
 
 
-\lstinputlisting[language=c++, caption={Brute force soltuion solution to the "largest square in matrix" problem using incremental side approach.},label=list:square_in_matrix:bruteforce1]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute force soltuion solution to the \textit{square in matrix} problem using incremental side probing.},label=list:square_in_matrix:bruteforce1]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
 
 \begin{figure}
 	\centering
 	\label{fig:square_in_matrix:squa_matrix_incremental}
 	\includegraphics[width=\textwidth/2]{sources/square_in_matrix/images/squa_matrix_incremental}
-	\caption[]{}
+	\caption[Square in matrix - Brute-force incremental square
+	construction.]{This figure shows  the squares that are checked by the
+	brute-force approach for solving the square in matrix problem. 
+	From the cell $(0,1)$ we first try to build a square of side $2$, and when
+	that is verified to be possible, a square of size $3$ is tried. This also
+	succeed and so a square of side $4$ is checked, with a negative outcome.
+	Thus $3$ is the largest square having cell $(0,1)$ as top left corner. }
 \end{figure}
 
 \subsubsection{Brute-force improved}
 The idea presented in the Section \ref{square_in_matrix:sec:incremental_side} can be significantly
-improved by noticing that is it really not necessary to check, for every cell, squares of all
-possible side lenghts. The idea is that we can walk diagonally (towards the bottom-right cell) from
-$(x,y)$ (by incrementing the both $x$ and $y$). For every step $i$ we take, we check whether all the
+improved by noticing that is it really not necessary to check, given a cell
+$(x,y)$ squares of all
+possible side lenghts having it as top left corner, fully and one after the
+other.
+The idea is that we can walk diagonally (towards the bottom-right cell) from
+$(x,y)$ (by incrementing both $x$ and $y$) and, for every step $i$ we take, we check whether all the
 elements to the left of $(x+i, y+i)$  and to the right of  $y$ are set, and also whether all the
-cells in the columns above $(x+i, y+i)$ and below the cell $(x,y+i)$ are set. If both conditions are
-true it means that we can construct a square of side $k$. We can then proceed to check the next $k$
-until a $0$ is found or the limit of the matrix are hit. If we were able to perform $t$ diagonal
-steps, it means we have found out that the largest square having $(i,j)$ as top-left corner has an
+cells in the columns above $(x+i, y+i)$ and below the cell $(x,y+i)$ are set
+(see Figure \ref{fig:square_in_matrix:squa_matrix_diagonal}). If both conditions are
+true it means that we can construct a square of side $i$. We can then proceed
+one step further until a $0$ is found among the checked cells on the left or
+above.
+If we were able to perform $t$ diagonal steps, it means we have found out that the largest square having $(x,y)$ as top-left corner has an
 area of $t^2$. The final answer is the largest value we calculated this way across all cell that are
-set. See Figure \ref{fig:square_in_matrix:squa_matrix_diagonal}. Every highlighted square depicts
+set. See Figure \ref{fig:square_in_matrix:squa_matrix_diagonal} where the
+numbers represents the cells that are checked during the corrensponding step. Every highlighted square depicts
 one of the squares that is checked by the algorithm.
-
 
 
 The time complexity of this approach is $N^3M$, lower than the previous solution. As shown in
 Section \ref{square_in_matrix:sec:incremental_side}, there are $NM$ potential top-left corner for a
 square and for each of them $O(N)$ diagonal steps. Each diagonal steps costs $O(N)$ as in the worst
-case we must check one entire row and column. Listing \ref{list:square_in_matrix_diagonal} shows a
-possible implementation of the idea described here. Note how the Listing for both of the bruteforce
-solution proposed so far are very much similar, with the only difference being in how the largest
-square constructible from a certain top-left cell is computed. 
+case we must check one entire row and column. Thus the complexity of calculating
+the value of the largest square having a certain cell as top-left corner is
+$O(N^2)$ (Figure \ref{fig:square_in_matrix:square_matrix_diagonal} shows that no
+cell is checked twice). Listing \ref{list:square_in_matrix_diagonal} shows a
+possible implementation of the idea described here. Note how
+Listings \ref{list:square_in_matrix_diagonal} and
+\ref{list:square_in_matrix:bruteforce1} for both the solutions proposed so far are very
+similar, with the only difference being in how the largest
+square constructible from a certain top-left cell is computed.
 
 \begin{figure}
 	\centering
 	\label{fig:square_in_matrix:square_matrix_diagonal}
 	\includegraphics[]{sources/square_in_matrix/images/square_matrix_diagonal}
-	\caption{ddddddddddddddddddd }
+	\caption[Square in matrix - Brute-force diagonal]{This figure depicts the process of calculating the value of the side of the largest square having as a top-left corner cell $(0,1)$. Each cell is labeled with a number representing the step at which that cell is checked. Note that no cell is checked twice.}
 \end{figure}
 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:square_in_matrix_diagonal]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
+\lstinputlisting[language=c++, caption={C++ brute force solution using diagonal steps for solving the \textit{square in matrix} problem.  },label=list:square_in_matrix_diagonal]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
 
 
 \subsubsection{Dynamic programming}
