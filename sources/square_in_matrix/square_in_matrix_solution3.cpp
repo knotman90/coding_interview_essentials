@@ -9,7 +9,7 @@ int maximal_square_in_matrix_bottom_up(const vector<vector<int>>& matrix)
 
   vector<vector<int>> R(rows, vector<int>(cols)),
       D(rows, vector<int>(cols)), S(rows, vector<int>(cols));
-  
+
   int ans = 0;
 
   for (int i = 0; i < rows; i++)
