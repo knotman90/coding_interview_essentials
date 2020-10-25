@@ -1,7 +1,9 @@
 % @Author: Davide Spataro
 % @Date:   2020-10-25 
 % @Last Modified by:   Davide Spataro
-
+% https://www.topcoder.com/community/competitive-programming/tutorials/dynamic-programming-from-novice-to-advanced/
+% file:///home/knotman/Downloads/DYNAMIC_PROGRAMMING_-_ITS_PRINCIPLES_APPLICATIONS_.pdf
+% http://smo.sogang.ac.kr/doc/bellman.pdf 
 \section{Dynamic Programming}
 \label{sect:appendix:DP}
 
@@ -27,3 +29,41 @@ introduce and describe it to the level that is necessary to understand and
 better tackle DP interview problems. For a more comprenshive material on DP
 please refer to \cite{bellman1954, cormen2009}.
 
+The gist of the DP approach is that we aim at breaking down a problem into
+simpler sub-problems recursively. If it is possible to do so, then the problem
+at hand is said to have the \textbf{optimal substructure} property i.e. it can
+be solved by using optimal solution to subproblems. But having the optimal
+substructure property alone is not enough to prefer a DP approach to another
+when trying to solve the same problem. This is because DP really shines when a
+problem also exposes the \textbf{overlapping subproblems} property i.e. when the
+subproblems are reused several times. A classic example if the
+Fibonacci Sequence. In order to calculate $F(n)$ we need to solve two subproblems:
+$F(n-1)$ and $F(n-2)$ and adding them up. But for solving $F(n-1)$ we need to
+solve $F(n-2)$ \textbf{again}. The value for the subproblem $F(n-2)$ is thus
+reused and this makes the Fibonacci problem exposed the optimal substructure
+property. 
+Dynamic programming takes care of this fact by making sure of solving each
+subproblem only once. Usually this can be achieved into two ways:
+\begin{description}
+    \item [Top-down] This is usually the easiest of the two, by being a direct
+    derivation from the recursive formulation of the problem. If the problem can
+    be formulated recursively in terms of solution then solution to subproblems
+    can be \textit{memoized}\footnote{From the latin word \texit{memorandum}
+    which means to be remembered. It is basically a way of remembering the
+    result of a function for a certain set of inputs call by storing it in a
+    cache.} in a cache. 
+    When a subproblem is reused then the
+    (potentially expensive) recursive call is avoided and the cached result is
+    returned instead. 
+    \item [Bottom-up] We can try to reformulate the problem by twisting and
+    massaging  the  recursive formulation so that the subproblems are solved
+    first (thus effectively removing the recursion) and build the solution to
+    the bigger problem from the bottom. This is usually done by working in a
+    sort of tabular form where entries of the table for larger problems are
+    filled by using  entries for solution to smaller problems that we have
+    already solved. For instance, when solving the problem of finding the
+    $10^{th}$ Fibonacci number $F(10)$, we can start from the known values for
+    $F(0)$ and $F(1)$ and working our way up to $F(2)$  by using $F(1)$ and
+    $F(2)$. Once F(2) is ready we can move up to F(3), and so on when we have
+    the values for $F(8)$ and $F(9)$ we proceed with calculating $F(10)$.
+\end{description}
