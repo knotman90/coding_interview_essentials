@@ -13,6 +13,7 @@ using std::vector;
 #include "square_in_matrix_solution2.cpp"
 #include "square_in_matrix_solution3.cpp"
 #include "square_in_matrix_solution4.cpp"
+#include "square_in_matrix_solution5.cpp"
 
 TEST(square_in_matrix, test1)
 {

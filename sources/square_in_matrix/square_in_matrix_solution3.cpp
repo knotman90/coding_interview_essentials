@@ -1,4 +1,4 @@
-
+#if 0
 int maximal_square_in_matrix_bottom_up(const vector<vector<int>>& matrix)
 {
   if (matrix.size() <= 0 || matrix[0].size() <= 0)
@@ -8,7 +8,8 @@ int maximal_square_in_matrix_bottom_up(const vector<vector<int>>& matrix)
   const int cols = matrix[0].size();
 
   vector<vector<int>> R(rows, vector<int>(cols)),
-      D(rows, vector<int>(cols)), S(rows, vector<int>(cols));
+                      D(rows, vector<int>(cols)), 
+                      S(rows, vector<int>(cols));
 
   int ans = 0;
 
@@ -52,3 +53,4 @@ int maximal_square_in_matrix_bottom_up(const vector<vector<int>>& matrix)
 
   return ans * ans;
 }
+#endif
