@@ -9,10 +9,14 @@
 
 Dynamic programming (DP) is a popular tecnique for solving a certain class of
 optimization problems efficiently and is accredited to the American Scientist
-Richard Bellman\cite{bellman1954}. The word \textit{programming} can be a bit deceiving for
+Richard Bellman\cite{bellman1954}. He conied the term DP in the context of
+solving problems involving a serie of best decision one after the other. 
+The word \textit{programming} can be a bit deceiving for
 computer scientist of programmers in general but it has really little to do with
 computer programming and it is infact intended as a set of rules to 
-follow to solve a certain problem. These rules can of course be coded and
+follow to solve a certain problem and it is refeered specifically to the
+solution to find an optimal militray schedule for logistics (and has more or
+less the same meaning as linear programming or linear optimization).  These rules can of course be coded and
 executed by a computer but can be easily followed on paper for instance. 
 Dynamic programming is better thought as an optimization approach rather than an
 method or framework where a complex optimization problem is transformed into a sequence of
@@ -67,3 +71,44 @@ subproblem only once. Usually this can be achieved into two ways:
     $F(2)$. Once F(2) is ready we can move up to F(3), and so on when we have
     the values for $F(8)$ and $F(9)$ we proceed with calculating $F(10)$.
 \end{description}
+
+DP has found application in many field of science such as Control theory,
+Bioinformatics AI and operations research. There are a number of problems in
+computer science that can be solved by using DP such as the 
+\begin{itemize}
+    \item Longest Common (or increasing) Subsequence
+    \item Weighted Interval Scheduling
+    \item Chain Matrix Multiplication
+    \item Subset sub
+    \item String edit distance
+    \item Coin change
+    \item 0/1 knapsack problem
+    \item Graph shortest path
+\end{itemize}
+
+In the next section we will shortly review a number of DP problem focusing on
+the key ideas that allow a problem to be approached and solved  using DP.
+
+\subsection{Fibonacci Sequence}
+Computing the $n^{th}$ number of the Fibonacci sequence is probably one of the
+most common introductionary example of DP. The Fibonacci sequence recursive
+formulation is ready to be solved using a top-down DP approach. Listing
+\ref{list:app:dp:canonical} shows a C++ function that calculated the $n^{th}$ Fibonacci
+number.
+\lstinputlisting[language=c++, caption={Canonical recursive C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:canonical]{sources/appendices/fibonacci_canonical.cpp}
+Notice that for instance when $F(6)$ a call tree is produced where the same call
+is repeated more than once as shown in the list below. $F(2)$ has been
+calculated $5$ times!
+\begin{itemize}
+    \item $F(6) = F(5)+F(4)$
+    \item $F(6) = (F(4)+F(3)) + (F(3)+F(2))$
+    \item $F(6) = ((F(3)+F(2))+(F(2)+F(1))) + ((F(2)+F(1))+(F(1)+F(0)))$
+    \item $F(6) = (((F(2)+F(1))+(F(1)+F(0)))+((F(1)+F(0))+F(1))) + (((F(1)+F(0))+F(1))+(F(1)+F(0)))$
+    \item $F(6) = ((((F(1)+F(0))+F(1))+(F(1)+F(0)))+((F(1)+F(0))+F(1))) + (((F(1)+F(0))+F(1))+(F(1)+F(0)))$
+\end{itemize}
+
+Listing \ref{list:app:dp:fib} can be improved dramatically if we memoize the function calls
+that have been already calculated. This way no duplicate work is done. W.r.t the
+previous example, from the second time the value of $F(2)$ is needed, no
+additional work is done, as the value in the cache is returned.
+\lstinputlisting[language=c++, caption={Canonical recursive top-down Dynamic Programming C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:fib]{sources/appendices/fibonacci_dp_top_down.cpp}
