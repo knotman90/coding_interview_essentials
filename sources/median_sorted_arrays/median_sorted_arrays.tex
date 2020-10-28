@@ -138,6 +138,98 @@ Section \ref{median_sorted_arrays:sec:bruteforce} but, it is still suboptimal as
 solved in logarithmic time. We are going to see how in Section \ref{median_sorted_arrays:sec:log}.
 
 \subsubsection{Merge sorted array in linear time}
+How exactly can we merge two sorted arrays $X$ and $Y$ into a third sorted array $Z$ in linear time? 
+The idea behind is that we can build $Z$ incrementally starting from an empty array, and at each step of the process
+inserting one of the elements of $X$ or $Y$ depening on which one of the two containts the smallest element at that moment.
+In the implementation of \inline{mergeSortedArrays} this is achieved by using two iterators, \inline{itX} and \inline{itY} 
+each pointing to the next element of $X$ and $Y$ to be inserted in $Z$, respectively.
+The \inline{while} loop is responsible for comparing the two elements pointed by the iterators and always inserting the smallest one
+into $Z$.  Once an element is merged in the final array, the corrensponding iterator is incremented so the next value will be considered at the next iteration.
+When one of the two iterators its the end of its array, then all we are left are the remaining elements of the other collection that we can at this point blindly insert into $Z$ because they are sorted 
+(see the last two \inline{while} loops in the code).
+Figure \ref{fig:median_sorted_array:mergearray} shows all the steps that are necessary to perform the merging for the arrays:
+$X = \{1,3,5,8,15\}$ and $X = \{2,4,7\}$. At step $1$ (Figure \ref{fig:median_sorted_array:mergearray0}) $Z$ is initially empty and \inline{itA} and \inline{itB} point to the beginning of $X$ and $Y$, respectively.
+Because the element pointed by itA is smaller, it is selected for merging and thus itA is incremented.
+At step $2$ (Figure \ref{fig:median_sorted_array:mergearray1}) the element pointed by itB is smaller, and as in the previous step, it is merged in $Z$ and itB is incremeneted.
+The same operations are performed for all the steps depicted in Figures 
+\ref{fig:median_sorted_array:mergearray2},
+\ref{fig:median_sorted_array:mergearray3},
+\ref{fig:median_sorted_array:mergearray4},
+\ref{fig:median_sorted_array:mergearray5} and \ref{fig:median_sorted_array:mergearray6}.
+Eventually itB goes out of range signalling that all the element in $Y$ have been processed (see Figure \ref{fig:median_sorted_array:mergearray6}).
+At this point then, as shown in Figure \ref{fig:median_sorted_array:mergearray7} we can safely merge all the element in $X$ into $Z$ that is now ready to be returned (see Figure \ref{fig:median_sorted_array:mergearray8}).
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays0}
+		\caption{Step $1$: $Z$ is initially empty. itX and itY points to the beginning of $X$ and $Y$, respectively. The element pointed by itX is merged as it is smaller. itX is advanced by one position.}
+		\label{fig:median_sorted_array:mergearray0}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays1}
+		\caption{Step $2$: itY is smaller than itX, thus it is the one being merged. itB is also advanced by one position. }
+		\label{fig:median_sorted_array:mergearray1}
+	\end{subfigure}
+	\hfill
+
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays2}
+		\caption{Step $3$: itX is smaller than itY, thus it is the one being merged. itX is also advanced by one position.}
+		\label{fig:median_sorted_array:mergearray2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays3}
+		\caption{Step $4$: itY is smaller than itX, thus it is the one being merged. itB is also advanced by one position. }
+		\label{fig:median_sorted_array:mergearray3}
+	\end{subfigure}
+	\hfill
+
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays4}
+		\caption{Step $5$:  itX is smaller than itY, thus it is the one being merged. itX is also advanced by one position.}
+		\label{fig:median_sorted_array:mergearray4}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays5}
+		\caption{Step $6$:itY is smaller than itX, thus it is the one being merged. itB is also advanced by one position.}
+		\label{fig:median_sorted_array:mergearray5}
+	\end{subfigure}
+	\hfill
+
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays6}
+		\caption{ itY now  points to the past-the-end element of $Y$. There are no more element of $Y$ to merge.}
+		\label{fig:median_sorted_array:mergearray6}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays7}
+		\caption{Step $7$: All the remaning element from the current location of itX to the end of X are merged into $Z$. }
+		\label{fig:median_sorted_array:mergearray7}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays8}
+		\caption{All the elements of $X$ and $Y$ have been merged. $Z$ contains the element of $X \cup Y$ and it is sorted.}
+		\label{fig:median_sorted_array:mergearray8}
+	\end{subfigure}
+	\caption[Example of merging two sorted arrays.]{This figure shows how two sorted arrays can be merged into a third sorted array in linear time. The hollow indicates which element at that step is selected to go into the third array. Notice that the iterator associated with that element is then moved forward. Already merged cells are }
+	\label{fig:median_sorted_array:mergearray}
+\end{figure}
+
 
 \subsection{Logarithmic solution}
 \label{median_sorted_arrays:sec:log}
