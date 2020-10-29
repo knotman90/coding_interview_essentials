@@ -1,6 +1,6 @@
 %!TEX root = ../main.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Links:
+% Links: https://medium.com/@hazemu/finding-the-median-of-2-sorted-arrays-in-logarithmic-time-1d3f2ecbeb46
 %
 % Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -137,7 +137,7 @@ The time and complexities of this version are both $O(n+m)$, much better than th
 Section \ref{median_sorted_arrays:sec:bruteforce} but, it is still suboptimal as this problem can be
 solved in logarithmic time. We are going to see how in Section \ref{median_sorted_arrays:sec:log}.
 
-\subsubsection{Merge sorted array in linear time}
+\subsubsection{Merge sorted arrays in linear time}
 How exactly can we merge two sorted arrays $X$ and $Y$ into a third sorted array $Z$ in linear time? 
 The idea behind is that we can build $Z$ incrementally starting from an empty array, and at each step of the process
 inserting one of the elements of $X$ or $Y$ depening on which one of the two containts the smallest element at that moment.
@@ -233,22 +233,45 @@ At this point then, as shown in Figure \ref{fig:median_sorted_array:mergearray7}
 
 \subsection{Logarithmic solution}
 \label{median_sorted_arrays:sec:log}
-Let's start by pointing out that the very essence of this problem is to try to figure out how the
-merging the two arrays together into one would look like (like in the previous sections) but without
-actually performing the merging itself.
+If we want to improve the $O(n+m)$ solution we have at hand at this point we need to abandon the idea of constructing a third array containing all the elements from the inputs.
+There is no way this can be done in less than linear time as one must at least access the input element once.
+Turns out, we do not actually need to have the array $C$ at all. 
 
-The key ideas are:
+The key insights are:
 \begin{itemize}
-	\item we know exactly how big is the merged array ($C$)
-	\item the left part of $C$, $C_l$ would be made up from portions of the smallest values of $A$
-	and $B$. For instance, w.r.t. the example in Figure \ref{fig:median_sorted_arrays:example2} we
-	can see that the left half (the first $5$ elements) of $A+B$ is made from the first two elements
+	\item we know exactly what the size of the merged array $C$ would be: $n+m$.
+	\item we also know that the part of $C$ to the left of the median, $C_l$ would be made up from elements among the smallest values of $A$
+	and $B$. These values also lie in the left portions of $A$ and $B$. For instance, w.r.t. the example in Figure \ref{fig:median_sorted_arrays:example2} we
+	can see that the left half (the first $5$ elements) of $A \cup B$ is made from the first two elements
 	of $A$ and the smallest $3$ elements of $B$. Because $C$ will be sorted, only the smallest
-	elements of $A$ and $B$ will contribute to its left half.
+	elements of $A$ and $B$ will can be part of $C_l$.
 \end{itemize}
+The problem is that we do not know exactly how many elements of $A$ will be part $C_l$ but if we do, then, we also know immediately how many elements of $B$ go to $C_l$
+and at that point we can calculate the median.
+We cannot find directly how many elements  of $A$ contributes to $C_l$, but we can test farily easily test if the first $i$ elements do.
+Let's suppose we try to make $C_l$ by using $i$ elements from the left portion of $A$.
+Because $|C|=n+m$ then $|C_l| = \frac{n+m}{2} = i+j$ where $j$ is the number of elements from the left part of $B$ contributing to $C_l$. 
+Thus if we take $i$ elements from $A$ we need to take $j = (n+m)-i$ elements from $B$. 
+Once $i$ and $j$ are decided, we also know that the last element of $C_l$, will be the maximum element among the first $i$ elements of $A$ and the first $j$ elements of $B$.
+From these arguments follows that the right half of $C$, $C_r$, denoted  contains all the remaining $n-i$ elements of $A$ and $m-j$ of $B$, 
+and also that the first element of $C_r$ will be the smallest element among them.
+Given:
+\begin{itemize}
+	\item $m_l$ and $M_l$ are respectively the smallest and largest elements among the $i$ elements of $A$ and $j$ of $B$
+	\item $m_r$ and $M_r$ are respectively the smallest and largest elements among the $n-i$ elements of $A$ and $m-j$ of $B$
+\end{itemize} 
+then if $i$ is indeed the right amount of element from $A$ belonging to $C_l$ then $M_l \leq m_r$ and $m_l$.
 
-At the beginning we do not know exactly how many elements from $A$ will be part of the first half of
-$C$, $C_l$. But we can try to search for this number. Let's suppose we try to construct $C_l$ by
-using $i$ elements from $A$. Because we know the size of $C$ i.e. $s=n+m$ (the sum of the sizes of
-$A$ and $B$), we also know the size of $C_l$, $s_2 = \frac{s}{2}$. Thus, we also know how many
-elements we need to take from the left part of $B$ ($B_l$), i.e. $s_2 - i$.
+\lstinputlisting[language=c++, caption={Naive implementation of solution to the problem of finding the median of two sorted arrays.},label=list:median_sorted_naive]{sources/median_sorted_arrays/median_sorted_arrays_solution3.cpp}
+
+
+
+https://leetcode.com/problems/median-of-two-sorted-arrays/ complete this code first
+use binary search to find i
+l , r is the range of elements of A initially l = 0 r = min(n, (n+m)/2)
+i = l+r/2
+j = n+m-i
+if max among A[i] and B[j] <= min A[i+1],B[j+1] we have a median
+otherwise 
+if A[i] > B[j] then r = i-1
+else l = i+1

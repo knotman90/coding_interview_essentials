@@ -1,14 +1,15 @@
 double mediam_sorted_arrays_log(const std::vector<int> &A,
                                 const std::vector<int> &B)
 {
-  int l = 0, r = A.size() - 1;
-  const int size      = A.size() + B.size();
-  const int half_size = size / 2;
+  using std::size_t;
+  size_t l = 0, r = A.size() - 1;
+  const size_t size      = A.size() + B.size();
+  const size_t half_size = size / 2;
 
   while (l <= r)
   {
-    const int i = l + (r - l) / 2 + 1;
-    const int j = half_size - mid;
+    const size_t i = l + (r - l) / 2 + 1;
+    const size_t j = half_size - mid;
 
     const int idx_i = i - 1;
     const int idx_j = j - 1;
