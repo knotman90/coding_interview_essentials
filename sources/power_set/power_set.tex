@@ -117,7 +117,10 @@ produced after $n$ decision steps).
 The C++ code implementing the idea above is shown in Listing \ref{list:power_set_backtracking}. The
 complexity of this solution is exponential i.e. $O(2^n)$ which as already pointed out is as good as
 it gets.
-\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
+\end{minipage}
 
 \begin{figure}
 	\centering
@@ -177,7 +180,7 @@ certain power of two should be added to the final value for the represented numb
 bits one can represents $2^n$ numbers, each corrensponding to one subset of the powerset of those
 $n$ bits.
 
-The following code implements the idea above\footnote{Notice the usage of the \texttt{reserve}
+Listing \ref{list:power_set_bits} shows  a possible C++ implementation of the idea above\footnote{Notice the usage of the \texttt{reserve}
 function that should be used in all those scenario when we already know the final size of the
 collection we are building. This saves times because avoids intermediate allocation and copy that
 must happen during the resize of the vector.}. The complexity of this implementation is, not
@@ -190,7 +193,7 @@ the magic number $32$.
 
 
 \begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_bit_manipulation.cpp}
+	\lstinputlisting[language=c++, caption="C++ backtracking solution to the problem of generating the powerset.",label=list:power_set_bits]{sources/power_set/power_set_bit_manipulation.cpp}
 \end{minipage}
 
 %\section{Common variations}
