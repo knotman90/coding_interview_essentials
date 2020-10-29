@@ -86,7 +86,6 @@ There is one key point that should immediately be noticed: \textbf{The powerset 
 	than the size of the powerset itself. Doing so shows general knowledge on set theory and the
 	ability to link and use that knowledge with the problem statement.
 
-\end{itemize}
 
 \subsection{Backtracking}
 The first solution presented in this chapter is based on the fact that that during the generation of
@@ -121,10 +120,10 @@ it gets.
 \lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
 
 \begin{figure}
-	\label{ref:power_set_decision_trees}
 	\centering
 	\includegraphics[width=\textwidth]{sources/power_set/images/tree}
 	\caption[Decision tree for the power-set generation using backtracking.]{Decision tree for the power-set generation using backtracking. At level $i$ are the decision for the element $i$ in the original set. A labal marked with yes identifies the decision to take the corrensponding element into the subset, while a node labeled with no the opposite. At the last level is the powerset.}
+	\label{ref:power_set_decision_trees}
 \end{figure}
 
 The advantages of using the backtracking framework to solve this problem is that, once we notice
@@ -165,6 +164,7 @@ excluded.
 		6     & 110  & $\{a,b\}$\\ \hline
 		7     & 111  & $\{a,b,c\}$ \\ \hline
 	\end{tabular}
+	\caption[Mapping between bits and element of the powerset.]{This table shows a 1-to-1 mapping between integer values, their binary representation and an element of the powerset.}
 	\label{tab:mapping_value_bits}
 \end{table}
 
