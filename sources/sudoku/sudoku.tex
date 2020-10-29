@@ -19,20 +19,19 @@ $3\times3$ subgrids) with digits so that each:
 	\item $3\times3$ \textbf{subsquare section}
 \end{itemize}
 contain number between $1$ and $9$, with the constraint that each number can appear only once in
-each section. The puzzle is given as a incomplete grid where only some of the cells are filled (See
-Figure \ref{fig:sudoku:example}).
+each section. The puzzle is given as a incomplete grid where only some of the cells are filled.
 
 This chapter describes how to write a very basic and simple sudoku solver based on backtracking that
 can be implemented fast enough during a programming interview. Having played this puzzle before
 might help during the interview but it is not fundamental because the rules are easy enough to
 understand in the span of a couple of minutes.
 
-\begin{figure}
-	\label{fig:sudoku:example}
-	\centering
-	\includegraphics[width=\textwidth]{sources/sudoku/images/sudoku-example}
-	\caption{Example of solved sudoku.}
-\end{figure}
+%\begin{figure}
+	%\label{fig:sudoku:example}
+	%\centering
+	%\includegraphics[width=\textwidth]{sources/sudoku/images/sudoku-example}
+	%\caption{Example of solved sudoku.}
+%\end{figure}
 
 \section{Problem statement}
 \begin{exercise}
@@ -52,27 +51,48 @@ cells are represented by the character '0'.
 	\normalsize. See Table \ref{tab:sudoku:grid_solution} for a 2D-grid representation.
 	
 	\begin{table}[]
-		\centering
+	\centering
 		\begin{tabular}{|l|l|}
-		\hline
-		Input & Solution \\ \hline
-		\texttt{\begin{tabular}[c]{@{}l@{}}0 0 4 3 0 0 2 0 9 \\ 0 0 5 0 0 9 0 0 1 \\ 0 7 0 0 6 0 0 4
-		3 \\ 0 0 6 0 0 2 0 8 7 \\ 1 9 0 0 0 7 4 0 0 \\ 0 5 0 0 8 3 0 0 0 \\ 6 0 0 0 0 0 1 0 5 \\ 0 0
-		3 5 0 8 6 9 0 \\ 0 4 2 9 1 0 3 0 0\end{tabular}} & \texttt{\begin{tabular}[c]{@{}l@{}}8 6 4
-		3 7 1 2 5 9 \\ 3 2 5 8 4 9 7 6 1 \\ 9 7 1 2 6 5 8 4 3 \\ 4 3 6 1 9 2 5 8 7 \\ 1 9 8 6 5 7 4
-		3 2 \\ 2 5 7 4 8 3 9 1 6 \\ 6 8 9 7 3 4 1 2 5 \\ 7 1 3 5 2 8 6 9 4 \\ 5 4 2 9 1 6 3 7
-		8\end{tabular}} \\ \hline
+			\hline
+			Input & Solution \\ \hline
+			\texttt{
+				\begin{tabular}[c]{@{}l@{}}
+					0 0 4 3 0 0 2 0 9 \\ 
+					0 0 5 0 0 9 0 0 1 \\ 
+					0 7 0 0 6 0 0 4	3 \\
+					0 0 6 0 0 2 0 8 7 \\
+					1 9 0 0 0 7 4 0 0 \\ 
+					0 5 0 0 8 3 0 0 0 \\ 
+					6 0 0 0 0 0 1 0 5 \\ 
+					0 0 3 5 0 8 6 9 0 \\ 
+					0 4 2 9 1 0 3 0 0
+				\end{tabular}
+			} & 
+			\texttt{
+				\begin{tabular}[c]{@{}l@{}}
+					8 6 4 3 7 1 2 5 9 \\
+					3 2 5 8 4 9 7 6 1 \\ 
+					9 7 1 2 6 5 8 4 3 \\ 
+					4 3 6 1 9 2 5 8 7 \\
+					1 9 8 6 5 7 4 3 2 \\ 
+					2 5 7 4 8 3 9 1 6 \\
+					6 8 9 7 3 4 1 2 5 \\
+					7 1 3 5 2 8 6 9 4 \\
+					5 4 2 9 1 6 3 7	8
+				\end{tabular}
+			}
+			\\ \hline
 		\end{tabular}
-		\label{tab:sudoku:grid_solution}
-		\caption[Example of Sudoku (2D) and its solution.]{Example of 2D grid represented sudoku and its solution.}
-		\end{table}
+	\caption[Example of Sudoku (2D) and its solution.]{Example of Sudoku grid (on the left) and its solution (on the right). Notice that empty cells are denoted here with the character '0' (zero).}
+	\label{tab:sudoku:grid_solution}
+	\end{table}
 \end{example}
 
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item is the input string guaranteed to only contains numeric charaters and be the right size?
+	\item Is the input string guaranteed to only contains numeric charaters and be the right size?
 	\begin{answered}
 		\textit{Yes the string is guaranteed to be encoding a valid sudoku}
 	\end{answered}	
@@ -203,12 +223,10 @@ of all cells belonging to the same row, columns and subsquare. Specifically:
 \end{itemize}
 
 
-
-
-
-
 \lstinputlisting[language=c++, caption={Backtracking solution to the Sudoku problem.},label=list:sudoku]{sources/sudoku/sudoku_solution1.cpp}
 
+
+\section{Conclusion}
 
 
 
