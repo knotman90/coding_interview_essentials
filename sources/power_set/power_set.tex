@@ -36,23 +36,24 @@ concept.
 
 
 \section{Problem statement}
-Write a function that given a set of elements $P$ returns its power-set. A power-set of a set $P$,
-(here denoted as $\mathcal{P}(S)$ is the set of all its subsets including the empty subset
-$\emptyset$ and $P$ itself.
+	\begin{exercise}
+		Write a function that given a set of elements $P$ returns its power-set. A power-set of a set $P$,
+		(here denoted as $\mathcal{P}(S)$ is the set of all its subsets including the empty subset
+		$\emptyset$ and $P$ itself.
 
-\begin{example}
-	\hfill \\
-	For example, given the set $P=\{a,b,c\}$, the following two sets are both correct outputs for
-	this problem:
-	\begin{equation*}
-		\{\{\}, \{b,c\}, \{a\}, \{a,b\}, \{a,b,c\}, \{b\}, \{a,c\}, \{c\} \}
-	\end{equation*}
-	\begin{equation*}
-		\{\{\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{b,c\}, \{a,c\}, \{a,b,c\} \}
-	\end{equation*}
-	
-\end{example}
-
+		\begin{example}
+			\hfill \\
+			For example, given the set $P=\{a,b,c\}$, the following two sets are both correct outputs for
+			this problem:
+			\begin{equation*}
+				\{\{\}, \{b,c\}, \{a\}, \{a,b\}, \{a,b,c\}, \{b\}, \{a,c\}, \{c\} \}
+			\end{equation*}
+			\begin{equation*}
+				\{\{\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{b,c\}, \{a,c\}, \{a,b,c\} \}
+			\end{equation*}
+			
+		\end{example}
+	\end{exercise}
 \section{Clarification Questions}
 
 \begin{QandA}
@@ -86,7 +87,6 @@ There is one key point that should immediately be noticed: \textbf{The powerset 
 	than the size of the powerset itself. Doing so shows general knowledge on set theory and the
 	ability to link and use that knowledge with the problem statement.
 
-\end{itemize}
 
 \subsection{Backtracking}
 The first solution presented in this chapter is based on the fact that that during the generation of
@@ -118,13 +118,16 @@ produced after $n$ decision steps).
 The C++ code implementing the idea above is shown in Listing \ref{list:power_set_backtracking}. The
 complexity of this solution is exponential i.e. $O(2^n)$ which as already pointed out is as good as
 it gets.
-\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
+\end{minipage}
 
 \begin{figure}
-	\label{ref:power_set_decision_trees}
 	\centering
 	\includegraphics[width=\textwidth]{sources/power_set/images/tree}
 	\caption[Decision tree for the power-set generation using backtracking.]{Decision tree for the power-set generation using backtracking. At level $i$ are the decision for the element $i$ in the original set. A labal marked with yes identifies the decision to take the corrensponding element into the subset, while a node labeled with no the opposite. At the last level is the powerset.}
+	\label{ref:power_set_decision_trees}
 \end{figure}
 
 The advantages of using the backtracking framework to solve this problem is that, once we notice
@@ -165,6 +168,7 @@ excluded.
 		6     & 110  & $\{a,b\}$\\ \hline
 		7     & 111  & $\{a,b,c\}$ \\ \hline
 	\end{tabular}
+	\caption[Mapping between bits and element of the powerset.]{This table shows a 1-to-1 mapping between integer values, their binary representation and an element of the powerset.}
 	\label{tab:mapping_value_bits}
 \end{table}
 
@@ -177,7 +181,7 @@ certain power of two should be added to the final value for the represented numb
 bits one can represents $2^n$ numbers, each corrensponding to one subset of the powerset of those
 $n$ bits.
 
-The following code implements the idea above\footnote{Notice the usage of the \texttt{reserve}
+Listing \ref{list:power_set_bits} shows  a possible C++ implementation of the idea above\footnote{Notice the usage of the \texttt{reserve}
 function that should be used in all those scenario when we already know the final size of the
 collection we are building. This saves times because avoids intermediate allocation and copy that
 must happen during the resize of the vector.}. The complexity of this implementation is, not
@@ -190,7 +194,7 @@ the magic number $32$.
 
 
 \begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_bit_manipulation.cpp}
+	\lstinputlisting[language=c++, caption="C++ backtracking solution to the problem of generating the powerset.",label=list:power_set_bits]{sources/power_set/power_set_bit_manipulation.cpp}
 \end{minipage}
 
 %\section{Common variations}
