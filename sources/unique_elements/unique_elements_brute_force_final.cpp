@@ -6,7 +6,7 @@ bool unique_elements_final(const std::string &s)
     return false;
 
   std::array<bool, ALPH_SIZE> F = { false };
-  for (size_t i = 0; i != s.size(); i++)
+  for (size_t i = 0; i < ALPH_SIZE; i++)
   {
     const int idx = s[i] - 'a';
     if (F[idx])
