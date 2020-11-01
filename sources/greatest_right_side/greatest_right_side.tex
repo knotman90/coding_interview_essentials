@@ -16,19 +16,17 @@ This chapter discusses a farily common problem asked during the on-site intervie
 \section{Problem statement}
 \begin{exercise}
 You are given an array $A$ of size $n$. You have to modify $A$ in place s.t. $A[i] = max(A[i+1], A[i+2],\ldots, A[n-1])$. In other words $A[i]$ should be substituted with  the maximum value among all elements $A[j], j > i$. If such element does not exists set $A[i] = -1$.
+
+	\begin{example}
+		\hfill \\
+		Given the input array $A = \{15, 22, 12, 13, 12, 19, 0, 2\}$, the output of the function in this case shluld be  $A = \{22, 19, 19, 19, 19, 2, 2, -1\}$.
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given the input array $A = \{2, 3, 1, 9\}$, the output of the function in this case shluld be  $A = \{9, 9, 9, -1\}$.
+\end{example}
 \end{exercise}
-
-
-\begin{example}
-	\hfill \\
-	Given the input array $A = \{15, 22, 12, 13, 12, 19, 0, 2\}$, the output of the function in this case shluld be  $A = \{22, 19, 19, 19, 19, 2, 2, -1\}$.
-\end{example}
-
-\begin{example}
-	\hfill \\
-	Given the input array $A = \{2, 3, 1, 9\}$, the output of the function in this case shluld be  $A = \{9, 9, 9, -1\}$.
-\end{example}
-
 
 
 \section{Clarification Questions}
