@@ -1,0 +1,73 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{TITLE OF THE CHAPTER}
+\label{ch:mirror_binary_tree}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+	Given a binary tree, the task is to create a new binary tree which is a mirror image of the given binary tree.
+
+	Examples:
+	
+	Input:
+			5
+		   / \
+		  3   6
+		 / \
+		2   4
+	Output:
+	Inorder of original tree: 2 3 4 5 6 
+	Inorder of mirror tree: 6 5 4 3 2
+	Mirror tree will be:
+	  5
+	 / \
+	6   3
+	   / \
+	  4   2
+	
+	Input:
+			2
+		   / \
+		  1   8
+		 /     \
+		12      9
+	Output:
+	Inorder of original tree: 12 1 2 8 9 
+	Inorder of mirror tree: 9 8 2 1 12 
+	\begin{example}
+		\hfill \
+		
+	\end{example}
+
+	\begin{example}
+		\hfill \
+		
+	\end{example}
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item 
+	\begin{answered}
+		\textit{}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{mirror_binary_tree:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{mirror_binary_tree:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:mirror_binary_tree]{sources/mirror_binary_tree/mirror_binary_tree_solution1.cpp}
+
