@@ -1,0 +1,1 @@
+../../sources/min_stack/min_stack_solution3.cpp

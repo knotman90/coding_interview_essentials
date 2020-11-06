@@ -30,14 +30,18 @@
 
 \usepackage[english]{babel} % English language/hyphenation
 
-\usepackage{enumitem} % Customize lists
+\usepackage[inline]{enumitem} % Customize lists
 \setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
 
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
 
-\usepackage{xcolor} % Required for specifying colors by name
+\usepackage{xcolor}
+\usepackage{colortbl}
 \definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
 
+
+\usepackage{subcaption}
+\usepackage{graphicx}
 %----------------------------------------------------------------------------------------
 %	FONTS
 %----------------------------------------------------------------------------------------
@@ -53,8 +57,8 @@
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
-
-\usepackage[citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\usepackage{csquotes}
+\usepackage[citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{sources/bibliography.bib}
 \defbibheading{bibempty}{}
 
@@ -585,6 +589,22 @@ addtohook={%
 \usepackage[makeroom]{cancel}
 \usepackage[super]{nth}
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\inline}[1]{\ \lstinline[columns=fixed]{#1}}
+
+%explicit space
 
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{fancyvrb}
+\fvset{showspaces=true}
+\SaveVerb{verbspace}! !
+\newcommand{\aspace}{\UseVerb{verbspace}}%
+
+
+\usepackage{framed}
+\newcommand*{\mybox}[1]{\framebox{#1}}
+
+
+\renewcommand{\thefootnote}{\textit{\alph{footnote}}}
+\usepackage{pifont}
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}

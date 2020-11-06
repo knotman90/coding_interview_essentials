@@ -1,6 +1,6 @@
 
-std::string reverse_string_outplace_raw_loop(const std::string &s) {
-
+std::string reverse_string_outplace_raw_loop(const std::string &s)
+{
   std::string ans;
   ans.reserve(s.size());
 
