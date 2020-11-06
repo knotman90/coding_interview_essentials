@@ -1,5 +1,3 @@
-
-#include "IKThLargestInStream.h"
 class KthLargestInStreamArray : IKThLargestInStream {
     public: 
     KthLargestInStreamArray() = default;
