@@ -98,19 +98,77 @@
 
 \section{Discussion}
 \label{mirror_binary_tree:sec:discussion}
-Let's start our discussion by trying to understand what it mirror copy really means. 
-If we have a tree $T$ rooted at node $n$ then its mirror image \rotatecharone{$T$} is defined as follows:
+Let's start our discussion by trying to understand how a mirror copy of a tree really looks like. 
+If we have a tree $T$ rooted at node $n$ then its mirror image \rotatecharone{$T$} can be defined as follows:
 \begin{itemize}
-	\item \textbf{if $n$ has no children:} return  $T$. See node $9$ in the example \ref{ex:mirro_binary_tree:example2}.
-	\item \textbf{if $n$ has one only the left child $n_l$:}  return $T$ having as left child the a mirrored copy of $n_l$.
-	\item \textbf{if $n$ has one only the left child $n_r$:}  return $T$ having as right child the a mirrored copy of $n_r$]
+	\item \textbf{if $n$ has no children:} return  $T$. See Figures \ref{fig:mirro_binary_tree:leaf} and \ref{fig:mirro_binary_tree:leaf_mirror}.
+	\item \textbf{if $n$ has one only the left child $n_l$:}  return $T$ having as left child the a mirrored copy of $n_l$. See Figures \ref{fig:mirro_binary_tree:single_left} and \ref{fig:mirro_binary_tree:single_left_mirror}.
+	\item \textbf{if $n$ has one only the left child $n_r$:}  return $T$ having as right child the a mirrored copy of $n_r$. See Figures \ref{fig:mirro_binary_tree:single_right} and \ref{fig:mirro_binary_tree:single_right_mirror}. 
 	\item \textbf{if $n$ has both children:} return $T$ having as left child the mirrored copy of its right child $n_r$ and,
-	 as right child the mirrored copy of its left child $n_l$.  An example of this case can be found
-	  in the node $5$ in the Example \ref{ex:mirro_binary_tree:example1}
+	 as right child the mirrored copy of its left child $n_l$.  See Figures \ref{fig:mirro_binary_tree:tree_only_both_children} and \ref{fig:mirro_binary_tree:tree_only_both_children_mirror}.
+	 Another example of this case can be found in the node $5$ in the Example \ref{ex:mirro_binary_tree:example1}
 	 where its left and right children are first mirrored individually and then swapped. 
 \end{itemize}
-This recursive definition can be refined into the following idea. We can turn a tree $T$ rooted at $n$ into its mirror image
-if we first mirror its children individually and only then we swap them.
-Listing \ref{} shows an implementation of such idea.
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:mirror_binary_tree]{sources/mirror_binary_tree/mirror_binary_tree_solution1.cpp}
+This recursive definition can be refined into the following simple idea: In order to create the mirror image of a tree $T$ rooted at $n$ we can first mirror its children individually and only after swap them.
+Listing \ref{list:mirror_binary_tree1} shows a recursive implementation of such idea.
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:mirror_binary_tree1]{sources/mirror_binary_tree/mirror_binary_tree_solution1.cpp}
 
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/leaf}
+		\caption{Example of single node tree.}
+		\label{fig:mirro_binary_tree:leaf}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/leaf}
+		\caption{Mirror image of the tree in Figure \ref{fig:mirro_binary_tree:leaf}.}
+		\label{fig:mirro_binary_tree:leaf_mirror}
+	 \end{subfigure}
+	 
+	 \centering
+
+	\begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/tree_only_right_child}
+		\caption{Example of node with a single child: the right one.}
+		\label{fig:mirro_binary_tree:single_right}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/tree_only_right_child_mirror}
+		\caption{Mirror image of the tree in Figure \ref{fig:mirro_binary_tree:single_right}.}
+		\label{fig:mirro_binary_tree:single_right_mirror}
+	 \end{subfigure}
+
+	 \hfill
+	 \begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/tree_only_right_child_mirror}
+		\caption{Example of node with a single child: the left one.}
+		\label{fig:mirro_binary_tree:single_left}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/tree_only_right_child}
+		\caption{Mirror image of the tree in Figure \ref{fig:mirro_binary_tree:single_right}.}
+		\label{fig:mirro_binary_tree:single_left_mirror}
+	 \end{subfigure}
+	
+	 \hfill
+
+	 \begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/tree_only_both_children}
+		\caption{Example of node with a single child: the left one.}
+		\label{fig:mirro_binary_tree:tree_only_both_children}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[b]{0.4\textwidth}
+		\includegraphics[]{sources/mirror_binary_tree/images/tree_only_both_children_mirror}
+		\caption{Mirror image of the tree in Figure \ref{fig:mirro_binary_tree:tree_only_both_children}.}
+		\label{fig:mirro_binary_tree:tree_only_both_children_mirror}
+	 \end{subfigure}
+
+
+\caption[]{Examples of various types of binary trees and their associated mirror images.}
+
+\end{figure}
