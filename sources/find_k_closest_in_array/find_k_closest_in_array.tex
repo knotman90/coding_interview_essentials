@@ -76,12 +76,46 @@ Listing \ref{list:find_k_closest_in_array1} shows a possible implementation of s
 
 Please note that as in all cases where you actually do not need to have the whole array sorted you can use partial sorting instead of the full fledged sorting. In all cases where $k$ is smaller that $n$ the complexity is going to be slighty better as
 we will go from the $O(nlog(n))$ of the normal sorting to $O(nlog(k))$ of the partial sort. 
-Fortunately making this change in C++ is extremely easily and it is only matter of calling \inline{std::partial_sort} instead of \inline{std::sort} as shown in Listing \ref{list:find_k_closest_in_array2}.
+Fortunately, making this change in C++ is extremely easily and it is only matter of calling \inline{std::partial_sort} instead of \inline{std::sort} as shown in Listing \ref{list:find_k_closest_in_array2}.
 
 \lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array1]{sources/find_k_closest_in_array/find_k_closest_in_array_solution2.cpp}
 
 \subsection{Binary Search}
 \label{find_k_closest_in_array:sec:binary_search}
+The problem description clearly state the fact that the input array is sorted but, the solution we devised in Section \ref{sec:find_k_closest_in_array:sorting} is not taking advantage of it at all. Infact all it does is invalidating
+the original ordering so to enforce a different one. Everytime the problem statement mention that some input is sorted, you should think how to use such constraint to device a more efficient solution rather than questioning whether that information is useful or not because 
+no useless information is part of the problem statement. Usually when sorted input is involved, there a bunch of algorithm that should come to mind immediately. Out of this set, binary search is probably going to be one of the firsts.
+But how can binary search be applied to this problem?
 
-\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array2]{sources/find_k_closest_in_array/find_k_closest_in_array_solution2.cpp}
+Let's take a step back and try to analyze the problem for a slightly different angle. In particular, let's discuss the case where $x \in \: I$. In this case we know for sure that $x$ is going to be part of the output vector. 
+Because the input is sorted we can use binary search to search for $x$ in $I$. Once we have identified the index $j$ such that $I_j = x$ we know that the closest element to $x$ must either be at index $j+1$ or $j-1$
+\footnote{If that was not true it would mean that:
+\begin{itemize}
+	\item $I_k = I_{j+1}$. In this case, picking $K$  would not be an improvement to $j-1$ or $j+1$.
+	\item otherwise either:
+	\begin{itemize}
+		\item $\exists k < j-1 \: : I_k < I_{j-1}$ and  $x-I_k < x-I_{j-1}$ or
+		\item $\exists k > j+1 \: : I_k > I_{j+1}$ and  $I_k-x < I_{j+1}-x$ 
+	\end{itemize} which is impossible because the input is sorted.
+\end{itemize}}.
+Therefore once $x$ has been identified we can select a range of $k$ elements "centered" at $j$.
+Said range can be found by using a two pointers tecnique. 
+We start by initializing two pointers $l = j$ and $r = j$. THen until $r-l+1 < k$ we do one of the following operations:
+\begin{itemize}
+	\item if $l = 0$ then $r = r+1$
+	\item if $r = |I|$ then $l = l-1$
+	\item if$ x-I_{l-1} > I_{r+1}-x$ then $r = r+1$. The range is enlarged at the its right end side.
+	\item symmetrically for the left side: if $x-I_{l-1} > I_{r+1}-x$ then $ l + l+1$. The range is enlarged at the its left end side.
+\end{itemize}
+In other words once $x$ has been found, we incrementally include elements around it, by always choosing between the closest numbers to $x$ between the numbers pointed by the two pointers.
+
+This approach can be easily extended to the case where $x$ is not present in the input array as it also work when we try to 
+build the range of elements to be returned around the closest element to $x$ in the array.
+Turns out that binary search can be used to find such element (we even have STL support for such operation).
+In particular we can use it to identify the index of the first element that is larger or equal than $x$: a value that is commonly known as \textit{lower bound}.
+Armed with this information let's have a look at Listing \ref{} showing the implementation of the idea above where we use the STL \inline{std::lower\_bound} function to find the index $o$ of the 
+first element greater or equal than $x$. We then compare such value with the value at index $p = o-1$ (if exists) and we promote $o$ or $p$ to be the index to closest element to $x$ in the array depending on their absolute difference to $x$. 
+The closest of the two to $x$ to be the starting value for the algorithm described above.
+
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using \inline{std::lower\_bound}.},label=list:find_k_closest_in_array2]{sources/find_k_closest_in_array/find_k_closest_in_array_solution3.cpp}
 
