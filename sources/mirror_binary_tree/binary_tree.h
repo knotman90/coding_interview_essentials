@@ -4,7 +4,7 @@
 template<typename T>
 struct Node{
     Node() = default;
-    Node(const T& val ): payload(val){};
+    Node(const T& val ): payload(val), left(nullptr), right(nullptr){};
     Node* left = nullptr, *right = nullptr;
     T payload{};
 };
