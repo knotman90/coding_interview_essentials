@@ -6,59 +6,82 @@
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{TITLE OF THE CHAPTER}
+\chapter{Find the $K$ closest elements}
 \label{ch:find_k_closest_in_array}
 \section*{Introduction}
+In this chapter we are going to discuss a problem that asks you to return a subset of a given input  array. 
+We will investigate two solutions: one that is based on sorting and the other on binary search with the latter being more efficient than the former because we will make good use of the fact
+that the input is going to be provided already sorted. As we will see the solution based on sorting is going to be almost trivial to and we will be able to derive it
+directly from the problem statement while the solution based on binary search requires slightly more brain work and typing to get it right. 
+
+We will show  two implementations of the binary search solution: one  based entirely  the C++ STL, and others where we will write the binary search algorithm ourself. 
+
 
 \section{Problem statement}
 \begin{exercise}
 
-	Given a sorted array arr, two integers k and x, find the k closest elements to x in the array. The result should also be sorted in ascending order. If there is a tie, the smaller elements are always preferred.
-
- 
-
-	Example 1:
-	
-	Input: arr = [1,2,3,4,5], k = 4, x = 3
-	Output: [1,2,3,4]
-	Example 2:
-	
-	Input: arr = [1,2,3,4,5], k = 4, x = -1
-	Output: [1,2,3,4]
+	Write a function that takes as input
+	\begin{enumerate*}
+		\item a sorted array $I$ and two integers
+		\item $k$ and
+		\item $x$
+	\end{enumerate*}
+	returns an array, sorted in ascending order, containing the $k$ elements that are closest to $x$ in $I$.
+	Note that: given two elements $y$, and $z$, $y$ is closer to $x$ than $z$ if 
+	\begin{equation}
+		|x-y| < |x-z|
+	\label{eq:kclosest_in_array:sort_criteria}
+	\end{equation}.
 	 
-	
-	Constraints:
-	
-	1 <= k <= arr.length
-	1 <= arr.length <= 10^4
-	Absolute value of elements in the array and x will not exceed 104
+
 	\begin{example}
-		\hfill \
-		
+		\hfill \\
+		Gven $I = \{1,2,3,4,5\}$, $k=4$ and $x = 3$ the function returns: $\{2,3,4,5\}$
 	\end{example}
 
 	\begin{example}
-		\hfill \
-		
+		\hfill \\
+		Gven $I = \{1,2,3,4,5\}$, $k=4$ and $x = -1$ the function returns: $\{1,2,3,4\}$
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Gven $I = \{12,16,26,30,35,39,42,46,48,50,53,55,56\}$,
+		 $k=5$ and $x = 36$ the function returns: $\{26,30,35,39,42\}$
 	\end{example}
 \end{exercise}
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
+	\item What should be the function behavior when resolving ties?
 	\begin{answered}
-		\textit{}
+		\textit{The function should always favor the smaller element in case of a tie.}
+	\end{answered}
+	
+	\item Is I guaranteed to be sorted in ascending order?
+	\begin{answered}
+		\textit{Yes you can assume $I$ to  always sorted in ascending order.}
 	\end{answered}
 	
 \end{QandA}
 
-\section{Discussion}
-\label{find_k_closest_in_array:sec:discussion}
+\section{Sorting}
+\label{find_k_closest_in_array:sec:sorting}
+A solution that almost immediately follows from the problem statement is based on the idea of sorting the elements of $I$ according to the criteria shown in Equation \ref{eq:kclosest_in_array:sort_criteria}.
+The idea is that if $I$ is sorted according to the absolute value of the different between each number of $I$ and $x$ then, the closest number to $x$ will be located, after the sorting at the front of $I$.
+All is necessary at that point is to copy the first $K$ element of $I$ into the return array.
+Listing \ref{list:find_k_closest_in_array1} shows a possible implementation of such idea. 
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array1]{sources/find_k_closest_in_array/find_k_closest_in_array_solution1.cpp}
 
+Please note that as in all cases where you actually do not need to have the whole array sorted you can use partial sorting instead of the full fledged sorting. In all cases where $k$ is smaller that $n$ the complexity is going to be slighty better as
+we will go from the $O(nlog(n))$ of the normal sorting to $O(nlog(k))$ of the partial sort. 
+Fortunately making this change in C++ is extremely easily and it is only matter of calling \inline{std::partial_sort} instead of \inline{std::sort} as shown in Listing \ref{list:find_k_closest_in_array2}.
 
-\subsection{Brute-force}
-\label{find_k_closest_in_array:sec:bruteforce}
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array1]{sources/find_k_closest_in_array/find_k_closest_in_array_solution2.cpp}
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:find_k_closest_in_array]{sources/find_k_closest_in_array/find_k_closest_in_array_solution1.cpp}
+\subsection{Binary Search}
+\label{find_k_closest_in_array:sec:binary_search}
+
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array2]{sources/find_k_closest_in_array/find_k_closest_in_array_solution2.cpp}
 
