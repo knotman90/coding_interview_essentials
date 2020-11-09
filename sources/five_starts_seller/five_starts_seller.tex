@@ -1,0 +1,155 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Five Starts Sellers}
+\label{ch:five_starts_seller}
+\section*{Introduction}
+Given the number of five-star and total reviews for each product a company sells,
+as well as the threshold percentage, 
+what is the minimum number of additional five-star reviews the company needs to become five star seller.
+For ex, there are 3 products (n=3) with productRatings =[[4,4],[1,2],[3,6]], percentage rating threshold = 77.
+[1,2] indicates => [1 (five star reviews) ,2 (total reviews)].
+We need to get the seller reach the threshold with minimum number of additional five star reviews.
+
+Before we add more five star reviews, the percentage for this seller is ((4/4) + (1/2) + (3/6))/3 = 66.66%
+If we add a five star review to 2nd product, ((4/4) + (2/3) + (3/6))/3 = 72.22%
+If we add another five star review to 2nd product, ((4/4) + (3/4) + (3/6))/3 = 75%
+If we add a five star review to 3rd product, ((4/4) + (3/4) + (4/7))/3 = 77.38%
+At this point, 77% (threshold) is met. Therefore, answer is 3 (because that is the minimum five star reviews we need to add, to get the seller reach the threshold).
+
+\begin{lstlisting}[language=c++, caption={Definition of a linked list with a random pointer.},label=list:delete_duplicates_list:linked_list]
+	public static int fiveStarReviews(List<List<Integer>> productRatings, int ratingsThreshold){
+	}
+
+
+
+
+\end{lstlisting}
+\section{Problem statement}
+\begin{exercise}
+
+\end{exercise}
+
+
+\begin{example}
+	\hfill \
+	
+\end{example}
+
+\begin{example}
+	\hfill \
+	
+\end{example}
+
+\section{Clarification Questions}
+
+
+
+
+\begin{QandA}
+	\item 
+	\begin{answered}
+		\textit{}
+	\end{answered}
+	
+\end{QandA}
+
+\section{Discussion}
+\label{five_starts_seller:sec:discussion}
+
+Please point out if my solution is wrong.
+
+Upvote if you like it.
+
+Part 0. Intuition
+Heap question. To improve the rating at best, we need to figure out what's the difference between current rating and if 1 more five star is added to this product
+thus, create heap = [[-diff(p)]+p for p in productRatings], where diff is the difference between current state and if one more 5 star is added to it
+there is no max-heap in Python, so use negative (-) instead.
+until our rating overpasses threshold, pop heap and update the diff then push back to heap
+Return how many times we did this (ans)
+Part 1. Implementation
+class Solution:
+    def fiveStartReviews(self, productRatings, ratingsThreshold):
+        n = len(productRatings)
+        ans = 0
+        cur_rating = sum(p[0]/p[1] for p in productRatings) / n * 100
+        def diff(p): return (p[0]+1)/(p[1]+1) - p[0]/p[1]
+        heap = [[-diff(p)]+p for p in productRatings]                     # create diff and store in heap & heapify
+        heapq.heapify(heap)
+        while cur_rating < ratingsThreshold:
+            p_diff, p0, p1 = heapq.heappop(heap)
+            cur_rating = (cur_rating * n + (-p_diff) * 100) / n           # update current rating by adding the difference
+            heapq.heappush(heap, [-diff([p0+1, p1+1]), p0+1, p1+1])       # maintain diff order in heap
+            ans += 1
+        return ans
+Part 2. Input & Test
+productRatings = [[[4, 4], [1, 2], [3, 6]]]
+ratingsThreshold = [77]
+output = [3]
+
+s = Solution()
+for i in range(len(productRatings)):
+    assert s.fiveStartReviews(
+		productRatings[i], ratingsThreshold[i]) == output[i]
+		
+
+
+
+
+		Java PriorityQueue solution, the idea is same as other guys' solutions. For each product, we want to calculate the biggest percentage jump if we add one more five-start to it. So we can use a max-heap so the head of the heap is current biggest jump product. Then we create a new rating based on this head, add one more five-start to this new rating and push to the heap again. Reminder to keep track the updated rating until we are above the threshold. I don't have enough test cases, so please point me out any problems. Thanks!
+
+public class Solution {
+    public int fiveStarReviews(List<List<Integer>> productRatings, int ratingsThreshold){
+        int num = 0;
+        PriorityQueue<List<Integer>> pq = new PriorityQueue<>((l1, l2) -> diff(l2) - diff(l1)); // max-heap.
+        for(List<Integer> rating : productRatings) pq.offer(rating); // initialize PriorityQueue.
+        double curRating = 0;
+        for(List<Integer> rating : productRatings) curRating += 100.0 * rating.get(0) / rating.get(1); // initialize curRating.
+        while(curRating < ratingsThreshold * productRatings.size()) {
+            num++;
+            List<Integer> rating = pq.poll();
+            List<Integer> newRating = Arrays.asList(rating.get(0)+1, rating.get(1)+1);
+            curRating = curRating - 100.0 * rating.get(0) / rating.get(1) + 100.0 * newRating.get(0) / newRating.get(1); // keep updating the rating.
+            pq.offer(newRating);
+        }
+        return num;
+    }
+
+    // the diff between the current product rating and the product added one more five-star rating.
+    private int diff(List<Integer> p) {
+        double currRating = 100.0 * p.get(0) / p.get(1);
+        double newRating = 100.0 * (p.get(0)+1) / (p.get(1)+1);
+        return (int)(newRating - currRating);
+    }
+
+    public static void main(String[] args) {
+        List<List<Integer>> ratings = new ArrayList(){
+            {
+                add(Arrays.asList(4,4));
+                add(Arrays.asList(1,2));
+                add(Arrays.asList(3,6));
+            }
+        };
+        int threshold = 77;
+        Solution s = new Solution();
+        System.out.println(s.fiveStarReviews(ratings, threshold));
+    }
+}
+
+
+
+I think the underlying intuition here is that the further that a product rating is away from 100%
+, the quicker its rating improves. 0/1 -> 1/2 is a 50%
+ jump. 1/2 -> 2/3 is a 17%
+  jump. 2/3 -> 3/4 is a 9%
+   jump and so on. So make a priority queue with a comparator for the product ratings, update the one with the lowest and add it back to the PQ
+\subsection{Brute-force}
+\label{five_starts_seller:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:five_starts_seller]{sources/five_starts_seller/five_starts_seller_solution1.cpp}
+

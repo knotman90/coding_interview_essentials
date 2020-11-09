@@ -1,0 +1,1 @@
+../../sources/five_starts_seller/five_starts_seller_solution1.cpp
