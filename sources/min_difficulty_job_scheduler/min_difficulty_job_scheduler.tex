@@ -1,0 +1,117 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/
+%
+% Difficulty: Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Minimum difficulty job schedule}
+\label{ch:min_difficulty_job_scheduler}
+\section*{Introduction}
+Imagine you are part of a team currently busy doing beta testing on your new cool feature. The
+testing consists of executing a number of tasks. Each task has dependencies on other tasks and is
+assigned a certain  amount of complexity points (a measure of how difficult a task is to be
+performed; it is not a measure of time). The dependencies between the tasks have been already worked
+out i.e. the order in which the task are going to be executed is decided. The problem in this
+chapter is about coming up with a schedule plan for the execution of these tasks spanning across a
+given number of days. Among all possible schedules we need to make an effort to calculate the
+minimum possible complexity achievable for a schedule that will eventually make sure all tasks are
+executed and also that there is at least one task executed every day.
+
+
+\section{Problem statement}
+\begin{exercise}
+	Write a function that takes as an input a list of tasks $I$ and an integer $d$. The elements in
+	$I$ are dependent on each other and in order to schedule a certain task $I_i$ all the tasks $I_j
+	\: : j < i$ have to be completed. The function should return the minimum complexity among all
+	possible schedules of lenght exactly $d$ days. The complexity of a job is calculated as the sum
+	of the complexity of each single day of the schedule. The complexity of a day of the schedule is
+	defined as the maximum complexity of the task planned for that day.
+
+	As an additional constraint you have to make sure that there is at least a task scheduled for
+	each day.
+		
+	\begin{example}
+		\hfill \\
+		Given:
+		\begin{itemize}
+			\item $I = \{6,5,4,3,2,1\}$
+			\item $d = 2$
+		\end{itemize}
+		the function returns $7$. You can schedule tasks $0$ to $4$ during the first day and the
+		last task during the second day. You cannot just schedule all tasks during the first day
+		because then you would have a day in the schedule without planned tasks which is not
+		allowed.
+	\end{example}
+	
+	\begin{example}
+		\hfill \\
+		Given:
+		\begin{itemize}
+			\item $I = \{10,10,10\}$
+			\item $d = 4$
+		\end{itemize}
+		the function returns $-1$. There is no way to schedule tasks for $4$ days when there are
+		only $3$ tasks available for scheduling.
+	\end{example}
+
+		
+	\begin{example}
+		\hfill \\
+		Given:
+		\begin{itemize}
+			\item $I = \{7,1,7,1,7,1\}$
+			\item $d = 3$
+		\end{itemize}
+		the function returns $15$. You can schedule the first $4$ tasks the first day for a total
+		complexity of $7$. Task at index $4$ and $5$ can be scheduled for days $2$ and $3$
+		respectively. 
+
+		Notice that in this case if $d = 2$ then the function would return $8$.
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given:
+		\begin{itemize}
+			\item $I = \{11,111,22,222,33,333,44,444\}$
+			\item $d = 6$
+		\end{itemize}
+		the function returns $843$. You can schedule tasks $0,1,2,3,4$ in the first $5$ days and the
+		rest during the \nth{6}.
+		
+	\end{example}
+\end{exercise}
+
+
+
+
+
+	\section{Clarification Questions}
+	
+	\begin{QandA}
+		\item What should the function return in case where it is not possible to make a valid
+		schedule? For instance when $|I| < d$?
+	\begin{answered}
+		\textit{You can return $-1$ in that case.}
+	\end{answered}
+
+	\item It is guaranteed for the complexity values to be positive ($\gew 0$)?
+	\begin{answered}
+		\textit{Yes you can assume complexities are always positive.}
+	\end{answered}
+
+	
+	
+\end{QandA}
+
+\section{Discussion}
+\label{min_difficulty_job_scheduler:sec:discussion}
+Use DP. Try to cut the array into d non-empty sub-arrays. Try all possible cuts for the array.
+Use dp[i][j] where DP states are i the index of the last cut and j the number of remaining cuts. Complexity is O(n * n * d).
+
+\subsection{Brute-force}
+\label{min_difficulty_job_scheduler:sec:bruteforce}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:min_difficulty_job_scheduler]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
+
