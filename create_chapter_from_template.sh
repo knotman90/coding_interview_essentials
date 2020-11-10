@@ -44,18 +44,16 @@ echo "\chapter{TITLE OF THE CHAPTER}
 echo "\section{Problem statement}
 \begin{exercise}
 
+	\begin{example}
+		\hfill \\
+		
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		
+	\end{example}
 \end{exercise}
-
-
-\begin{example}
-	\hfill \\
-	
-\end{example}
-
-\begin{example}
-	\hfill \\
-	
-\end{example}
 
 \section{Clarification Questions}
 
