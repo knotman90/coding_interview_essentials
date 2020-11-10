@@ -248,21 +248,26 @@ The key insights are:
 \end{itemize}
 The problem is that we do not know exactly how many elements of $A$ will be part $C_l$ but if we do, then, we also know immediately how many elements of $B$ go to $C_l$
 and at that point we can calculate the median.
-We cannot find directly how many elements  of $A$ contributes to $C_l$, but we can test farily easily test if the first $i$ elements do.
+We cannot find directly how many elements  of $A$ contributes to $C_l$, but we can test farily easily if the first $i$ elements do.
 Let's suppose we try to make $C_l$ by using $i$ elements from the left portion of $A$.
 Because $|C|=n+m$ then $|C_l| = \frac{n+m}{2} = i+j$ where $j$ is the number of elements from the left part of $B$ contributing to $C_l$. 
 Thus if we take $i$ elements from $A$ we need to take $j = (n+m)-i$ elements from $B$. 
 Once $i$ and $j$ are decided, we also know that the last element of $C_l$, will be the maximum element among the first $i$ elements of $A$ and the first $j$ elements of $B$.
-From these arguments follows that the right half of $C$, $C_r$, denoted  contains all the remaining $n-i$ elements of $A$ and $m-j$ of $B$, 
+From these arguments follows that the right half of $C$, $C_r$,  contains all the remaining $n-i$ elements of $A$ and $m-j$ of $B$, 
 and also that the first element of $C_r$ will be the smallest element among them.
 Given:
 \begin{itemize}
-	\item $m_l$ and $M_l$ are respectively the smallest and largest elements among the $i$ elements of $A$ and $j$ of $B$
-	\item $m_r$ and $M_r$ are respectively the smallest and largest elements among the $n-i$ elements of $A$ and $m-j$ of $B$
+	\item $M_l$ is the largest elements among the $A[i]$  $B[j]$
+	\item $m_r$ is the smallest element among the $A[i+1]$  $B[j+1]$
 \end{itemize} 
-then if $i$ is indeed the right amount of element from $A$ belonging to $C_l$ then $M_l \leq m_r$ and $m_l$.
+then if $i$ is indeed the right amount of element from $A$ belonging to $C_l$ then, $M_l \leq m_r$.
+If $M_l > m_r$ then we need to understand whether we took too many or too few elements from $A$ to be part of $C_l$. 
+We can check this by checking whether  $M_l$ belongs to $B$ or $A$, respectively. 
+Thus if $A[i] > B[j]$ we reduce or increase $i$ by doing $r = r-1$. 
+Conversely if $A[i] < B[i]$ then $i$ is increased by moving the left boundary of the binary search range: $l = l+1$.
 
-\lstinputlisting[language=c++, caption={Naive implementation of solution to the problem of finding the median of two sorted arrays.},label=list:median_sorted_naive]{sources/median_sorted_arrays/median_sorted_arrays_solution3.cpp}
+Listing \ref{list:median_sorted_binary} shows an implementation of the idea above.
+\lstinputlisting[language=c++, caption={Binary search solution to the \textit{median of two sorted arrays} problem.},label=list:median_sorted_binary]{sources/median_sorted_arrays/median_sorted_arrays_solution3.cpp}
 
 
 

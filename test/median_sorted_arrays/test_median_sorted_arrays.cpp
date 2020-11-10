@@ -9,6 +9,7 @@ using std::swap;
 
 #include "median_sorted_arrays_solution1.cpp"
 #include "median_sorted_arrays_solution2.cpp"
+#include "median_sorted_arrays_solution3.cpp"
 
 TEST(median_sorted_arrays, test_when_A_is_empty)
 {
