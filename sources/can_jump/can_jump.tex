@@ -38,16 +38,33 @@ are able to reach the last cell of the array, false otherwise.
 	\begin{example}
 		\hfill \\
 		Given  $I=[2,3,1,1,4]$ the function retuns \textbf{true}. You jump from cell $0$ to $1$ and
-		then take a $3$ cells wide jump to the end of the array. 
+		then take a $3$ cells wide jump to the end of the array. See Figure \ref{fig:can_jump:example1}.
+		\label{ex:can_jump_example1}
 	\end{example}
 
 	\begin{example}
 		\hfill \\
 		Given $I=[3,2,1,0,4]$ the function retuns \textbf{false} because it is impossible to reach
-		any cells with index higher than $3$.
-		
+		any cells with index higher than $3$. See Figure \ref{fig:can_jump:example2}: there is not incoming edge for the node with label $4$.
+		\label{ex:can_jump_example2}
 	\end{example}
 \end{exercise}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/can_jump/images/can_jump_example1}
+	\caption[Implicit graph for the Example \ref{ex:can_jump_example1}.]
+	{This figure shows how the implicit graph for the problem instance of Example \ref{ex:can_jump_example1} looks like.}.
+	\label{fig:can_jump:example1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/can_jump/images/example2}
+	\caption[Implicit graph for the Example \ref{ex:can_jump_example2}.]
+	{This figure shows how the implicit graph for the problem instance of Example \ref{ex:can_jump_example2} looks like.}.
+	\label{fig:can_jump:example2}
+\end{figure}
 
 %\section{Clarification Questions}
 
@@ -107,19 +124,20 @@ implementation of this idea.
 
 \lstinputlisting[language=c++, caption={Quadratic time and linear space DFS solution to the \textit{jump game} problem using a visited array.},label=list:can_jump1]{sources/can_jump/can_jump_solution1.cpp}
 
-Notice that one optimization from which this solution (and perhaps also Listing \ref{list:can_jump1_1}) can benefit would be to always try to
-jump the longest distance possible. Despite this would not change their asymptotic complexity, in
-practice this might be faster in certain cases.
+Notice that one optimization from which this solution (and perhaps also Listing
+\ref{list:can_jump1_1}) can benefit would be to always try to jump the longest distance possible.
+Despite this would not change their asymptotic complexity, in practice this might be faster in
+certain cases.
 
 
 
 \subsection{Greedy}
 \label{can_jump:sec:DP1}
-There is however a much faster solution to this problem that is based on the idea that we can return true if we 
-can jump from the cell at index $0$ to a cell from which we can reach the end of the array.
-If we apply the same reasoning to any index $i$ we end up with basically a Dynamic programming approach that, 
-given $G(x)$ is $1$ if you can reach the end of the array from the cell $x$ and $0$ otherwise,
-is based on the following recursive formula:
+There is however a much faster solution to this problem that is based on the idea that we can return
+true if we can jump from the cell at index $0$ to a cell from which we can reach the end of the
+array. If we apply the same reasoning to any index $i$ we end up with basically a Dynamic
+programming approach that, given $G(x)$ is $1$ if you can reach the end of the array from the cell
+$x$ and $0$ otherwise, is based on the following recursive formula:
 \begin{equation}
 	\begin{cases}
 		G(|I|-1) = 1 \\
@@ -128,15 +146,21 @@ is based on the following recursive formula:
 	 \end{cases}
 	\label{eq:can_jump:dpformula}
 \end{equation}
-Equation \ref{eq:can_jump:dpformula} shows that a possible implementation would start processing cells from the last to the first
-and that for each element a linear time lookup for a suitable cell $y$ might be needed. Therefore the complexity of this solution is quadratic in time.
-However we can drastically lower its complexity by noticing that when processing cell $x$ all we care about is whether the closest cell to the right from which you can reach the end of the array
-is reachable from $x$. 
-We can carry this information into a variable $m$ down from cell $|I|-1$ to cell $0$ and update it after a cell is processed and this would effectively allow us to have a linear time solution.
+Equation \ref{eq:can_jump:dpformula} shows that a possible implementation would start processing
+cells from the last to the first and that for each element a linear time lookup for a suitable cell
+$y$ might be needed. Therefore the complexity of this solution is quadratic in time. However we can
+drastically lower its complexity by noticing that when processing cell $x$ all we care about is
+whether the closest cell to the right from which you can reach the end of the array is reachable
+from $x$. We can carry this information into a variable $m$ down from cell $|I|-1$ to cell $0$ and
+update it after a cell is processed and this would effectively allow us to have a linear time
+solution.
 
-To summarize the linear time solution for this problem works as follows:
-We iterate the array $I$ right-to-left and for each cell $x$ we check whether we can reach $m$ jumping from $x$. If we can then $x$ is the new leftmost cell from which we can reach the end of the array, thus $m = x$.
-Otherwise we continue by processing cell $x-1$ in a similar manner. Eventually we will have processed all cells and therefore we can return true if $m = 0$ (meaning cell $0$ is the leftmost cell from which we can jump to location $|I|-1$), and false otherwise.
+To summarize the linear time solution for this problem works as follows: We iterate the array $I$
+right-to-left and for each cell $x$ we check whether we can reach $m$ jumping from $x$. If we can
+then $x$ is the new leftmost cell from which we can reach the end of the array, thus $m = x$.
+Otherwise we continue by processing cell $x-1$ in a similar manner. Eventually we will have
+processed all cells and therefore we can return true if $m = 0$ (meaning cell $0$ is the leftmost
+cell from which we can jump to location $|I|-1$), and false otherwise.
 \lstinputlisting[language=c++, caption={Linear time DFS solution on the implicit graph having indexes as vertices and jump lenghts defining the arcs between them. },label=list:can_jump]{sources/can_jump/can_jump_solution2.cpp}
 
 
