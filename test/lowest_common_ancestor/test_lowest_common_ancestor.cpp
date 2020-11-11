@@ -37,7 +37,7 @@ TEST(lowest_common_ancestor, test1)
   {
     auto [p, q, expected] = value;
     {
-      const auto& LCA = findLeastCommonAncestor(root, p, q);
+      const auto& LCA = findLeastCommonAncestor_reference(root, p, q);
       ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
       ASSERT_EQ(LCA->val, expected);
     }
@@ -93,7 +93,7 @@ TEST(lowest_common_ancestor, example1)
   {
     auto [p, q, expected] = value;
     {
-      const auto& LCA = findLeastCommonAncestor(root, p, q);
+      const auto& LCA = findLeastCommonAncestor_reference(root, p, q);
 
       ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
       ASSERT_EQ(LCA->val, expected);

@@ -1,5 +1,5 @@
 template <typename T>
-Node<T>* findLeastCommonAncestor(Node<T>* root, const T& p, const T& q)
+Node<T>* findLeastCommonAncestor_reference(Node<T>* root, const T& p, const T& q)
 {
   while (root)
   {

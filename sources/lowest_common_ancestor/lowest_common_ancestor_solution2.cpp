@@ -32,6 +32,7 @@ Node<T>* findLeastCommonAncestor_paths(Node<T>* root, const T& p, const T& q)
     std::vector<Node<T>*> P_p = find_path(root, p);
     std::vector<Node<T>*> P_q = find_path(root, q);
     
+    //find the point up to which P_q and P_q are the same
     auto itp = begin(P_p);
     auto itq = begin(P_q);
     Node<T>* ans = *itp;
