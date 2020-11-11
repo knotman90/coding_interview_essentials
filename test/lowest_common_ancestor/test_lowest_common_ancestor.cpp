@@ -15,6 +15,7 @@ using Node = Book::BinaryTree::Node<T>;
 
 #include "lowest_common_ancestor_solution1.cpp"
 #include "lowest_common_ancestor_solution2.cpp"
+#include "lowest_common_ancestor_solution3.cpp"
 
 TEST(lowest_common_ancestor, test1)
 {
@@ -35,10 +36,21 @@ TEST(lowest_common_ancestor, test1)
        })
   {
     auto [p, q, expected] = value;
-    const auto& LCA       = findLeastCommonAncestor(root, p, q);
-
-    ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
-    ASSERT_EQ(LCA->val, expected);
+    {
+      const auto& LCA = findLeastCommonAncestor(root, p, q);
+      ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
+      ASSERT_EQ(LCA->val, expected);
+    }
+    {
+      const auto& LCA = findLeastCommonAncestor_paths(root, p, q);
+      ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
+      ASSERT_EQ(LCA->val, expected);
+    }
+    {
+      const auto& LCA = findLeastCommonAncestor_paths_optimized(root, p, q);
+      ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
+      ASSERT_EQ(LCA->val, expected);
+    }
   }
 }
 
@@ -80,10 +92,22 @@ TEST(lowest_common_ancestor, example1)
        })
   {
     auto [p, q, expected] = value;
-    const auto& LCA       = findLeastCommonAncestor(root, p, q);
+    {
+      const auto& LCA = findLeastCommonAncestor(root, p, q);
 
-    ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
-    ASSERT_EQ(LCA->val, expected);
+      ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
+      ASSERT_EQ(LCA->val, expected);
+    }
+    {
+      const auto& LCA = findLeastCommonAncestor_paths(root, p, q);
+      ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
+      ASSERT_EQ(LCA->val, expected);
+    }
+    {
+      const auto& LCA = findLeastCommonAncestor_paths_optimized(root, p, q);
+      ASSERT_TRUE(LCA) << "error for nodes " << p << "and " << q;
+      ASSERT_EQ(LCA->val, expected);
+    }
   }
 }
 
