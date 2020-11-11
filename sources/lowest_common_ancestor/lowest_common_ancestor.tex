@@ -14,22 +14,29 @@ quite often a topic or a fundamental building block of coding interview question
 Given a tree and two nodes $p$ and $q$, the lowest common ancestor  of $p$ and $q$, ($LCA(p,q)$) is defined as the lowest or deepest node that has both $p$ and $q$ as descendant.
 In other words the LCA is the shared ancestor or $p$ and $q$ that is the farthest from the root of the tree.
 
-In \section\ref{} we will investigate an easy approach that can be used to the LCA of two nodes and we will provide an 
+In this chapter we will explore the problem of finding the LCA for a tree of a particular kind: binary search. This constraint simplify the general problem of finding LCA greatly. 
 \section{Problem statement}
 \begin{exercise}
-	Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
-
-	According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
-	\begin{example}
-		\hfill \
-		
-	\end{example}
+	Write a function that takes a binary search tree $T$, and two nodes $p$ and $q$ and returns their lowest common ancestor.
 
 	\begin{example}
-		\hfill \
-		
+		\hfill \\
+		Given the tree in Figure \ref{fig:lowest_common_ancestor:example1} the lowest common ancestor for nodes:
+		\begin{itemize}
+			\item $p = 2$, $q=12$ is node $3$
+			\item $p = 12$, $q=3$ is node $12$
+			\item $p = 18$, $q=1$ is the root node $13$
+		\end{itemize}
+		\label{ex:lower_common_ancestor:example1}
 	\end{example}
 \end{exercise}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\textwidth]{sources/lowest_common_ancestor/images/example1}
+	\caption[Sample short cpation]{Binary Search tree of Example \ref{ex:lower_common_ancestor:example1}}.
+	\label{fig:lowest_common_ancestor:example1}
+\end{figure}
 
 \section{Clarification Questions}
 
@@ -48,5 +55,6 @@ In \section\ref{} we will investigate an easy approach that can be used to the L
 \subsection{Brute-force}
 \label{lowest_common_ancestor:sec:bruteforce}
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:lowest_common_ancestor]{sources/lowest_common_ancestor/lowest_common_ancestor_solution1.cpp}
-
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={Sample Caption},label=list:lowest_common_ancestor]{sources/lowest_common_ancestor/lowest_common_ancestor_solution1.cpp}
+\end{minipage}
