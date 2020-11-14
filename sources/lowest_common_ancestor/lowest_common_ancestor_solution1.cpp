@@ -1,13 +1,21 @@
-	private static TreeNode findLeastCommonAncestor(TreeNode root, int i, int j) {
-		while(true){
-			if(root.val>i && root.val>j){
-				root = root.left;
-			}
-			else if(root.val<i && root.val<j){
-				root = root.right;
-			}
-			else{
-				return root;
-			}
-		}		
-	}
+template <typename T>
+Node<T>* findLeastCommonAncestor_reference(Node<T>* root, const T& p, const T& q)
+{
+  while (root)
+  {
+    const auto& payload = root->val;
+    if (payload > p && payload > q)
+    {
+      root = root->left;
+    }
+    else if (payload < p && payload < q)
+    {
+      root = root->right;
+    }
+    else
+    {
+      return root;
+    }
+  }
+  return root;
+}
