@@ -605,3 +605,8 @@ addtohook={%
 \renewcommand{\thefootnote}{\textit{\alph{footnote}}}
 \usepackage{pifont}
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+
+%rotate characters
+\def\rotatecharone#1{\rotatebox[origin=c]{180}{#1}}
+
+\def\rotatechartwo#1{\reflectbox{#1}}
