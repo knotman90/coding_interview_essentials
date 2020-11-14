@@ -1,63 +1,34 @@
-public static int findDistance(int[] is, int i, int j) {
-		TreeNode root = null;
-		for(int k=0;k< is.length;k++){
-			root = buildBST(root, is[k]);			
-		}
-		TreeNode lca = findLeastCommonAncestor(root, i, j);	
-		int distance = findDistanceFromLCA(lca,i)+findDistanceFromLCA(lca,j);
-		return distance;
-	}
+/**
+ * Calculates the distance between T and a node with payload `val`
+ * Perform a classic BST visit/search (downward) from T for val.
+ *
+ * @param T is valid binary search tree
+ * @param val is the value to be searched in T
+ * @return the distance between T and val
+ */
+template<typename U>
+int find_distance_down(const Node<U>*const T, const U val)
+{
+	assert(T && "node val exists and is reachable from T");
+	const auto& payload = T->val;
+	if(payload == val)
+		return 0;
+	if(val <= payload)
+		return 1+find_distance_down(T->left, val);
+	return 1+find_distance_down(T->right, val);
+}
 
-	private static int findDistanceFromLCA(TreeNode lca, int i) {
-		int distanceSum= 0;
-		while(true){
-			if(lca!=null){
-				if(lca.val==i)
-					return distanceSum;
-				else if(lca.val<i){
-					distanceSum++;
-					lca = lca.right;
-				}
-				else if(lca.val>i){
-					distanceSum++;
-					lca = lca.left;
-				}
-			}
-			else 
-				return distanceSum;
-		}		
-	}
-
-	private static TreeNode findLeastCommonAncestor(TreeNode root, int i, int j) {
-		while(true){
-			if(root.val>i && root.val>j){
-				root = root.left;
-			}
-			else if(root.val<i && root.val<j){
-				root = root.right;
-			}
-			else{
-				return root;
-			}
-		}		
-	}
-
-	private static TreeNode buildBST(TreeNode root , int node) {
-		if(root==null){
-			root = new TreeNode(node);
-			return root;
-		}
-		else if(root.val<node){
-			if(root.right ==null)
-				root.right = new TreeNode(node);
-			else
-				buildBST(root.right, node);						
-		}
-		else if(root.val>node){
-			if(root.left==null)
-				root.left = new TreeNode(node);
-			else 
-				buildBST(root.left, node);	
-		}		
-		return root;
-	}
+/**
+ * Find the distance between two nodes a tree
+ *
+ * @param T is valid binary search tree
+ * @param p is the payload of a node in T
+ * @param q is the payload of a node in T
+ * @return the minimum number of edges to traverse to get from p to q
+ */
+template<typename U>
+int min_distance_nodes_BST(Node<U>* T, const U p, const U q)
+{
+	const Node<U>*const lca = find_LCA(T , p, q);
+	return find_distance_down(lca, p) + find_distance_down(lca, q);
+}
