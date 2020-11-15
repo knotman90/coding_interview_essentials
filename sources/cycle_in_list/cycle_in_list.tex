@@ -97,7 +97,13 @@ represent the list shown in Figure \ref{fig:cycle_in_list:example1}.
 Considering this is a very well-known problem we will not spent time on dwelling on naive
 brute-force solution, and instead will only concentrate first on an optimal in time solution with
 linear space, and then we will concentrate on improving it by lowering the space complexity to
-constant.
+constant. 
+
+All solution implementation in this chapter uses the  Linked list definition shown in Listing \ref{list:cycle_in_list:node_definition};
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={Singly linked-list node definition.},label=list:cycle_in_list:node_definition]{sources/cycle_in_list/linked_list.h}
+\end{minipage}
 
 \subsection{Linear time and space solution}
 \label{cycle_in_list:sec:bruteforce}
@@ -109,7 +115,7 @@ of a loop. If we reach the end of the list and we were not be able to find a dup
 means there is no loop and we can return \lstinline[columns=fixed]{nullptr}. A possible
 implementation of this idea is shown in Listing \ref{list:cycle_in_list:linearspace}.
 
-\lstinputlisting[language=c++, caption={Linear time and space solution to the problem of detecting a cycle in a linked list.},label=list:cycle_in_list:linearspace]{sources/cycle_in_list/cycle_in_list_solution1.cpp}
+\lstinputlisting[language=c++, caption={Linear time and space solution to the problem of detecting a cycle in a linked list where an hashset is used to remember already visited nodes.},label=list:cycle_in_list:linearspace]{sources/cycle_in_list/cycle_in_list_solution1.cpp}
 
 
 
@@ -125,23 +131,25 @@ arriving at the starting point again, the faster has completed a second entire c
 this fact to detect a cycle in a linked list even if for the cycle detection problem things might be
 a bit more complicated because the two runners might now start going in loop at the same time (the
 list potentially has a first part the is not part of the loop as can be seen in Figure
-\ref{fig:cycle_in_list:example1}). The rest of the section is a bit technical and you can skip to
+\ref{fig:cycle_in_list:example1}). 
+
+
+The rest of the section is a bit technical and you can skip to
 the implementation shown in Listing \ref{list:cycle_in_list:constantspace} which can be self-explanatory considering that in the end the intuition behind the algorithm is quite easy. If you
 are interested in the details of why it works, read along. 
 
+
 Consider two iterators p,q with velocities $v_p=1$,$v_q=2$  respectively. Suppose the
-\textbf{cycle}(not the entire list) has length $n$. We can have two scenario depending on the index
+\textbf{cycle}(not the entire list) has length $n$. We can have two scenarios depending on the index
 $A$ of the starting node of the cycle:
 
 \begin{enumerate}
 \item the cycle starts at $A < n$.
 \item or  starts at \(A \geq n\).
 \end{enumerate}
-
 For the case $(1)$ when the slower iterator reaches $A$ the faster is at location $2A$ (which might
-mean that the faster iterator looped around the cycle already). How many iteration $k$ it will take
+mean that the faster iterator looped around the cycle already). How many iterations $k$ it will take
 before they meet? And at which node?
-
 The situation is described by the following congruences:
 \begin{align}
   A + kv_p &\equiv 2A + k2v_p \Mod{n} \\
@@ -174,14 +182,11 @@ now use similar argument to the previous case and write:
   (A \Mod{n}) + kv_p \Mod{n} & \equiv 0\Mod{n} \\
   (A \Mod{n}) + k \Mod{n} &\equiv 0 \Mod{n} \: \: \text{  : because  } v_p=1 \\
 \end{align}
-
-
 which has solution \(k = n-(A \Mod{n})\). This means that the meeting point is \(A \Mod{n}\) nodes
 before the beginning of the cycle. If we do the same operations as the previous case,(when \(A <
 n\)), we obtain again, the same result. Iterators will meet at the beginning of the cycle. Why? Well
 advancing \(q\) makes \(p\) cycle possibly several times ( remember that \(A \geq n\)  ) and it will
 clearly stops at \( A+(n-A \Mod{n}) + A \Mod{n} = A +n \;(mod (n))= A\).
-
 In other words the slower pointer is at first  at node number \(A+(n-A \Mod{n})\). We can write \( A
 = bn + r\) where \(r = A \;\Mod{n}\). After \(A\) advancing steps it will be at location  \( A+(n-A
 \;\Mod{n}) +bn +r (\Mod{n})\). Since \(bn \; \Mod{n}=0\) the result follows.
@@ -190,7 +195,6 @@ As an example consider a list with a cycle of length \(n=4\) starting at node nu
 first part of the algorithm tells us that the nodes will meet at node \(10 + 4 - 10 \: mod(4) =
 12\). Moving the fast pointer back to the head of the list and iterating one node per time both
 iterators will lead the slower point to node:
-
 
 
 Figure \ref{fig:cycle_in_list:floyd} depicts how the algorithm
