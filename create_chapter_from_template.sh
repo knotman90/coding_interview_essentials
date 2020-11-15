@@ -60,6 +60,15 @@ echo "\section{Problem statement}
 		
 	\end{example}
 
+	\begin{example}
+		\hfill \\
+		
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		
+	\end{example}
 \end{exercise}
 
 \section{Clarification Questions}
