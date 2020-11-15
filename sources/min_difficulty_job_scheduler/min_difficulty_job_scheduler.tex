@@ -24,8 +24,8 @@ executed and also that there is at least one task executed every day.
 	Write a function that takes as an input a list of tasks $I$ and an integer $d$. The elements in
 	$I$ are dependent on each other and in order to schedule a certain task $I_i$ all the tasks $I_j
 	\: : j < i$ have to be completed. The function should return the minimum complexity among all
-	possible schedules of lenght exactly $d$ days. The complexity of a job is calculated as the sum
-	of the complexity of each single day of the schedule. The complexity of a day of the schedule is
+	possible schedules of length exactly $d$ days. The complexity of a job is calculated as the sum
+	of the complexity of every single day of the schedule. The complexity of a day of the schedule is
 	defined as the maximum complexity of the task planned for that day.
 
 	As an additional constraint you have to make sure that there is at least a task scheduled for
@@ -85,33 +85,64 @@ executed and also that there is at least one task executed every day.
 
 
 
-
-
-	\section{Clarification Questions}
-	
+\section{Clarification Questions}
+		
 	\begin{QandA}
-		\item What should the function return in case where it is not possible to make a valid
-		schedule? For instance when $|I| < d$?
-	\begin{answered}
-		\textit{You can return $-1$ in that case.}
-	\end{answered}
+			\item What should the function return in case where it is not possible to make a valid
+			schedule? For instance when $|I| < d$?
+		\begin{answered}
+			\textit{You can return $-1$ in that case.}
+		\end{answered}
 
-	\item It is guaranteed for the complexity values to be positive ($\gew 0$)?
-	\begin{answered}
-		\textit{Yes you can assume complexities are always positive.}
-	\end{answered}
-
-	
-	
-\end{QandA}
+		\item It is guaranteed for the complexity values to be positive ($\geq 0$)?
+		\begin{answered}
+			\textit{Yes you can assume complexities are always positive.}
+		\end{answered}
+	\end{QandA}
 
 \section{Discussion}
 \label{min_difficulty_job_scheduler:sec:discussion}
-Use DP. Try to cut the array into d non-empty sub-arrays. Try all possible cuts for the array.
+This problem is a classic example of  a problem that can be easily solvable via dynamic programming but can be super challenging if you try to approach it in a different way.
+Fortunately, the statement is full of hints about the fact this problem can be solved using DP.
+For instance:
+\begin{enumerate*}
+	\item it is an optimization problem, and,
+	\item you are  not really asked to find an actual schedule, but only the value of the best possible one. 
+\end{enumerate*}. Very often those are the two most common ingredients in a DP problem.
+We have therefore, be able to spot the hints in the statement so that we think about DP.
+
+se DP. Try to cut the array into d non-empty sub-arrays. Try all possible cuts for the array.
 Use dp[i][j] where DP states are i the index of the last cut and j the number of remaining cuts. Complexity is O(n * n * d).
 
 \subsection{Brute-force}
 \label{min_difficulty_job_scheduler:sec:bruteforce}
+If you do not think about DP right away one of the possible ways of approaching this problem would be to try out all possible schedules, and for each of them calculate its cost, 
+and return the smallest. 
+The problem explicitelly mention a case where a solution does not exists. This is an easy case as there is only one scenario
+where you cannot schedule jobs for $d$ days: when the number of jobs to be scheduled is strictly less than $d$.
+The core of the problem is really about the case where $|I| \geq d$. 
+You can think about a schedule as way of splitting $I$ into $d$ non-empty sub-arrays.
+You can split an array in $d$ parts by placing $d-1$ splitting-points in $I$ at different location.
+A different placing of the splitting-points leads univocally to a different schedule. 
+There is therefore a one-to-one correnspondence between a subset of $\{0,1,2, \ldots, |I|-1\}$ and schedules. 
+We can therefore generate all possible schedules by generating all possible combinations of $d$ elements from $\{0,1,2, \ldots, |I|-1\}$
+where each number of a combination  $\{e_0, \ldots, \_{d-1}\}$ represent a splitting point in $I$.
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:min_difficulty_job_scheduler]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
+In order to solve this problem we can calculate the costs for each of the schedule represented by a combination of $d$ elements of $\{0,1,2, \ldots, |I|-1\}$, and return the cost of the best (the one having minimum cost overall).
+The cost of a schedule, as stated in the problem statement is the sum of the costs for each of the $d$ day where the cost of a single day is the cost of the most expensive job scheduled for that particular day. 
+So given a schedule represented by the combination $e = \{e_0, \ldots, \_{d-1}\}$ we can easily calculate its cost, $C(e)$, by using:
+\begin{equation*}
+	C(e) = \underbrace{\max(A_0, A_1, \ldots, A_{e_0})}_{\text{cost for the } 1^{st} \text{day}} + \underbrace{\max(A_{e_0+1}, A_{e_0+2}, \ldots, A_{e_1})}_{\text{cost for the } 2^{nd} \text{day}} + \ldots + \underbrace{\max(A_{d-2+1}, A_{d-2+2}, \ldots, A_{d-1})}_{\text{cost for the } d^{th} \text{day}}
+\end{equation*}
+
+\subsubsection{Generate all combinations}
+The real challenge at this point is really generating the combinations in groups of $d$ elements. 
+We can generate all the combinations one at the time by using a backtracking algorithm where we try to construct a combination of element at the time.
+A possible recursive implementation of such algorithm is shown in Listing \ref{list:min_difficulty_job_scheduler:combinations}.
+
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={Sample Caption},label=list:min_difficulty_job_scheduler:combinations]{sources/min_difficulty_job_scheduler/generate_combination.cpp}
+\end{minipage}
+
 
