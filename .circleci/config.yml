@@ -14,5 +14,5 @@
        - run: rm -rf /googletest
        - run: echo "Creating PDF and Building UTs"
        - checkout
-       - run: make
+       - run: make fullpdf tests
        - run: bash run_all_tests.sh
