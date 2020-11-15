@@ -8,5 +8,7 @@ std::vector<int> kth_closest_in_array_partial_sorting(vector<int>& I,
         return std::abs(x - y) < std::abs(x - z);
       });
 
-  return std::vector<int>(begin(I), begin(I) + k);
+  std::vector<int> ans{begin(I), begin(I) + k};
+  std::sort(begin(ans), end(ans));
+  return ans;
 }
