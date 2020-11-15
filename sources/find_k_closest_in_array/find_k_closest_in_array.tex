@@ -162,9 +162,9 @@ The closest of the two to $x$ is chosen to be the designated starting value for 
 
 \lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using \inline{std::lower\_bound}.},label=list:find_k_closest_in_array2]{sources/find_k_closest_in_array/find_k_closest_in_array_solution3.cpp}
 
-For completeness, in Listing \ref{} we also show an implementation of "in-house" version of \inline{std::lower\_bound}. You might be asked 
+For completeness, in Listing \ref{list:find_k_closest_in_array:binary_lower_bound} we also show an implementation of "in-house" version of \inline{std::lower\_bound}. You might be asked 
 to show you can code binary search. 
 
 \begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Implementation of a function for the calculation of the \textit{lower\_bound} that can be using in substitution of \inline{std::lower\_bound} in Listing \ref{list:find_k_closest_in_array2}.},label=list:cycle_in_list:node_definition]{sources/find_k_closest_in_array/my_lower_bound.h}
+	\lstinputlisting[language=c++, caption={Implementation of a function for the calculation of the \textit{lower\_bound} that can be using in substitution of \inline{std::lower\_bound} in Listing \ref{list:find_k_closest_in_array2}.},label=list:find_k_closest_in_array:binary_lower_bound]{sources/find_k_closest_in_array/my_lower_bound.h}
 \end{minipage}
