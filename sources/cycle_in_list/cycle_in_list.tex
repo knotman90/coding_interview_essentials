@@ -5,12 +5,46 @@
 % Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Linked list cycle}
+\chapter{Find the cycle in a Linked list}
 \label{ch:cycle_in_list}
 \section*{Introduction}
-The problem described in this chapter is a classical one on linked lists asked in many interviews in
-the tech industry. Because it is very common, it is therefore imperative that we learn how to code
-this problem in a fast and correct manner at the first try.
+The problem described in this chapter is a classical one that has been reported to be asked in 
+in countless coding interviews. The topic of this chapter is linked-lists: linear collections of elements whose order, unlike an array,
+is not dictated by their ordering in memory. 
+By being one of the most simple and common data structures you can expect them to be as important for your interview preparation.
+
+The major difference that lists offer over conventional arrays is that elements in the list can be efficiently  (in constant time) 
+removed and inserted without the need to reorganize and perform a complete restructuring of the whole data \footnote{For arrays, the cost of inserting or deleting an element is linear as you need to:
+\begin{enumerate*}
+	\item possibly enlarge the allocated space for the array
+	\item copy all the elements (minus or plus the element you want to remove or insert) in the new memory space
+\end{enumerate*}.
+}. Because of this property linked lists are often used to implement more complex data structures 
+where this insertion and deletion cost is crucial, for example associative arrays.
+There are however quite a few drawbacks associated with them, for instance:
+\begin{enumerate*}
+	\item memory consumption (as for each node of the list you also pay a price as has to remember the next and/or previous nodes).
+	\item they offer sequential access. Accessing a node costs linear time.
+	\item cache unfriendly
+\end{enumerate*}. This is the reason why  
+
+A linked list is, at a high level of abstraction, a collection of so-called nodes or elements  each of them (except the last) containing
+a pointer to the next one. 
+Each node also carries payload data, which is the information you want ultimately to be stored.
+The standard linked lists has two special nodes:
+\begin{itemize}
+	\item the head that is not pointed by other elements and is the first of the collection. 
+	\item the tail, which is a node that has no next element, and is, not surprisingly, the last of the elements.
+\end{itemize}
+
+In some particular cases during the manipulation of the list you might end up with a broken or corrupted one  where the tail node does not exists anymore, meaning that
+each of the elements in the list is pointing to some other nodes.
+In this situation a loop forms and the list becomes what it known as a \textit{circular} list.
+In this chapter we will investigate how we can find out whether:
+\begin{enumerate*}
+	\item a list is circular, and when it is,
+	\item how to identify the first element of the loop.
+\end{enumerate*}.
 
 \section{Problem statement}
 \begin{exercise}
@@ -228,7 +262,8 @@ An implementation of the Floyd's algorithm is shown in Listing \ref{list:cycle_i
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
 		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd7}
-		\caption{$p$ is reset to the beginning of the list. $q$ is not moved.  From now on $p$ and $q$ are moved one step at the time.}
+		\caption{$p$ is reset to the beginning of the list. $q$ is not moved.  
+		From now on $p$ and $q$ are moved one step at the time.}
 		\label{fig:cycle_in_list:floyd7}
 	 \end{subfigure}
 	 \hfill
@@ -254,7 +289,7 @@ An implementation of the Floyd's algorithm is shown in Listing \ref{list:cycle_i
 	  \ref{fig:cycle_in_list:floyd1}) and immeditely moved forward at different speeds (Figure
 	  \ref{fig:cycle_in_list:floyd2}). They continue to move forward at different speed until their
 	  values mismatch (from Figure \ref{fig:cycle_in_list:floyd2} to
-	  \ref{fig:cycle_in_list:floyd6}). At this point the $p$ is moved back to the head of the list
+	  \ref{fig:cycle_in_list:floyd6}). At this point $p$ is moved back to the head of the list
 	  (Figure \ref{fig:cycle_in_list:floyd7}). From now on the pointers are moved at the same speed
 	  of $1$ and they continue to move forward until they match again (from Figure
 	  \ref{fig:cycle_in_list:floyd8} to \ref{fig:cycle_in_list:floyd10}.). $p$ and $q$ now point to
