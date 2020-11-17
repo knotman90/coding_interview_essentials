@@ -1,40 +1,27 @@
+int calculate_cost_schedule(const std::vector<int>& I, const std::vector<int>& cutpoints_combo)
+{
 
-    struct KeyHash {
-    std::size_t operator()(const std::tuple<int,int> & key) const
-    {
-        return std::get<0>(key) ^ std::get<1>(key);
+    int ans = 0;
+    auto start = std::begin(I);
+    for(const auto& cutpoint : cutpoints_combo){
+        const auto finish = std::begin(I) + cutpoint+1;
+        ans += *std::max_element(start, finish);
+        start = finish;
     }
-};
+    ans += *std::max_element(start, std::end(I));
+    return ans;
+}
 
-    std::unordered_map<std::tuple<int,int>,int,KeyHash> DP;
-    
-    long min_difficulty_helper(const std::vector<int>& A, const size_t start, const int d)
+int min_difficulty_scheduler_combinations(const std::vector<int>& I, const unsigned d)
+{
+    if( I.size() < d)
+        return -1;
+
+    auto all_combinations_cutpoints = all_combinations(d-1, I.size());
+    int ans = std::numeric_limits<int>::max();
+    for(const auto& cutpoints_combo : all_combinations_cutpoints)
     {
-        if(start >= A.size() && d==0)
-            return 0;
-        
-        const size_t remaining = A.size()-start;
-        if(remaining < d)
-            return std::numeric_limits<int>::max();
-        
-        auto t = std::make_tuple(start, d);
-        
-        if(DP.find(t) != DP.end())
-            return DP[t];
-        
-        int M = A[start];
-        long ans = std::numeric_limits<int>::max();
-        for(int i = start ; i < A.size() ; i++)
-        {
-            M = std::max(M, A[i]);
-            ans = min(ans, M + min_difficulty_helper(A,i+1,d-1));
-        }
-        DP[t] = ans;
-        return ans;
+        ans = std::min(ans, calculate_cost_schedule(I, cutpoints_combo));
     }
-    int minDifficulty(vector<int>& jobDifficulty, int d) {
-        auto ans =  min_difficulty_helper(jobDifficulty, 0, d);
-        if(ans >= std::numeric_limits<int>::max() )
-            return -1;
-        return ans;
-    }
+    return ans;
+}
