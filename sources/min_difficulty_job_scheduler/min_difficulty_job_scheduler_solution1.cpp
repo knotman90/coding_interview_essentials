@@ -1,14 +1,12 @@
-class Solution {
-public:
-using Key = std::tuple<int,int>;
+
     struct KeyHash {
-    std::size_t operator()(const Key & key) const
+    std::size_t operator()(const std::tuple<int,int> & key) const
     {
         return std::get<0>(key) ^ std::get<1>(key);
     }
 };
 
-    std::unordered_map<Key,int,KeyHash> DP;
+    std::unordered_map<std::tuple<int,int>,int,KeyHash> DP;
     
     long min_difficulty_helper(const std::vector<int>& A, const size_t start, const int d)
     {
@@ -40,4 +38,3 @@ using Key = std::tuple<int,int>;
             return -1;
         return ans;
     }
-};

@@ -124,22 +124,23 @@ The core of the problem is really about the case where $|I| \geq d$.
 You can think about a schedule as way of splitting $I$ into $d$ non-empty sub-arrays.
 You can split an array in $d$ parts by placing $d-1$ splitting-points in $I$ at different location.
 A different placing of the splitting-points leads univocally to a different schedule. 
-There is therefore a one-to-one correnspondence between a subset of $\{0,1,2, \ldots, |I|-1\}$ and schedules. 
+There is therefore a one-to-one correnspondence between a subset of size $d-1$ of $\{0,1,2, \ldots, |I|-1\}$(the splitting point locations) and schedules. 
 We can therefore generate all possible schedules by generating all possible combinations of $d$ elements from $\{0,1,2, \ldots, |I|-1\}$
 where each number of a combination  $\{e_0, \ldots, \_{d-1}\}$ represent a splitting point in $I$.
 
-In order to solve this problem we can calculate the costs for each of the schedule represented by a combination of $d$ elements of $\{0,1,2, \ldots, |I|-1\}$, and return the cost of the best (the one having minimum cost overall).
-The cost of a schedule, as stated in the problem statement is the sum of the costs for each of the $d$ day where the cost of a single day is the cost of the most expensive job scheduled for that particular day. 
-So given a schedule represented by the combination $e = \{e_0, \ldots, \_{d-1}\}$ we can easily calculate its cost, $C(e)$, by using:
+In order to solve this problem we can calculate the costs for each of the schedule represented by a combination of $d-1$ elements of $\{0,1,2, \ldots, |I|-1\}$, and return the cost of the best (the one having minimum cost overall).
+The cost of a schedule, as stated in the problem statement, is the sum of the costs for each of the $d$ day where the cost of a single day is the cost of the most expensive job scheduled for that particular day. 
+So given a schedule represented by the combination $e = \{e_1, \ldots, \_{d-1}\}$ we can easily calculate its cost, $C(e)$, by using:
 \begin{equation*}
-	C(e) = \underbrace{\max(A_0, A_1, \ldots, A_{e_0})}_{\text{cost for the } 1^{st} \text{day}} + \underbrace{\max(A_{e_0+1}, A_{e_0+2}, \ldots, A_{e_1})}_{\text{cost for the } 2^{nd} \text{day}} + \ldots + \underbrace{\max(A_{d-2+1}, A_{d-2+2}, \ldots, A_{d-1})}_{\text{cost for the } d^{th} \text{day}}
+	C(e) = \underbrace{\max(A_0, A_1, \ldots, A_{e_1})}_{\text{cost for the } 1^{st} \text{day}} + \underbrace{\max(A_{e_1+1}, A_{e_1+2}, \ldots, A_{e_2})}_{\text{cost for the } 2^{nd} \text{day}} + \ldots + \underbrace{\max(A_{e_{d-1}+1}, A_{e_{d-1}+2}, \ldots, A_{|I|-1})}_{\text{cost for the } d^{th} \text{day}}
 \end{equation*}
 
 \subsubsection{Generate all combinations}
 The real challenge at this point is really generating the combinations in groups of $d$ elements. 
 We can generate all the combinations one at the time by using a backtracking algorithm where we try to construct a combination of element at the time.
 A possible recursive implementation of such algorithm is shown in Listing \ref{list:min_difficulty_job_scheduler:combinations}.
-
+The function \inline{foreach_combination} takes as a input an integer $d$ and a function taking a combination
+It works by having a number of recursive calls each of them trying to insert an element at a certain location of the variable \inline{combination}.
 
 \begin{minipage}{\linewidth}
 	\lstinputlisting[language=c++, caption={Sample Caption},label=list:min_difficulty_job_scheduler:combinations]{sources/min_difficulty_job_scheduler/generate_combination.cpp}
