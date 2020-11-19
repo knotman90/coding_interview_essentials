@@ -1,8 +1,3 @@
-
-
-
-
-
 struct KeyHash
 {
   std::size_t operator()(const std::tuple<int, int>& key) const

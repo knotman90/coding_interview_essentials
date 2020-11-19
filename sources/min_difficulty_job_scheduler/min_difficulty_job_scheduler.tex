@@ -22,8 +22,11 @@ executed and also that there is at least one task executed every day.
 \section{Problem statement}
 \begin{exercise}
     Write a function that takes as an input a list of tasks $I$ and an integer $d$. The elements in
-    $I$ are dependent on each other and to schedule a certain task $I_i$ all the tasks $I_j
-    \: : j < i$ have to be completed. The function should return the minimum complexity among all possible schedules of length exactly $d$ days. The complexity of a job is calculated as the sum of the complexity of every single day of the schedule. The complexity of a day of the schedule is defined as the maximum complexity of the task planned for that day.
+    $I$ are dependent on each other and to schedule a certain task $I_i$ all the tasks $I_j \: : j <
+    i$ have to be completed. The function should return the minimum complexity among all possible
+    schedules of length exactly $d$ days. The complexity of a job is calculated as the sum of the
+    complexity of every single day of the schedule. The complexity of a day of the schedule is
+    defined as the maximum complexity of the task planned for that day.
 
     As an additional constraint, you have to make sure that there is at least a task scheduled for
     each day.
@@ -85,7 +88,8 @@ executed and also that there is at least one task executed every day.
 \section{Clarification Questions}
         
     \begin{QandA}
-            \item What should the function return in the case where it is not possible to make a valid schedule? For instance when $|I| < d$?
+            \item What should the function return in the case where it is not possible to make a
+            valid schedule? For instance when $|I| < d$?
         \begin{answered}
             \textit{You can return $-1$ in that case.}
         \end{answered}
@@ -99,13 +103,13 @@ executed and also that there is at least one task executed every day.
 \section{Discussion}
 \label{min_difficulty_job_scheduler:sec:discussion}
 This problem is a classic example of a problem that can be easily solvable via dynamic programming
-but can be super challenging if you try to approach it differently. Fortunately, the
-statement is full of hints about the fact this problem can be solved using DP. For instance:
+but can be super challenging if you try to approach it differently. Fortunately, the statement is
+full of hints about the fact this problem can be solved using DP. For instance:
 \begin{enumerate*}
     \item it is an optimization problem, and,
-    \item you are not asked to find an actual schedule, but only the value of the best
-possible one. \end{enumerate*}. Very often those are the two most common ingredients in a DP
-problem. We have, therefore, to be able to spot the hints in the statement so that we think about DP.
+    \item you are not asked to find an actual schedule, but only the value of the best possible one.
+\end{enumerate*}. Very often those are the two most common ingredients in a DP problem. We have,
+therefore, to be able to spot the hints in the statement so that we think about DP.
 
 
 
@@ -145,13 +149,14 @@ where we try to construct ane combination of elements at a time. A possible recu
 of such algorithm is shown in Listing \ref{list:min_difficulty_job_scheduler:combinations}. The
 function \inline{generate_all_combination} takes as a input two integer $k$ and $l$. $k$ represents
 the size of the combination and $l$ identifies the elements of the combinations i.e. $0,1,\ldots,
-l-1$. If you had to write a generic function for generating combinations you would also most likely have a parameter 
-containing the list of elements from which to generate the combinations. In this case, such list is implicit,
-as we need to generate combinations of splitting points and can be uniquely identified by a single integer.
-For instance \inline{generate_all_combination(3,10)} generates all combinations of three
-elements from $\{0,1,2,3,4,5,6,7,8,9\}$ and \inline{generate_all_combination(2,4)} generates all
-combinations of $2$ elements from $\{0,1,2,3\}$. \inline{generate_all_combination_helper} is a
-recursive function which enumerates all combinations. It takes the following parameters:
+l-1$. If you had to write a generic function for generating combinations you would also most likely
+have a parameter containing the list of elements from which to generate the combinations. In this
+case, such list is implicit, as we need to generate combinations of splitting points and can be
+uniquely identified by a single integer. For instance \inline{generate_all_combination(3,10)}
+generates all combinations of three elements from $\{0,1,2,3,4,5,6,7,8,9\}$ and
+\inline{generate_all_combination(2,4)} generates all combinations of $2$ elements from
+$\{0,1,2,3\}$. \inline{generate_all_combination_helper} is a recursive function which enumerates all
+combinations. It takes the following parameters:
 \begin{itemize}
     \item \inline{std::vector<std::vector<int>> & all_combinations}: the output list of all
     generated combination,
@@ -160,33 +165,71 @@ recursive function which enumerates all combinations. It takes the following par
     \item \inline{const unsigned l}: the last number we can add to the work-in-progress combination
     \item \inline{const unsigned curr_el}: the first number we can add to the combination
 \end{itemize}
-Each call tries to place a number  in the work-in-progress \inline{combination} at location specified by $curr_el$.
-Initially $curr_el = 0$ and each recursive call increases it by $1$. Eventually $curr_el = d$ and we can stop the recursion and return.
-At that point the combination is ready and saved into
-\inline{all_combinations}. 
-After each recursive call, the last inserted element is removed from the
-work-in-progress combination and another number is pushed. The process repeats until
-there is no more number to be pushed.
+Each call tries to place a number  in the work-in-progress \inline{combination} at location
+specified by $curr_el$. Initially $curr_el = 0$ and each recursive call increases it by $1$.
+Eventually $curr_el = d$ and we can stop the recursion and return. At that point the combination is
+ready and saved into \inline{all_combinations}. After each recursive call, the last inserted element
+is removed from the work-in-progress combination and another number is pushed. The process repeats
+until there is no more number to be pushed.
 
 \lstinputlisting[language=c++, caption={Function that generates all the combinations of size $k$ from the elements $\{0,1,\ldots,l\}$},label=list:min_difficulty_job_scheduler:combinations]{sources/min_difficulty_job_scheduler/generate_combination.h}
 
 
 \subsubsection{Wrapping-up}
-Once we are able to generate all the possible schedules we are going to evaluate the cost associated with each of them, 
-and pick the one with the smallest difficulty overall. 
-All is left to do at this point is to come up with a way
-to evaluate a given schedule $c$. 
-We have already seen in Equation
+Once we are able to generate all the possible schedules we are going to evaluate the cost associated
+with each of them, and pick the one with the smallest difficulty overall. All is left to do at this
+point is to come up with a way to evaluate a given schedule $c$. We have already seen in Equation
 \ref{eq:min_difficulty_job_scheduler:cost_combination} how a certain combination of $d-1$ splitting
 points maps directly to subarrays of $I$. The function \inline{calculate\_cost\_schedule} in Listing
 \ref{list:min_difficulty_job_scheduler:combinations} uses this idea to evaluate a schedule and
 calculate its difficulty by summing up the difficulties of each of the tasks scheduled each day.
 Notice that \inline{start} and \inline{finish} identify the elements of $I$ in the following range:
-$[start, finish]$ (the element pointed by \inline{finish} is included). 
-The function
+$[start, finish]$ (the element pointed by \inline{finish} is included). The function
 \inline{min\_difficulty\_scheduler\_combinations} is the driver that is responsible for keeping
 track of the minimum difficulty among all the processed schedules.
 
-    \lstinputlisting[language=c++, caption={Brute-force solution that works by evaluating all the possible schedules generated using Listing \ref{list:min_difficulty_job_scheduler:combinations}},label=list:min_difficulty_job_scheduler:solution_combinations]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute-force solution that works by evaluating all the possible schedules generated using Listing \ref{list:min_difficulty_job_scheduler:combinations}},label=list:min_difficulty_job_scheduler:solution_combinations]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
 
 
+\subsection{Dynamic Programming}
+The key insight to solve this problem with DP is that given that you have decided on a set of tasks
+that are scheduled in the first day, say the first $i$ tasks, than the minimum difficulty of a
+schedule having the first $i$ elements scheduled the first day across $d$ days is the sum of the
+largest task among the first $i$ tasks plus the cost of the best possible schedule of the last
+$|I|-i$ tasks among $d-1$ days. More formally, if $C(I,d)$ is a function returning the minimum cost
+of a schedule of the tasks in $I$ across $d$ days , and can be defined as follows:
+\begin{equation}
+    \begin{cases}
+        C(\emptyset, 0) = 0 \; :  \text{the cost of scheduling $0$ task in $0$ days is $0$}\\
+        C(\emptyset, d > 0) = +\infty \; : \text{it is impossible to schedule $0$ tasks in $1$ or more days}\\
+        C(|I|, 0) = +\infty \: :\text{it is impossible to schedule $1$ or more tasks  in $0$ days}\\\\
+		C(|I|, d) = \underbrace{\min_{\forall j \in \{0,1,\ldots,|I-1|\}}}_{\text{ $\forall$ schedule of the $d^{th}$ day}} \Bigg( \max I_j + \underbrace{C\Big(I - \{0,1,\ldots,j\}, d-1\Big)}_{\text{optimal solution to a subproblem}}\Bigg)\\
+	 \end{cases}
+	\label{eq:min_difficulty_job_scheduler:dpformula}
+\end{equation}
+$C(I,d)$ has a recursive definition and we can quickly see that the problem has both the properties
+a DP problem has:
+\begin{description}
+    \item[optimal substructure:] can be solved by solving and combining together various
+    \textbf{optimal} solutions to \textbf{smaller} subproblems.
+    \item[overlapping subproblems:] the same problems are solved over and over again. (try to draw
+    the recursion tree for $C$ if you are not entirely convinced)
+\end{description}
+
+\subsection{Top-down}
+Without any optimization, the function that we obtain by translating the recursive definition of
+Equation \ref{eq:min_difficulty_job_scheduler:dpformula} is extremely inefficient due to the fact
+problems are recalculated over and over (See Appendix \ref{sect:appendix:DP}). In order to make good
+use of DP we can therefore use memoization to avoid unnecessary recomputation. Listing
+\ref{list:min_difficulty_job_scheduler:solutiondp} shows a possible implementation of this idea
+where a \inline{std::unordered_map} is used to remember the calls to \inline{min_difficulty_helper}
+(the equivalent of the function $C$). Notice that given $I$ and $d$ the function can "only"  be invoked in $|I|
+\times d$ ways. Therefore,in the worst case, by using memoization  we will never
+make more than $|I| \times d$ calls to \inline{min_difficulty_helper}. Because the cost of a single call to \inline{min_difficulty_helper} is linear in $|I|$ the complexity of the whole algorithm is $O(|I|^2 d)$
+
+\lstinputlisting[language=c++, caption={Dynamic programming solution that using the idea that },label=list:min_difficulty_job_scheduler:solutiondp]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution2.cpp}
+
+\subsection{Bottom-up}
+The same  DP approach can also be implemented in a bottom-up fashion. 
+
+\section{Conclusion}
