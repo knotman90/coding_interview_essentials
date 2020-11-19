@@ -9,146 +9,184 @@
 \label{ch:min_difficulty_job_scheduler}
 \section*{Introduction}
 Imagine you are part of a team currently busy doing beta testing on your new cool feature. The
-testing consists of executing a number of tasks. Each task has dependencies on other tasks and is
-assigned a certain  amount of complexity points (a measure of how difficult a task is to be
+testing consists of executing several tasks. Each task has dependencies on other tasks and is
+assigned a certain amount of complexity points (a measure of how difficult a task is to be
 performed; it is not a measure of time). The dependencies between the tasks have been already worked
-out i.e. the order in which the task are going to be executed is decided. The problem in this
+out i.e. the order in which the tasks are going to be executed is decided. The problem in this
 chapter is about coming up with a schedule plan for the execution of these tasks spanning across a
-given number of days. Among all possible schedules we need to make an effort to calculate the
+given number of days. Among all possible schedules, we need to make an effort to calculate the
 minimum possible complexity achievable for a schedule that will eventually make sure all tasks are
 executed and also that there is at least one task executed every day.
 
 
 \section{Problem statement}
 \begin{exercise}
-	Write a function that takes as an input a list of tasks $I$ and an integer $d$. The elements in
-	$I$ are dependent on each other and in order to schedule a certain task $I_i$ all the tasks $I_j
-	\: : j < i$ have to be completed. The function should return the minimum complexity among all
-	possible schedules of length exactly $d$ days. The complexity of a job is calculated as the sum
-	of the complexity of every single day of the schedule. The complexity of a day of the schedule is
-	defined as the maximum complexity of the task planned for that day.
+    Write a function that takes as an input a list of tasks $I$ and an integer $d$. The elements in
+    $I$ are dependent on each other and to schedule a certain task $I_i$ all the tasks $I_j
+    \: : j < i$ have to be completed. The function should return the minimum complexity among all possible schedules of length exactly $d$ days. The complexity of a job is calculated as the sum of the complexity of every single day of the schedule. The complexity of a day of the schedule is defined as the maximum complexity of the task planned for that day.
 
-	As an additional constraint you have to make sure that there is at least a task scheduled for
-	each day.
-		
-	\begin{example}
-		\hfill \\
-		Given:
-		\begin{itemize}
-			\item $I = \{6,5,4,3,2,1\}$
-			\item $d = 2$
-		\end{itemize}
-		the function returns $7$. You can schedule tasks $0$ to $4$ during the first day and the
-		last task during the second day. You cannot just schedule all tasks during the first day
-		because then you would have a day in the schedule without planned tasks which is not
-		allowed.
-	\end{example}
-	
-	\begin{example}
-		\hfill \\
-		Given:
-		\begin{itemize}
-			\item $I = \{10,10,10\}$
-			\item $d = 4$
-		\end{itemize}
-		the function returns $-1$. There is no way to schedule tasks for $4$ days when there are
-		only $3$ tasks available for scheduling.
-	\end{example}
+    As an additional constraint, you have to make sure that there is at least a task scheduled for
+    each day.
+        
+    \begin{example}
+        \hfill \\
+        Given:
+        \begin{itemize}
+            \item $I = \{6,5,4,3,2,1\}$
+            \item $d = 2$
+        \end{itemize}
+        the function returns $7$. You can schedule tasks $0$ to $4$ during the first day and the
+        last task during the second day. You cannot just schedule all tasks during the first day
+        because then you would have a day in the schedule without planned tasks which is not
+        allowed.
+    \end{example}
+    
+    \begin{example}
+        \hfill \\
+        Given:
+        \begin{itemize}
+            \item $I = \{10,10,10\}$
+            \item $d = 4$
+        \end{itemize}
+        the function returns $-1$. There is no way to schedule tasks for $4$ days when there are
+        only $3$ tasks available for scheduling.
+    \end{example}
 
-		
-	\begin{example}
-		\hfill \\
-		Given:
-		\begin{itemize}
-			\item $I = \{7,1,7,1,7,1\}$
-			\item $d = 3$
-		\end{itemize}
-		the function returns $15$. You can schedule the first $4$ tasks the first day for a total
-		complexity of $7$. Task at index $4$ and $5$ can be scheduled for days $2$ and $3$
-		respectively. 
+        
+    \begin{example}
+        \hfill \\
+        Given:
+        \begin{itemize}
+            \item $I = \{7,1,7,1,7,1\}$
+            \item $d = 3$
+        \end{itemize}
+        the function returns $15$. You can schedule the first $4$ tasks the first day for a total
+        complexity of $7$. Task at index $4$ and $5$ can be scheduled for days $2$ and $3$
+        respectively. 
 
-		Notice that in this case if $d = 2$ then the function would return $8$.
-	\end{example}
+        Notice that in this case if $d = 2$ then the function would return $8$.
+    \end{example}
 
-	\begin{example}
-		\hfill \\
-		Given:
-		\begin{itemize}
-			\item $I = \{11,111,22,222,33,333,44,444\}$
-			\item $d = 6$
-		\end{itemize}
-		the function returns $843$. You can schedule tasks $0,1,2,3,4$ in the first $5$ days and the
-		rest during the \nth{6}.
-		
-	\end{example}
+    \begin{example}
+        \hfill \\
+        Given:
+        \begin{itemize}
+            \item $I = \{11,111,22,222,33,333,44,444\}$
+            \item $d = 6$
+        \end{itemize}
+        the function returns $843$. You can schedule tasks $0,1,2,3,4$ in the first $5$ days and the
+        rest during the \nth{6}.
+        
+    \end{example}
 \end{exercise}
 
 
 
 \section{Clarification Questions}
-		
-	\begin{QandA}
-			\item What should the function return in case where it is not possible to make a valid
-			schedule? For instance when $|I| < d$?
-		\begin{answered}
-			\textit{You can return $-1$ in that case.}
-		\end{answered}
+        
+    \begin{QandA}
+            \item What should the function return in the case where it is not possible to make a valid schedule? For instance when $|I| < d$?
+        \begin{answered}
+            \textit{You can return $-1$ in that case.}
+        \end{answered}
 
-		\item It is guaranteed for the complexity values to be positive ($\geq 0$)?
-		\begin{answered}
-			\textit{Yes you can assume complexities are always positive.}
-		\end{answered}
-	\end{QandA}
+        \item It is guaranteed for the complexity values to be positive ($\geq 0$)?
+        \begin{answered}
+            \textit{Yes you can assume complexities are always positive.}
+        \end{answered}
+    \end{QandA}
 
 \section{Discussion}
 \label{min_difficulty_job_scheduler:sec:discussion}
-This problem is a classic example of  a problem that can be easily solvable via dynamic programming but can be super challenging if you try to approach it in a different way.
-Fortunately, the statement is full of hints about the fact this problem can be solved using DP.
-For instance:
+This problem is a classic example of a problem that can be easily solvable via dynamic programming
+but can be super challenging if you try to approach it differently. Fortunately, the
+statement is full of hints about the fact this problem can be solved using DP. For instance:
 \begin{enumerate*}
-	\item it is an optimization problem, and,
-	\item you are  not really asked to find an actual schedule, but only the value of the best possible one. 
-\end{enumerate*}. Very often those are the two most common ingredients in a DP problem.
-We have therefore, be able to spot the hints in the statement so that we think about DP.
+    \item it is an optimization problem, and,
+    \item you are not asked to find an actual schedule, but only the value of the best
+possible one. \end{enumerate*}. Very often those are the two most common ingredients in a DP
+problem. We have, therefore, to be able to spot the hints in the statement so that we think about DP.
 
-se DP. Try to cut the array into d non-empty sub-arrays. Try all possible cuts for the array.
-Use dp[i][j] where DP states are i the index of the last cut and j the number of remaining cuts. Complexity is O(n * n * d).
+
 
 \subsection{Brute-force}
 \label{min_difficulty_job_scheduler:sec:bruteforce}
-If you do not think about DP right away one of the possible ways of approaching this problem would be to try out all possible schedules, and for each of them calculate its cost, 
-and return the smallest. 
-The problem explicitelly mention a case where a solution does not exists. This is an easy case as there is only one scenario
-where you cannot schedule jobs for $d$ days: when the number of jobs to be scheduled is strictly less than $d$.
-The core of the problem is really about the case where $|I| \geq d$. 
-You can think about a schedule as way of splitting $I$ into $d$ non-empty sub-arrays.
-You can split an array in $d$ parts by placing $d-1$ splitting-points in $I$ at different location.
-A different placing of the splitting-points leads univocally to a different schedule. 
-There is therefore a one-to-one correnspondence between a subset of size $d-1$ of $\{0,1,2, \ldots, |I|-1\}$(the splitting point locations) and schedules. 
-We can therefore generate all possible schedules by generating all possible combinations of $d$ elements from $\{0,1,2, \ldots, |I|-1\}$
-where each number of a combination  $\{e_0, \ldots, \_{d-1}\}$ represent a splitting point in $I$.
+If you do not think about DP right away one of the possible ways of approaching this problem would
+be to try out all possible schedules, and for each of them calculate its cost, and return the
+smallest. The problem explicitly mentions a case where a solution does not exist. This is an easy
+case as there is only one scenario where you cannot schedule jobs for $d$ days: when the number of
+jobs to be scheduled is strictly less than $d$. The core of the problem is really about the case
+where $|I| \geq d$. You can think about a schedule as a way of splitting $I$ into $d$ non-empty
+sub-arrays. You can split an array into $d$ parts by placing $d-1$ splitting-points in $I$ at
+different locations. A different placing of the splitting-points leads univocally to a different
+schedule. There is, therefore, a one-to-one correspondence between a subset of size $d-1$ of
+$\{0,1,2, \ldots, |I|-2\}$ (the splitting point locations) and schedules (see Equation
+\ref{eq:min_difficulty_job_scheduler:cost_combination}). We can therefore generate all possible
+schedules by generating all possible combinations of $d-1$ elements from $\{0,1,2, \ldots, |I|-2\}$
+where each number of a combination  $\{e_0, \ldots, e_{d-1}\}$ represent a splitting point in $I$
+and $e_i$ identifies the following subarray of $I$: $\{A_{e_i-1+1}, A_{e_i-1+1}, \ldots ,
+A_{e_i}\}$.
 
-In order to solve this problem we can calculate the costs for each of the schedule represented by a combination of $d-1$ elements of $\{0,1,2, \ldots, |I|-1\}$, and return the cost of the best (the one having minimum cost overall).
-The cost of a schedule, as stated in the problem statement, is the sum of the costs for each of the $d$ day where the cost of a single day is the cost of the most expensive job scheduled for that particular day. 
-So given a schedule represented by the combination $e = \{e_1, \ldots, \_{d-1}\}$ we can easily calculate its cost, $C(e)$, by using:
-\begin{equation*}
-	C(e) = \underbrace{\max(A_0, A_1, \ldots, A_{e_1})}_{\text{cost for the } 1^{st} \text{day}} + \underbrace{\max(A_{e_1+1}, A_{e_1+2}, \ldots, A_{e_2})}_{\text{cost for the } 2^{nd} \text{day}} + \ldots + \underbrace{\max(A_{e_{d-1}+1}, A_{e_{d-1}+2}, \ldots, A_{|I|-1})}_{\text{cost for the } d^{th} \text{day}}
-\end{equation*}
+In order to solve this problem we can calculate the costs for each of the schedule represented by a
+combination of $d-1$ elements of $\{0,1,2, \ldots, |I|-1\}$, and return the cost of the best (the
+one having minimum cost overall). The cost of a schedule, as stated in the problem statement, is the
+sum of the costs for each of the $d$ day where the cost of a single day is the cost of the most
+expensive job scheduled for that particular day. So given a schedule represented by the combination
+$e = \{e_1, \ldots, \_{d-1}\}$ we can easily calculate its cost, $C(e)$, by using:
+\begin{equation}
+    C(e) = \underbrace{\max(A_0, A_1, \ldots, A_{e_1})}_{\text{cost for the } 1^{st} \text{day}} + \underbrace{\max(A_{e_1+1}, A_{e_1+2}, \ldots, A_{e_2})}_{\text{cost for the } 2^{nd} \text{day}} + \ldots + \underbrace{\max(A_{e_{d-1}+1}, A_{e_{d-1}+2}, \ldots, A_{|I|-1})}_{\text{cost for the } d^{th} \text{day}}
+    \label{eq:min_difficulty_job_scheduler:cost_combination}
+\end{equation}
 
 \subsubsection{Generate all combinations}
-The real challenge at this point is really generating the combinations in groups of $d$ elements. 
-We can generate all the combinations one at the time by using a backtracking algorithm where we try to construct a combination of element at the time.
-A possible recursive implementation of such algorithm is shown in Listing \ref{list:min_difficulty_job_scheduler:combinations}.
-The function \inline{foreach_combination} takes as a input an integer $d$ and a function taking a combination
-It works by having a number of recursive calls each of them trying to insert an element at a certain location of the variable \inline{combination}.
+The real challenge at this point is really about the generation of combinations in groups of $d-1$
+elements. We can generate all the combinations one at the time by using a backtracking algorithm
+where we try to construct ane combination of elements at a time. A possible recursive implementation
+of such algorithm is shown in Listing \ref{list:min_difficulty_job_scheduler:combinations}. The
+function \inline{generate_all_combination} takes as a input two integer $k$ and $l$. $k$ represents
+the size of the combination and $l$ identifies the elements of the combinations i.e. $0,1,\ldots,
+l-1$. If you had to write a generic function for generating combinations you would also most likely have a parameter 
+containing the list of elements from which to generate the combinations. In this case, such list is implicit,
+as we need to generate combinations of splitting points and can be uniquely identified by a single integer.
+For instance \inline{generate_all_combination(3,10)} generates all combinations of three
+elements from $\{0,1,2,3,4,5,6,7,8,9\}$ and \inline{generate_all_combination(2,4)} generates all
+combinations of $2$ elements from $\{0,1,2,3\}$. \inline{generate_all_combination_helper} is a
+recursive function which enumerates all combinations. It takes the following parameters:
+\begin{itemize}
+    \item \inline{std::vector<std::vector<int>> & all_combinations}: the output list of all
+    generated combination,
+    \item \inline{std::vector<int>& combination}: the work-in-progress combination,
+    \item \inline{const unsigned k}: the size of the combinations
+    \item \inline{const unsigned l}: the last number we can add to the work-in-progress combination
+    \item \inline{const unsigned curr_el}: the first number we can add to the combination
+\end{itemize}
+Each call tries to place a number  in the work-in-progress \inline{combination} at location specified by $curr_el$.
+Initially $curr_el = 0$ and each recursive call increases it by $1$. Eventually $curr_el = d$ and we can stop the recursion and return.
+At that point the combination is ready and saved into
+\inline{all_combinations}. 
+After each recursive call, the last inserted element is removed from the
+work-in-progress combination and another number is pushed. The process repeats until
+there is no more number to be pushed.
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:min_difficulty_job_scheduler:combinations]{sources/min_difficulty_job_scheduler/generate_combination.h}
-\end{minipage}
+\lstinputlisting[language=c++, caption={Function that generates all the combinations of size $k$ from the elements $\{0,1,\ldots,l\}$},label=list:min_difficulty_job_scheduler:combinations]{sources/min_difficulty_job_scheduler/generate_combination.h}
 
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:min_difficulty_job_scheduler:combinations]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
-\end{minipage}
+\subsubsection{Wrapping-up}
+Once we are able to generate all the possible schedules we are going to evaluate the cost associated with each of them, 
+and pick the one with the smallest difficulty overall. 
+All is left to do at this point is to come up with a way
+to evaluate a given schedule $c$. 
+We have already seen in Equation
+\ref{eq:min_difficulty_job_scheduler:cost_combination} how a certain combination of $d-1$ splitting
+points maps directly to subarrays of $I$. The function \inline{calculate\_cost\_schedule} in Listing
+\ref{list:min_difficulty_job_scheduler:combinations} uses this idea to evaluate a schedule and
+calculate its difficulty by summing up the difficulties of each of the tasks scheduled each day.
+Notice that \inline{start} and \inline{finish} identify the elements of $I$ in the following range:
+$[start, finish]$ (the element pointed by \inline{finish} is included). 
+The function
+\inline{min\_difficulty\_scheduler\_combinations} is the driver that is responsible for keeping
+track of the minimum difficulty among all the processed schedules.
+
+    \lstinputlisting[language=c++, caption={Brute-force solution that works by evaluating all the possible schedules generated using Listing \ref{list:min_difficulty_job_scheduler:combinations}},label=list:min_difficulty_job_scheduler:solution_combinations]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
 
 
