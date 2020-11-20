@@ -139,3 +139,10 @@ above.
 	\lstinputlisting[language=c++, caption={Solution to the problem of finding the distance between two nodes in a binary search tree.},label=list:distance_between_nodes_in_tree]{sources/distance_between_nodes_in_tree/distance_between_nodes_in_tree_solution1.cpp}
 \end{minipage}
 
+
+\section{Conclusion}
+In this chapter we have seen how we can efficiently solve the problem of finding the distance between two nodes in a binary search tree
+by using the concept of LCA (discussed more in details in Chapter \ref{ch:lowest_common_ancestor}). The general strategy is that,
+we can calculate the distance between the LCA and both $p$ and $q$. The sum of these two distances is the final answer.
+The distance between two nodes in a binary search tree can be found by slightly modifying the standard search algorithm for BSTs so that we return
+the number of recursive calls made instead of a boolean value signaling whether the element to be searched was found or not.
