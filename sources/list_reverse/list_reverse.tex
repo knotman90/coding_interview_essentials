@@ -2,48 +2,73 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
 %
-% Difficulty:
-% Companies: 
+% Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{TITLE OF THE CHAPTER}
+\chapter{Reverse a singly linked list}
 \label{ch:list_reverse}
-\section*{Introduction}
-A common interview question asked at larger companies.
-Often being unable to solve this problem stems from an engineer not being familiar with what linked lists are ahead of time, or not understanding the difference between a linked list and an array.
 
-\section{Problem statement}
+\section*{Introduction}
+In this chapter we are going to have a look at two variations of the same problem about the same topic: reversing a singly
+linked list. These problems has been asked in coding interviews for a long time. They are among the most
+basic problems on linked-list out there and despite their popularity and the fact it is about one of
+the basic fundamental data structures in computer science, it has been proven to be the cause of
+failure for many engineers. Most often, being unable to solve these problems result in almost
+immediate rejection.
+
+Both problems have a simple definition as they asks us to transform a given list into its reverse. We
+will discuss how we can approach this problem both in a recursive as well as in an iterative manner.
+Section \ref{sec:list_reverse:statement} will discuss the first and easier version while in Section \ref{sec:list_reverse:hard} 
+we will have a look at the slightly harder variation that if often asked as a follow-up.
+In both cases iterative and recursive solutions are discussed.
+
+\section{Easy version}
+\label{sec:list_reverse:statementeasy}
+\subsection{Problem statement}
 \begin{exercise}
-Create a function that given a singly linked list $L$, return a
+Create a function that given a singly linked list $L$, reverses it and return the pointer to the new head of $L$.
+$L$ is given as a pointer to the first node of the list. The definition of the node is given in Listing \ref{list:list_reverse:node_definition}.
+
+
+
+\begin{example}
+	\hfill \\
+	Given the $L = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5$, the function modifies it into 
+	$L = 5 \rightarrow 4 \rightarrow 3 \rightarrow 2 \rightarrow 1$ and returns a pointer to the node $5$, the new head of the list.
+\end{example}
+
 \end{exercise}
 
-
-\begin{example}
-	\hfill \
-	
-\end{example}
-
-\begin{example}
-	\hfill \
-	
-\end{example}
+\lstinputlisting[language=c++, caption={Singly linked-list node definition.},label=list:list_reverse:node_definition]{sources/cycle_in_list/linked_list.h}
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
+	\item Can the input list be empty? 
 	\begin{answered}
-		\textit{}
+		\textit{Yes.}
+	\end{answered}
+
+	\item Can I assume $L$ is not corrupted by for instance containing cycles? 
+	\begin{answered}
+		\textit{Yes, the input list is a singly linked list with no cycles.}
 	\end{answered}
 	
 \end{QandA}
 
 \section{Discussion}
 \label{list_reverse:sec:discussion}
-
-
-\subsection{Brute-force}
-\label{list_reverse:sec:bruteforce}
+Solving this problem by using linear additional space is  trivial as we can iterate over the list and for each push the address of each of its nodes in a stack. 
+We can then, pop them one at a time while making sure they are connected in the same order they are popped-out. Listing \ref{} shows a possible implementation of this idea. 
+The time and space complexity of this approach is $O(n)$.
 
 \lstinputlisting[language=c++, caption={Sample Caption},label=list:list_reverse]{sources/list_reverse/list_reverse_solution1.cpp}
 
+
+There is however no need to use additional space 
+\subsection{Brute-force}
+
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:list_reverse]{sources/list_reverse/list_reverse_solution1.cpp}
+
+
+\section{}
