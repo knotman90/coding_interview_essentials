@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-double mediam_sorted_arrays_log(const std::vector<int> &A,
-                                const std::vector<int> &B)
-{
-  int l = 0, r = A.size() - 1;
-  const int size      = A.size() + B.size();
-  const int half_size = size / 2;
-
-  while (l <= r)
-  {
-    const int i = l + (r - l) / 2 + 1;
-    const int j = half_size - mid;
-
-=======
 size_t midpoint(const size_t l, const size_t r)
 {
   assert( l <= r );
@@ -32,7 +18,6 @@ double mediam_sorted_arrays_binary_search(
     const size_t i = midpoint(l,r);
     const size_t j = half_size_C - i;
 /*
->>>>>>> db9e6004377e57e406836e62f8d6a33353a91bb2
     const int idx_i = i - 1;
     const int idx_j = j - 1;
     if (A[i - 1] <= B[j] && B[j - 1] <= A[i])
@@ -44,12 +29,7 @@ double mediam_sorted_arrays_binary_search(
     if (A[i - 1] > B[j])
       r = i - 1;
     else
-<<<<<<< HEAD
-      l = i - 1;
-  }
-=======
       l = i - 1;*/
   }
   return median;
->>>>>>> db9e6004377e57e406836e62f8d6a33353a91bb2
 }
