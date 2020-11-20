@@ -592,6 +592,9 @@ addtohook={%
 \newcommand{\inline}[1]{\ \lstinline[columns=fixed]{#1}}
 
 %explicit space
+
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{fancyvrb}
 \fvset{showspaces=true}
 \SaveVerb{verbspace}! !
@@ -605,3 +608,12 @@ addtohook={%
 \renewcommand{\thefootnote}{\textit{\alph{footnote}}}
 \usepackage{pifont}
 \renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+
+
+\def\bsq#1{%both single quotes
+\lq{#1}\rq}
+
+%rotate characters
+\def\rotatecharone#1{\rotatebox[origin=c]{180}{#1}}
+
+\def\rotatechartwo#1{\reflectbox{#1}}
