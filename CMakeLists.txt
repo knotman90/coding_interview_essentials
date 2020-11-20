@@ -19,3 +19,4 @@ find_package(GTest REQUIRED)
 
 #tests
 ADD_SUBDIRECTORY(test)
+ADD_SUBDIRECTORY(experiment)
