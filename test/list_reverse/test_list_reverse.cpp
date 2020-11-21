@@ -1,17 +1,17 @@
-#include <gtest/gtest.h>
 #include <bits/stdc++.h>
+#include <gtest/gtest.h>
 
-using std::string;
-using std::swap;
 using std::cout;
 using std::endl;
+using std::string;
+using std::swap;
 #include "list.h"
 using Book::List::Node;
 #include "list_reverse_solution1.cpp"
 #include "list_reverse_solution2.cpp"
 
 template <typename T>
-Node<T> *create_list_from(std::vector<int> &vec, const int loop = -1)
+Node<T> *create_list_from(const std::vector<int> &vec, const int loop = -1)
 {
   using N = Node<T>;
   if (vec.size() <= 0)
@@ -34,18 +34,83 @@ Node<T> *create_list_from(std::vector<int> &vec, const int loop = -1)
   return p[0];
 }
 
+TEST(list_reverse, test_empty)
+{
+  const std::vector<int> input = {};
+  std::vector<int> expected(input);
+  std::reverse(std::begin(expected), std::end(expected));
 
+  Node<int> *head = create_list_from<int>(input, -1);
+  ASSERT_EQ(nullptr, head);
+
+  {
+    const auto ans = list_reverse_linear_space(head);
+    ASSERT_EQ(nullptr, ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+  }
+}
+
+TEST(list_reverse, test_one)
+{
+  const std::vector<int> input = {123456};
+  std::vector<int> expected(input);
+  std::reverse(std::begin(expected), std::end(expected));
+
+  Node<int> *head = create_list_from<int>(input, -1);
+
+  {
+    const auto ans = list_reverse_linear_space(head);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+  }
+}
+
+TEST(list_reverse, test_single)
+{
+  std::vector<int> input = {};
+  std::vector<int> expected(input);
+  std::reverse(std::begin(expected), std::end(expected));
+  Node<int> *head = create_list_from<int>(input, -1);
+  ASSERT_EQ(nullptr, head);
+
+  {
+    const auto ans = list_reverse_linear_space(head);
+    ASSERT_EQ(nullptr, ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+  }
+}
+
+TEST(list_reverse, test_all_equal)
+{
+  std::vector<int> input = {1, 1, 1, 1, 1, 1, 1};
+  std::vector<int> expected(input);
+  std::reverse(std::begin(expected), std::end(expected));
+  Node<int> *head = create_list_from<int>(input, -1);
+  {
+    const auto ans = list_reverse_linear_space(head);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+  }
+}
 
 TEST(list_reverse, example1)
 {
+  std::vector<int> input = {1, 2, 3, 4, 5};
+  std::vector<int> expected(input);
+  std::reverse(std::begin(expected), std::end(expected));
+  Node<int> *head = create_list_from<int>(input, -1);
 
-  std::vector<int> v = {1, 2, 3, 4,5};
-  Node<int> *head    = create_list_from<int>(v, -1);
-  auto ans = list_reverse_linear_space(head);
+  {
+    const auto ans = list_reverse_linear_space(head);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+  }
 }
 
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv); 
-    return RUN_ALL_TESTS();
+int main(int argc, char **argv)
+{
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
-

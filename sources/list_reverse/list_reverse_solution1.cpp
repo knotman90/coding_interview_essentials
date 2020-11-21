@@ -25,6 +25,7 @@ Node<T>* list_reverse_linear_space(Node<T>* L)
         it->next = it_next;
         it = it_next;
     }
+    it->next = nullptr;
     return new_head;
 
 }
