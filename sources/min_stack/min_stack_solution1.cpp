@@ -5,7 +5,7 @@ class min_stack_stack_pair
   void push(const T& x)
   {
     const auto nm = q.size() > 0 ? std::min(x, getMin()) : x;
-    q.push({ x, nm });
+    q.push({x, nm});
   }
 
   void pop()

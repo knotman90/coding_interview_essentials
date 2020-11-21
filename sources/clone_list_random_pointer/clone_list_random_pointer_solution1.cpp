@@ -33,7 +33,7 @@ Node<T> *clone_random_list_map(Node<T> *head)
   {
     // which index does t->random has in the original list?
     // connect the current node with the P[t->random]-th node in the copy list
-    Node<T> *rnd      = P.find(t->random) != P.end() ? ptrs[P[t->random]] : nullptr;
+    Node<T> *rnd = P.find(t->random) != P.end() ? ptrs[P[t->random]] : nullptr;
     ptrs[idx]->random = rnd;
     idx++;
     t = t->next;

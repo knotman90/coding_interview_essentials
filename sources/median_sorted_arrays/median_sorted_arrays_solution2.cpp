@@ -1,7 +1,7 @@
-#include<cassert>
+#include <cassert>
 template <typename T>
 std::vector<T> mergeSortedArrays(const std::vector<T> &A,
-                                   const std::vector<T> &B)
+                                 const std::vector<T> &B)
 {
   assert(std::is_sorted(std::begin(A), std::end(A)));
   assert(std::is_sorted(std::begin(B), std::end(B)));
@@ -12,7 +12,7 @@ std::vector<T> mergeSortedArrays(const std::vector<T> &A,
 
   auto itA = std::begin(A);
   auto itB = std::begin(B);
-  
+
   while (itA != std::end(A) && itB != std::end(B))
   {
     if (*itA < *itB)
