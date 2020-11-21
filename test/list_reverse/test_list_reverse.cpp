@@ -9,6 +9,7 @@ using std::swap;
 using Book::List::Node;
 #include "list_reverse_solution1.cpp"
 #include "list_reverse_solution2.cpp"
+#include "list_reverse_solution3.cpp"
 
 template <typename T>
 Node<T> *create_list_from(const std::vector<int> &vec, const int loop = -1)
@@ -56,6 +57,15 @@ TEST(list_reverse, test_empty)
     ASSERT_EQ(input.size(), Book::List::length(ans));
     ASSERT_EQ(expected, Book::List::to_vector(ans));
   }
+
+    {
+    const auto ans = list_reverse_constant_space_recursive(head);
+    ASSERT_EQ(nullptr, ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+  }
+
+  
 }
 
 TEST(list_reverse, test_one)
@@ -87,6 +97,19 @@ TEST(list_reverse, test_one)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
+
+    {
+    const auto ans = list_reverse_constant_space_recursive(head);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+
+    const auto ans_double_reverse = list_reverse_constant_space_recursive(ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans_double_reverse));
+    ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
+        << "double reverse should be equal to original list";
+  }
+
+  
 }
 
 TEST(list_reverse, test_single)
@@ -125,6 +148,22 @@ TEST(list_reverse, test_single)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
+
+
+    {
+    Node<int> *head = create_list_from<int>(input, -1);
+    ASSERT_EQ(nullptr, head);
+    ASSERT_EQ(input.size(), Book::List::length(head));
+    const auto ans = list_reverse_constant_space_recursive(head);
+    ASSERT_EQ(nullptr, ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+
+    const auto ans_double_reverse = list_reverse_constant_space_recursive(ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans_double_reverse));
+    ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
+        << "double reverse should be equal to original list";
+  }
 }
 
 TEST(list_reverse, test_all_equal)
@@ -157,6 +196,22 @@ TEST(list_reverse, test_all_equal)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
+
+    {
+    Node<int> *head = create_list_from<int>(input, -1);
+    ASSERT_EQ(input.size(), Book::List::length(head));
+
+    const auto ans = list_reverse_constant_space_recursive(head);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+
+    const auto ans_double_reverse = list_reverse_constant_space_recursive(ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans_double_reverse));
+    ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
+        << "double reverse should be equal to original list";
+  }
+
+  
 }
 
 TEST(list_reverse, example1)
@@ -190,6 +245,20 @@ TEST(list_reverse, example1)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
+
+  {
+    Node<int> *head = create_list_from<int>(input, -1);
+    ASSERT_EQ(input.size(), Book::List::length(head));
+    const auto ans = list_reverse_constant_space_recursive(head);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+
+    const auto ans_double_reverse = list_reverse_constant_space_recursive(ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans_double_reverse));
+    ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
+        << "double reverse should be equal to original list";
+  }
+  
 }
 
 TEST(list_reverse, example1_double_reverse)
@@ -224,6 +293,21 @@ TEST(list_reverse, example1_double_reverse)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
+
+
+  {
+    Node<int> *head = create_list_from<int>(input, -1);
+    ASSERT_EQ(input.size(), Book::List::length(head));
+    const auto ans = list_reverse_constant_space_recursive(head);
+    ASSERT_EQ(input.size(), Book::List::length(ans));
+    ASSERT_EQ(expected, Book::List::to_vector(ans));
+
+    const auto ans_double_reverse = list_reverse_constant_space_recursive(ans);
+    ASSERT_EQ(input.size(), Book::List::length(ans_double_reverse));
+    ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
+        << "double reverse should be equal to original list";
+  }
+
 }
 
 int main(int argc, char **argv)

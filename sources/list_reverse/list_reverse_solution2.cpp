@@ -5,14 +5,14 @@ Node<T>* list_reverse_constant_space_iterative(Node<T>* L)
     return L;
 
   auto curr  = L;
-  auto next  = curr->next;
-  curr->next = nullptr;
-  while (curr && next)
+  auto curr_next  = curr->next;
+  curr->next = nullptr; //the first node is the new tail
+  while (curr && curr_next)
   {
-    auto temp  = next->next;
-    next->next = curr;
-    curr       = next;
-    next       = temp;
+    auto temp  = curr_next->next; //needed to move forward curr_next
+    curr_next->next = curr;
+    curr       = curr_next;
+    curr_next  = temp;
   }
   return curr;
 }
