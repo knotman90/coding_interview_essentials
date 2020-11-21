@@ -15,6 +15,7 @@ function help()
 
 NAME=$1
 SOURCE_FOLDER="sources/$NAME"
+IMAGES_FOLDER="$SOURCE_FOLDER/images"
 TEST_FOLDER="test/$NAME"
 TEX_FILE="$SOURCE_FOLDER/$NAME.tex"
 TEST_FILE="$TEST_FOLDER/test_$NAME.cpp"
@@ -23,7 +24,11 @@ CMAKE_FILE="${TEST_FOLDER}/CMakeLists.txt"
 
 ([ -d "$NAME" ] || [ -d "$TEST_FOLDER" ] || [ -d "$SOURCE_FOLDER" ] || [ -f "$TEX_FILE" ] || [ -f "$TEST_FILE" ]) && help
 
+
+git checkout -b $NAME
+
 mkdir -p "$SOURCE_FOLDER"
+mkdir -p "$IMAGES_FOLDER"
 touch "$TEX_FILE"
 
 echo "%!TEX root = ../main.tex
@@ -33,6 +38,14 @@ echo "%!TEX root = ../main.tex
 % Difficulty:
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=\textwidth]{sources/$NAME/images/example1}
+%	\caption[Sample short cpation]{Sample Caption}.
+%	\label{fig:$NAME:example1}
+%\end{figure}
 " >> $TEX_FILE
 
 echo "\chapter{TITLE OF THE CHAPTER}
@@ -62,12 +75,14 @@ echo "\section{Problem statement}
 
 	\begin{example}
 		\hfill \\
-		
+	
+	\label{ex:$NAME:example1}
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		
+
+	\label{ex:$NAME:example2}	
 	\end{example}
 \end{exercise}
 
@@ -89,7 +104,9 @@ echo "\section{Discussion}
 \subsection{Brute-force}
 \label{$NAME:sec:bruteforce}
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={Sample Caption},label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
+\end{minipage}
 " >>  $TEX_FILE
 
 ####################################
