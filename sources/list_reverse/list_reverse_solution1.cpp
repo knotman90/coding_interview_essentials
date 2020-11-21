@@ -1,8 +1,6 @@
-
 template<typename T>
 Node<T>* list_reverse_linear_space(Node<T>* L)
 {
-
     if(!L)
         return nullptr;
 
