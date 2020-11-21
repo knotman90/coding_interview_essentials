@@ -194,9 +194,12 @@ track of the minimum difficulty among all the processed schedules.
 \subsection{Dynamic Programming}
 The key insight to solve this problem with DP is that given that you have decided on a set of tasks
 that are scheduled in the first day, say the first $i$ tasks, than the minimum difficulty of a
-schedule having the first $i$ elements scheduled the first day across $d$ days is the sum of the
-largest task among the first $i$ tasks plus the cost of the best possible schedule of the last
-$|I|-i$ tasks among $d-1$ days. More formally, if $C(I,d)$ is a function returning the minimum cost
+schedule across $d$ days having the first $i$ elements scheduled the first day is the sum of 
+\begin{enumerate*}
+    \item  the largest difficulty  among the first $i$ tasks, and
+    \item  the cost of the best possible schedule of the last $|I|- i$ tasks across $d-1$ days.
+\end{enumerate*}
+ More formally, if $C(I,d)$ is a function returning the minimum cost
 of a schedule of the tasks in $I$ across $d$ days , and can be defined as follows:
 \begin{equation}
     \begin{cases}
@@ -227,9 +230,54 @@ where a \inline{std::unordered_map} is used to remember the calls to \inline{min
 \times d$ ways. Therefore,in the worst case, by using memoization  we will never
 make more than $|I| \times d$ calls to \inline{min_difficulty_helper}. Because the cost of a single call to \inline{min_difficulty_helper} is linear in $|I|$ the complexity of the whole algorithm is $O(|I|^2 d)$
 
-\lstinputlisting[language=c++, caption={Dynamic programming solution that using the idea that },label=list:min_difficulty_job_scheduler:solutiondp]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution2.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming top-down solution.},label=list:min_difficulty_job_scheduler:solutiondp]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution2.cpp}
 
 \subsection{Bottom-up}
-The same  DP approach can also be implemented in a bottom-up fashion. 
+In this section we are going to have a look at how  we can implemented the DP idea in a bottom-up fashion. 
+Like many bottom-up  solutions we have to come up with a way of filling out a table of values of some sort.
+For this problem we can use a table $T$ of size $d \times |I|$  where each element of the table $T[i][j]$
+will eventually contain the solution to the problem of scheduling the elements of $|I|$ up to and including the task at index $j$
+in exactly $i$ days.
+Clearly, filling some cells of  $T$ is easier than other. 
+For instance all the values of the first column of $T$ are all filled with a value indicating that 
+the problem has no solution because you cannot schedule any task in $0$ days. 
+An exception should be made for $T[0][0]$ that is filled with $0$ as the cost of 
+scheduling $0$ tasks in $0$ days is equivalent to the cost of doing nothing.
+To mark that a subproblem is impossible we can use a large value, or perhaps the largest value a cell of $T$ can hold. 
+
+Additionally, also the values of the first row are relatively easy to fill-in.
+The values of the first row contain values that are symmetrically equal to the cells in the first column.
+Each value of the first row represents a solution to the problem of scheduling some task in 
+$0$ days and there is clearly no way that can be done (except for the case when you have $0$ task to schedule).
+The elements of the first row are also relatively easy to fill. An element of the first row $T[1][j]$
+correspond to the subproblem of scheduling the first $j$ of $I$ in exactly one day. 
+Its cost is cleary the maximum difficulty among the elements of $I$ from $0$ to $j$ as there is only one way of scheduling all the $j+1$ tasks in a single day.
+
+Things get a bit more interesting when looking at the second row. When we have two days at our disposal to schedule $j$ tasks we have more freedom on which task to schedule on the first day and which on the second.
+The values we just filled for the first two can however be helpful in making the best decision for the elements of the second row. 
+We can in-fact fill $T[2][j]$ by scheduling one task in the first day, and $j-1$ in the second. Or $2$ tasks the first day and $j-2$ in the second and so on. 
+But which of these divisions is the best? Easy! let's try them all and see which one yields the smallest difficulty overall.
+Therefore we can calculate $T[2][j]$  as shown in Equation \ref{eq:min_difficulty_schedule:secondRowbottomup}:
+\begin{equation}
+    T[2][j] = \min_{1 \leq k \leq j-1} \Big( T[1][k] + \big(\ max_{k+1 \leq l \leq j }I_l \big)  \Big)
+\label{eq:min_difficulty_schedule:secondRowbottomup}
+\end{equation}
+Equation \ref{} is really saying that we can calculate the minimum difficulty of scheduling the tasks in $I$ up to the one having index $j$ 
+by calculating the minimum among the costs of  scheduling the tasks up to the index $k \leq j-1$ on the first day and the rest on the second.
+The trick here is that we have already calculate all the possible costs of scheduling all possible number of tasks, and thus all we have to do at this step is to calculate the costs 
+of scheduling the tasks from the one having index $k+1$ to task $j$. This can be done by simply returning the maximum costs among those tasks.
+
+This exact same reasoning can be applied to all the other rows and we can therefore come up with a general formula that can be used to fill the entire table of values as shown in Equation \ref{eq:min_difficulty_schedule:generic_bottom_up}.
+\begin{equation}
+    T[i][j] = \min_{1 \leq k \leq j-1} \Big( T[i-1][k] + \big(\ max_{k+1 \leq l \leq j }I_l \big)  \Big)
+    \label{eq:min_difficulty_schedule:generic_bottom_up}
+\end{equation}
+
+Clearly the solution to the entire problem is in $T[d][|I|-1]$: the cost of scheduling all the elements in $I$ in exactly $d$ days.
+Listing \ref{list:min_difficulty_job_scheduler:solutiondpbottomup} shows an implementation of this idea.
+
+
+\lstinputlisting[language=c++, caption={Dynamic programming bottom-up solution. },label=list:min_difficulty_job_scheduler:solutiondpbottomup]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution3.cpp}
+
 
 \section{Conclusion}

@@ -6,35 +6,36 @@ struct KeyHash
   }
 };
 
-std::unordered_map<std::tuple<int, int>, int, KeyHash> DP;
+using Cache = std::unordered_map<std::tuple<int, int>, int, KeyHash>;
 
-long min_difficulty_helper(const std::vector<int>& A, const size_t start, const int d)
+long min_difficulty_scheduler_DP_topdown_helper(const std::vector<int>& I, const size_t start, const int d, Cache& cache)
 {
-  if (start >= A.size() && d == 0)
+  if (start >= I.size() && d == 0)
     return 0;
 
-  const size_t remaining = A.size() - start;
+  const size_t remaining = I.size() - start;
   if (remaining < d)
     return std::numeric_limits<int>::max();
 
   auto t = std::make_tuple(start, d);
+  if (auto it = cache.find(t); it != cache.end())
+    return it->second;
 
-  if (DP.find(t) != DP.end())
-    return DP[t];
-
-  int M    = A[start];
+  int M    = I[start];
   long ans = std::numeric_limits<int>::max();
-  for (size_t i = start; i < A.size(); i++)
+  for (size_t i = start; i < I.size(); i++)
   {
-    M   = std::max(M, A[i]);
-    ans = std::min(ans, M + min_difficulty_helper(A, i + 1, d - 1));
+    M   = std::max(M, I[i]);
+    ans = std::min(ans, M + min_difficulty_scheduler_DP_topdown_helper(I, i + 1, d - 1, cache));
   }
-  DP[t] = ans;
+  cache[t] = ans;
   return ans;
 }
-int minDifficulty(vector<int>& jobDifficulty, int d)
+
+int min_difficulty_scheduler_DP_topdown(const vector<int>& I, int d)
 {
-  auto ans = min_difficulty_helper(jobDifficulty, 0, d);
+  Cache cache;
+  auto ans = min_difficulty_scheduler_DP_topdown_helper(I, 0, d, cache);
   if (ans >= std::numeric_limits<int>::max())
     return -1;
   return ans;

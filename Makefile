@@ -13,7 +13,7 @@ pdf: $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf
 fullpdf: $(BUILD_DIR_FULL)/$(FULLBOOK_FILE_NAME).pdf
 
 tests:
-	mkdir -p build && cd build && cmake .. && $(MAKE)
+	mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && $(MAKE)
 
 $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf: sources/$(MAIN_FILE_NAME).tex $(BUILD_DIR)
 	pdflatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
