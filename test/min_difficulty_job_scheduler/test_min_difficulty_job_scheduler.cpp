@@ -12,6 +12,7 @@ using std::vector;
 #include "generate_combinations.h"
 #include "min_difficulty_job_scheduler_solution1.cpp"
 #include "min_difficulty_job_scheduler_solution2.cpp"
+#include "min_difficulty_job_scheduler_solution3.cpp"
 
 TEST(min_difficulty_job_scheduler, example1)
 {
@@ -33,9 +34,15 @@ TEST(min_difficulty_job_scheduler, example1)
       ASSERT_EQ(expected, actual);
     }
 
-        {
+    {
       auto [d, expected] = test_data;
       auto actual        = min_difficulty_scheduler_DP_topdown(I, d);
+      ASSERT_EQ(expected, actual);
+    }
+
+    {
+      auto [d, expected] = test_data;
+      auto actual        = min_difficulty_scheduler_DP_bottomup(I, d);
       ASSERT_EQ(expected, actual);
     }
   }
@@ -57,9 +64,15 @@ TEST(min_difficulty_job_scheduler, example2)
       ASSERT_EQ(expected, actual) << "failed for days = " << d;
     }
 
-        {
+    {
       auto [d, expected] = test_data;
       auto actual        = min_difficulty_scheduler_DP_topdown(I, d);
+      ASSERT_EQ(expected, actual) << "failed for days = " << d;
+    }
+
+    {
+      auto [d, expected] = test_data;
+      auto actual        = min_difficulty_scheduler_DP_bottomup(I, d);
       ASSERT_EQ(expected, actual) << "failed for days = " << d;
     }
   }
@@ -79,9 +92,15 @@ TEST(min_difficulty_job_scheduler, example3)
       ASSERT_EQ(expected, actual) << "failed for days = " << d;
     }
 
-        {
+    {
       auto [d, expected] = test_data;
       auto actual        = min_difficulty_scheduler_DP_topdown(I, d);
+      ASSERT_EQ(expected, actual) << "failed for days = " << d;
+    }
+
+    {
+      auto [d, expected] = test_data;
+      auto actual        = min_difficulty_scheduler_DP_bottomup(I, d);
       ASSERT_EQ(expected, actual) << "failed for days = " << d;
     }
   }

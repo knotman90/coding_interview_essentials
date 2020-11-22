@@ -262,7 +262,7 @@ Therefore we can calculate $T[2][j]$  as shown in Equation \ref{eq:min_difficult
     T[2][j] = \min_{1 \leq k \leq j-1} \Big( T[1][k] + \big(\ max_{k+1 \leq l \leq j }I_l \big)  \Big)
 \label{eq:min_difficulty_schedule:secondRowbottomup}
 \end{equation}
-Equation \ref{} is really saying that we can calculate the minimum difficulty of scheduling the tasks in $I$ up to the one having index $j$ 
+Equation \ref{eq:min_difficulty_schedule:generic_bottom_up} is really saying that we can calculate the minimum difficulty of scheduling the tasks in $I$ up to the one having index $j$ 
 by calculating the minimum among the costs of  scheduling the tasks up to the index $k \leq j-1$ on the first day and the rest on the second.
 The trick here is that we have already calculate all the possible costs of scheduling all possible number of tasks, and thus all we have to do at this step is to calculate the costs 
 of scheduling the tasks from the one having index $k+1$ to task $j$. This can be done by simply returning the maximum costs among those tasks.
