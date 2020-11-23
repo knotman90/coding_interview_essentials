@@ -262,22 +262,28 @@ Therefore we can calculate $T[2][j]$  as shown in Equation \ref{eq:min_difficult
     T[2][j] = \min_{1 \leq k \leq j-1} \Big( T[1][k] + \big(\ max_{k+1 \leq l \leq j }I_l \big)  \Big)
 \label{eq:min_difficulty_schedule:secondRowbottomup}
 \end{equation}
-Equation \ref{eq:min_difficulty_schedule:generic_bottom_up} is really saying that we can calculate the minimum difficulty of scheduling the tasks in $I$ up to the one having index $j$ 
-by calculating the minimum among the costs of  scheduling the tasks up to the index $k \leq j-1$ on the first day and the rest on the second.
+Equation \ref{eq:min_difficulty_schedule:generic_bottom_up} is really saying that we can calculate the minimum difficulty of scheduling the tasks in 
+$I$ up to the one having index $j$ 
+by calculating the minimum among the costs of scheduling the tasks up to the index $k \leq j-1$ on the first day and the rest on the second.
 The trick here is that we have already calculate all the possible costs of scheduling all possible number of tasks, and thus all we have to do at this step is to calculate the costs 
 of scheduling the tasks from the one having index $k+1$ to task $j$. This can be done by simply returning the maximum costs among those tasks.
 
-This exact same reasoning can be applied to all the other rows and we can therefore come up with a general formula that can be used to fill the entire table of values as shown in Equation \ref{eq:min_difficulty_schedule:generic_bottom_up}.
+This exact same reasoning can be applied to all the other rows and we can therefore come up with a general formula that can be 
+used to fill the entire table of values as shown in Equation \ref{eq:min_difficulty_schedule:generic_bottom_up}.
 \begin{equation}
-    T[i][j] = \min_{1 \leq k \leq j-1} \Big( T[i-1][k] + \big(\ max_{k+1 \leq l \leq j }I_l \big)  \Big)
+    T[i][j] = \min_{i-1 \leq k \leq j-1} \Big( T[i-1][k] + \big(\ max_{k+1 \leq l \leq j }I_l \big)  \Big)
     \label{eq:min_difficulty_schedule:generic_bottom_up}
 \end{equation}
 
 Clearly the solution to the entire problem is in $T[d][|I|-1]$: the cost of scheduling all the elements in $I$ in exactly $d$ days.
 Listing \ref{list:min_difficulty_job_scheduler:solutiondpbottomup} shows an implementation of this idea.
 
-
 \lstinputlisting[language=c++, caption={Dynamic programming bottom-up solution. },label=list:min_difficulty_job_scheduler:solutiondpbottomup]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution3.cpp}
+
+This implementation has a space complexity of $O(d*|I|)$, but a closer inspection to the code and to Equation \ref{eq:min_difficulty_schedule:generic_bottom_up} 
+should make clear that we do not really need to keep all the values for $T$ in memory all the time. 
+In-fact all we need is two rows with the values for days $i$ and $i-1$. This way the complexity goes down to $O(|I|)$.
+Listing can be easily modified so that it implements this memory saving strategy. We will leave this as an exercese to the reader.
 
 
 \section{Conclusion}
