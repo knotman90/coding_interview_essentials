@@ -7,21 +7,22 @@
 int removeDuplicates(int* A, int n1) {
     if(n1 <= 1)
         return n1;
-    int x1 = 0;
-    int y = 1;
+    
+    int last_inserted = 0;
+    int currently_examined = 1;
     int consecutive = 1;
-    while(y < n1)
+    while(currently_examined < n1)
     {
-        if(A[x1] == A[y] && consecutive == 1){
-            A[++x1] = A[y]; 
+        if(A[last_inserted] == A[currently_examined] && consecutive == 1){
+            A[++last_inserted] = A[currently_examined]; 
             consecutive = 2;
         }
-        if(A[x1] != A[y]){
-            A[++x1] = A[y]; 
+        if(A[last_inserted] != A[currently_examined]){
+            A[++last_inserted] = A[currently_examined]; 
             consecutive = 1;
         }
-        y++;
+        currently_examined++;
     }
-    return x1+1;
+    return last_inserted+1;
     
 }
