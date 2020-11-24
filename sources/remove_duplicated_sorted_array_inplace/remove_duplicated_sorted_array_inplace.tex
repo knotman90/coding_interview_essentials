@@ -124,3 +124,63 @@ we can use \inline{std::move} to potentially avoid expensive copies.
 	\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:remove_duplicated_sorted_array_inplace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
 \end{minipage}
 
+\section{Common Variations}
+\subsection{Max $2$ duplicates allowed}
+This is a common variation of the main problem described in this Chapter where the task 
+we have to accomplish is almost identical except this time each element can appears at most 
+twice in the final rearrangements of $I$.
+\begin{exercise}
+	Write a function that given a sorted array $I$ removes all the 
+	duplicates in such a way an element appears at most twice and at with all the valid elements being located at the beginning of the $I$ itself.
+	The function returns the number of valid elements left in $I$.
+	
+	\label{example:remove_duplicated_sorted_array_inplace:exercice2}
+	
+		%example1
+		\begin{example}
+			\label{example:remove_duplicated_sorted_array_inplace_variation1:example1}
+			\hfill \\
+			Given $I=\{1,1,2,2,3,3,4,5,6,6,6,6,7\}$ the function returns $11$ and $I$ is rearranged such
+			that itself first $11$ elements are $\{1,1,2,2,3,3,4,5,6,6,7\}$.				
+		\end{example}
+	
+		%example2
+		\begin{example}
+			\label{example:remove_duplicated_sorted_array_inplace_variation1:example2}
+			\hfill \\
+			Given $I=\{1,2,3,4\}$ the function returns $4$ and $I$ is rearranged such that its first $4$
+			elements are $\{1,2,3,4\}$.	
+		\end{example}
+	\end{exercise}
+
+\subsection{Discussion}
+
+\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:remove_duplicated_sorted_array_inplace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
+
+\subsection{Max $k$ duplicates allowed}
+This variation is also a quite common, and it is basically a generalization of problems above where this time each element can appear $k$ times.
+When $k= 1$ and $k=2$ this problem is equivalent to the Problems \ref{example:remove_duplicated_sorted_array_inplace:exercice1} and \ref{example:remove_duplicated_sorted_array_inplace:exercice2}, respectively.
+The solution for this variation is not discussed here as it can be trivially derived from the solution to the Problem \ref{example:remove_duplicated_sorted_array_inplace:exercice1}.
+\begin{exercise}
+	Write a function that given a sorted array $I$ removes all the 
+	duplicates in such a way an element appears at most $k$ times with all the valid elements being located at the beginning of the $I$ itself.
+	The function returns the number of valid elements left in $I$.
+	
+	\label{example:remove_duplicated_sorted_array_inplace_variation:exercice3}
+	
+		%example1
+		\begin{example}
+			\label{example:remove_duplicated_sorted_array_inplace_variation2:example1}
+			\hfill \\
+			Given $I=\{1,1,2,2,3,3,4,5,6,6,6,6,7\}$ and $k=3$ the function returns $12$ and $I$ is rearranged such
+			that itself first $1$ elements are $\{1,1,2,2,3,3,4,5,6,6,6,7\}$. Notice the extra $6$ w.r.t. the Example \ref{example:remove_duplicated_sorted_array_inplace_variation1:example1}.
+		\end{example}
+	
+		%example2
+		\begin{example}
+			\label{example:remove_duplicated_sorted_array_inplace_variation2:example2}
+			\hfill \\
+			Given $I=\{1,1,1,1,1,1,1,2,2,3,3,3,4,4\}$ and $k=5$ the function returns $13$ and $I$ is rearranged such that its first $13$
+			elements are $\{1,1,1,1,1,2,2,3,3,3,3,4,4\}$.	
+		\end{example}
+	\end{exercise}
