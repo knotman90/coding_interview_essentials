@@ -1,14 +1,15 @@
-int removeDuplicates(std::vector<int> I) 
+int remove_duplicates_constant_space(std::vector<int>& I) 
 {
-    if(I.size()<=1)
-        return n1;
+    const auto num_elements = I.size();
+    if(num_elements<=1)
+        return num_elements;
         
     
     int x = 0, y = 1;
-    while(j < I.size())
+    while(y < num_elements)
     {
-        if(A[x] != A[y])
-            A[x++]  = A[y];
+        if(I[x] != I[y])
+            I[++x]  = I[y];
         y++;
     }
     return x+1;    
