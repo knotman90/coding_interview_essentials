@@ -2,32 +2,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
 %
-% Difficulty:
-% Companies: 
+% Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=\textwidth]{sources/remove_duplicated_sorted_array_inplace/images/example1}
-%	\caption[Sample short cpation]{Sample Caption}.
-%	\label{fig:remove_duplicated_sorted_array_inplace:example1}
-%\end{figure}
+%\begin{figure} \centering
+%   \includegraphics[width=\textwidth]{sources/remove_duplicated_sorted_array_inplace/images/example1}
+%   \caption[Sample short cpation]{Sample Caption}.
+%   \label{fig:remove_duplicated_sorted_array_inplace:example1} \end{figure}
 
 \chapter{Remove duplicates in sorted array}
 \label{ch:remove_duplicated_sorted_array_inplace}
 \section*{Introduction}
 Sorting and duplicates are the bread and butter of coding interview questions. There are countless
-problems that asks you to perform various operations where you either have some sort of sorted input and involving duplicates.
-In the problem described in this chapter we are going to investigate how we can remove duplicates from an already sorted collection of elements.
-This problem is trivially solvable when you can use linear space, 
-but solving it such that the operations are done in-place and by only using constant time is going to be slightly more challenging.
+problems that asks you to perform various operations where you either have some sort of sorted input
+and involving duplicates. In the problem described in this chapter we are going to investigate how
+we can remove duplicates from an already sorted collection of elements. This problem is trivially
+solvable when you can use linear space, but solving it such that the operations are done in-place
+and by only using constant time is going to be slightly more challenging.
 
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that take a sorted array $I$ as input and  returns the number of unique elements $u$ in it.
-The function should also cause all the unique elements of $I$ to appear in the first $u$ positions.
+Write a function that take a sorted array $I$ as input and  returns the number of unique elements
+$u$ in it. The function should also cause all the unique elements of $I$ to appear in the first $u$
+positions.
 
 \label{example:remove_duplicated_sorted_array_inplace:exercice1}
 
@@ -35,16 +34,16 @@ The function should also cause all the unique elements of $I$ to appear in the f
 	\begin{example}
 		\label{example:remove_duplicated_sorted_array_inplace:example1}
 		\hfill \\
-		Given $I=\{1,1,2,2,3,3,4,5,6,6,6,6,7\}$ the function returns $7$ and $I$ is rearranged such that itself
-		first $7$ elements are $\{1,2,3,4,5,6,7\}$.				
+		Given $I=\{1,1,2,2,3,3,4,5,6,6,6,6,7\}$ the function returns $7$ and $I$ is rearranged such
+		that itself first $7$ elements are $\{1,2,3,4,5,6,7\}$.				
 	\end{example}
 
 	%example2
 	\begin{example}
 		\label{example:remove_duplicated_sorted_array_inplace:example2}
 		\hfill \\
-		Given $I=\{1,2,3,4\}$ the function returns $4$ and $I$ is rearranged such that its first
-		$4$ elements are $\{1,2,3,4\}$.	
+		Given $I=\{1,2,3,4\}$ the function returns $4$ and $I$ is rearranged such that its first $4$
+		elements are $\{1,2,3,4\}$.	
 	\end{example}
 \end{exercise}
 
@@ -53,47 +52,75 @@ The function should also cause all the unique elements of $I$ to appear in the f
 \begin{QandA}
 	\item Is it guaranteed for the input array to  contain integers? 
 	\begin{answered}
-		\textit{Yes you can assume $I$ is an array of integers. But if you want you can make your solution generic.}
+		\textit{Yes you can assume $I$ is an array of integers. But if you are free to produce a generic solution.}
 	\end{answered}	
 \end{QandA}
 
 \section{Discussion}
 \label{remove_duplicated_sorted_array_inplace:sec:discussion}
-This problem is remarkably similar to what how the function \inline{std::unique} from the STL library behaves. 
-Such function does not really remove any elements from the input collection, but what it does instead is rearranging the elements
-such that the initial collection is divided into two parts:
+This problem is remarkably similar to what how the function \inline{std::unique} from the STL
+library behaves. Such function does not really remove any elements from the input collection, but
+what it does instead is rearranging the elements such that the initial collection is divided into
+two parts:
 \begin{enumerate}
 	\item the first containing only the unique elements
 	\item the second where the duplicate elements are moved to (possibly empty)
 \end{enumerate}
-This function is often used in pair with \inline{std::erase} to delete the second part of the newly arranged collection.
+This function is often used in pair with \inline{std::erase} to delete the second part of the newly
+arranged collection. Listing \ref{list:remove_duplicated_sorted_array_inplace_stl} shows how you can
+solve this problem with a one-liner solution. Being able to show you can use the standard library to
+solve relatively complex problem is a good thing that every interviewer appreciate. However, despite
+making a good impression, this is not enough to clear the round just yet as if you use this solution
+during an actual interview the interviewer would very likely asks you implement \inline{std::unique}
+yourself.
 
-As already mentioned in the introduction it is quite easy to implement this problem when you can use linear additional space.
-You can think of building a list $U$ of unique elements of $I$ by:
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={One-liner solution using \inline{std::unique}.},label=list:remove_duplicated_sorted_array_inplace_stl]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution3.cpp}
+\end{minipage}
+
+As already mentioned in the introduction it is quite easy to implement this problem when you can use
+linear additional space. You can think of building a list $U$ of unique elements of $I$ by:
 \begin{itemize}
 	\item inserting the first element of $I$
 	\item insert all the elements at position $k$ s.t. $I_k \neq I_{k+1}$
 \end{itemize}
-At the end of this process $U$ contains an ordered list of all the unique elements in $I$. All we have to do is to copy $U$ into the first $|U|$ positions of $|I|$ and return $|U|$.
-The complexity of this approach is linear in time and space as in the worst-case read and write all the elements of $I$ twice.
+At the end of this process $U$ contains an ordered list of all the unique elements in $I$. All we
+have to do is to copy $U$ into the first $|U|$ positions of $|I|$ and return $|U|$. The complexity
+of this approach is linear in time and space as in the worst-case read and write all the elements of
+$I$ twice. An implementation of this approach is shown in Listing
+\ref{list:remove_duplicated_sorted_array_inplace_linearspace}.
 
-Despite we cannot do much better than spending linear time, we can improve on the space and bring it down to constant.
-The key idea is that because the array is sorted, equal elements will be one next to the other, forming clusters of the same value.
-Eventually $I$ has to be logically divided into two subarrays where we only care about the content of the first-part only containing the unique elements. We have no constraints on the second half.
-The algorithm proposed in this Section will build the first half of $I$ one element at the time.  This can be achieved by looping through the elements of $I$ and keeping track of two pointers:
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={Linear time and space solution using \inline{std::std::unordered_set} to remember what elements have been already encountered.},label=list:remove_duplicated_sorted_array_inplace_linearspace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution2.cpp}
+\end{minipage}
+
+Despite we cannot do much better than spending linear time, we can improve on the space and bring it
+down to constant. The key idea is that because the array is sorted, equal elements will be one next
+to the other, forming clusters of the same value. Eventually $I$ has to be logically divided into
+two subarrays where we only care about the content of the first-part only containing the unique
+elements. We have no constraints on the second half. The algorithm proposed in this Section will
+build the first half of $I$ one element at a time.  This can be achieved by looping through the
+elements of $I$ and keeping track of two pointers:
 \begin{itemize}
 	\item $x$: a pointer to the last element of the first part of $I$
 	\item $y$ a pointer to the next element to be processed 
 \end{itemize}
-When the element pointed by $y$ is different to the element pointerd by $x$ we know that we can add $y$ to the first part of $I$.
-We can do that by copying $I_y$ into $I_{x+1}$ and incrementing both $y$ and $x$ so that the next comparison would be among the last inserted element and the next element to be processed.
-If they are equal, the first part of $I$ is not going to grow and we can safely ignore the element pointed by $y$ as we already have an instance of it in the first half of $I$.
+When the element pointed by $y$ is different to the element pointer by $x$ we know that we can add
+$y$ to the first part of $I$. We can do that by copying $I_y$ into $I_{x+1}$ and incrementing both
+$y$ and $x$ so that the next comparison would be among the last inserted element and the next
+element to be processed. If they are equal, the first part of $I$ is not going to grow and we can
+safely ignore the element pointed by $y$ as we already have an instance of it in the first half of
+$I$.
 
-When all the element of $I$ are processed ($y \geq |I|$) the algorithm can be stopped. At this point we know that $x$ is marking the end of the part of $I$ containing only unique elements. All we have to do is calculate its lenght 
-and return it.
-Listing \ref{list:remove_duplicated_sorted_array_inplace} shows an implementation of such idea. As already stated before, its complexity is linear in time and constant in space.
+When all the element of $I$ are processed ($y \geq |I|$) the algorithm can be stopped. At this point
+we know that $x$ is marking the end of the part of $I$ containing only unique elements. All we have
+to do is calculate its length and return it. Listing
+\ref{list:remove_duplicated_sorted_array_inplace} shows an implementation of such idea. As already
+stated before, its complexity is linear in time and constant in space.
+Notice that because we do not have to maintain the state of the elements of $I$ after the point where all the unique elements are
+we can use \inline{std::move} to potentially avoid expensive copies.
 
 \begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:remove_duplicated_sorted_array_inplace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
+	\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:remove_duplicated_sorted_array_inplace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
 \end{minipage}
 

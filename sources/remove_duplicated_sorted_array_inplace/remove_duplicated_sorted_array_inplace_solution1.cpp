@@ -1,4 +1,5 @@
-int remove_duplicates_constant_space(std::vector<int>& I) 
+template<typename T>
+int remove_duplicates_constant_space(std::vector<T>& I) 
 {
     const auto num_elements = I.size();
     if(num_elements<=1)
@@ -9,7 +10,7 @@ int remove_duplicates_constant_space(std::vector<int>& I)
     while(y < num_elements)
     {
         if(I[x] != I[y])
-            I[++x]  = I[y];
+            I[++x] = std::move(I[y]);
         y++;
     }
     return x+1;    
