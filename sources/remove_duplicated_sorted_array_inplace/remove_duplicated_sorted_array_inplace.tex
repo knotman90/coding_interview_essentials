@@ -128,99 +128,102 @@ we can use \inline{std::move} to potentially avoid expensive copies.
 
 \begin{figure}
 	\centering
-	\vspace*{-0.0in}
-	\begin{subfigure}[t]{0.45\textwidth}
+	\vspace*{0.0in}
+	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_1}
-		\vspace*{-10mm}
+		\vspace*{-8mm}
 		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_1}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_2}
-		\vspace*{-10mm}
+		\vspace*{-8mm}
 		\caption{$1 = I_x \neq I_y = 2$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_2}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_3}
+		\vspace*{-8mm}
 		\caption{$I_x = I_y$. $y$ only moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_3}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_4}
+		\vspace*{-8mm}
 		\caption{$2 = I_x \neq I_y = 3$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_4}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_5}
-		\caption{$3 = I_x = I_y = 3$. $y$ moved forward.}
+		\vspace*{-8mm}
+		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_5}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_6}
-		\caption{$3 = I_x = I_y = 3$. $y$ moved forward.}
-		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
-	 \end{subfigure}
-	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_7}
-		\caption{}
+		\vspace*{-8mm}
+		\caption{$3 = I_x \neq I_y = 4$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_8}
-		\caption{}
+		\vspace*{-8mm}
+		\caption{$4 = I_x \neq I_y = 5$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_9}
-		\caption{}
-		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
-	 \end{subfigure}
-	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_10}
-		\caption{}
+		\vspace*{-8mm}
+		\caption{$5 = I_x \neq I_y = 6$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_11}
-		\caption{}
+		\vspace*{-8mm}
+		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_12}
-		\caption{}
+		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_13}
-		\caption{}
+		\vspace*{-8mm}
+		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_14}
-		\caption{}
+		\vspace*{-8mm}
+		\caption{$6 = I_x \neq I_y = 7$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
-	 \begin{subfigure}[t]{0.45\textwidth}
+	 \begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_15}
-		\caption{}
+		\vspace*{-8mm}
+		\caption{$y$ is outside the range of valid elements of $I$. The algorithm stops.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
-
+\caption{Execution of the algorithm implementd in Listing
+ \ref{list:remove_duplicated_sorted_array_inplace} on the input of the Example
+ \ref{example:remove_duplicated_sorted_array_inplace:example1}. The shaded part of the array
+ contains all the unique elements processed so far. $x$ is a pointer to the last element of this
+ sequence. $y$ is a pointer to the element currently processed.}
+\label{fig:remove_duplicated_sorted_array_inplace:example1_process}
 \end{figure}
 
 \section{Common Variations}
