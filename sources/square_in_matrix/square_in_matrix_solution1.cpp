@@ -1,8 +1,9 @@
 
-[[nodiscard]] int largerSquareFrom(const vector<vector<int>>& matrix,
-                                   const std::pair<size_t, size_t>& top_left_corner,
-                                   const size_t rows,
-                                   const size_t cols)
+[[nodiscard]] int largerSquareFrom(
+    const vector<vector<int>>& matrix,
+    const std::pair<size_t, size_t>& top_left_corner,
+    const size_t rows,
+    const size_t cols)
 {
   const auto [x, y] = top_left_corner;
 
@@ -25,7 +26,8 @@
   return k;
 }
 
-[[nodiscard]] int maximal_square_brute_force_1(const vector<vector<int>>& matrix)
+[[nodiscard]] int maximal_square_brute_force_1(
+    const vector<vector<int>>& matrix)
 {
   if (matrix.size() <= 0 || matrix[0].size() <= 0)
     return 0;

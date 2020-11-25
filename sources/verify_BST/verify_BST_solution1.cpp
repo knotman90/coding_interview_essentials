@@ -1,5 +1,7 @@
 
-inline bool isValidBST_helper(const TreeNode* const root, const long lower, const long upper)
+inline bool isValidBST_helper(const TreeNode* const root,
+                              const long lower,
+                              const long upper)
 {
   if (!root)
     return true;

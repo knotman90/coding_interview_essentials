@@ -6,46 +6,56 @@
 %               Structure
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{sources/preamble.tex}
+
+
 \interfootnotelinepenalty=10000
 
 \begin{document}
-	
-	%\frontmatter
-	\input{sources/front_cover.tex}
 
-	\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
+%\frontmatter
+\input{sources/front_cover.tex}
 
-	%\chapterimage{images/header} % Table of contents heading image
-	
-	\pagestyle{empty} % No headers
-	
-	\tableofcontents % Print the table of contents itself
-	
-	\lstlistoflistings
-	%\listoffigures
-	%\listoftables
+\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
 
-	%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
-	
-	%pagestyle{fancy} % Print headers again
+%\chapterimage{images/header} % Table of contents heading image
 
-	\input{sources/buy_sell_stocks/buy_sell_stocks.tex}
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%               Appendices
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\chapter{Appendices}
-	\input{sources/appendices/dynamic_programming.tex}
-	%\input{sources/appendices/prefix_sum.tex}
-	%\input{sources/appendices/binary_search.tex}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%               BIBLIOGRAPHY
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	%\chapter*{Bibliography}
-	\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
-	\printbibliography	
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\lstlistoflistings
+%\listoffigures
+%\listoftables
+
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+%pagestyle{fancy} % Print headers again
+
+\input{sources/list_reverse/list_reverse.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               Appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Appendices}
+%\input{sources/appendices/dynamic_programming.tex}
+%\input{sources/appendices/prefix_sum.tex}
+%\input{sources/appendices/binary_search.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{sources/glossary.tex}
+%\addcontentsline{toc}{chapter}{\textcolor{ocre}{Glossary}}
+%\printglossaries
+
+
+%Print the glossary
+
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
+%\chapter*{Bibliography}
+%Print the glossary
+\printbibliography	
 	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               INDEX

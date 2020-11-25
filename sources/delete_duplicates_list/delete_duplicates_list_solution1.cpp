@@ -29,8 +29,10 @@ template <typename T>
 Node<T> *remove_duplicates_from_linked_list_1(Node<T> *head)
 {
   auto vec_list = list_to_vector<int>(head);
-  // std::sort(std::begin(vec_list), std::end(vec_list)); //not necessary. List is sorted already
-  vec_list.erase(std::unique(std::begin(vec_list), std::end(vec_list)), std::end(vec_list));
+  // std::sort(std::begin(vec_list), std::end(vec_list)); //not necessary. List
+  // is sorted already
+  vec_list.erase(std::unique(std::begin(vec_list), std::end(vec_list)),
+                 std::end(vec_list));
 
   return list_from_vector(vec_list);
 }

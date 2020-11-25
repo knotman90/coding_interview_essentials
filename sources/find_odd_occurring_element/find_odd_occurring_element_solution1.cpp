@@ -10,5 +10,6 @@ int odd_appearing_element_bruteforce_rawloop(const std::vector<int>& A)
     if (is_odd(number_appeareance))
       return x;
   }
-  throw std::invalid_argument("Invalid input array. No elements appear an odd number of times");
+  throw std::invalid_argument(
+      "Invalid input array. No elements appear an odd number of times");
 }
