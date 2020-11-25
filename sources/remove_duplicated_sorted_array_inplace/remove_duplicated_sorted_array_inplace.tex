@@ -124,6 +124,105 @@ we can use \inline{std::move} to potentially avoid expensive copies.
 	\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:remove_duplicated_sorted_array_inplace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
 \end{minipage}
 
+
+
+\begin{figure}
+	\centering
+	\vspace*{-0.0in}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_1}
+		\vspace*{-10mm}
+		\caption{$I_x = I_y$. $y$ moved forward.}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_1}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_2}
+		\vspace*{-10mm}
+		\caption{$1 = I_x \neq I_y = 2$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_2}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_3}
+		\caption{$I_x = I_y$. $y$ only moved forward.}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_3}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_4}
+		\caption{$2 = I_x \neq I_y = 3$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_4}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_5}
+		\caption{$3 = I_x = I_y = 3$. $y$ moved forward.}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_5}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_6}
+		\caption{$3 = I_x = I_y = 3$. $y$ moved forward.}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_7}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_8}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_9}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_10}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_11}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_12}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_13}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_14}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_15}
+		\caption{}
+		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
+	 \end{subfigure}
+
+\end{figure}
+
 \section{Common Variations}
 \subsection{Max $2$ duplicates allowed}
 This is a common variation of the main problem described earlier in this Chapter where the task 
