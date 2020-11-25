@@ -3,7 +3,8 @@ constexpr inline bool is_bit_set(const int n, const unsigned p)
   return (n >> p) & 1;
 }
 
-std::vector<std::vector<int>> power_set_bit_manipulation(const std::vector<int> &A)
+std::vector<std::vector<int>> power_set_bit_manipulation(
+    const std::vector<int> &A)
 {
   const size_t limit = (1ll << A.size()) - 1;
   std::vector<std::vector<int>> PS;

@@ -1,4 +1,6 @@
-void reverse_string_inplace_recursive_helper(std::string &s, const int k, const int l)
+void reverse_string_inplace_recursive_helper(std::string &s,
+                                             const int k,
+                                             const int l)
 {
   if (k >= l)
     return;

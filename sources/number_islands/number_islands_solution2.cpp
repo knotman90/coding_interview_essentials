@@ -15,7 +15,8 @@ void visit(const cell& c, std::vector<std::vector<bool>>& grid)
     const auto [x, y] = p;
     grid[x][y]        = false;  // mark the original map
 
-    constexpr std::array<cell, 4> cross = {cell{-1, 0}, cell{1, 0}, cell{0, -1}, cell{0, 1}};
+    constexpr std::array<cell, 4> cross = {
+        cell{-1, 0}, cell{1, 0}, cell{0, -1}, cell{0, 1}};
     for (const auto& inc : cross)
     {
       const auto nx = x + inc.first;
