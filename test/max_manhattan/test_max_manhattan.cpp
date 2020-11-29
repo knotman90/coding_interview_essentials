@@ -14,12 +14,53 @@ using std::vector;
 
 
 
+using  Matrix = std::vector<std::vector<int>>;
 
-TEST(max_manhattan, test1)
+TEST(max_manhattan, exmaple1)
 {
-	
-	EXPECT_EQ(0,1);
+	Matrix input = {
+        {1,2,3},
+        {4,5,6},
+        {7,8,9},
+    };
+    constexpr int K = 1;
+
+    Matrix expected = {
+        {4,5,6},
+        {7,8,9},
+        {8,9,9},
+    };
+
+    {
+        const auto ans = max_manhattan_matrix_k_bruteforce(input, K); 
+        ASSERT_EQ(ans, expected);
+    }
+
 }
+
+
+TEST(max_manhattan, exmaple2)
+{
+	Matrix input = {
+        {1,2,3},
+        {4,5,6},
+        {7,8,9},
+    };
+    constexpr int K = 2;
+
+    Matrix expected = {
+        {7,8,9},
+        {8,9,9},
+        {9,9,9},
+    };
+
+    {
+        const auto ans = max_manhattan_matrix_k_bruteforce(input, K); 
+        ASSERT_EQ(ans, expected);
+    }
+
+}
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv); 

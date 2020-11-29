@@ -1,3 +1,4 @@
+#if 0 
 void printMatrix(vector<vector<int> > &B){
         const int rows = B.size();
    
@@ -55,3 +56,4 @@ vector<vector<int> > Solution::solve(int A, vector<vector<int> > &B) {
     }
     return B;
 }
+#endif
