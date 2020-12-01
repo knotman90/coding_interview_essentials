@@ -126,23 +126,13 @@ $
 \subsection{Brute-force}
 \label{max_manhattan:sec:bruteforce}
 %You can optimize by only using N*M*2 space . see solution 2
-This problem can be quite easily tackled by using a bruteforce approach that is basically finding the answer 
-by blindly calculating the answer for each cell. 
-All is necessary to find the answer for the cell $(i,j)$ is to find the maximum among the cells that are 
-at a Manhattan distance of at most $K$ from it (the cells that are part of the Manhattan neighborhood of size $K$).
-Figure \ref{fig:max_manhattan:neighborhood} shown an example of such neighborhood where the numbers inside the
+This problem can be quite easily tackled by using a brute-force approach that is basically finding the answer 
+by blindly calculating the answer for each cell as per the problem statement. 
+All is necessary to find the answer for the cell $(i,j)$ is to calculate the maximum among the cells that are 
+at a manhattan distance of at most $K$ from it (the cells that are part of the Manhattan neighborhood of size $K$).
+Therefore, the problem boils down to figuring out  the neighborhood for a given cell.
+Figure \ref{fig:max_manhattan:neighborhood} shown an example of such a neighborhood where the numbers inside the
 cells represent the distance from the cell $(i,j)$ at the center. 
-Given a cell $(i,j)$, figuring out exactly which cells are part of the neighborhood and which are not
-is not particularly difficult but is definitely not trivial. 
-Instead of coming up with a way of generating such list, it is easier to loop over all the cells within
-a square of size $2K$ having cell $(i,j)$ at its center, and to ignore the ones that do not satisfy Equation \ref{eq:max_manhattan:neighbood_equation}.
-Because both 
-\begin{enumerate*}
-	\item the number of cells in the neighborhood and 
-	\item the number of cell in such square
-\end{enumerate*} is quadratic in $K$, 
-then, asymptotically speaking, the additional work required by visiting cells that are not part of the neighborhood
-does not really make any difference. Listing \ref{list:max_manhattan:bruteforce} shows an implementation of such idea. 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhood}
@@ -150,14 +140,151 @@ does not really make any difference. Listing \ref{list:max_manhattan:bruteforce}
 	The numbers in each cell represent the Manhattan distance from the central cell.}
 	\label{fig:max_manhattan:neighborhood}
 \end{figure}
-This approach is clearly correct, and has a time complexity of $O(nmK^2)$. The space complexity is $O(1)$ as no additional space is used. 
-
-
+Given a cell $(i,j)$, figuring out exactly which cells are part of the neighborhood and which are not
+is not particularly difficult but is definitely not trivial. 
+Instead of coming up with a way of generating such a list of cells, it is easier to loop over all the cells within
+a square of size $2K$ having cell $(i,j)$ at its center, and to ignore the ones that do not satisfy Equation \ref{eq:max_manhattan:neighbood_equation}.
+Because both 
+\begin{enumerate*}
+	\item the number of cells in the neighborhood and 
+	\item the number of cell in such square
+\end{enumerate*} is quadratic in $K$, 
+then, asymptotically speaking, the additional work required by visiting cells that are inside the area of cells we are looping on but not part of the neighborhood
+does not really make any difference. 
+Listing \ref{list:max_manhattan:bruteforce} shows an implementation of such idea. 
+This approach is clearly correct, and has a time complexity of $O(nmK^2)$ as for each of the $nm$ cells of the matrix we do exactly $K^2$ work.
+The space complexity is $O(1)$ as no additional space is used other than the second matrix we must return.
 \lstinputlisting[language=c++, caption={Brute Force solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:bruteforce]{sources/max_manhattan/max_manhattan_solution1.cpp}
 
 
 \subsection{Dynamic Programming}
 \label{max_manhattan:sec:DP}
+The brute-force solution works by blindly finding the solution for each cell without taking into consideration whether we can use the information already calculated for other cells.
+What do I mean by reusing and by already calculated answers for other cells?
+Consider the matrix shown in Figure \ref{fig:max_manhattan:neighborhoodDP1_1} showing the neighborhood of size $1$ for the cells 
+\begin{itemize*}
+	\item $(x,y)$ (center)
+	\item $(x+1,y)$ (right)
+	\item $(x-1,y)$ (left)
+	\item $(x,y-1)$ (top)
+	\item $(x,y+1)$ (down)
+\end{itemize*}
+and Figure \ref{fig:max_manhattan:neighborhoodDP1_2} showing the neighborhood of size $2$ for the cell $(x,y)$. 
+Notice that the latter is composed by the union of the neighborhoods of size $1$ shown in Figure \ref{fig:max_manhattan:neighborhoodDP1_1}. Therefore, if we know the answer for $K=1$ for the cells 
+\begin{itemize*}
+	\item $(x,y)$
+	\item $(x+1,y)$
+	\item $(x-1,y)$
+	\item $(x,y-1)$
+	\item $(x,y+1)$
+\end{itemize*} we can easily calculate the answer for $K=2$ for the cell $(x,y)$ without having to look at all the $12$ cells composing its  manhattan neighborhood of size $2$.
+
+
+
+\begin{figure}
+	\vspace*{-0.5in}
+	%\hspace*{-0.5in}
+	\centering
+	
+	\begin{subfigure}[t]{1.0\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDP1_1}
+		\caption[]{Manahtann neighborhoods of size $1$ for the cells \begin{itemize*}
+			\item $(x,y)$ (center)
+			\item $(x+1,y)$ (right)
+			\item $(x-1,y)$ (left)
+			\item $(x,y-1)$ (top)
+			\item $(x,y+1)$ (down)
+		\end{itemize*}}
+		\label{fig:max_manhattan:neighborhoodDP1_1}
+	 \end{subfigure}
+	
+	 \hfill
+	
+	\begin{subfigure}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDP1_2}
+		\caption[]{Neighborhood of size $2$ for the cell $(x,y)$ obtained by the union of the neighborhood depicted in Figure\ref{fig:max_manhattan:neighborhoodDP1_1}.}
+		\label{fig:max_manhattan:neighborhoodDP1_2}
+	 \end{subfigure}
+	 \label{}
+	 \caption{}
+\end{figure}
+
+We can apply the same line of reasoning for finding the answer for $K=3$. Figure \ref{fig:max_manhattan:neighborhoodDPK2_1} shows  the neighborhoods of size $2$ for the cells 
+\begin{itemize*}
+	\item $(x,y)$
+	\item $(x+1,y)$
+	\item $(x-1,y)$
+	\item $(x,y-1)$
+	\item $(x,y+1)$
+\end{itemize*} and and Figure \ref{fig:max_manhattan:neighborhoodDPK2_2} shows  the neighborhood of size $3$ for the cell $(x,y)$.
+Also in this case the latter can be obtained by the union of all the cells in Figure \ref{fig:max_manhattan:neighborhoodDPK2_1} and therefore, 
+if we have the answer for the subproblem where $K=2$ we can obtain the answer for the subproblem where $K=3$
+without having to scan the entirety of the neighborhood of size $3$ for $(x,y)$. We only have to find the maximum among $5$ elements instead of having to look into $25$ cells. 
+This idea can be generalized and its formalization is shown in Equation \ref{eq:max_manhattan:dpformula}.
+The formula is saying that we can obtain the answer for $K=0$ trivially by simply returning the value of the cell $(i,j)$. 
+For $K>0$, we only have to return the max among the neighboring north,south, west and east cells of $(i,j)$ for the same subproblem where at $K-1$.
+
+\hspace{-0.5in}
+\vspace{-0.051in}
+\begin{equation}
+	\begin{cases}
+		S(0,i,j) = I[i][j] \\
+		S(K,i,j) = \max \Big [ S(K-1,i,j), S(K-1,i+1,j),\;S(K-1,i-1,j),\;S(K-1,i,j+1),\;S(K-1,i,j-1) \Big ] \\
+	 \end{cases}
+	\label{eq:max_manhattan:dpformula}
+\end{equation}
+
+\begin{figure}
+	\vspace*{-0.5in}
+	%\hspace*{-0.5in}
+	\centering
+	
+	\begin{subfigure}[t]{1.0\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDPK2_1}
+		\caption[]{Manahtann neighborhoods of size $1$ for the cells \begin{itemize*}
+			\item $(x,y)$ (center)
+			\item $(x+1,y)$ (right)
+			\item $(x-1,y)$ (left)
+			\item $(x,y-1)$ (top)
+			\item $(x,y+1)$ (down)
+		\end{itemize*}}
+		\label{fig:max_manhattan:neighborhoodDPK2_1}
+	\end{subfigure}
+	
+	\hfill
+	
+	\begin{subfigure}[t]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDPK2_2}
+		\caption[]{Neighborhood of size $3$ for the cell $(x,y)$ obtained by the union of the neighborhood depicted in Figure\ref{fig:max_manhattan:neighborhoodDPK2_1}.}
+		\label{fig:max_manhattan:neighborhoodDPK2_2}
+	 \end{subfigure}
+	 \label{}
+	 \caption{}
+\end{figure}
+
+
+As for all dynamic programming problem we have two ways to write the solution: \begin{enumerate}
+	\item top-down, where we use memoization to avoid making duplicate work
+	\item bottom-up, where we solve subproblem in a ordered manner, from the simplest one to the hardest.
+\end{enumerate}
+
+\subsubsection{Top-down}
+The top-down approach is possibly the easiest to write  as we can use a translate $S(K,i,j)$ into a C++ recursive function, 
+and we can use a matrix of size $K\times n\times m$ to store intermediate values of $S$.
+Listing \ref{list:max_manhattan:dp_topdown} shows an implementation of this approach
+
+\lstinputlisting[language=c++, caption={DP top-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_topdown]{sources/max_manhattan/max_manhattan_solution2.cpp}
+The time and space complexity of this approach is $O(nmK)$.
+
+
+\subsubsection{bottom-up}
+
+\lstinputlisting[language=c++, caption={DP bottom-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_topdown]{sources/max_manhattan/max_manhattan_solution3.cpp}
+
 %This problem can be solved easily using dynamic programming.
 %DP recurrence:
 %dp[k][i][j] = ans. for kth manhattan distance for element (i,j)
