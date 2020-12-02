@@ -273,15 +273,47 @@ As for all dynamic programming problem we have two ways to write the solution: \
 \end{enumerate}
 
 \subsubsection{Top-down}
-The top-down approach is possibly the easiest to write  as we can use a translate $S(K,i,j)$ into a C++ recursive function, 
-and we can use a matrix of size $K\times n\times m$ to store intermediate values of $S$.
-Listing \ref{list:max_manhattan:dp_topdown} shows an implementation of this approach
+The top-down approach is possibly the easiest to write as we can  translate $S(K,i,j)$ (see Equation \ref{eq:max_manhattan:dpformula}) into a C++ recursive function, 
+and we can use memoization (in the form of a cache of size $K\times n\times m$) to store intermediate values of $S$ and avoid duplicate work.
+Listing \ref{list:max_manhattan:dp_topdown} shows an implementation of this approach where such a cache is implemented via a hashmap, which maps the arguments of $S$, triplets $(K,i,j)$
+to integers.
+Notice that the function \inline{hash\_combine} and the functor \inline{TupleHash} are the machinery that makes us use 
+tuples of type \inline{std::tuple<int,int,int>} as keys in the Cache (which has type \inline{std::unordered_map}). 
+\inline{TupleHash} uses \inline{hash\_combine} to calculate the hash value for a given \inline{std::tuple<int,int,int>}.
+The main driver function is named \inline{max\_manhattan\_matrix\_k\_DP\_topdown} and the sole purpouse is to create
+the memoization cache and then to call the C++ equivalent of function $S$ (see Equation \ref{eq:max_manhattan:dpformula}): 
+\inline{max\_manhattan\_matrix\_k\_DP\_topdown\_helper}. The latter is a recursive function that takes as input
+\begin{enumerate*}
+	\item the original input matrix $I$ (which is never modified and it is only passed along as a reference),
+	\item $K$, the max distance at which we search for the max value in $I$ ,
+	\item \inline{cell}, which contains the coordinate of the cell for which we are finding and answer, and finally
+	\item the memoization cache where we store the answers for a given $K$ and \inline{cell}.
+\end{enumerate*}
+
+The first thing we do is to unpack the cell into two separate variables representing the row and the column of a cell: $i,j$.
+If the coordinate of the cell are outside the boundaries of $I$, then there is no answer for such cell and we return the smallest possible int.
+Moreover if $K=0$, as per Equation \ref{eq:max_manhattan:dpformula}, the answer is the value of the cell $(i,j)$
+When we have already calculate the solution to this very problem (i.e. for the same values of $K,i,j$) then we simply return the memoized value.
+In all the other cases, we have to do the actual work and perform the recursive calls to get the answer for the subproblems for the neighboring cells at the previous value of $K$:
+\begin{itemize}
+	\item \inline{max\_manhattan\_matrix\_k\_DP\_topdown\_helper(K-1,i-1,j)}
+	\item \inline{max\_manhattan\_matrix\_k\_DP\_topdown\_helper(K-1,i+1,j)}
+	\item \inline{max\_manhattan\_matrix\_k\_DP\_topdown\_helper(K-1,i,j+1)}
+	\item \inline{max\_manhattan\_matrix\_k\_DP\_topdown\_helper(K-1,i,j-1)}
+\end{itemize}.
+
+The time and space complexity of this approach is $O(nmK)$. The proof is quite simple and it boils down to the following facts:
+\begin{enumerate}
+	\item there are exactly $n\times m \times K$ different unique ways we can call the recursive function.
+	\item each function call is memoized. This mean that redundant work is avoided, therefore we do not actually do the work for a recursive call that has been already executed fully.
+\end{enumerate}
+Clearly each entry in the memoization cache costs $4$ integers for a total of $O(nmK)$.
 
 \lstinputlisting[language=c++, caption={DP top-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_topdown]{sources/max_manhattan/max_manhattan_solution2.cpp}
-The time and space complexity of this approach is $O(nmK)$.
 
 
-\subsubsection{bottom-up}
+
+\subsubsection{Bottom-up}
 
 \lstinputlisting[language=c++, caption={DP bottom-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_topdown]{sources/max_manhattan/max_manhattan_solution3.cpp}
 
