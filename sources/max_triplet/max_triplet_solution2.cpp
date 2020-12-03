@@ -1,6 +1,6 @@
 
 constexpr auto MIN_INT = std::numeric_limits<int>::min();
-auto findLargestSmallerThan(const std::set<int>& N, const int n)
+auto find_largest_smaller_than(const std::set<int>& N, const int n)
 {
     auto it =N.lower_bound( n);
     if(N.size() == 0 || it==std::begin(N))
@@ -8,9 +8,8 @@ auto findLargestSmallerThan(const std::set<int>& N, const int n)
     return std::make_tuple(*(--it), true);
 }
 
-int Solution::solve(vector<int> &A) {
-    std::set<int> N;
-    
+int max_triplet_sum_prefix_binary_search(const vector<int> &A) {
+    std::set<int> N;    
     std::vector<int> L;
     
     L.resize(A.size(), MIN_INT);
@@ -21,11 +20,11 @@ int Solution::solve(vector<int> &A) {
         m = std::max(A[i], m);
     }
     
-    int ans = MIN_INT;
+    int ans = -1;
     for(int i = 0 ; i < A.size(); i++)
     {
         auto larger = L[i];
-        auto [smaller, exists] = findLargestSmallerThan(N,A[i]);
+        auto [smaller, exists] = find_largest_smaller_than(N,A[i]);
         if(larger != MIN_INT && exists)
             ans = std::max(ans, A[i]+larger +smaller);
         N.insert(A[i]);

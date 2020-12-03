@@ -10,6 +10,7 @@ using std::string;
 using std::vector;
 
 
+
 template<typename T, typename = std::enable_if<std::is_integral<T>::value>::type>
 T get_random_in_range(const T& s, const T& e)
 {
@@ -54,6 +55,24 @@ std::vector<std::string> generate_well_parenthesized_combinations(const int size
   generate_well_parenthesized_combinations_helper(ans, s, 0, size, 0, 0);
   return ans;
 }
+
+
+/**
+ * Generate a collection of random integrals
+ * 
+ **/
+template<typename T>
+auto generateRandomCollection(const int size, const int l , const int r )
+{
+  std::vector<T> ans;
+  ans.reserve(size);
+  for(int i = 0 ; i < size ; i++)
+  {
+    ans.emplace_back(Book::Algorithm::get_random_in_range(l,r));
+  }
+  return ans;
+}
+
 
 }  // namespace Algorithm
 }  // namespace Book
