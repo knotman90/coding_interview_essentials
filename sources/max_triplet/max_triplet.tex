@@ -80,12 +80,14 @@ You can form such a triplet by selecting an element $i$,
 then another element $j$ such that it appears after and it is larger the element at position $i$ ($j>i$)  and finally the third one, say at index $k$
 which appears after and it is larger the element in position $j$ ($k>j$).
 
-\subsection{Brute-force}
+\section{Brute-force}
 \label{max_triplet:sec:bruteforce}
 One way of solving this problem trivially is to try all possible triplet in a brute-force manner and keep track of the triplets yielding the maximum value.
 Three simple nested loops are enough to implement this idea, as shown in Listing \ref{}. The time complexity of this approach is $(O(|I|^3)$ which is unfortunately is far from being optimal.
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:max_triplet]{sources/max_triplet/max_triplet_solution1.cpp}
-\end{minipage}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:max_triplet]{sources/max_triplet/max_triplet_solution1.cpp}
 
+
+
+\section{Precalculation and Binary Search}
+\lstinputlisting[language=c++, caption={$O(nlog(n))$ solution to the max triplet sum problem.},label=list:max_triplet]{sources/max_triplet/max_triplet_solution2.cpp}
