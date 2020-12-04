@@ -163,7 +163,7 @@ int main(int argc, char **argv) {
 #########################################
 touch $CMAKE_FILE
 
-echo "cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+echo "cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 
 add_executable(test_${NAME} `basename $TEST_FILE`)
