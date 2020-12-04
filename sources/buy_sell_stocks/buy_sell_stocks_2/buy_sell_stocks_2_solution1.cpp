@@ -1,4 +1,5 @@
-int buy_sell_stocks_multiple_transactions_exp_helper(const std::vector<int> &P, const int start)
+int buy_sell_stocks_multiple_transactions_exp_helper(const std::vector<int> &P,
+                                                     const int start)
 {
   int ans = 0;
   for (int buy_day = start; buy_day < P.size() - 1; buy_day++)

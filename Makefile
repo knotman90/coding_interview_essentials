@@ -15,13 +15,19 @@ fullpdf: $(BUILD_DIR_FULL)/$(FULLBOOK_FILE_NAME).pdf
 tests:
 	mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && $(MAKE)
 
+
 $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf: sources/$(MAIN_FILE_NAME).tex $(BUILD_DIR)
 	pdflatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
 	biber build/main.bcf
+	makeglossaries build/$(MAIN_FILE_NAME)
+	makeindex -s build/$(MAIN_FILE_NAME).ist -t build/$(MAIN_FILE_NAME).glg -o build/$(MAIN_FILE_NAME).gls build/$(MAIN_FILE_NAME).glo
+	
 
 $(BUILD_DIR_FULL)/$(FULLBOOK_FILE_NAME).pdf: sources/$(FULLBOOK_FILE_NAME).tex $(BUILD_DIR_FULL)
 	pdflatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
 	biber $(BUILD_DIR_FULL)/$(FULLBOOK_FILE_NAME).bcf
+	makeglossaries build/full/$(FULLBOOK_FILE_NAME)
+	makeindex -s build/full/$(FULLBOOK_FILE_NAME).ist -t build/full/$(FULLBOOK_FILE_NAME).glg -o build/full/$(FULLBOOK_FILE_NAME).gls build/full/$(FULLBOOK_FILE_NAME).glo
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
