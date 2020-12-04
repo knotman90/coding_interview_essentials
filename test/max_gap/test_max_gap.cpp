@@ -13,12 +13,18 @@ using std::vector;
 #include "max_gap_solution2.cpp"
 
 
-
-
 TEST(max_gap, test1)
 {
 	
-	EXPECT_EQ(0,1);
+	for(const auto&[input, expected] : 
+    {
+        std::pair<std::vector<int>, int>({1,2,3},1),
+        std::pair<std::vector<int>, int>({5,3,1,8,9,2,4},3),
+        std::pair<std::vector<int>, int>({7, 1, 8, 9,15},6),
+    }
+    ){
+        EXPECT_EQ(expected, max_gap_bruteforce(input));
+    }
 }
 
 int main(int argc, char **argv) {

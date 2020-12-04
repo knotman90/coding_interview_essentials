@@ -1,46 +1,59 @@
 %!TEX root = ../main.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Links: http://www.zrzahid.com/the-%E2%80%A9maximum%E2%80%A9-gap%E2%80%A9-problem-%E2%80%A9pigeonhole-%E2%80%A9principle%E2%80%A9/
+% Links:
+% http://www.zrzahid.com/the-%E2%80%A9maximum%E2%80%A9-gap%E2%80%A9-problem-%E2%80%A9pigeonhole-%E2%80%A9principle%E2%80%A9/
 % https://leetcode.com/problems/maximum-gap/discuss/50667/Solutions-in-C%2B%2B-with-explanation-read-it-and-then-you-get-it
 % https://leetcode.com/problems/maximum-gap/discuss/50694/12ms-C%2B%2B-Suggested-Solution
-% Difficulty: 
-% Companies: 
+% Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=\textwidth]{sources/max_gap/images/example1}
-%	\caption[Sample short cpation]{Sample Caption}.
-%	\label{fig:max_gap:example1}
-%\end{figure}
+%\begin{figure} \centering \includegraphics[width=\textwidth]{sources/max_gap/images/example1}
+%   \caption[Sample short cpation]{Sample Caption}. \label{fig:max_gap:example1} \end{figure}
 
 \chapter{Fid the largest gap}
 \label{ch:max_gap}
 \section*{Introduction}
+The problem discussed in the chapter is another one about sorting. Its statement is quite simple and
+the only input given is an unsorted array from which we are asked to calculate a value would be
+trivial to find if the input was sorted. Therefore, the real challenge of this problem is to come-up
+with a solution that does not require explicit sorting.
+
+Particular attention should be paid to the examples as well as to the problem statement because it
+is quite easy to misinterpret the real requirements of the function you asked to write if you dive
+right away into coding. The problem asks you to return the largest distance between any element in
+the input array provided they appear one next to the other when $I$ is sorted. You might
+misinterpret the problem by thinking that you need to return the largest distance between any two
+elements of the original input array. This interpretation is wrong, and your intuition should make
+you aware of it right away considering that the solution to this problem involves only finding the
+minimum and the maximum values of the input array. You can expect any coding interview question to
+be harder than that. An imagination effort (or some pen and paper work) is thus necessary to
+understand each of the examples provided.
 
 \section{Problem statement}
 \begin{exercise}
 \label{example:max_gap:exercice1}
-Write a function that given a unsorted array $I$ of length $n$ returns the
-largest gap between two elements appearing one next to the other (they are consecutive) 
-when $I$ is sorted.
-A gap between $x$ and $y$ is defined as the absolute value of the difference between $x$ and $y$: $|x-y|$.
+Write a function that given a unsorted array $I$ of length $n$ returns the largest gap between two
+elements that would appear one next to the other  
+if $I$ was sorted. A gap between $x$ and $y$ is defined as the absolute value of the difference
+between $x$ and $y$: $|x-y|$.
 
 	%example1
 	\begin{example}
 		\label{example:max_gap:example1}
 		\hfill \\
 		Given $I = \{5,3,1,8,9,2,4\}$ the function returns $3$. Sorting $I$ changes it into:
-		$sort(I)= \{1,2,3,4,5,8,9\}$, and the largest gap between any two consecutive elements is $3$. In this case between $5$ and $8$.		
+		$sort(I)= \{1,2,3,4,5,8,9\}$, and the largest gap between any two consecutive elements is
+		$3$. In this case between $5$ and $8$.		
 	\end{example}
 
 	%example2
 	\begin{example}
 		\label{example:max_gap:example2}
 		\hfill \\
-		Given $I = \{7, 1, 8, 9,15\}$ the function returns $6$.
-		$sort(I)= \{1,7,8,9,15\}$, and the largest gap between any two of its consecutive elements is $6$ e.g. between $1$ and $7$ or between $15$ and $9$.	
+		Given $I = \{7, 1, 8, 9,15\}$ the function returns $6$. $sort(I)= \{1,7,8,9,15\}$, and the
+		largest gap between any two of its consecutive elements is $6$ e.g. between $1$ and $7$ or
+		between $15$ and $9$.	
 	\end{example}
 	
 \end{exercise}
@@ -48,23 +61,42 @@ A gap between $x$ and $y$ is defined as the absolute value of the difference bet
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
+	\item Is the input $I$ modifiable?
 	\begin{answered}
-		\textit{}
+		\textit{Yes you can modify $I$.}
+	\end{answered}
+
+	\item Is any guarantee or constraint on the value of each element of $I$?
+	\begin{answered}
+		\textit{You can assume each element of $I$ to fit in a signed integer.}
 	\end{answered}
 	
 \end{QandA}
 
-\section{Discussion}
-\label{max_gap:sec:discussion}
+%\section{Discussion} \label{max_gap:sec:discussion}
 
 
-\subsection{Trivial Solution}
+\section{Trivial Solution}
 \label{max_gap:sec:trivial}
+As already mentioned in the introduction this problem has an extremely simple solution when we can
+afford to get our hands on a sorted version of the input array. In this specific version of the
+problem $I$ is not read-only and we are allowed to modify it,therefore, we can sort it directly. If
+that is not possible all you have to do is to create a copy of $I$ and sort that instead. 
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:max_gap]{sources/max_gap/max_gap_solution1.cpp}
-\end{minipage}
+Given a sorted collection, the largest gap between any two numbers can be find in linear time by
+just scanning each pair $p=(I_k, I_{k+1)}$ of subsequent elements and for each of them calculate
+their distance $d_k=I_{k-1}-I_k$. Among all calculated distances we just return the largest. Listing
+\ref{list:max_gap:bruteforce} shows an implementation of this idea. Notice that:
+\begin{itemize}
+	\item we do not need to use the absolute value operation as we are operating on a sorted
+	collection and therefore, we are guaranteed that $I_{k+1}$ is larger or equal than $I_k$.
+	\item the \inline{for} loop stops when $i=|I|-1$ in order to avoid accessing an invalid element
+	while executing \inline{I_copy[i+1]}. When $i=|I|-1$ this would lead to accessing the element at index
+	$|I|$, which does not exists. In C++ this would cause undefined behaviour, and the most likely
+	outcome would be a segmentation fault error.
+\end{itemize}
+\lstinputlisting[language=c++, caption={Trivial solution to the max gap problem using sorting and linear space.},label=list:max_gap:bruteforce]{sources/max_gap/max_gap_solution1.cpp}
+
 
 
 \section{Radix Sort}
