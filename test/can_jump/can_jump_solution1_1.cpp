@@ -1,1 +1,1 @@
-/home/dspataro/git/algorithm_articles/sources/can_jump/can_jump_solution1_1.cpp
+../../sources/can_jump/can_jump_solution1.cpp
