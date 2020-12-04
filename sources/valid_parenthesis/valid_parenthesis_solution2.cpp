@@ -32,10 +32,9 @@ bool validate_parenthesized_string_DP_helper(
     ans = false;
 
   if (!ans && c == '*')  // try ignoring this character
-    ans = validate_parenthesized_string_DP_helper(s, DP, { i + 1, j });
+    ans = validate_parenthesized_string_DP_helper(s, DP, {i + 1, j});
 
-  if (!ans
-      && c != ')')  // either * or open brackets. Try turning it into a (
+  if (!ans && c != ')')  // either * or open brackets. Try turning it into a (
   {
     // find a something that can be turned into a ) further ahead in the
     // string
@@ -43,11 +42,9 @@ bool validate_parenthesized_string_DP_helper(
     {
       if (s[k] == ')' || s[k] == '*')
       {
-        //validate the two resulting substring from pairing char i and k
-        ans = validate_parenthesized_string_DP_helper(
-                  s, DP, { i + 1, k - 1 })
-              && (validate_parenthesized_string_DP_helper(
-                  s, DP, { k + 1, j }));
+        // validate the two resulting substring from pairing char i and k
+        ans = validate_parenthesized_string_DP_helper(s, DP, {i + 1, k - 1})
+              && (validate_parenthesized_string_DP_helper(s, DP, {k + 1, j}));
       }
     }
   }
@@ -60,5 +57,5 @@ bool validate_parenthesized_string_DP(const std::string& s)
 {
   std::unordered_map<pii, bool, pair_hash> DP;
   const int size = s.size() - 1;
-  return validate_parenthesized_string_DP_helper(s, DP, { 0, size });
+  return validate_parenthesized_string_DP_helper(s, DP, {0, size});
 }

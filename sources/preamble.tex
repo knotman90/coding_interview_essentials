@@ -30,12 +30,13 @@
 
 \usepackage[english]{babel} % English language/hyphenation
 
-\usepackage{enumitem} % Customize lists
+\usepackage[inline]{enumitem} % Customize lists
 \setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
 
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
 
-\usepackage{xcolor} % Required for specifying colors by name
+\usepackage{xcolor}
+\usepackage{colortbl}
 \definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
 
 
@@ -56,8 +57,8 @@
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
-
-\usepackage[citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\usepackage{csquotes}
+\usepackage[citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{sources/bibliography.bib}
 \defbibheading{bibempty}{}
 
@@ -477,25 +478,7 @@ innerbottommargin=5pt]{cBox}
 \par\vspace*{100\p@}}
 \makeatother
 
-%----------------------------------------------------------------------------------------
-%	HYPERLINKS IN THE DOCUMENTS
-%----------------------------------------------------------------------------------------
-
-\usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
-\usepackage{bookmark}
-\bookmarksetup{
-open,
-numbered,
-addtohook={%
-\ifnum\bookmarkget{level}=0 % chapter
-\bookmarksetup{bold}%
-\fi
-\ifnum\bookmarkget{level}=-1 % part
-\bookmarksetup{color=ocre,bold}%
-\fi
-}
-}
+\input{sources/title_and_author.tex}
 
 %----------------------------------------------------------------------------------------
 %	LISTINGS
@@ -591,6 +574,9 @@ addtohook={%
 \newcommand{\inline}[1]{\ \lstinline[columns=fixed]{#1}}
 
 %explicit space
+
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{fancyvrb}
 \fvset{showspaces=true}
 \SaveVerb{verbspace}! !
@@ -599,3 +585,25 @@ addtohook={%
 
 \usepackage{framed}
 \newcommand*{\mybox}[1]{\framebox{#1}}
+
+
+\renewcommand{\thefootnote}{\textit{\alph{footnote}}}
+\usepackage{pifont}
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+
+
+\def\bsq#1{%both single quotes
+\lq{#1}\rq}
+
+%rotate characters
+\def\rotatecharone#1{\rotatebox[origin=c]{180}{#1}}
+
+\def\rotatechartwo#1{\reflectbox{#1}}
+
+% Load the package
+\usepackage{glossaries}
+% Generate the glossary
+\makeglossaries
+
+
+\usepackage{pst-solides3d}
