@@ -22,14 +22,7 @@ If we add another five star review to 2nd product, ((4/4) + (3/4) + (3/6))/3 = 7
 If we add a five star review to 3rd product, ((4/4) + (3/4) + (4/7))/3 = 77.38%
 At this point, 77% (threshold) is met. Therefore, answer is 3 (because that is the minimum five star reviews we need to add, to get the seller reach the threshold).
 
-\begin{lstlisting}[language=c++, caption={Definition of a linked list with a random pointer.},label=list:delete_duplicates_list:linked_list]
-	public static int fiveStarReviews(List<List<Integer>> productRatings, int ratingsThreshold){
-	}
 
-
-
-
-\end{lstlisting}
 \section{Problem statement}
 \begin{exercise}
 
@@ -61,7 +54,7 @@ At this point, 77% (threshold) is met. Therefore, answer is 3 (because that is t
 
 \section{Discussion}
 \label{five_starts_seller:sec:discussion}
-
+\begin{verbatim}
 Please point out if my solution is wrong.
 
 Upvote if you like it.
@@ -148,6 +141,8 @@ I think the underlying intuition here is that the further that a product rating 
  jump. 1/2 -> 2/3 is a 17%
   jump. 2/3 -> 3/4 is a 9%
    jump and so on. So make a priority queue with a comparator for the product ratings, update the one with the lowest and add it back to the PQ
+
+\end{verbatim}
 \subsection{Brute-force}
 \label{five_starts_seller:sec:bruteforce}
 
