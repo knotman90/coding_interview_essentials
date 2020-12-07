@@ -483,9 +483,6 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 %	LISTINGS
 %----------------------------------------------------------------------------------------
-%----------------------------------------------------------------------------------------
-%	LISTINGS
-%----------------------------------------------------------------------------------------
 \usepackage{listings}
 \lstset{language=C++}
 \lstset{
@@ -571,7 +568,7 @@ innerbottommargin=5pt]{cBox}
 \usepackage[makeroom]{cancel}
 \usepackage[super]{nth}
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
-\newcommand{\inline}[1]{\ \lstinline[columns=fixed]{#1}}
+\newcommand{\inline}[1]{\ \lstinline[breaklines=true]{#1}}
 
 %explicit space
 
@@ -606,4 +603,6 @@ innerbottommargin=5pt]{cBox}
 \makeglossaries
 
 
-\usepackage{pst-solides3d}
+
+
+\usepackage{siunitx}
