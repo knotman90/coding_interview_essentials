@@ -14,47 +14,47 @@
 \chapter{Sort the chunks, sort the array.}
 \label{ch:max_num_chunks_sorted}
 \section*{Introduction}
-The problem asks for coutning the maximum number of subarrays we can split the array s.t. if we sort
-each subarray individually then the whole arrays is sorted.
 
-The idea is that you can greedily construct pieces of chuks from left to right. If the maximum of
-the current chuck you are constructing is smaller than the minimum in the rest of the array, then
-you can sort the chuck and no problem will arise because all the elements greater then the elements
-in the chuck are further right and will be sorted later. This can be done with a set, where the set
-keep tracks of the elements on the right and you can easily query for the minimum.
+Sorting is a popular topic in computer science and in programming interview. Its usefulness its beyond dispute and 
+is it not surprising that there are literally countless of research papers and algorithms on the topic. 
+
+In this problem however we are not going to devise a novel sorting algorithm, instead 
+we are going to investigate on a less useful problem,
+that challenge us to find out how we can split an array into pieces such that if each of the pieces is sorted 
+individually, the final result would be equivalent to having sorted the entire array to begin with.
+
+It is necessary to develop a key insight to solve this problem efficiently, 
+and asking the right questions and looking at a number of good examples
+is fundamental for doing so. In the next section we are going to explore how these insight 
+can be gained and then turned into an efficient code. 
 
 
 
-If the problem say that the elements are taken from the 0....n-1 (meaning that the array is a
-permutation) then you can do this a bit better. 
 \section{Problem statement}
 \begin{exercise}
 \label{example:max_num_chunks_sorted:exercice1}
+Write a function that given an array $I$ of integers returns the maximum number of sub-arrays of $I$ 
+such that if each of the subarray is sorted individually, then $I$ as a whole is sorted.
 
 	%example1
 	\begin{example}
 		\label{example:max_num_chunks_sorted:example1}
-		\hfill \}
+		\hfill \\
+		Given $I=\{45,88,1,9,90\}$ then the function return $1$.
 		
 	\end{example}
 
 	%example2
 	\begin{example}
 		\label{example:max_num_chunks_sorted:example2}
-		\hfill \
-		
-	\end{example}
-
-	\begin{example}
-		\hfill \
-	
-	\label{ex:max_num_chunks_sorted:example1}
-	\end{example}
-
-	\begin{example}
-		\hfill \
-
-	\label{ex:max_num_chunks_sorted:example2}	
+		\hfill \\
+		Given $I=\{4,3,2,1,5,9,10\}$ then the function return $4$. We can sort the following sub-arrays:
+		\begin{itemize*}
+			\item $[0,3]$
+			\item $[4,4]$
+			\item $[4,4]$
+			\item $[4,4]$
+		\end{itemize*}
 	\end{example}
 \end{exercise}
 
