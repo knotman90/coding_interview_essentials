@@ -1,4 +1,4 @@
-int maxChunksToSorted(std::vector<int>& arr)
+int max_chunks_to_sorted_lineartime(std::vector<int>& arr)
 {
   constexpr int INF = std::numeric_limits<int>::min();
 
