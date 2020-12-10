@@ -75,19 +75,19 @@ such that if each of the sub-array is sorted individually, then $I$ as a whole i
 
 
 Let's start our discussion by thinking about a brute-force solution for this problem. 
-One possible way of doing it would be to try to divide the array into $|I|$ parts, 
+One possible way of doing it would be to try to divide the array into $|I|$ non-empty and non-overlapping parts (only one way of performing such division), 
 sort  them individually and then check if $I$ is sorted. 
-If it is not we can try to divide $I$ into $|I|-1$ sub-arrays,
+If it is not, then we can try to divide $I$ into $|I|-1$ sub-arrays,
 and check whether by sorting the resulting individual pieces $I$ turns to be sorted.
 This line or reasoning can be generalized and a general brute-force approach
-could work by progressively trying to split $I$ into less number of sub-arrays $k <|I|$.
-For each of the possible  partitions of $I$ into $k$ subarrays, we can then check whether 
+that works by progressively trying to split $I$ into less and less number of sub-arrays $k <|I|$.
+For each of the possible valid divisions of $I$ into $k$ sub-arrays, we can then check whether 
 we can obtain a complete sorting of $I$ by only sorting the individual $k$ sub-arrays.
-Eventually when $k=1$, $I$ would be sorted fully.
+Eventually when $k=1$, $I$ would be sorted fully as this is equivalent to sorting $I$ entirely.
 
 Clearly this algorithm is complete and correct
 as all possible valid partitions of $I$ are checked. Its complexity is however exponential
-in time as given a certain $k$ there are ${n \choose k} $ possible valid partition of $I$. 
+in time as given a certain $k$ there are ${n \choose k} $ possible way we can divide $I$ into $k$ sub-arrays. 
 Listing \ref{list:max_num_chunks_sorted:bruteforce} shows a C++ implementation of such idea. 
 
 
@@ -98,7 +98,40 @@ Listing \ref{list:max_num_chunks_sorted:bruteforce} shows a C++ implementation o
 
 \section{Linear time}
 \label{max_num_chunks_sorted:sec:lineartime}
+This problem can be however sorted in linear time if we take into consideration that if we sort a sub-array of $I$
+containing elements from index $s$ to $r< |I|-1$  (there is at least an element after this sub-array) 
+then $I$ cannot be fully sorted if the maximum element among the elements $I_s, I_{s+1},\ldots, I_r$
+is smaller than any of the element of $I$ after $r$ (or smaller than the smallest among those elements after $r$). 
+For instance, imagine $I$ is the input array of the example \ref{example:max_num_chunks_sorted:example2}. 
+If we choose $s=0$ and $r=2$ then $I$ can never be properly sorted, no matter how we divide the elements after the one at index $r=2$ into subarrays
+because the element at index $3$ will always appear after the value $4$ (see Figure \ref{fig:max_num_chunks_sorted:example1}).
+
+\begin{figure}[b]
+  \centering
+   \includegraphics[width=\textwidth]{sources/max_num_chunks_sorted/images/example1}
+   \caption[]{Input array from the Example \ref{example:max_num_chunks_sorted:example1}. If the 
+   sub-array identified by $s$ and $r$ is sorted in isolation, $I$ as a whole cannot be sorted (no matter how elements from $r$ to $|I|-1$ are sorted)
+   because $M$ will always appear before $m$, despite the fact $M>m$ and it should appear after.}.
+   \label{fig:max_num_chunks_sorted:example1}
+\end{figure}
+
+This insight makes possible to derive a greedy approach to this problem that is based on the idea that we 
+are going to split $I$ into as many pieces as possible, such that the largest element of a sub-array 
+is smaller than all the subsequent elements. 
+
+Listing \ref{list:max_num_chunks_sorted:linear} shows an implementation of this  idea that works by keeping a sorted list $N$
+of all the elements not yet processed in $I$. $N$ initially contains all the values in $I$.
+We start a new chunk at index $0$ and we keep including elements into this chunk until the largest
+of its element is still larger than the smallest element in $N$.
+When an element is included into the chunk, then it is removed from $N$.
+If the largest element in the current chunk is indeed smaller than the smallest in $N$,
+then this signals the fact we can sort this chunk independently without
+causing $I$ as a whole not to be sorted (all the element of this chunk appear before the rest of the elements when $I$ is sorted).
+At this point we can start a new chunk and repeat the process until
+we are left with no element to process (or equivalently $N$ is empty).
+Listing \ref{list:max_num_chunks_sorted:linear} has a complexity of $O(|I|)$  for both space and time. 
 
 \begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Linear time solution to the problem \textit{Sort the chunks, sort the array}.},label=list:max_num_chunks_sorted]{sources/max_num_chunks_sorted/max_num_chunks_sorted_solution2.cpp}
+	\lstinputlisting[language=c++, caption={Linear time solution to the problem \textit{Sort the chunks, sort the array}.},
+	label=list:max_num_chunks_sorted:linear]{sources/max_num_chunks_sorted/max_num_chunks_sorted_solution2.cpp}
 \end{minipage}
