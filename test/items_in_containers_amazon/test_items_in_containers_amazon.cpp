@@ -17,8 +17,16 @@ using std::vector;
 
 TEST(items_in_containers_amazon, test1)
 {
-	
-	EXPECT_EQ(0,1);
+	const std::string s = "|*|*|";
+    const std::vector<std::pair<int,int>> Q ={{0,2},{0,4}};
+    const std::vector<int> expected = {1,2};
+
+	{
+        EXPECT_EQ(expected,items_in_containers_naive(s,Q));
+    }
+    {
+        EXPECT_EQ(expected,items_in_containers_lineartime(s,Q));
+    }
 }
 
 int main(int argc, char **argv) {

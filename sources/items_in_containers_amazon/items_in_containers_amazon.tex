@@ -2,90 +2,96 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
 %
-% Difficulty:
-% Companies: 
+% Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Counts the items on the containers}
+\chapter{Counts the items in the containers}
 \label{ch:items_in_containers_amazon}
 \section*{Introduction}
-Imagine you are the owner of a succesfully online store. 
-You would like to be able to query what is the number of items you still have in the warehouse.
-The problem is that you cannot just walk into the warehouse and count the items as they are stored in closed containers. 
-Thankfully, the warehouse is equipped with sensors and it is able to produce a string representing 
-the state of the warehouse and single containers. 
-The problem described in this chapter investigates how we can write an algorithm
-that takes such string (the state of all the containers in the warehouse) and is able to answer queries on the number of elements that are present 
-in some portions of the warehouse itself. 
+Imagine you are the owner of a successful online store. You would like to be able to query what is
+the number of items you still have in the warehouse. The problem is that you cannot just walk into
+the warehouse and count the items as they are stored in closed containers. Thankfully, the warehouse
+is equipped with sensors and it is able to produce a string representing the state of the warehouse
+and single containers. The problem described in this chapter investigates how we can write an
+algorithm that takes such string (the state of all the containers in the warehouse) and is able to
+answer queries on the number of elements that are present in some portions of the warehouse itself. 
 
-This problem has been reported to be asked during Amazon interviews and it is considered a medium difficulty problem.
-We will investigate two solutions:
+This problem has been reported to be asked during Amazon interviews and it is considered a medium
+difficulty problem. We will investigate two solutions:
 \begin{itemize}
-	\item brute-force, that is going to have a relatively straightforward logic (blindly count the items in the string)
-	 and be easy to code (in Section \ref{}),
-	\item a more sophisticated one with optimal asymptotic complexity where the input string is preprocessed so that queries can be answered faster.
+	\item brute-force, that is going to have a relatively straightforward logic (blindly count the
+	 items in the string) and be easy to code (in Section
+	 \ref{items_in_containers_amazon:sec:bruteforce}),
+	\item a more sophisticated one with optimal asymptotic complexity where the input string is
+	preprocessed so that queries can be answered faster.
 \end{itemize}
 
 
 
 \section{Problem statement}
 \begin{exercise}
-	You are given a string $s$ representing the current state of a warehouse. 
-	The string contains only two kinds of characters: 
+	You are given a string $s$ representing the current state of a warehouse. The string contains
+	only two kinds of characters: 
 	\begin{description}
 		\item[\bsq{\textbf{\texttt{*}}}(ASCII 42)]: representing an item 
 		\item[\bsq{\textbf{\texttt{|}}}(ASCII 124)]: representing the boundaries of a container.
 	\end{description}
 	
-	A container is a closed space within the warehouse and it is represented in $s$ by a pair of  \bsq{\texttt{|}}.
-	Items within a container $c$ are represented as \bsq{\texttt{*}} appearing withing the two \bsq{\texttt{|}} defining $c$.
-	You are also given an array of pairs $Q = \{(s_0, e_0),(s_1, e_2),\ldots,(s_{n-1}, e_{e-1}) : 0 \leq s_i \leq e_i \leq |s|\}$, 
-	the queries, where each pair in $Q$ identifies a substring in $s$.
+	A container is a closed space within the warehouse and it is represented in $s$ by a pair of
+	\bsq{\texttt{|}}. Items within a container $c$ are represented as \bsq{\texttt{*}} appearing
+	withing the two \bsq{\texttt{|}} defining $c$. You are also given an array of pairs $Q = \{(s_0,
+	e_0),(s_1, e_2),\ldots,(s_{n-1}, e_{e-1}) : 0 \leq s_i \leq e_i \leq |s|\}$, where
+	each pair in $Q$ identifies a substring in $s$. Each element of $Q$ is a query you must answer to.
 	
-	Your task is to write a function that returns an array $A$ of length $n$ 
-	(containing the answers for each of the queries in $Q$)
-	where each element $A_i$ is the number of items contained in all the \textbf{closed} compartments between $(s_i, e_i)$.
-	
+	Your task is to write a function that returns an array $A$ of length $n$, containing the answers
+	to all of the queries in $Q$, where each element $A_i$ is the number of items contained in all
+	the \textbf{closed} compartments between $(s_i, e_i)$.	
 
 \begin{example}
 	\hfill \\
-	Given \texttt{s = \bsq{|**|*|*}} and $Q = \{(0,4),(0,5)\}$ the function returns $A=\{2,3\}$.
-	$s$ has a total of $2$ closed containers the first with $2$ and $1$ item inside respectively.
+	Given \texttt{s = \bsq{|**|*|*}} and $Q = \{(0,4),(0,5)\}$ the function returns $A=\{2,3\}$. $s$
+	has a total of $2$ closed containers the first with $2$ and $1$ item inside respectively.
 	
-	The first query asks you to find the number of elements in the substring $s[0,4]=$ \texttt{\bsq{|**|*}} 
-	where three items are represented but only two are within a closed container (the first two).
+	The first query asks you to find the number of elements in the substring $s[0,4]=$
+	\texttt{\bsq{|**|*}} where three items are represented but only two are within a closed
+	container (the first two).
 	
-	The second query refers to the substring $s[0,5]=$ \texttt{\bsq{|**|*|}}. The items are the same as in the previous query but this time
-	all of them are in closed containers.
+	The second query refers to the substring $s[0,5]=$ \texttt{\bsq{|**|*|}}. The items are the same
+	as in the previous query but this time all of them are in closed containers.
 	
 \end{example}
 
 \begin{example}
 	\hfill \\
-	Given \texttt{s = \bsq{*|*|}} and $Q = \{(0,2),(1,3)\}$ the function returns $A=\{0,1\}$.
-	$s$ has a total of two items and only $1$ closed container containing only a single item.
+	Given \texttt{s = \bsq{*|*|}} and $Q = \{(0,2),(1,3)\}$ the function returns $A=\{0,1\}$. $s$
+	has a total of two items and only $1$ closed container containing only a single item.
 
-	The first query refers to the substring $s[0,2]=$ \texttt{\bsq{*|*}}. No closed container are represented in such substring thus the answer in this case must be $0$.
-	However, the second question refers to  $s[1,3]=$ \texttt{\bsq{|*|}} where we can see we have a valid container. We can therefore counts the elements in it.
+	The first query refers to the substring $s[0,2]=$ \texttt{\bsq{*|*}}. No closed container are
+	represented in such substring thus the answer in this case must be $0$. However, the second
+	question refers to  $s[1,3]=$ \texttt{\bsq{|*|}} where we can see we have a valid container. We
+	can therefore counts the elements in it.
 \end{example}
 
 \end{exercise}
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
+	\item Is it guaranteed for the input string $s$ to only contains valid character?
 	\begin{answered}
-		\textit{}
+		\textit{Yes, you do not need to worry about the sanity of the input.}
 	\end{answered}
-	
 \end{QandA}
 
 \section{Discussion}
 \label{items_in_containers_amazon:sec:discussion}
 
 
+
 \subsection{Brute-force}
 \label{items_in_containers_amazon:sec:bruteforce}
+This problem has a straightforward solution that basically loops over all the elements  specified in a query $(s,e) \in Q$
+and counts all the elements inside the containers. Because the $|s-e|$ is $O(|s|)$ the complexity of this approach is $O(|s|*|Q|)$. 
+Listing \ref{} shows an implementation of such idea.
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:items_in_containers_amazon]{sources/items_in_containers_amazon/items_in_containers_amazon_solution1.cpp}
+\lstinputlisting[language=c++, caption={Na\"ive solution to the \textit{items in the container} problem.},label=list:items_in_containers_amazon]{sources/items_in_containers_amazon/items_in_containers_amazon_solution1.cpp}
 

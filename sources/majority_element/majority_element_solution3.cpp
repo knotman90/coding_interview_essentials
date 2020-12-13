@@ -12,7 +12,7 @@ int find_majority_element_sorting(std::vector<int>& N)
   for (size_t i = 0; i < N.size(); i++)
   {
     if (N[i] != current.first || i == 0)
-      current = { N[i], 1 };
+      current = {N[i], 1};
     else
       current.second++;
 

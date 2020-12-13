@@ -1,7 +1,8 @@
-[[nodiscard]] auto largerSquareFromDiagonal(const vector<vector<int>>& matrix,
-                                            const std::pair<size_t, size_t>& top_left_corner,
-                                            const size_t rows,
-                                            const size_t cols)
+[[nodiscard]] auto largerSquareFromDiagonal(
+    const vector<vector<int>>& matrix,
+    const std::pair<size_t, size_t>& top_left_corner,
+    const size_t rows,
+    const size_t cols)
 {
   const auto [x, y] = top_left_corner;
   int steps         = 0;
@@ -39,7 +40,8 @@ auto maximal_square_brute_force_2(const vector<vector<int>>& matrix)
   for (size_t i = 0; i < rows; i++)
     for (size_t j = 0; j < cols; j++)
       if (matrix[i][j])
-        ans = std::max(ans, largerSquareFromDiagonal(matrix, {i, j}, rows, cols));
+        ans =
+            std::max(ans, largerSquareFromDiagonal(matrix, {i, j}, rows, cols));
 
   return ans * ans;
 }

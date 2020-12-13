@@ -478,25 +478,7 @@ innerbottommargin=5pt]{cBox}
 \par\vspace*{100\p@}}
 \makeatother
 
-%----------------------------------------------------------------------------------------
-%	HYPERLINKS IN THE DOCUMENTS
-%----------------------------------------------------------------------------------------
-
-\usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
-\usepackage{bookmark}
-\bookmarksetup{
-open,
-numbered,
-addtohook={%
-\ifnum\bookmarkget{level}=0 % chapter
-\bookmarksetup{bold}%
-\fi
-\ifnum\bookmarkget{level}=-1 % part
-\bookmarksetup{color=ocre,bold}%
-\fi
-}
-}
+\input{sources/title_and_author.tex}
 
 %----------------------------------------------------------------------------------------
 %	LISTINGS
@@ -592,6 +574,9 @@ addtohook={%
 \newcommand{\inline}[1]{\ \lstinline[columns=fixed]{#1}}
 
 %explicit space
+
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{fancyvrb}
 \fvset{showspaces=true}
 \SaveVerb{verbspace}! !
@@ -614,3 +599,8 @@ addtohook={%
 \def\rotatecharone#1{\rotatebox[origin=c]{180}{#1}}
 
 \def\rotatechartwo#1{\reflectbox{#1}}
+
+% Load the package
+\usepackage{glossaries}
+% Generate the glossary
+\makeglossaries
