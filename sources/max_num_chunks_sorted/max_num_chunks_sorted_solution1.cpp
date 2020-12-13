@@ -29,7 +29,7 @@ bool check_all_k_combinations(const std::vector<int>& I, const int offset, const
 }
 
 
-int maxChunksToSorted_bruteforce(const std::vector<int>& I)
+int max_chunks_to_sorted_bruteforce(const std::vector<int>& I)
 {
     for(int k = std::ssize(I); k >= 2  ; k--)
     {

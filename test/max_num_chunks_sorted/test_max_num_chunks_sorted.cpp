@@ -26,7 +26,7 @@ TEST(max_num_chunks_sorted, example1)
 
     {
         auto I_copy(I);
-      EXPECT_EQ(maxChunksToSorted_bruteforce(I_copy), expected);
+      EXPECT_EQ(max_chunks_to_sorted_bruteforce(I_copy), expected);
     }
   }
 }
@@ -46,7 +46,7 @@ TEST(max_num_chunks_sorted, example2)
 
     {
         auto I_copy(I);
-      EXPECT_EQ(maxChunksToSorted_bruteforce(I_copy), expected);
+      EXPECT_EQ(max_chunks_to_sorted_bruteforce(I_copy), expected);
     }
   }
 }

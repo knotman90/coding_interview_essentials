@@ -12,7 +12,8 @@ int max_chunks_to_sorted_lineartime(std::vector<int>& arr)
   {
     N.erase(arr[i]);
     const int new_max = std::max(curr_max, arr[i]);
-    if (N.size() > 0 && new_max >= *(N.begin()))
+    const auto& smallest_among_rest = *(N.begin());
+    if (N.size() > 0 && new_max >= smallest_among_rest)
     {
       curr_max = new_max;
     }
