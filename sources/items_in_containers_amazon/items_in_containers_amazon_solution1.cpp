@@ -10,7 +10,7 @@ int count_items_in_substring(const std::string& s ,const Query& query)
 
     auto curr_char = start;
     //find the first container
-    while(curr_char <= end && curr_char!=kContDelimiter)
+    while(curr_char <= end && s[curr_char]!=kContDelimiter)
         curr_char++;
     curr_char++;
 
