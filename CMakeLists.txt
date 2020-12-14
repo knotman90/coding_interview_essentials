@@ -28,14 +28,19 @@ endif(ENABLE_CLANG_TIDY)
 
 
 
-set(EXTRA_WARNING_GNU "-march=native -Wextra -Wdisabled-optimization  -Wunsafe-loop-optimizations -funsafe-loop-optimizations -Wshadow -Wpointer-arith -Wcast-qual -Wunreachable-code ")
+set(EXTRA_WARNING_GNU "-march=native -Wextra -Wdisabled-optimization  -funsafe-loop-optimizations -Wshadow -Wpointer-arith -Wcast-qual -Wunreachable-code ")
 
 #set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=-*,cppcoreguidelines-*, -header-filter=.;)
 
 set (CMAKE_CXX_STANDARD 20)
 if ( CMAKE_COMPILER_IS_GNUCC  OR CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall ${EXTRA_WARNING_GNU}")
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall ${EXTRA_WARNING_GNU} -Wunsafe-loop-optimizations")
 endif ( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall ${EXTRA_WARNING_GNU} -fsanitize=address -fno-omit-frame-pointer")
+endif()
+
 if ( MSVC )
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /W4")
 endif ( MSVC )
