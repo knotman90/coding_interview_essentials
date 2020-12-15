@@ -11,7 +11,7 @@
 %\begin{figure} \centering \includegraphics[width=\textwidth]{sources/max_gap/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:max_gap:example1} \end{figure}
 
-\chapter{Fid the largest gap}
+\chapter{Find the largest gap}
 \label{ch:max_gap}
 \section*{Introduction}
 The problem discussed in the chapter is another one about sorting. Its statement is quite simple and
@@ -33,7 +33,8 @@ understand each of the examples provided.
 \section{Problem statement}
 \begin{exercise}
 \label{example:max_gap:exercice1}
-Write a function that given a unsorted array $I$ of length $n$ returns the largest gap between two
+Write a function that given a unsorted array of non-negative integers 
+$I$ of length $n$ returns the largest gap between two
 elements that would appear one next to the other  
 if $I$ was sorted. A gap between $x$ and $y$ is defined as the absolute value of the difference
 between $x$ and $y$: $|x-y|$.
@@ -68,7 +69,7 @@ between $x$ and $y$: $|x-y|$.
 
 	\item Is any guarantee or constraint on the value of each element of $I$?
 	\begin{answered}
-		\textit{You can assume each element of $I$ to fit in a signed integer.}
+		\textit{You can assume each element of $I$ to fit in a 4 bytes unsigned integer.}
 	\end{answered}
 	
 \end{QandA}
@@ -101,6 +102,30 @@ their distance $d_k=I_{k-1}-I_k$. Among all calculated distances we just return 
 
 \section{Radix Sort}
 \label{max_gap:sec:radix_sort}
+The idea we developed in Section \ref{max_gap:sec:trivia} can be improved 
+if instead of using a normal comparison-based sorting algorithm  we use 
+radix-sort\cite{cit::wiki::radix_sort }instead. 
+Radix sort will perform better than a standard $O(nlogn)$ algorithm when there is an upper bound for the values of the 
+input array. If we assume that such bound is the largest value a standard 4 bytes \inline{int} can hold then radix sort will 
+have a complexity of $O(n)$.
+
+Radix sort works by sorting the input array $d$ times, where $d = \floor{log_{10}k+1}$ and $k$ is the largest number in $I$.
+$d$ is just the number of digits of the largest number in the list. For a standard \inline{int} $d=\floor{log_{10}2147483647 + 1}=10$.
+The sorting works by repeatedly sorting the input list from the least to the most significant digit where each of the intermediate 
+sorting steps is performed using counting-sort.
+For instance given $I = \{329,457,657,839,436,720,355\}$ the first pass of radix sort will sort $I$ based on the value of the least significant digits.
+After this first pass we have $I=\{720,355,436,457,657,329,839\}$. Notice how the first digits are sorted. At this point the algorithm proceed by sorting 
+$I$ further but this time according to their second digit. The resulting list becomes $I=\{720,329,436,839,355,457,657\}$.
+Finally the third pass will sort all the elements according the the most significant digit, resulting in a well
+sorted list: $I=\{329,355,436,457,657,720,839\}$. 
+Notice that this approach needs to be tweaked in case you want to apply radix sort to negative numbers\footnote{You can treat the sign as a special kind of digit. 
+You sort the pile on the units, then the tens, etc. and finally on the sign. 
+This does produce a reversed order for the negatives, 
+you then simply reverse the contents of that bucket.}.
+
+Listing \ref{list:max_gap:radixsort} shows an implementation of radix-sort and its application to the solution of this chapter's problem.
+\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using radix-sort.},label=list:max_gap:radixsort]{sources/max_gap/max_gap_solution2.cpp}
+Notice how the main driver function \inline{max_gap_radix_sort} is basically the same as \inline{max_gap_bruteforce} from Listing \ref{list:max_gap:bruteforce} except for the sorting procedure used.
 
 \section{Buckets and the pigeons holes}
 \label{max_gap:sec:buckets}

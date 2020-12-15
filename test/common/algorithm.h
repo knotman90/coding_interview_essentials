@@ -20,6 +20,14 @@ T get_random_in_range(const T& s, const T& e)
     return dist(rng);
 }
 
+template<typename T, typename = std::enable_if<std::is_integral<T>::value>::type>
+std::vector<T> generate_random_vector_in_range(const size_t size, const T& s, const T& e)
+{
+  std::vector<T> ans(size);
+  std::generate_n(std::begin(ans), size, [&](){return get_random_in_range<T>(s,e);});
+  return ans;
+}
+
 
 void generate_well_parenthesized_combinations_helper(vector<std::string>& ans,
                                                      string& s,
