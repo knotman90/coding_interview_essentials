@@ -16,7 +16,7 @@ ListNode* remove_nth_node_from_end_bruteforce(ListNode* head, int n)
 
   ListNode *prec = nullptr, *curr = head;
 
-  int index = length - n-1;
+  int index = length - n - 1;
   while (index--)
   {
     prec = curr;
@@ -26,7 +26,7 @@ ListNode* remove_nth_node_from_end_bruteforce(ListNode* head, int n)
   ListNode* next = curr->next;
   ListNode* ans  = head;
   if (!prec)
-    ans = next; //we are removing the first node 
+    ans = next;  // we are removing the first node
   else
     prec->next = next;
 

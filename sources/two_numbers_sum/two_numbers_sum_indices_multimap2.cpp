@@ -1,4 +1,5 @@
-bool two_numbers_sum_sorting_indices_multimap_2(std::vector<int> &A, const int T)
+bool two_numbers_sum_sorting_indices_multimap_2(std::vector<int> &A,
+                                                const int T)
 {
   std::vector<int> twoSum(vector<int> & nums, const int target)
   {
@@ -8,10 +9,10 @@ bool two_numbers_sum_sorting_indices_multimap_2(std::vector<int> &A, const int T
     {
       const int rest = target - nums[i];
       if (auto itr = N.find(rest); itr != N.end())
-        return { i, itr->second };
-      N.insert({ nums[i], i });
+        return {i, itr->second};
+      N.insert({nums[i], i});
     }
 
-    return { -1 };
+    return {-1};
   }
 }
