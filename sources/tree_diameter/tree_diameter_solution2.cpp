@@ -28,5 +28,5 @@ int diameter_of_binary_tree_linear(Node<int>* root,
     r = 1 + depth_cached(root->right, D);
   return std::max(
       std::max(l + r, diameter_of_binary_tree_linear(root->left, D)),
-      diameter_of_binary_tree_linear(root->right,D));
+      diameter_of_binary_tree_linear(root->right, D));
 }

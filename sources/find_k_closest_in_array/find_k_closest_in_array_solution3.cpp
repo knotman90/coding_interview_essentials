@@ -1,18 +1,19 @@
 template <typename Iterator>
-auto find_range(Iterator begin, Iterator end, Iterator closest, int k, const int x)
+auto find_range(
+    Iterator begin, Iterator end, Iterator closest, int k, const int x)
 {
   assert(begin < end);
   assert(closest >= begin);
   assert(closest < end);
 
-  auto l        = closest;
-  auto r        = l + 1;
+  auto l          = closest;
+  auto r          = l + 1;
   auto difference = [](const auto x, const auto y) { return std::abs(x - y); };
-  
-  k--; //closest is already included in the range
+
+  k--;  // closest is already included in the range
   while (k && l > begin && r < end)
   {
-    if (difference(*(l-1), x) <= difference(*r, x))
+    if (difference(*(l - 1), x) <= difference(*r, x))
     {
       l--;
     }
@@ -41,7 +42,8 @@ std::vector<int> kth_closest_in_array_binary_search_lower_bound(
 {
   auto closest = std::lower_bound(begin(I), end(I), x);
   if (auto prec = std::prev(closest);
-      closest != begin(I) && closest != end(I) && (std::abs(*closest -x) >= std::abs(*prec -x)))
+      closest != begin(I) && closest != end(I)
+      && (std::abs(*closest - x) >= std::abs(*prec - x)))
   {
     closest = prec;
   }
@@ -50,6 +52,6 @@ std::vector<int> kth_closest_in_array_binary_search_lower_bound(
   if (closest == end(I))
     closest = std::prev(end(I));
 
-  auto [l, r] = find_range(begin(I), end(I), closest, k,x);
-  return std::vector<int>(l,  r);
+  auto [l, r] = find_range(begin(I), end(I), closest, k, x);
+  return std::vector<int>(l, r);
 }

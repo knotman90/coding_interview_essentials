@@ -8,7 +8,7 @@ class SudokuSolver
   }
   auto solve()
   {
-      printSudoku();
+    printSudoku();
     getBlankCells();
     solve_helper(0);
     printSudoku();
@@ -23,11 +23,11 @@ class SudokuSolver
         blankCells.push_back(i);
   }
 
-char intToChar(const char num)
-{
-    assert(num>='0' && num <='9');
+  char intToChar(const char num)
+  {
+    assert(num >= '0' && num <= '9');
     return num;
-}
+  }
 
   bool canInsertInRow(const auto x, const auto row)
   {
@@ -51,13 +51,13 @@ char intToChar(const char num)
 
   bool canInsertInSquare(const auto x, const auto square)
   {
-    int start_cell = (3*9 * (square / 3)) + (3 * (square % 3));
+    int start_cell = (3 * 9 * (square / 3)) + (3 * (square % 3));
     for (int i = 0; i < 3; i++)
     {
       const bool found = (problem[start_cell + i * 9] == intToChar(x))
                          || (problem[start_cell + i * 9 + 1] == intToChar(x))
                          || (problem[start_cell + i * 9 + 2] == intToChar(x));
-      if(found)
+      if (found)
         return false;
     }
     return true;
@@ -66,22 +66,21 @@ char intToChar(const char num)
   {
     const auto row    = pos / 9;
     const auto col    = pos % 9;
-    const auto square = (row / 3)*3 + (col / 3) ;
+    const auto square = (row / 3) * 3 + (col / 3);
     return canInsertInRow(x, row) && canInsertInCol(x, col)
            && canInsertInSquare(x, square);
   }
 
   void printSudoku()
   {
-      for(int i = 0 ; i < 9 ; i++)
+    for (int i = 0; i < 9; i++)
+    {
+      for (size_t j = 0; j < 9; j++)
       {
-          for (size_t j = 0; j < 9; j++)
-          {
-              cout<<problem[i*9+j]<<" ";
-          }
-          cout<<endl;
-          
+        cout << problem[i * 9 + j] << " ";
       }
+      cout << endl;
+    }
   }
 
   bool solve_helper(const int i)
@@ -91,18 +90,19 @@ char intToChar(const char num)
       return true;
     }
     auto pos = blankCells[i];
-    cout<<pos<<" +++++++   "<<endl;
-   // printSudoku();
-  //  cout<<endl;
+    cout << pos << " +++++++   " << endl;
+    // printSudoku();
+    //  cout<<endl;
     for (char x = '1'; x <= '9'; x++)
     {
-        problem[pos] = '0';
-       /* if(pos == 27)
-            cout<<"here";*/
-      if (canInsert(x, pos)){
+      problem[pos] = '0';
+      /* if(pos == 27)
+           cout<<"here";*/
+      if (canInsert(x, pos))
+      {
         problem[pos] = x;
         if (solve_helper(i + 1))
-            return true;
+          return true;
       }
     }
     problem[pos] = '0';
@@ -115,7 +115,7 @@ char intToChar(const char num)
 
 std::string solve_sudoku_backtracking(std::string& sudoku)
 {
-    SudokuSolver solver(sudoku);
-    solver.solve();
-    return solver.solve();
+  SudokuSolver solver(sudoku);
+  solver.solve();
+  return solver.solve();
 }
