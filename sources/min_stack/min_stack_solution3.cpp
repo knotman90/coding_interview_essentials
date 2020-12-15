@@ -1,8 +1,8 @@
-template <class T, typename = std::enable_if<std::is_integral<T>::value>::type>
+template <class T, typename = typename std::enable_if<std::is_integral<T>::value>::type>
 class min_stack_int_constant_time
 {
  public:
-  void push(const T&x)
+  void push(const T& x)
   {
     T new_min_el = min_el;
     if (elements.size() == 0)

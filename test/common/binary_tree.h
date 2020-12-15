@@ -68,6 +68,7 @@ void visit_in_order(Node<T>* root, Fn fn)
   fn(root->val);
   visit_in_order(root->right, fn);
 }
+
 }  // namespace BinaryTree
 }  // namespace Book
 
