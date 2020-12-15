@@ -1,0 +1,1 @@
+../../sources/dice_rolls/dice_rolls_solution1.cpp
