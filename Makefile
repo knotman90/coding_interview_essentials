@@ -12,8 +12,17 @@ pdf: $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf
 
 fullpdf: $(BUILD_DIR_FULL)/$(FULLBOOK_FILE_NAME).pdf
 
+cmake_clean:
+	rm -rf build/CMake*
 tests:
-	mkdir -p build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && $(MAKE)
+	mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && $(MAKE)
+
+tests_tidy:
+	mkdir -p build && cd build && cmake -DENABLE_CLANG_TIDY=ON  -DCMAKE_BUILD_TYPE=Debug .. && $(MAKE)
+
+tests_cppcheck:
+	mkdir -p build && cd build && cmake -DENABLE_CPPCHECK=ON  -DCMAKE_BUILD_TYPE=Debug .. && $(MAKE)
+
 
 
 $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf: sources/$(MAIN_FILE_NAME).tex $(BUILD_DIR)
