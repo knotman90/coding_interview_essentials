@@ -15,7 +15,7 @@ int buy_sell_stocks_multiple_transactions_exp_helper(const std::vector<int> &P,
             buy_sell_stocks_multiple_transactions_exp_helper(P, sell_day + 1);
         ans = std::max(ans, selling_profit + profit_rest_transactions);
       }else{
-        ans = *x;
+        ans = x!=nullptr ? *x : 0;
       }
     }
   }
