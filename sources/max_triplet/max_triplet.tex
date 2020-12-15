@@ -82,11 +82,11 @@ which appears after and it is larger the element in position $j$ ($k>j$).
 
 \section{Brute-force}
 \label{max_triplet:sec:bruteforce}
-One way of solving this problem trivially is to try all possible triplet in a brute-force manner and keep track of the triplets yielding the maximum value.
-Three simple nested loops are enough to implement this idea, as shown in Listing \ref{}. The time complexity of this approach is $(O(|I|^3)$ which is unfortunately is far from being optimal.
+One way of solving this problem trivially is to try all possible triplets in a brute-force manner and keep track of the triplets yielding the maximum value.
+Three simple nested loops are enough to implement this idea, as shown in Listing \ref{list:max_triplet_bruteforce}. 
+The time complexity of this approach is $(O(|I|^3)$ which is unfortunately far from being optimal.
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:max_triplet]{sources/max_triplet/max_triplet_solution1.cpp}
-
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:max_triplet_bruteforce]{sources/max_triplet/max_triplet_solution1.cpp}
 
 
 \section{Precalculation and Binary Search}
