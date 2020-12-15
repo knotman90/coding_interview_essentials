@@ -76,13 +76,13 @@ echo "\section{Problem statement}
 	\begin{example}
 		\hfill \\
 	
-	\label{ex:$NAME:example1}
+	\label{ex:$NAME:example3}
 	\end{example}
 
 	\begin{example}
 		\hfill \\
 
-	\label{ex:$NAME:example2}	
+	\label{ex:$NAME:example4}	
 	\end{example}
 \end{exercise}
 
