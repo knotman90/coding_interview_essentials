@@ -105,12 +105,6 @@ TEST(min_difficulty_job_scheduler, example3)
       ASSERT_EQ(expected, actual) << "failed for days = " << d;
     }
 
-      {
-      auto [d, expected] = test_data;
-      auto actual        = min_difficulty_scheduler_DP_bottomup_mem_optimized(I, d);
-      ASSERT_EQ(expected, actual) << "failed for days = " << d;
-    }
-
   }
 }
 
