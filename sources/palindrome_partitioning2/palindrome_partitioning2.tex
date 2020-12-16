@@ -12,36 +12,34 @@
 
 \section{Problem statement}
 \begin{exercise}
-Given a string s, partition s such that every substring of the partition is a palindrome. A partition for a string $s$ is a collection of cutpoints $c_0 < c_1 \ldots < c_k$ that split the string $s$ into $k+1$ sustrings:
+Write a function that given a string $s$,
+partitions it in a way that every substring of the partition is a palindrome.
+A partition for a string $s$ is a collection of cut-points $1 \leq c_0 < c_1 \ldots < c_k < |s|$ 
+that split the string $s$ into $k+1$ non empty substrings:
 \begin{itemize}
 	\item $s(0 \ldots c_0)$
 	\item $s(c_0+1 \ldots c_1)$
 	\item \ldots
 	\item $s(k-1 \ldots c_k)$
 \end{itemize}
+The function should return the minimum number of cuts needed 
+s.t. the resulting partition consist only of palindrome substrings.
 
-Return the minimum cuts needed s.t. the obtained partitions consist only of palindrome substrings.
-
-	\begin{example}
+\begin{example}
 		\hfill \\
-		Input: "aab"
-		Output: 1
-		Explanation: The palindrome partitioning $["aa","b"]$ could be produced using $1$ cut.
+		Given \textit{s="aab"} the function returns $1$. 
+		$0$ cut-points are not enough as $s$ itself is not a palindrome but with one cutpoint at
+		index $1$ we can obtain a the following partitioning $["aa","b"]$ where both $aa$ and $b$ are palindrome. 
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Input: "itopinonavevnonipoti"
-		Output: 0
-		Explanation: The input is already palindrome
+		Given \textit{s="itopinonavevanonipoti"} the function returns $0$ because $s$ is itself a palindrome. 
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Input: "ababbbabbababa"
-		Output: 3
-		Explanation: The palindrome partitioning $["a","bbabbbab","b","ababa"]$ could be produced using $3$ cut.
-
+		Given \textit{s="ababbbabbababa"} the function returns $3$. One possible partition could be produced with $3$ cuts is: $["a","babbbab","b","ababa"]$.
 	\end{example}
 \end{exercise}
 \section{Clarification Questions}
@@ -60,6 +58,19 @@ Return the minimum cuts needed s.t. the obtained partitions consist only of pali
 
 \subsection{Brute-force}
 \label{palindrome_partitioning2:sec:bruteforce}
+The obvious trivial solution would be to try to all possible partitions of the input string, from the ones splitting it into $1$ pieces, then all the ones splitting it into $2$, and so on in a similar fashion
+until we eventually find a partition that splits $s$ into palindromes. Such partition exists as if we split $s$ into $s$ pieces, down to its individual characters, the resulting 
+length one substrings are all palindrome. This approach is basically the same adopted for the brute-force (see Section \ref{min_difficulty_job_scheduler:sec:bruteforce}) 
+solution of the problem discussed in Chapter \ref{ch:min_difficulty_job_scheduler} where the bulk of the complexity
+is into the generation of the partitions of incremental size. 
+In order to do that we could use the algorithm for the generation of all combinations of size $k$ shown in 
+Listing \ref{list:min_difficulty_job_scheduler:combinations} to generate all possible cut-points and from there get the associated sub-strings.
+For each partition size $l = 1,2,\ldots,|s|$ we can use Listing \ref{list:min_difficulty_job_scheduler:combinations} to generate the combination of $\{1,2,\ldots,|s|-1\}$
+in groups of size $l$ and for each of them evaluate whether the resulting substrings are all palindrome. We can return $l$ as soon as we find a combination which does.
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
+Listing \ref{list:min_difficulty_job_scheduler:combinations} shows an implementation of this idea which has a time and space complexity of $O(2^{|s|}$. 
+The work done is the sum of all the work necessary to generate the combinations of sizes $1,2,\ldots,|s-1|$ i.e. $\sum_{k=1}^{|s|-1} {|s| \choose k} = 2^n$.
+The union of all combinations of size $k=1,2,\ldots,|s|$ is equivalent to the power-set (see Section \ref{ch:power_set} at page \pageref{sec:powerset:discussion}) which has size $2^n$.
+
+\lstinputlisting[language=c++, caption={Exponential time solution to the palindrome partition problem using Listing \ref{list:min_difficulty_job_scheduler:combinations} at page as a sub-routine for the generation of the combinations of size $k$.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
 
