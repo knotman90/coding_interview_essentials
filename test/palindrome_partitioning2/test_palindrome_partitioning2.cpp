@@ -17,11 +17,22 @@ using std::vector;
 TEST(palindrome_partitioning2, test1)
 {
 	
-	const string s = "itopinonavevnonipoti";
-	constexpr int expected = 0;
-	ASSERT_EQ(expected, palindrome_partitioning2_bruteforce(s));
-	ASSERT_EQ(expected, palindrome_partitioning2_DP_topdown(s));
+	for(const auto [s, expected] : {
+		std::pair<std::string, int>("itopinonavevanonipoti", 0),
+		std::pair<std::string, int>("ab", 1),
+		std::pair<std::string, int>("abc", 2),
+		std::pair<std::string, int>("abac",1),
+		std::pair<std::string, int>("abacfbf",2),
+		std::pair<std::string, int>("ababbbabbababa",3),
+	})
+	{
+		ASSERT_EQ(expected, palindrome_partitioning2_bruteforce(s)) <<"failed for "<<s<<std::endl;
+	}
+	
 }
+
+
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv); 
