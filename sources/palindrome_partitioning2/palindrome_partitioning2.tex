@@ -74,3 +74,21 @@ The union of all combinations of size $k=1,2,\ldots,|s|$ is equivalent to the po
 
 \lstinputlisting[language=c++, caption={Exponential time solution to the palindrome partition problem using Listing \ref{list:min_difficulty_job_scheduler:combinations} at page as a sub-routine for the generation of the combinations of size $k$.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
 
+
+\section{Dynamic Programming}
+
+\begin{equation}
+	S(s, i) = \begin{cases}
+		0 \; \; \text{ if } i \geq |s|  \\
+		\min{} \: \: \text{if} \: \: \exists \: y > x \:\: \text{s.t.} \:\: y < (x+I_x) \: \: \text{and} \: \:G(y) = 1\\
+		\text{otherwise} \: \: G(x) = 0
+	 \end{cases}
+	\label{eq:palindrome_partitioning2:dpformula}
+\end{equation}
+
+\subsection{Top-down}
+
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming top-down solution to the palindrome partition problem.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
+
+
+\subsection{Bottom-up}
