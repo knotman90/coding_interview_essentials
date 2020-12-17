@@ -24,9 +24,12 @@ TEST(palindrome_partitioning2, test1)
 		std::pair<std::string, int>("abac",1),
 		std::pair<std::string, int>("abacfbf",2),
 		std::pair<std::string, int>("ababbbabbababa",3),
+		std::pair<std::string, int>("acac",1),
+		std::pair<std::string, int>("adda",0),
 	})
 	{
 		ASSERT_EQ(expected, palindrome_partitioning2_bruteforce(s)) <<"failed for "<<s<<std::endl;
+		ASSERT_EQ(expected, palindrome_partitioning2_DP_topdown (s)) <<"failed for "<<s<<std::endl;
 	}
 	
 }
