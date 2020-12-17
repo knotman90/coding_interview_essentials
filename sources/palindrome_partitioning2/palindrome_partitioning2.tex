@@ -2,8 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
 %
-% Difficulty:
-% Companies: 
+% Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Palindrome Partitioning \rom{2}}
@@ -12,34 +11,35 @@
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that given a string $s$,
-partitions it in a way that every substring of the partition is a palindrome.
-A partition for a string $s$ is a collection of cut-points $1 \leq c_0 < c_1 \ldots < c_k < |s|$ 
-that split the string $s$ into $k+1$ non empty substrings:
+Write a function that given a string $s$, partitions it in a way that every substring of the
+partition is a palindrome. A partition for a string $s$ is a collection of cut-points $1 \leq c_0 <
+c_1 \ldots < c_k < |s|$ that split the string $s$ into $k+1$ non empty substrings:
 \begin{itemize}
 	\item $s(0 \ldots c_0)$
 	\item $s(c_0+1 \ldots c_1)$
 	\item \ldots
 	\item $s(k-1 \ldots c_k)$
 \end{itemize}
-The function should return the minimum number of cuts needed 
-s.t. the resulting partition consist only of palindrome substrings.
+The function should return the minimum number of cuts needed s.t. the resulting partition consist
+only of palindrome substrings.
 
 \begin{example}
 		\hfill \\
-		Given \textit{s="aab"} the function returns $1$. 
-		$0$ cut-points are not enough as $s$ itself is not a palindrome but with one cutpoint at
-		index $1$ we can obtain a the following partitioning $["aa","b"]$ where both $aa$ and $b$ are palindrome. 
+		Given \textit{s="aab"} the function returns $1$. $0$ cut-points are not enough as $s$ itself
+		is not a palindrome but with one cutpoint at index $1$ we can obtain a the following
+		partitioning $["aa","b"]$ where both $aa$ and $b$ are palindrome. 
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Given \textit{s="itopinonavevanonipoti"} the function returns $0$ because $s$ is itself a palindrome. 
+		Given \textit{s="itopinonavevanonipoti"} the function returns $0$ because $s$ is itself a
+		palindrome. 
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Given \textit{s="ababbbabbababa"} the function returns $3$. One possible partition could be produced with $3$ cuts is: $["a","babbbab","b","ababa"]$.
+		Given \textit{s="ababbbabbababa"} the function returns $3$. One possible partition could be
+		produced with $3$ cuts is: $["a","babbbab","b","ababa"]$.
 	\end{example}
 \end{exercise}
 \section{Clarification Questions}
@@ -58,37 +58,107 @@ s.t. the resulting partition consist only of palindrome substrings.
 
 \subsection{Brute-force}
 \label{palindrome_partitioning2:sec:bruteforce}
-The obvious trivial solution would be to try to all possible partitions of the input string, from the ones splitting it into $1$ pieces, then all the ones splitting it into $2$, and so on in a similar fashion
-until we eventually find a partition that splits $s$ into palindromes. Such partition exists as if we split $s$ into $s$ pieces, down to its individual characters, the resulting 
-length one substrings are all palindrome. This approach is basically the same adopted for the brute-force (see Section \ref{min_difficulty_job_scheduler:sec:bruteforce}) 
-solution of the problem discussed in Chapter \ref{ch:min_difficulty_job_scheduler} where the bulk of the complexity
-is into the generation of the partitions of incremental size. 
-In order to do that we could use the algorithm for the generation of all combinations of size $k$ shown in 
-Listing \ref{list:min_difficulty_job_scheduler:combinations} to generate all possible cut-points and from there get the associated sub-strings.
-For each partition size $l = 1,2,\ldots,|s|$ we can use Listing \ref{list:min_difficulty_job_scheduler:combinations} to generate the combination of $\{1,2,\ldots,|s|-1\}$
-in groups of size $l$ and for each of them evaluate whether the resulting substrings are all palindrome. We can return $l$ as soon as we find a combination which does.
+The obvious trivial solution would be to try to all possible partitions of the input string, from
+the ones splitting it into $1$ pieces, then all the ones splitting it into $2$, and so on in a
+similar fashion until we eventually find a partition that splits $s$ into palindromes. Such
+partition exists as if we split $s$ into $s$ pieces, down to its individual characters, the
+resulting length one substrings are all palindrome. This approach is basically the same adopted for
+the brute-force (see Section \ref{min_difficulty_job_scheduler:sec:bruteforce}) solution of the
+problem discussed in Chapter \ref{ch:min_difficulty_job_scheduler} where the bulk of the complexity
+is into the generation of the partitions of incremental size. In order to do that we could use the
+algorithm for the generation of all combinations of size $k$ shown in Listing
+\ref{list:min_difficulty_job_scheduler:combinations} to generate all possible cut-points and from
+there get the associated sub-strings. For each partition size $l = 1,2,\ldots,|s|$ we can use
+Listing \ref{list:min_difficulty_job_scheduler:combinations} to generate the combination of
+$\{1,2,\ldots,|s|-1\}$ in groups of size $l$ and for each of them evaluate whether the resulting
+substrings are all palindrome. We can return $l$ as soon as we find a combination which does.
 
-Listing \ref{list:min_difficulty_job_scheduler:combinations} shows an implementation of this idea which has a time and space complexity of $O(2^{|s|}$. 
-The work done is the sum of all the work necessary to generate the combinations of sizes $1,2,\ldots,|s-1|$ i.e. $\sum_{k=1}^{|s|-1} {|s| \choose k} = 2^n$.
-The union of all combinations of size $k=1,2,\ldots,|s|$ is equivalent to the power-set (see Section \ref{ch:power_set} at page \pageref{sec:powerset:discussion}) which has size $2^n$.
+Listing \ref{list:min_difficulty_job_scheduler:combinations} shows an implementation of this idea
+which has a time and space complexity of $O(2^{|s|}$. The work done is the sum of all the work
+necessary to generate the combinations of sizes $1,2,\ldots,|s-1|$ i.e. $\sum_{k=1}^{|s|-1} {|s|
+\choose k} = 2^n$. The union of all combinations of size $k=1,2,\ldots,|s|$ is equivalent to the
+power-set (see Section \ref{ch:power_set} at page \pageref{sec:powerset:discussion}) which has size
+$2^n$.
 
 \lstinputlisting[language=c++, caption={Exponential time solution to the palindrome partition problem using Listing \ref{list:min_difficulty_job_scheduler:combinations} at page as a sub-routine for the generation of the combinations of size $k$.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
 
 
 \section{Dynamic Programming}
+\label{sec:palindrome_partitioning2:DP}
+This problem has however a solution that is much better than exponential time. As the title of this
+section suggests, we can use DP to effectively tackle it. The key insight that allows us to develop
+an effective DP solution is to think about how we can break down the problem into subproblem on a
+suffix of $s$. What I mean is that we can think about a function $P(s, i)$ which returns the answer
+to the problem for the substring of $s$ from the character at index $i$ to its end. Clearly $P(s,0)$
+is the answer to the general question. However given this formulation  we can express the solution
+of a subproblem for a starting index $i$ in terms of optimal solution for the smaller sub-problems
+at indices $j>i$. Equation \ref{eq:palindrome_partitioning2:dpformula} captures this idea into a
+recurrence relation. It states that the answer to a subproblem for an empty substring of $s$ is
+zero: no cuts are necessary as an empty string is already palindrome. If the whole string from index
+$i$ to the end is a palindrome, then no cuts are necessary. For any other sub-problems $P(s,i)$ what
+we can do is to make a cut at an index $k\geq i$ provided that  the  substring of $s$ from index $i$
+to $k$,resulting from the cut, is a palindrome and then add to it the answer to the subproblem
+$P(s,k+1)$ which gives the optimal solution for the unprocessed part of $s$: from index $k+1$ to the
+end.
 
 \begin{equation}
-	S(s, i) = \begin{cases}
+	P(s, i) = \begin{cases}
 		0 \; \; \text{ if } i \geq |s|  \\
-		\min{} \: \: \text{if} \: \: \exists \: y > x \:\: \text{s.t.} \:\: y < (x+I_x) \: \: \text{and} \: \:G(y) = 1\\
-		\text{otherwise} \: \: G(x) = 0
+		0 \; \; \text{ if } s[i\ldots |s|-1]  \:\: \text{is palindrome}  \\
+		\min_{k\geq |s|} \big( 1 + P(s,k+1) \big) \: \: \text{if} \: \: s[i\ldots k]  \:\: \text{is palindrome}
 	 \end{cases}
 	\label{eq:palindrome_partitioning2:dpformula}
 \end{equation}
 
 \subsection{Top-down}
+The solution outlined in Section \ref{sec:palindrome_partitioning2:DP} and formalized in Equation
+\ref{eq:palindrome_partitioning2:dpformula} can easily translated into a recursive solution as shown
+in Listing \ref{list:palindrome_partitioning2:topdown}. The recursive function
+\inline{palindrome_partitioning2_DP_helper} has an almost 1-to1 mapping to the Equation
+\ref{eq:palindrome_partitioning2:dpformula} except for the code responsible for the memoization
+optimization which allows the answer for a given subproblem that has been already solved previously
+to be returned immediately. We have used this optimization already other problems like: 
+\begin{enumerate}
+	\item  \nameref{ch:dice_rolls} in Section \ref{ch:dice_rolls} at page \pageref{ch:dice_rolls} or
+	\item \nameref{ch:min_difficulty_job_scheduler} in Section \ref{ch:min_difficulty_job_scheduler}
+at page \pageref{ch:min_difficulty_job_scheduler}, \end{enumerate}.
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming top-down solution to the palindrome partition problem.},label=list:palindrome_partitioning2:topdown]{sources/palindrome_partitioning2/palindrome_partitioning2_solution2.cpp}
 
-\lstinputlisting[language=c++, caption={Quadratic time dynamic programming top-down solution to the palindrome partition problem.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
+The complexity of this solution is $O(|s|^3)$ because each of the  $O(|s|)$ distinct (for which we
+might have to execute the whole function code) calls to \inline{palindrome_partitioning2_DP_helper}
+and each performs $O(|s|^2)$ work: the for loops runs $O(|s|)$ times, and the function
+\inline{is_palindrome} has a complexity of $O(|s|)$
+
+\subsubsection{Top-down improved}
+The complexity of code in Listing \ref{list:palindrome_partitioning2:topdown} can be lowered to
+$O(|s|^2)$ if only we were able to answer the question whether a given substring of $s$ from index
+$i$ to $j>i$ is a palindrome or not. The current implementation blindly process the whole substring
+to find that information. What we can do instead is to use DP again in order to build a table with
+$B$ where each its elements of $B[i][j]$ contains the information about whether the substring of $s$
+from index $i$ to $j$ is a palindrome. The key idea is that we can build such a table in $O(|s|^2)$
+time, and store it using $O(|s|^2)$ space. 
+
+A palindrome is a word having the same first and last character, for which the substring obtained by
+removing the first and the last character is itself a palindrome. We are going to use this property
+to build $B$. In-fact, an entry in $B$, $B[i][j]$ is true if $s[i]=s[j]$ and $B[i+1][j-1]$ is true.
+There are certain cells of $B$ that we can fill immediately: for instance all the cells where $i=j$
+can be set to true as those maps to sub-string of $s$ of length $1$ which are palindrome by
+definition. 
+
+Listing \ref{} shows an implementation of this idea in the function \inline{xxx}. Notice that the
+code for \inline{xxx} is almost identical to the one of \inline{xxxx} in Listing \ref{} with the
+difference that the former takes $B$ as an additional parameter and that the call to
+\inline{is_palindrome} is substituted with a query into $B$ which runs in constant time. The
+complexity of this solution is now $O(|s|^2)$ which is a big improvement from $O(|s|^3)$. The space
+complexity is also $O(|s|^2)$, because of the space used by $B$.
+
+You can ignore the \inline{hash_combine} and \inline{PairHasher} as their only purpose is to 
+allows us to use \inline{std::pair<int,int>} as keys in the \inline{std::unordered_map}.
+
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution3.cpp}
+
 
 
 \subsection{Bottom-up}
+
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution3.cpp}
