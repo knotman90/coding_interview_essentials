@@ -243,3 +243,41 @@ Despite the oveall complexity is still $O(n log(n))$ this solution is it likely 
 the one presented in Section \ref{sect:two_number_problem_binary_search}, mostly because in this
 case the array is search somehow linearly and not in a scattered way as in the case of binary
 search.
+
+%%%%%%%%%%%%%%%%%%%%%
+\section{Common Variations}
+\subsection{Four number sum problem}
+\label{sec:four_number}
+
+\subsection{Problem statement}
+
+\begin{exercise}
+Write a function that takes four arrays of integers, $A,B,C,D$ and a integer $T$,
+and returns how many distinct tuple $(i,j,k,l)$ where exist such that 
+$A_i+B_j+C_k+D_l = Y$.
+
+\begin{example}
+\hfill \\
+Given:
+	\begin{itemize}
+		\item[-] 	$A=\{1,2\}$,
+		\item[-] 	$B=\{-2,-1\}$,
+		\item[-] 	$C=\{-1,2\}$,
+		\item[-]	$D=\{0,2\}$, and 
+		\item[-] 	$T = 0$
+	\end{itemize}
+The answer is $2$ because the only two valid tuples are:
+\begin{enumerate}
+	\item $(0,0,0,1)$: $A_0 + B_0 + C_0 + D_1 = 1 + (-2) + (-1) + 2 = T = 0$
+	\item $(1,1,0,0)$: $A_1 + B_1 + C_0 + D_0 = 2 + (-1) + (-1) + (-1) = T = 0$
+\end{enumerate}
+\end{example}
+
+\subsection{Na\"ive solution}
+
+\subsection{$O(n^3)$ solution}
+
+\subsection{$O(n^2)$ solution using hashing}
+
+\end{exercise}	
+

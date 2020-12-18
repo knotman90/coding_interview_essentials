@@ -20,6 +20,17 @@ T get_random_in_range(const T& s, const T& e)
     return dist(rng);
 }
 
+template<typename T>
+auto generate_random_pair_in_range(const T s, const T e)
+{
+    assert(s<=e);
+     auto M = Book::Algorithm::get_random_in_range<T>(s,e);
+     auto m = Book::Algorithm::get_random_in_range<T>(s,e);
+    if(M < m)
+        swap(M,m);
+    return std::pair<T,T>(m,M);
+}
+
 
 void generate_well_parenthesized_combinations_helper(vector<std::string>& ans,
                                                      string& s,

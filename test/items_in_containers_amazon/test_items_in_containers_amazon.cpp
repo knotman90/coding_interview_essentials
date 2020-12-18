@@ -15,6 +15,8 @@ using std::vector;
 
 
 #include "algorithm.h"
+#include "test_utils.h"
+
 TEST(items_in_containers_amazon, test1)
 {
 	const std::string s = "|*|*|";
@@ -105,48 +107,7 @@ std::string input_string_containers(const int stride_size, const int max_strides
     return ss.str();
 }
 
-template<typename T>
-auto generate_random_pair_in_range(const T s, const T e)
-{
-    assert(s<=e);
-     auto M = Book::Algorithm::get_random_in_range<T>(s,e);
-     auto m = Book::Algorithm::get_random_in_range<T>(s,e);
-    if(M < m)
-        swap(M,m);
-    return std::pair<T,T>(m,M);
-}
 
-
-std::string to_string(const int& v)
-{
-    std::ostringstream ss;
-     ss<<v;
-    return ss.str();
-}
-
-std::string to_string(const std::pair<int,int>& q)
-{
-    std::ostringstream ss;
-     ss<<"(";
-        ss<<std::get<0>(q);
-        ss<<",";
-        ss<<std::get<1>(q);
-        ss<<") ";
-        return ss.str();
-}
-
-template<typename T>
-std::string to_string(const std::vector<T>& Q )
-{
-    std::ostringstream ss;
-    ss<<"[";
-    for(const auto& q: Q){
-        ss<<to_string(q);
-        ss<<", ";
-    }
-    ss<<"]";
-    return ss.str();
-}
 
 TEST(items_in_containers_amazon, test_random_all_solution_equal)
 {
