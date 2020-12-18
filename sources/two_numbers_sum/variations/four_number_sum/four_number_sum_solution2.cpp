@@ -9,10 +9,10 @@ int four_sum_cubic(std::vector<int>& A,
     if(B.size() > D.size())
         std::swap(B,D);
     if(C.size() > D.size())
-        std::swap(C,D);
-  
-  
-  std::unordered_map<int,int>Dmap;
+        std::swap(C,D);  
+
+  //D is now the longest
+  std::unordered_map<int,int>Dmap; //frequencies map for D
   for(const auto d : D)
       Dmap[d]++;
 

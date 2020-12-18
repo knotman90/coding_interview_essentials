@@ -276,19 +276,42 @@ The answer is $2$ because the only two valid tuples are:
 
 \subsection{Na\"ive $O(n^4)$ solution}
 We can solve this problem very easily by using the same approach we have described in Section \ref{sec:two_numbers:bruteforce}.
-The idea is that we can use four nested loops and enumerate all possible 4-elements tuples of indices. Listing \ref{} shows how such an idea can be implemented.
+The idea is that we can use four nested loops and enumerate all possible 4-elements tuples of indices. Listing \ref{list:two_number_sum_naive} shows how such an idea can be implemented.
 Goes without saying, that this is not the fastest solution we can come up with, considering it has a time complexity of $O(n^4)$
 
-\lstinputlisting[language=c++, caption="Brute force na\"ive solution to the four numbers sum problem.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp}
+\lstinputlisting[language=c++, caption="Brute force na\"ive solution to the four numbers sum problem.",label=list:two_number_sum_naive]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp}
 
 
 \subsection{$O(n^3)$ solution}
-\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution2.cpp}
+The trivial solution shown in Listing \ref{list:two_number_sum_naive} can be improved by using a similar reason that lead us improve the brute-force 
+quadratic time solution for the two numbers problem in Listing \ref{list:two_number_sum_bruteforce} to the linear time (and space) in Listing \ref{list:two_number_sum_hashing}.
+The idea is that inner-most loop is searching for a value $x$  s.t. if it summed to $A_i+B_j+C_k$ gives us $T$; in other words: $x+(A_i+B_j+C_k)=T$.
+Therefore $x = T-(A_i+B_j+C_k)$. If there is a way of avoiding a linear search in the array $D$ for such a value, then we could bring down the complexity from $O(n^4)$ to $O(n^3)$.
+
+Thankfully this is possible if we use a hashmap. If we create a hashmap mapping the value of $D$ and to their frequencies the inner-most loop of Listing \ref{list:two_number_sum_naive} can be substituted with a query to the hashmap which 
+runs in constant time. Listing \ref{list:two_number_sum_cubic} shows an implementation of such idea. 
+Notice that in order to obtain the maximum saving in terms of work avoided the arrays are rearranged in such a way so that $D$ 
+is the longest of the four input arrays. 
+\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_cubic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution2.cpp}
 
 
 \subsection{$O(n^2)$ solution using hashing}
+This problem can be however be solved in quadratic time if we use hashmaps again, to hold 
+the frequencies of all the values you can obtain by summing up any two elements of $A$ and $B$ and of $C$ and $D$.
+The key idea is that we can build two hashmaps:
+\begin{itemize}
+	\item $AB$: holding the frequencies of the values obtainable by summing any two elements of $A$ and $B$
+	\item $AB$: holding the frequencies of the values obtainable by summing any two elements of $C$ and $D$.
+\end{itemize}
+The space required for both $AB$ and $CD$ is quadratic, more than the space used by any of the previous solutions, but this extra space
+enable us to solve this problem also in quadratic time. 
+The idea is that we are going to spend $O(n^2)$ time to construct both $AB$ and $CD$
+and then again  $O(n^2)$ to calculate the final answer. 
+by searching into $CD$ for the value $T-y$ where $y$ is an element of $AB$. If such a value exists in $CD$ it means that there exists one element in  $A$ and one in $B$ such that they sum up to $y$ and
+one element $C$ and one in $D$ such that they sum up to $T-y$. Summing all these elements up gives: $y+T-y = T$.
 
-\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
+Listing \ref{list:two_number_sum_quadratic} implements this idea.
+\lstinputlisting[language=c++, caption="Quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
 
 
 
