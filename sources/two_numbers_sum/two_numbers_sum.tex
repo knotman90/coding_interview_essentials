@@ -14,7 +14,7 @@
 \section*{Introduction}
 The problem described in this section is possibly one of the most asked during coding interview, nowadays mostly 
 asked during the early online stages of the hiring process as the interviewer pretty much expects you to be at least familiar with the problem.
-The problem is hard enough to require non trivial insight in order to be able to write a non-naive solution for it but at the same time it is not so hard that it would take you 2 hours to come up with something to say to the interviewer.
+The problem is hard enough to require non-trivial insight in order to be able to write a non-naive solution for it but at the same time it is not so hard that it would take you 2 hours to come up with something to say to the interviewer.
 We will have a look at a number of solution, starting from the inefficient bruteforce in Section \ref{sec:two_numbers:bruteforce} to a refined version of it in Section \ref{sec:two_numbers:hashing}.
 In Section \ref{sect:two_number_problem_binary_search} we will have a look at an approach that is based on a idea that is radically different than the one the previous two are based on.
 Finally, Section \ref{sec:two_numbers:twopointers} further refines it into  possibly the best solution in terms of overall time and space complexity.
@@ -272,12 +272,23 @@ The answer is $2$ because the only two valid tuples are:
 	\item $(1,1,0,0)$: $A_1 + B_1 + C_0 + D_0 = 2 + (-1) + (-1) + (-1) = T = 0$
 \end{enumerate}
 \end{example}
+\end{exercise}
 
-\subsection{Na\"ive solution}
+\subsection{Na\"ive $O(n^4)$ solution}
+We can solve this problem very easily by using the same approach we have described in Section \ref{sec:two_numbers:bruteforce}.
+The idea is that we can use four nested loops and enumerate all possible 4-elements tuples of indices. Listing \ref{} shows how such an idea can be implemented.
+Goes without saying, that this is not the fastest solution we can come up with, considering it has a time complexity of $O(n^4)$
+
+\lstinputlisting[language=c++, caption="Brute force na\"ive solution to the four numbers sum problem.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp}
+
 
 \subsection{$O(n^3)$ solution}
+\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution2.cpp}
+
 
 \subsection{$O(n^2)$ solution using hashing}
 
-\end{exercise}	
+\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
+
+
 
