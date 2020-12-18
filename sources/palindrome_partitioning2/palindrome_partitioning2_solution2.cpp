@@ -20,7 +20,7 @@ int palindrome_partitioning2_DP_topdown_helper(const std::string s, const int st
 	return ans;	
 }
 
-int palindrome_partitioning2_DP_topdown(const std::string s)
+size_t palindrome_partitioning2_DP_topdown(const std::string s)
 {
 	Cache memoization_cache;
 	return palindrome_partitioning2_DP_topdown_helper(s,0, memoization_cache);

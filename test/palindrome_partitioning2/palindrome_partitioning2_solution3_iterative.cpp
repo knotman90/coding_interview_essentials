@@ -1,7 +1,7 @@
-#include "PalindromeSubstringCacheRecursive.h"
+#include "PalindromeSubstringCacheIterative.h"
 
 
-size_t palindrome_partitioning2_DP_topdown_optimized_helper(const PalindromeSubstringCacheRecursive& B,
+size_t palindrome_partitioning2_DP_topdown_optimized_helper_it(const PalindromeSubstringCacheIterative& B,
 const size_t start_idx, Cache& memoization_cache)
 {
   const auto size =  B.size();
@@ -16,7 +16,7 @@ const size_t start_idx, Cache& memoization_cache)
 	for(size_t i = start_idx ; i < size ; i++)
 	{
 		if(B.is_palindrome(start_idx, i)) //O(1)
-			ans = std::min(ans, 1 + palindrome_partitioning2_DP_topdown_optimized_helper(B,i+1,memoization_cache));
+			ans = std::min(ans, 1 + palindrome_partitioning2_DP_topdown_optimized_helper_it(B,i+1,memoization_cache));
 	}
 	
 	assert(ans <= size - start_idx);
@@ -25,9 +25,9 @@ const size_t start_idx, Cache& memoization_cache)
 }
 
 
-size_t palindrome_partitioning2_DP_topdown_optimized(const std::string s)
+size_t palindrome_partitioning2_DP_topdown_optimized_it(const std::string s)
 {
-    PalindromeSubstringCacheRecursive B(s);
+    PalindromeSubstringCacheIterative B(s);
 	  Cache memoization_cache;
-	  return palindrome_partitioning2_DP_topdown_optimized_helper(B,0u, memoization_cache);
+	  return palindrome_partitioning2_DP_topdown_optimized_helper_it(B,0u, memoization_cache);
 }

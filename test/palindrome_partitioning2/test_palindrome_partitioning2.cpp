@@ -12,7 +12,8 @@ using std::vector;
 #include "palindrome_partitioning2_solution1.cpp"
 #include "palindrome_partitioning2_solution2.cpp"
 #include "palindrome_partitioning2_solution3.cpp"
-
+#include "palindrome_partitioning2_solution4.cpp"
+#include "palindrome_partitioning2_solution3_iterative.cpp"
 #include "algorithm.h"
 
 TEST(palindrome_partitioning2, test1)
@@ -33,6 +34,9 @@ TEST(palindrome_partitioning2, test1)
     ASSERT_EQ(expected, palindrome_partitioning2_DP_topdown(s))
         << "failed for " << s << std::endl;
     ASSERT_EQ(expected, palindrome_partitioning2_DP_bottomup(s))
+        << "failed for " << s << std::endl;
+
+    ASSERT_EQ(expected, palindrome_partitioning2_DP_topdown_optimized_it(s))
         << "failed for " << s << std::endl;
   }
 }
@@ -64,12 +68,16 @@ TEST(palindrome_partitioning2, random1)
       const auto x1             = palindrome_partitioning2_bruteforce(s);
       const auto x2             = palindrome_partitioning2_DP_topdown(s);
       const auto x3             = palindrome_partitioning2_DP_bottomup(s);
-      ASSERT_TRUE((x1 == x2) && (x2 == x3))
+      const auto x4             = palindrome_partitioning2_DP_topdown_optimized_it(s);
+      const auto x5             = palindrome_partitioning2_DP_topdown_optimized(s);
+      ASSERT_TRUE((x1 == x2) && (x2 == x3) && (x3==x4) && (x4==x5))
           << "failed for " << s << " x1 = " << x1 << " x2 = " << x2
-          << " x3 = " << x3;
+          << " x3 = " << x3 <<" x4 = "<<x4<<" x5 = "<<x5;
     }
   }
 }
+
+
 
 int main(int argc, char** argv)
 {
