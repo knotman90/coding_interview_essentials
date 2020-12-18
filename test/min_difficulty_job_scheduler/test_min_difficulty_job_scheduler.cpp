@@ -9,7 +9,7 @@ using std::string;
 using std::swap;
 using std::vector;
 
-#include "generate_combinations.h"
+#include "generate_combination.h"
 #include "min_difficulty_job_scheduler_solution1.cpp"
 #include "min_difficulty_job_scheduler_solution2.cpp"
 #include "min_difficulty_job_scheduler_solution3.cpp"
