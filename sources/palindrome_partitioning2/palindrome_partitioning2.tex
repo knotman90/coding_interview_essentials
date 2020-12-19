@@ -112,16 +112,17 @@ end.
 
 \subsection{Top-down}
 The solution outlined in Section \ref{sec:palindrome_partitioning2:DP} and formalized in Equation
-\ref{eq:palindrome_partitioning2:dpformula} can easily translated into a recursive solution as shown
+\ref{eq:palindrome_partitioning2:dpformula} can be easily translated into a recursive solution as shown
 in Listing \ref{list:palindrome_partitioning2:topdown}. The recursive function
-\inline{palindrome_partitioning2_DP_helper} has an almost 1-to1 mapping to the Equation
+\inline{palindrome_partitioning2_DP_helper} has an almost 1-to-1 mapping to the Equation
 \ref{eq:palindrome_partitioning2:dpformula} except for the code responsible for the memoization
-optimization which allows the answer for a given subproblem that has been already solved previously
+optimization which allows the answer for a given subproblem that has been already solved previously,
 to be returned immediately. We have used this optimization already other problems like: 
-\begin{enumerate}
-	\item  \nameref{ch:dice_rolls} in Section \ref{ch:dice_rolls} at page \pageref{ch:dice_rolls} or
-	\item \nameref{ch:min_difficulty_job_scheduler} in Section \ref{ch:min_difficulty_job_scheduler}
-at page \pageref{ch:min_difficulty_job_scheduler}, \end{enumerate}.
+\begin{enumerate*}
+	\item  \textit{\nameref{ch:dice_rolls}} in Section \ref{ch:dice_rolls} at page \pageref{ch:dice_rolls} or
+	\item \textit{\nameref{ch:min_difficulty_job_scheduler}} in Section \ref{ch:min_difficulty_job_scheduler}
+at page \pageref{ch:min_difficulty_job_scheduler} 
+\end{enumerate*}.
 \lstinputlisting[language=c++, caption={Quadratic time dynamic programming top-down solution to the palindrome partition problem.},label=list:palindrome_partitioning2:topdown]{sources/palindrome_partitioning2/palindrome_partitioning2_solution2.cpp}
 
 The complexity of this solution is $O(|s|^3)$ because each of the  $O(|s|)$ distinct (for which we
@@ -131,31 +132,47 @@ and each performs $O(|s|^2)$ work: the for loops runs $O(|s|)$ times, and the fu
 
 \subsubsection{Top-down improved}
 The complexity of code in Listing \ref{list:palindrome_partitioning2:topdown} can be lowered to
-$O(|s|^2)$ if only we were able to answer the question whether a given substring of $s$ from index
+$O(|s|^2)$ if only we were able to answer the question about whether a given substring of $s$ from index
 $i$ to $j>i$ is a palindrome or not. The current implementation blindly process the whole substring
-to find that information. What we can do instead is to use DP again in order to build a table with
-$B$ where each its elements of $B[i][j]$ contains the information about whether the substring of $s$
-from index $i$ to $j$ is a palindrome. The key idea is that we can build such a table in $O(|s|^2)$
+to find-out that information. 
+What we can do instead is to use DP (again) in order to build a table $B$
+ where each its elements $B[i][j]$ contains the information about whether the substring of $s$
+from index $i$ to $j>i$ is a palindrome. The key idea is that we can build such a table in $O(|s|^2)$
 time, and store it using $O(|s|^2)$ space. 
 
 A palindrome is a word having the same first and last character, for which the substring obtained by
 removing the first and the last character is itself a palindrome. We are going to use this property
-to build $B$. In-fact, an entry in $B$, $B[i][j]$ is true if $s[i]=s[j]$ and $B[i+1][j-1]$ is true.
+to build $B$ which is reflected by the fact that an entry of $B$,
+$B[i][j]$ contains true if and only if $s[i]=s[j]$ and $B[i+1][j-1]$ is true.
 There are certain cells of $B$ that we can fill immediately: for instance all the cells where $i=j$
 can be set to true as those maps to sub-string of $s$ of length $1$ which are palindrome by
-definition. 
-
-Listing \ref{} shows an implementation of this idea in the function \inline{xxx}. Notice that the
-code for \inline{xxx} is almost identical to the one of \inline{xxxx} in Listing \ref{} with the
-difference that the former takes $B$ as an additional parameter and that the call to
-\inline{is_palindrome} is substituted with a query into $B$ which runs in constant time. The
-complexity of this solution is now $O(|s|^2)$ which is a big improvement from $O(|s|^3)$. The space
-complexity is also $O(|s|^2)$, because of the space used by $B$.
-
-You can ignore the \inline{hash_combine} and \inline{PairHasher} as their only purpose is to 
+definition. We can fill the table by using a  recursive function and memoization. as shown in 
+Listing \ref{list:palindrome_partitioning2:recursivecache} shows an implementation of a class which will provide the same information in the table $B$
+but wrapped in a class with a simple API: a constructor taking a \inline{std::string} as input and a function \inline{bool is_palindrome(const size_t start, const size_t end)}
+for answering queries on sub-strings of $s$.
+Notice that the constructor will immediately call the function \inline{buildMap} which will fill the table $B$ fully before any call to \inline{is_palindrome}. 
+With minimal change we can also make the class \inline{PalindromeSubstringCacheRecursive}, by removing the \inline{buildMap} function completely by implementing \inline{is_palindrome}
+in terms of \inline{is_palindrome_substring_helper}.
+The file\texttt{"hash\_pair.h"}\footnote{See Listing \ref{list:listings:hash_pair} at page \pageref{list:listings:hash_pair}.} contains some code which only purpose is to 
 allows us to use \inline{std::pair<int,int>} as keys in the \inline{std::unordered_map}.
+can however also be implemented in a iterative way, 
+The same functionality can be also implemented iteratively
+by using a bottom-up DP strategy. 
+Listing \ref{list:palindrome_partitioning2:iterativecache} how it can be done.
 
-\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution3.cpp}
+\lstinputlisting[language=c++, caption={Recursive implementation of a class which allows to answer queries about whether a given substring of a given string is palindrome or not in constant time. },label=list:palindrome_partitioning2:recursivecache]{sources/palindrome_partitioning2/PalindromeSubstringCacheRecursive.h}
+
+\lstinputlisting[language=c++, caption={Iterative implementation of a class which allows to answer queries about whether a given substring of a given string is palindrome or not in constant time.},label=list:palindrome_partitioning2:iterativecache]{sources/palindrome_partitioning2/PalindromeSubstringCacheIterative.h}
+
+Finally in Listing \ref{list:palindrome_partitioning2;topdownquadratic} we can see how such a \textit{Substring Palindrome Cache} can be used in order to implement a quadratic solution for the problem treated by this chapter.
+Notice that the code for \inline{palindrome_partitioning2_DP_topdown_optimized_helper} is almost identical to the one of \inline{palindrome_partitioning2_DP_topdown_helper}
+in Listing \ref{list:palindrome_partitioning2:topdown} with the
+difference that the former takes $B$, the substring palindrome cache, as an additional parameter and that, the call to
+\inline{is_palindrome} is substituted with a query into $B$ which runs in constant time. The
+complexity of this solution is now $O(|s|^2)$ which is a big improvement from $O(|s|^3)$. 
+The space complexity is also $O(|s|^2)$, because of the space used by $B$.
+
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2;topdownquadratic]{sources/palindrome_partitioning2/palindrome_partitioning2_solution3.cpp}
 
 
 
