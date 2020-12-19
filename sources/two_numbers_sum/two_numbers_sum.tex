@@ -235,7 +235,7 @@ pointers, respectively, then:
 \end{itemize}
 
 Listing \ref{list:two_number_sum_two_pointers} shows an implementation of the idea above.  Note that
-this solution has an additional strenght i.e.  it is short and simple to write. 
+this solution has an additional strength i.e.  it is short and simple to write. 
 
 \lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
 
@@ -307,11 +307,22 @@ The space required for both $AB$ and $CD$ is quadratic, more than the space used
 enable us to solve this problem also in quadratic time. 
 The idea is that we are going to spend $O(n^2)$ time to construct both $AB$ and $CD$
 and then again  $O(n^2)$ to calculate the final answer. 
-by searching into $CD$ for the value $T-y$ where $y$ is an element of $AB$. If such a value exists in $CD$ it means that there exists one element in  $A$ and one in $B$ such that they sum up to $y$ and
+by searching into $CD$ for the value $T-y$ where $y$ is an element of $AB$. 
+If such a value exists in $CD$ it means that there exists one element in  $A$ and one in $B$ such that they sum up to $y$ and
 one element $C$ and one in $D$ such that they sum up to $T-y$. Summing all these elements up gives: $y+T-y = T$.
-
-Listing \ref{list:two_number_sum_quadratic} implements this idea.
+This approach is shown in Listing \ref{list:two_number_sum_quadratic}. 
+Notice that the first thing we do is to fill $AB$ by looping over all possible pairs of elements from $A$ and $B$.
+We then do the same thing for $CD$, and finally, in the last loop, we take care of calculating the answer by 
+searching, for each element $(k,v)$ of $AB$, where $k$ is the sum obtained by one element of $A$ and one of $B$ and $v$ is the number of ways we can obtain it,
+into $CD$ for the target value $T-k$. If such a value exists into $CD$ then we know we can make $T$. The number of times
+that is possible is dictated by the frequencies of $k$ and of the target value.
 \lstinputlisting[language=c++, caption="Quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
 
+However, you might have already noticed that we do not really need to explicitly create the map $CD$. 
+The idea is that when we create $CD$ we already have all the values of $AB$  and therefore for a given $C_i+D_j$ we can already 
+find out how many pairs in $AB$ exists that we can use to get a total sum of $T$. This optimization does not really change the overall space complexity
+but in practice this mean that we use half the memory and we avoid doing $O(n^2)$ work by eliminating the last loop.
+Listing \ref{list:two_number_sum_quadratic_opti} shows this optimized version.
 
+\lstinputlisting[language=c++, caption="Space optimized quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic_opti]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution4.cpp}
 
