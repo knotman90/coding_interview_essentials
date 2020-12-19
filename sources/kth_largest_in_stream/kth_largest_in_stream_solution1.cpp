@@ -9,8 +9,8 @@ class KthLargestInStreamArray : IKThLargestInStream
     std::sort(begin(m_values), end(m_values));
     const auto start = begin(m_values);
     const auto end   = m_values.size() >= K
-                         ? m_values.begin() + (m_values.size() - K)
-                         : m_values.begin();
+                           ? m_values.begin() + (m_values.size() - K)
+                           : m_values.begin();
     m_values.erase(start, end);
   };
 

@@ -4,8 +4,8 @@ using Cell   = std::pair<int, int>;
 template <typename SeedType, typename T, typename... Rest>
 void hash_combine(SeedType& seed, const T& v, const Rest&... rest)
 {
-    seed ^= std::hash<T>{}(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-    (hash_combine(seed, rest), ...);
+  seed ^= std::hash<T>{}(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+  (hash_combine(seed, rest), ...);
 }
 struct TupleHash
     : public std::unary_function<std::tuple<int, int, int>, std::size_t>
@@ -13,7 +13,7 @@ struct TupleHash
   std::size_t operator()(const std::tuple<int, int, int>& k) const
   {
     size_t seed = 0;
-    hash_combine(seed,std::get<0>(k),std::get<1>(k),std::get<2>(k));
+    hash_combine(seed, std::get<0>(k), std::get<1>(k), std::get<2>(k));
     return seed;
   }
 };
