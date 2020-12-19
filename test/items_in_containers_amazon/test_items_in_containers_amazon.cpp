@@ -115,7 +115,7 @@ TEST(items_in_containers_amazon, test_random_all_solution_equal)
     std::vector<std::pair<int,int>> Q(1000);
     std::generate(
         Q.begin(), Q.end(), [&](){
-            return generate_random_pair_in_range<int>(0,s.size()-1);
+            return Book::Algorithm::generate_random_pair_in_range<int>(0,s.size()-1);
             }
     );
     

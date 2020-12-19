@@ -20,6 +20,7 @@ T get_random_in_range(const T& s, const T& e)
     return dist(rng);
 }
 
+
 template<typename T>
 auto generate_random_pair_in_range(const T s, const T e)
 {
@@ -29,6 +30,14 @@ auto generate_random_pair_in_range(const T s, const T e)
     if(M < m)
         swap(M,m);
     return std::pair<T,T>(m,M);
+}
+
+template<typename T, typename = std::enable_if<std::is_integral<T>::value>::type>
+std::vector<T> generate_random_vector_in_range(const size_t size, const T& s, const T& e)
+{
+  std::vector<T> ans(size);
+  std::generate_n(std::begin(ans), size, [&](){return get_random_in_range<T>(s,e);});
+  return ans;
 }
 
 
