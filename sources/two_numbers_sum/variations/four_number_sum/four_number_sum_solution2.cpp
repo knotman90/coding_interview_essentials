@@ -17,13 +17,13 @@ int four_sum_cubic(std::vector<int>& A,
       Dmap[d]++;
 
   int ans = 0;
-  for (size_t i = 0; i < A.size; i++)
-    for (size_t j = 0; j < B.size; j++)
-      for (size_t k = 0; k < C.size; k++){
+  for (size_t i = 0; i < A.size(); i++)
+    for (size_t j = 0; j < B.size(); j++)
+      for (size_t k = 0; k < C.size(); k++){
           const long sum = (long)A[i] + (long)B[j] + 
                            (long)C[k];
           if(auto it = Dmap.find(T-sum) ; it != Dmap.end()){
-              ans+=*it;
+              ans+=it->second;
           }
       }
 
