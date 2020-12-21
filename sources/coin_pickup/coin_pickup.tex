@@ -1,0 +1,147 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Links:
+%
+% Difficulty:
+% Companies: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=\textwidth]{sources/coin_pickup/images/example1}
+%	\caption[Sample short cpation]{Sample Caption}.
+%	\label{fig:coin_pickup:example1}
+%\end{figure}
+
+\chapter{Coin Collection}
+\label{ch:coin_pickup}
+\section*{Introduction}
+
+\section{Problem statement}
+\begin{exercise}
+\label{example:coin_pickup:exercice1}
+You are given a square matrix $M$ of size $n \times n$ where each of its cells contains one of following three integers:
+\begin{enumerate}
+	\item $0$: the cell is empty
+	\item $1$: the cell contains a coin
+	\item $-1$: the cell contains a thorn. 
+\end{enumerate}
+Write a function that return the maximum number of coins you can collect by following the rules below:
+\begin{itemize}
+	\item You start at location $(0,0)$ and you have to reach the cell $(n-1,n-1)$ by only moving down or right.
+	\item From cell  $(n-1,n-1)$ you have to go back to the start location $(0,0)$, by only moving up or left.
+	\item Cells containing $-1$ cannot be traversed.
+	\item If you step into a cell containing a coin, you will automatically collect it and if you step in it another time, you will not collect the coin a second time.
+\end{itemize}
+If it is not possible to reach the cell $(n-1,n-1)$, the function should return $-1$.
+
+	%example1
+	\begin{example}
+		\label{example:coin_pickup:example1}
+		\hfill \\
+		Given $B$  as in Figure \ref{fig:coin_pickup:example_1_0} the function return $4$.
+		By starting from the top-left corner you can go twice down and twice right and reach the cell $(2,2)$. In the process
+		you have collected $3$ coins (see highlighted cells in Figure \ref{fig:coin_pickup:example_1_1}).
+		From cell $(2,2)$ you can then move left, then up twice and finally left to reach the starting cell $(0,0)$ again
+		 and collecting the only coin left in cell $(0,1)$ (see the highlighted cells in Figure \ref{fig:coin_pickup:example_1_2}). 
+	\end{example}
+
+\end{exercise}
+
+\section{Clarification Questions}
+
+\begin{QandA}
+	\item 
+	\begin{answered}
+		\textit{}
+	\end{answered}
+	
+\end{QandA}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\includegraphics[width=1\linewidth]{sources/coin_pickup/images/example1_0}
+		\caption{Input Matrix for the Example \ref{example:coin_pickup:example1}}
+		\label{fig:coin_pickup:example_1_0}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.3\textwidth}
+		\includegraphics[width=1\linewidth]{sources/coin_pickup/images/example1_1}
+		\caption{Path from $(0,0)$ to $(2,2)$ for an optimal solution to the Example \ref{example:coin_pickup:example1}.}
+		\label{fig:coin_pickup:example_1_1}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.3\textwidth}
+		 \includegraphics[width=1\linewidth]{sources/coin_pickup/images/example1_2}
+		 \caption{Path from $(2,2)$ to the original starting location for an optimal solution to the Example \ref{example:coin_pickup:example1}.
+		 Notice that the coins in the cells part of the path shown in Figure \ref{fig:coin_pickup:example_1_1} are collected.}
+		 \label{fig:coin_pickup:example_1_2}
+	  \end{subfigure}
+\end{figure}
+
+
+\section{Discussion}
+\label{coin_pickup:sec:discussion}
+
+
+\subsection{Brute-force}
+\label{coin_pickup:sec:bruteforce}
+
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={Sample Caption},label=list:coin_pickup]{sources/coin_pickup/coin_pickup_solution1.cpp}
+\end{minipage}
+
+
+
+\section{Common Variations}
+\subsection{Two robots}
+A popular variation of the \textit{	\nameref{ch:coin_pickup}} problem is the one where
+\begin{itemize}
+	\item there are two robots navigating the matrix at the same time. 
+	Robot $1$ starts from cell $(0,0)$ while robot $2$ starts from cell $(0,n-1)$.
+	\item there are no constraints on the cells you have to reach meaning that you 
+	do not have to go down to cell $(n-1,n-1)$ and then 
+	\item each robot can move either down or down diagonally to the left and right and,
+	\item the matrix is not necessarily square.
+\end{itemize}.
+
+\begin{exercise}
+	\label{example:coin_pickup:variation1:exercice1}
+	You are given a square matrix $M$ of size $n \times n$ where each of its cells contains an integer
+	representing the number of coins in that cell. 
+	
+	There are two robots, $R1$ and $R2$, in the matrix, initially placed at locations: 
+	\begin{enumerate*}
+		\item $P_{R1}=(0,0)$
+		\item $P_{R1}=(0,n-1)$
+	\end{enumerate*}
+	If a robot is at location $(x,y)$ in one step can move to cells: $(x+1,y)$, $(x+1,y-1)$ and $(x+1,y+1)$ as shown in Figure \ref{fig:coin_pickup:variation1:robot_movements}.
+	Write a function returning the maximum number of coins you can collect with both $R1$ and $R2$.	
+	
+	
+	\begin{example}
+			\label{example:coin_pickup:variation1::example1}
+			\hfill \\
+			Given the input matrix is as the one shown in as in Figure \ref{fig:coin_pickup:variation1:example1} the function return $28$.
+			$R1$ will collect all the coins along the path highlighted in green while $R2$ will collect the coins along the blue cells.
+		\end{example}
+	
+\end{exercise}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{sources/coin_pickup/images/robot_movement_variation}
+	\caption[Robot possible movements]{Robot movements pattern.}.
+	\label{fig:coin_pickup:variation1:robot_movements}
+\end{figure}
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{sources/coin_pickup/images/variation1_example1}
+	\caption[Robot possible movements]{Solution for the instance of the problem of the Example \ref{example:coin_pickup:variation1::example1}. Green and blue cell hightlight the paths of the first and second robot, respectively.}.
+	\label{fig:coin_pickup:variation1:example1}
+\end{figure}
