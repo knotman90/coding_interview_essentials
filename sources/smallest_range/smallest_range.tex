@@ -2,35 +2,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
 %
-% Difficulty:
-% Companies: 
+% Difficulty: Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=\textwidth]{sources/smallest_range/images/example1}
-%	\caption[Sample short cpation]{Sample Caption}.
-%	\label{fig:smallest_range:example1}
-%\end{figure}
+%\begin{figure} \centering
+%   \includegraphics[width=\textwidth]{sources/smallest_range/images/example1} \caption[Sample short
+%   cpation]{Sample Caption}. \label{fig:smallest_range:example1} \end{figure}
 
 \chapter{Smallest Range \RN{1} and \RN{2}}
 \label{ch:smallest_range}
 \section*{Introduction}
+This chapter discusses a problem on an array and one of its variations. Both are very common
+interview questions, with the former having a really easy solution, and the second being slightly
+more complex. Both however, can be solved by starting from the same idea and in just a handful of
+lines of code.
+
 
 \section{Problem statement}
 \begin{exercise}
 \label{example:smallest_range:exercice1}
-Write a function that given given an array of integers $I$ and an integer $K$ 
-returns the smallest possible difference between the smallest and largest value in $I$
-after you have added to each of the elements $-K \leq p \leq K$.
+Write a function that given given an array of integers $I$ and an integer $K$ returns the smallest
+possible difference between the smallest and largest value in $I$ after you have added to each of
+the elements $-K \leq p \leq K$.
 
 	%example1
 	\begin{example}
 		\label{example:smallest_range:example1}
 		\hfill \\
-		Given $I = \{3,5,1,7,8\}$ and $K=4$ the function returns $0$. You can modify add to $I$ the followings values
-		$\{1,-1,3,-3,-4\}$. The modified array finally becomes: $I'=\{4,4,4,4,4\}$. 
+		Given $I = \{3,5,1,7,8\}$ and $K=4$ the function returns $0$. You can modify add to $I$ the
+		followings values $\{1,-1,3,-3,-4\}$. The modified array finally becomes:
+		$I'=\{4,4,4,4,4\}$. 
 		
 	\end{example}
 
@@ -54,34 +56,73 @@ after you have added to each of the elements $-K \leq p \leq K$.
 
 \section{Discussion}
 \label{smallest_range:sec:discussion}
+For this problem we are going to skip even discussing a brute-force solution because it is
+impractical to actually code it during an interview. Moreover, such a solution is conceptually very
+different from the one that allows us to solve this problem efficiently.
+So let's jump directly into the core of an good solution for this problem.
+
+The problem is asking us to minimize the difference between the largest value $M$, and the smallest value $m$ of $I$, after
+we have processed the latter by adding to each and every of its element a value in the range $[-K,+K]$.
+Let's call $B$ the post-processed version of $I$. 
+We know that if $K$ is large enough\footnote{We I say "large enough" I really mean that $(M-K) - (m+K) = M-m-2K \leq 0$.} so that we can bring $M$ and $m$ to the same value, by subtracting from $M$ and adding to $m$
+then we make all the elements of $B$ equal, thus reducing the difference between
+its smallest and the largest element to zero (see Figure \ref{fig:smallest_range:explanation2}). 
+This is possible because $M-m$ is the  largest difference in $I$ and if we can bring that to $0$ then we can bring to $0$ any other difference between any element of $I$  f.
+If $K$ is not large enough, then all we know is that we can reduce it to the difference between $m$ and $M$ to $d=(M-K)-(m+K)$. Notice that in this case $d > 0$  (see Figure \ref{fig:smallest_range:explanation1}).
+Moreover, because the difference between any other pair of elements of $I$ is smaller than $M-m$, we also know that their difference can be made
+smaller than $d$. 
 
 
-\subsection{Brute-force}
-\label{smallest_range:sec:bruteforce}
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:smallest_range]{sources/smallest_range/smallest_range_solution1.cpp}
-\end{minipage}
+\begin{figure}
+	\vspace*{-0.5in}
+	\centering
+	\begin{subfigure}[t]{0.90\textwidth}
+		\includegraphics[width=\textwidth]{sources/smallest_range/images/explanation1} 
+		\caption{$m$ and $M$ are the smallest and largest element of $I$, respectively. 
+		You can bring them closer together by adding $K$ to $m$ and subtracting $-K$ to $M$. $d$ is the difference between these two new values. $d$ will always be larger than any other difference you can obtain the same way. 
+		You can see that any other pair $(I[i], I[j])$ will have smaller difference because they are closer together to begin with.}
+		\label{fig:smallest_range:explanation1} 
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.90\textwidth}
+		\includegraphics[width=\textwidth]{sources/smallest_range/images/explanation2} 
+		\caption{$m$ and $M$ are the smallest and largest element of $I$, respectively. 
+		If we  add $K$ to $m$ and subtract $-K$ to $M$ then in this case $m+K$ will be larger than $M-K$. This means that we can add to $m$ and subtract to $M$
+		a number $p \leq K$ such that $m+p = M-p$. Because any other number in $I$ is larger than $m$ and smaller than $M$ we can do the same with them, so that we bring all the elements to the same value.}
+		\label{fig:smallest_range:explanation2} 
+	 \end{subfigure}
+	 \hfill
+	 \label{}
+	 \caption{}
+\end{figure}
+Therefore in order to solve this problem we only have to look at $M$ and $m$ and calculate $d=(M-K)-(m+K)$.
+If $d \leq 0$ then it means that we can make all the elements of $I$ equal and the function should return $0$, otherwise we can safely return $d$ as an answer.
+
+You can find an implementation of this idea in Listing \ref{list:smallest_range:solution1} which has $O(|I|)$ time and $O(1)$ space complexity.
+\lstinputlisting[language=c++, caption={Solution to the \textit{smallest range} problem.},label=list:smallest_range:solution1]{sources/smallest_range/smallest_range_solution1.cpp}
+
 
 
 \section{Common Variations}
-\subsection{Smallest range \RN{2} }
-This variant is almost identical to the main problem of this chapter (Exercice \ref{}) except that this time
-we are only allowed to add either $-K$ or $+K$ to each and every element of the input array $I$. As we shall see, this complicates things quite a bit,
+\subsection{Smallest range \RN{2} } This variant is almost identical to the main problem of this
+chapter (Exercise \ref{}) except that this time we are only allowed to add either $-K$ or $+K$ to
+each and every element of the input array $I$. As we shall see, this complicates things quite a bit,
 but, nevertheless, the core solution strategy  remains the same. 
 
 \begin{exercise}
 	\label{example:smallest_range:variation1:exercice1}
-	Write a function that given given an array of integers $I$ and an integer $K$ 
-	returns the smallest possible difference between the smallest and largest value in $I$
-	after you have added to each of the elements either $-K$ or $K$.
+	Write a function that given given an array of integers $I$ and an integer $K$ returns the
+	smallest possible difference between the smallest and largest value in $I$ after you have added
+	to each of the elements either $-K$ or $K$.
 	
 		%example1
 		\begin{example}
 			\label{example:smallest_range:variation1:example1}
 			\hfill \\
-			Given $I = \{3,5,1,7,8\}$ and $K=4$ the function returns $xxx$. You can modify add to $I$ the followings values
-			$\{xxxxx\}$. The modified array finally becomes: $I'=\{xxxxx\}$. 
+			Given $I = \{3,5,1,7,8\}$ and $K=4$ the function returns $xxx$. You can modify add to
+			$I$ the followings values $\{xxxxx\}$. The modified array finally becomes:
+			$I'=\{xxxxx\}$. 
 			
 		\end{example}
 	
