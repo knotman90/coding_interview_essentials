@@ -1,6 +1,3 @@
-#ifndef TEST_PALINDROME_PARTITIONING2_HASH_PAIR
-#define TEST_PALINDROME_PARTITIONING2_HASH_PAIR
-
 template <typename SeedType, typename T, typename... Rest>
 void hash_combine(SeedType& seed, const T& v, const Rest&... rest)
 {
@@ -17,5 +14,3 @@ struct PairHasher
     return seed;
   }
 };
-
-#endif /* TEST_PALINDROME_PARTITIONING2_HASH_PAIR */
