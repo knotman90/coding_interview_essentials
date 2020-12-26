@@ -19,14 +19,18 @@
 \section*{Introduction}
 The problem described in this chapter asks you to implement a common operations: 
 removes all elements satisfying specific criteria from a collection.
-This problem shares  lot of similarities with the one described in Chapter \ref{ch:remove_duplicated_sorted_array_inplace}
-and as a consequence they also share the same solution approach. 
+This problem shares lot of similarities with the one described in Chapter \ref{ch:remove_duplicated_sorted_array_inplace}
+and as a consequence also shares the same general solution approach. 
 
-There are many version of this problem, but the most  common is
+There are many versions and variations of this problem with the most common being 
 the one where the collection is a simple array or a vector of integers
-and you are ask to remove all the element that are equal to a given integer.
-We will discuss, however, a more general version where the collection contains elements of a generic type \inline{T}
-and the criteria for equality is given to us in the form of a unary function returning a boolean.
+and you are asked to remove all the elements equal to a given integer.
+However here, we will discuss a more general version of this problem where the collection
+is of a generic type \inline{T}
+and the criteria is given in the form of a unary function returning a boolean. 
+Specializing what is discussed here on the fly 
+during the interview for the actual particular version of asked should be easy.
+
 
 \section{Problem statement}
 \begin{exercise}
