@@ -127,5 +127,44 @@ Listing \ref{list:max_gap:radixsort} shows an implementation of radix-sort and i
 \lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using radix-sort.},label=list:max_gap:radixsort]{sources/max_gap/max_gap_solution2.cpp}
 Notice how the main driver function \inline{max_gap_radix_sort} is basically the same as \inline{max_gap_bruteforce} from Listing \ref{list:max_gap:bruteforce} except for the sorting procedure used.
 
-\section{Buckets and the pigeons holes}
+\section{Buckets and the pigeonhole principle}
 \label{max_gap:sec:buckets}
+All the solutions we have presented so far rely on sorting. In this section we are going to discuss an approach
+that rely on  the pigeonhole principle\footnote{\url{https://en.wikipedia.org/wiki/Pigeonhole_principle}} and bucketing.
+The general idea is that we could split the entire array into several buckets and then find the largest gap by only comparing
+one element of a given bucket to one element of the subsequent bucket. 
+
+You can think of $I$ as an array of buckets each containing a single element. $|I|$ is made of $b$ buckets and the total amount of element in $I$ is $n=b$.
+Imagine for a moment that you would reduce the number of buckets from $b$ to some integer $k < b$.
+For the pigeonhole principle then, one or more of the buckets in $I$ have to contain  strictly more than one element.
+
+Let's now focus for a moment of the gaps of an ideal collection where each of the elements has a given distance $t$ from its successor in the list. 
+If such a collection ic composed of  $n$ elements, then there is a total of $n-1$ gaps, each of size $t$.
+$t$ can be easily calculate if the maximum and minimum values are known: in-fact $t=\frac{max-min}{n-1}$. 
+If $I$ was like this ideal collection then the problem would be easily solved by using the formula above. 
+$I$ is different to this ideal collection because elements do not have uniform gaps between each other. 
+In this situation then we can argue that the maximum gap between any pair of subsequent 
+elements of $I$ is always larger than $t$.
+We can show this by trying reduce the gap between two subsequent elements $I_{i}$ and $I_{i+1}$, of an ideal collection with uniform gaps.
+We can do that by moving $I_{i+1}$ closer to $I_{i}$. When this happens the gap $(I_{i+1}-I_{i})$ becomes smaller than $t$. But what happens to the gap between $I_{i+1}$ and $I_{i+2}$?
+It actually becomes larger than $t$. In our effort to make the largest gap among two subsequent elements smaller, we obtained the opposite result: we made it larger.
+This shows that the maximum attainable gap can in a  collection with uniform gaps can only increase. 
+
+We are going to apply the two ideas above to solve this problem in the following way. We will distribute all the element of $I$
+into $n-1$ buckets. The first bucket would contains all the elements of $I$ which have in the following range: $[min, min + t)$.
+Similarly the second buckets would contain all the elements in the following range: $[min + t, min + 2t)$. 
+In general the $i^{th}$ bucket  would contain all the elements of $I$ in the following range: $[min + (i-1)t, min +it)$ (where $ 1 \leq i$).
+You can refer to Figure \ref{fig:max_gap:bucketing_example2} for an example of how such a division into buckets would work for the input array in Example \ref{example:max_gap:example2}.
+This allows us to skip comparing all the element within a bucket because we know for sure they will have a distance that is lower of equal than $t$ and we can therefore only concentrate on comparing elements 
+of subsequent buckets.
+In particular we should compare the maximum value of the $i^{th}$ bucket with the minimum value of the $(i+1)^{th}$ bucket. Why? Because they would appear one next to the other if $I$ was sorted.
+Because the number of buckets is always lower of equal than the number of elements in the collection, this approach has a linear complexity as it does require to compare at most twice the number of input elements in $I$.
+
+
+\begin{figure}
+	 \centering
+	 \includegraphics[width=\textwidth]{sources/max_gap/images/bucketing_example1}
+     \caption{Division of the elements of the Example \ref{example:max_gap:example2} into buckets.}.
+	\label{fig:max_gap:bucketing_example2}
+\end{figure}
+
