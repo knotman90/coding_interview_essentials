@@ -16,20 +16,20 @@ using Node = Book::BinaryTree::Node<T>;
 TEST(tree_diameter, test_full_2_levels)
 {
   using Book::BinaryTree::Direction;
-  auto root = Book::BinaryTree::from_arcs_and_values<int>(
-      7,
-      {
-          {0, Direction::Left, 1},
-          {0, Direction::Right, 2},
+  auto root =
+      Book::BinaryTree::from_arcs_and_values<int>(7,
+                                                  {
+                                                      {0, Direction::Left, 1},
+                                                      {0, Direction::Right, 2},
 
-          {1, Direction::Left, 3},
-          {1, Direction::Right, 4},
+                                                      {1, Direction::Left, 3},
+                                                      {1, Direction::Right, 4},
 
-          {2, Direction::Left, 5},
-          {2, Direction::Right, 6},
+                                                      {2, Direction::Left, 5},
+                                                      {2, Direction::Right, 6},
 
-      },
-      {0, 1, 2, 3, 4, 5, 6});
+                                                  },
+                                                  {0, 1, 2, 3, 4, 5, 6});
 
   //  Book::BinaryTree::visit_in_order(
   //     root, [](const auto v) { cout << v << endl; });
@@ -116,7 +116,7 @@ TEST(tree_diameter, test_example1)
   auto root = Book::BinaryTree::from_arcs_and_values<int>(
       15,
       {
-      	
+
           {0, Direction::Left, 1},
           {0, Direction::Right, 2},
 
@@ -126,7 +126,6 @@ TEST(tree_diameter, test_example1)
           {2, Direction::Left, 5},
           {2, Direction::Right, 6},
 
-         
           {5, Direction::Left, 11},
           {5, Direction::Right, 12},
 
@@ -150,21 +149,20 @@ TEST(tree_diameter, test_example1)
   }
 }
 
-
 TEST(tree_diameter, test_list_7_nodes)
 {
   using Book::BinaryTree::Direction;
-  auto root = Book::BinaryTree::from_arcs_and_values<int>(
-      7,
-      {
-          {0, Direction::Left, 1},
-          {1, Direction::Right, 2},
-          {2, Direction::Left, 3},
-          {3, Direction::Right, 4},
-          {4, Direction::Left, 5},
-          {5, Direction::Left, 6},
-      },
-      {0, 1, 2, 3, 4, 5, 6});
+  auto root =
+      Book::BinaryTree::from_arcs_and_values<int>(7,
+                                                  {
+                                                      {0, Direction::Left, 1},
+                                                      {1, Direction::Right, 2},
+                                                      {2, Direction::Left, 3},
+                                                      {3, Direction::Right, 4},
+                                                      {4, Direction::Left, 5},
+                                                      {5, Direction::Left, 6},
+                                                  },
+                                                  {0, 1, 2, 3, 4, 5, 6});
 
   //  Book::BinaryTree::visit_in_order(
   //     root, [](const auto v) { cout << v << endl; });

@@ -10,8 +10,6 @@ using std::vector;
 #include "list.h"
 using Book::List::Node;
 
-
-
 #include "delete_duplicates_list_solution1.cpp"
 #include "delete_duplicates_list_solution2.cpp"
 
@@ -133,7 +131,7 @@ TEST(delete_duplicates_list, test_remove_duplicate_up_100)
 
   Ni *list = Book::List::from_vector(V);
   EXPECT_NE(nullptr, list);
-  Ni *list_unique = remove_duplicates_from_linked_list_1(list);
+  Ni *list_unique     = remove_duplicates_from_linked_list_1(list);
   Ni *list_unique_lin = remove_duplicates_from_linked_list_linear_space(list);
 
   for (const auto x : expected)

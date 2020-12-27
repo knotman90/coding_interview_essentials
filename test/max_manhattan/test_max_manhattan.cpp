@@ -135,7 +135,6 @@ TEST(max_manhattan, exmaple4)
   }
 }
 
-
 int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);

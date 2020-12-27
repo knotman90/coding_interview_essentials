@@ -58,14 +58,12 @@ TEST(list_reverse, test_empty)
     ASSERT_EQ(expected, Book::List::to_vector(ans));
   }
 
-    {
+  {
     const auto ans = list_reverse_recursive(head);
     ASSERT_EQ(nullptr, ans);
     ASSERT_EQ(input.size(), Book::List::length(ans));
     ASSERT_EQ(expected, Book::List::to_vector(ans));
   }
-
-  
 }
 
 TEST(list_reverse, test_one)
@@ -98,7 +96,7 @@ TEST(list_reverse, test_one)
         << "double reverse should be equal to original list";
   }
 
-    {
+  {
     const auto ans = list_reverse_recursive(head);
     ASSERT_EQ(input.size(), Book::List::length(ans));
     ASSERT_EQ(expected, Book::List::to_vector(ans));
@@ -108,8 +106,6 @@ TEST(list_reverse, test_one)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
-
-  
 }
 
 TEST(list_reverse, test_single)
@@ -149,8 +145,7 @@ TEST(list_reverse, test_single)
         << "double reverse should be equal to original list";
   }
 
-
-    {
+  {
     Node<int> *head = create_list_from<int>(input, -1);
     ASSERT_EQ(nullptr, head);
     ASSERT_EQ(input.size(), Book::List::length(head));
@@ -197,7 +192,7 @@ TEST(list_reverse, test_all_equal)
         << "double reverse should be equal to original list";
   }
 
-    {
+  {
     Node<int> *head = create_list_from<int>(input, -1);
     ASSERT_EQ(input.size(), Book::List::length(head));
 
@@ -210,8 +205,6 @@ TEST(list_reverse, test_all_equal)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
-
-  
 }
 
 TEST(list_reverse, example1)
@@ -258,7 +251,6 @@ TEST(list_reverse, example1)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
-  
 }
 
 TEST(list_reverse, example1_double_reverse)
@@ -294,7 +286,6 @@ TEST(list_reverse, example1_double_reverse)
         << "double reverse should be equal to original list";
   }
 
-
   {
     Node<int> *head = create_list_from<int>(input, -1);
     ASSERT_EQ(input.size(), Book::List::length(head));
@@ -307,7 +298,6 @@ TEST(list_reverse, example1_double_reverse)
     ASSERT_EQ(input, Book::List::to_vector(ans_double_reverse))
         << "double reverse should be equal to original list";
   }
-
 }
 
 int main(int argc, char **argv)
