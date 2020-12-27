@@ -50,8 +50,10 @@ class min_stack_fixture : public ::testing::Test
   T value_;
 };
 
-using min_stack_implementations = ::testing::
-    Types<min_stack_stack_pair<int>, min_stack_two_stacks<int>, min_stack_int_constant_time<int>>;
+using min_stack_implementations =
+    ::testing::Types<min_stack_stack_pair<int>,
+                     min_stack_two_stacks<int>,
+                     min_stack_int_constant_time<int>>;
 TYPED_TEST_SUITE(min_stack_fixture, min_stack_implementations);
 
 TYPED_TEST(min_stack_fixture, test_increasing)
@@ -65,7 +67,7 @@ TYPED_TEST(min_stack_fixture, test_increasing)
   constexpr int START = 100;
   for (int i = START; i < END; i++)
   {
-    const op o = { 'p', i };
+    const op o = {'p', i};
     EXPECT_NO_THROW(execute_operation(o, stack_pair));
     if (o.first == 'p')
     {
@@ -77,7 +79,7 @@ TYPED_TEST(min_stack_fixture, test_increasing)
   // remove all
   for (int i = START; i < END; i++)
   {
-    const op o = { 'r', i };
+    const op o = {'r', i};
     EXPECT_NO_THROW(execute_operation(o, stack_pair));
     EXPECT_EQ(END - 1 - i, stack_pair.top());
 
@@ -97,7 +99,7 @@ TYPED_TEST(min_stack_fixture, test_decreasing)
   min_stack_stack_pair<int> stack_pair;
   for (int i = END; i >= START; i--)
   {
-    const op o = { 'p', i };
+    const op o = {'p', i};
     EXPECT_NO_THROW(execute_operation(o, stack_pair));
     if (o.first == 'p')
     {
@@ -109,7 +111,7 @@ TYPED_TEST(min_stack_fixture, test_decreasing)
   // remove all
   for (int i = START; i < END; i++)
   {
-    const op o = { 'r', i };
+    const op o = {'r', i};
     EXPECT_EQ(i, stack_pair.top());
     EXPECT_EQ(stack_pair.top(), stack_pair.getMin());
     EXPECT_NO_THROW(execute_operation(o, stack_pair));
@@ -117,7 +119,6 @@ TYPED_TEST(min_stack_fixture, test_decreasing)
     EXPECT_EQ(i + 1, stack_pair.top());
     EXPECT_EQ(stack_pair.top(), stack_pair.getMin());
   }
-  
 }
 
 int main(int argc, char** argv)

@@ -14,8 +14,8 @@ using std::swap;
 
 TEST(majority_element, test_empty_array)
 {
-  std::vector<int> V = {};
-  constexpr int expected   = -1;
+  std::vector<int> V     = {};
+  constexpr int expected = -1;
   EXPECT_EQ(expected, find_majority_element_brute_force(V));
   EXPECT_EQ(expected, find_majority_element_linear(V));
   EXPECT_EQ(expected, find_majority_element_hash_map(V));
@@ -25,8 +25,8 @@ TEST(majority_element, test_empty_array)
 
 TEST(majority_element, test_single_element)
 {
-  std::vector<int> V = { 1 };
-  constexpr int expected   = 1;
+  std::vector<int> V     = {1};
+  constexpr int expected = 1;
   EXPECT_EQ(expected, find_majority_element_brute_force(V));
   EXPECT_EQ(expected, find_majority_element_linear(V));
   EXPECT_EQ(expected, find_majority_element_hash_map(V));
@@ -36,8 +36,8 @@ TEST(majority_element, test_single_element)
 
 TEST(majority_element, test_all_different)
 {
-  std::vector<int> V = { 1, 2, 3, 4, 5, 6, 7, 8 };
-  constexpr int expected   = -1;
+  std::vector<int> V     = {1, 2, 3, 4, 5, 6, 7, 8};
+  constexpr int expected = -1;
   EXPECT_EQ(expected, find_majority_element_brute_force(V));
   EXPECT_EQ(expected, find_majority_element_linear(V));
   EXPECT_EQ(expected, find_majority_element_hash_map(V));
@@ -47,8 +47,8 @@ TEST(majority_element, test_all_different)
 
 TEST(majority_element, test_equal_times)
 {
-  std::vector<int> V = { 1, 1, 2, 2 };
-  constexpr int expected   = -1;
+  std::vector<int> V     = {1, 1, 2, 2};
+  constexpr int expected = -1;
   EXPECT_EQ(expected, find_majority_element_brute_force(V));
   EXPECT_EQ(expected, find_majority_element_linear(V));
   EXPECT_EQ(expected, find_majority_element_hash_map(V));
@@ -58,8 +58,8 @@ TEST(majority_element, test_equal_times)
 
 TEST(majority_element, test_equal_times_plus_one)
 {
-  std::vector<int> V = { 2, 1, 1, 2, 2 };
-  constexpr int expected   = 2;
+  std::vector<int> V     = {2, 1, 1, 2, 2};
+  constexpr int expected = 2;
   EXPECT_EQ(expected, find_majority_element_brute_force(V));
   EXPECT_EQ(expected, find_majority_element_linear(V));
   EXPECT_EQ(expected, find_majority_element_hash_map(V));
