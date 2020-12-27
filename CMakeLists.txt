@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 project(Book)
 
@@ -24,8 +24,6 @@ endif(ENABLE_CPPCHECK)
 if(ENABLE_CLANG_TIDY)
     set(CMAKE_CXX_CLANG_TIDY clang-tidy)
 endif(ENABLE_CLANG_TIDY)
-
-
 
 
 set(EXTRA_WARNING_GNU "-march=native -Wextra -Wdisabled-optimization  -funsafe-loop-optimizations -Wshadow -Wpointer-arith -Wcast-qual -Wunreachable-code ")
