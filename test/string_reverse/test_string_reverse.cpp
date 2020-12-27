@@ -11,7 +11,8 @@ using std::swap;
 #include "string_reverse_solution3.cpp"
 #include "string_reverse_solution4.cpp"
 
-TEST(string_reverse, test_empty) {
+TEST(string_reverse, test_empty)
+{
   std::string s = "";
   const std::string expected(s);
   EXPECT_EQ(expected, reverse_string_outplace_raw_loop(s));
@@ -28,7 +29,8 @@ TEST(string_reverse, test_empty) {
   }
 }
 
-TEST(string_reverse, test_single) {
+TEST(string_reverse, test_single)
+{
   std::string s = "a";
   const std::string expected(s);
   EXPECT_EQ(expected, reverse_string_outplace_raw_loop(s));
@@ -40,8 +42,9 @@ TEST(string_reverse, test_single) {
   }
 }
 
-TEST(string_reverse, test_abcde) {
-  std::string s = "abcde";
+TEST(string_reverse, test_abcde)
+{
+  std::string s              = "abcde";
   const std::string expected = "edcba";
   EXPECT_EQ(expected, reverse_string_outplace_raw_loop(s));
   EXPECT_EQ(expected, reverse_string_outplace_iterator(s));
@@ -52,7 +55,8 @@ TEST(string_reverse, test_abcde) {
   }
 }
 
-TEST(string_reverse, test_dante_inferno) {
+TEST(string_reverse, test_dante_inferno)
+{
   std::string s = R"(Midway upon the journey of our life
   I found myself within a forest dark,
   For the straightforward pathway had been lost.
@@ -110,7 +114,8 @@ efil ruo fo yenruoj eht nopu yawdiM)";
   }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

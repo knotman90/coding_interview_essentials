@@ -26,7 +26,7 @@ tests_cppcheck:
 
 
 $(BUILD_DIR)/$(MAIN_FILE_NAME).pdf: sources/$(MAIN_FILE_NAME).tex $(BUILD_DIR)
-	pdflatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
+	xelatex  $(TEXFLAGS) -jobname=$(@:.pdf=) -f $<
 	biber build/main.bcf
 	makeglossaries build/$(MAIN_FILE_NAME)
 	makeindex -s build/$(MAIN_FILE_NAME).ist -t build/$(MAIN_FILE_NAME).glg -o build/$(MAIN_FILE_NAME).gls build/$(MAIN_FILE_NAME).glo

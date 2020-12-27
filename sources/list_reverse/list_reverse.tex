@@ -9,22 +9,21 @@
 \label{ch:list_reverse}
 
 \section*{Introduction}
-In this chapter we are going to have a look at two variations of the same problem about the same
-topic: reversing a singly linked list. These problems has been asked in coding interviews for a long
-time. They are among the most basic problems on linked-list out there and despite their popularity
+In this chapter we are going to have a look at a problem that is about reversing a singly linked list.
+This problem has been asked in coding interviews for a long
+time. and despite the fact it is among the most basic problems on linked-list out there and despite its popularity
 and the fact it is about one of the basic fundamental data structures in computer science, it has
-been proven to be the cause of failure for many engineers. Most often, being unable to solve these
+been proven to be the cause of failure for many software engineers interview. Most often, being unable to solve these
 problems result in almost immediate rejection.
 
-Both problems have a simple definition as they asks us to transform a given list into its reverse.
+The problem has  a simple definition as it asks us to transform a given list into its reverse.
 We will discuss how we can approach this problem both in a recursive as well as in an iterative
-manner. Section \ref{sec:list_reverse:statement} will discuss the first and easier version while in
-Section \ref{sec:list_reverse:hard} we will have a look at the slightly harder variation that if
-often asked as a follow-up. In both cases iterative and recursive solutions are discussed.
+manner. Section \ref{sec:list_reverse:statement} will present the formal problem statement and the subsequent sections 
+discuss the details of the solution. Finally in Section \ref{sec:list_reverse:hard} we will have a look at the slightly harder variation that if
+often asked as a follow-up and which solution is left as an exercices.
 
-\section{Easy version}
-\label{sec:list_reverse:statementeasy}
-\subsection{Problem statement}
+
+\section{Problem statement}
 \begin{exercise}
 Create a function that given a singly linked list $L$, reverses it and return the pointer to the new
 head of $L$. $L$ is given as a pointer to the first node of the list. The definition of the node is
@@ -198,3 +197,28 @@ We then had a look at an alternative solution that is somehow based on the same 
 call stack of the recursive function. 
 
 Lastly we discussed a solution where only a constant space is required. This approach works iteratively from the head to the tail of the list by reversing two nodes at a time.
+
+\section{Common variation - Reserve a sublist}
+\subsection{Problem statement}
+\begin{exercise}
+Create a function that given a singly linked list $L$ and two integers $n \geq  m \geq 0$,
+reverses only its nodes from the $m^{th}$ to the $n^{th}$ and return the pointer to the new
+head of $L$. As in the other version of this problem discussed above the definition of a node is the same and the list 
+$L$ is given as a pointer to the first node of the list itself.
+
+\begin{example}
+	\hfill \\
+	Given the $L = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5$, $m = 3$, $n = 5$ the function modifies
+	it into $L = 1 \rightarrow 2 \rightarrow 5 \rightarrow 4 \rightarrow 3$ and returns a pointer to
+	the node $1$.
+\end{example}
+
+\begin{example}
+	\hfill \\
+	Given the $L = 1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5$, $m = 1$, $n = 2$ the function modifies
+	it into $L = 1 \rightarrow 2 \rightarrow 5 \rightarrow 4 \rightarrow 3$ and returns a pointer to
+	the node $1$.
+\end{example}
+
+\end{exercise}
+
