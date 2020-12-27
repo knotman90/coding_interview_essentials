@@ -20,37 +20,35 @@ TEST(max_num_chunks_sorted, example1)
        })
   {
     {
-     auto I_copy(I);
+      auto I_copy(I);
       EXPECT_EQ(max_chunks_to_sorted_lineartime(I_copy), expected);
     }
 
     {
-        auto I_copy(I);
+      auto I_copy(I);
       EXPECT_EQ(max_chunks_to_sorted_bruteforce(I_copy), expected);
     }
   }
 }
 
-
 TEST(max_num_chunks_sorted, example2)
 {
-  const std::vector<int> input = {9,8,7,6,5,4,3,2,1};
+  const std::vector<int> input = {9, 8, 7, 6, 5, 4, 3, 2, 1};
   for (auto [I, expected] : {
            std::pair<std::vector<int>, int>(input, 1),
        })
   {
     {
-        auto I_copy(I);
+      auto I_copy(I);
       EXPECT_EQ(max_chunks_to_sorted_lineartime(I_copy), expected);
     }
 
     {
-        auto I_copy(I);
+      auto I_copy(I);
       EXPECT_EQ(max_chunks_to_sorted_bruteforce(I_copy), expected);
     }
   }
 }
-
 
 int main(int argc, char **argv)
 {

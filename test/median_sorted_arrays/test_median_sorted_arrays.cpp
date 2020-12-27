@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include <cassert>
 #include <gtest/gtest.h>
+#include <cassert>
 
 using std::cout;
 using std::endl;
@@ -128,14 +128,13 @@ TEST(median_sorted_arrays, test_big_2_odd)
                      11, 37, 73, 79, 7,  10, 87,  1,  77, 42, 95, 44, 31, 58,
                      93, 85, 91, 82, 84, 45, 6,   9,  71, 88, 55, 20, 30, 89,
                      29, 43, 98, 51, 50, 66, 100, 19, 74, 24, 15, 76, 72, 35,
-                     2,  80, 18, 33, 83, 69, 26,  81, 49, 65, 36,101};
+                     2,  80, 18, 33, 83, 69, 26,  81, 49, 65, 36, 101};
   sort(begin(B), end(B));
 
   constexpr double expected = 51;
   EXPECT_EQ(expected, mediam_sorted_arrays_naive(A, B));
   EXPECT_DOUBLE_EQ(expected, mediam_sorted_arrays_merge(A, B));
 }
-
 
 int main(int argc, char **argv)
 {
