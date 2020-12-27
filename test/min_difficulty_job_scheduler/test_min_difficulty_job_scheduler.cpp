@@ -104,7 +104,6 @@ TEST(min_difficulty_job_scheduler, example3)
       auto actual        = min_difficulty_scheduler_DP_bottomup(I, d);
       ASSERT_EQ(expected, actual) << "failed for days = " << d;
     }
-
   }
 }
 

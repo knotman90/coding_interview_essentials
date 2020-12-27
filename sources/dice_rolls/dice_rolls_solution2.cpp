@@ -18,8 +18,8 @@ int num_rolls_to_target_memoization_helper(const int target,
 
   unsigned long ans = 0;
   for (int i = 1; i <= f; i++, ans %= MOD)
-    ans += num_rolls_to_target_memoization_helper(
-        target - i, dices - 1, f, cache);
+    ans +=
+        num_rolls_to_target_memoization_helper(target - i, dices - 1, f, cache);
 
   cache[dices][target] = ans;
   return ans;

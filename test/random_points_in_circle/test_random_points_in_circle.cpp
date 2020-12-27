@@ -1,14 +1,13 @@
-#include <gtest/gtest.h>
 #include <bits/stdc++.h>
+#include <gtest/gtest.h>
 
-using std::string;
-using std::swap;
 using std::cout;
 using std::endl;
+using std::string;
+using std::swap;
 
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv); 
-    return RUN_ALL_TESTS();
+int main(int argc, char **argv)
+{
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
-

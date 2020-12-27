@@ -8,7 +8,10 @@ struct KeyHash
 
 using Cache = std::unordered_map<std::tuple<int, int>, int, KeyHash>;
 
-long min_difficulty_scheduler_DP_topdown_helper(const std::vector<int>& I, const size_t start, const int d, Cache& cache)
+long min_difficulty_scheduler_DP_topdown_helper(const std::vector<int>& I,
+                                                const size_t start,
+                                                const int d,
+                                                Cache& cache)
 {
   if (start >= I.size() && d == 0)
     return 0;
@@ -26,7 +29,9 @@ long min_difficulty_scheduler_DP_topdown_helper(const std::vector<int>& I, const
   for (size_t i = start; i < I.size(); i++)
   {
     M   = std::max(M, I[i]);
-    ans = std::min(ans, M + min_difficulty_scheduler_DP_topdown_helper(I, i + 1, d - 1, cache));
+    ans = std::min(
+        ans,
+        M + min_difficulty_scheduler_DP_topdown_helper(I, i + 1, d - 1, cache));
   }
   cache[t] = ans;
   return ans;
