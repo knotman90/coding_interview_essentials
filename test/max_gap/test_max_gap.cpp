@@ -12,6 +12,7 @@ using std::vector;
 #include "max_gap_solution1.cpp"
 #include "max_gap_solution2.cpp"
 #include "algorithm.h"
+#include "max_gap_solution3.cpp"
 
 TEST(max_gap, test1)
 {
@@ -27,6 +28,8 @@ TEST(max_gap, test1)
         EXPECT_EQ(expected, max_gap_bruteforce(input));
 
         EXPECT_EQ(expected, max_gap_radix_sort(input));
+
+        EXPECT_EQ(expected, max_gap_buckets(input));
     }
 }
 
@@ -42,7 +45,10 @@ TEST(max_gap, test_consistency_solutions)
      
         const auto& output1 = max_gap_bruteforce(input);
         const auto& output2 =  max_gap_radix_sort(input);
+        const auto& output3 =  max_gap_buckets(input);
+
         ASSERT_EQ(output1, output2);
+        ASSERT_EQ(output1, output3);
     
     }
 }

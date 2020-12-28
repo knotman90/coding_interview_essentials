@@ -33,9 +33,8 @@ understand each of the examples provided.
 \section{Problem statement}
 \begin{exercise}
 \label{example:max_gap:exercice1}
-Write a function that given a unsorted array of non-negative integers 
-$I$ of length $n$ returns the largest gap between two
-elements that would appear one next to the other  
+Write a function that given a unsorted array of non-negative integers $I$ of length $n$ returns the
+largest gap between two elements that would appear one next to the other  
 if $I$ was sorted. A gap between $x$ and $y$ is defined as the absolute value of the difference
 between $x$ and $y$: $|x-y|$.
 
@@ -92,9 +91,9 @@ their distance $d_k=I_{k-1}-I_k$. Among all calculated distances we just return 
 	\item we do not need to use the absolute value operation as we are operating on a sorted
 	collection and therefore, we are guaranteed that $I_{k+1}$ is larger or equal than $I_k$.
 	\item the \inline{for} loop stops when $i=|I|-1$ in order to avoid accessing an invalid element
-	while executing \inline{I_copy[i+1]}. When $i=|I|-1$ this would lead to accessing the element at index
-	$|I|$, which does not exists. In C++ this would cause undefined behaviour, and the most likely
-	outcome would be a segmentation fault error.
+	while executing \inline{I_copy[i+1]}. When $i=|I|-1$ this would lead to accessing the element at
+	index $|I|$, which does not exists. In C++ this would cause undefined behaviour, and the most
+	likely outcome would be a segmentation fault error.
 \end{itemize}
 \lstinputlisting[language=c++, caption={Trivial solution to the max gap problem using sorting and linear space.},label=list:max_gap:bruteforce]{sources/max_gap/max_gap_solution1.cpp}
 
@@ -102,69 +101,116 @@ their distance $d_k=I_{k-1}-I_k$. Among all calculated distances we just return 
 
 \section{Radix Sort}
 \label{max_gap:sec:radix_sort}
-The idea we developed in Section \ref{max_gap:sec:trivial} can be improved 
-if instead of using a normal comparison-based sorting algorithm  we use 
-radix-sort\cite{cit::wiki::radix_sort }instead. 
-Radix sort will perform better than a standard $O(nlogn)$ algorithm when there is an upper bound for the values of the 
-input array. If we assume that such bound is the largest value a standard 4 bytes \inline{int} can hold then radix sort will 
-have a complexity of $O(n)$.
+The idea we developed in Section \ref{max_gap:sec:trivial} can be improved if instead of using a
+normal comparison-based sorting algorithm  we use radix-sort\cite{cit::wiki::radix_sort }instead.
+Radix sort will perform better than a standard $O(nlogn)$ algorithm when there is an upper bound for
+the values of the input array. If we assume that such bound is the largest value a standard 4 bytes
+\inline{int} can hold then radix sort will have a complexity of $O(n)$.
 
-Radix sort works by sorting the input array $d$ times, where $d = \floor{log_{10}k+1}$ and $k$ is the largest number in $I$.
-$d$ is just the number of digits of the largest number in the list. For a standard \inline{int} $d=\floor{log_{10}(2147483647) + 1}=10$.
-The sorting is obtained by repeatedly sorting the input list from the least to the most significant digit where each of the intermediate 
-sorting steps is performed using counting-sort.
-For instance given $I = \{329,457,657,839,436,720,355\}$ the first pass of radix sort will sort $I$ based on the value of the least significant digits.
-After this first pass we have $I=\{720,355,436,457,657,329,839\}$. Notice how the first digits are sorted. At this point the algorithm proceed by sorting 
-$I$ further but this time according to their second digit. The resulting list becomes $I=\{720,329,436,839,355,457,657\}$.
-Finally the third pass will sort all the elements according the the most significant digit, resulting in a well
-sorted list: $I=\{329,355,436,457,657,720,839\}$. 
-Notice that this approach needs to be tweaked in case you want to apply radix sort to negative numbers\footnote{You can treat the sign as a special kind of digit. 
-You sort the pile on the units, then the tens, etc. and finally on the sign. 
-This does produce a reversed order for the negatives, 
+Radix sort works by sorting the input array $d$ times, where $d = \floor{log_{10}k+1}$ and $k$ is
+the largest number in $I$. $d$ is just the number of digits of the largest number in the list. For a
+standard \inline{int} $d=\floor{log_{10}(2147483647) + 1}=10$. The sorting is obtained by repeatedly
+sorting the input list from the least to the most significant digit where each of the intermediate
+sorting steps is performed using counting-sort. For instance given $I =
+\{329,457,657,839,436,720,355\}$ the first pass of radix sort will sort $I$ based on the value of
+the least significant digits. After this first pass we have $I=\{720,355,436,457,657,329,839\}$.
+Notice how the first digits are sorted. At this point the algorithm proceed by sorting $I$ further
+but this time according to their second digit. The resulting list becomes
+$I=\{720,329,436,839,355,457,657\}$. Finally the third pass will sort all the elements according the
+the most significant digit, resulting in a well sorted list: $I=\{329,355,436,457,657,720,839\}$.
+Notice that this approach needs to be tweaked in case you want to apply radix sort to negative
+numbers\footnote{You can treat the sign as a special kind of digit. You sort the pile on the units,
+then the tens, etc. and finally on the sign. This does produce a reversed order for the negatives,
 you then simply reverse the contents of that bucket.}.
 
-Listing \ref{list:max_gap:radixsort} shows an implementation of radix-sort and its application to the solution of this chapter's problem.
+Listing \ref{list:max_gap:radixsort} shows an implementation of radix-sort and its application to
+the solution of this chapter's problem.
 \lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using radix-sort.},label=list:max_gap:radixsort]{sources/max_gap/max_gap_solution2.cpp}
-Notice how the main driver function \inline{max_gap_radix_sort} is basically the same as \inline{max_gap_bruteforce} from Listing \ref{list:max_gap:bruteforce} except for the sorting procedure used.
+Notice how the main driver function \inline{max_gap_radix_sort} is basically the same as
+\inline{max_gap_bruteforce} from Listing \ref{list:max_gap:bruteforce} except for the sorting
+procedure used.
 
 \section{Buckets and the pigeonhole principle}
 \label{max_gap:sec:buckets}
-All the solutions we have presented so far rely on sorting. In this section we are going to discuss an approach
-that rely on  the pigeonhole principle\footnote{\url{https://en.wikipedia.org/wiki/Pigeonhole_principle}} and bucketing.
-The general idea is that we could split the entire array into several buckets and then find the largest gap by only comparing
-one element of a given bucket to one element of the subsequent bucket. 
+All the solutions we have presented so far rely on sorting. In this section we are going to discuss
+an approach that relies on  the pigeonhole
+principle\footnote{\url{https://en.wikipedia.org/wiki/Pigeonhole_principle}} and bucketing. The
+general idea is that we could split the entire array into several buckets and then find the largest
+gap by only comparing one element of a given bucket to one element of the subsequent bucket. 
 
-You can think of $I$ as an array of buckets each containing a single element. $|I|$ is made of $b$ buckets and the total amount of element in $I$ is $n=b$.
-Imagine for a moment that you would reduce the number of buckets from $b$ to some integer $k < b$.
-For the pigeonhole principle then, one or more of the buckets in $I$ have to contain  strictly more than one element.
+You can think of $I$ as an array of buckets each containing a single element. $|I|$ is made of $b$
+buckets and the total amount of element in $I$ is $n=b$. Imagine for a moment that you would reduce
+the number of buckets from $b$ to some integer $k < b$. For the pigeonhole principle then, one or
+more of the buckets in $I$ have to contain  strictly more than one element.
 
-Let's now focus for a moment of the gaps of an ideal collection where each of the elements has a given distance $t$ from its successor in the list. 
-If such a collection ic composed of  $n$ elements, then there is a total of $n-1$ gaps, each of size $t$.
-$t$ can be easily calculate if the maximum and minimum values are known: in-fact $t=\frac{max-min}{n-1}$. 
-If $I$ was like this ideal collection then the problem would be easily solved by using the formula above. 
-$I$ is different to this ideal collection because elements do not have uniform gaps between each other. 
-In this situation then we can argue that the maximum gap between any pair of subsequent 
-elements of $I$ is always larger than $t$.
-We can show this by trying reduce the gap between two subsequent elements $I_{i}$ and $I_{i+1}$, of an ideal collection with uniform gaps.
-We can do that by moving $I_{i+1}$ closer to $I_{i}$. When this happens the gap $(I_{i+1}-I_{i})$ becomes smaller than $t$. But what happens to the gap between $I_{i+1}$ and $I_{i+2}$?
-It actually becomes larger than $t$. In our effort to make the largest gap among two subsequent elements smaller, we obtained the opposite result: we made it larger.
-This shows that the maximum attainable gap can in a  collection with uniform gaps can only increase. 
+Let's now focus for a moment of the gaps of an ideal collection where each its of the elements has a
+the same distance $t$ from its successor in the list. If such a collection is composed of  $n$
+elements, then there is a total of $n-1$ gaps, each of size $t$. $t$ can be easily calculate if the
+maximum and minimum values are known: in-fact $t=\frac{max-min}{n-1}$. For instance for the
+collection of five elements $\{4,8,12,16,20\}$ we have $t=\frac{20-4}{4}$ and for the
+$\{-2,5,12,19\}$ we have $t=\frac{19- (-2)}{3} = 7$. If $I$ was like this ideal collection then the
+problem would be easily solved by using the formula above. 
 
-We are going to apply the two ideas above to solve this problem in the following way. We will distribute all the element of $I$
-into $n-1$ buckets. The first bucket would contains all the elements of $I$ which have in the following range: $[min, min + t)$.
-Similarly the second buckets would contain all the elements in the following range: $[min + t, min + 2t)$. 
-In general the $i^{th}$ bucket  would contain all the elements of $I$ in the following range: $[min + (i-1)t, min +it)$ (where $ 1 \leq i$).
-You can refer to Figure \ref{fig:max_gap:bucketing_example2} for an example of how such a division into buckets would work for the input array in Example \ref{example:max_gap:example2}.
-This allows us to skip comparing all the element within a bucket because we know for sure they will have a distance that is lower of equal than $t$ and we can therefore only concentrate on comparing elements 
-of subsequent buckets.
-In particular we should compare the maximum value of the $i^{th}$ bucket with the minimum value of the $(i+1)^{th}$ bucket. Why? Because they would appear one next to the other if $I$ was sorted.
-Because the number of buckets is always lower of equal than the number of elements in the collection, this approach has a linear complexity as it does require to compare at most twice the number of input elements in $I$.
-
-
+$I$ is different to this ideal collection because elements do not have uniform gaps between each
+other. In this situation then we can argue that the maximum gap between any pair of subsequent
+elements of $I$ is always larger than $t=\frac{max-min}{n-1}$. We can show this by taking an ideal
+collection $C$ and try to reduce the gap between any two subsequent elements $C_{i}$ and $C_{i+1}$.
+We can do that by moving $I_{i+1}$ closer to $I_{i}$. When this happens the gap $(I_{i+1}-I_{i})$
+becomes smaller than $t$. So far all is looking promising. But what happens to the gap between
+$I_{i+1}$ and $I_{i+2}$? It actually becomes larger than $t$! In our effort to make the largest gap
+among two subsequent elements smaller, we obtained the opposite result: we made it larger. Figure
+\ref{fig:max_gap:move_t} shows an example of such scenario where we have a collection of uniformly
+separated elements where $t  = 2$. When the third element is moved by one toward the second, you see
+that the gap between them is reduced from $2$ to $1$ but the gap between the third and the fourth
+element increases from $2$ to $3$, and now the largest gap between any two pair of subsequent
+element is no more $2$ but $3$ which is larger than what we had to begin with. This shows that the
+maximum attainable gap can in a  collection with uniform gaps can only increase. 
 \begin{figure}
-	 \centering
-	 \includegraphics[width=\textwidth]{sources/max_gap/images/bucketing_example1}
-     \caption{Division of the elements of the Example \ref{example:max_gap:example2} into buckets.}.
+	\centering
+	\includegraphics[width=\textwidth]{sources/max_gap/images/move_t}
+	\caption{Example of how trying to reduce the gap between pairs of subsequent element of a
+	uniformly separated collections makes the largest gap larger.}.
+   \label{fig:max_gap:move_t}
+\end{figure}
+
+
+We are going to apply the two ideas above to solve this problem in the following way. We will
+distribute all the elements of $I$ into $n-1$ buckets. The first bucket would contains all the
+elements of $I$ in the following range: $[min, min + t)$. Similarly the second buckets will contain
+all the elements in the following range: $[min + t, min + 2t)$. In general the $i^{th}$ bucket
+would contain all the elements of $I$ in the following range: $[min + (i-1)t, min+it)$ (where $ 1
+\leq i$). You can refer to Figure \ref{fig:max_gap:bucketing_example2} for an example of how such a
+division into buckets would work for the input array in Example \ref{example:max_gap:example2}. This
+allows us to skip comparing all the element within a bucket because we know for sure they will have
+a distance that is lower of equal than $t$ and we can therefore only concentrate on comparing
+elements of subsequent buckets. In particular we should compare the maximum value of the $i^{th}$
+bucket with the minimum value of the $(i+1)^{th}$ bucket. Why? Because they would appear one next to
+the other if $I$ was sorted. Because the number of buckets is always lower of equal than the number
+of elements in the collection, this approach has a linear time complexity as it does require to
+compare at most twice the number of input elements in $I$. The space complexity is also linear as
+the number of buckets can be proportional to $|I|$.
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/max_gap/images/bucketing_example1}
+	\caption{Division of the elements of the Example \ref{example:max_gap:example2} into buckets.}.
 	\label{fig:max_gap:bucketing_example2}
 \end{figure}
 
+
+Listing \ref{list:max_gap:buckets} shows an implementation of this idea where we use the
+\inline{struct Bucket} to model a bucket for which we only need to store three piece of information:
+\begin{enumerate*}
+	\item if the buckets contains at least one elements
+	\item the min
+	\item and the max val \end{enumerate*}. If $|I| < 2$ we can immediately return $0$ as there are
+no possible pairs to calculate the gap for. Otherwise we proceed in calculating $t$ and the number
+of buckets we need. The first loop takes care of filling each of the buckets an element belongs to.
+Notice that we can calculate such index for an element $el$ by using the following expression:
+$\frac{el- \min(I)}{t}$. Once all the buckets are initialized, then we can proceed by calculating
+the largest gap between them by paying attention not to consider empty buckets which are ignored
+during the second loop. We proceed by considering the max element of the  first bucket with the
+minimum element of the next non-empty bucket $j > 0$. Once the gap between them is calculated, we
+can move onto calculating the gap between the next pair of subsequent buckets which will be made of
+the bucket at index $j$ and the first non-empty bucket having index larger than $j$. This process is
+repeated until all pairs of buckets are processed.
+\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using radix-sort.},label=list:max_gap:buckets]{sources/max_gap/max_gap_solution3.cpp}
