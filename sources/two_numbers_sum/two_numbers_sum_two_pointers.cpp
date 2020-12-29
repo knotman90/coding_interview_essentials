@@ -1,15 +1,15 @@
-bool two_numers_sum_two_pointers(const vector<int> &A, const int T)
+bool two_numers_sum_two_pointers(const std::vector<int> &A, const int T)
 {
   int s = 0, e = A.size() - 1;
   while (s < e)
   {
-    const int s = A[s] + A[e];
-    if (s < T)
+    const int sum = A[s] + A[e];
+    if (sum < T)
       s++;
-    else if (s > T)
+    else if (sum > T)
       e--;
-
-    return true;
+    else
+      return true;
   }
   return false;
 }
