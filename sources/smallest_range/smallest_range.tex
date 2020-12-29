@@ -14,15 +14,14 @@
 \label{ch:smallest_range}
 \section*{Introduction}
 This chapter discusses a problem on an array and one of its variations. Both are very common
-interview questions, with the former having a really easy solution, and the second being slightly
+interview questions, with the former having a really easy solution, and the latter being slightly
 more complex. Both however, can be solved by starting from the same idea and in just a handful of
 lines of code.
-
 
 \section{Problem statement}
 \begin{exercise}
 \label{example:smallest_range:exercice1}
-Write a function that given given an array of integers $I$ and an integer $K$ returns the smallest
+Write a function that given given an array of integers $I$ and an integer $K /geq 0$ returns the smallest
 possible difference between the smallest and largest value in $I$ after you have added to each of
 the elements $-K \leq p \leq K$.
 
@@ -58,20 +57,25 @@ the elements $-K \leq p \leq K$.
 \label{smallest_range:sec:discussion}
 For this problem we are going to skip even discussing a brute-force solution because it is
 impractical to actually code it during an interview. Moreover, such a solution is conceptually very
-different from the one that allows us to solve this problem efficiently.
-So let's jump directly into the core of an good solution for this problem.
+different and time complexity-wise far off from the one that allows us to solve this problem efficiently.
+So let's jump directly into the core of a good solution.
 
-The problem is asking us to minimize the difference between the largest value $M$, and the smallest value $m$ of $I$, after
-we have processed the latter by adding to each and every of its element a value in the range $[-K,+K]$.
-Let's call $B$ the post-processed version of $I$. 
-We know that if $K$ is large enough\footnote{We I say "large enough" I really mean that $(M-K) - (m+K) = M-m-2K \leq 0$.} so that we can bring $M$ and $m$ to the same value, by subtracting from $M$ and adding to $m$
-then we make all the elements of $B$ equal, thus reducing the difference between
-its smallest and the largest element to zero (see Figure \ref{fig:smallest_range:explanation2}). 
-This is possible because $M-m$ is the  largest difference in $I$ and if we can bring that to $0$ then we can bring to $0$ any other difference between any element of $I$  f.
-If $K$ is not large enough, then all we know is that we can reduce it to the difference between $m$ and $M$ to $d=(M-K)-(m+K)$. Notice that in this case $d > 0$  (see Figure \ref{fig:smallest_range:explanation1}).
-Moreover, because the difference between any other pair of elements of $I$ is smaller than $M-m$, we also know that their difference can be made
-smaller than $d$. 
-
+The problem is asking us to minimize the difference between the largest value $M$, and the smallest
+value $m$ of $I$ after we have processed it by adding to each and every of its element a
+value in the range $[-K,+K]$. 
+Let's call $B$ this post-processed version of $I$. 
+We know that if $K$ is large enough\footnote{When I say "large enough" I really mean that 
+$(M-K) - (m+K) = M-m-2K \leq 0$.} so that we can bring $M$ and $m$ to the same value,
+by subtracting from $M$ and adding to $m$, then we make all the elements of $B$ equal,
+thus reducing the difference between $I$'s smallest and
+the largest element to zero (see Figure \ref{fig:smallest_range:explanation2}).
+This is possible because $M-m$ is the  largest difference in $I$ and if we can effectively close their gap to $0$
+then we can do the same with any other difference between any other pair of elements of $I$.
+On the other hand, if $K$ is not large enough, then all we know
+is that we can reduce the difference between $m$ and $M$ to $d=(M-K)-(m+K)$.
+Notice that in this case $d > 0$  (see Figure \ref{fig:smallest_range:explanation1}).
+Moreover, similarly to what we have discussed above, because the difference between any other pair of elements of $I$ is smaller than $M-m$, we also know that their
+differences can be made at least  equal or smaller  than $d$.
 
 
 \begin{figure}
@@ -79,29 +83,35 @@ smaller than $d$.
 	\centering
 	\begin{subfigure}[t]{0.90\textwidth}
 		\includegraphics[width=\textwidth]{sources/smallest_range/images/explanation1} 
-		\caption{$m$ and $M$ are the smallest and largest element of $I$, respectively. 
-		You can bring them closer together by adding $K$ to $m$ and subtracting $-K$ to $M$. $d$ is the difference between these two new values. $d$ will always be larger than any other difference you can obtain the same way. 
-		You can see that any other pair $(I[i], I[j])$ will have smaller difference because they are closer together to begin with.}
+		\caption{$m$ and $M$ are the smallest and largest element of $I$, respectively. You can
+		bring them closer together by adding $K$ to $m$ and subtracting $-K$ to $M$. $d$ is the
+		difference between these two new values. $d$ will always be larger than any other difference
+		you can obtain the same way. You can see that any other pair $(I[i], I[j])$ will have
+		smaller difference because they are closer together to begin with.}
 		\label{fig:smallest_range:explanation1} 
 	 \end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.90\textwidth}
 		\includegraphics[width=\textwidth]{sources/smallest_range/images/explanation2} 
-		\caption{$m$ and $M$ are the smallest and largest element of $I$, respectively. 
-		If we  add $K$ to $m$ and subtract $-K$ to $M$ then in this case $m+K$ will be larger than $M-K$. This means that we can add to $m$ and subtract to $M$
-		a number $p \leq K$ such that $m+p = M-p$. Because any other number in $I$ is larger than $m$ and smaller than $M$ we can do the same with them, so that we bring all the elements to the same value.}
+		\caption{$m$ and $M$ are the smallest and largest element of $I$, respectively. If we  add
+		$K$ to $m$ and subtract $-K$ to $M$ then in this case $m+K$ will be larger than $M-K$. This
+		means that we can add to $m$ and subtract to $M$ a number $p \leq K$ such that $m+p = M-p$.
+		Because any other number in $I$ is larger than $m$ and smaller than $M$ we can do the same
+		with them, so that we bring all the elements to the same value.}
 		\label{fig:smallest_range:explanation2} 
 	 \end{subfigure}
 	 \hfill
 	 \label{}
 	 \caption{}
 \end{figure}
-Therefore in order to solve this problem we only have to look at $M$ and $m$ and calculate $d=(M-K)-(m+K)$.
-If $d \leq 0$ then it means that we can make all the elements of $I$ equal and the function should return $0$, otherwise we can safely return $d$ as an answer.
+Therefore in order to solve this problem we only have to look at $M$ and $m$ and calculate
+$d=(M-K)-(m+K)$. If $d \leq 0$ then it means that we can make all the elements of $I$ equal and the
+function should return $0$, otherwise we can safely return $d$ as an answer.
 
-You can find an implementation of this idea in Listing \ref{list:smallest_range:solution1} which has $O(|I|)$ time and $O(1)$ space complexity.
+You can find an implementation of this idea in Listing \ref{list:smallest_range:solution1} which has
+$O(|I|)$ time and $O(1)$ space complexity.
+The \inline{std::minmax_element}\footnote{\url{https://en.cppreference.com/w/cpp/algorithm/minmax_element}} function  returns a pair of iterator pointing to the minimum and maximum element of the input range, respectively.
 \lstinputlisting[language=c++, caption={Solution to the \textit{smallest range} problem.},label=list:smallest_range:solution1]{sources/smallest_range/smallest_range_solution1.cpp}
-
 
 
 \section{Common Variations}

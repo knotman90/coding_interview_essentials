@@ -16,7 +16,6 @@ using std::vector;
 // source not in the book. used to test my_lower_bound
 #include "find_k_closest_in_array_solution4.cpp"
 
-
 TEST(find_k_closest_in_array, example1)
 {
   std::vector<int> original = {1, 2, 3, 4, 5};
@@ -32,10 +31,9 @@ TEST(find_k_closest_in_array, example1)
     ASSERT_EQ(expected, ans);
   }
 
- {
-    std::vector<int> I = original;
-    const std::vector<int> ans =
-        kth_closest_in_array_my_lower_bound(I, k, x);
+  {
+    std::vector<int> I         = original;
+    const std::vector<int> ans = kth_closest_in_array_my_lower_bound(I, k, x);
     ASSERT_EQ(expected, ans);
   }
 
@@ -65,10 +63,9 @@ TEST(find_k_closest_in_array, example2)
         kth_closest_in_array_binary_search_lower_bound(I, k, x);
     ASSERT_EQ(expected, ans);
   }
- {
-    std::vector<int> I = original;
-    const std::vector<int> ans =
-        kth_closest_in_array_my_lower_bound(I, k, x);
+  {
+    std::vector<int> I         = original;
+    const std::vector<int> ans = kth_closest_in_array_my_lower_bound(I, k, x);
     ASSERT_EQ(expected, ans);
   }
   {
@@ -98,10 +95,9 @@ TEST(find_k_closest_in_array, example3)
         kth_closest_in_array_binary_search_lower_bound(I, k, x);
     ASSERT_EQ(expected, ans);
   }
- {
-    std::vector<int> I = original;
-    const std::vector<int> ans =
-        kth_closest_in_array_my_lower_bound(I, k, x);
+  {
+    std::vector<int> I         = original;
+    const std::vector<int> ans = kth_closest_in_array_my_lower_bound(I, k, x);
     ASSERT_EQ(expected, ans);
   }
   {
@@ -131,10 +127,9 @@ TEST(find_k_closest_in_array, test1)
         kth_closest_in_array_binary_search_lower_bound(I, k, x);
     ASSERT_EQ(expected, ans);
   }
- {
-    std::vector<int> I = original;
-    const std::vector<int> ans =
-        kth_closest_in_array_my_lower_bound(I, k, x);
+  {
+    std::vector<int> I         = original;
+    const std::vector<int> ans = kth_closest_in_array_my_lower_bound(I, k, x);
     ASSERT_EQ(expected, ans);
   }
   {
@@ -207,12 +202,11 @@ TEST(find_k_closest_in_array, test3)
           kth_closest_in_array_binary_search_lower_bound(I, k, x);
       ASSERT_EQ(expected, ans) << "failed for " << x;
     }
-     {
-    std::vector<int> I = original;
-    const std::vector<int> ans =
-        kth_closest_in_array_my_lower_bound(I, k, x);
-    ASSERT_EQ(expected, ans);
-  }
+    {
+      std::vector<int> I         = original;
+      const std::vector<int> ans = kth_closest_in_array_my_lower_bound(I, k, x);
+      ASSERT_EQ(expected, ans);
+    }
 
     {
       std::vector<int> I         = original;
