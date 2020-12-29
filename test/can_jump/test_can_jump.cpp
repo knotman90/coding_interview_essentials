@@ -73,16 +73,15 @@ TEST(can_jump, random05_one)
 
 TEST(can_jump, random06_impossible)
 {
-  const std::vector<int> N = {5, 2, 1, 3, 4, 5, 1, 3, 4, 0, 2, 1, 5, 2, 3,
-                              4, 0, 2, 3, 5, 1, 4, 0, 0, 2, 3, 4, 5, 1, 2,
-                              3, 4, 5, 0, 1, 5, 2, 3, 1, 4, 0, 0, 3, 1, 0,
-                              3, 4, 1, 5, 3, 0, 4, 2, 0, 4, 1, 5, 2, 3,0,0,0,0,0,0,0,0,0,0};
+  const std::vector<int> N = {
+      5, 2, 1, 3, 4, 5, 1, 3, 4, 0, 2, 1, 5, 2, 3, 4, 0, 2, 3, 5, 1, 4, 0,
+      0, 2, 3, 4, 5, 1, 2, 3, 4, 5, 0, 1, 5, 2, 3, 1, 4, 0, 0, 3, 1, 0, 3,
+      4, 1, 5, 3, 0, 4, 2, 0, 4, 1, 5, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
   ASSERT_FALSE(can_jump_DFS(N));
-  //ASSERT_FALSE(can_jump_DFS_forward_only(N)); //takes too long to complete
+  // ASSERT_FALSE(can_jump_DFS_forward_only(N)); //takes too long to complete
   ASSERT_FALSE(can_jump_linear(N));
 }
-
 
 int main(int argc, char **argv)
 {
