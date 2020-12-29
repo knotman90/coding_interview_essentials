@@ -198,11 +198,13 @@ the number of buckets can be proportional to $|I|$.
 
 
 Listing \ref{list:max_gap:buckets} shows an implementation of this idea where we use the
-\inline{struct Bucket} to model a bucket for which we only need to store three piece of information:
+\inline{struct Bucket} to model a bucket for which we only need to store three pieces of information:
 \begin{enumerate*}
-	\item if the buckets contains at least one elements
-	\item the min
-	\item and the max val \end{enumerate*}. If $|I| < 2$ we can immediately return $0$ as there are
+	\item if the buckets contains at least one elements,
+	\item its minimum
+	\item and the maximum value
+\end{enumerate*}.
+If $|I| < 2$ we can immediately return $0$ as there are
 no possible pairs to calculate the gap for. Otherwise we proceed in calculating $t$ and the number
 of buckets we need. The first loop takes care of filling each of the buckets an element belongs to.
 Notice that we can calculate such index for an element $el$ by using the following expression:
@@ -213,4 +215,4 @@ minimum element of the next non-empty bucket $j > 0$. Once the gap between them 
 can move onto calculating the gap between the next pair of subsequent buckets which will be made of
 the bucket at index $j$ and the first non-empty bucket having index larger than $j$. This process is
 repeated until all pairs of buckets are processed.
-\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using radix-sort.},label=list:max_gap:buckets]{sources/max_gap/max_gap_solution3.cpp}
+\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using bucketing.},label=list:max_gap:buckets]{sources/max_gap/max_gap_solution3.cpp}
