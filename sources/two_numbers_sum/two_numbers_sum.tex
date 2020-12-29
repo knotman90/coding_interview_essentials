@@ -14,7 +14,7 @@
 \section*{Introduction}
 The problem described in this section is possibly one of the most asked during coding interview, nowadays mostly 
 asked during the early online stages of the hiring process as the interviewer pretty much expects you to be at least familiar with the problem.
-The problem is hard enough to require non trivial insight in order to be able to write a non-naive solution for it but at the same time it is not so hard that it would take you 2 hours to come up with something to say to the interviewer.
+The problem is hard enough to require non-trivial insight in order to be able to write a non-naive solution for it but at the same time it is not so hard that it would take you 2 hours to come up with something to say to the interviewer.
 We will have a look at a number of solution, starting from the inefficient bruteforce in Section \ref{sec:two_numbers:bruteforce} to a refined version of it in Section \ref{sec:two_numbers:hashing}.
 In Section \ref{sect:two_number_problem_binary_search} we will have a look at an approach that is based on a idea that is radically different than the one the previous two are based on.
 Finally, Section \ref{sec:two_numbers:twopointers} further refines it into  possibly the best solution in terms of overall time and space complexity.
@@ -235,7 +235,7 @@ pointers, respectively, then:
 \end{itemize}
 
 Listing \ref{list:two_number_sum_two_pointers} shows an implementation of the idea above.  Note that
-this solution has an additional strenght i.e.  it is short and simple to write. 
+this solution has an additional strength i.e.  it is short and simple to write. 
 
 \lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
 
@@ -243,3 +243,86 @@ Despite the oveall complexity is still $O(n log(n))$ this solution is it likely 
 the one presented in Section \ref{sect:two_number_problem_binary_search}, mostly because in this
 case the array is search somehow linearly and not in a scattered way as in the case of binary
 search.
+
+%%%%%%%%%%%%%%%%%%%%%
+\section{Common Variations}
+\subsection{Four number sum problem}
+\label{sec:four_number}
+
+\subsection{Problem statement}
+
+\begin{exercise}
+Write a function that takes four arrays of integers, $A,B,C,D$ and a integer $T$,
+and returns how many distinct tuple $(i,j,k,l)$ where exist such that 
+$A_i+B_j+C_k+D_l = Y$.
+
+\begin{example}
+\hfill \\
+Given:
+	\begin{itemize}
+		\item[-] 	$A=\{1,2\}$,
+		\item[-] 	$B=\{-2,-1\}$,
+		\item[-] 	$C=\{-1,2\}$,
+		\item[-]	$D=\{0,2\}$, and 
+		\item[-] 	$T = 0$
+	\end{itemize}
+The answer is $2$ because the only two valid tuples are:
+\begin{enumerate}
+	\item $(0,0,0,1)$: $A_0 + B_0 + C_0 + D_1 = 1 + (-2) + (-1) + 2 = T = 0$
+	\item $(1,1,0,0)$: $A_1 + B_1 + C_0 + D_0 = 2 + (-1) + (-1) + (-1) = T = 0$
+\end{enumerate}
+\end{example}
+\end{exercise}
+
+\subsection{Na\"ive $O(n^4)$ solution}
+We can solve this problem very easily by using the same approach we have described in Section \ref{sec:two_numbers:bruteforce}.
+The idea is that we can use four nested loops and enumerate all possible 4-elements tuples of indices. Listing \ref{list:two_number_sum_naive} shows how such an idea can be implemented.
+Goes without saying, that this is not the fastest solution we can come up with, considering it has a time complexity of $O(n^4)$
+
+\lstinputlisting[language=c++, caption="Brute force na\"ive solution to the four numbers sum problem.",label=list:two_number_sum_naive]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp}
+
+
+\subsection{$O(n^3)$ solution}
+The trivial solution shown in Listing \ref{list:two_number_sum_naive} can be improved by using a similar reason that lead us improve the brute-force 
+quadratic time solution for the two numbers problem in Listing \ref{list:two_number_sum_bruteforce} to the linear time (and space) in Listing \ref{list:two_number_sum_hashing}.
+The idea is that inner-most loop is searching for a value $x$  s.t. if it summed to $A_i+B_j+C_k$ gives us $T$; in other words: $x+(A_i+B_j+C_k)=T$.
+Therefore $x = T-(A_i+B_j+C_k)$. If there is a way of avoiding a linear search in the array $D$ for such a value, then we could bring down the complexity from $O(n^4)$ to $O(n^3)$.
+
+Thankfully this is possible if we use a hashmap. If we create a hashmap mapping the value of $D$ and to their frequencies the inner-most loop of Listing \ref{list:two_number_sum_naive} can be substituted with a query to the hashmap which 
+runs in constant time. Listing \ref{list:two_number_sum_cubic} shows an implementation of such idea. 
+Notice that in order to obtain the maximum saving in terms of work avoided the arrays are rearranged in such a way so that $D$ 
+is the longest of the four input arrays. 
+\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_cubic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution2.cpp}
+
+
+\subsection{$O(n^2)$ solution using hashing}
+This problem can be however be solved in quadratic time if we use hashmaps again, to hold 
+the frequencies of all the values you can obtain by summing up any two elements of $A$ and $B$ and of $C$ and $D$.
+The key idea is that we can build two hashmaps:
+\begin{itemize}
+	\item $AB$: holding the frequencies of the values obtainable by summing any two elements of $A$ and $B$
+	\item $AB$: holding the frequencies of the values obtainable by summing any two elements of $C$ and $D$.
+\end{itemize}
+The space required for both $AB$ and $CD$ is quadratic, more than the space used by any of the previous solutions, but this extra space
+enable us to solve this problem also in quadratic time. 
+The idea is that we are going to spend $O(n^2)$ time to construct both $AB$ and $CD$
+and then again  $O(n^2)$ to calculate the final answer. 
+by searching into $CD$ for the value $T-y$ where $y$ is an element of $AB$. 
+If such a value exists in $CD$ it means that there exists one element in  $A$ and one in $B$ such that they sum up to $y$ and
+one element $C$ and one in $D$ such that they sum up to $T-y$. Summing all these elements up gives: $y+T-y = T$.
+This approach is shown in Listing \ref{list:two_number_sum_quadratic}. 
+Notice that the first thing we do is to fill $AB$ by looping over all possible pairs of elements from $A$ and $B$.
+We then do the same thing for $CD$, and finally, in the last loop, we take care of calculating the answer by 
+searching, for each element $(k,v)$ of $AB$, where $k$ is the sum obtained by one element of $A$ and one of $B$ and $v$ is the number of ways we can obtain it,
+into $CD$ for the target value $T-k$. If such a value exists into $CD$ then we know we can make $T$. The number of times
+that is possible is dictated by the frequencies of $k$ and of the target value.
+\lstinputlisting[language=c++, caption="Quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
+
+However, you might have already noticed that we do not really need to explicitly create the map $CD$. 
+The idea is that when we create $CD$ we already have all the values of $AB$  and therefore for a given $C_i+D_j$ we can already 
+find out how many pairs in $AB$ exists that we can use to get a total sum of $T$. This optimization does not really change the overall space complexity
+but in practice this mean that we use half the memory and we avoid doing $O(n^2)$ work by eliminating the last loop.
+Listing \ref{list:two_number_sum_quadratic_opti} shows this optimized version.
+
+\lstinputlisting[language=c++, caption="Space optimized quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic_opti]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution4.cpp}
+
