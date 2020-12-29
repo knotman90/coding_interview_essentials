@@ -1,0 +1,1 @@
+../../sources/next_greater_element_2/next_greater_element_2_solution3.cpp
