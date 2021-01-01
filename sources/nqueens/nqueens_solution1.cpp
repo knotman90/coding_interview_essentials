@@ -16,11 +16,10 @@ ChessBoardSnapshot make_chessboard_snapshot(const Solution& solution)
 
 bool is_valid_solution(const Solution& solution)
 {
-
-    const auto sgn = [](auto val) {
-        using T = decltype(val);
-        return (T(0) < val) - (val < T(0));
-    };
+  const auto sgn = [](auto val) {
+    using T = decltype(val);
+    return (T(0) < val) - (val < T(0));
+  };
 
   for (int i = 0; i < std::ssize(solution); i++)
   {
@@ -28,13 +27,14 @@ bool is_valid_solution(const Solution& solution)
     {
       const auto rows_difference = solution[i].first - solution[j].first;
       const auto cols_difference = solution[i].second - solution[j].second;
-      
+
       const bool same_row   = rows_difference == 0;
       const bool same_col   = cols_difference == 0;
       const bool same_diag1 = rows_difference == cols_difference;
-      
-      const bool same_diag2 = std::abs(rows_difference) == std::abs(cols_difference) && 
-                              sgn(rows_difference) != sgn(cols_difference);
+
+      const bool same_diag2 =
+          std::abs(rows_difference) == std::abs(cols_difference)
+          && sgn(rows_difference) != sgn(cols_difference);
       if (same_row || same_col || same_diag1 || same_diag2)
         return false;
     }

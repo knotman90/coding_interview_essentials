@@ -172,8 +172,23 @@ We can prevent this from happening by using the  reusing the idea of placing one
 and by also placing one queen per column. This can be achieved by using 
 one of the $n!$ permutations of the numbers  $0,1,2,\ldots n-1$ as indices to place a queen on each row.
 We can then reject a candidate solution only by looking at the diagonal attacking positions. 
-Listing \ref{} shows an implementation of this idea that uses the 
+Listing \ref{list:nqueens:oneperrowcolumn} shows an implementation of this idea that uses the 
 \inline{std::next_permutation} function to generate the permutations.
+This approach is in practice significantly faster than the ones presented above.
+
+\lstinputlisting[language=c++, caption={Solution to the n-queens problem where we do not place more than one queen on the same row and column.},label=list:nqueens:oneperrowcolumn]{sources/nqueens/nqueens_solution3.cpp}
 
 
-\lstinputlisting[language=c++, caption={Solution to the n-queens problem where we do not place more than one queen on the same row.},label=list:nqueens:oneperrow]{sources/nqueens/nqueens_solution3.cpp}
+
+\subsection{Brute-force Revisited}
+\label{nqueens:sec:bruteforcerevisited}
+The purely bruteforce approach shown in Section \ref{nqueens:sec:bruteforce} can be improved quite dramatically by using an early prunining tecnique that
+does not wait to reject a given arrangements until all the queens are places, but does so as soon as a conflict is found, even on a partial candidate solution.
+Surprisingly this can be achieved with minimal changes to the Listing \ref{list:nqueens:bruteforce} by adding a call to 
+\inline{is_valid_solution(sol_candidate)} every-time an element is added to the candidate solution list.
+Listing \ref{list:nqueens:bruteforcerevised} shows how this modified version of the brute-force approach above can be implemented.
+Notice that the function \inline{can_add_queen} is pretty much a copy and paste of the function \inline{is_valid_solution} with the (crucial)
+difference that it only checks whether is it legal to add a queen at the position specified by its second argument when you have already a number of queens placed in the board which positions are defined in its first parameter.
+This solution has performance that are very much comparable to the fastest one shown in this chapter, Listing \ref{list:nqueens:oneperrowcolumn}.
+
+\lstinputlisting[language=c++, caption={Revised brute-force solution to the n-queens problem optimized by using  an early prunining tecnique.},label=list:nqueens:bruteforcerevised]{sources/nqueens/nqueens_solution4.cpp}
