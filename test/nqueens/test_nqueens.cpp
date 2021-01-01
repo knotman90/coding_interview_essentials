@@ -14,12 +14,33 @@ using std::vector;
 
 
 
+TEST(nqueens, testFrom1To6OnePerRow)
+{
+	
+    
+    EXPECT_EQ(1,nqueen_one_per_row(1).size());
+    
+    EXPECT_EQ(0,nqueen_one_per_row(2).size());
 
-TEST(nqueens, testFrom1To6)
+    EXPECT_EQ(0,nqueen_one_per_row(3).size());
+
+    EXPECT_EQ(2,nqueen_one_per_row(4).size());
+
+    EXPECT_EQ(10,nqueen_one_per_row(5).size());
+
+    EXPECT_EQ(4,nqueen_one_per_row(6).size());
+
+    EXPECT_EQ(40,nqueen_one_per_row(7).size());
+
+}
+
+
+TEST(nqueens, testFrom1To6_bruteforce)
 {
 	
     
 	EXPECT_EQ(1,nqueen_bruteforce(1).size());
+    EXPECT_EQ(1,nqueen_one_per_row(1).size());
     
     EXPECT_EQ(0,nqueen_bruteforce(2).size());
 
@@ -31,7 +52,6 @@ TEST(nqueens, testFrom1To6)
 
     EXPECT_EQ(4,nqueen_bruteforce(6).size());
 
-    EXPECT_EQ(40,nqueen_bruteforce(7).size());
 
 }
 
