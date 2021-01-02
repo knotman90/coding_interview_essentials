@@ -17,6 +17,7 @@ bin/
 *.fot
 *.cb
 *.cb2
+*.orig
 
 ## Intermediate documents:
 *.dvi

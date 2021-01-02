@@ -1,0 +1,1 @@
+../../../sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp

@@ -9,7 +9,7 @@ using std::string;
 using std::swap;
 using std::vector;
 
-#include "generate_combinations.h"
+#include "generate_combination.h"
 #include "min_difficulty_job_scheduler_solution1.cpp"
 #include "min_difficulty_job_scheduler_solution2.cpp"
 #include "min_difficulty_job_scheduler_solution3.cpp"
@@ -104,13 +104,6 @@ TEST(min_difficulty_job_scheduler, example3)
       auto actual        = min_difficulty_scheduler_DP_bottomup(I, d);
       ASSERT_EQ(expected, actual) << "failed for days = " << d;
     }
-
-      {
-      auto [d, expected] = test_data;
-      auto actual        = min_difficulty_scheduler_DP_bottomup_mem_optimized(I, d);
-      ASSERT_EQ(expected, actual) << "failed for days = " << d;
-    }
-
   }
 }
 

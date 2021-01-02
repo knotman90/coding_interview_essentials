@@ -31,7 +31,6 @@ TEST(square_in_matrix, test1)
   EXPECT_EQ(expected, maximal_square_in_matrix_top_down(M));
 }
 
-
 TEST(square_in_matrix, test2)
 {
   const std::vector<std::vector<int>> M = {
@@ -48,15 +47,14 @@ TEST(square_in_matrix, test2)
   EXPECT_EQ(expected, maximal_square_in_matrix_top_down(M));
 }
 
-
 TEST(square_in_matrix, test3)
 {
   const std::vector<std::vector<int>> M = {
-      {0,0,0,0,0,0},
-      {0,0,0,0,0,0},
-      {0,0,0,0,0,0},
-      {0,0,0,0,0,0},
-      {0,0,0,0,0,0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0},
   };
   constexpr int expected = 0;
 
@@ -69,14 +67,14 @@ TEST(square_in_matrix, test3)
 TEST(square_in_matrix, test4)
 {
   const std::vector<std::vector<int>> M = {
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
   };
   constexpr int expected = 64;
 
@@ -89,14 +87,14 @@ TEST(square_in_matrix, test4)
 TEST(square_in_matrix, test5)
 {
   const std::vector<std::vector<int>> M = {
-      {0,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
+      {0, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
   };
   constexpr int expected = 49;
 
@@ -109,14 +107,14 @@ TEST(square_in_matrix, test5)
 TEST(square_in_matrix, test6)
 {
   const std::vector<std::vector<int>> M = {
-      {0,1,1,1,1,1,1,0},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {1,1,1,1,1,1,1,1},
-      {0,1,1,1,1,1,1,0},
+      {0, 1, 1, 1, 1, 1, 1, 0},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1, 1, 1, 1},
+      {0, 1, 1, 1, 1, 1, 1, 0},
   };
   constexpr int expected = 36;
 
@@ -129,7 +127,7 @@ TEST(square_in_matrix, test6)
 TEST(square_in_matrix, test7)
 {
   const std::vector<std::vector<int>> M = {
-      {0,1,1,1,1,1,1,0},
+      {0, 1, 1, 1, 1, 1, 1, 0},
   };
   constexpr int expected = 1;
 
@@ -138,7 +136,6 @@ TEST(square_in_matrix, test7)
   EXPECT_EQ(expected, maximal_square_in_matrix_bottom_up(M));
   EXPECT_EQ(expected, maximal_square_in_matrix_top_down(M));
 }
-
 
 TEST(square_in_matrix, test8)
 {
@@ -159,8 +156,6 @@ TEST(square_in_matrix, test8)
   EXPECT_EQ(expected, maximal_square_in_matrix_bottom_up(M));
   EXPECT_EQ(expected, maximal_square_in_matrix_top_down(M));
 }
-
-
 
 int main(int argc, char **argv)
 {

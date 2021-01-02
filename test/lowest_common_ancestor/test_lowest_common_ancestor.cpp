@@ -20,12 +20,13 @@ using Node = Book::BinaryTree::Node<T>;
 TEST(lowest_common_ancestor, test1)
 {
   using Book::BinaryTree::Direction;
-  auto root = Book::BinaryTree::from_arcs_and_values<int>(3,
-                                                          {
-                                                              {0, Direction::Left, 1},
-                                                              {0, Direction::Right, 2},
-                                                          },
-                                                          {2, 1, 3});
+  auto root =
+      Book::BinaryTree::from_arcs_and_values<int>(3,
+                                                  {
+                                                      {0, Direction::Left, 1},
+                                                      {0, Direction::Right, 2},
+                                                  },
+                                                  {2, 1, 3});
 
   for (std::tuple<int, int, int> value : {
            std::make_tuple(1, 3, 2),
@@ -78,8 +79,9 @@ TEST(lowest_common_ancestor, example1)
           {21, Direction::Right, 44},  // 10
 
       },
-      {13, 3, 14, 1, 4, 0, 18, 0, 2, 0, 12, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0,  0, 0,  0, 0, 0, 0,  0, 0, 0, 0,  5, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0});
+      {13, 3, 14, 1, 4, 0, 18, 0, 2, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       10, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0,  5, 11, 0, 0, 0, 0,  0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
 
   for (std::tuple<int, int, int> value : {
            std::make_tuple(3, 14, 13),
