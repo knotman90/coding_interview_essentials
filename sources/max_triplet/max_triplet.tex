@@ -67,27 +67,47 @@ $ 0 \leq i < j < k \leq n-1$ and $ A_i < A_j < A_k $.
 	\end{answered}
 	\item  Is it guaranteed the answer to fit a standard \inline{int}?
 	\begin{answered}
-		\textit{Yes you can assume the max possible value always fits a standard $4$-bytes \inline{int}}
+		\textit{Yes you can assume the the answer always fits a standard $4$-bytes \inline{int}}
 	\end{answered}
 \end{QandA}
 
 \section{Discussion}
 \label{max_triplet:sec:discussion}
-The problem is asking us to find the largest possible sum obtainable by selecting and summing up together
+The problem is asking us to find the largest possible sum obtainable by summing up
 three distinct elements of $I$ with the additional constraint that when ordered according to their indices 
 they form a sorted sequence. 
-You can form such a triplet by selecting an element $i$,
-then another element $j$ such that it appears after and it is larger the element at position $i$ ($j>i$)  and finally the third one, say at index $k$
-which appears after and it is larger the element in position $j$ ($k>j$).
+You can form such a triplet by selecting an element at index $i$,
+then another element at index $j$ that it appears after and it is larger than the element at position $i$  
+and finally, a third element at index $k$ which appears after and it is larger than the element at index $j$.
 
 \section{Brute-force}
 \label{max_triplet:sec:bruteforce}
-One way of solving this problem trivially is to try all possible triplets in a brute-force manner and keep track of the triplets yielding the maximum value.
-Three simple nested loops are enough to implement this idea, as shown in Listing \ref{list:max_triplet_bruteforce}. 
-The time complexity of this approach is $(O(|I|^3)$ which is unfortunately far from being optimal.
+We can solve this problem trivially in a brute-force manner by trying all possible triplets of ordered indices $i < j <k$
+and keep track of the triplet yielding the maximum value.
+Three simple nested loops are enough to implement this idea, as shown in Listing \ref{list:max_triplet_bruteforce}.
+The time complexity of this approach is $(O(|I|^3)$ which is far from being optimal.
+The space complexity is $O(1)$ as no additional space is used.
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:max_triplet_bruteforce]{sources/max_triplet/max_triplet_solution1.cpp}
+\lstinputlisting[language=c++, caption={Cubic time complexity bruteforce solution.},label=list:max_triplet_bruteforce]{sources/max_triplet/max_triplet_solution1.cpp}
 
 
 \section{Precalculation and Binary Search}
+The cubic time complexity approach discussed in Section \ref{max_triplet:sec:bruteforce}
+can be dramatically improved if we approach the problem a little differently. 
+Imagine we would be able to efficiently $L_j$ and $G_j$ for an element at index $j$ where :
+\begin{enumerate}
+	\item $L_j$ is the largest value of any of the elements of $I$ appearing at any index smaller than $j$ and it is smaller than $I_j$ and,
+	\item $G_j$ is the largest value among any of the elements of $I$ appearing at any index higher than $j$ and it is larger than $I_J$.
+\end{enumerate}
+When these value are available we can calculate the value of the largest sum obtainable by any triplet having the $I_j$  as the middle element.
+The triplet $(L_j, I_j, G_j)$ yield the largest sum as if that was not the case it means that either exists a larger element than $L_j$ that is smaller than $I_j$ in any of the positions before $j$
+or that exists an element that is larger than $G_j$  in any of the positions after $j$. Both of these two scenarios are impossible  because $L_j$ is by definition the largest element 
+that is smaller than $I_j$ and appears before index $j$  and similarly,  $G_j$ is defined to be the largest element appearing after index $j$ and that is larger than $I_j$.
+
+We can use this fact to calculate the answer to this problem by looping over $I$ and for each element $I_j$ calculate $L_j+ I_j+ G_j$. The largest of the sums calculated this way is the final answer.
+But how can we calculate $L_j$ and $G_j$ for $I_j$?
+
+$L_j$ can be calculated efficiently by keeping a sorted list of all the values appearing before index $j$ and use binary search to find $L_j$ in the list while $G_j$ can be precalculated
+in a similar fashion to what we have done for the problem in Chapter \ref{ch:greatest_right}.
+
 \lstinputlisting[language=c++, caption={$O(nlog(n))$ solution to the max triplet sum problem.},label=list:max_triplet]{sources/max_triplet/max_triplet_solution2.cpp}

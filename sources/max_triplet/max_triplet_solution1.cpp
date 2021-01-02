@@ -6,12 +6,15 @@ int max_triplet_sum_bruteforce(const std::vector<int>& I)
     {
         for(int j = i+1 ; j < n ; j++)
         {
+            if(!(I[i] < I[j]))
+                continue;
+
             for(int k = j+1 ; k < n ; k++)
             {
-                if((I[i] < I[j]) && (I[j] < I[k]) )
-                {
-                    ans = std::max(ans,I[i]+I[j]+I[k] );
-                }
+                if(!(I[j] < I[k]) )
+                    continue;
+                //here: i < j < k and I[i] < I[j] < I[k]
+                ans = std::max(ans,I[i]+I[j]+I[k] );
             }
         }
     }
