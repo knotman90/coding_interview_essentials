@@ -13,15 +13,15 @@ int max_triplet_sum_prefix_binary_search(const vector<int> &A) {
     std::vector<int> L;
     
     L.resize(A.size(), MIN_INT);
-    int m = A[A.size()-1];
-    for(int i = A.size()-2 ; i >=0 ; i--)
+    int M = A[A.size()-1];
+    for(int i = std::ssize(A)-2 ; i >=0 ; i--)
     {
-        L[i] = A[i] < m ? m : MIN_INT;
-        m = std::max(A[i], m);
+        L[i] = A[i] < M ? M : MIN_INT;
+        M = std::max(A[i], M);
     }
     
     int ans = -1;
-    for(int i = 0 ; i < A.size(); i++)
+    for(size_t i = 0 ; i < A.size(); i++)
     {
         auto larger = L[i];
         auto [smaller, exists] = find_largest_smaller_than(N,A[i]);
