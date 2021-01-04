@@ -17,8 +17,18 @@ using std::vector;
 
 TEST(next_greater_element, test1)
 {
-	
-	EXPECT_EQ(0,1);
+	const std::vector<int> A = {4,1,2};
+    const std::vector<int> B = {1,3,4,2};
+    const std::vector<int> expected = {-1,2,-1};
+	{
+    auto ans = next_greater_element_I_bruteforce(A,B);
+    EXPECT_EQ(expected, ans);
+    }
+
+    {
+    auto ans = next_greater_element_I_set(A,B);
+    EXPECT_EQ(expected, ans);
+    }
 }
 
 int main(int argc, char **argv) {
