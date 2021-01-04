@@ -38,7 +38,7 @@ each of the elements $-K \leq p \leq K$.
 		\label{example:smallest_range:example2}
 		\hfill \\
 		Given $I = \{1,9,4\}$ and $K=2$ the function returns $4$.
-	\end{example}
+	\end{example} 
 \end{exercise}
 
 \section{Clarification Questions}
@@ -223,18 +223,19 @@ Listing \ref{list:smallest_range:solution2} shows an implementation of this idea
 the code, $m'$ is \inline{m_new} and $M'$ is \inline{M_new}.
 \lstinputlisting[language=c++, caption={Solution to the \textit{smallest range} problem using sorting.},label=list:smallest_range:solution2]{sources/smallest_range/smallest_range_solution2.cpp}
 
-\begin{figure}
-	\centering
-	\vspace{-0.5in}
-	
+\begin{figure}[bp!]
+	\centering	
 	\begin{subfigure}[t]{0.99\textwidth}
 			\centering
 			\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars2}
 			\caption{$j=0$}
 			\label{fig:smallest_range:bars2}
 	\end{subfigure}
-	
-	\begin{subfigure}[t]{0.99\textwidth}
+\end{figure}
+
+\begin{figure}\ContinuedFloat
+	\vspace{-0.5in}
+	\begin{subfigure}{0.99\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars3}
 		\caption{$j=1$}
@@ -243,25 +244,23 @@ the code, $m'$ is \inline{m_new} and $M'$ is \inline{M_new}.
 
 	
 	\medskip
-	\begin{subfigure}[t]{0.99\textwidth}
+	\begin{subfigure}{0.99\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars4}
 		\subcaption{$j=1$}
 		\label{fig:smallest_range:bars4}
 	\end{subfigure}
-\end{figure}
 
-
-\begin{figure}\ContinuedFloat
-	\begin{subfigure}[t]{0.99\textwidth}
+	\begin{subfigure}{0.99\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars5}
 		\caption{$j=1$}
 		\label{fig:smallest_range:bars5}
 	\end{subfigure}
+\end{figure}
 
-	\medskip
-	\begin{subfigure}[t]{0.99\textwidth}
+\begin{figure}\ContinuedFloat
+	\begin{subfigure}{0.99\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars6}
 		\caption{$j=1$}
