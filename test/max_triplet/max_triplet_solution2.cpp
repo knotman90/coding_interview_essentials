@@ -1,0 +1,1 @@
+../../sources/max_triplet/max_triplet_solution2.cpp

@@ -1,0 +1,1 @@
+../../sources/nqueens/nqueens_solution1.cpp
