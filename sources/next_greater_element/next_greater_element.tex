@@ -17,31 +17,27 @@
 \section{Problem statement}
 \begin{exercise}
 \label{example:next_greater_element:exercice1}
-Write a function that given two arrays with no duplicates $A$ and $B$ 
-where $A \subset B$
-returns an array $C$ of size $|A|$ where $C_i$ 
-contains the next greater element of $A_i$ among the elements of $B$.
-The next greater element of a number $A_i$ is defined
-as the smallest element greater than $A_i$ among the elements of 
-$B$ from index $j$ to $|B|-1$ where $B_j = A_i$
+Write a function that given two arrays with no duplicates $A$ and $B$ where $A \subset B$ returns an
+array $C$ of size $|A|$ where $C_i$ contains the next greater element of $A_i$ among the elements of
+$B$. The next greater element of a number $A_i$ is defined as the smallest element greater than
+$A_i$ among the elements of $B$ from index $j$ to $|B|-1$ where $B_j = A_i$
 
-In other words, for each $A_i$ the function 
-finds the smallest element in $B$ that is greater than $A_i$ 
-among the cells that are to the right
-of the cell in $B$ having the value $A_i$ and places it into 
-$C$ at index $i$.
+In other words, for each $A_i$ the function finds the smallest element in $B$ that is greater than
+$A_i$ among the cells that are to the right of the cell in $B$ having the value $A_i$ and places it
+into $C$ at index $i$.
 
 	%example1
 	\begin{example}
 		\label{example:next_greater_element:example1}
 		\hfill \\
-		Given $A=\{4,1,2\}$ and $B=\{1,3,4,2\}$ the function returns $C=\{-1,2,-1\}$.
-		$C_0 = -1$ because there $A_0 = 4$ appears in $B$ at index $2$ 
-		and there is no cells to the right of $B_2$ that is strictly greater than $4$.
-		$C_1 = 2$ because $1$ appears in $B$ at index $0$ and the smallest element larger than $1$ after index $0$ in $B$ is the element $2$ in the last position.
-		$C_2 = -1$ because $A_2 = 2$ appears in $B$ at index $3$ and there is no element ot the right of it.
-		Note that there exists a value in $B$ that is larger than $2$ but we are not considering it because it appears to the left
-		of the cell in $B$ holding value $A_2=2$.
+		Given $A=\{4,1,2\}$ and $B=\{1,3,4,2\}$ the function returns $C=\{-1,2,-1\}$. $C_0 = -1$
+		because there $A_0 = 4$ appears in $B$ at index $2$ and there is no cells to the right of
+		$B_2$ that is strictly greater than $4$. $C_1 = 2$ because $1$ appears in $B$ at index $0$
+		and the smallest element larger than $1$ after index $0$ in $B$ is the element $2$ in the
+		last position. $C_2 = -1$ because $A_2 = 2$ appears in $B$ at index $3$ and there is no
+		element ot the right of it. Note that there exists a value in $B$ that is larger than $2$
+		but we are not considering it because it appears to the left of the cell in $B$ holding
+		value $A_2=2$.
 		
 	\end{example}
 
@@ -49,13 +45,14 @@ $C$ at index $i$.
 	\begin{example}
 		\label{example:next_greater_element:example2}
 		\hfill \\
-		Given $A=\{2,4\}$ and $B=\{9,2,1,4,12,8\}$ the function returns $C=\{4,8\}$.
-		$C_0 = 4$ because there $A_0 = 2$ appears in $B$ at index $1$ 
-		and  the smallest element larger than $2$ in $B$ from the cell to the right of the one at index $1$ is $4$.
+		Given $A=\{2,4\}$ and $B=\{9,2,1,4,12,8\}$ the function returns $C=\{4,8\}$. $C_0 = 4$
+		because there $A_0 = 2$ appears in $B$ at index $1$ and  the smallest element larger than
+		$2$ in $B$ from the cell to the right of the one at index $1$ is $4$.
 		
-		$C_1 = 8$ because there $A_0 = 4$ appears in $B$ at index $3$ 
-		and  the smallest element larger than $2$ in $B$ from the cell to the right of the one at index $3$ is $8$, appearing at the very end of $B$.
-		Notice that $12$ is also larger than $4$ and appearing to the right of the index $3$ but is not the right answer because it is not the smallest.
+		$C_1 = 8$ because there $A_0 = 4$ appears in $B$ at index $3$ and  the smallest element
+		larger than $2$ in $B$ from the cell to the right of the one at index $3$ is $8$, appearing
+		at the very end of $B$. Notice that $12$ is also larger than $4$ and appearing to the right
+		of the index $3$ but is not the right answer because it is not the smallest.
 	\end{example}
 \end{exercise}
 
@@ -69,17 +66,51 @@ $C$ at index $i$.
 	
 \end{QandA}
 
-\section{Discussion}
-\label{next_greater_element:sec:discussion}
-
-
 \subsection{Brute-force}
 \label{next_greater_element:sec:bruteforce}
+This problem has a very intuitive brute-force solution that basically consists in 
+\begin{itemize}
+	\item looping through each element at index $i$ of $A$
+	\item finding the position $j$ in $B$ where the value $A_i$ appear i.e. $B_j = A_i$ (which
+	exists because $A \subset B$)
+	\item find the smallest element larger than $A_i$ in $B$ only considering the positions strictly
+	after $j$.
+\end{itemize}
+An implementation of this approach is shown in Listing \ref{list:next_greater_element:bruteforce} where we use
+\inline{std::find} to the location in $B$ (the iterator \inline{it}) where $A_j$ exists. The
+subsequent \inline{while} is used to scan the remaining of the array and to keep track of the
+smallest element that is larger than $A_i$. The complexity of this approach is $O(|A| \times |B|)$
+as we could potentially do linear  work (in $|B|$) for each and every element of $A$. One of such
+case is when the elements of $A$ appear in the first positions of $B$. 
+\lstinputlisting[language=c++, caption={Brute-force solution to the \textit{next smaller element}.},label=list:next_greater_element:bruteforce]{sources/next_greater_element/next_greater_element_solution1.cpp}
 
 
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:next_greater_element]{sources/next_greater_element/next_greater_element_solution1.cpp}
+\section{$O(nlog(n))$ time, $O(1)$ space}
+\label{next_greater_element:sec:lineartime}
+We can solve this problem much faster than quadratic time if we are willing to use some additional
+space. In particular the problem would be easily solved if we would have a map containing the
+information about the next greater element for each of the elements of $B$. We could simply loop
+over all the elements of $A$ and query such map to get the required answer. However the problem is,
+how can we generate such map?
+
+The idea is that we can fill the map for each element of $B$ starting from the back. We can also
+keep a sorted list of all the elements of $B$ that we have already processed and use it to find
+quickly the upper bound for a given value. The upper bound for an integer $x$ is the first (or
+smallest) element in a collection that is strictly larger than $x$. The upper bound operation can be
+easily implemented on a sorted collection using binary search. We have already implemented a similar operation (the lower bound)
+in Chapter \ref{ch:find_k_closest_in_array} and you can check Listing \ref{list:find_k_closest_in_array:binary_lower_bound} (at page \pageref{list:find_k_closest_in_array:binary_lower_bound})
+to have an idea of how you can go about brewing  your own version of \inline{upper_bound}.
 
 
+Listing \ref{list:next_greater_element:set} implements this idea. The \inline{std::set<int> N} contains the sorted list of
+elements of $B$ that we have already processed while the \inline{std::unordered_map<int,int> C_val}
+contains the information about the upper bounds for each of the processed elements of $B$. The first
+\inline{for} goes through each element $j$ of $B$ from the back of it to the front and calculates
+the answer for $B_j$ by looking into the sorted \inline{std::set} $N$\footnote{Note that we do not
+use the free standing function \href{https://en.cppreference.com/w/cpp/algorithm/upper_bound}{\inline{std::upper_bound}} because on non linear data structures (like
+\inline{std::set} it operates in linear time instead of logaritmic time.)}.
+The second \inline{for} loop only takes care of copying the relevant information from the map \inline{C_val} to the return array.
+The time and space complexity of this code are $O(|B|log(|B|))$ (each of the $|B|$ insertions in $N$ costs $O(log(|B|)$) and $O(|B|)$, respectively.
 
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:next_greater_element]{sources/next_greater_element/next_greater_element_solution2.cpp}
+\lstinputlisting[language=c++, caption={$O(nlog(n))$ time and linear space solution.},label=list:next_greater_element:set]{sources/next_greater_element/next_greater_element_solution2.cpp}
 
