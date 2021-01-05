@@ -85,13 +85,13 @@ case is when the elements of $A$ appear in the first positions of $B$.
 \lstinputlisting[language=c++, caption={Brute-force solution to the \textit{next smaller element}.},label=list:next_greater_element:bruteforce]{sources/next_greater_element/next_greater_element_solution1.cpp}
 
 
-\section{$O(nlog(n))$ time, $O(1)$ space}
-\label{next_greater_element:sec:lineartime}
+\section{$O(|B|log(|B|))$ time, $O(|B|)$ space}
+\label{next_greater_element:sec:nlogntime}
 We can solve this problem much faster than quadratic time if we are willing to use some additional
 space. In particular the problem would be easily solved if we would have a map containing the
 information about the next greater element for each of the elements of $B$. We could simply loop
-over all the elements of $A$ and query such map to get the required answer. However the problem is,
-how can we generate such map?
+over all the elements of $A$ and query such a map to get the required answer. However the problem is,
+how can we generate such a map?
 
 The idea is that we can fill the map for each element of $B$ starting from the back. We can also
 keep a sorted list of all the elements of $B$ that we have already processed and use it to find
@@ -108,9 +108,107 @@ contains the information about the upper bounds for each of the processed elemen
 \inline{for} goes through each element $j$ of $B$ from the back of it to the front and calculates
 the answer for $B_j$ by looking into the sorted \inline{std::set} $N$\footnote{Note that we do not
 use the free standing function \href{https://en.cppreference.com/w/cpp/algorithm/upper_bound}{\inline{std::upper_bound}} because on non linear data structures (like
-\inline{std::set} it operates in linear time instead of logaritmic time.)}.
+\inline{std::set} it operates in linear time instead of logarithmic time.)}.
 The second \inline{for} loop only takes care of copying the relevant information from the map \inline{C_val} to the return array.
 The time and space complexity of this code are $O(|B|log(|B|))$ (each of the $|B|$ insertions in $N$ costs $O(log(|B|)$) and $O(|B|)$, respectively.
 
 \lstinputlisting[language=c++, caption={$O(nlog(n))$ time and linear space solution.},label=list:next_greater_element:set]{sources/next_greater_element/next_greater_element_solution2.cpp}
 
+\section{Common Variation}
+\subsection{First next greater element}
+\label{next_greater_element:sec:first}
+There is a common variation of this problem featuring an almost identical statement to the one shown in Section \ref{}
+with the only difference being that for an element of $A_i$ we should return the first (and not the necessarily the smallest like in the original variant)
+element in $B$ that is greater than $A_i$.
+
+\begin{exercise}
+	\label{example:next_greater_element:exercice2}
+	Write a function that given two arrays with no duplicates $A$ and $B$ where $A \subset B$ returns an
+	array $C$ of size $|A|$ where $C_i$ contains the first element greater than $A_i$ among the elements of $B$ 
+	strictly after the cell at index $j$, where $B_j = A_i$.
+	
+	In other words, for each $A_i$ the function finds the first element in $B$ that is greater than
+	$A_i$ among the cells that are to the right of the cell in $B$ having the value $A_i$ and places it
+	into $C$ at index $i$.
+
+\end{exercise}
+
+\section{Discussion}
+\label{next_greater_element:sec:variation1:discussion}
+The difference with the original variation is minimal but is big enough so that we have a linear time solution for this problem. 
+While to solve the original problem  we were forced to keep a sorted list of all the already processed elements of $B$ this time we can 
+simply keep a stack of where we keep only those processed elements of $B$ forming an increasing sequence.
+
+Suppose we have a decreasing sequence followed by a greater number: 
+For example, consider the following list: $\{8,7,5, 4, 3, 2, 1, 6\}$;  when we process the $6$, at the beginning, the stack is empty and therefore $6$ has no
+greater element at all on its right. Because the stack is empty, adding $6$ to it would still preserve the fact that the numbers contained in it form an increasing sequence.
+
+When the $1$ is processed, then the stack is not empty and $6$ is at the top and is larger than $1$. Therefore we can use $6$ as an answer for $1$ and add $1$ to the stack
+because the sequence $1,6$ is still increasing. 
+Things however, are a bit different when $2$ is processed. This time the top of the stack is a $2$.
+ the greater number 6 is the next greater element for all previous numbers in the sequence
+
+
+
+
+ \begin{figure}
+	\vspace*{-0.5in}
+	\centering
+	\begin{subfigure}[t]{0.49\textwidth}
+		\begin{framed}
+			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack1}
+		\end{framed}
+		\caption{}
+		\label{fig:next_greater:variation1:stack1}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.49\textwidth}
+		\begin{framed}
+			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack2}
+		\end{framed}
+		\caption{}
+		\label{fig:next_greater:variation1:stack1}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.49\textwidth}
+		\begin{framed}
+			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack3}
+		\end{framed}
+		\caption{}
+		\label{fig:next_greater:variation1:stack1}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.49\textwidth}
+		\begin{framed}
+			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack4}
+		\end{framed}
+		\caption{}
+		\label{fig:next_greater:variation1:stack1}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.49\textwidth}
+		\begin{framed}
+			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack5}
+		\end{framed}
+		\caption{}
+		\label{fig:next_greater:variation1:stack1}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.49\textwidth}
+		\begin{framed}
+			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack6}
+		\end{framed}
+		\caption{}
+		\label{fig:next_greater:variation1:stack1}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.49\textwidth}
+		\begin{framed}
+			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack7}
+		\end{framed}
+		\caption{}
+		\label{fig:next_greater:variation1:stack1}
+	 \end{subfigure}
+	 \caption[]{}
+	  \label{fig:cycle_in_list:floyd}
+\end{figure}
