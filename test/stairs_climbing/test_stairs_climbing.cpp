@@ -6,7 +6,8 @@
 
 using std::string;
 
-TEST(stairs_climbing, test1_2_fibonacci) {
+TEST(stairs_climbing, test1_2_fibonacci)
+{
   std::vector<int> expected = {
       1, 1, 2}; /*, 2, 3, 5, 8, 13, 21, 34, 55, 89,
                                   144, 233, 377, 610, 987, 1597, 2584, 4181,
@@ -14,13 +15,15 @@ TEST(stairs_climbing, test1_2_fibonacci) {
                                   121393, 196418, 317811};*/
 
   const std::vector<int> step_sizes = {1, 2};
-  for (int i = 2; i < expected.size(); i++) {
+  for (int i = 2; i < expected.size(); i++)
+  {
     EXPECT_EQ(expected[i], stair_climbing_fibonacci(i));
     EXPECT_EQ(expected[i], stair_climbing_arbitrary(i, step_sizes));
   }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

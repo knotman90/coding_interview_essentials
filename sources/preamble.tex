@@ -583,6 +583,8 @@ innerbottommargin=5pt]{cBox}
 \usepackage{framed}
 \newcommand*{\mybox}[1]{\framebox{#1}}
 
+%Roman numbers
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
 
 \renewcommand{\thefootnote}{\textit{\alph{footnote}}}
 \usepackage{pifont}
@@ -603,3 +605,11 @@ innerbottommargin=5pt]{cBox}
 \makeglossaries
 
 \usepackage{siunitx}
+
+\usepackage{xskak}
+\usepackage{chessboard}
+\newcounter{chessex}
+\newcommand\printchessex{\refstepcounter{chessex}Chessboard \thechessex}
+
+
+\DeclareMathOperator{\sign}{sign}
