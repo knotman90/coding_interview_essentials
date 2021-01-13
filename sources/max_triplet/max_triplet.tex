@@ -18,7 +18,7 @@
 \label{example:max_triplet:exercice1}
 Write a function that, given an array $I$ of length $n$, returns the maximum value obtainable by
 summing $3$ distinct elements of $I$: $I_i$, $I_j$ and $I_k$ such that $ 0 \leq i < j < k \leq n-1$
-and $ A_i < A_j < A_k $.
+and $ I_i < I_j < I_k $.
 
 
 	%example1
@@ -72,7 +72,6 @@ The problem is asking us to find the largest possible sum obtainable by summing 
 elements of $I$ with the additional constraint that when ordered according to their indices they
 form a sorted sequence. You can form such a triplet by selecting an element at index $i$, then
 another element at index $j$ that it appears after and it is larger than the element at position $i$
-
 and finally, a third element at index $k$ which appears after and it is larger than the element at
 index $j$.
 
