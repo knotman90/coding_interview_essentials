@@ -75,13 +75,15 @@ this line of reasoning until we reach $0$, which clearly has zero bits set.
 
 Because every time we remove a bit we are solving a problem for a smaller number, and because the
 solution for a number $x$ can be required counting the bits of many numbers $n>x$, we can adopt
-DP\ref{sect:appendix:DP} (it exposes optimal substructures as well as overlapping subproblems). In a
+DP(see Appendix \ref{sect:appendix:DP}) (it exposes optimal substructures as well as overlapping subproblems). In a
 DP solution we will use  a DP table $B$, which we initially fill only for the number $0$. We will
-then follow a bottom-up approach where we start solving problems from $x=1,2,\ldots,n$. When we
-reach a given number $y$ we have already solved and stored into $B$ the answer for every number less
-than $y$, therefore we can count the number of bits in $y$! Moreover because the answers for all of
-these numbers smaller than $y$ are stored in $B$ we do not need to recompute them. Listing
-\ref{list:count_bits:DP} shows an implementation of this approach. You can find a shorter (three
+then follow a bottom-up approach where we start solving problems for $x=1,2,\ldots,n$. When we
+reach a given number $y$ we have already solved and stored into $B$ the answers for every number less
+than $y$, therefore we can count the number of bits in $y$.
+Moreover because the answers for all of
+these numbers smaller than $y$ are stored in $B$ we do not need to recompute them. 
+
+Listing \ref{list:count_bits:DP} shows an implementation of this approach. You can find a shorter (three
 lines) and more compact (and possibly unreadable) but yet equivalent version of the same idea in
 Listing \ref{list:count_bits:DP_short}.
 
