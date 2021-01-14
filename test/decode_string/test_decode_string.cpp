@@ -32,6 +32,11 @@ TEST(decode_string, test1)
           auto ans = decode_string(input);
           EXPECT_EQ(expected, ans) << "failed for "<<input;
       }
+
+       {
+          auto ans = decode_string_recursive(input);
+          EXPECT_EQ(expected, ans) << "failed for "<<input;
+      }
   }
 }
 
