@@ -3,7 +3,6 @@ std::string decode_string(const std::string& s)
     std::stack<std::pair<int,std::string>> stack;
     stack.push({1, std::string()});
     size_t i = 0;
-
     int rep_f = 0;
     while(i < s.size())
     {

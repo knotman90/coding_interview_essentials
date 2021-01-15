@@ -9,28 +9,25 @@
 %\begin{figure} \centering \includegraphics[width=\textwidth]{sources/decode_string/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:decode_string:example1} \end{figure}
 
-\chapter{Ways of decoding a message}
+\chapter{Decode the message}
 \label{ch:decode_string}
 \section*{Introduction}
 This problem resemble the problem of decoding a string encoded with the famous \textit{run-length
-encoding method}(RLE)\footnote{It is a simple form of data compression in
-which a stream of data is given (like the following string "AAABBCCCC") 
-and the output is a sequence of	counts of consecutive data values in a row. 
-(i.e. "3A2B4C").
-It is a type of lossless encoding meaning that the encoding process does not lose any information in the 
-original input and therefore the input data can be recovered fully and integrally.
-decoded.} 
-
-The problem discussed in this chapter is going to deal with a similar algorithm and you are asked to write a 
-decode function for a string encoded with a run-length-encoding-like algorithm.
+encoding method}(RLE)\footnote{It is a simple form of data compression in which a stream of data is
+given (like the following string "AAABBCCCC") and the output is a sequence of	counts of consecutive
+data values in a row. (i.e. "3A2B4C"). It is a type of lossless encoding meaning that the encoding
+process does not lose any information in the original input and therefore the input data can be
+recovered fully and integrally. decoded.} 
+The problem discussed in this chapter is going to deal with a similar algorithm and you are asked to
+write a decode function for a string encoded with a run-length-encoding-like algorithm.
 
 
 \section{Problem statement}
 \begin{exercise}
 \label{example:decode_string:exercice1}
-Write a function that given an encoded string $s$ decodes it.
-$s$ is of the form: ${k_1[d_1]k_2[d_2[ \ldots]}$ where $k$ is a positive integer and $s$ is another encoded string. 
-The decoded version of $s$ is obtained by appending $d_1$ $k_1$ followed by repeating $d_2$ $k_2$ times.
+Write a function that given an encoded string $s$ decodes it. $s$ is of the form:
+${k_1[d_1]k_2[d_2[ \ldots]}$ where $k$ is a positive integer and $s$ is another encoded string. The
+decoded version of $s$ is obtained by appending $d_1$ $k_1$ followed by repeating $d_2$ $k_2$ times.
  
 	%example1
 	\begin{example}
@@ -70,43 +67,86 @@ The decoded version of $s$ is obtained by appending $d_1$ $k_1$ followed by repe
 
 \subsection{Recursive solution}
 \label{decode_string:sec:recursive}
-The first thing we notice about this problem is that the encoded string has a recursive definition. 
-Whenever we encounter a number $x$ followed by the \inline{'['} character we are know that we have to 
-decode whatever is inside the square brackets and then repeat that $x$ times. 
-We can use this fact to simply create a recursive algorithm which mimics this definition. The real challenge of this problem
-lies in the implementation more than in the algorithm itself.
+The first thing we notice about this problem is that the encoded string has a recursive definition.
+Whenever we encounter a number $x$ followed by the \inline{'['} character we are know that we have
+to decode whatever is inside the square brackets and then repeat that $x$ times. We can use this
+fact to simply create a recursive algorithm which mimics this definition. The real challenge of this
+problem lies in the implementation more than in the algorithm itself.
 
-The idea is to construct the final answer by looking at one character of $s$ at a time. 
-We can start from char at index $0$ and depending from it we can:
+The idea is to construct the final answer by looking at one character of $s$ at a time. We can start
+from char at index $0$ and depending from it we can:
 \begin{enumerate}
 	\item append it to the answer (when the char we are looking at is a letter)
 	\item parse it as a part of a number (when we encounter a digit) or,
-	\item recursively decode the rest of the string (when the current character is an open square bracket \inline{'['}).
-\end{enumerate}.
-For instance image we have to decode \inline{s="xy242[ab3[c]de]}. 
-We start by reading $x$ and $y$ which are letters and therefore are just appended to the final answer.
-We then see a digit, which signal us that a number started.  We parse it fully into the number $242$.The end of the number is signaled by the presence of the char \inline{'['}
-which also signals that a new encoded substring is starting. 
-So when we see an open square bracket character we recursively call the decode function so that it returns the expansion of whatever is within the brackets. 
-When the recursive call ends (when we find a closed square bracket character \inline{']'})
- we are left with the expanded string which we can then replicate $242$ times and append to the final answer. 
-Each recursive function also update the index which signals the next character in the input string that is not yet processed. 
-This is necessary because after the recursive call we might need to continue processing more characters.
-Listing \ref{list:decode_string:recursive} shows a possible implementation of this idea.
-Notice that the function \inline{decode_string_recursive_helper} takes as a second parameter a reference to an index of $i$.
-We use a reference because we want this number to be updated by each of the recursive calls.
-We use $i$ to keep track of the current character we are examining in $s$.
+	\item recursively decode the rest of the string (when the current character is an open square
+bracket \inline{'['}). \end{enumerate}. For instance image we have to decode
+\inline{s="xy242[ab3[c]de]}. We start by reading $x$ and $y$ which are letters and therefore are
+just appended to the final answer. We then see a digit, which signal us that a number started.  We
+parse it fully into the number $242$.The end of the number is signaled by the presence of the char
+\inline{'['} which also signals that a new encoded substring is starting. So when we see an open
+square bracket character we recursively call the decode function so that it returns the expansion of
+whatever is within the brackets. When the recursive call ends (when we find a closed square bracket
+character \inline{']'}) we are left with the expanded string which we can then replicate $242$ times
+and append to the final answer. Each recursive function also update the index which signals the next
+character in the input string that is not yet processed. This is necessary because after the
+recursive call we might need to continue processing more characters. Listing
+\ref{list:decode_string:recursive} shows a possible implementation of this idea. Notice that the
+function \inline{decode_string_recursive_helper} takes as a second parameter a reference to an index
+of $i$. We use a reference because we want this number to be updated by each of the recursive calls.
+We use $i$ to keep track of the current character we are examining in $s$. Figure
+\ref{fig:decode_string:recursion} graphically depicts the execution of the algorithm above on the
+input string \inline{ab23[x12[w]]cd}.
 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:decode_string:recursive]{sources/decode_string/decode_string_solution2.cpp}
+\lstinputlisting[language=c++, caption={Recursive implementation of the algorithm described in Section \ref{decode_string:sec:recursive}},label=list:decode_string:recursive]{sources/decode_string/decode_string_solution2.cpp}
 
 
 \begin{figure}
+	\captionsetup{font=footnotesize,labelfont=footnotesize}
 	\centering
 	\includegraphics[width=\textwidth]{sources/decode_string/images/recursion}
-   \caption{Execution of the algorithm in Listing \ref{} for the input string \inline{s="ab23[x12[w]]cd}}. \label{fig:decode_string:recursion}
+   \caption{Execution of the algorithm in Listing \ref{list:decode_string:recursive} for the input
+	string \inline{s="ab23[x12[w]]cd}. The execution starts (Figure (a)) with a first call to
+	\inline{decode_string_recursive_helper} with \inline{i=0}. The first two characters are letters
+	and therefore they are appended to the instance of \inline{ans} bounded to this recursive call
+	(Figures (a) and (b)). Characters at indices $2$ and $3$ are numbers and they are parsed and
+	saved into the integer \inline{m} (Figure (c)). The next character is going to be the open
+	square bracket at index $4$  and this will cause a new recursive call to happen with $i=5$
+	(Figure (d)). The process repeats now and we see at index $5$ a letter that we append to the
+	instance of \inline{ans} bound to this call (Figures (e)). We then parse the number $12$ at
+	characters $6$ and $7$ (Figure (f)) and subsequently at index $8$ we find an open square bracket
+	leads to a new recursive call this time starting from index $i=9$ (Figure (g)). Index $9$ holds
+	a letter which is appended to the (empty) instance of \inline{ans} bound to this call (Figure
+	(h)). The next character is a closed square bracket which mean we can terminate the recursive
+	call and return to the caller \inline{ans} (which now holds \inline{"w"}). We are not back
+	(Figure (k)) to the second recursive call where, as you remember $m$ is twelve. Therefore we
+	replicate $12$ times the string we received from the recursive call number three and append the
+	result to the current instance of \inline{ans}. We also set $m$ to zero. Because the next
+	character is again a closed bracket we return the the caller and repeat the process (Figure
+	(i)).$m=23$ and therefore we replicate \inline{ans} from the second recursive call $23$ times.
+	The rest of the characters left are the ones at indices $11$ and $12$ which are simple letters
+	and are just appended to \inline{ans}.}	
+   \label{fig:decode_string:recursion}
  \end{figure}
 
-
-
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:decode_string]{sources/decode_string/decode_string_solution2.cpp}
+ \subsection{Iterative solution}
+ \label{decode_string:sec:iterative}
+The same idea can of course be implemented iteratively. The trick is to \textit{simulate} the call
+stack of the recursive approach in Section \ref{decode_string:sec:recursive} by using an explicit
+stack. This stack will contains two information 
+\begin{enumerate*}
+	\item the replication factor associated with an encoded substring ($1$ is the default)
+	\item the decoded substring \end{enumerate*}. Initially the stack contains only one entry: 
+	\inline{(1,"")}. 
+	As of in the recursive approach we process $s$ one character  at the time and all the
+operations are performed on the \textbf{top} of the stack unless we encounter a \inline{'['} which
+signals we need to add another element to the stack and start decoding a substring of $s$.,or a
+\inline{']'} which signals that we are done with decoding the substring and we can then replicate it
+as many time it is necessary, remove the entry from the top of the stack and append the replicated
+string to the string associated with the new top of the stack. At the end of this process we are
+left with the fully decoded string at the top of the stack. Listing
+\ref{list:decode_string:iterative} implements this idea. Notice that the stack has a type
+\inline{std::stack<std::pair<int,std::string>>} thus reflecting the fact we need to keep two
+information for each of the encoded substrings.
+ 
+\lstinputlisting[language=c++, caption={Iterative solution using a \inline{std::stack}.},label=list:decode_string:iterative]{sources/decode_string/decode_string_solution1.cpp}

@@ -1,9 +1,6 @@
 std::string decode_string_recursive_helper(const std::string& s, std::size_t& i)
 {
     const auto size = s.size();
-    if(i >= size)
-        return {};
-    
     std::string ans;
     int multiplier = 0;
     while(i < size)
@@ -17,8 +14,7 @@ std::string decode_string_recursive_helper(const std::string& s, std::size_t& i)
                 multiplier*=10;
                 multiplier+=s[i]-'0';
                 i++;
-            }
-            
+            }   
         }else if(s[i]=='[')
         {
             const std::string nested = decode_string_recursive_helper(s, ++i);
