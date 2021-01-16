@@ -115,11 +115,15 @@ The time and complexity of the code in Listing \ref{list:decode_string:recursive
 
 \lstinputlisting[language=c++, caption={Recursive implementation of the algorithm described in Section \ref{decode_string:sec:recursive}},label=list:decode_string:recursive]{sources/decode_string/decode_string_solution2.cpp}
 
-
 \begin{figure}
+	
+	\vspace{-3cm}
+
 	\captionsetup{font=footnotesize,labelfont=footnotesize}
 	\centering
-	\includegraphics[width=\textwidth]{sources/decode_string/images/recursion}
+	\hspace*{-1.5cm}
+	\includegraphics[width=1.25\textwidth]{sources/decode_string/images/recursion}
+	\vspace*{-10mm}
    \caption{Execution of the algorithm in Listing \ref{list:decode_string:recursive} for the input
 	string \inline{s="ab23[x12[w]]cd}. The execution starts (Figure (a)) with a first call to
 	\inline{decode_string_recursive_helper} with \inline{i=0}. The first two characters are letters
