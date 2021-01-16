@@ -164,15 +164,18 @@ would make the elements in the stack an
 increasing sequence. 
 So we remove $1$ from the stack and the new stack becomes 
 $2,6$ (see Figure \ref{fig:next_greater:variation1:stack3}). 
-
-The rest of the execution is described more in detail in (see Figure \ref{fig:next_greater:stack}
+The rest of the execution is described more in detail in Figure \ref{fig:next_greater:stack}.
 
 
 From this example we can draw a general approach about how we can solve this problem using a stack. 
 When we process an element we try to insert it into the stack paying attention to how this element compares to the top of the stack.
 If it is larger than we remove the top of the stack and compare it again with the subsequent element. 
-We keep repeating and removing elements from the stack until either the element we are tryi8ng to place is smaller than the current element of there are no more elements left in the stack.
-In the former case then the new top of the stack is going to be the answer associated with the element we are processing. In the latter the answer does not exists and this element is therefore, the largest element processed so far.
+We keep repeating and removing elements from the stack until either the element we are 
+trying to place is smaller than the top of the stack or there are no more elements left in it.
+In the former case then the new top  of the stack(after all the necessary removals)
+is going to be the answer associated with the element we are processing.
+In the latter, the answer does not exists and the element we are trying to place on the stack
+is therefore the largest processed so far.
 Listing \ref{list:next_greater_element:stack} shows an implementation of this idea.
 
 
