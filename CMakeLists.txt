@@ -45,5 +45,8 @@ endif ( MSVC )
 
 find_package(GTest REQUIRED)
 
+
+
+
 #tests
 ADD_SUBDIRECTORY(test)
