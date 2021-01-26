@@ -41,6 +41,7 @@ You have an infinite amount of coins of each denomination.
 	\end{example}
 
 	\begin{example}
+		\label{ex:coin_change:example3}
 		\hfill \\
 		Given $I={1,5,8}$ and $t=12$, the function returns $4$.
 		We can change $12$ by using two coins of value $1$ and two of value $5$.
@@ -65,7 +66,20 @@ You have an infinite amount of coins of each denomination.
 \section{Discussion}
 \label{coin_change:sec:discussion}
 
-\subsubsection{Mathematical definition}
+\subsection{The greedy approach and why it is incorrect}
+This is one of those problems that can trick inexperienced candidates into thinking about a greedy solution, especially when nudged by the examples crafted so that such an approach produces the optimal answer. A greedy algorithm for this problem works repeatedly picking the largest coin $I_k$ that is smaller than $t$, and repeating the process on a new target amount $t-I_k$.
+Listing \ref{} outline how this algorithm works.
+
+If we apply this algorithm to the Example \ref{ex:coin_change:example1}  we see that initially $t=11$
+and that the largest number $5$ is smaller that $t$. Therefore we pick it (in the code this is reflected in assigning the variable \inline{greedy_choice = *it}) and decrease $t$ by the same amount. Now, $t=6$ which is still larger than $5$. We pick $5$ another time and $t = 1$.
+At this point neither $5$ nor $2$ are smaller or equal than $1$ and we choose $1$. Now $t=0$ and we can stop, after having used $3$ coins in total, which is the optimal solution.
+However if we try the same algorithm on the Example \ref{ex:coin_change:example3} we get the answer $6$ which is quite far off from the optimal solution $4$. This approach is fails sometimes to find a valid solution like in the case where $I=\{5,8\}$ and $t=12$.
+
+\lstinputlisting[language=c++, caption={Greedy solution which always try to use the largest coin we can. Notice tht this approach is incorrect and should not be used during an interview.},label=list:coin_change:bruteforce]{sources/coin_change/coin_change_solution_greedy.cpp}
+
+
+
+\subsection{Mathematical definition}
 \label{coin_change:sec:mathdefinition}
 This problem can be formalized as an optimization problem where the solution is a set of number $X=\{X_0,X_1,\ldots, X_{|I|-1}\}$ of size $|I|$ with each $x_j$ representing how many coins of the denomination $I_j$ are used and the answer is the minimum of 
 $
@@ -82,7 +96,7 @@ where $W(t)$ is total the sum of all the coins used, with a total value of exact
 The brute-force approach is conceptually straightforward and basically consists in checking enumerating every single possible valid combination of coins
 and keep track of one with the smallest number of coins in it. A valid combination can be uniquely identified by the array $X$  mentioned above (in Section \ref{coin_change:sec:mathdefinition}).
 The enumeration process can be implemented using recursion and backtracking. 
-The idea is that we fill $X$ (which initially is filled with zeros) incrementally starting with the first position, $X_0$, which represent the number of coins of the first denomination. 
+The idea is that we fill $X$ (which initially is filled with zeros) incrementally starting with the first position, $X_0$. A value in $X$ at position $j$ ($X_j$) represents the number of coins of the denomination $I_j$ (for a total value of $I_j\times X_j$). 
 Every time we try a new value $k$, for $X_0$, we know we are adding $kI_0$ to the overall value of all the coins in $X$, and of course also that we used $k$ coins.
 At this point we can continue and try to fill the next position of $X$ knowing have to make up for $t-kI_0$ and that we have used already $k$ coins. We can fill the first position in a similar manner to what we did for the position $0$.
 This process can be repeated until either we reach a point where we have nothing to make up for anymore or we still have a certain amount to change but no available denominations.
