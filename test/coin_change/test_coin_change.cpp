@@ -11,6 +11,33 @@ using std::vector;
 
 #include "coin_change_solution1.cpp"
 #include "coin_change_solution2.cpp"
+#include "coin_change_solution3.cpp"
+
+
+TEST(coinChangeMinCoins, test1)
+{ 
+   const long long amount       = 5;
+  const std::vector<int> coins = {1, 2, 5, 7};
+    const long long expected     = 1;
+    ASSERT_EQ(expected, change_ways_bruteforce(coins,amount));
+}
+
+TEST(coinChangeMinCoins, test2)
+{ 
+   const long long amount       = 8;
+  const std::vector<int> coins = {1, 2, 5, 7};
+    const long long expected     = 2;
+    ASSERT_EQ(expected, change_ways_bruteforce(coins,amount));
+}
+
+TEST(coinChangeMinCoins, testexample3)
+{ 
+   const long long amount       = 4;
+  const std::vector<int> coins = {1, 2,3};
+    const long long expected     = 2;
+    ASSERT_EQ(expected, change_ways_bruteforce(coins,amount));
+}
+
 
 TEST(coin_change, test1)
 {
@@ -20,6 +47,7 @@ TEST(coin_change, test1)
 
   ASSERT_EQ(expected, count_change_ways_top_down(amount, coins));
   ASSERT_EQ(expected, change_ways_bottom_up(amount, coins));
+
 }
 
 TEST(coin_change, test2)

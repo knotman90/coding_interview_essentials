@@ -24,6 +24,7 @@ Write a function that given an array of coin denominations $I$ and an integer $t
 the minimum number of coins (of any denomination in $I$) that are necessary need to make up that amount. 
 You have an infinite amount of coins of each denomination. 
 	\begin{example}
+		\label{ex:coin_change:example1}
 		\hfill \\
 		Given $I={1,2,5}$ and $t=11$, the function returns $3$.
 		We can change $11$ in many ways, but none of them uses less than $3$ coins:
@@ -63,8 +64,10 @@ You have an infinite amount of coins of each denomination.
 
 \section{Discussion}
 \label{coin_change:sec:discussion}
+
 \subsubsection{Mathematical definition}
-This problem can be formalized as a optimization problem where the solution is a set of number $X=\{X_0,X_1,\ldots, X_{|I|-1}\}$ of size $|I|$ with each $x_j$ representing how many coin of the denomination $I_j$ are used and the answer is the minimum of 
+\label{coin_change:sec:mathdefinition}
+This problem can be formalized as an optimization problem where the solution is a set of number $X=\{X_0,X_1,\ldots, X_{|I|-1}\}$ of size $|I|$ with each $x_j$ representing how many coins of the denomination $I_j$ are used and the answer is the minimum of 
 $
 	W(t) = \sum_{j=0}^{|I|-1} X_j
 $
@@ -72,10 +75,47 @@ subject to:
 $
 	\sum_{j=0}^{|I|-1} X_j I_j = t
 $
-where $W(t)$ is total the sum of coin used, and their total value is exactly equal to $t$, the target amount.
+where $W(t)$ is total the sum of all the coins used, with a total value of exactly $t$, the target amount.
 
 \subsection{Brute-force}
 \label{coin_change:sec:bruteforce}
+The brute-force approach is conceptually straightforward and basically consists in checking enumerating every single possible valid combination of coins
+and keep track of one with the smallest number of coins in it. A valid combination can be uniquely identified by the array $X$  mentioned above (in Section \ref{coin_change:sec:mathdefinition}).
+The enumeration process can be implemented using recursion and backtracking. 
+The idea is that we fill $X$ (which initially is filled with zeros) incrementally starting with the first position, $X_0$, which represent the number of coins of the first denomination. 
+Every time we try a new value $k$, for $X_0$, we know we are adding $kI_0$ to the overall value of all the coins in $X$, and of course also that we used $k$ coins.
+At this point we can continue and try to fill the next position of $X$ knowing have to make up for $t-kI_0$ and that we have used already $k$ coins. We can fill the first position in a similar manner to what we did for the position $0$.
+This process can be repeated until either we reach a point where we have nothing to make up for anymore or we still have a certain amount to change but no available denominations.
+In the former case we return the number of coins used up to that point, while in the latter we return a value indicating that there is no solution.
+
+An implementation of this idea is shown below in Listing \ref{list:coin_change:bruteforce}.
+Notice that the function \inline{change_ways_bruteforce_backtracking_helper} takes $4$ parameters:
+\begin{enumerate}
+	\item \inline{I}: a purely input parameter containing the denominations,
+	\item \inline{t}: the amount we need to make up for,
+	\item \inline{j}: the denomination index in $I$ we are currently processing, and
+	\item \inline{coin_used}: the number of coin used so far.
+\end{enumerate}
+The function is initially called with the original value of $j=0$ (because we start with the first denomination), \inline{coin_used = 0} (no coins are used when we start this backtracking process) and \inline{t} is set to be equal to the original amount (the one coming from the main driver function \inline{change_ways_bruteforce}).
+As the execution and the recursion unfold $t$ is changed accordingly to the values of the coin used, 
+\inline{coin_used} is updated with the number of coin used and $j$ is incremented by one at each recursive call.
+
+Figure \ref{} shows the recursion tree of \inline{change_ways_bruteforce_backtracking_helper} when the input is the one shown in Example \ref{ex:coin_change:example1};
+The complexity of this approach is exponential in time as,
+and linear in space. 
+\begin{figure}
+	\centering
+	\label{fig:square_in_matrix:recursiontree}
+	\includegraphics[width=\textwidth]{sources/coin_change/images/recursiontree}
+	\caption{This figure is an example of recursion tree for the Equation
+	\ref{eq:square_in_matrix_DPformula}. Note that the nodes colored in green representing a choice of coins that which value adds exactly up to $4$. }
+\end{figure}
+
+\lstinputlisting[language=c++, caption={Backtracking recursive brute-force solution},label=list:coin_change:bruteforce]{sources/coin_change/coin_change_solution3.cpp}
+
+
+
+
 
 \lstinputlisting[language=c++, caption={Sample Caption},label=list:coin_change]{sources/coin_change/coin_change_solution1.cpp}
 
