@@ -11,6 +11,7 @@ using std::vector;
 
 #include "dice_rolls_solution1.cpp"
 #include "dice_rolls_solution2.cpp"
+#include "dice_rolls_solution3.cpp"
 
 TEST(dice_rolls, test_d1_f6_t3)
 {
@@ -22,6 +23,7 @@ TEST(dice_rolls, test_d1_f6_t3)
 
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
 
 TEST(dice_rolls, test_d2_f6_t7)
@@ -34,6 +36,7 @@ TEST(dice_rolls, test_d2_f6_t7)
 
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
 
 TEST(dice_rolls, test_d2_f5_t10)
@@ -46,6 +49,7 @@ TEST(dice_rolls, test_d2_f5_t10)
 
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
 
 TEST(dice_rolls, test_d1_f2_t3)
@@ -58,6 +62,7 @@ TEST(dice_rolls, test_d1_f2_t3)
 
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
 
 TEST(dice_rolls, test_d1_f100_t101)
@@ -70,6 +75,7 @@ TEST(dice_rolls, test_d1_f100_t101)
 
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
 
 TEST(dice_rolls, test_d7_f10_t71)
@@ -82,6 +88,7 @@ TEST(dice_rolls, test_d7_f10_t71)
 
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
 
 TEST(dice_rolls, test_d7_f10_t70)
@@ -94,21 +101,21 @@ TEST(dice_rolls, test_d7_f10_t70)
 
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
 
 TEST(dice_rolls, test_d7_f10_t69)
 {
   constexpr int d = 7;
   constexpr int f = 10;
-  constexpr int t = 0.5*(d * f);
+  constexpr int t = 0.5 * (d * f);
 
   constexpr int expected = 465795;
 
-
   ASSERT_EQ(expected, num_rolls_to_target_bruteforce(d, f, t));
   ASSERT_EQ(expected, num_rolls_to_target_memoization(d, f, t));
+  ASSERT_EQ(expected, num_rolls_to_target_bottom_up(d, f, t));
 }
-
 
 int main(int argc, char **argv)
 {

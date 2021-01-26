@@ -17,15 +17,15 @@ void visit(const cell& c,
     visited[x][y]     = true;
 
     constexpr std::array<cell, 4> cross = {
-      cell{ -1, 0 }, cell{ 1, 0 }, cell{ 0, -1 }, cell{ 0, 1 }
-    };
+        cell{-1, 0}, cell{1, 0}, cell{0, -1}, cell{0, 1}};
     for (const auto& inc : cross)
     {
       const auto nx = x + inc.first;
       const auto ny = y + inc.second;
-      if (nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] && !visited[nx][ny])
+      if (nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny]
+          && !visited[nx][ny])
       {
-        S.push({ nx, ny });
+        S.push({nx, ny});
       }
     }
   }
@@ -51,7 +51,7 @@ int count_island_iterative_DFS(const std::vector<std::vector<bool>>& grid)
       // found one, mark as visited all the piece of
       // land you can reach from here
       ans++;
-      visit({ i, j }, grid, visited);
+      visit({i, j}, grid, visited);
     }
   }
   return ans;

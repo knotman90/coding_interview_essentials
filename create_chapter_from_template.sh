@@ -15,6 +15,7 @@ function help()
 
 NAME=$1
 SOURCE_FOLDER="sources/$NAME"
+IMAGES_FOLDER="$SOURCE_FOLDER/images"
 TEST_FOLDER="test/$NAME"
 TEX_FILE="$SOURCE_FOLDER/$NAME.tex"
 TEST_FILE="$TEST_FOLDER/test_$NAME.cpp"
@@ -23,7 +24,11 @@ CMAKE_FILE="${TEST_FOLDER}/CMakeLists.txt"
 
 ([ -d "$NAME" ] || [ -d "$TEST_FOLDER" ] || [ -d "$SOURCE_FOLDER" ] || [ -f "$TEX_FILE" ] || [ -f "$TEST_FILE" ]) && help
 
+
+git checkout -b $NAME
+
 mkdir -p "$SOURCE_FOLDER"
+mkdir -p "$IMAGES_FOLDER"
 touch "$TEX_FILE"
 
 echo "%!TEX root = ../main.tex
@@ -33,6 +38,14 @@ echo "%!TEX root = ../main.tex
 % Difficulty:
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=\textwidth]{sources/$NAME/images/example1}
+%	\caption[Sample short cpation]{Sample Caption}.
+%	\label{fig:$NAME:example1}
+%\end{figure}
 " >> $TEX_FILE
 
 echo "\chapter{TITLE OF THE CHAPTER}
@@ -43,15 +56,33 @@ echo "\chapter{TITLE OF THE CHAPTER}
 
 echo "\section{Problem statement}
 \begin{exercise}
+\label{example:$NAME:exercice1}
 
+	%example1
 	\begin{example}
-		\hfill \\\\
+		\label{example:$NAME:example1}
+		\hfill \\
+	}
+		
+	\end{example}
+
+	%example2
+	\begin{example}
+		\label{example:$NAME:example2}
+		\hfill \\
 		
 	\end{example}
 
 	\begin{example}
-		\hfill \\\\
-		
+		\hfill \\
+	
+	\label{ex:$NAME:example3}
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+
+	\label{ex:$NAME:example4}	
 	\end{example}
 \end{exercise}
 
@@ -73,7 +104,9 @@ echo "\section{Discussion}
 \subsection{Brute-force}
 \label{$NAME:sec:bruteforce}
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
+\begin{minipage}{\linewidth}
+	\lstinputlisting[language=c++, caption={Sample Caption},label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
+\end{minipage}
 " >>  $TEX_FILE
 
 ####################################
@@ -130,7 +163,7 @@ int main(int argc, char **argv) {
 #########################################
 touch $CMAKE_FILE
 
-echo "cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+echo "cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 
 add_executable(test_${NAME} `basename $TEST_FILE`)

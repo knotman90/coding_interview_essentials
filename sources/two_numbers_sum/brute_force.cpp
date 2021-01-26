@@ -1,4 +1,4 @@
-bool two_numers_sum_brute_force(const vector<int> &A, const int T)
+bool two_numers_sum_bruteforce(const std::vector<int> &A, const int T)
 {
   const size_t size = A.size();
   for (int i = 0; i < size - 1; i++)
