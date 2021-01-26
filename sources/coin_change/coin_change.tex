@@ -6,40 +6,79 @@
 % Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{TITLE OF THE CHAPTER}
+\chapter{Coin Change Problem}
 \label{ch:coin_change}
 \section*{Introduction}
+The problem discussed in this chapter is considered by many to be a fundamental stepping stone for anyone on the path of mastering Dynamic Programming (see Section \ref{sect:appendix:DP}).
+This reputation comes from the fact that this problem encompass all the crucial ingredients of any DP algorithms with the additional benefit of having a statement that is very intuitive as 
+it features things like coins and change which are concepts we are all familiar with.
+
+This problem addressed the question of finding the minimum number of coins (of certain given denominations) that add up to a given amount of money. 
+Many people, when reading the problem statement of this problem, are tempted to approach it greedily but, as we will see,  this does not always lead us towards the correct answer. 
+Moreover, the coin change problem can be seen as an archetype for a whole bunch of DP optimization problems which can be reduced, and solved effortlessly, using the techniques shown in this section (see Chapter \ref{ch:dice_rolls} and \ref{ch:can_jump}, for instance).
+
 
 \section{Problem statement}
 \begin{exercise}
-
+Write a function that given an array of coin denominations $I$ and an integer $t$ representing an amount of money, returns
+the minimum number of coins (of any denomination in $I$) that are necessary need to make up that amount. 
+You have an infinite amount of coins of each denomination. 
 	\begin{example}
 		\hfill \\
-		
+		Given $I={1,2,5}$ and $t=11$, the function returns $3$.
+		We can change $11$ in many ways, but none of them uses less than $3$ coins:
+		\begin{itemize}
+			\item two coins of denomination $5$,
+			\item and one coin of denomination $1$
+		\end{itemize}
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		
+		Given $I={1,3,4,5}$ and $t=7$, the function returns $2$.
+		We can change $7$ by using one coin of value $3$ and one of value $4$.
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		Given $I={1,5,8}$ and $t=12$, the function returns $4$.
+		We can change $12$ by using two coins of value $1$ and two of value $5$.
 	\end{example}
 \end{exercise}
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
+	\item Is $I$ sorted?
 	\begin{answered}
-		\textit{}
+		\textit{No, denomination in $I$ are not sorted.}
+	\end{answered}
+
+	\item Can we assume we can always change $t$ using the denomination in $I$?
+	\begin{answered}
+		\textit{No, and if that is the case the function should return $-1$.}
 	\end{answered}
 	
 \end{QandA}
 
 \section{Discussion}
 \label{coin_change:sec:discussion}
-
+\subsubsection{Mathematical definition}
+This problem can be formalized as a optimization problem where the solution is a set of number $X=\{X_0,X_1,\ldots, X_{|I|-1}\}$ of size $|I|$ with each $x_j$ representing how many coin of the denomination $I_j$ are used and the answer is the minimum of 
+$
+	W(t) = \sum_{j=0}^{|I|-1} X_j
+$
+subject to:
+$
+	\sum_{j=0}^{|I|-1} X_j I_j = t
+$
+where $W(t)$ is total the sum of coin used, and their total value is exactly equal to $t$, the target amount.
 
 \subsection{Brute-force}
 \label{coin_change:sec:bruteforce}
 
 \lstinputlisting[language=c++, caption={Sample Caption},label=list:coin_change]{sources/coin_change/coin_change_solution1.cpp}
 
+
+
+\section{Common Variations}
