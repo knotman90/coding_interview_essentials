@@ -1,4 +1,4 @@
-\documentclass[11pt,fleqn, oneside,openany]{book} % Default font size and left-justified equations
+\documentclass[11pt,fleqn, oneside,openany]{extbook} % Default font size and left-justified equations
 
 % use this list: https://www.educative.io/blog/google-coding-interview
 
@@ -12,7 +12,8 @@
 \begin{document}
 
 %\frontmatter
-\input{sources/front_cover.tex}
+\includepdf[pages=1, fitpaper]{sources/front_cover_image.pdf}
+%\input{sources/front_cover.tex}
 
 \usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
 
@@ -26,7 +27,7 @@
 %\listoffigures
 %\listoftables
 
-%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
 
 %pagestyle{fancy} % Print headers again
 
