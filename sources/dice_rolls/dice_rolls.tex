@@ -40,12 +40,12 @@ should be returned modulo $10^9 + 7$.
 		Given $d=2$, $f=6$ and $t=7$ the function should return $6$. The followings are the possible
 		ways of obtaining $7$ from two common $6$ faces dices.
 		\begin{enumerate}
-			\item $1$ for the fist and $6$ for the second dice.
-			\item $2$ for the fist and $5$ for the second dice.
-			\item $3$ for the fist and $4$ for the second dice.
-			\item $4$  for the fist and $3$ for the second dice.
-			\item $5$  for the fist and $2$ for the second dice.
-			\item $6$  for the fist and $1$ for the second dice.
+			\item $1$ for the first and $6$ for the second dice.
+			\item $2$ for the first and $5$ for the second dice.
+			\item $3$ for the first and $4$ for the second dice.
+			\item $4$  for the first and $3$ for the second dice.
+			\item $5$  for the first and $2$ for the second dice.
+			\item $6$  for the first and $1$ for the second dice.
 		\end{enumerate}
 	\end{example}
 
@@ -173,7 +173,7 @@ Chapter \ref{ch:coin_change}. Section
 generating combinations, and the material discussed there can be adapted and applied here.
 \lstinputlisting[language=c++, caption={Brute-force (enumerating all possible combinations) solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:bruteforce]{sources/dice_rolls/dice_rolls_solution1.cpp}
 
-The time and  complexity of this approach are exponential and constant, respectively: The proof of
+The time and  space complexity of this approach are exponential and constant, respectively: The proof of
 this fact can be derived from the solution of the following recurrence relation:
 \begin{equation}
 	S(d,t) = S(d-1,t-1) + S(d-1,t-2)
