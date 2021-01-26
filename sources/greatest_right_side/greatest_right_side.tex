@@ -62,6 +62,7 @@ Note also that the last element will always be modified into $-1$ because, it is
 This solution is considered poor because it has a time complexity of $O(n^2)$ and a linear solution exists. 
 
 \subsection{Linear solution}
+\label{sec:greatest_right:linear}
 The approach used in Listing \ref{list::greatest_right_bruteforce} can be greately improved if instead of looping from left to right, the scan is performed from right to left (from $A.size()-2$ to $0$)\footnote{the starting point is $A.size()-2$ because $A.size()-1$ is always turned into $-1$}. This allows for keeping track of the maximum element on the right  side of the element currenlty analyzed, $M$, to be calculated in constant time because:
 \begin{itemize}
 	\item[-] at first the maximum element on the right of $A.size()-2$ is $A.size()-1$ i.e. $M = A[A.size()-1]$.
