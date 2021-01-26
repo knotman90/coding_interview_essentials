@@ -98,25 +98,30 @@ Notice that the function \inline{change_ways_bruteforce_backtracking_helper} tak
 \end{enumerate}
 The function is initially called with the original value of $j=0$ (because we start with the first denomination), \inline{coin_used = 0} (no coins are used when we start this backtracking process) and \inline{t} is set to be equal to the original amount (the one coming from the main driver function \inline{change_ways_bruteforce}).
 As the execution and the recursion unfold $t$ is changed accordingly to the values of the coin used, 
-\inline{coin_used} is updated with the number of coin used and $j$ is incremented by one at each recursive call.
+\inline{coin_used} is updated with the number of coin used and $j$ is incremented by one at each recursive call. Figure \ref{fig:coin_change:recursiontree} shows the recursion tree of \inline{change_ways_bruteforce_backtracking_helper} when the input is the one shown in Example \ref{ex:coin_change:example1}; As we can see, there are $4$ ways of changing $4$ by using coin of denominations $\{1,2,3\}$:
+\begin{enumerate}
+	\item $2+2$ (using two coins of value $2$),
+	\item $1+3$, (using one and three coins of values $1$ and $3$, respectively)
+	\item $1+1+2$,(using two and one coins of values $1$ and $2$, respectively), and
+	\item $1+1+1+1$ (using $4$ coins of value $1$).
+\end{enumerate}
 
-Figure \ref{} shows the recursion tree of \inline{change_ways_bruteforce_backtracking_helper} when the input is the one shown in Example \ref{ex:coin_change:example1};
-The complexity of this approach is exponential in time as,
-and linear in space. 
 \begin{figure}
 	\centering
-	\label{fig:square_in_matrix:recursiontree}
+	\label{fig:coin_change:recursiontree}
 	\includegraphics[width=\textwidth]{sources/coin_change/images/recursiontree}
-	\caption{This figure is an example of recursion tree for the Equation
-	\ref{eq:square_in_matrix_DPformula}. Note that the nodes colored in green representing a choice of coins that which value adds exactly up to $4$. }
+	\captionsetup{singlelinecheck=off}
+	\caption{This figure shows the call tree for the recursive function \inline{change_ways_bruteforce_backtracking_helper} on the following input:  $I = \{1,2,3\}$, and $t=4$. Each node contains the only three varying parameters of \inline{change_ways_bruteforce_backtracking_helper} (shortened here as $W$): the first is the current $t$ (the amount that we still need to make up for). The second   is the index to an element of $I$ for the denomination we are considering and the third is the number of coins used so far.
+	Moreover, the highlighted paths shows all the valid ways of changing $4$. Note that all the green nodes have the first number equal to zero.}
 \end{figure}
 
 \lstinputlisting[language=c++, caption={Backtracking recursive brute-force solution},label=list:coin_change:bruteforce]{sources/coin_change/coin_change_solution3.cpp}
 
+The time complexity of this approach is exponential in $|I|$. As an informal proof consider that for each denomination we at least try either to use zero or one coin. 
+Therefore for each element of $I$ we have two choices resulting in $2^{|I|}$ possibilities. 
+The space complexity is linear in $|I|$ as in the worst case the depth of the recursive calls do not go lower than $|I|$. This is a direct consequence of the base case, checking for $j >= |I|$.
 
-
-
-
+\subsection{Dynamic Programming - top-down}
 \lstinputlisting[language=c++, caption={Sample Caption},label=list:coin_change]{sources/coin_change/coin_change_solution1.cpp}
 
 

@@ -4,10 +4,11 @@ int change_ways_bruteforce_backtracking_helper(
     const size_t j, /*current denomination*/
     const int coin_used /*number of coin in X*/)
 {
-    std::cout<<t<<" "<<j<<" "<<coin_used<<endl;
   if (t==0)
     return coin_used;
 
+  //Either we added more coin than necessary
+  //or we do not have any more denomination to use  
   if ( t < 0 || j >= I.size())
     return std::numeric_limits<int>::max();
 
