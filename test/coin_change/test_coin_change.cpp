@@ -13,6 +13,7 @@ using std::vector;
 #include "coin_change_solution2.cpp"
 #include "coin_change_solution3.cpp"
 #include "coin_change_solution4.cpp"
+#include "coin_change_solution5.cpp"
 
 
 TEST(coinChangeMinCoins, test0)

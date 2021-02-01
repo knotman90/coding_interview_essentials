@@ -226,7 +226,7 @@ This process can continue until we have finished processing all the values up to
 More generally, assuming the table is filled up to (and including) cell at index $x+1$ (corresponding to the amount $x$)
 you can update the cell of $T$ at index $0 \leq k < |I|$ as follows: $$T_{x+I_k} = \min (T_{x+I_k}, T_{x}+1)$$.
 
-
+\lstinputlisting[language=c++, caption={Dynamic Programmin top-down solution.},label=list:coin_change:topdown]{sources/coin_change/coin_change_solution5.cpp}
 
 \subsection{Conclusion}
 In this chapter we have seen how to solve the Coin change problem which is a classical DP problem. 
