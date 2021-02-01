@@ -1,4 +1,4 @@
-// Note:  This algorithm is always not correct
+// Note:  This algorithm is always neither correct nor complete
 int change_ways_bruteforce(const std::vector<int>& I, int t)
 {
   int ans = 0;
