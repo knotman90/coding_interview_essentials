@@ -56,21 +56,21 @@ Being this problem so popular, when asked, the interviewer is expecting the cand
 The brute force solution to this problem works by looping over each character $s_i$ once, and for each of them checking if it is present in any of the subsequent position of $s$ i.e. checking if the following is true: $\exists \; j $ s.t.  $s_j=s_i \; j>i$.
 This idea can be implemented as shown in Listing \ref{list:unique_elements_brute_force1} using two nested loops.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique.",label=list:unique_elements_brute_force1]{sources/unique_elements/unique_elements_brute_force.cpp}
-\end{minipage}
+
 
 As a stylistic improvements to the code in Listing \ref{list:unique_elements_brute_force1}, Listing \ref{list:unique_elements_brute_force2}  uses the C++ standard library function \texttt{find} to search for a duplicate  of the character $s_i$. This not only makes the code shorter and cleaner, but also shows that the candidate is able to use the standard library and do not reinvent the wheel (in this case the ubiquitous \texttt{find} function).
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique using \texttt{std::find}",label=list:unique_elements_brute_force2]{sources/unique_elements/unique_elements_brute_force_std.cpp}
-\end{minipage}
+
 
 In Listing \ref{list:unique_elements_brute_force1} the internal loop is doing the hard work of searching for a duplicate of the character at index $i$. We can trade space for time and reduce the complexity of the duplicate search of a single character down to $O(1)$. The idea is that when the duplicate search is over for character $s_i$, then $s_i$ is inserted into a set. The set keeps track of all the characters seen so far. The internal loop can be modified to simply be a lookup into the map as shown in Listing \ref{list:unique_elements_brute_force_map}.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_map]{sources/unique_elements/unique_elements_brute_force_map.cpp}
-\end{minipage}
+
 
 This approach seems to effectively lower the time complexity down to linear, but at the cost of some space. But how much space exactly? The intuition would say $n$ because that is the size of the  input string. But the string is made of characters from an alphabet $\Sigma$ which has a very limited size, at most $128$ (size of the ASCII table) elements. The insert instruction will not be executed more than $|\Sigma|$ times. Because of this the space complexity of this solution if $O(1)$. 
 
@@ -80,8 +80,8 @@ Thus the solution using the hashset has complexity of $O(1)$ because in the wors
 Armed with these new arguments, the solution we suggest to present during the interview only uses a stack allocated array of bool of size $|\Sigma|$ storing
 the information regarding the presence of a character in the characters examined so far. If at any time the currenclty examined character has been already seen, then there is a duplicate. See Listing \ref{list:unique_elements_brute_force_final} for a possible implementation of this idea.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_final]{sources/unique_elements/unique_elements_brute_force_final.cpp}
-\end{minipage}
+
 
 \section{Common variations}

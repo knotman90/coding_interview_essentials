@@ -74,9 +74,9 @@ making a good impression, this is not enough to clear the round just yet as if y
 during an actual interview the interviewer would very likely asks you implement \inline{std::unique}
 yourself.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption={One-liner solution using \inline{std::unique}.},label=list:remove_duplicated_sorted_array_inplace_stl]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution3.cpp}
-\end{minipage}
+
 
 As already mentioned in the introduction it is quite easy to implement this problem when you can use
 linear additional space. You can think of building a list $U$ of unique elements of $I$ by:
@@ -90,9 +90,9 @@ of this approach is linear in time and space as in the worst-case read and write
 $I$ twice. An implementation of this approach is shown in Listing
 \ref{list:remove_duplicated_sorted_array_inplace_linearspace}.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption={Linear time and space solution using \inline{std::std::unordered_set} to remember what elements have been already encountered.},label=list:remove_duplicated_sorted_array_inplace_linearspace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution2.cpp}
-\end{minipage}
+
 
 Despite we cannot do much better than spending linear time, we can improve on the space and bring it
 down to constant. The key idea is that because the array is sorted, equal elements will be one next
@@ -120,9 +120,9 @@ stated before, its complexity is linear in time and constant in space.
 Notice that because we do not have to maintain the state of the elements of $I$ after the point where all the unique elements are
 we can use \inline{std::move} to potentially avoid expensive copies.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:remove_duplicated_sorted_array_inplace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
-\end{minipage}
+
 
 
 
