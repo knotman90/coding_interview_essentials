@@ -107,26 +107,23 @@ std::string input_string_containers(const int stride_size,
 
 TEST(items_in_containers_amazon, test_random_all_solution_equal)
 {
-	const std::string s = input_string_containers(1000, 100);
-    std::vector<std::pair<int,int>> Q(1000);
-    std::generate(
-        Q.begin(), Q.end(), [&](){
-            return Book::Algorithm::generate_random_pair_in_range<int>(0,s.size()-1);
-            }
-    );
-    
-    std::vector<std::vector<int>> answers;
+  const std::string s = input_string_containers(1000, 100);
+  std::vector<std::pair<int, int>> Q(1000);
+  std::generate(Q.begin(), Q.end(), [&]() {
+    return Book::Algorithm::generate_random_pair_in_range<int>(0, s.size() - 1);
+  });
 
-	
-    answers.push_back(items_in_containers_naive(s,Q));
-    answers.push_back(items_in_containers_lineartime(s,Q));
+  std::vector<std::vector<int>> answers;
 
-    ASSERT_TRUE(std::all_of(std::begin(answers), std::end(answers),
-    [&](const auto& v){return v==answers.back();}
-    )) << "error for "<<s<<std::endl << " Q= "<<to_string(Q)<<std::endl<<"answers = "<<to_string(answers);
+  answers.push_back(items_in_containers_naive(s, Q));
+  answers.push_back(items_in_containers_lineartime(s, Q));
 
-
-    
+  ASSERT_TRUE(std::all_of(std::begin(answers),
+                          std::end(answers),
+                          [&](const auto& v) { return v == answers.back(); }))
+      << "error for " << s << std::endl
+      << " Q= " << to_string(Q) << std::endl
+      << "answers = " << to_string(answers);
 }
 
 int main(int argc, char** argv)

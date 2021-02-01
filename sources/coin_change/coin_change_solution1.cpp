@@ -16,8 +16,7 @@ int change_helper(int amount,
 
   const int ans =
       change_helper(amount, coins, current_coin - 1, cache)
-      + change_helper(
-          amount - coins[current_coin], coins, current_coin, cache);
+      + change_helper(amount - coins[current_coin], coins, current_coin, cache);
   cache[current_coin][amount] = ans + 1;
 
   return ans;

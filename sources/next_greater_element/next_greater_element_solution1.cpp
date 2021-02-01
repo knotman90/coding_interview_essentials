@@ -1,6 +1,5 @@
-std::vector<int> 
-next_greater_element_I_bruteforce(const std::vector<int>& A,
-                                  const std::vector<int>& B)
+std::vector<int> next_greater_element_I_bruteforce(const std::vector<int>& A,
+                                                   const std::vector<int>& B)
 {
   std::vector<int> C(A.size());
   for (int i = 0; i < std::ssize(A); i++)
