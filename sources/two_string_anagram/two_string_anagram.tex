@@ -150,9 +150,9 @@ appearing in $a$ and $b$. Listings \ref{list:two_string_anagram_sorting} shows a
 Note that if the input was mutable, then the additional space occupied by the copies of the string
 could have been avoided. The complexity of the idea above is $O(n log(n))$(because of sorting) time and $O(n)$ space (because of the copies of the input).
 
-\begin{minipage}{\linewidth}
+
  	\lstinputlisting[language=c++, caption="Brute force C++ solution to the two string anagram problem.",label=list:two_string_anagram_sorting]{sources/two_string_anagram/two_string_anagram_sorting.cpp}
-\end{minipage}
+
 
 \subsection{Histograms}
 \label{sec:anagrams:histograms}
@@ -190,8 +190,8 @@ computing the frequencies for $a$ and $b$ but by simply adding a frequency for a
 and subtracing it for letters in $b$. 
 The complexity of this approach is $O(n)$ in time and $O(1)$ in space. We cannot do better than this because all characters in the input strings must be at least accessed once in the worst case.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption="C++ solution to the two string anagram problem using the histogram approach.",label=list:two_string_anagram_histogram]{sources/two_string_anagram/two_string_anagram_histogram.cpp}
-\end{minipage}
+
 
 \section{Conclusion}

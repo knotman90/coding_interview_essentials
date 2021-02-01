@@ -71,9 +71,9 @@ Pay attention to the fact that the variable $i$ has a type that is larger in siz
 $int$. This is necessary in order to prevent overflows during the calculation of $i^2$. 
 One of the constraint of the problem is that the largest input can be $n=2^{32}-1$; if we square that number the result does not fit in a $4$ bytes int.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption=$O(\sqrt{n})$ solution to the problem of finding the square root of an integer.,label=list:square_root_brute_force]{sources/square_root/square_root_brute_force.cpp}
-\end{minipage}
+
 
 \subsection{Logarithmic Solution}
 Binary search can be effectively used to solve this problem and tn order to show that, we are going
@@ -126,9 +126,9 @@ The complexity of this approach is logaritmic in $n$. A good improvement w.r.t. 
 	\label{tab:sqrt_split_space}
 \end{table}
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption=$O(log_2(n))$ solution to the problem of finding the square root of an integer.,label=list:square_root_binary_search]{sources/square_root/square_root_binary_search.cpp}
-\end{minipage}
+
 
 
 \section{Conclusion}
