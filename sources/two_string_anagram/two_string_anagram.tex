@@ -10,67 +10,72 @@
 \chapter{Two string anagram}
 \label{ch:two_string_anagram}
 \section*{Introduction}
-Given a certain a certain word, you can construct other words by only changing the arrangements of its characters.
-For instance from the characters in \textit{alerting} you can spell the following words:
-\begin{enumerate*}
-	\item \textit{altering}
-	\item \textit{integral}
-	\item \textit{relating}
-	\item \textit{triangle}
-\end{enumerate*}.
-Words sharing the same characters-set are called anagrams. 
+From a set of words, you can construct other words by only changing the arrangements of their characters.
+For instance, from the characters in \textit{"alerting"} you can spell the following words:
+\begin{itemize}
+	\item  \textit{"altering"}
+	\item  \textit{"integral"}
+	\item  \textit{"relating"}
+	\item  \textit{"triangle"}.
+\end{itemize}
+Words sharing the same characters set are called \textbf{anagrams}. 
 
 Being able to create good anagrams,
-especially ones reflecting or commenting the word they are generated from (for instance turning
-\textit{Madam Curie} into \textit{Radium came}) is regarded as difficult task.
-Computers have been used for long time to find anagrams in long texts as well as to generate the so
-called anagram dictionaries \footnote{special kind of dictionary where all the letters in a word and
-all their transposition are arranged in alphabetical order} that are often used in games like
-Scrabble. Often, at the core of such application lies an efficient algorithm for determining if a word is an anagram.
+especially ones reflecting or commenting on the words they are generated from (for instance turning
+\textit{"Madam Curie"} into \textit{"Radium came"}) is regarded as a rather difficult task.
+Computers have been used for a long time to find anagrams in long texts as well as to generate the so-called anagram dictionaries,  a special kind of dictionary where all the letters in a word and
+all their transposition are arranged in alphabetical order, that are often used in games like
+[Scrabble](https://en.wikipedia.org/wiki/Scrabble). Often, at the core of such applications lies an efficient algorithm for determining if a word is an anagram of another word.
 
-The problem discussed in this chapter is about anagrams, and more specifically about determining how many 
-modification you need to make to a word in order to make it the anagram of a
-another given word. It is regarded as an easy problem mostly because the statement is straightforward to
-understand, the concept of anagram is part of the common knowledge and no particular insights or particularly
-tricky reasoning is required in order to obtain an efficient solution. 
-However, it has been frequently asked in coding interview, especially during the preliminary stages.
+As you might have already guessed, the problem discussed in this lesson is about anagrams, and more specifically, about determining the number of
+modifications you need to make to a word in order to make it a valid anagram of a
+another word.
+
+As a coding interview question, it is considered an easy one, mostly because, aside from the fact the statement is straightforward to
+understand and the concept of an anagram is part of the common knowledge, no particular insights or particularly
+tricky reasoning is required in order to come up with an efficient solution. 
+That said, it is still very much worth studying as it has been frequently asked during the preliminary interview stages.
 Moreover, despite its simplicity, there is more than one neat and elegant approach leading to an efficient
 solution to this problem.
+
+In the rest of the lesson, we are going to have a look at three
+solutions, starting from the slow but easy to understand brute-force touching briefly on a faster approach using sorting, and finally, to the optimal solution running in linear time. 
+
 In the rest of the chapter we are going to have a look at three
-solutions, from the slow and easy to understand brute-force in Section \ref{sec:anagrams:bruteforce} to a faster using
-sorting in Section \ref{sec:anagrams:sorting}, and finally, to the optimal solution running in linear time in Section
+solutions, starting from the slow but easy to understand brute-force in Section \ref{sec:anagrams:bruteforce} touching briefly on a faster approach using sorting
+ in Section \ref{sec:anagrams:sorting},and finally, to the optimal solution running in linear time in Section
 \ref{sec:anagrams:histograms}. 
 
 \section{Problem statement}
 	\begin{exercise}
-	Write a function that given two string, $a$ and $b$ of length $n$ and $m$, respectively, determines the minimum
-	number of character substitution, $C(s, i, c)$, necessary to make the string $a$ an anagram of the string $b$.
-	Two strings are said to be anagrams of one another if you can turn the first string into the second by
-	rearranging its letters. A substitution operation $C(s,i,c)$ modifies the input string $s$, by changing its $i^{th}$ character
-	into $c$. Notice that deletions or additions of character is not allowed. The only operation you can do is change a character of the first string into another one. 
-	You can perform any number of modification.
+		Write a function that given two string, $a$ and $b$ of length $n$ and $m$, respectively, determines the minimum number of character substitution, $C(s, i, c)$, necessary to make the string $a$ an anagram of the string $b$.
 
-	In other words, what is the minimum number of  characters of the input strings that need to be
-	modified (no addition or deletion)  so that $a$ becomes an anagram of $b$?
-
+		Two strings are said to be anagrams of one another if you can turn the first string into the second by rearranging its letters. 
+		
+		A substitution operation $C(s,i,c)$ modifies the string $s$, by changing its $i^{th}$ character into $c$. Notice that deletions or additions of characters are not allowed.
+		The only operation you can do is change a character of the first string into another one. 
+		
+		In other words, what is the minimum number of characters of the input strings that need to be modified (no addition or deletion)  so that $a$ becomes an anagram of $b$?
+		
 	\begin{example}
 		\hfill \\
 		\begin{itemize}
-			\item[] 	a = "aaa"
-			\item[] 	b = "bbb"
+			\item 	a = "aaa"
+			\item 	b = "bbb"
 		\end{itemize}
-		The answer for this case is: 3. All the character of the first string needs to be changed to \textit{'b'}.
+		The function returns $3$. 
+		All the characters of \textit{a} need to be changed into \textit{'b'}.
 		\label{ex:anagrams:example1}
 	\end{example}
 
 	\begin{example}
 		\hfill \\
 		\begin{itemize}
-			\item[] 	a = "tear"
-			\item[] 	b = "fear"
+			\item 	a = "tear"
+			\item	b = "fear"
 		\end{itemize}
-		The answer for this case is: 1. All it is necessary is turning the first letter of $a$ into an \textit{'f'}.
-		
+		The function returns $1$. 
+		All it is necessary is turning the first letter \textit{'t'} into a \textit{'f'}.
 	\end{example}
 
 	\begin{example}
@@ -79,21 +84,21 @@ sorting in Section \ref{sec:anagrams:sorting}, and finally, to the optimal solut
 			\item[] 	a = "Protectional"
 			\item[] 	b = "Lactoprotein"
 		\end{itemize}
-		The answer for this case is $0$ because $a$ is already an angram of $b$.
+		The answer for this case is $0$ because \emph{Protectional} is already an angram of \emph{Lactoprotein}.
 	\end{example}
 \end{exercise}
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item Are the letters of the string always only letters from the English alphabeth? 
+	\item Are the letters of the string always only letters from the English alphabet?  
 	\begin{answered}
-		\textit{Yes, letters are always from the english alphabet.}
+		\textit{Yes, letters are always from the English alphabet.}
 	\end{answered}
 	
 	\item Should the function be case sensitive? 
 	\begin{answered}
-		\textit{No, in particular the letters are always lower case.}
+		\textit{ No. You can assume the input letters are always lower case.}
 	\end{answered}
 	\item Can the input string be modified? No, the input is immutable.
 	\begin{answered}
@@ -107,91 +112,101 @@ sorting in Section \ref{sec:anagrams:sorting}, and finally, to the optimal solut
 \end{QandA}
 
 \section{Discussion}
-Let's start by first quickly review what the word anagram means in this case. For $a$ to be an anagram
+
+Let's start by first quickly review what the word anagram means in the context of this problem. First of all, notice that both $a$ and $b$ contain a single word (which can be fairly long).
+Moreover, for $a$ to be an anagram
 of $b$, it has to be the case that exists an arrangement of characters in $a$ that is equal to $b$.
 In other words, the question to which we need to answer is: is it possible to shuffle the character of $a$ such that we obtain $b$?
-For this to be case, it must be that $a$ and $b$ contains the same set of characters meaning that sorting both $a$ and $b$
-lead to two the same strings. 
-Moreover as a consequence of the fact that no addition or deletion
-is allowed, $a$ and $b$ must have the same length. 
-But if they have the same length then it is always
-possible to solve this problem because in the worst case, we can modify every letter in $a$ (see Example \ref{ex:anagrams:example1}).
-Thus, the only case when the problem has no solution has been isolated i.e. if the input string differes in length we must return $-1$ otherwise we can proceed with our calculation knowing that a solution exists.
+For this to be the case, it must be that $a$ and $b$ contain the same set of characters meaning that sorting both $a$ and $b$ would make them equal.
+In addition, as a consequence of the fact that no addition or deletion
+is allowed, \textbf{$a$ and $b$ must have the same length}. 
+On the other hand, if they have the same length then it is always
+possible to solve this problem because in the worst case, we can modify every letter of $a$ (see [Example 1]()).
+Thus, the only case when the problem has no solution has been isolated: when $n \neq m$ we must return $-1$ otherwise we can proceed with our calculation knowing that a solution exists.
 
 
 \subsection{Brute-Force}
 \label{sec:anagrams:bruteforce}
-Probably one of the first options coming to mind is the brute force solution where we generate all possible arrangements of the letters in $a$, and
-for each arrangement we calculate the number of modifications necessary for converting it into $b$. The key idea is that the cost of transforming a string into
-another equals to the numbers positions having different letters. For instance the cost of transforming "abcb"
-into "bbbb" is $2$ because the two strings differ in the first and third letter. 
 
-Despite its conceptual simplicity this approach is to be considered poor because the number
-of arrangements to be checked grows very fast with the length of the input string (as fast as $n!$).
-Moreover, its implementation  is not straightforward because the generation of all permutation is not easy do to
-by hand unless you use a third party library capable of doing that or certain languages like C++ that offers standard library functions devoted to this purpose (\lstinline[columns=fixed]{std::next_permutation(...)}\footnote{\url{https://en.cppreference.com/w/cpp/algorithm/next_permutation}}).
 
-Listings \ref{list:two_string_anagram_bruteforce} shows a C++ implementation of the idea above using \lstinline[columns=fixed]{std::next_permutation}.
+One of the first options coming to mind is a solution where we generate all possible arrangements of the letters in $a$, and
+for each of these arrangements, calculate the number of modifications necessary in order to convert it into $b$. 
+The key idea is that the cost of transforming a string into
+another is equal to the number positions having different letters. 
+For instance the cost of transforming \textit{"abcb"}
+into \textit{"bbbb"} is $2$ because the two strings differ in the first and third letters. 
+
+Despite being simple to explain this approach is to be considered poor because the number
+of arrangements of a set of $n$ letters grows as fast as $n!$.
+Moreover, enumerating all the arrangements is no trivial task unless we use a  library function capable of doing that (for instance, the C++ standard library provides the function \href{https://en.cppreference.com/w/cpp/algorithm/next_permutation}{\inline{std::next_permutation}} devoted to this purpose).
+
+Listings \ref{list:two_string_anagram_bruteforce} shows a C++ implementation of the idea above.
+
 \lstinputlisting[language=c++, caption="Brute force C++ solution to the two string anagram problem.",label=list:two_string_anagram_bruteforce]{sources/two_string_anagram/two_string_anagram_brute_force.cpp}
 
 
 \subsection{Sorting}
 \label{sec:anagrams:sorting}
-The brute-force solution does a lot of superfluous work because it tries to find a permutation of the string $a$
-requiring  minimal modifications to be morphed into b.
-But, is really necessary to try to turn $a$ into exactly $b$, or is it sufficient to turn $a$ into a particular permutation of $b$? 
-Afterall being an anagram is a transitive property meaning that if $a$ is a permutation of $b$ and $b$ is a prtmutation of $c$ then $a$ is also a permutaion of $c$. 
-By definition an anagram of $b$ is any permutation of its characters, meaning that also the permutation in which the characters of $b$ are sorted is a valid
-anagram. It is much easier if we try to modify $a$ into this sorted version of $b$ rather than to exactly $b$ because all we need to do it to create
-a copy of $a$ and $b$, sort both of them and then calculate the letter by letter difference.
-This approach works because if $x$ is an anagram of $b$ then $x$ is also an
-anagram of \inline{sort(b)}. In other words, it does not matter how the characters are arranged in $a$ and $b$, the only thing that matters is the set of characters
-appearing in $a$ and $b$. Listings \ref{list:two_string_anagram_sorting} shows a C++ implemenetation of the idea above. 
-Note that if the input was mutable, then the additional space occupied by the copies of the string
-could have been avoided. The complexity of the idea above is $O(n log(n))$(because of sorting) time and $O(n)$ space (because of the copies of the input).
 
+The brute-force solution does a lot of superfluous work because it tries to find a permutation of the string $a$
+requiring minimal modifications to be morphed into $b$.
+But, is it really necessary to turn $a$ into \textbf{exactly} $b$, or is it sufficient to modify $a$ so that it is equal to a particular permutation of $b$? 
+After all, being an anagram is a transitive property and if $a$ is a permutation of $b$ and $b$ is a permutation of $c$ then, $a$ must also be a permutation of $c$. 
+
+By definition, an anagram of $b$ is any permutation of its characters, and therefore, the particular permutation in which the characters of $b$ are sorted is a valid anagram of its. 
+It is much easier than checking all possible permutations, to modify $a$ into the "sorted" anagram of $b$ (where all of its characters are sorted), rather than to exactly $b$ because all we need to do is to create a copy of both $a$ and $b$, sort both of them and then calculate the character-by-character difference.
+\textit{}This approach works because if $x$ is an anagram of $b$ then $x$ is also an
+anagram of \inline{sort(b)}\textit{}. In other words, it does not matter how the characters are arranged in $a$ and $b$ as, the only thing that matters is the set of the characters
+appearing in $a$ and $b$: the order in which characters in both $a$ and $b$ appear does not matter. 
+
+Listings \ref{list:two_string_anagram_sorting}  shows how we can take advantage of this fact and write a fast solution for this problem.
 
  	\lstinputlisting[language=c++, caption="Brute force C++ solution to the two string anagram problem.",label=list:two_string_anagram_sorting]{sources/two_string_anagram/two_string_anagram_sorting.cpp}
 
+Notice that, if the input was mutable, then, the additional space occupied by the copies of the string \inline{aa} and \inline{bb}
+could have been avoided. 
+	 
+\textbf{The time complexity of the idea above is $O(n log(n))$} (because of sorting). \textbf{The space complexity is $O(n)$} (we create copies of the input strings).
+	 
+		  
 
 \subsection{Histograms}
 \label{sec:anagrams:histograms}
-There is another bit of information that is not yet used i.e. the fact that the set from which the
-letters (the alphabet) are taken from is really small. 
-If the only thing that matters is the set of characters appearing in $a$ and $b$,
-then we can use the same idea used at the core of bucket sort\footnote{\url{https://en.wikipedia.org/wiki/Bucket_sort}} to finally achieve a linear time solution.
-To solve this problem efficiently it is then sufficient  to calculate the frequencies of the character in $a$, $F_a$, and $b$, $F_b$.
-If $F_a$ and $F_b$ are the same, then $a$ is an anagram of $b$ otherwise then it must be that either some character is appears a different number of times in both strings.
-All it is needed is modifying $a$ such that the frequencies of $F_a$ and $F_b$ match exactly. 
-But how many operations are necessary to do so?  In order to get this answer it is useful to look at
-the difference of the two frequencies arrays $D = F_a - F_b$:
-\begin{equation*}
-	 D = \{D[\mathrm{a}] = (F_a[\mathrm{a}] - F_b[\mathrm{a}]), D[\mathrm{b}] = (F_a[\mathrm{b}] - F_b[\mathrm{b}]), D[\mathrm{c}] = (F_a[\mathrm{c}] - F_b[\mathrm{c}]), \ldots, D[\mathrm{z}] = (F_a[\mathrm{z}] - F_b[\mathrm{z}])\}
-\end{equation*}
-First of all notice that $\sum_{\mathrm{a}}^{\mathrm{z}} D = 0$. Moreover, if an element of $D$ is greater than zero, than this means that $a$
-has an excess of the corrensponding letter, and on the contrary if it is less than zero, it means $a$
-has a deficit of that letter.
-What can be done is to turn the letters in excess into letters that
-are missing and that is possible since $\sum_{\mathrm{a}}^{\mathrm{z}} D= 0$.
-The answer to this problem is the sum over the positive (alternatively negative) numbers of $D$. 
+
+There is another bit of information that we have not  yet used: \textbf{the alphabet} from which the
+letters of $a$ and $ab$ are taken from \textbf{is small}. 
+If the only thing that matters is the set of characters appearing in $a$ and $b$ (and not their order, as discussed above),
+then we can use the same idea at the core of the \href{https://en.wikipedia.org/wiki/Bucket_sort}{bucket sort} algorithm to achieve a linear time complexity solution.
+
+The key idea is to preprocess $a$ and $b$ so to calculate their per-character frequencies, denoted here as $F_a$ and $F_b$, respectively. An entry of $F_a[\mathrm{c}]$ and $F_b[\mathrm{c}]$, where $\mathrm{c} \in \{\mathrm{a},\mathrm{b},\ldots,\mathrm{z}\}$ (a letter of the alphabet), contains the frequency of character $\mathrm{c}$, in $a$ and $b$, respectively.
+
+If $F_a$ and $F_b$ are the same, then $a$ and $b$ have exactly the same character set and $a$ is an anagram of $b$.
+Otherwise, it must be the case that some characters of $a$ appear in $b$ a different number of times.
+In this case, we can fix $a$ in such a way to make sure that its frequencies $F_a$ ey match the ones in $F_b$. 
+But the main question is still unanswered: how many operations are necessary to do so?  In order to get this answer, it is useful to look at
+the difference ($D$) of $F_a$ and $F_b$.
+
+$D = F_a - F_b = \{D[\mathrm{a}] = (F_a[\mathrm{a}] - F_b[\mathrm{a}]), D[\mathrm{b}] = (F_a[\mathrm{b}] - F_b[\mathrm{b}]), D[\mathrm{c}] = (F_a[\mathrm{c}] - F_b[\mathrm{c}]), \ldots, D[\mathrm{z}] = (F_a[\mathrm{z}] - F_b[\mathrm{z}])\}
+$
+
+$D[\mathrm{c}]$ (where $\mathrm{c} \in \{\mathrm{a},\mathrm{b},\ldots,\mathrm{z}\}$) contains the difference between the number of occurrences of the character $\mathrm{c}$ in the string $a$ and $b$. Depending on whether the value of $D[\mathrm{c}]$  is greater or smaller than $0$, $a$ has an excess or a deficit of the letter c, respectively.
+
+Firstly, notice that $\sum_{c=\mathrm{a}}^{\mathrm{z}} D[\mathrm{c}] = 0$. This observation stems from the fact that $|a|=n=m=|b|$ ($a$ and $b$ must have equal length for this problem to have a solution, remember?) and that if $a$ has an excess of a certain character $\mathrm{c}$ then there must exist another character $\mathrm{d} \neq \mathrm{c}$ that the string $a$ has a shortage of. If that is not the case, it is impossible for $a$ and $b$ to have equal lenght.
+
+We can use this fact to modify the excesses of the letters of $a$, the ones having a positive value of $D$ 
+into some of the letters there is a shortage of so that eventually, every single value of $D$ is zero.
+If $D[\mathrm{c}] = x$ is going to take $x$ modifications to transform the excess of characters $\mathrm{c}$.
+The answer to this problem is, therefore, the sum of all the positive numbers of $D$. 
+
 Listings \ref{list:two_string_anagram_histogram} shows a possible implemenetation of the idea above.
-Notice how the array of differences of frequencies $D$ can be easily calculated without explicitelly
-computing the frequencies for $a$ and $b$ but by simply adding a frequency for a letter appearing in $a$
-and subtracing it for letters in $b$. 
-First of all notice that $\sum D = 0$. Moreover, if an element of $D$ is greater than zero, than this means that $a$
-has an excess of the corrensponding letter, and on the contrary if it is less than zero, it means $a$
-has a deficit of that letter.
-What can be done is to turn the letters in excess into letters that
-are missing and that is possible since $\sum D = 0$.
-The answer to this problem is the sum over the positive (alternatively negative) numbers of $D$. 
-Listings \ref{list:two_string_anagram_histogram} shows a possible implemenetation of the idea above.
-Notice how the array of differences of frequencies $D$ can be easily calculated without explicitelly
-computing the frequencies for $a$ and $b$ but by simply adding a frequency for a letter appearing in $a$
-and subtracing it for letters in $b$. 
-The complexity of this approach is $O(n)$ in time and $O(1)$ in space. We cannot do better than this because all characters in the input strings must be at least accessed once in the worst case.
+
+\lstinputlisting[language=c++, caption="C++ solution to the two string anagram problem using the histogram approach.",label=list:two_string_anagram_histogram]{sources/two_string_anagram/two_string_anagram_histogram.cpp}
 
 
-	\lstinputlisting[language=c++, caption="C++ solution to the two string anagram problem using the histogram approach.",label=list:two_string_anagram_histogram]{sources/two_string_anagram/two_string_anagram_histogram.cpp}
+Notice how the array of differences of frequencies $D$ can be easily calculated without explicitly
+computing the frequencies for the characters of $a$ and $b$ but by simply adding $1$ to $D[\mathrm{c}]$ when the letter $\mathrm{c}$ appears in $a$
+and subtracting $1$ when it does in $b$. 
 
+\textbf{The time and space complexity of the code above is $O(n)$ and $O(1)$ in space} (we are using an array of $128$ integers regardless of the size of the input). We cannot do better than this as all characters in the input strings must be at least read once.
 
-\section{Conclusion}
+%\section{Conclusion}
