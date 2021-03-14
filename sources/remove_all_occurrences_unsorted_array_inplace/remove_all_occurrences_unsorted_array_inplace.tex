@@ -15,23 +15,24 @@
 \label{ch:remove_all_occurrences_unsorted_array_inplace}
 \section*{Introduction}
 The problem described in this chapter asks you to implement a common operations: removes all
-elements satisfying specific criteria from a collection. This problem has lot of similarities with
+elements satisfying specific criterium from a collection. This problem has lot of similarities with
 the one described in Chapter \ref{ch:remove_duplicated_sorted_array_inplace} and as a consequence
 they share the same general solution approach. 
 
 There are many versions and variations of this problem with the most common being the one where the
 collection is a simple array or a vector of integers and you are asked to remove all the elements
-equal to a given integer. However here, we will discuss a more general version of this problem where
-the collection is of a generic type \inline{T} and the criteria is given in the form of a unary
-function returning a boolean\footnote{This type of functions is also commonly known as
-\textit{predicate}.}. Specializing what is discussed here on the fly during the interview for the
-actual particular problem's version given to you should be easy.
+equal to a given integer. However, here we will discuss a more general version of this problem where
+the collection is of a generic type \inline{T} and the criterium is given in the form of a unary
+function returning a boolean\footnote{This type of functions are commonly known as
+\textit{predicates}.}. 
 
+If you are asked to solve this actual particular problem’s version during an interview, you should be able to easily specialise what is discussed here on the fly.
 
 \section{Problem statement}
 \begin{exercise}
 \label{example:remove_all_occurrences_unsorted_array_inplace:exercice1}
-Write a function that given a collection $I$ of elements of type \inline{T} and a predicate function
+Write a function that given a collection $I$ of elements of type \inline{T}
+ and a predicate function
  $p$ with signature \inline{bool(const T&)}, rearranges $I$ in such a way that all the $0 \leq k
  \leq |I|$ elements satisfying $p$ in $I$ are moved to its front. The function should returns $k$.
 
@@ -44,18 +45,14 @@ Write a function that given a collection $I$ of elements of type \inline{T} and 
 	\begin{example}
 		\label{example:remove_all_occurrences_unsorted_array_inplace:example1}
 		\hfill \\
-		Given $I = \{[4, 1, 1, 2, 1, 3]\}$ and $p$ is a function returning true if its input
-		argument is an even number, the function returns $4$. The first $4$ elements of $I$ are
-		$\{1,1,1,3\}$. 
+		Given $I = \{{4, 1, 1, 2, 1, 3\}}$ and a function $p$ returning true if its input argument is an even number, false otherwise, the function returns $4$. The first $4$ elements of $I$ are $\{1,1,1,3\}$. 
 		
 	\end{example}
 
 	\begin{example}
 		\label{example:remove_all_occurrences_unsorted_array_inplace:example2}
 		\hfill \\
-		Given $I = \{[4, 1, 1, 2, 1, 3]\}$ and $p$ is a function returning true if its input
-		argument is odd, the function returns $2$. At this point, the first $2$ elements of $I$ are
-		$\{4,2\}$. 
+		Given $I = \{4, 1, 1, 2, 1, 3\}$ and a function $p$ returning true if its input argument is odd, the function returns $2$. At this point, the first $2$ elements of $I$ are $\{4,2\}$. 
 		
 	\end{example}
 \end{exercise}
@@ -75,49 +72,71 @@ Write a function that given a collection $I$ of elements of type \inline{T} and 
 This problem could be restated as: \textit{Implement the
 \inline{remove_if}\footnote{\url{https://en.cppreference.com/w/cpp/algorithm/remove}}} function from
 the C++ STL. So I would not be really surprised if during an interview someone would come-up with a
-one-liner as the one shown in Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:STL}.
+one-liner as the one shown in Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:STL}
 \footnote{Notice the similarities with Listing \ref{list:remove_duplicated_sorted_array_inplace_stl} for the problem in Chapter \ref{ch:remove_duplicated_sorted_array_inplace}}.
-However, if you present this solution to the interviewer you might expect that he asks you to implement the logic behind \inline{std::remove_if}.
 
 \lstinputlisting[language=c++, caption={One-liner solution using the STL functions \inline{distance} and \inline{remove_if}},label=list:remove_all_occurrences_unsorted_array_inplace:STL]{sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution1.cpp}
 
 
-\subsection{Linear space}
+This algorithm has a linear time and constant space complexity, which is pretty much as good as it gets. You cannot do much better than this considering you must at least read all the elements in the input array. 
+Rest assured that, however, if you present this solution to the interviewer, you should expect him to ask you to implement the logic behind \inline{std::remove_if}
+ itself. This is pretty much what this problem is all about.
+
+\subsection{Linear time and linear space solution}
 \label{remove_all_occurrences_unsorted_array_inplace:sec:bruteforce}
-There is a straightforward way of solving this problem that has also the additional benefit of occupy only a couple of lines and of being 
-super clear and simple. The idea is that we can use an additional linear amount of space to temporarily store the valid (dissatisfying $p$) elements, and
-in a subsequent phase move them into the front of $I$. Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:copy} shows a possible implementation of this idea.
-This solution however only works correctly for types that can be copied. The interviewer could well ask you to fix this and in that case you can 
-loop over \inline{A} and \inline{temp} and \inline{move}\footnote{\url{https://en.cppreference.com/w/cpp/utility/move}} the elements around instead.
+There is a straightforward way of solving this problem that has also the added benefit of occupying
+only a couple of lines and of being super clear and simple. The idea is that we can use an additional
+linear amount of space to temporarily store the valid (dissatisfying the predicate \inline{p}
+) elements, and in a subsequent
+phase move them into the front of \inline{I}
+. Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:copy} shows a possible implementation of this idea.
+
 \lstinputlisting[language=c++, caption={Linear space solution using the \inline{std::copy} family of functions from the STL.},label=list:remove_all_occurrences_unsorted_array_inplace:copy]{sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution2.cpp}
 
-\subsection{Constant space}
+
+This solution however, only works correctly for types that can be copied. Beware that the interviewer could
+well ask you to fix this: in that case, you can loop over \inline{I}
+ and \inline{temp}
+ and
+\href{https://en.cppreference.com/w/cpp/utility/move}{\inline{move}
+}\footnote{\inline{std::move}
+ is used to indicate that an object t may be "moved from", i.e. allowing the efficient transfer of resources from t to another object without the need for an explicit copy.}
+ the elements around instead.
+
+
+
+\subsection{Linear time and constant space solution}
 \label{remove_all_occurrences_unsorted_array_inplace:sec:constant_space}
+
 The idea discussed in Section \ref{remove_all_occurrences_unsorted_array_inplace:sec:bruteforce} can quite easily be modified so that we avoid using linear
-additional space. We could use move the elements of $A$ into $A$ itself, pretty much in the same fashion we already did for the problem discussed in Chapter \ref{ch:remove_duplicated_sorted_array_inplace}
+additional space. We could use \inline{std::move} the elements of $I$ into $I$ itself, pretty much in the same fashion we already did for the problem discussed in Chapter \ref{ch:remove_duplicated_sorted_array_inplace}
 while discussing the solution \ref{list:remove_duplicated_sorted_array_inplace}. 
-We use exactly the same approach of two pointers $x$ and $y$ pointing to:
+
+Here we use exactly the same approach of two pointers $x$ and $y$:
 \begin{enumerate}
-	\item $x$, keeping track of the new front to $I$. It points to the end of the portion of $I$ (starting at index $0$ and ending at $x-1$) containing all the valid elements found so far.
-	\item $y$, which is a pointer to the next element not yet processed in $I$.
-\end{enumerate}.
+	\item  $x$ keeps track of the new front to $I$. It points to the end of the portion of $I$ (starting at index $0$ and ending at $x-1$) containing all the valid elements found so far;
+	\item $y$ is a pointer to the next element not yet processed in $I$.
+\end{enumerate}
+
 Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:constant_space} implements this idea.
-
-At the beginning of the execution the algorithm moves $x$ forward so that all the valid elements that are already
-at the front of $I$ stay untouched where they are as they are already in the right locations.
-At this point $x$ points either to the first invalid element in $I$ or to one element past $I$.
-In the second scenario there is no more work to do. All the elements are valid to begin with and the second \inline{while}
-will not even start. $I$ is left unchanged.
-In the first scenario we will use $y$ to scan the remaining element of $I$ past $x$, and we move each valid element we encounter, 
-into the location pointed by $x$. When this happen $x$ is moved forward as the portion of valid elements grew by one element. 
-
-Notice that the invariant $x \leq y$ is always respected as:
-\begin{itemize}
-	\item it holds before the beginning of the loop and,
-	\item $x$ is incremented at the same rate or less compare to $y$.
-\end{itemize}
-At the end of this process we are left with $y$ pointing to the one element past $I$ and $x$ pointing one cell after the last valid element of the newly rearranged $I$.
 
 \lstinputlisting[language=c++, caption={Constant space solution using a two pointer approach.},label=list:remove_all_occurrences_unsorted_array_inplace:constant_space]{sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution3.cpp}
 
 
+
+At the beginning of the execution, the algorithm moves $x$ forward: all the valid elements that are already
+at the front of $I$ stay untouched where they are, as they are already in the right locations.
+At this point, $x$ points either to the first invalid element in $I$ or to one element past $I$.
+In the second scenario, there is no more work to do. All the elements are valid to begin with, and the second \inline{while}
+
+will not even start. $I$ is left unchanged.
+In the first scenario, we will use $y$ to scan the remaining element of $I$ past $x$, and we move each valid element we encounter 
+into the location pointed by $x$. When this happens $x$ is moved forward as the portion of valid elements grew by one element. 
+
+Notice that the invariant $x \leq y$ is always respected as:
+\begin{itemize}
+	\item it holds before the beginning of the loop;
+	\item $x$ is incremented at the same rate or less compared to $y$.
+\end{itemize}
+
+At the end of this process, we are left with $y$ pointing to the one element past $I$ and $x$ pointing to one cell after the last valid element of the newly rearranged $I$.
