@@ -2,8 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Links:
 %
-% Difficulty: Easy
-% Companies: 
+% Difficulty: Easy Companies: 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapterimage{header}
@@ -11,19 +10,20 @@
 \chapter{Unique Elements in a collection}
 \label{ch:unique_elements}
 \section*{Introduction}
-The problem presented in this section is probably one of the most asked problem during interviews probably because its statement is simple to understand and it is easy to come up with a brute force solution that can be used a starting point towards the asymptotically optimal one. 
+The problem presented in this section is probably one of the most popular
+possibly because it features an incredibly simple statement and it is and easy to understand.
+This problem has an intuitive brute-force solution that can be coded in a few minutes and that
+can be refined and optimized into a short and efficient one. 
 
 \section{Problem statement}
-Given a string $s$ of length $n$, determine whether it does not contains duplicate character. 
+Given a string $s$ of length $n$, determine whether it does \textbf{not} contain duplicate characters. 
 
 \begin{example}
 \hfill
 	\begin{itemize}
-		\item [-] $s=$"graph" $ \longrightarrow$ TRUE
-		\item [-] $s=$"tree" $ \longrightarrow$ FALSE
-		\item [-] $s=$"Einstein" $ \longrightarrow$ FALSE
+		\item Given \textit{s="graph"} the function returns \inline{true}. There are no duplicates  in $s$.
+		\item Given \textit{s="tree"} the function returns \inline{false}. Characters at indices $2$ and $3$  are the same.
 	\end{itemize}
-	
 \end{example}
 
 \section{Clarification Questions}
@@ -34,54 +34,87 @@ Given a string $s$ of length $n$, determine whether it does not contains duplica
 		\textit{The maximum length for the input string is $10^6$.}
 	\end{answered}
 	
-	\item Are all character upper or lower case?
+	\item Are all characters upper or lower case?
 	\begin{answered}
 		\textit{No, both upper and lower case might be present.}
 	\end{answered}
 
-	\item Is the function case sensitive?
+	\item Is the function case-sensitive?
 	\begin{answered}
 		\textit{Yes.}
 	\end{answered}
 
 	\item Can I assume characters only alphanumeric characters are present in the input?
 	\begin{answered}
-		\textit{Yes. Upper and lower case latin letters and numbers only.}
+		\textit{Yes. Upper and lower case Latin letters and numbers only.}
 	\end{answered}
 \end{QandA}
 
 \section{Discussion}
-Being this problem so popular, when asked, the interviewer is expecting the candidate to come up with a good solution in a small time window. For this reason the obvious $O(n^2)$ solution should be immediately put on the whiteboard.
+Being this problem so popular, the interviewer is expecting you to come up
+with a good solution in a relatively small time-window. 
+For this reason the obvious $O(n^2)$ solution should be
+immediately put on the whiteboard or at least spoken out-loud.
+
 \subsection{Brute Force}
-The brute force solution to this problem works by looping over each character $s_i$ once, and for each of them checking if it is present in any of the subsequent position of $s$ i.e. checking if the following is true: $\exists \; j $ s.t.  $s_j=s_i \; j>i$.
-This idea can be implemented as shown in Listing \ref{list:unique_elements_brute_force1} using two nested loops.
+The trivial and easy approach in solving this problem works by looping over each character at index $i$,
+and checking if $s_i$ is present in any of the elements  of $s$ appearing at positions higher than $i$. 
+In other words we want to check whether the following is true: $\exists \; j $ s.t.  $s_j=s_i$ and $j>i$.
+This idea can be implemented as shown in
+Listing \ref{list:unique_elements_brute_force1} using two simple nested loops.
+
+\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique.",label=list:unique_elements_brute_force1]{sources/unique_elements/unique_elements_brute_force.cpp}
 
 
-	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique.",label=list:unique_elements_brute_force1]{sources/unique_elements/unique_elements_brute_force.cpp}
+As a stylistic improvements to the code in Listing \ref{list:unique_elements_brute_force1}, Listing
+\ref{list:unique_elements_brute_force2}  uses the C++ standard library function \inline{std::find} to
+search for a duplicate of the character $s_i$. 
+This not only makes the code shorter and cleaner,
+but also shows to the interviewer that you are able to use the standard library and do not reinvent the wheel.
+
+\lstinputlisting[language=c++, caption="C++ solution for determining if all characters in a string are unique using \inline{std::find}",label=list:unique_elements_brute_force2]{sources/unique_elements/unique_elements_brute_force_std.cpp}
+
+\subsection{Linear time - Hashset}
+In Listing \ref{list:unique_elements_brute_force1} the internal loop is doing the hard work of
+searching for a duplicate of the character at index $i$. We can trade space for time and reduce the
+complexity of the  search for a duplicate of $s_i$ down to $O(1)$.
+The idea is that wen can use a set to keep track, as we loop over the characters of $s$, of all the distinct characters seen so far.
+A search for a duplicate of $s_i$ becomes a query into this set. If the query is positive then we know we have seen this character before, otherwise 
+we inser $s_i$ into the set and can continue  processing the rest of $s$.
+Listing \ref{list:unique_elements_brute_force_map} shows how this idea can be implemented.
 
 
-As a stylistic improvements to the code in Listing \ref{list:unique_elements_brute_force1}, Listing \ref{list:unique_elements_brute_force2}  uses the C++ standard library function \texttt{find} to search for a duplicate  of the character $s_i$. This not only makes the code shorter and cleaner, but also shows that the candidate is able to use the standard library and do not reinvent the wheel (in this case the ubiquitous \texttt{find} function).
+\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_map]{sources/unique_elements/unique_elements_brute_force_map.cpp}
 
 
-	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique using \texttt{std::find}",label=list:unique_elements_brute_force2]{sources/unique_elements/unique_elements_brute_force_std.cpp}
+This approach effectively lowers the time complexity down to linear, but at the cost of some
+space. But how much space exactly? 
+The intuition would suggest $O(n)$ because that is the size of the
+input string, and afterall we might be inserting into the hashset all of the characters of $s$.
+But the intuition is wrong as the string is made of characters from an alphabet $\Sigma$ 
+which has a (very) limited size, at most $128$ (which is the size of the ASCII set) elements.
+The insert instruction will not be
+executed more than $|\Sigma|$ times.
+Because of this the space complexity of this solution is $O(1)$. 
 
+The previous argument can be expanded furthermore with the following idea: \textbf{Every string
+with more than $|\Sigma|$ character contains at least one duplicate}(follows from the pigeon
+principle\footnote{The pigeonhole principle (\url{https://en.wikipedia.org/wiki/Pigeonhole_principle}) states that if $n$ items are put into $m$ containers, with
+$n > m$, then at least one container must contain more than one item.}). 
+The longest string with only unique characters is one of the permutations of \textit{"abcde\ldots zABCD \ldots Z123 \ldots 9"}.
+Thus the solution using the hashset has complexity of $O(1)$ because in the worst case 
+we can have $|\Sigma|$ negative lookups.
+For this reason, we can limit our investigation to only strings that have size smaller or equal to
+$|\Sigma|$ character. For all other strings we can immediately return false.
+Note that under the light of these new facts the brute-force approach also has a complexity of $O(1)$
+if $i$ and $j$ in Listing \ref{list:unique_elements_brute_force1} are forced to stay below
+$|\Sigma|$.
 
-In Listing \ref{list:unique_elements_brute_force1} the internal loop is doing the hard work of searching for a duplicate of the character at index $i$. We can trade space for time and reduce the complexity of the duplicate search of a single character down to $O(1)$. The idea is that when the duplicate search is over for character $s_i$, then $s_i$ is inserted into a set. The set keeps track of all the characters seen so far. The internal loop can be modified to simply be a lookup into the map as shown in Listing \ref{list:unique_elements_brute_force_map}.
+Armed with these new arguments, the solution we suggest to present during an actual interview only uses a
+array of booleans of size $|\Sigma|$ storing the information regarding the presence of a
+character in the portion of $s$ considered so far.
+If at any time the currently examined character has
+been already seen, then it is a duplicate.
+Listing \ref{list:unique_elements_brute_force_final} shows an implementation of this idea.
 
-
-	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_map]{sources/unique_elements/unique_elements_brute_force_map.cpp}
-
-
-This approach seems to effectively lower the time complexity down to linear, but at the cost of some space. But how much space exactly? The intuition would say $n$ because that is the size of the  input string. But the string is made of characters from an alphabet $\Sigma$ which has a very limited size, at most $128$ (size of the ASCII table) elements. The insert instruction will not be executed more than $|\Sigma|$ times. Because of this the space complexity of this solution if $O(1)$. 
-
-The previous argument can be expanded further more with the following idea: \textbf{Every string with more than $|\Sigma|$ character contains at least one duplicate}(follows from the pigeon principle\footnote{The pigeonhole principle states that if n items are put into m containers, with $n > m$, then at least one container must contain more than one item.}). The longest string with only unique characters is one of the permutation of "abcde\ldots zABCD \ldots Z123 \ldots 9".
-Thus the solution using the hashset has complexity of $O(1)$ because in the worst case after $|\Sigma|$ lookups the next one will be positive. For this reason the checks can be limited to the first $|\Sigma|$ character. Note that this observation suddenly makes the brute force approach also $O(1)$ if $i$ and $j$ in Listing \ref{list:unique_elements_brute_force1} are forced to stay below $|\Sigma|$.
-
-Armed with these new arguments, the solution we suggest to present during the interview only uses a stack allocated array of bool of size $|\Sigma|$ storing
-the information regarding the presence of a character in the characters examined so far. If at any time the currenclty examined character has been already seen, then there is a duplicate. See Listing \ref{list:unique_elements_brute_force_final} for a possible implementation of this idea.
-
-
-	\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_final]{sources/unique_elements/unique_elements_brute_force_final.cpp}
-
-
-\section{Common variations}
+\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_final]{sources/unique_elements/unique_elements_brute_force_final.cpp}
