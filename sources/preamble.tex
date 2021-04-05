@@ -613,3 +613,17 @@ innerbottommargin=5pt]{cBox}
 
 
 \DeclareMathOperator{\sign}{sign}
+
+\usepackage[xcolor,leftbars]{changebar}
+
+\usepackage{lipsum}
+
+\newcommand{\quoteblock}[1]{%
+	\cbcolor{ocre}
+	\begin{changebar}
+		#1
+	\end{changebar}%
+}%
+
+
+\setlength{\changebarsep}{2ex}
