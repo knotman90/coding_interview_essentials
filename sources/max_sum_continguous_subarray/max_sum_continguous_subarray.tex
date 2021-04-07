@@ -32,13 +32,13 @@ Formally, the task is to find two indices $ 0 \leq i \leq j < n$ s.t. the follow
 	\begin{example}
 		\hfill \\
 		Given $A=\{-2, -5, \underbrace{6, -2, -3, 1, 5}\text{}, -6\}$ then the answer is $7$ which can
-		be obtained by summing all elements from index $2$ to $6$ i.e. $\sum_{2}^7 A[i] = 7$
+		be obtained by summing all elements from index $2$ to $6$ i.e. $\sum_{i=2}^7 A[i] = 7$
 	\end{example}
 
 	\begin{example}
 		\hfill \\
 		Given $A=\{-2, 1, -3, \underbrace{4, -1, 2, 1}\text{}, -5, 4\}$ then the answer is $6$ which can
-		be obtained by summing all elements from index $3$ to $6$ i.e. $\sum_{3}^6 A[i] = 6$
+		be obtained by summing all elements from index $3$ to $6$ i.e. $\sum_{i=3}^6 A[i] = 6$
 		
 	\end{example}
 \end{exercise}
@@ -84,7 +84,7 @@ element can be calculated by as shown in Listing
 This approach is correct but it is unnecessarily slow, and it has a time complexity of $O(n^3)$: there are $O(n^2)$ ordered pairs $(i,j)$ each identifying a sub-array, and calculating the sum of a single sub-array costs $O(n)$ (the call to \inline{std::accumulate}), for a grand total of $O(n^3)$. 
 This is considered a poor solution because it is quite far off from the optimal linear time complexity solution that exists for this problem.
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_bruteforce]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution1.cpp}
+\lstinputlisting[language=c++, caption=Cubic time brute-force solution,label=list:max_sum_continguous_subarray_bruteforce]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution1.cpp}
 
 
 \subsection{Brute-force improved}
@@ -96,14 +96,14 @@ prefix sum (see Section \ref{sect:appendix:prefix_sum}) of the input array.
 This allows for constant time computation of the sum of any sub-array in $A$. Given an array $Y$ containing the prefix sum for the
 array $A$ then the sub-array sum between indices $i$ and $j$ is equal to: $Y[j]-Y[i-1]$ where $Y[-1] = 0$.
 
-The code in Listing \ref{list:max_sum_continguous_subarray_bruteforce_improved} shows how this idea can be used to bring the time complexity of the the brute-force solution above (in Listing \ref{sec:max_sum_continguous_subarray_bruteforce}) down to $O(n^2)$. 
+The code in Listing \ref{list:max_sum_continguous_subarray_bruteforce_improved} shows how this idea can be used to bring the time complexity of the brute-force solution above (in Listing \ref{sec:max_sum_continguous_subarray_bruteforce}) down to $O(n^2)$. 
 Notice how the call to \inline{std::accumulate} is substituted with a simple $O(1)$ operation on the prefix sum that is pre-calculated using the function \inline{prefix_sum} (which crucially runs in linear time).
 
-\lstinputlisting[language=c++, caption=Brute-force solution using prefix-sum.,label=list:max_sum_continguous_subarray_bruteforce_improved]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution3.cpp}
+\lstinputlisting[language=c++, caption=Brute-force quadratic time and linear space solution using prefix-sum.,label=list:max_sum_continguous_subarray_bruteforce_improved]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution3.cpp}
 
 Despite the dramatic improvement in time complexity obtained with this new solution, Listing
 \ref{list:max_sum_continguous_subarray_bruteforce_improved} it is still considered a rather poor solution.
-Storing the prefix sum costs linear space and  considering the the popularity of this interview question, during a real
+Storing the prefix sum costs linear space and  considering the  popularity of this interview question, during a real
 interview a linear time and constant space solution is likely to be expected by the interviewer.
 
 \subsection{Kadane's Algorithm}
@@ -126,7 +126,7 @@ The function call to \inline{std::max} really means that the maximum sub-array s
 \end{enumerate}
 If you think about it it make sense to construct $B$ this way. After all, when processing an element $A[i]$ you can either use it to extend a sub-array ending at index $i-1$ (and if you are going to extend one you are better off extending the one which gives you the largest sum up to that point) or start a new sub-array from the cell at position $i$. You choose one of the two option based on which choice lead to the largest value. 
 
-Figure \ref{fig:median_sorted_array:kadane} shows an example of execution of this idea on the array $A=\{-2,-5,6,-2,-3,1,-10,4\}$ where it is depicted for each of the eight steps of the algorithm how the value for the corresponding cells of $B$ are calculated as well as which cells of $A$ contribute to it.
+Figure \ref{fig:median_sorted_array:kadane} shows an example of execution of this idea on the array $A=\{-2,-5,6,-2,-3,1,5,2\}$ where it is depicted for each of the eight steps of the algorithm how the value for the corresponding cells of $B$ are calculated as well as which cells of $A$ contribute to it.
 
 \begin{figure}
 	\centering
@@ -203,7 +203,7 @@ value of $B$ i.e. the value for the index $i-1$ as shown in Listing
 
 \lstinputlisting[language=c++, caption=Constant space and linear time Kadane's algorithm,label=list:max_sum_continguous_subarray_kadane]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution4.cpp}
 
-Note how the variable \texttt{max\_ending\_here} is doing the job that the variable \texttt{B[i-1]}
+Notice how the variable \texttt{max\_ending\_here} is doing the job that the variable \texttt{B[i-1]}
 was doing in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space} and also how
 the final answer is the maximum among all values taken by \texttt{max\_ending\_here}.
 
@@ -213,7 +213,7 @@ of complexity the interviewer expects.
 \section{Common Variations}
 \subsection{Minium sum contiguous sub-array}
 A very common variation of this problem is to find the smallest sum instead of the largest. This
-variation is very quickly solved by just changing the the way the variables in Listing \ref{list:max_sum_continguous_subarray_kadane}
+variation is very quickly solved by just changing the  way the variables in Listing \ref{list:max_sum_continguous_subarray_kadane}
 \texttt{min\_ending\_here} (the variable is named \textbf{min} instead of max so to reflect the nature of the
 problem) and \texttt{ans} are updated. Since the minimum is to be returned then they should be
 updated using \lstinline[columns=fixed]{min_ending_here = std::min(A[i] , max_ending_here+A[i]);}
