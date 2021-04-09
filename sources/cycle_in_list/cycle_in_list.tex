@@ -75,14 +75,14 @@ represent the list shown in Figure \ref{fig:cycle_in_list:example1}.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=1.0]{sources/cycle_in_list/images/list_cycle}
+	\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/list_cycle}
 	\caption{Example of linked list with a cycle.}
 	\label{fig:cycle_in_list:example1}
 \end{figure}
 \begin{figure}
 	\label{fig:cycle_in_list:example2}
 	\centering
-	\includegraphics[scale=1.0]{sources/cycle_in_list/images/list_no_cycle}
+	\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/list_no_cycle}
 	\caption{Example of linked list with no cycle.}
 \end{figure}
 
@@ -102,7 +102,7 @@ constant.
 All solution implementation in this chapter uses the  Linked list definition shown in Listing \ref{list:cycle_in_list:node_definition};
 
 
-	\lstinputlisting[language=c++, caption={Singly linked-list node definition.},label=list:cycle_in_list:node_definition]{sources/cycle_in_list/linked_list.h}
+	\lstinputlisting[language=c++, caption={Singly linked-list node definition.},label=list:cycle_in_list:node_definition]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/linked_list.h}
 
 
 \subsection{Linear time and space solution}
@@ -115,7 +115,7 @@ of a loop. If we reach the end of the list and we were not be able to find a dup
 means there is no loop and we can return \lstinline[columns=fixed]{nullptr}. A possible
 implementation of this idea is shown in Listing \ref{list:cycle_in_list:linearspace}.
 
-\lstinputlisting[language=c++, caption={Linear time and space solution to the problem of detecting a cycle in a linked list where an hashset is used to remember already visited nodes.},label=list:cycle_in_list:linearspace]{sources/cycle_in_list/cycle_in_list_solution1.cpp}
+\lstinputlisting[language=c++, caption={Linear time and space solution to the problem of detecting a cycle in a linked list where an hashset is used to remember already visited nodes.},label=list:cycle_in_list:linearspace]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/cycle_in_list_solution1.cpp}
 
 
 
@@ -205,19 +205,19 @@ until they meet again.
 They will meet again at the beginning of the cycle. 
 
 An implementation of the Floyd's algorithm is shown in Listing \ref{list:cycle_in_list:constantspace}.
-\lstinputlisting[language=c++, caption={Floyd's algorithm, linear time, constant space solution to the problem of detecting a cycle in a linked list.},label=list:cycle_in_list:constantspace]{sources/cycle_in_list/cycle_in_list_solution2.cpp}
+\lstinputlisting[language=c++, caption={Floyd's algorithm, linear time, constant space solution to the problem of detecting a cycle in a linked list.},label=list:cycle_in_list:constantspace]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/cycle_in_list_solution2.cpp}
 
 
 %\begin{figure}[htbp]
 	%\label{fig:cycle_in_list:flow1} \centering
-	%\includegraphics[scale=0.15]{sources/cycle_in_list/images/flow1} \caption{Execution of the
+	%\includegraphics[scale=0.15]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/flow1} \caption{Execution of the
 	%first phase of the Floyd's algorithm on a list of $8$ nodes with a cycle of length $4$ starting
 	%at node $4$.}
 %\end{figure}
 
 %\begin{figure}[htbp]
 	%\label{fig:cycle_in_list:flow2} \centering
-	%\includegraphics[scale=0.15]{sources/cycle_in_list/images/flow2} \caption{Execution of the
+	%\includegraphics[scale=0.15]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/flow2} \caption{Execution of the
 	%second phase of the Floyd's algorithm on a list of $8$ nodes with a cycle of length $4$
 	%starting at node $4$.}
 %\end{figure}
@@ -229,62 +229,62 @@ An implementation of the Floyd's algorithm is shown in Listing \ref{list:cycle_i
 	\vspace*{-0.5in}
 	\centering
 	\begin{subfigure}[t]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd1}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd1}
 		\caption{At the beginning $p=q=1$. The slow and fast forward: $p=p+1$, $q=q+2$.}
 		\label{fig:cycle_in_list:floyd1}
 	 \end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd2}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd2}
 		\caption{$p \neq q$,  thus: $p=p+1$, $q=q+2$}
 		\label{fig:cycle_in_list:floyd2}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd3}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd3}
 		\caption{$p \neq q$,  thus: $p=p+1$, $q=q+2$}
 		\label{fig:cycle_in_list:floyd3}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd4}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd4}
 		\caption{$p \neq q$,  thus: $p=p+1$, $q=q+2$}
 		\label{fig:cycle_in_list:floyd4}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd5}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd5}
 		\caption{$p \neq q$,  thus: $p=p+1$, $q=q+2$}
 		\label{fig:cycle_in_list:floyd5}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd6}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd6}
 		\caption{$p = q$. The fast and slow movements stop.}
 		\label{fig:cycle_in_list:floyd6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd7}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd7}
 		\caption{$p$ is reset to the beginning of the list. $q$ is not moved.  
 		From now on $p$ and $q$ are moved one step at the time.}
 		\label{fig:cycle_in_list:floyd7}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd8}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd8}
 		\caption{$p \neq q$,  thus: $p=p+1$, $q=q+1$}
 		\label{fig:cycle_in_list:floyd8}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd9}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd9}
 		\caption{$p \neq q$,  thus: $p=p+1$, $q=q+1$}
 		\label{fig:cycle_in_list:floyd9}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[l]{0.36\textwidth}
-		\includegraphics[width=1\linewidth]{sources/cycle_in_list/images/floyd10}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/cycle_in_list/images/floyd10}
 		\caption{$p = q$. The algorithm stops, and both $p$ and $q$ point to the beginning of the cycle.}
 		\label{fig:cycle_in_list:floyd10}
 	 \end{subfigure}

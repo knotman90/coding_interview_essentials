@@ -45,7 +45,7 @@ For instance the list: $[(7,-1),(13,0),(11,4),(10,2),(1,0)]$ represent the list 
 \begin{figure}
 	\label{fig:clone_list_random_pointer:list1}
 	\centering
-	\includegraphics[scale=0.6]{sources/clone_list_random_pointer/images/random_list_1}
+	\includegraphics[scale=0.6]{/home/dspataro/git/algorithm_articles/sources/clone_list_random_pointer/images/random_list_1}
 	\caption{Linked list wit random pointer.}
 \end{figure}
 
@@ -82,7 +82,7 @@ The solution presented in this section can be split into a number of distinct st
 The idea above can be implemented as shown in the Listing \ref{list:clone_list_random_pointer_1}
 
 
-\lstinputlisting[language=c++, caption={Linear Memory solution to the problem of copying a linked list with random pointers.},label=list:clone_list_random_pointer_1]{sources/clone_list_random_pointer/clone_list_random_pointer_solution1.cpp}
+\lstinputlisting[language=c++, caption={Linear Memory solution to the problem of copying a linked list with random pointers.},label=list:clone_list_random_pointer_1]{/home/dspataro/git/algorithm_articles/sources/clone_list_random_pointer/clone_list_random_pointer_solution1.cpp}
 
 This approach has a complexity of $O(n)$ for both time and space. The time complexity is already optimal as we cannot do better than linear time, considering that to do a copy we need to look at all the nodes at least once. The space complexity can be improved though, and as we will see in Section \ref{clone_list_random_pointer:sec:interleaved_lists} it can be brought down to constant.
 
@@ -95,7 +95,7 @@ The idea behind the solution presented in this section is to construct the copy 
 \begin{figure}
 	\label{fig:clone_list_random_pointer:interleaved}
 	\centering
-	\includegraphics[scale=0.5]{sources/clone_list_random_pointer/images/random_list_2}
+	\includegraphics[scale=0.5]{/home/dspataro/git/algorithm_articles/sources/clone_list_random_pointer/images/random_list_2}
 	\caption{Intermediate interleaved list.}
 \end{figure}
 
@@ -112,7 +112,7 @@ Then we want to get a list $I$ of size $2n$: $I=a_0 \rightarrow b_0 \rightarrow 
 \begin{figure}
 	\label{fig:clone_list_random_pointer:interleaved_fixed}
 	\centering
-	\includegraphics[scale=0.5]{sources/clone_list_random_pointer/images/random_list_3}
+	\includegraphics[scale=0.5]{/home/dspataro/git/algorithm_articles/sources/clone_list_random_pointer/images/random_list_3}
 	\caption{Interleaved list with fixed random pointers.}
 \end{figure}
 
@@ -120,4 +120,4 @@ Then we want to get a list $I$ of size $2n$: $I=a_0 \rightarrow b_0 \rightarrow 
 Once we reach this point we have basically two copies of the original list (with random pointers fixed) interleaved with each other. All is it necessary at this point is pull out the cloned list from the interleaved one. This is easily achievable as all we need to do is to remove all the odd nodes, and in the process connect all together (see function \lstinline[columns=fixed]{split_list} in Listing \ref{list:clone_list_random_pointer_2}).
 
 
-\lstinputlisting[language=c++, caption={Constant memory solution to the problem of copying a linked list with random pointers using an interleaved list.},label=list:clone_list_random_pointer_2]{sources/clone_list_random_pointer/clone_list_random_pointer_solution2.cpp}
+\lstinputlisting[language=c++, caption={Constant memory solution to the problem of copying a linked list with random pointers using an interleaved list.},label=list:clone_list_random_pointer_2]{/home/dspataro/git/algorithm_articles/sources/clone_list_random_pointer/clone_list_random_pointer_solution2.cpp}

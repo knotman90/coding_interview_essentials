@@ -1,0 +1,1 @@
+pandoc --mathjax  --top-level-division=chapter  -s  --toc  --template=github_html5.html ../sources/main.tex -o main.html

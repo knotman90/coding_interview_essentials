@@ -98,7 +98,7 @@ that has to make sure only to count items that are within a closed container. It
 finding the first container wall appearing after the start of the query interval. We can safely skip
 all those items because there are not inside a container. Once we have found the beginning of the
 first container, we can proceed by counting the elements, one container   at the time. 
-\lstinputlisting[language=c++, caption={Na\"ive solution to the \textit{items in the container} problem.},label=list:items_in_containers_amazon_bruteforce]{sources/items_in_containers_amazon/items_in_containers_amazon_solution1.cpp}
+\lstinputlisting[language=c++, caption={Na\"ive solution to the \textit{items in the container} problem.},label=list:items_in_containers_amazon_bruteforce]{/home/dspataro/git/algorithm_articles/sources/items_in_containers_amazon/items_in_containers_amazon_solution1.cpp}
 
 \subsection{Linear time solution}
 \label{items_in_containers_amazon:sec:lineartime}
@@ -149,13 +149,13 @@ for the sake of clarity, $C$ and $P$, are named \inline{closest_bars_right} and 
 \begin{figure}
 	\centering
 	\begin{subfigure}[t]{0.48\textwidth}
-		\includegraphics[width=1\linewidth]{sources/items_in_containers_amazon/images/delimiter_on_right}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/items_in_containers_amazon/images/delimiter_on_right}
 		\caption{Each element at location $i$ of the array $C$ contains an integer corresponding to the smallest index $j$ of $s$ larger than $i$ such that $s[j]='|'$ is a delimiter of a container.}
 		\label{fig:items_in_containers_amazon:delimiter_right}
 	 \end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.48\textwidth}
-		\includegraphics[width=1\linewidth]{sources/items_in_containers_amazon/images/prefix_sum}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/items_in_containers_amazon/images/prefix_sum}
 		\caption{Each element at index $i$ of the array $P$ contains the number of elements in all the closed containers appearing before $i$ in $s$.  }
 		\label{fig:items_in_containers_amazon:prefix_sum}
 	 \end{subfigure}
@@ -163,4 +163,4 @@ for the sake of clarity, $C$ and $P$, are named \inline{closest_bars_right} and 
 \end{figure}	 
 
 
-\lstinputlisting[language=c++, caption={Linear time and linear space solution to the \textit{items in the container} problem.},label=list:items_in_containers_amazon_lineartime]{sources/items_in_containers_amazon/items_in_containers_amazon_solution2.cpp}
+\lstinputlisting[language=c++, caption={Linear time and linear space solution to the \textit{items in the container} problem.},label=list:items_in_containers_amazon_lineartime]{/home/dspataro/git/algorithm_articles/sources/items_in_containers_amazon/items_in_containers_amazon_solution2.cpp}

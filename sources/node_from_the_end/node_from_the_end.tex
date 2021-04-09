@@ -30,14 +30,14 @@ Given a linked list $L$ (which definition is shown in Listing \ref{list:delete_d
 \begin{figure}
 	\label{fig:node_from_the_end:example1}
 	\centering
-	\includegraphics[scale=1.0]{sources/node_from_the_end/images/example1}
+	\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/node_from_the_end/images/example1}
 	\caption{Removal of the \nth{2} to last element in a singly linked list of length $4$.}
 \end{figure}
 
 \begin{figure}
 	\label{fig:node_from_the_end:example2}
 	\centering
-	\includegraphics[scale=1.0]{sources/node_from_the_end/images/example2}
+	\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/node_from_the_end/images/example2}
 	\caption{Removal of the \nth{4} to last element in a singly linked list of length $4$. The head pointer needs to be updated.}
 \end{figure}
 
@@ -66,7 +66,7 @@ Finding out the the node to be deleted becomes trivial once we know how long the
 Please note that in order to correctly remove a node from a singly linked list a we need to have a pointer to the node we want to remove as well as a pointer to its predecessor (variable \inline{pred} in the code). This approach can be implemented as shown in Listing \ref{list:node_from_the_end:bruteforce}, and it has a time and space complexity of  $O(n)$ and $O(1)$, respectively.
 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:node_from_the_end:bruteforce]{sources/node_from_the_end/node_from_the_end_solution1.cpp}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:node_from_the_end:bruteforce]{/home/dspataro/git/algorithm_articles/sources/node_from_the_end/node_from_the_end_solution1.cpp}
 
 \subsection{Two pointers}
 \label{node_from_the_end:sec:twopointers}
@@ -79,7 +79,7 @@ This idea is implemented in Listing \ref{list:node_from_the_end:twopointers}. Pl
 The complexity of this implementation is linear in time and constant in space.
 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:node_from_the_end:twopointers]{sources/node_from_the_end/node_from_the_end_solution2.cpp}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:node_from_the_end:twopointers]{/home/dspataro/git/algorithm_articles/sources/node_from_the_end/node_from_the_end_solution2.cpp}
 
 \subsection{Common Variation}
 \subsubsection{List midpoint}

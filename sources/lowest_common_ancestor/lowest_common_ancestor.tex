@@ -46,7 +46,7 @@ particular kind: binary search trees. This constraint greatly simplifies the gen
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{sources/lowest_common_ancestor/images/example1}
+	\includegraphics[width=0.5\textwidth]{/home/dspataro/git/algorithm_articles/sources/lowest_common_ancestor/images/example1}
 	\caption[Sample short cpation]{Binary Search tree of the Example
 	\ref{ex:lower_common_ancestor:example1}}.
 	\label{fig:lowest_common_ancestor:example1}
@@ -103,7 +103,7 @@ number of nodes in $T$). Listing \ref{list:lowest_common_ancestor_paths} show an
 the idea above. 
 
 
-	\lstinputlisting[language=c++, caption={LCA solution based on the difference of paths from the root.},label=list:lowest_common_ancestor_paths]{sources/lowest_common_ancestor/lowest_common_ancestor_solution2.cpp}
+	\lstinputlisting[language=c++, caption={LCA solution based on the difference of paths from the root.},label=list:lowest_common_ancestor_paths]{/home/dspataro/git/algorithm_articles/sources/lowest_common_ancestor/lowest_common_ancestor_solution2.cpp}
 
 
 This approach is however not optimal as we waste unnecessary space for storing entire paths.
@@ -119,7 +119,7 @@ improvement compared to the linear space complexity for Listing
 \ref{list:lowest_common_ancestor_paths_optimized}.
 
 
-	\lstinputlisting[language=c++, caption={Space optimized version of Listing \ref{list:lowest_common_ancestor_paths} },label=list:lowest_common_ancestor_paths_optimized]{sources/lowest_common_ancestor/lowest_common_ancestor_solution3.cpp}
+	\lstinputlisting[language=c++, caption={Space optimized version of Listing \ref{list:lowest_common_ancestor_paths} },label=list:lowest_common_ancestor_paths_optimized]{/home/dspataro/git/algorithm_articles/sources/lowest_common_ancestor/lowest_common_ancestor_solution3.cpp}
 
 
 
@@ -131,5 +131,5 @@ both $p$ and $q$ is the same. When the path diverges we can stop and return the 
 is the lowest node shared node in the paths from the root to $p$ and $q$
 
 
-	\lstinputlisting[language=c++, caption={Iterative solution to the problem of finding the LCA in a binary search tree.},label=list:lowest_common_ancestor_iterative]{sources/lowest_common_ancestor/lowest_common_ancestor_solution1.cpp}
+	\lstinputlisting[language=c++, caption={Iterative solution to the problem of finding the LCA in a binary search tree.},label=list:lowest_common_ancestor_iterative]{/home/dspataro/git/algorithm_articles/sources/lowest_common_ancestor/lowest_common_ancestor_solution1.cpp}
 

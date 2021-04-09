@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>main</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style4.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#ch:power_set">Power set generation</a></li>
+<li><a href="#ch:square_root">Square root of an integer</a></li>
+<li><a href="#ch:two_string_anagram">Two string anagram</a></li>
+<li><a href="#appendices">Appendices</a></li>
+</ul>
+</nav>
+<h1 id="ch:power_set">Power set generation</h1>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span>*<span>Introduction</span></p>
+<p>The concept of power set is familiar to many because it is one of the topics of the first introductory math courses on set theory.</p>
+<p>The power set of a set <span class="math inline">\(S\)</span> is the set of all its subsets and in this lesson, we will explore how we can generate the power set of a given set. Very often this is a task we are challenged to solve directly as well as indirectly as part of a coding interview question.</p>
+<p>We will investigate two different approaches to solve this problem:</p>
+<ol>
+<li><p>The first derives straightforwardly from the recursive definition of power-set which says that the power-set of an empty set is a set containing one element only: the empty set itself. For a non-empty set <span class="math inline">\(S\)</span>, let <span class="math inline">\(e\)</span> be an element of <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span> be the original set <span class="math inline">\(S\)</span> set minus <span class="math inline">\(e\)</span> ( <span class="math inline">\(T=S \setminus e\)</span>), then the power set of <span class="math inline">\(S\)</span> is defined as the union of two distinct power sets:</p>
+<ul>
+<li><p>the power set of <span class="math inline">\(T\)</span></p></li>
+<li><p>and the power set of <span class="math inline">\(T\)</span> modified in a such way that <span class="math inline">\(e\)</span> is added to all of its elements. This idea is formalized in the Equation <a href="#eq:power_set_recursive_definition" data-reference-type="ref" data-reference="eq:power_set_recursive_definition">[eq:power_set_recursive_definition]</a>:</p>
+<p><span class="math inline">\(\mathcal{P}(S)=\begin{cases} 
+        \{\{\}\} &amp; \text{if } S=\{\} \\
+        \mathcal{P}\{T\} \bigcup \{t \bigcup \{e\} \: : t \in \mathcal{P}\{T\}\} \text{ where }  T = S \setminus \{e\} \text{ } \forall e \in S, &amp; \text{otherwise}
+        \end{cases}\)</span></p></li>
+</ul></li>
+<li><p>The second is based on a property of the distribution of the bits in the binary representation of the integers from <span class="math inline">\(0\)</span> to the size of the power set.</p></li>
+</ol>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Problem statement</span></p>
+<div class="eBox">
+<div class="exerciseT">
+<p><strong>Problem 1.1</strong>.  <em>Write a function that given a set <span class="math inline">\(S\)</span> returns its power set. The power-set of <span class="math inline">\(S\)</span> (<span class="math inline">\(\mathcal{P}(S)\)</span>) is the set of all its subsets including the empty subset (<span class="math inline">\(\emptyset\)</span>) and <span class="math inline">\(S\)</span> itself.</em></p>
+<div id="ex:power_set:example1" class="exampleT">
+<p><em><strong>Example 1.1</strong>.  <em><br />
+Given the set <span class="math inline">\(S=\{a,b,c\}\)</span>, the following is a correct output for this problem: <span class="math display">\[\{\{\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{b,c\}, \{a,c\}, \{a,b,c\} \}\]</span></em></em></p>
+</div>
+</div>
+</div>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Clarification Questions</span></p>
+<ol>
+<li><p>What is the maximum input size?</p>
+<p><em>The maximum number of element in <span class="math inline">\(S\)</span> is strictly less than <span class="math inline">\(32\)</span>.</em></p></li>
+<li><p>Are all the elements in the collection distinct?</p>
+<p><em>No, the elements are not necessarily distinct. <span class="math inline">\(S\)</span> might contain duplicates..</em></p></li>
+<li><p>Can the elements of the power-set appear in any order?</p>
+<p><em>Yes, subsets can appear in any order. For example the following is also a valid output for the input shown in Example <a href="#ex:power_set:example1" data-reference-type="ref" data-reference="ex:power_set:example1">Example 1.1</a>:</em> <span class="math inline">\(\{\{\}, \{b,c\}, \{a\}, \{a,b\}, \{a,b,c\}, \{b\}, \{a,c\}, \{c\} \}\)</span></p></li>
+</ol>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Discussion</span> <span id="sec:powerset:discussion" label="sec:powerset:discussion">[sec:powerset:discussion]</span></p>
+<p>There is one key point that should immediately be noticed: The power set of a collection of <span class="math inline">\(n\)</span> elements has size <span class="math inline">\(2^n\)</span>. The proof is relatively easy, and it boils down to the fact that a subset of <span class="math inline">\(S\)</span> can be uniquely identified by a list <span class="math inline">\(X=\{x_0,x_1,\ldots x_{|S|-1}\}\)</span> of <span class="math inline">\(|S|\)</span> binary variables each carrying the information about whether <span class="math inline">\(S_i\)</span> is part of the subset; <span class="math inline">\(x_i\)</span> answers the question: <strong>should <span class="math inline">\(S_i\)</span> be part of this subset?</strong> If <span class="math inline">\(x_i\)</span> is true the answer is yes, otherwise it is no. Because we have two possible choices for every element of <span class="math inline">\(S\)</span> (either take it or not), then the total number of distinct <span class="math inline">\(X\)</span>s is: <span class="math inline">\(2 \times 2 \times \ldots \times 2 = 2^{|S|}\)</span>. Two choices for the first element, two for the second, and so on until the last element of <span class="math inline">\(S\)</span>.</p>
+<p>This, together with the constraint on <span class="math inline">\(|S|\)</span> (<span class="math inline">\(|S| &lt; 32)\)</span> is a strong hint towards the fact that an <strong>exponential time and space</strong> solution is expected. After all, we are required to output all the elements of the power set, and thus the number of operations of an algorithm designed for this task cannot be less than the size of the power set itself.</p>
+<p><span>-3ex -0.1ex -.4ex</span> <span>0.5ex .2ex </span> <span><strong></strong></span><span>Bruteforce - Backtracking-like approach</span></p>
+<p>The first solution presented in this lesson is based on the fact that during the generation of one of the elements of the power set a decision has to be taken for each element <span class="math inline">\(e\)</span> of <span class="math inline">\(S\)</span>, on whether to include or not <span class="math inline">\(e\)</span> into the subset. When a decision for the first element is taken, we are left with are <span class="math inline">\(|S|-1\)</span> decisions before we have created a valid subset of <span class="math inline">\(|S|\)</span>.</p>
+<p>This kind of process is inherently recursive and is easily visualized with a tree (see the Figure <a href="#ref:power_set_decision_trees" data-reference-type="ref" data-reference="ref:power_set_decision_trees">1.1</a>) where a node at level <span class="math inline">\(i\)</span> represents a decision for the <span class="math inline">\(i^{th}\)</span> element of <span class="math inline">\(S\)</span> and a path from the root to a leaf uniquely identifies a subset of <span class="math inline">\(S\)</span> as, after having traversed all the levels down to a leaf, <span class="math inline">\(n\)</span> decisions have been taken: one for each of the elements of <span class="math inline">\(S\)</span>. Collectively, all the paths from the root to the leaves are the power set, and therefore, in order to solve this problem, we have to visit the entire tree.</p>
+<p>A general way to deal with such type of problems is by using a backtracking-like approach to try all possible decisions (or equivalently to visit every path from the root to a leaf). The idea is that, for all elements of <span class="math inline">\(S\)</span>, from first to last, we are going to explore the two available possibilities: either take or exclude the it from the subset.</p>
+<p>We start by making a decision for the first element and continuing from there to generate all possible subsets where the first decision is never changed. When there are no more subsets to generate, we <em>backtrack</em> and change our first decision and repeat the process of generating all possible subsets.</p>
+<p>For instance, given <span class="math inline">\(S=\{1,2,3\}\)</span>, we might start by deciding to use the element <span class="math inline">\(1\)</span>, and include it in all possible subsets from the remaining elements <span class="math inline">\(\{2, 3\}\)</span> only. When we are done with it we can repeat the same process, only this time, excluding <span class="math inline">\(1\)</span>. What we do is: <span class="math inline">\(\mathcal{P}(S)= \{\{1\} \; \bigcup \;\mathcal{P}(\{2,3\})\} \: \bigcup \: \{\mathcal{P}(\{2,3\})\}\}\)</span></p>
+<p>The proposed solution will incrementally construct one subset at a time, using an integer variable to keep track of which element we are currently taking the decision for. This type of problem is naturally solved recursively, with a base case of the recursion happening when there is no more decision to take, meaning that the current subset is ready to be included in the solution (it has been produced after <span class="math inline">\(n\)</span> decision steps).</p>
+<p>The C++ code implementing the idea above is shown in Listing <a href="#list:power_set_backtracking" data-reference-type="ref" data-reference="list:power_set_backtracking">[list:power_set_backtracking]</a>. The complexity of this solution is exponential i.e. <span class="math inline">\(O(2^n)\)</span> which as already pointed out is as good as it gets.</p>
+<div class="sourceCode" id="list:power_set_backtracking" data-language="c++" data-caption="&quot;C++ to the power set generation using backtracking&quot;" label="list:power_set_backtracking"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:power_set_backtracking-1"><a href="#list:power_set_backtracking-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> power_set_backtracking_helper<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>S<span class="op">,</span></span>
+<span id="list:power_set_backtracking-2"><a href="#list:power_set_backtracking-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">const</span> <span class="dt">int</span> idx<span class="op">,</span></span>
+<span id="list:power_set_backtracking-3"><a href="#list:power_set_backtracking-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>curr<span class="op">,</span></span>
+<span id="list:power_set_backtracking-4"><a href="#list:power_set_backtracking-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> <span class="op">&amp;</span>ans<span class="op">)</span></span>
+<span id="list:power_set_backtracking-5"><a href="#list:power_set_backtracking-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_backtracking-6"><a href="#list:power_set_backtracking-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>idx <span class="op">&gt;=</span> S<span class="op">.</span>size<span class="op">())</span></span>
+<span id="list:power_set_backtracking-7"><a href="#list:power_set_backtracking-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// base case</span></span>
+<span id="list:power_set_backtracking-8"><a href="#list:power_set_backtracking-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:power_set_backtracking-9"><a href="#list:power_set_backtracking-9" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">.</span>push_back<span class="op">(</span>curr<span class="op">);</span></span>
+<span id="list:power_set_backtracking-10"><a href="#list:power_set_backtracking-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="list:power_set_backtracking-11"><a href="#list:power_set_backtracking-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:power_set_backtracking-12"><a href="#list:power_set_backtracking-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_backtracking-13"><a href="#list:power_set_backtracking-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// include element S[idx]</span></span>
+<span id="list:power_set_backtracking-14"><a href="#list:power_set_backtracking-14" aria-hidden="true" tabindex="-1"></a>  curr<span class="op">.</span>push_back<span class="op">(</span>S<span class="op">[</span>idx<span class="op">]);</span></span>
+<span id="list:power_set_backtracking-15"><a href="#list:power_set_backtracking-15" aria-hidden="true" tabindex="-1"></a>  power_set_backtracking_helper<span class="op">(</span>S<span class="op">,</span> idx <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> curr<span class="op">,</span> ans<span class="op">);</span></span>
+<span id="list:power_set_backtracking-16"><a href="#list:power_set_backtracking-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_backtracking-17"><a href="#list:power_set_backtracking-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// exclude element S[idx]</span></span>
+<span id="list:power_set_backtracking-18"><a href="#list:power_set_backtracking-18" aria-hidden="true" tabindex="-1"></a>  curr<span class="op">.</span>pop_back<span class="op">();</span></span>
+<span id="list:power_set_backtracking-19"><a href="#list:power_set_backtracking-19" aria-hidden="true" tabindex="-1"></a>  power_set_backtracking_helper<span class="op">(</span>S<span class="op">,</span> idx <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> curr<span class="op">,</span> ans<span class="op">);</span></span>
+<span id="list:power_set_backtracking-20"><a href="#list:power_set_backtracking-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="list:power_set_backtracking-21"><a href="#list:power_set_backtracking-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_backtracking-22"><a href="#list:power_set_backtracking-22" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> power_set_backtracking<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>S<span class="op">)</span></span>
+<span id="list:power_set_backtracking-23"><a href="#list:power_set_backtracking-23" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_backtracking-24"><a href="#list:power_set_backtracking-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> ans<span class="op">;</span></span>
+<span id="list:power_set_backtracking-25"><a href="#list:power_set_backtracking-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> current<span class="op">;</span></span>
+<span id="list:power_set_backtracking-26"><a href="#list:power_set_backtracking-26" aria-hidden="true" tabindex="-1"></a>  power_set_backtracking_helper<span class="op">(</span>S<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> current<span class="op">,</span> ans<span class="op">);</span></span>
+<span id="list:power_set_backtracking-27"><a href="#list:power_set_backtracking-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="list:power_set_backtracking-28"><a href="#list:power_set_backtracking-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<figure>
+<embed src="/home/dspataro/git/algorithm_articles/sources/power_set/images/tree.pdf" id="ref:power_set_decision_trees" /><figcaption aria-hidden="true">Decision tree for the power-set generation using backtracking. At level <span class="math inline">\(i\)</span> are the decision for the element <span class="math inline">\(i\)</span> in the original set. A label marked with yes identifies the decision to take the corresponding element into the subset, while a node labeled with no the opposite. At the last level is the power set.</figcaption>
+</figure>
+<p>The advantages of using this backtracking-like approach to solve this problem are that, once we notice that a problem can be solved by fully exploring the associated search space tree, then we can immediately start writing the code and rely on our experience as backtracking expert writers to implement a correct solution with the added bonuses of being concise and short when written in a recursive form (which gives you fewer chances to make mistakes, and less code to debug and explain), as well as well understood. The downside is that, if you decide to go for it, an iterative implementation can be a little harder and more verbose to write.</p>
+<p>Regardless of which type you decide to write, the interviewer is going to be pleased with your code provided you get to the final solution without making too many implementation mistakes like forgetting to handle the base case.</p>
+<p><span>-3ex -0.1ex -.4ex</span> <span>0.5ex .2ex </span> <span><strong></strong></span><span>Bit Manipulation</span></p>
+<p>Another approach that can be used to solve this problem is based on the fact that the values of the bits of the numbers <span class="math inline">\(\{0,1,2,\ldots, s^n-1\}\)</span> already provide all the information necessary to decide whether to include or not an element from <span class="math inline">\(S\)</span> into a subset. The main idea is that the binary representation of all the numbers (<span class="math inline">\(2^{|S|}\)</span> of them) from <span class="math inline">\(0\)</span> to <span class="math inline">\(2^{|S|}-1\)</span> is the power set of <span class="math inline">\(n\)</span> bits. This practically means that the binary representation of any of those numbers carry the necessary information that can be used to build one subset of <span class="math inline">\(\mathcal{P}(S)\)</span>.</p>
+<p>For instance for the input <span class="math inline">\(S=\{a,b,c\}\)</span> the Table <a href="#tab:mapping_value_bits" data-reference-type="ref" data-reference="tab:mapping_value_bits">1.1</a> shows numbers from <span class="math inline">\(0\)</span> to <span class="math inline">\(2^3-1 = 7\)</span> and their binary representation (in the second column) as well as how the information about which bit is set can be used to construct one subset of <span class="math inline">\(\mathcal{P}(S)\)</span> (in the third column). <strong>When the <span class="math inline">\(i^{th}\)</span> bit is set (its value is <span class="math inline">\(1\)</span>), it means that corresponding <span class="math inline">\(i^{th}\)</span> element of <span class="math inline">\(S\)</span> is chosen, while an unset bit (with value <span class="math inline">\(0\)</span>) means it is excluded</strong>.</p>
+<div id="tab:mapping_value_bits">
+<table>
+<caption>This table shows a 1-to-1 mapping between integer values, their binary representation and an element of the power set.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Number Value</th>
+<th style="text-align: left;">Bits</th>
+<th style="text-align: left;">Subset</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">000</td>
+<td style="text-align: left;"><span class="math inline">\(\{\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">001</td>
+<td style="text-align: left;"><span class="math inline">\(\{c\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">010</td>
+<td style="text-align: left;"><span class="math inline">\(\{b\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">011</td>
+<td style="text-align: left;"><span class="math inline">\(\{b,c\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;"><span class="math inline">\(\{a\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">101</td>
+<td style="text-align: left;"><span class="math inline">\(\{a,c\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">110</td>
+<td style="text-align: left;"><span class="math inline">\(\{a,b\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">111</td>
+<td style="text-align: left;"><span class="math inline">\(\{a,b,c\}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This idea can be used to write an algorithm in which all the numbers in the range <span class="math inline">\(\{0,1,2,\ldots,
+2^{|S|}-1\}\)</span> are considered and each of them is used to generate a subset of the final solution. Every number from this range maps uniquely to a subset of <span class="math inline">\(\mathcal{P}(S)\)</span>.</p>
+<p>It is not surprising when we think about the meaning of a bit in the binary representation of integers. One can "build" a number <span class="math inline">\(k\)</span> by summing up powers of <span class="math inline">\(2\)</span> where the bits contain the information about whether a certain power of two should be added to the final value. With <span class="math inline">\(n\)</span> bits one can represent <span class="math inline">\(2^n\)</span> numbers, each corresponding to one and only one subset of the power set of those <span class="math inline">\(n\)</span> bits.</p>
+<p>Listing <a href="#list:power_set_bits" data-reference-type="ref" data-reference="list:power_set_bits">[list:power_set_bits]</a> shows a possible C++ implementation of the idea above.</p>
+<div class="sourceCode" id="list:power_set_bits" data-language="c++" data-caption="&quot;&quot;" label="list:power_set_bits"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:power_set_bits-1"><a href="#list:power_set_bits-1" aria-hidden="true" tabindex="-1"></a><span class="kw">constexpr</span> <span class="kw">inline</span> <span class="dt">bool</span> is_bit_set<span class="op">(</span><span class="at">const</span> <span class="dt">int</span> n<span class="op">,</span> <span class="at">const</span> <span class="dt">unsigned</span> p<span class="op">)</span></span>
+<span id="list:power_set_bits-2"><a href="#list:power_set_bits-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_bits-3"><a href="#list:power_set_bits-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span>n <span class="op">&gt;&gt;</span> p<span class="op">)</span> <span class="op">&amp;</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="list:power_set_bits-4"><a href="#list:power_set_bits-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="list:power_set_bits-5"><a href="#list:power_set_bits-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_bits-6"><a href="#list:power_set_bits-6" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> power_set_bit_manipulation<span class="op">(</span></span>
+<span id="list:power_set_bits-7"><a href="#list:power_set_bits-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>A<span class="op">)</span></span>
+<span id="list:power_set_bits-8"><a href="#list:power_set_bits-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_bits-9"><a href="#list:power_set_bits-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">size_t</span> limit <span class="op">=</span> <span class="op">(</span><span class="dv">1</span><span class="bu">ll</span> <span class="op">&lt;&lt;</span> A<span class="op">.</span>size<span class="op">())</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="list:power_set_bits-10"><a href="#list:power_set_bits-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> PS<span class="op">;</span></span>
+<span id="list:power_set_bits-11"><a href="#list:power_set_bits-11" aria-hidden="true" tabindex="-1"></a>  PS<span class="op">.</span>reserve<span class="op">(</span>limit <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="list:power_set_bits-12"><a href="#list:power_set_bits-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_bits-13"><a href="#list:power_set_bits-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> limit<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="list:power_set_bits-14"><a href="#list:power_set_bits-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:power_set_bits-15"><a href="#list:power_set_bits-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> subset <span class="op">=</span> <span class="op">{};</span></span>
+<span id="list:power_set_bits-16"><a href="#list:power_set_bits-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> p <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> p <span class="op">&lt;</span> <span class="dv">32</span><span class="op">;</span> p<span class="op">++)</span></span>
+<span id="list:power_set_bits-17"><a href="#list:power_set_bits-17" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>is_bit_set<span class="op">(</span>i<span class="op">,</span> p<span class="op">))</span></span>
+<span id="list:power_set_bits-18"><a href="#list:power_set_bits-18" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span></span>
+<span id="list:power_set_bits-19"><a href="#list:power_set_bits-19" aria-hidden="true" tabindex="-1"></a>        subset<span class="op">.</span>push_back<span class="op">(</span>A<span class="op">[</span>p<span class="op">]);</span></span>
+<span id="list:power_set_bits-20"><a href="#list:power_set_bits-20" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="list:power_set_bits-21"><a href="#list:power_set_bits-21" aria-hidden="true" tabindex="-1"></a>    PS<span class="op">.</span>push_back<span class="op">(</span>subset<span class="op">);</span></span>
+<span id="list:power_set_bits-22"><a href="#list:power_set_bits-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:power_set_bits-23"><a href="#list:power_set_bits-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_bits-24"><a href="#list:power_set_bits-24" aria-hidden="true" tabindex="-1"></a>  PS<span class="op">.</span>push_back<span class="op">(</span>A<span class="op">);</span></span>
+<span id="list:power_set_bits-25"><a href="#list:power_set_bits-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> PS<span class="op">;</span></span>
+<span id="list:power_set_bits-26"><a href="#list:power_set_bits-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The complexity of this function is, not surprisingly, <span class="math inline">\(O(2^{|S|})\)</span>. We also pay a constant price of <span class="math inline">\(32\)</span> for each number we loop through since we need to inspect all of its bits. The proposed implementation assumes that the size of  <code>int</code> is <span class="math inline">\(4\)</span> bytes, which is true for most systems.</p>
+<p>Moreover, notice the usage  <code>std::reserve</code> that should be used in all those scenarios when we already know the final size of the collection we are building. This saves time because avoids intermediate allocations and copies that must happen during the resize of the vector.</p>
+<h1 id="ch:square_root">Square root of an integer</h1>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span>*<span>Introduction</span></p>
+<p>The concept of square root goes is not only one of the central operations in mathematics that we use almost as often as addition or multiplication or division but it is also at the core of countless everyday gadgets and cool technology we use everyday like the radio and GPS systems, for instance.</p>
+<p>The square root of a number <span class="math inline">\(x\)</span>, denoted with the <span class="math inline">\(\sqrt{x}\)</span> symbol, is formally defined to be a number <span class="math inline">\(y\)</span> such that <span class="math inline">\(y^2 = y\times y=x\)</span>. For example: <span class="math inline">\(\sqrt{4} = 2\)</span> and <span class="math inline">\(\sqrt{1253} \approx 35.3977\)</span>.</p>
+<p>The square root is defined for every positive real number but in this lesson, we will derive an algorithm for the calculation of the square root for integers.</p>
+<p>As for almost every coding interview problem, there are multiple possible solutions and approaches we can take to tackle this problem. In this lesson, we will learn how to write a simple and yet sub-optimal solution that runs in <span class="math inline">\(O(\sqrt{n})\)</span> time, as well as a much faster and elegant logarithmic time solution.</p>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Problem statement</span></p>
+<div class="eBox">
+<div class="exerciseT">
+<p><strong>Problem 2.1</strong>.  <em>Write a function that calculates the integral part of the square root of an integer <span class="math inline">\(n\)</span> i.e. <span class="math inline">\(\lfloor \sqrt{n}\rfloor\)</span>. <strong>You cannot use any library functions</strong>.</em></p>
+<div class="exampleT">
+<p><em><strong>Example 2.1</strong>.  <em><br />
+Given <span class="math inline">\(n=9\)</span> the function returns <span class="math inline">\(3\)</span>: <span class="math inline">\(\ceil{\sqrt{9}}=3\)</span></em></em></p>
+</div>
+<div class="exampleT">
+<p><em><strong>Example 2.2</strong>.  <em><br />
+Given <span class="math inline">\(n=11\)</span> the function returns <span class="math inline">\(3\)</span>: <span class="math inline">\(\ceil{\sqrt{11}}\approx\ceil{3.316624}=3\)</span></em></em></p>
+</div>
+<div class="exampleT">
+<p><em><strong>Example 2.3</strong>.  <em><br />
+Given <span class="math inline">\(n=18\)</span> the function returns <span class="math inline">\(4\)</span>: <span class="math inline">\(\ceil{\sqrt{11}}\approx\ceil{4.242640}=4\)</span></em></em></p>
+</div>
+</div>
+</div>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Clarification Questions</span></p>
+<ol>
+<li><p>What is the maximum value the parameter <span class="math inline">\(n\)</span> can take?</p>
+<p><em>The greatest input is guaranteed to be smaller than <span class="math inline">\(2^{32}\)</span>.</em></p></li>
+<li><p>Is <span class="math inline">\(n\)</span> guaranteed to be always positive?</p>
+<p><em>Yes, there is no need to check for invalid input.</em></p></li>
+</ol>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Discussion</span> A brute-force solution is quickly derivable from the definition of square root given above (<span class="math inline">\(\sqrt{x} = y\)</span> where <span class="math inline">\(y^2 = x\)</span>.) and the interviewer is very likely expecting to see it mentioned or appearing on the whiteboard within the first few minutes of the interview.</p>
+<p><span>-3ex -0.1ex -.4ex</span> <span>0.5ex .2ex </span> <span><strong></strong></span><span>Brute-Force</span> We know that if <span class="math inline">\(y = \sqrt{x}\)</span> <span class="math inline">\(y^2 = x\)</span>. Moreover, <span class="math inline">\(y\)</span> is an integer only when <span class="math inline">\(x\)</span> is a perfect square<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. If <span class="math inline">\(x\)</span> is not a perfect square than <span class="math inline">\(y\)</span> is a real number and the following holds true: <span class="math inline">\(\lfloor{y}^2 \rfloor \leq x\)</span> and <span class="math inline">\(\lceil{y} \rceil^2 &gt; x\)</span>. For instance <span class="math inline">\(\sqrt{5} \approx 2.2360\)</span> and <span class="math inline">\(2^2=4 \leq 5\)</span> and <span class="math inline">\(3^2=9 &gt; 5\)</span>.</p>
+<p>We can use this last property to blindly loop through all the integers <span class="math inline">\(k=0,1,2,\ldots\)</span> until the following is true: <span class="math inline">\(k^2\leq n\)</span> and <span class="math inline">\((k+1)^2 &gt; n\)</span>. A solution is guaranteed to be found because eventually, <span class="math inline">\(k\)</span> will be equal to <span class="math inline">\(\floor{y}\)</span>. Moreover, it is clear that no more than <span class="math inline">\(\sqrt{n}\)</span> numbers will be tested, which proves that the time complexity of this approach is <span class="math inline">\(O(\sqrt{n})\)</span>.</p>
+<p>Listing <a href="#list:square_root_brute_force" data-reference-type="ref" data-reference="list:square_root_brute_force">[list:square_root_brute_force]</a> shows a C++ implementation of this idea.</p>
+<div class="sourceCode" id="list:square_root_brute_force" data-language="c++" data-caption="$O(\sqrt{n})$ solution to the problem of finding the square root of an integer." label="list:square_root_brute_force"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:square_root_brute_force-1"><a href="#list:square_root_brute_force-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> square_root_brute_force<span class="op">(</span><span class="at">const</span> <span class="dt">int</span> n<span class="op">)</span></span>
+<span id="list:square_root_brute_force-2"><a href="#list:square_root_brute_force-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:square_root_brute_force-3"><a href="#list:square_root_brute_force-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">long</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="list:square_root_brute_force-4"><a href="#list:square_root_brute_force-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">((</span>i <span class="op">*</span> i<span class="op">)</span> <span class="op">&lt;=</span> n<span class="op">)</span></span>
+<span id="list:square_root_brute_force-5"><a href="#list:square_root_brute_force-5" aria-hidden="true" tabindex="-1"></a>    i<span class="op">++;</span></span>
+<span id="list:square_root_brute_force-6"><a href="#list:square_root_brute_force-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// i at this point is the smallest element s.t. i*i &gt; n</span></span>
+<span id="list:square_root_brute_force-7"><a href="#list:square_root_brute_force-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> i <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="list:square_root_brute_force-8"><a href="#list:square_root_brute_force-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>It is worth noticing that the variable <span class="math inline">\(i\)</span> has a type that is larger in size than an  <code>int</code>. This is necessary in order to prevent overflows during the calculation of <span class="math inline">\(i^2\)</span> (see the highlighted line). One of the constraints of the problem is that the largest input can be <span class="math inline">\(n=2^{32}-1\)</span>; The square of that number does not fit in a <span class="math inline">\(4\)</span> bytes  <code>int</code>.</p>
+<p><span>-3ex -0.1ex -.4ex</span> <span>0.5ex .2ex </span> <span><strong></strong></span><span>Logarithmic Solution</span> Binary search can be effectively used to solve this problem and in order to show that, we are going to look at the problem from a slightly different angle. Let <span class="math display">\[F(k)=\begin{cases} 
+	0 &amp; k^2 \leq n \\
+	1 &amp; k^2 &gt; n
+\end{cases}
+\label{eq:square_root_piecewice}\]</span> be a piece-wise function that partition the search space <span class="math inline">\([0\ldots n]\)</span> into two parts (See Table <a href="#tab:sqrt_split_space" data-reference-type="ref" data-reference="tab:sqrt_split_space">2.1</a>):</p>
+<ol>
+<li><p>the numbers less or equal than <span class="math inline">\(\sqrt{n}\)</span></p></li>
+<li><p>the numbers strictly greater or equal than <span class="math inline">\(\sqrt{n}\)</span></p></li>
+</ol>
+<p>Clearly, <strong>the answer we are looking for is the greatest value <span class="math inline">\(k\)</span> s.t. <span class="math inline">\(F(k) = 0\)</span></strong>.</p>
+<div id="tab:sqrt_split_space">
+<table>
+<caption>Partition of the search space according to the function in Eq. <a href="#eq:square_root_piecewice" data-reference-type="ref" data-reference="eq:square_root_piecewice">[eq:square_root_piecewice]</a></caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(0\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\floor{\sqrt{n}}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\floor{\sqrt{n}}+1\)</span></th>
+<th style="text-align: center;">…</th>
+<th style="text-align: center;"><span class="math inline">\(n\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice that every number in the left part of the search space, <span class="math inline">\(0 \leq l \leq \floor{n}\)</span> has <span class="math inline">\(F(l) = 0\)</span>, while the elements in the right side,<span class="math inline">\(\floor{n}+1 \leq r \leq n\)</span>, have <span class="math inline">\(F(r) = 1\)</span>. Because the function <span class="math inline">\(F(k)\)</span> splits the search space into two parts, we can use binary search to find the end of the first partition (this is actually true in general, and if you ever recognize a problem has these characteristics, you can apply binary search to it). We can do that because if we pick an integer from in <span class="math inline">\([0,n]\)</span>, say <span class="math inline">\(k\)</span>, and <span class="math inline">\(F(k) = 1\)</span> we know that <span class="math inline">\(k\)</span> is not the solution and &lt;ins&gt; crucially, also that all the values greater than <span class="math inline">\(k\)</span> are not good candidates because they all belong to the right partition. On the other hand, if <span class="math inline">\(F(k) = 0\)</span>, we know that <span class="math inline">\(k\)</span> might be the solution but also that,&lt;ins&gt; all the elements smaller than <span class="math inline">\(k\)</span> are not good candidates as <span class="math inline">\(k\)</span> is already a better answer than any of those numbers would be. The idea above is implemented in Listing <a href="#list:square_root_binary_search" data-reference-type="ref" data-reference="list:square_root_binary_search">[list:square_root_binary_search]</a>.</p>
+<div class="sourceCode" id="list:square_root_binary_search" data-language="c++" data-caption="$O(log_2(n))$ solution to the problem of finding the square root of an integer." label="list:square_root_binary_search"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:square_root_binary_search-1"><a href="#list:square_root_binary_search-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> square_root_binary_search<span class="op">(</span><span class="at">const</span> <span class="dt">int</span> A<span class="op">)</span></span>
+<span id="list:square_root_binary_search-2"><a href="#list:square_root_binary_search-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:square_root_binary_search-3"><a href="#list:square_root_binary_search-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">long</span> l <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> r <span class="op">=</span> A<span class="op">;</span></span>
+<span id="list:square_root_binary_search-4"><a href="#list:square_root_binary_search-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> ans <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="list:square_root_binary_search-5"><a href="#list:square_root_binary_search-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>l <span class="op">&lt;=</span> r<span class="op">)</span></span>
+<span id="list:square_root_binary_search-6"><a href="#list:square_root_binary_search-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:square_root_binary_search-7"><a href="#list:square_root_binary_search-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> <span class="dt">long</span> <span class="dt">long</span> mid <span class="op">=</span> l <span class="op">+</span> <span class="op">(</span>r <span class="op">-</span> l<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="list:square_root_binary_search-8"><a href="#list:square_root_binary_search-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span><span class="dt">long</span><span class="op">)(</span>mid <span class="op">*</span> mid<span class="op">)</span> <span class="op">==</span> <span class="op">(</span><span class="dt">long</span><span class="op">)</span>A<span class="op">)</span></span>
+<span id="list:square_root_binary_search-9"><a href="#list:square_root_binary_search-9" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> mid<span class="op">;</span></span>
+<span id="list:square_root_binary_search-10"><a href="#list:square_root_binary_search-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>mid <span class="op">*</span> mid <span class="op">&gt;</span> A<span class="op">)</span></span>
+<span id="list:square_root_binary_search-11"><a href="#list:square_root_binary_search-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="list:square_root_binary_search-12"><a href="#list:square_root_binary_search-12" aria-hidden="true" tabindex="-1"></a>      r <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="list:square_root_binary_search-13"><a href="#list:square_root_binary_search-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="list:square_root_binary_search-14"><a href="#list:square_root_binary_search-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="list:square_root_binary_search-15"><a href="#list:square_root_binary_search-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="list:square_root_binary_search-16"><a href="#list:square_root_binary_search-16" aria-hidden="true" tabindex="-1"></a>      l   <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="list:square_root_binary_search-17"><a href="#list:square_root_binary_search-17" aria-hidden="true" tabindex="-1"></a>      ans <span class="op">=</span> mid<span class="op">;</span></span>
+<span id="list:square_root_binary_search-18"><a href="#list:square_root_binary_search-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="list:square_root_binary_search-19"><a href="#list:square_root_binary_search-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:square_root_binary_search-20"><a href="#list:square_root_binary_search-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="list:square_root_binary_search-21"><a href="#list:square_root_binary_search-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The algorithm works by maintaining an interval (defined by the variables  <code>l</code> and  <code>r</code>) inside which the solution lies which initially is set to be the entire search space <span class="math inline">\([0,n]\)</span>. It iteratively shrinks this range by testing the middle element of <span class="math inline">\([l,r]\)</span> (value hold by  <code>middle</code>), and this can lead to one of the following three scenarios:</p>
+<ol>
+<li><p><span class="math inline">\(middle^2  = n\)</span>:  <code>middle</code> is the solution and also that <span class="math inline">\(n\)</span> is a perfect square.</p></li>
+<li><p><span class="math inline">\(middle^2  &gt; n\)</span>:  <code>middle</code> is <strong>not</strong> the solution and we can also exclude all numbers <span class="math inline">\(k \geq middle\)</span> from the search (by setting  <code>r = middle-1</code>).</p></li>
+<li><p><span class="math inline">\(middle^2  &lt; n\)</span>:  <code>middle</code> is the best guess we have found so far (it might be the solution). We can, however, exclude every number <span class="math inline">\(k &lt; middle\)</span> (by doing  <code>l = middle+1</code>) as when squared, they would also be smaller than <span class="math inline">\(middle^2\)</span> .</p></li>
+</ol>
+<p>Pay attention to the way the midpoint between <span class="math inline">\(l\)</span> and <span class="math inline">\(r\)</span> is calculated. It is common to see it calculated by using the following formula: <span class="math inline">\((l+r)/2\)</span>. This however can lead to overflow problems when <span class="math inline">\(l+r\)</span> does not fit in an  <code>int</code>.</p>
+<p>Finally, <strong>the time and space complexity of this algorithm is <span class="math inline">\(O(log(n))\)</span> and <span class="math inline">\(O(1)\)</span></strong>, respectively. A good improvement w.r.t. to the complexity of the brute-force solution.</p>
+<h1 id="ch:two_string_anagram">Two string anagram</h1>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span>*<span>Introduction</span> From a set of words, you can construct other words by only changing the arrangements of their characters. For instance, from the characters in <em>"alerting"</em> you can spell the following words:</p>
+<ul>
+<li><p><em>"altering"</em></p></li>
+<li><p><em>"integral"</em></p></li>
+<li><p><em>"relating"</em></p></li>
+<li><p><em>"triangle"</em>.</p></li>
+</ul>
+<p>Words sharing the same characters set are called <strong>anagrams</strong>.</p>
+<p>Being able to create good anagrams, especially ones reflecting or commenting on the words they are generated from (for instance turning <em>"Madam Curie"</em> into <em>"Radium came"</em>) is regarded as a rather difficult task. Computers have been used for a long time to find anagrams in long texts as well as to generate the so-called anagram dictionaries, a special kind of dictionary where all the letters in a word and all their transposition are arranged in alphabetical order, that are often used in games like [Scrabble](https://en.wikipedia.org/wiki/Scrabble). Often, at the core of such applications lies an efficient algorithm for determining if a word is an anagram of another word.</p>
+<p>As you might have already guessed, the problem discussed in this lesson is about anagrams, and more specifically, about determining the number of modifications you need to make to a word in order to make it a valid anagram of a another word.</p>
+<p>As a coding interview question, it is considered an easy one, mostly because, aside from the fact the statement is straightforward to understand and the concept of an anagram is part of the common knowledge, no particular insights or particularly tricky reasoning is required in order to come up with an efficient solution. That said, it is still very much worth studying as it has been frequently asked during the preliminary interview stages. Moreover, despite its simplicity, there is more than one neat and elegant approach leading to an efficient solution to this problem.</p>
+<p>In the rest of the lesson, we are going to have a look at three solutions, starting from the slow but easy to understand brute-force touching briefly on a faster approach using sorting, and finally, to the optimal solution running in linear time.</p>
+<p>In the rest of the chapter we are going to have a look at three solutions, starting from the slow but easy to understand brute-force in Section <a href="#sec:anagrams:bruteforce" data-reference-type="ref" data-reference="sec:anagrams:bruteforce">[sec:anagrams:bruteforce]</a> touching briefly on a faster approach using sorting in Section <a href="#sec:anagrams:sorting" data-reference-type="ref" data-reference="sec:anagrams:sorting">[sec:anagrams:sorting]</a>,and finally, to the optimal solution running in linear time in Section <a href="#sec:anagrams:histograms" data-reference-type="ref" data-reference="sec:anagrams:histograms">[sec:anagrams:histograms]</a>.</p>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Problem statement</span></p>
+<div class="eBox">
+<div class="exerciseT">
+<p><strong>Problem 3.1</strong>.  <em>Write a function that given two string, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> of length <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, respectively, determines the minimum number of character substitution, <span class="math inline">\(C(s, i, c)\)</span>, necessary to make the string <span class="math inline">\(a\)</span> an anagram of the string <span class="math inline">\(b\)</span>.</em></p>
+<p><em>Two strings are said to be anagrams of one another if you can turn the first string into the second by rearranging its letters.</em></p>
+<p><em>A substitution operation <span class="math inline">\(C(s,i,c)\)</span> modifies the string <span class="math inline">\(s\)</span>, by changing its <span class="math inline">\(i^{th}\)</span> character into <span class="math inline">\(c\)</span>. Notice that deletions or additions of characters are not allowed. The only operation you can do is change a character of the first string into another one.</em></p>
+<p><em>In other words, what is the minimum number of characters of the input strings that need to be modified (no addition or deletion) so that <span class="math inline">\(a\)</span> becomes an anagram of <span class="math inline">\(b\)</span>?</em></p>
+<div class="exampleT">
+<p><em><strong>Example 3.1</strong>.  <em><br />
+</em></em></p>
+<ul>
+<li><p><em><em>a = "aaa"</em></em></p></li>
+<li><p><em><em>b = "bbb"</em></em></p></li>
+</ul>
+<p><em><em>The function returns <span class="math inline">\(3\)</span>. All the characters of <em>a</em> need to be changed into <em>’b’</em>. <span id="ex:anagrams:example1" label="ex:anagrams:example1">[ex:anagrams:example1]</span></em></em></p>
+</div>
+<div class="exampleT">
+<p><em><strong>Example 3.2</strong>.  <em><br />
+</em></em></p>
+<ul>
+<li><p><em><em>a = "tear"</em></em></p></li>
+<li><p><em><em>b = "fear"</em></em></p></li>
+</ul>
+<p><em><em>The function returns <span class="math inline">\(1\)</span>. All it is necessary is turning the first letter <em>’t’</em> into a <em>’f’</em>.</em></em></p>
+</div>
+<div class="exampleT">
+<p><em><strong>Example 3.3</strong>.  <em><br />
+</em></em></p>
+<ul>
+<li><p><em><em>a = "Protectional"</em></em></p></li>
+<li><p><em><em>b = "Lactoprotein"</em></em></p></li>
+</ul>
+<p><em><em>The answer for this case is <span class="math inline">\(0\)</span> because <em>Protectional</em> is already an angram of <em>Lactoprotein</em>.</em></em></p>
+</div>
+</div>
+</div>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Clarification Questions</span></p>
+<ol>
+<li><p>Are the letters of the string always only letters from the English alphabet?</p>
+<p><em>Yes, letters are always from the English alphabet.</em></p></li>
+<li><p>Should the function be case sensitive?</p>
+<p><em>No. You can assume the input letters are always lower case.</em></p></li>
+<li><p>Can the input string be modified? No, the input is immutable.</p>
+<p><em>No, the input strings are immutable.</em></p></li>
+<li><p>What value should be returned when there is no solution?</p>
+<p><em>In such case you can return <span class="math inline">\(-1\)</span>.</em></p></li>
+</ol>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span><span>Discussion</span></p>
+<p>Let’s start by first quickly review what the word anagram means in the context of this problem. First of all, notice that both <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> contain a single word (which can be fairly long). Moreover, for <span class="math inline">\(a\)</span> to be an anagram of <span class="math inline">\(b\)</span>, it has to be the case that exists an arrangement of characters in <span class="math inline">\(a\)</span> that is equal to <span class="math inline">\(b\)</span>. In other words, the question to which we need to answer is: is it possible to shuffle the character of <span class="math inline">\(a\)</span> such that we obtain <span class="math inline">\(b\)</span>? For this to be the case, it must be that <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> contain the same set of characters meaning that sorting both <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> would make them equal. In addition, as a consequence of the fact that no addition or deletion is allowed, <strong><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> must have the same length</strong>. On the other hand, if they have the same length then it is always possible to solve this problem because in the worst case, we can modify every letter of <span class="math inline">\(a\)</span> (see [Example 1]()). Thus, the only case when the problem has no solution has been isolated: when <span class="math inline">\(n \neq m\)</span> we must return <span class="math inline">\(-1\)</span> otherwise we can proceed with our calculation knowing that a solution exists.</p>
+<p><span>-3ex -0.1ex -.4ex</span> <span>0.5ex .2ex </span> <span><strong></strong></span><span>Brute-Force</span> <span id="sec:anagrams:bruteforce" label="sec:anagrams:bruteforce">[sec:anagrams:bruteforce]</span></p>
+<p>One of the first options coming to mind is a solution where we generate all possible arrangements of the letters in <span class="math inline">\(a\)</span>, and for each of these arrangements, calculate the number of modifications necessary in order to convert it into <span class="math inline">\(b\)</span>. The key idea is that the cost of transforming a string into another is equal to the number positions having different letters. For instance the cost of transforming <em>"abcb"</em> into <em>"bbbb"</em> is <span class="math inline">\(2\)</span> because the two strings differ in the first and third letters.</p>
+<p>Despite being simple to explain this approach is to be considered poor because the number of arrangements of a set of <span class="math inline">\(n\)</span> letters grows as fast as <span class="math inline">\(n!\)</span>. Moreover, enumerating all the arrangements is no trivial task unless we use a library function capable of doing that (for instance, the C++ standard library provides the function <a href="https://en.cppreference.com/w/cpp/algorithm/next_permutation"> <code>std::next_permutation</code></a> devoted to this purpose).</p>
+<p>Listings <a href="#list:two_string_anagram_bruteforce" data-reference-type="ref" data-reference="list:two_string_anagram_bruteforce">[list:two_string_anagram_bruteforce]</a> shows a C++ implementation of the idea above.</p>
+<div class="sourceCode" id="list:two_string_anagram_bruteforce" data-language="c++" data-caption="&quot;Brute force C++ solution to the two string anagram problem.&quot;" label="list:two_string_anagram_bruteforce"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:two_string_anagram_bruteforce-1"><a href="#list:two_string_anagram_bruteforce-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="list:two_string_anagram_bruteforce-2"><a href="#list:two_string_anagram_bruteforce-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;limits&gt;</span></span>
+<span id="list:two_string_anagram_bruteforce-3"><a href="#list:two_string_anagram_bruteforce-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="list:two_string_anagram_bruteforce-4"><a href="#list:two_string_anagram_bruteforce-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_bruteforce-5"><a href="#list:two_string_anagram_bruteforce-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> count_different_letters<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>a_perm<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>b<span class="op">)</span></span>
+<span id="list:two_string_anagram_bruteforce-6"><a href="#list:two_string_anagram_bruteforce-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:two_string_anagram_bruteforce-7"><a href="#list:two_string_anagram_bruteforce-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">assert</span><span class="op">(</span>a_perm<span class="op">.</span>size<span class="op">()</span> <span class="op">==</span> b<span class="op">.</span>size<span class="op">());</span></span>
+<span id="list:two_string_anagram_bruteforce-8"><a href="#list:two_string_anagram_bruteforce-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_bruteforce-9"><a href="#list:two_string_anagram_bruteforce-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="list:two_string_anagram_bruteforce-10"><a href="#list:two_string_anagram_bruteforce-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">size_t</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> a_perm<span class="op">.</span>length<span class="op">();</span> i<span class="op">++)</span></span>
+<span id="list:two_string_anagram_bruteforce-11"><a href="#list:two_string_anagram_bruteforce-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:two_string_anagram_bruteforce-12"><a href="#list:two_string_anagram_bruteforce-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a_perm<span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> b<span class="op">[</span>i<span class="op">])</span></span>
+<span id="list:two_string_anagram_bruteforce-13"><a href="#list:two_string_anagram_bruteforce-13" aria-hidden="true" tabindex="-1"></a>      <span class="op">++</span>count<span class="op">;</span></span>
+<span id="list:two_string_anagram_bruteforce-14"><a href="#list:two_string_anagram_bruteforce-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:two_string_anagram_bruteforce-15"><a href="#list:two_string_anagram_bruteforce-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> count<span class="op">;</span></span>
+<span id="list:two_string_anagram_bruteforce-16"><a href="#list:two_string_anagram_bruteforce-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="list:two_string_anagram_bruteforce-17"><a href="#list:two_string_anagram_bruteforce-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_bruteforce-18"><a href="#list:two_string_anagram_bruteforce-18" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> solution_brute_force<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>a<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>b<span class="op">)</span></span>
+<span id="list:two_string_anagram_bruteforce-19"><a href="#list:two_string_anagram_bruteforce-19" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:two_string_anagram_bruteforce-20"><a href="#list:two_string_anagram_bruteforce-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>a<span class="op">.</span>length<span class="op">()</span> <span class="op">!=</span> b<span class="op">.</span>length<span class="op">())</span></span>
+<span id="list:two_string_anagram_bruteforce-21"><a href="#list:two_string_anagram_bruteforce-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="list:two_string_anagram_bruteforce-22"><a href="#list:two_string_anagram_bruteforce-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_bruteforce-23"><a href="#list:two_string_anagram_bruteforce-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>string<span class="op"> </span>a_perm<span class="op">(</span>a<span class="op">);</span></span>
+<span id="list:two_string_anagram_bruteforce-24"><a href="#list:two_string_anagram_bruteforce-24" aria-hidden="true" tabindex="-1"></a>  sort<span class="op">(</span>a_perm<span class="op">.</span>begin<span class="op">(),</span> a_perm<span class="op">.</span>end<span class="op">());</span></span>
+<span id="list:two_string_anagram_bruteforce-25"><a href="#list:two_string_anagram_bruteforce-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> ans <span class="op">=</span> <span class="bu">std::</span>numeric_limits<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;::</span>max<span class="op">();</span></span>
+<span id="list:two_string_anagram_bruteforce-26"><a href="#list:two_string_anagram_bruteforce-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">do</span></span>
+<span id="list:two_string_anagram_bruteforce-27"><a href="#list:two_string_anagram_bruteforce-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:two_string_anagram_bruteforce-28"><a href="#list:two_string_anagram_bruteforce-28" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="bu">std::</span>min<span class="op">(</span>ans<span class="op">,</span> count_different_letters<span class="op">(</span>a_perm<span class="op">,</span> b<span class="op">));</span></span>
+<span id="list:two_string_anagram_bruteforce-29"><a href="#list:two_string_anagram_bruteforce-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ans <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="list:two_string_anagram_bruteforce-30"><a href="#list:two_string_anagram_bruteforce-30" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span></span>
+<span id="list:two_string_anagram_bruteforce-31"><a href="#list:two_string_anagram_bruteforce-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span><span class="bu">std::</span>next_permutation<span class="op">(</span>a_perm<span class="op">.</span>begin<span class="op">(),</span> a_perm<span class="op">.</span>end<span class="op">()));</span></span>
+<span id="list:two_string_anagram_bruteforce-32"><a href="#list:two_string_anagram_bruteforce-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_bruteforce-33"><a href="#list:two_string_anagram_bruteforce-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="list:two_string_anagram_bruteforce-34"><a href="#list:two_string_anagram_bruteforce-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><span>-3ex -0.1ex -.4ex</span> <span>0.5ex .2ex </span> <span><strong></strong></span><span>Sorting</span> <span id="sec:anagrams:sorting" label="sec:anagrams:sorting">[sec:anagrams:sorting]</span></p>
+<p>The brute-force solution does a lot of superfluous work because it tries to find a permutation of the string <span class="math inline">\(a\)</span> requiring minimal modifications to be morphed into <span class="math inline">\(b\)</span>. But, is it really necessary to turn <span class="math inline">\(a\)</span> into <strong>exactly</strong> <span class="math inline">\(b\)</span>, or is it sufficient to modify <span class="math inline">\(a\)</span> so that it is equal to a particular permutation of <span class="math inline">\(b\)</span>? After all, being an anagram is a transitive property and if <span class="math inline">\(a\)</span> is a permutation of <span class="math inline">\(b\)</span> and <span class="math inline">\(b\)</span> is a permutation of <span class="math inline">\(c\)</span> then, <span class="math inline">\(a\)</span> must also be a permutation of <span class="math inline">\(c\)</span>.</p>
+<p>By definition, an anagram of <span class="math inline">\(b\)</span> is any permutation of its characters, and therefore, the particular permutation in which the characters of <span class="math inline">\(b\)</span> are sorted is a valid anagram of its. It is much easier than checking all possible permutations, to modify <span class="math inline">\(a\)</span> into the "sorted" anagram of <span class="math inline">\(b\)</span> (where all of its characters are sorted), rather than to exactly <span class="math inline">\(b\)</span> because all we need to do is to create a copy of both <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, sort both of them and then calculate the character-by-character difference. <em></em>This approach works because if <span class="math inline">\(x\)</span> is an anagram of <span class="math inline">\(b\)</span> then <span class="math inline">\(x\)</span> is also an anagram of  <code>sort(b)</code><em></em>. In other words, it does not matter how the characters are arranged in <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> as, the only thing that matters is the set of the characters appearing in <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>: the order in which characters in both <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> appear does not matter.</p>
+<p>Listings <a href="#list:two_string_anagram_sorting" data-reference-type="ref" data-reference="list:two_string_anagram_sorting">[list:two_string_anagram_sorting]</a> shows how we can take advantage of this fact and write a fast solution for this problem.</p>
+<div class="sourceCode" id="list:two_string_anagram_sorting" data-language="c++" data-caption="&quot;Brute force C++ solution to the two string anagram problem.&quot;" label="list:two_string_anagram_sorting"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:two_string_anagram_sorting-1"><a href="#list:two_string_anagram_sorting-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_sorting-2"><a href="#list:two_string_anagram_sorting-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> solution_sorting<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>a<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>b<span class="op">)</span></span>
+<span id="list:two_string_anagram_sorting-3"><a href="#list:two_string_anagram_sorting-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:two_string_anagram_sorting-4"><a href="#list:two_string_anagram_sorting-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>a<span class="op">.</span>length<span class="op">()</span> <span class="op">!=</span> b<span class="op">.</span>length<span class="op">())</span></span>
+<span id="list:two_string_anagram_sorting-5"><a href="#list:two_string_anagram_sorting-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="list:two_string_anagram_sorting-6"><a href="#list:two_string_anagram_sorting-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_sorting-7"><a href="#list:two_string_anagram_sorting-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>string<span class="op"> </span>aa<span class="op">(</span>a<span class="op">);</span></span>
+<span id="list:two_string_anagram_sorting-8"><a href="#list:two_string_anagram_sorting-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>string<span class="op"> </span>bb<span class="op">(</span>b<span class="op">);</span></span>
+<span id="list:two_string_anagram_sorting-9"><a href="#list:two_string_anagram_sorting-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_sorting-10"><a href="#list:two_string_anagram_sorting-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>sort<span class="op">(</span>aa<span class="op">.</span>begin<span class="op">(),</span> aa<span class="op">.</span>end<span class="op">());</span></span>
+<span id="list:two_string_anagram_sorting-11"><a href="#list:two_string_anagram_sorting-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>sort<span class="op">(</span>bb<span class="op">.</span>begin<span class="op">(),</span> bb<span class="op">.</span>end<span class="op">());</span></span>
+<span id="list:two_string_anagram_sorting-12"><a href="#list:two_string_anagram_sorting-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> count_different_letters<span class="op">(</span>aa<span class="op">,</span> bb<span class="op">);</span></span>
+<span id="list:two_string_anagram_sorting-13"><a href="#list:two_string_anagram_sorting-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Notice that, if the input was mutable, then, the additional space occupied by the copies of the string  <code>aa</code> and  <code>bb</code> could have been avoided.</p>
+<p><strong>The time complexity of the idea above is <span class="math inline">\(O(n log(n))\)</span></strong> (because of sorting). <strong>The space complexity is <span class="math inline">\(O(n)\)</span></strong> (we create copies of the input strings).</p>
+<p><span>-3ex -0.1ex -.4ex</span> <span>0.5ex .2ex </span> <span><strong></strong></span><span>Histograms</span> <span id="sec:anagrams:histograms" label="sec:anagrams:histograms">[sec:anagrams:histograms]</span></p>
+<p>There is another bit of information that we have not yet used: <strong>the alphabet</strong> from which the letters of <span class="math inline">\(a\)</span> and <span class="math inline">\(ab\)</span> are taken from <strong>is small</strong>. If the only thing that matters is the set of characters appearing in <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> (and not their order, as discussed above), then we can use the same idea at the core of the <a href="https://en.wikipedia.org/wiki/Bucket_sort">bucket sort</a> algorithm to achieve a linear time complexity solution.</p>
+<p>The key idea is to preprocess <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> so to calculate their per-character frequencies, denoted here as <span class="math inline">\(F_a\)</span> and <span class="math inline">\(F_b\)</span>, respectively. An entry of <span class="math inline">\(F_a[\mathrm{c}]\)</span> and <span class="math inline">\(F_b[\mathrm{c}]\)</span>, where <span class="math inline">\(\mathrm{c} \in \{\mathrm{a},\mathrm{b},\ldots,\mathrm{z}\}\)</span> (a letter of the alphabet), contains the frequency of character <span class="math inline">\(\mathrm{c}\)</span>, in <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, respectively.</p>
+<p>If <span class="math inline">\(F_a\)</span> and <span class="math inline">\(F_b\)</span> are the same, then <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> have exactly the same character set and <span class="math inline">\(a\)</span> is an anagram of <span class="math inline">\(b\)</span>. Otherwise, it must be the case that some characters of <span class="math inline">\(a\)</span> appear in <span class="math inline">\(b\)</span> a different number of times. In this case, we can fix <span class="math inline">\(a\)</span> in such a way to make sure that its frequencies <span class="math inline">\(F_a\)</span> ey match the ones in <span class="math inline">\(F_b\)</span>. But the main question is still unanswered: how many operations are necessary to do so? In order to get this answer, it is useful to look at the difference (<span class="math inline">\(D\)</span>) of <span class="math inline">\(F_a\)</span> and <span class="math inline">\(F_b\)</span>.</p>
+<p><span class="math inline">\(D = F_a - F_b = \{D[\mathrm{a}] = (F_a[\mathrm{a}] - F_b[\mathrm{a}]), D[\mathrm{b}] = (F_a[\mathrm{b}] - F_b[\mathrm{b}]), D[\mathrm{c}] = (F_a[\mathrm{c}] - F_b[\mathrm{c}]), \ldots, D[\mathrm{z}] = (F_a[\mathrm{z}] - F_b[\mathrm{z}])\}\)</span></p>
+<p><span class="math inline">\(D[\mathrm{c}]\)</span> (where <span class="math inline">\(\mathrm{c} \in \{\mathrm{a},\mathrm{b},\ldots,\mathrm{z}\}\)</span>) contains the difference between the number of occurrences of the character <span class="math inline">\(\mathrm{c}\)</span> in the string <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Depending on whether the value of <span class="math inline">\(D[\mathrm{c}]\)</span> is greater or smaller than <span class="math inline">\(0\)</span>, <span class="math inline">\(a\)</span> has an excess or a deficit of the letter c, respectively.</p>
+<p>Firstly, notice that <span class="math inline">\(\sum_{c=\mathrm{a}}^{\mathrm{z}} D[\mathrm{c}] = 0\)</span>. This observation stems from the fact that <span class="math inline">\(|a|=n=m=|b|\)</span> (<span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> must have equal length for this problem to have a solution, remember?) and that if <span class="math inline">\(a\)</span> has an excess of a certain character <span class="math inline">\(\mathrm{c}\)</span> then there must exist another character <span class="math inline">\(\mathrm{d} \neq \mathrm{c}\)</span> that the string <span class="math inline">\(a\)</span> has a shortage of. If that is not the case, it is impossible for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> to have equal lenght.</p>
+<p>We can use this fact to modify the excesses of the letters of <span class="math inline">\(a\)</span>, the ones having a positive value of <span class="math inline">\(D\)</span> into some of the letters there is a shortage of so that eventually, every single value of <span class="math inline">\(D\)</span> is zero. If <span class="math inline">\(D[\mathrm{c}] = x\)</span> is going to take <span class="math inline">\(x\)</span> modifications to transform the excess of characters <span class="math inline">\(\mathrm{c}\)</span>. The answer to this problem is, therefore, the sum of all the positive numbers of <span class="math inline">\(D\)</span>.</p>
+<p>Listings <a href="#list:two_string_anagram_histogram" data-reference-type="ref" data-reference="list:two_string_anagram_histogram">[list:two_string_anagram_histogram]</a> shows a possible implemenetation of the idea above.</p>
+<div class="sourceCode" id="list:two_string_anagram_histogram" data-language="c++" data-caption="&quot;C++ solution to the two string anagram problem using the histogram approach.&quot;" label="list:two_string_anagram_histogram"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:two_string_anagram_histogram-1"><a href="#list:two_string_anagram_histogram-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> solution_histogram<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>a<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>string<span class="op"> &amp;</span>b<span class="op">)</span></span>
+<span id="list:two_string_anagram_histogram-2"><a href="#list:two_string_anagram_histogram-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:two_string_anagram_histogram-3"><a href="#list:two_string_anagram_histogram-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>a<span class="op">.</span>length<span class="op">()</span> <span class="op">!=</span> b<span class="op">.</span>length<span class="op">())</span></span>
+<span id="list:two_string_anagram_histogram-4"><a href="#list:two_string_anagram_histogram-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="list:two_string_anagram_histogram-5"><a href="#list:two_string_anagram_histogram-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_histogram-6"><a href="#list:two_string_anagram_histogram-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>array<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dv">128</span><span class="op">&gt;</span> F <span class="op">=</span> <span class="op">{</span><span class="dv">0</span><span class="op">};</span></span>
+<span id="list:two_string_anagram_histogram-7"><a href="#list:two_string_anagram_histogram-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> a<span class="op">.</span>size<span class="op">();</span> i<span class="op">++)</span></span>
+<span id="list:two_string_anagram_histogram-8"><a href="#list:two_string_anagram_histogram-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:two_string_anagram_histogram-9"><a href="#list:two_string_anagram_histogram-9" aria-hidden="true" tabindex="-1"></a>    F<span class="op">[</span>a<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> <span class="ch">&#39;a&#39;</span><span class="op">]++;</span></span>
+<span id="list:two_string_anagram_histogram-10"><a href="#list:two_string_anagram_histogram-10" aria-hidden="true" tabindex="-1"></a>    F<span class="op">[</span>b<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> <span class="ch">&#39;a&#39;</span><span class="op">]--;</span></span>
+<span id="list:two_string_anagram_histogram-11"><a href="#list:two_string_anagram_histogram-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:two_string_anagram_histogram-12"><a href="#list:two_string_anagram_histogram-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_histogram-13"><a href="#list:two_string_anagram_histogram-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> ans <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="list:two_string_anagram_histogram-14"><a href="#list:two_string_anagram_histogram-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="at">const</span> <span class="kw">auto</span> x <span class="op">:</span> F<span class="op">)</span></span>
+<span id="list:two_string_anagram_histogram-15"><a href="#list:two_string_anagram_histogram-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="list:two_string_anagram_histogram-16"><a href="#list:two_string_anagram_histogram-16" aria-hidden="true" tabindex="-1"></a>      ans <span class="op">+=</span> x<span class="op">;</span></span>
+<span id="list:two_string_anagram_histogram-17"><a href="#list:two_string_anagram_histogram-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:two_string_anagram_histogram-18"><a href="#list:two_string_anagram_histogram-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="list:two_string_anagram_histogram-19"><a href="#list:two_string_anagram_histogram-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Notice how the array of differences of frequencies <span class="math inline">\(D\)</span> can be easily calculated without explicitly computing the frequencies for the characters of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> but by simply adding <span class="math inline">\(1\)</span> to <span class="math inline">\(D[\mathrm{c}]\)</span> when the letter <span class="math inline">\(\mathrm{c}\)</span> appears in <span class="math inline">\(a\)</span> and subtracting <span class="math inline">\(1\)</span> when it does in <span class="math inline">\(b\)</span>.</p>
+<p><strong>The time and space complexity of the code above is <span class="math inline">\(O(n)\)</span> and <span class="math inline">\(O(1)\)</span> in space</strong> (we are using an array of <span class="math inline">\(128\)</span> integers regardless of the size of the input). We cannot do better than this as all characters in the input strings must be at least read once.</p>
+<h1 id="appendices">Appendices</h1>
+<p><span>-4ex -1ex -.4ex</span> <span>1ex .2ex </span> <span><strong></strong></span>*<span>Listings</span></p>
+<div class="sourceCode" id="list:listings:hash_pair" data-language="c++" data-caption="Functor used to calculate the hash value for a pair of integers.     \ \lstinline[breaklines=true]{hash_combine} is a free function used to mix several input hash values into a new one." label="list:listings:hash_pair"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:listings:hash_pair-1"><a href="#list:listings:hash_pair-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> SeedType<span class="op">,</span> <span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span><span class="op">...</span> Rest<span class="op">&gt;</span></span>
+<span id="list:listings:hash_pair-2"><a href="#list:listings:hash_pair-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> hash_combine<span class="op">(</span>SeedType<span class="op">&amp;</span> seed<span class="op">,</span> <span class="at">const</span> T<span class="op">&amp;</span> v<span class="op">,</span> <span class="at">const</span> Rest<span class="op">&amp;...</span> rest<span class="op">)</span></span>
+<span id="list:listings:hash_pair-3"><a href="#list:listings:hash_pair-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:listings:hash_pair-4"><a href="#list:listings:hash_pair-4" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">^=</span> <span class="bu">std::</span>hash<span class="op">&lt;</span>T<span class="op">&gt;{}(</span>v<span class="op">)</span> <span class="op">+</span> <span class="bn">0x9e3779b9</span> <span class="op">+</span> <span class="op">(</span>seed <span class="op">&lt;&lt;</span> <span class="dv">6</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span>seed <span class="op">&gt;&gt;</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="list:listings:hash_pair-5"><a href="#list:listings:hash_pair-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>hash_combine<span class="op">(</span>seed<span class="op">,</span> rest<span class="op">),</span> <span class="op">...);</span></span>
+<span id="list:listings:hash_pair-6"><a href="#list:listings:hash_pair-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="list:listings:hash_pair-7"><a href="#list:listings:hash_pair-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> PairHasher</span>
+<span id="list:listings:hash_pair-8"><a href="#list:listings:hash_pair-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> <span class="kw">public</span> <span class="bu">std::</span>unary_function<span class="op">&lt;</span><span class="bu">std::</span>pair<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;,</span> <span class="bu">std::</span>size_t<span class="op">&gt;</span></span>
+<span id="list:listings:hash_pair-9"><a href="#list:listings:hash_pair-9" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:listings:hash_pair-10"><a href="#list:listings:hash_pair-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>size_t<span class="op"> </span><span class="kw">operator</span><span class="op">()(</span><span class="at">const</span> <span class="bu">std::</span>pair<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;&amp;</span> k<span class="op">)</span> <span class="at">const</span></span>
+<span id="list:listings:hash_pair-11"><a href="#list:listings:hash_pair-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:listings:hash_pair-12"><a href="#list:listings:hash_pair-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> seed <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="list:listings:hash_pair-13"><a href="#list:listings:hash_pair-13" aria-hidden="true" tabindex="-1"></a>    hash_combine<span class="op">(</span>seed<span class="op">,</span><span class="bu">std::</span>get<span class="op">&lt;</span><span class="dv">0</span><span class="op">&gt;(</span>k<span class="op">),</span><span class="bu">std::</span>get<span class="op">&lt;</span><span class="dv">1</span><span class="op">&gt;(</span>k<span class="op">));</span></span>
+<span id="list:listings:hash_pair-14"><a href="#list:listings:hash_pair-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> seed<span class="op">;</span></span>
+<span id="list:listings:hash_pair-15"><a href="#list:listings:hash_pair-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:listings:hash_pair-16"><a href="#list:listings:hash_pair-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>An integer <span class="math inline">\(x\)</span> is a perfect square if its square root is also an integer.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>

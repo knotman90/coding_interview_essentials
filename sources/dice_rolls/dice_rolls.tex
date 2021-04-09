@@ -78,19 +78,19 @@ should be returned modulo $10^9 + 7$.
 \begin{figure}
 	\centering
 	\begin{subfigure}[t]{0.25\textwidth}
-		\includegraphics[width=1\linewidth]{sources/dice_rolls/images/3d_dices}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/dice_rolls/images/3d_dices}
 		\caption{Example of dice with $12$ faces.}
 		\label{fig:dice_rolls:12faces_dice}
 	 \end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.25\textwidth}
-		\includegraphics[width=1\linewidth]{sources/dice_rolls/images/cubic_dice}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/dice_rolls/images/cubic_dice}
 		\caption{Example of common $6$ faces dice.}
 		\label{fig:dice_rolls:6faces_dice}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.25\textwidth}
-		 \includegraphics[width=1\linewidth]{sources/dice_rolls/images/icosahedron_dice}
+		 \includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/dice_rolls/images/icosahedron_dice}
 		 \caption{Example of dice with $20$ faces.}
 		 \label{fig:dice_rolls:20faces_dice}
 	  \end{subfigure}
@@ -241,7 +241,7 @@ Chapter \ref{ch:coin_change}. Section
 \ref{sec:min_difficulty_job_scheduler:generate_all_combination} also discuss the problem of
 generating combinations, and the material discussed there can be adapted and applied here.
 
-\lstinputlisting[language=c++, caption={Brute-force (enumerating all possible combinations) solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:bruteforce]{sources/dice_rolls/dice_rolls_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute-force (enumerating all possible combinations) solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:bruteforce]{/home/dspataro/git/algorithm_articles/sources/dice_rolls/dice_rolls_solution1.cpp}
 
 
 The time and space complexity of this approach are exponential and constant, respectively.
@@ -299,7 +299,7 @@ subproblem \inline{num_rolls_to_target_bruteforce(1,4,6)} is solved $5$ times. I
 convinced draw the recursion tree, or add a print statement at the beginning of the function. All
 these superfluous execution can be avoided if the result of each of the subproblem is stored into a cache as shown in Listing \ref{list:dice_rolls:dp}. 
 
-\lstinputlisting[language=c++, caption={Dynamic programming with memoization top-down recursive  solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:dp]{sources/dice_rolls/dice_rolls_solution2.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming with memoization top-down recursive  solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:dp]{/home/dspataro/git/algorithm_articles/sources/dice_rolls/dice_rolls_solution2.cpp}
 
 
 This implementation is an almost identical copy
@@ -318,7 +318,7 @@ calculate the answer for all possible target values when $d=0$ and $d=1$ and fro
 the reasoning above. 
 This is exactly the strategy that Listing \ref{list:dice_rolls:dpbottomup} implements.
 
-\lstinputlisting[language=c++, caption={Dynamic programming bottom-up solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:dpbottomup]{sources/dice_rolls/dice_rolls_solution3.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming bottom-up solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:dpbottomup]{/home/dspataro/git/algorithm_articles/sources/dice_rolls/dice_rolls_solution3.cpp}
 
 We use a 2D
 table \inline{DP} (initialized with zeros) with $d+1$ rows and $t+1$ columns where each cell \inline{DP[i][j]}

@@ -63,7 +63,7 @@ In other words we want to check whether the following is true: $\exists \; j $ s
 This idea can be implemented as shown in
 Listing \ref{list:unique_elements_brute_force1} using two simple nested loops.
 
-\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique.",label=list:unique_elements_brute_force1]{sources/unique_elements/unique_elements_brute_force.cpp}
+\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique.",label=list:unique_elements_brute_force1]{/home/dspataro/git/algorithm_articles/sources/unique_elements/unique_elements_brute_force.cpp}
 
 
 As a stylistic improvements to the code in Listing \ref{list:unique_elements_brute_force1}, Listing
@@ -72,7 +72,7 @@ search for a duplicate of the character $s_i$.
 This not only makes the code shorter and cleaner,
 but also shows to the interviewer that you are able to use the standard library and do not reinvent the wheel.
 
-\lstinputlisting[language=c++, caption="C++ solution for determining if all characters in a string are unique using \inline{std::find}",label=list:unique_elements_brute_force2]{sources/unique_elements/unique_elements_brute_force_std.cpp}
+\lstinputlisting[language=c++, caption="C++ solution for determining if all characters in a string are unique using \inline{std::find}",label=list:unique_elements_brute_force2]{/home/dspataro/git/algorithm_articles/sources/unique_elements/unique_elements_brute_force_std.cpp}
 
 \subsection{Linear time - Hashset}
 In Listing \ref{list:unique_elements_brute_force1} the internal loop is doing the hard work of
@@ -84,7 +84,7 @@ we inser $s_i$ into the set and can continue  processing the rest of $s$.
 Listing \ref{list:unique_elements_brute_force_map} shows how this idea can be implemented.
 
 
-\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_map]{sources/unique_elements/unique_elements_brute_force_map.cpp}
+\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_map]{/home/dspataro/git/algorithm_articles/sources/unique_elements/unique_elements_brute_force_map.cpp}
 
 
 This approach effectively lowers the time complexity down to linear, but at the cost of some
@@ -117,4 +117,4 @@ If at any time the currently examined character has
 been already seen, then it is a duplicate.
 Listing \ref{list:unique_elements_brute_force_final} shows an implementation of this idea.
 
-\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_final]{sources/unique_elements/unique_elements_brute_force_final.cpp}
+\lstinputlisting[language=c++, caption="C++ solution for determining all characters in a string are unique in $O(n)$ using an hashset.",label=list:unique_elements_brute_force_final]{/home/dspataro/git/algorithm_articles/sources/unique_elements/unique_elements_brute_force_final.cpp}

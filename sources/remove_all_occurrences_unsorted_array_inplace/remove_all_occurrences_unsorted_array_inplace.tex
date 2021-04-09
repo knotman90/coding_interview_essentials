@@ -7,7 +7,7 @@
 
 
 %\begin{figure} \centering
-%   \includegraphics[width=\textwidth]{sources/remove_all_occurrences_unsorted_array_inplace/images/example1}
+%   \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/remove_all_occurrences_unsorted_array_inplace/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}.
 %   \label{fig:remove_all_occurrences_unsorted_array_inplace:example1} \end{figure}
 
@@ -75,7 +75,7 @@ the C++ STL. So I would not be really surprised if during an interview someone w
 one-liner as the one shown in Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:STL}
 \footnote{Notice the similarities with Listing \ref{list:remove_duplicated_sorted_array_inplace_stl} for the problem in Chapter \ref{ch:remove_duplicated_sorted_array_inplace}}.
 
-\lstinputlisting[language=c++, caption={One-liner solution using the STL functions \inline{distance} and \inline{remove_if}},label=list:remove_all_occurrences_unsorted_array_inplace:STL]{sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution1.cpp}
+\lstinputlisting[language=c++, caption={One-liner solution using the STL functions \inline{distance} and \inline{remove_if}},label=list:remove_all_occurrences_unsorted_array_inplace:STL]{/home/dspataro/git/algorithm_articles/sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution1.cpp}
 
 
 This algorithm has a linear time and constant space complexity, which is pretty much as good as it gets. You cannot do much better than this considering you must at least read all the elements in the input array. 
@@ -91,7 +91,7 @@ linear amount of space to temporarily store the valid (dissatisfying the predica
 phase move them into the front of \inline{I}
 . Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:copy} shows a possible implementation of this idea.
 
-\lstinputlisting[language=c++, caption={Linear space solution using the \inline{std::copy} family of functions from the STL.},label=list:remove_all_occurrences_unsorted_array_inplace:copy]{sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution2.cpp}
+\lstinputlisting[language=c++, caption={Linear space solution using the \inline{std::copy} family of functions from the STL.},label=list:remove_all_occurrences_unsorted_array_inplace:copy]{/home/dspataro/git/algorithm_articles/sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution2.cpp}
 
 
 This solution however, only works correctly for types that can be copied. Beware that the interviewer could
@@ -120,7 +120,7 @@ Here we use exactly the same approach of two pointers $x$ and $y$:
 
 Listing \ref{list:remove_all_occurrences_unsorted_array_inplace:constant_space} implements this idea.
 
-\lstinputlisting[language=c++, caption={Constant space solution using a two pointer approach.},label=list:remove_all_occurrences_unsorted_array_inplace:constant_space]{sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution3.cpp}
+\lstinputlisting[language=c++, caption={Constant space solution using a two pointer approach.},label=list:remove_all_occurrences_unsorted_array_inplace:constant_space]{/home/dspataro/git/algorithm_articles/sources/remove_all_occurrences_unsorted_array_inplace/remove_all_occurrences_unsorted_array_inplace_solution3.cpp}
 
 
 

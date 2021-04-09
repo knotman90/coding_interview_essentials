@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure} \centering \includegraphics[width=\textwidth]{sources/max_manhattan/images/example1}
+%\begin{figure} \centering \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:max_manhattan:example1} \end{figure}
 
 \chapter{Max in manhattan neighborhood$^{K}$}
@@ -39,7 +39,7 @@ value in any cell sitting at a Manahtann distance below a certain threshold.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{sources/max_manhattan/images/distance_manhattan2}
+    \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/images/distance_manhattan2}
     \caption[Taxicab distance from times square to the trump tower]{Taxicab distance from times
     square to the Trump's tower. Notice that the black straight-line is depicting the Euclidean
     distance, and that the latter is shorter than the actual taxicab distance between  the two
@@ -132,7 +132,7 @@ given cell. Figure \ref{fig:max_manhattan:neighborhood} shown an example of such
 where the numbers inside the cells represent the distance from the cell $(i,j)$ at the center. 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhood}
+    \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/images/neighborhood}
     \caption[Cells in the Manhattan neighborhood of size $3$.]{Cells in the Manhattan neighborhood
     of size $3$. The numbers in each cell represent the Manhattan distance from the central cell.}
     \label{fig:max_manhattan:neighborhood}
@@ -151,7 +151,7 @@ Listing \ref{list:max_manhattan:bruteforce} shows an implementation of such idea
 clearly correct and has a time complexity of $O(nmK^2)$ as for each of the $nm$ cells of the matrix
 we do exactly $K^2$ work. The space complexity is $O(1)$ as no additional space is used other than
 the second matrix we must return.
-\lstinputlisting[language=c++, caption={Brute Force solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:bruteforce]{sources/max_manhattan/max_manhattan_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute Force solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:bruteforce]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/max_manhattan_solution1.cpp}
 
 
 \subsection{Dynamic Programming}
@@ -188,7 +188,7 @@ without having to look at all the $12$ cells composing its  manhattan neighborho
     
     \begin{subfigure}[t]{1.0\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDP1_1}
+        \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/images/neighborhoodDP1_1}
         \caption[]{Manahtann neighborhoods of size $1$ for the cells \begin{itemize*}
             \item $(x,y)$ (center)
             \item $(x+1,y)$ (right)
@@ -202,7 +202,7 @@ without having to look at all the $12$ cells composing its  manhattan neighborho
     
     \begin{subfigure}[t]{0.4\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDP1_2}
+        \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/images/neighborhoodDP1_2}
         \caption[]{Neighborhood of size $2$ for the cell $(x,y)$ obtained by the union of the
         neighborhood depicted in Figure\ref{fig:max_manhattan:neighborhoodDP1_1}.}
         \label{fig:max_manhattan:neighborhoodDP1_2}
@@ -246,7 +246,7 @@ and east cells of $(i,j)$ for the same subproblem where at $K-1$.
     
     \begin{subfigure}[t]{1.0\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDPK2_1}
+        \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/images/neighborhoodDPK2_1}
         \caption[]{Manahtann neighborhoods of size $1$ for the cells \begin{itemize*}
             \item $(x,y)$ (center)
             \item $(x+1,y)$ (right)
@@ -260,7 +260,7 @@ and east cells of $(i,j)$ for the same subproblem where at $K-1$.
     
     \begin{subfigure}[t]{0.4\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDPK2_2}
+        \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/images/neighborhoodDPK2_2}
         \caption[]{Neighborhood of size $3$ for the cell $(x,y)$ obtained by the union of the
         neighborhood depicted in Figure\ref{fig:max_manhattan:neighborhoodDPK2_1}.}
         \label{fig:max_manhattan:neighborhoodDPK2_2}
@@ -324,7 +324,7 @@ down to the following facts:
 \end{enumerate}
 Clearly each entry in the memoization cache costs $4$ integers for a total of $O(nmK)$.
 
-\lstinputlisting[language=c++, caption={DP top-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_topdown]{sources/max_manhattan/max_manhattan_solution2.cpp}
+\lstinputlisting[language=c++, caption={DP top-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_topdown]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/max_manhattan_solution2.cpp}
 
 
 
@@ -371,7 +371,7 @@ is in this approach $O(nm)$.
 Listing \ref{list:max_manhattan:dp_bottomup} shows an implementation of this idea. Notice that in
 the actual code, $M_{K-1}$ and $M_{K}$ are the variables \inline{previous} and \inline{current},
 respectively. 
-\lstinputlisting[language=c++, caption={DP bottom-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_bottomup]{sources/max_manhattan/max_manhattan_solution3.cpp}
+\lstinputlisting[language=c++, caption={DP bottom-down solution to the problem of finding the max cell within the manhattan neighborhood of size $K$.},label=list:max_manhattan:dp_bottomup]{/home/dspataro/git/algorithm_articles/sources/max_manhattan/max_manhattan_solution3.cpp}
 
 %This problem can be solved easily using dynamic programming. DP recurrence: dp[k][i][j] = ans. for
 %kth manhattan distance for element (i,j) dp[k+1][i][j] = max(dp[k][i-1][j], dp[k][i+1][j],

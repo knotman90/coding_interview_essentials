@@ -81,7 +81,7 @@ for each number from $1$ onward \textbf{until the search fails}. This algorithm 
 Listing
 \ref{list:first_positive_missing_bruteforce} shows an implementation of this idea where we use \inline{std::find()} as a means to do the actual search in the $A$. 
  
-\lstinputlisting[language=c++, caption=Two bruteforce solution implementations the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_bruteforce]{sources/first_positive_missing/first_positive_missing_solution4.cpp}
+\lstinputlisting[language=c++, caption=Two bruteforce solution implementations the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_bruteforce]{/home/dspataro/git/algorithm_articles/sources/first_positive_missing/first_positive_missing_solution4.cpp}
 
 This is, however, considered to be a poor solution (as a rule of thumb, in the context of coding interviews, all brute-force solutions are) and has a
 complexity of $O(n^2)$ time and $O(1)$ space.
@@ -138,7 +138,7 @@ We can clearly see that the missing number is $6 = A[8]+1 = A[n-1]+1$.
 An implementation of this idea is shown in Listing
 \ref{list:first_positive_missing_sorting}.
 
-\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_sorting]{sources/first_positive_missing/first_positive_missing_solution1.cpp}
+\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_sorting]{/home/dspataro/git/algorithm_articles/sources/first_positive_missing/first_positive_missing_solution1.cpp}
 
 
 Notice that:
@@ -175,7 +175,7 @@ Eventually, this array of flags contains the answer, which can be found by scann
 
 An implementation of the idea above is found in Listing \ref{list:first_positive_missing_linear_space}.
 
-\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{sources/first_positive_missing/first_positive_missing_solution2.cpp}
+\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{/home/dspataro/git/algorithm_articles/sources/first_positive_missing/first_positive_missing_solution2.cpp}
 
 
 The code works in two phases:
@@ -221,7 +221,7 @@ If all those cells contain negative, then it means that the missing number is $n
 
 This idea is implemented in Listing \ref{list:first_positive_missing_linear_space} shown below.
 
-\lstinputlisting[language=c++, caption=Linear time and constantspace solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{sources/first_positive_missing/first_positive_missing_solution3.cpp}
+\lstinputlisting[language=c++, caption=Linear time and constantspace solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{/home/dspataro/git/algorithm_articles/sources/first_positive_missing/first_positive_missing_solution3.cpp}
 
 
 The two phases of this solution are packaged into two functions:

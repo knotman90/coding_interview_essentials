@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure} \centering \includegraphics[width=\textwidth]{sources/max_gap/images/example1}
+%\begin{figure} \centering \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_gap/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:max_gap:example1} \end{figure}
 
 \chapter{Find the largest gap}
@@ -95,7 +95,7 @@ their distance $d_k=I_{k-1}-I_k$. Among all calculated distances we just return 
 	index $|I|$, which does not exists. In C++ this would cause undefined behaviour, and the most
 	likely outcome would be a segmentation fault error.
 \end{itemize}
-\lstinputlisting[language=c++, caption={Trivial solution to the max gap problem using sorting and linear space.},label=list:max_gap:bruteforce]{sources/max_gap/max_gap_solution1.cpp}
+\lstinputlisting[language=c++, caption={Trivial solution to the max gap problem using sorting and linear space.},label=list:max_gap:bruteforce]{/home/dspataro/git/algorithm_articles/sources/max_gap/max_gap_solution1.cpp}
 
 
 
@@ -125,7 +125,7 @@ you then simply reverse the contents of that bucket.}.
 
 Listing \ref{list:max_gap:radixsort} shows an implementation of radix-sort and its application to
 the solution of this chapter's problem.
-\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using radix-sort.},label=list:max_gap:radixsort]{sources/max_gap/max_gap_solution2.cpp}
+\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using radix-sort.},label=list:max_gap:radixsort]{/home/dspataro/git/algorithm_articles/sources/max_gap/max_gap_solution2.cpp}
 Notice how the main driver function \inline{max_gap_radix_sort} is basically the same as
 \inline{max_gap_bruteforce} from Listing \ref{list:max_gap:bruteforce} except for the sorting
 procedure used.
@@ -167,7 +167,7 @@ element is no more $2$ but $3$ which is larger than what we had to begin with. T
 maximum attainable gap can in a  collection with uniform gaps can only increase. 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{sources/max_gap/images/move_t}
+	\includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_gap/images/move_t}
 	\caption{Example of how trying to reduce the gap between pairs of subsequent element of a
 	uniformly separated collections makes the largest gap larger.}.
    \label{fig:max_gap:move_t}
@@ -191,7 +191,7 @@ compare at most twice the number of input elements in $I$. The space complexity 
 the number of buckets can be proportional to $|I|$.
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{sources/max_gap/images/bucketing_example1}
+	\includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_gap/images/bucketing_example1}
 	\caption{Division of the elements of the Example \ref{example:max_gap:example2} into buckets.}.
 	\label{fig:max_gap:bucketing_example2}
 \end{figure}
@@ -215,4 +215,4 @@ minimum element of the next non-empty bucket $j > 0$. Once the gap between them 
 can move onto calculating the gap between the next pair of subsequent buckets which will be made of
 the bucket at index $j$ and the first non-empty bucket having index larger than $j$. This process is
 repeated until all pairs of buckets are processed.
-\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using bucketing.},label=list:max_gap:buckets]{sources/max_gap/max_gap_solution3.cpp}
+\lstinputlisting[language=c++, caption={Linear time solution to the max gap problem using bucketing.},label=list:max_gap:buckets]{/home/dspataro/git/algorithm_articles/sources/max_gap/max_gap_solution3.cpp}

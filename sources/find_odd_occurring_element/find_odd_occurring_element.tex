@@ -45,11 +45,11 @@ Given the array $A=\{4,3,6,2,4,2,3,4,3,3,6\}$ the function returns $4$ because i
 The brute-force solution to this problem is quite easy: provided that a function `count` is available which counts the occurrences of an element in the array, it is only matter of using that function for all the elements in the array and return as soon as it return an odd number. 
  Listing \ref{list:find_odd_occurring_element_bruteforce_rawloop} shows a possible implementation in C++ using the standard library function \texttt{count} for counting the number of occurrences of a given number in the array.
 
-\lstinputlisting[language=c++, caption=Brute force solution to the problem of finding the odd occurring element in an array.,label=list:find_odd_occurring_element_bruteforce_rawloop]{sources/find_odd_occurring_element/find_odd_occurring_element_solution1.cpp}
+\lstinputlisting[language=c++, caption=Brute force solution to the problem of finding the odd occurring element in an array.,label=list:find_odd_occurring_element_bruteforce_rawloop]{/home/dspataro/git/algorithm_articles/sources/find_odd_occurring_element/find_odd_occurring_element_solution1.cpp}
 
 What the code above is really trying to do is to \textbf{find} the element appearing an odd number of times. Instead of using a raw loop for doing so, the code can be made much more expressive (which is always appreciated and positively evaluated by the interviewer) by using the standard \texttt{find\_if} (or equivalents in other languages) function as shown in the Listing \ref{list:find_odd_occurring_element_bruteforce_standard} 
 
-\lstinputlisting[language=c++, caption=Brute force solution to the problem of finding the odd occurring element in an array using only standard libraries functions.,label=list:find_odd_occurring_element_bruteforce_standard]{sources/find_odd_occurring_element/find_odd_occurring_element_solution2.cpp}
+\lstinputlisting[language=c++, caption=Brute force solution to the problem of finding the odd occurring element in an array using only standard libraries functions.,label=list:find_odd_occurring_element_bruteforce_standard]{/home/dspataro/git/algorithm_articles/sources/find_odd_occurring_element/find_odd_occurring_element_solution2.cpp}
 
 
 This is however considered a poor solution because the time complexity is $O(n^2)$ which is much higher than the optimal, while space complexity is constant. 
@@ -62,7 +62,7 @@ In order to speed up the process of keeping count of how many times each element
 The in Listing \ref{list:find_odd_occurring_element_bruteforce_linearspace} shows a possible implementation of the idea above.
 
 
-\lstinputlisting[language=c++, caption=Linear time and space solution to the problem of finding the odd occurring element in an array.,label=list:find_odd_occurring_element_bruteforce_linearspace]{sources/find_odd_occurring_element/find_odd_occurring_element_solution3.cpp}
+\lstinputlisting[language=c++, caption=Linear time and space solution to the problem of finding the odd occurring element in an array.,label=list:find_odd_occurring_element_bruteforce_linearspace]{/home/dspataro/git/algorithm_articles/sources/find_odd_occurring_element/find_odd_occurring_element_solution3.cpp}
 
 This solution is considered fairly good and has a time and complexity of $O(n)$.
 
@@ -84,7 +84,7 @@ W.r.t. to the example above $A=\{4,3,6,2,4,2,3,4,3,3,6\}$ we obtain: $4 \oplus 3
 
 An implementation of the idea above can be found in Listings \ref{list:find_odd_occurring_element_bruteforce_final1} and \ref{list:find_odd_occurring_element_bruteforce_final2} (implemented using C++ standard library functions).
 
-\lstinputlisting[language=c++, caption=Linear time and constnat space solution to the problem of finding the odd occurring element in an array using XOR $\oplus$.,label=list:find_odd_occurring_element_bruteforce_final1]{sources/find_odd_occurring_element/find_odd_occurring_element_solution4.cpp}
+\lstinputlisting[language=c++, caption=Linear time and constnat space solution to the problem of finding the odd occurring element in an array using XOR $\oplus$.,label=list:find_odd_occurring_element_bruteforce_final1]{/home/dspataro/git/algorithm_articles/sources/find_odd_occurring_element/find_odd_occurring_element_solution4.cpp}
 
 
-\lstinputlisting[language=c++, caption=Linear time and constnat space solution to the problem of finding the odd occurring element in an array using XOR $\oplus$ and C++ standard library accumulate function.,label=list:find_odd_occurring_element_bruteforce_final2]{sources/find_odd_occurring_element/find_odd_occurring_element_solution5.cpp}
+\lstinputlisting[language=c++, caption=Linear time and constnat space solution to the problem of finding the odd occurring element in an array using XOR $\oplus$ and C++ standard library accumulate function.,label=list:find_odd_occurring_element_bruteforce_final2]{/home/dspataro/git/algorithm_articles/sources/find_odd_occurring_element/find_odd_occurring_element_solution5.cpp}

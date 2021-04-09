@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure} \centering \includegraphics[width=\textwidth]{sources/max_triplet/images/example1}
+%\begin{figure} \centering \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_triplet/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:max_triplet:example1} \end{figure}
 
 \chapter{Max triplet sum}
@@ -83,7 +83,7 @@ nested loops are enough to implement this idea, as shown in Listing
 \ref{list:max_triplet_bruteforce}. The time complexity of this approach is $(O(|I|^3)$ which is far
 from being optimal. The space complexity is $O(1)$ as no additional space is used.
 
-\lstinputlisting[language=c++, caption={Cubic time complexity bruteforce solution.},label=list:max_triplet_bruteforce]{sources/max_triplet/max_triplet_solution1.cpp}
+\lstinputlisting[language=c++, caption={Cubic time complexity bruteforce solution.},label=list:max_triplet_bruteforce]{/home/dspataro/git/algorithm_articles/sources/max_triplet/max_triplet_solution1.cpp}
 
 
 \section{Precalculation and Binary Search}
@@ -116,4 +116,4 @@ similar fashion to what we have done for the problem in Chapter \ref{ch:greatest
 from the right to the left of $I$ and we keep track of the largest element ($M$) seen so far. If $M$ is larger
 then the element we are currently examining ($I_x$) then $M$ is also the largest element larger than $I_x$ appearing after $x$.
 If not, it means that $I_x$ is the largest element so far, and that $I_x$ does not have any larger element on its right: thus $M = I_x$ (see Section \ref{sec:greatest_right:linear} and Listing \ref{list:greatest_right_final1}).
-\lstinputlisting[language=c++, caption={$O(nlog(n))$ solution to the max triplet sum problem.},label=list:max_triplet]{sources/max_triplet/max_triplet_solution2.cpp}
+\lstinputlisting[language=c++, caption={$O(nlog(n))$ solution to the max triplet sum problem.},label=list:max_triplet]{/home/dspataro/git/algorithm_articles/sources/max_triplet/max_triplet_solution2.cpp}

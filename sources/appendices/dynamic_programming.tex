@@ -95,7 +95,7 @@ most common introductionary example of DP. The Fibonacci sequence recursive
 formulation is ready to be solved using a top-down DP approach. Listing
 \ref{list:app:dp:canonical} shows a C++ function that calculated the $n^{th}$ Fibonacci
 number.
-\lstinputlisting[language=c++, caption={Canonical recursive C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:canonical]{sources/appendices/fibonacci_canonical.cpp}
+\lstinputlisting[language=c++, caption={Canonical recursive C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:canonical]{/home/dspataro/git/algorithm_articles/sources/appendices/fibonacci_canonical.cpp}
 Notice that for instance when $F(6)$ a call tree is produced where the same call
 is repeated more than once as shown in the list below. $F(2)$ has been
 calculated $5$ times!
@@ -111,4 +111,4 @@ Listing \ref{list:app:dp:fib} can be improved dramatically if we memoize the fun
 that have been already calculated. This way no duplicate work is done. W.r.t the
 previous example, from the second time the value of $F(2)$ is needed, no
 additional work is done, as the value in the cache is returned.
-\lstinputlisting[language=c++, caption={Canonical recursive top-down Dynamic Programming C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:fib]{sources/appendices/fibonacci_dp_top_down.cpp}
+\lstinputlisting[language=c++, caption={Canonical recursive top-down Dynamic Programming C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:fib]{/home/dspataro/git/algorithm_articles/sources/appendices/fibonacci_dp_top_down.cpp}

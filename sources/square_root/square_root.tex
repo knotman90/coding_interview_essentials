@@ -78,7 +78,7 @@ Moreover, it is clear that no more than $\sqrt{n}$ numbers will be tested, which
 Listing \ref{list:square_root_brute_force} shows a C++ implementation of this idea.
 
 
-\lstinputlisting[language=c++, caption=$O(\sqrt{n})$ solution to the problem of finding the square root of an integer.,label=list:square_root_brute_force]{sources/square_root/square_root_brute_force.cpp}
+\lstinputlisting[language=c++, caption=$O(\sqrt{n})$ solution to the problem of finding the square root of an integer.,label=list:square_root_brute_force]{/home/dspataro/git/algorithm_articles/sources/square_root/square_root_brute_force.cpp}
 
 It is worth noticing that the variable $i$ has a type that is larger in size than an
 \inline{int}. This is necessary in order to prevent overflows during the calculation of $i^2$ (see the highlighted line). 
@@ -126,7 +126,7 @@ all the values greater than $k$ are not good candidates because they all belong 
 On the other hand, if $F(k) = 0$, we know that $k$ might be the solution but also that,<ins> all the elements smaller than $k$ are not good candidates as $k$ is already a better answer than any of those numbers would be.
 The idea above is implemented in Listing \ref{list:square_root_binary_search}. 
 
-\lstinputlisting[language=c++, caption=$O(log_2(n))$ solution to the problem of finding the square root of an integer.,label=list:square_root_binary_search]{sources/square_root/square_root_binary_search.cpp}
+\lstinputlisting[language=c++, caption=$O(log_2(n))$ solution to the problem of finding the square root of an integer.,label=list:square_root_binary_search]{/home/dspataro/git/algorithm_articles/sources/square_root/square_root_binary_search.cpp}
 
 
 

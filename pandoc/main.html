@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.2 — by Tristano Ajmone
+==============================================================================
+Copyright © Tristano Ajmone, 2017-2020, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License
+
+Copyright (c) Tristano Ajmone, 2017-2020 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017-2020,
+released under the MIT License (MIT); it contains readaptations of substantial
+portions of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>main</title>
+  <style type="text/css">
+@charset "UTF-8";.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#24292e;font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:16px;line-height:1.5;word-wrap:break-word;box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}.markdown-body a{color:#0366d6;background-color:transparent;text-decoration:none;-webkit-text-decoration-skip:objects}.markdown-body a:active,.markdown-body a:hover{outline-width:0}.markdown-body a:hover{text-decoration:underline}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body strong{font-weight:600}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1{font-size:2em;margin:.67em 0;padding-bottom:.3em;border-bottom:1px solid #eaecef}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid #eaecef}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#6a737d}.markdown-body img{border-style:none}.markdown-body svg:not(:root){overflow:hidden}.markdown-body hr{box-sizing:content-box;height:.25em;margin:24px 0;padding:0;overflow:hidden;background-color:#e1e4e8;border:0}.markdown-body hr::before{display:table;content:""}.markdown-body hr::after{display:table;clear:both;content:""}.markdown-body input{margin:0;overflow:visible;font:inherit;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}.markdown-body *{box-sizing:border-box}.markdown-body blockquote{margin:0}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dd{margin-left:0}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body code{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace}.markdown-body pre{font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;word-wrap:normal}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #dfe2e5}.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body code{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}.markdown-body code::after,.markdown-body code::before{letter-spacing:-.2em;content:" "}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code::after,.markdown-body pre code::before{content:normal}.markdown-body .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}.markdown-body kbd{box-shadow:inset 0 -1px 0 #959da5;display:inline-block;padding:3px 5px;font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;color:#444d56;vertical-align:middle;background-color:#fcfcfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5}.markdown-body :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:3px}.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}.markdown-body::before{display:table;content:""}.markdown-body::after{display:table;clear:both;content:""}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.Alert,.Error,.Note,.Success,.Warning{padding:11px;margin-bottom:24px;border-style:solid;border-width:1px;border-radius:4px}.Alert p,.Error p,.Note p,.Success p,.Warning p{margin-top:0}.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child{margin-bottom:0}.Alert{color:#246;background-color:#e2eef9;border-color:#bac6d3}.Warning{color:#4c4a42;background-color:#fff9ea;border-color:#dfd8c2}.Error{color:#911;background-color:#fcdede;border-color:#d2b2b2}.Success{color:#22662c;background-color:#e2f9e5;border-color:#bad3be}.Note{color:#2f363d;background-color:#f6f8fa;border-color:#d5d8da}.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{color:#246;margin-bottom:0}.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{color:#4c4a42;margin-bottom:0}.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{color:#911;margin-bottom:0}.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{color:#22662c;margin-bottom:0}.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{color:#2f363d;margin-bottom:0}.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{margin-top:0}h1.title,p.subtitle{text-align:center}h1.title.followed-by-subtitle{margin-bottom:0}p.subtitle{font-size:1.5em;font-weight:600;line-height:1.25;margin-top:0;margin-bottom:16px;padding-bottom:.3em}div.line-block{white-space:pre-line}
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article class="markdown-body">
+<hr>
+<nav id="TOC">
+<h1 class="toc-title">Contents</h1>
+<ul>
+<li><a href="#ch:power_set">Power set generation</a>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#problem-statement">Problem statement</a></li>
+<li><a href="#clarification-questions">Clarification Questions</a></li>
+<li><a href="#sec:powerset:discussion">Discussion</a>
+<ul>
+<li><a href="#bruteforce---backtracking-like-approach">Bruteforce - Backtracking-like approach</a></li>
+<li><a href="#bit-manipulation">Bit Manipulation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#appendices">Appendices</a>
+<ul>
+<li><a href="#listings">Listings</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr>
+<h1 id="ch:power_set">Power set generation</h1>
+<h2 class="unnumbered" id="introduction">Introduction</h2>
+<p>The concept of power set is familiar to many because it is one of the topics of the first introductory math courses on set theory.</p>
+<p>The power set of a set <span class="math inline">\(S\)</span> is the set of all its subsets and in this lesson, we will explore how we can generate the power set of a given set. Very often this is a task we are challenged to solve directly as well as indirectly as part of a coding interview question.</p>
+<p>We will investigate two different approaches to solve this problem:</p>
+<ol>
+<li><p>The first derives straightforwardly from the recursive definition of power-set which says that the power-set of an empty set is a set containing one element only: the empty set itself. For a non-empty set <span class="math inline">\(S\)</span>, let <span class="math inline">\(e\)</span> be an element of <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span> be the original set <span class="math inline">\(S\)</span> set minus <span class="math inline">\(e\)</span> ( <span class="math inline">\(T=S \setminus e\)</span>), then the power set of <span class="math inline">\(S\)</span> is defined as the union of two distinct power sets:</p>
+<ul>
+<li><p>the power set of <span class="math inline">\(T\)</span></p></li>
+<li><p>and the power set of <span class="math inline">\(T\)</span> modified in a such way that <span class="math inline">\(e\)</span> is added to all of its elements. This idea is formalized in the Equation <a href="#eq:power_set_recursive_definition" data-reference-type="ref" data-reference="eq:power_set_recursive_definition">[eq:power_set_recursive_definition]</a>:</p>
+<p><span class="math inline">\(\mathcal{P}(S)=\begin{cases} 
+        \{\{\}\} &amp; \text{if } S=\{\} \\
+        \mathcal{P}\{T\} \bigcup \{t \bigcup \{e\} \: : t \in \mathcal{P}\{T\}\} \text{ where }  T = S \setminus \{e\} \text{ } \forall e \in S, &amp; \text{otherwise}
+        \end{cases}\)</span></p></li>
+</ul></li>
+<li><p>The second is based on a property of the distribution of the bits in the binary representation of the integers from <span class="math inline">\(0\)</span> to the size of the power set.</p></li>
+</ol>
+<h2 id="problem-statement">Problem statement</h2>
+<div class="exercise">
+<p>Write a function that given a set <span class="math inline">\(S\)</span> returns its power set. The power-set of <span class="math inline">\(S\)</span> (<span class="math inline">\(\mathcal{P}(S)\)</span>) is the set of all its subsets including the empty subset (<span class="math inline">\(\emptyset\)</span>) and <span class="math inline">\(S\)</span> itself.</p>
+<div class="example">
+<p><span id="ex:power_set:example1" label="ex:power_set:example1">[ex:power_set:example1]</span><br />
+Given the set <span class="math inline">\(S=\{a,b,c\}\)</span>, the following is a correct output for this problem: <span class="math display">\[\{\{\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{b,c\}, \{a,c\}, \{a,b,c\} \}\]</span></p>
+</div>
+</div>
+<h2 id="clarification-questions">Clarification Questions</h2>
+<div class="QandA">
+<p>What is the maximum input size?</p>
+<div class="answered">
+<p><em>The maximum number of element in <span class="math inline">\(S\)</span> is strictly less than <span class="math inline">\(32\)</span>.</em></p>
+</div>
+<p>Are all the elements in the collection distinct?</p>
+<div class="answered">
+<p><em>No, the elements are not necessarily distinct. <span class="math inline">\(S\)</span> might contain duplicates..</em></p>
+</div>
+<p>Can the elements of the power-set appear in any order?</p>
+<div class="answered">
+<p><em>Yes, subsets can appear in any order. For example the following is also a valid output for the input shown in Example <a href="#ex:power_set:example1" data-reference-type="ref" data-reference="ex:power_set:example1">[ex:power_set:example1]</a>:</em> <span class="math inline">\(\{\{\}, \{b,c\}, \{a\}, \{a,b\}, \{a,b,c\}, \{b\}, \{a,c\}, \{c\} \}\)</span></p>
+</div>
+</div>
+<h2 id="sec:powerset:discussion">Discussion</h2>
+<p>There is one key point that should immediately be noticed: The power set of a collection of <span class="math inline">\(n\)</span> elements has size <span class="math inline">\(2^n\)</span>. The proof is relatively easy, and it boils down to the fact that a subset of <span class="math inline">\(S\)</span> can be uniquely identified by a list <span class="math inline">\(X=\{x_0,x_1,\ldots x_{|S|-1}\}\)</span> of <span class="math inline">\(|S|\)</span> binary variables each carrying the information about whether <span class="math inline">\(S_i\)</span> is part of the subset; <span class="math inline">\(x_i\)</span> answers the question: <strong>should <span class="math inline">\(S_i\)</span> be part of this subset?</strong> If <span class="math inline">\(x_i\)</span> is true the answer is yes, otherwise it is no. Because we have two possible choices for every element of <span class="math inline">\(S\)</span> (either take it or not), then the total number of distinct <span class="math inline">\(X\)</span>s is: <span class="math inline">\(2 \times 2 \times \ldots \times 2 = 2^{|S|}\)</span>. Two choices for the first element, two for the second, and so on until the last element of <span class="math inline">\(S\)</span>.</p>
+<p>This, together with the constraint on <span class="math inline">\(|S|\)</span> (<span class="math inline">\(|S| &lt; 32)\)</span> is a strong hint towards the fact that an <strong>exponential time and space</strong> solution is expected. After all, we are required to output all the elements of the power set, and thus the number of operations of an algorithm designed for this task cannot be less than the size of the power set itself.</p>
+<h3 id="bruteforce---backtracking-like-approach">Bruteforce - Backtracking-like approach</h3>
+<p>The first solution presented in this lesson is based on the fact that during the generation of one of the elements of the power set a decision has to be taken for each element <span class="math inline">\(e\)</span> of <span class="math inline">\(S\)</span>, on whether to include or not <span class="math inline">\(e\)</span> into the subset. When a decision for the first element is taken, we are left with are <span class="math inline">\(|S|-1\)</span> decisions before we have created a valid subset of <span class="math inline">\(|S|\)</span>.</p>
+<p>This kind of process is inherently recursive and is easily visualized with a tree (see the Figure <a href="#ref:power_set_decision_trees" data-reference-type="ref" data-reference="ref:power_set_decision_trees">1.1</a>) where a node at level <span class="math inline">\(i\)</span> represents a decision for the <span class="math inline">\(i^{th}\)</span> element of <span class="math inline">\(S\)</span> and a path from the root to a leaf uniquely identifies a subset of <span class="math inline">\(S\)</span> as, after having traversed all the levels down to a leaf, <span class="math inline">\(n\)</span> decisions have been taken: one for each of the elements of <span class="math inline">\(S\)</span>. Collectively, all the paths from the root to the leaves are the power set, and therefore, in order to solve this problem, we have to visit the entire tree.</p>
+<p>A general way to deal with such type of problems is by using a backtracking-like approach to try all possible decisions (or equivalently to visit every path from the root to a leaf). The idea is that, for all elements of <span class="math inline">\(S\)</span>, from first to last, we are going to explore the two available possibilities: either take or exclude the it from the subset.</p>
+<p>We start by making a decision for the first element and continuing from there to generate all possible subsets where the first decision is never changed. When there are no more subsets to generate, we <em>backtrack</em> and change our first decision and repeat the process of generating all possible subsets.</p>
+<p>For instance, given <span class="math inline">\(S=\{1,2,3\}\)</span>, we might start by deciding to use the element <span class="math inline">\(1\)</span>, and include it in all possible subsets from the remaining elements <span class="math inline">\(\{2, 3\}\)</span> only. When we are done with it we can repeat the same process, only this time, excluding <span class="math inline">\(1\)</span>. What we do is: <span class="math inline">\(\mathcal{P}(S)= \{\{1\} \; \bigcup \;\mathcal{P}(\{2,3\})\} \: \bigcup \: \{\mathcal{P}(\{2,3\})\}\}\)</span></p>
+<p>The proposed solution will incrementally construct one subset at a time, using an integer variable to keep track of which element we are currently taking the decision for. This type of problem is naturally solved recursively, with a base case of the recursion happening when there is no more decision to take, meaning that the current subset is ready to be included in the solution (it has been produced after <span class="math inline">\(n\)</span> decision steps).</p>
+<p>The C++ code implementing the idea above is shown in Listing <a href="#list:power_set_backtracking" data-reference-type="ref" data-reference="list:power_set_backtracking">[list:power_set_backtracking]</a>. The complexity of this solution is exponential i.e. <span class="math inline">\(O(2^n)\)</span> which as already pointed out is as good as it gets.</p>
+<div class="sourceCode" id="list:power_set_backtracking" data-language="c++" data-caption="&quot;C++ to the power set generation using backtracking&quot;" label="list:power_set_backtracking"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:power_set_backtracking-1"><a href="#list:power_set_backtracking-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> power_set_backtracking_helper<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>S<span class="op">,</span></span>
+<span id="list:power_set_backtracking-2"><a href="#list:power_set_backtracking-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">const</span> <span class="dt">int</span> idx<span class="op">,</span></span>
+<span id="list:power_set_backtracking-3"><a href="#list:power_set_backtracking-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>curr<span class="op">,</span></span>
+<span id="list:power_set_backtracking-4"><a href="#list:power_set_backtracking-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> <span class="op">&amp;</span>ans<span class="op">)</span></span>
+<span id="list:power_set_backtracking-5"><a href="#list:power_set_backtracking-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_backtracking-6"><a href="#list:power_set_backtracking-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>idx <span class="op">&gt;=</span> S<span class="op">.</span>size<span class="op">())</span></span>
+<span id="list:power_set_backtracking-7"><a href="#list:power_set_backtracking-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// base case</span></span>
+<span id="list:power_set_backtracking-8"><a href="#list:power_set_backtracking-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:power_set_backtracking-9"><a href="#list:power_set_backtracking-9" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">.</span>push_back<span class="op">(</span>curr<span class="op">);</span></span>
+<span id="list:power_set_backtracking-10"><a href="#list:power_set_backtracking-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="list:power_set_backtracking-11"><a href="#list:power_set_backtracking-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:power_set_backtracking-12"><a href="#list:power_set_backtracking-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_backtracking-13"><a href="#list:power_set_backtracking-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// include element S[idx]</span></span>
+<span id="list:power_set_backtracking-14"><a href="#list:power_set_backtracking-14" aria-hidden="true" tabindex="-1"></a>  curr<span class="op">.</span>push_back<span class="op">(</span>S<span class="op">[</span>idx<span class="op">]);</span></span>
+<span id="list:power_set_backtracking-15"><a href="#list:power_set_backtracking-15" aria-hidden="true" tabindex="-1"></a>  power_set_backtracking_helper<span class="op">(</span>S<span class="op">,</span> idx <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> curr<span class="op">,</span> ans<span class="op">);</span></span>
+<span id="list:power_set_backtracking-16"><a href="#list:power_set_backtracking-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_backtracking-17"><a href="#list:power_set_backtracking-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// exclude element S[idx]</span></span>
+<span id="list:power_set_backtracking-18"><a href="#list:power_set_backtracking-18" aria-hidden="true" tabindex="-1"></a>  curr<span class="op">.</span>pop_back<span class="op">();</span></span>
+<span id="list:power_set_backtracking-19"><a href="#list:power_set_backtracking-19" aria-hidden="true" tabindex="-1"></a>  power_set_backtracking_helper<span class="op">(</span>S<span class="op">,</span> idx <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> curr<span class="op">,</span> ans<span class="op">);</span></span>
+<span id="list:power_set_backtracking-20"><a href="#list:power_set_backtracking-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="list:power_set_backtracking-21"><a href="#list:power_set_backtracking-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_backtracking-22"><a href="#list:power_set_backtracking-22" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> power_set_backtracking<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>S<span class="op">)</span></span>
+<span id="list:power_set_backtracking-23"><a href="#list:power_set_backtracking-23" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_backtracking-24"><a href="#list:power_set_backtracking-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> ans<span class="op">;</span></span>
+<span id="list:power_set_backtracking-25"><a href="#list:power_set_backtracking-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> current<span class="op">;</span></span>
+<span id="list:power_set_backtracking-26"><a href="#list:power_set_backtracking-26" aria-hidden="true" tabindex="-1"></a>  power_set_backtracking_helper<span class="op">(</span>S<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> current<span class="op">,</span> ans<span class="op">);</span></span>
+<span id="list:power_set_backtracking-27"><a href="#list:power_set_backtracking-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="list:power_set_backtracking-28"><a href="#list:power_set_backtracking-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<figure>
+<embed src="/home/dspataro/git/algorithm_articles/sources/power_set/images/tree.pdf" id="ref:power_set_decision_trees" /><figcaption aria-hidden="true">Decision tree for the power-set generation using backtracking. At level <span class="math inline">\(i\)</span> are the decision for the element <span class="math inline">\(i\)</span> in the original set. A label marked with yes identifies the decision to take the corresponding element into the subset, while a node labeled with no the opposite. At the last level is the power set.</figcaption>
+</figure>
+<p>The advantages of using this backtracking-like approach to solve this problem are that, once we notice that a problem can be solved by fully exploring the associated search space tree, then we can immediately start writing the code and rely on our experience as backtracking expert writers to implement a correct solution with the added bonuses of being concise and short when written in a recursive form (which gives you fewer chances to make mistakes, and less code to debug and explain), as well as well understood. The downside is that, if you decide to go for it, an iterative implementation can be a little harder and more verbose to write.</p>
+<p>Regardless of which type you decide to write, the interviewer is going to be pleased with your code provided you get to the final solution without making too many implementation mistakes like forgetting to handle the base case.</p>
+<h3 id="bit-manipulation">Bit Manipulation</h3>
+<p>Another approach that can be used to solve this problem is based on the fact that the values of the bits of the numbers <span class="math inline">\(\{0,1,2,\ldots, s^n-1\}\)</span> already provide all the information necessary to decide whether to include or not an element from <span class="math inline">\(S\)</span> into a subset. The main idea is that the binary representation of all the numbers (<span class="math inline">\(2^{|S|}\)</span> of them) from <span class="math inline">\(0\)</span> to <span class="math inline">\(2^{|S|}-1\)</span> is the power set of <span class="math inline">\(n\)</span> bits. This practically means that the binary representation of any of those numbers carry the necessary information that can be used to build one subset of <span class="math inline">\(\mathcal{P}(S)\)</span>.</p>
+<p>For instance for the input <span class="math inline">\(S=\{a,b,c\}\)</span> the Table <a href="#tab:mapping_value_bits" data-reference-type="ref" data-reference="tab:mapping_value_bits">1.1</a> shows numbers from <span class="math inline">\(0\)</span> to <span class="math inline">\(2^3-1 = 7\)</span> and their binary representation (in the second column) as well as how the information about which bit is set can be used to construct one subset of <span class="math inline">\(\mathcal{P}(S)\)</span> (in the third column). <strong>When the <span class="math inline">\(i^{th}\)</span> bit is set (its value is <span class="math inline">\(1\)</span>), it means that corresponding <span class="math inline">\(i^{th}\)</span> element of <span class="math inline">\(S\)</span> is chosen, while an unset bit (with value <span class="math inline">\(0\)</span>) means it is excluded</strong>.</p>
+<div id="tab:mapping_value_bits">
+<table>
+<caption>This table shows a 1-to-1 mapping between integer values, their binary representation and an element of the power set.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Number Value</th>
+<th style="text-align: left;">Bits</th>
+<th style="text-align: left;">Subset</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">000</td>
+<td style="text-align: left;"><span class="math inline">\(\{\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">001</td>
+<td style="text-align: left;"><span class="math inline">\(\{c\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">010</td>
+<td style="text-align: left;"><span class="math inline">\(\{b\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">011</td>
+<td style="text-align: left;"><span class="math inline">\(\{b,c\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;"><span class="math inline">\(\{a\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">101</td>
+<td style="text-align: left;"><span class="math inline">\(\{a,c\}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">110</td>
+<td style="text-align: left;"><span class="math inline">\(\{a,b\}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">111</td>
+<td style="text-align: left;"><span class="math inline">\(\{a,b,c\}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This idea can be used to write an algorithm in which all the numbers in the range <span class="math inline">\(\{0,1,2,\ldots,
+2^{|S|}-1\}\)</span> are considered and each of them is used to generate a subset of the final solution. Every number from this range maps uniquely to a subset of <span class="math inline">\(\mathcal{P}(S)\)</span>.</p>
+<p>It is not surprising when we think about the meaning of a bit in the binary representation of integers. One can "build" a number <span class="math inline">\(k\)</span> by summing up powers of <span class="math inline">\(2\)</span> where the bits contain the information about whether a certain power of two should be added to the final value. With <span class="math inline">\(n\)</span> bits one can represent <span class="math inline">\(2^n\)</span> numbers, each corresponding to one and only one subset of the power set of those <span class="math inline">\(n\)</span> bits.</p>
+<p>Listing <a href="#list:power_set_bits" data-reference-type="ref" data-reference="list:power_set_bits">[list:power_set_bits]</a> shows a possible C++ implementation of the idea above.</p>
+<div class="sourceCode" id="list:power_set_bits" data-language="c++" data-caption="&quot;&quot;" label="list:power_set_bits"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:power_set_bits-1"><a href="#list:power_set_bits-1" aria-hidden="true" tabindex="-1"></a><span class="kw">constexpr</span> <span class="kw">inline</span> <span class="dt">bool</span> is_bit_set<span class="op">(</span><span class="at">const</span> <span class="dt">int</span> n<span class="op">,</span> <span class="at">const</span> <span class="dt">unsigned</span> p<span class="op">)</span></span>
+<span id="list:power_set_bits-2"><a href="#list:power_set_bits-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_bits-3"><a href="#list:power_set_bits-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span>n <span class="op">&gt;&gt;</span> p<span class="op">)</span> <span class="op">&amp;</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="list:power_set_bits-4"><a href="#list:power_set_bits-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="list:power_set_bits-5"><a href="#list:power_set_bits-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_bits-6"><a href="#list:power_set_bits-6" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> power_set_bit_manipulation<span class="op">(</span></span>
+<span id="list:power_set_bits-7"><a href="#list:power_set_bits-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> <span class="op">&amp;</span>A<span class="op">)</span></span>
+<span id="list:power_set_bits-8"><a href="#list:power_set_bits-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:power_set_bits-9"><a href="#list:power_set_bits-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> <span class="dt">size_t</span> limit <span class="op">=</span> <span class="op">(</span><span class="dv">1</span><span class="bu">ll</span> <span class="op">&lt;&lt;</span> A<span class="op">.</span>size<span class="op">())</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="list:power_set_bits-10"><a href="#list:power_set_bits-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;&gt;</span> PS<span class="op">;</span></span>
+<span id="list:power_set_bits-11"><a href="#list:power_set_bits-11" aria-hidden="true" tabindex="-1"></a>  PS<span class="op">.</span>reserve<span class="op">(</span>limit <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="list:power_set_bits-12"><a href="#list:power_set_bits-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_bits-13"><a href="#list:power_set_bits-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> limit<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="list:power_set_bits-14"><a href="#list:power_set_bits-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:power_set_bits-15"><a href="#list:power_set_bits-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> subset <span class="op">=</span> <span class="op">{};</span></span>
+<span id="list:power_set_bits-16"><a href="#list:power_set_bits-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> p <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> p <span class="op">&lt;</span> <span class="dv">32</span><span class="op">;</span> p<span class="op">++)</span></span>
+<span id="list:power_set_bits-17"><a href="#list:power_set_bits-17" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>is_bit_set<span class="op">(</span>i<span class="op">,</span> p<span class="op">))</span></span>
+<span id="list:power_set_bits-18"><a href="#list:power_set_bits-18" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span></span>
+<span id="list:power_set_bits-19"><a href="#list:power_set_bits-19" aria-hidden="true" tabindex="-1"></a>        subset<span class="op">.</span>push_back<span class="op">(</span>A<span class="op">[</span>p<span class="op">]);</span></span>
+<span id="list:power_set_bits-20"><a href="#list:power_set_bits-20" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="list:power_set_bits-21"><a href="#list:power_set_bits-21" aria-hidden="true" tabindex="-1"></a>    PS<span class="op">.</span>push_back<span class="op">(</span>subset<span class="op">);</span></span>
+<span id="list:power_set_bits-22"><a href="#list:power_set_bits-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:power_set_bits-23"><a href="#list:power_set_bits-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="list:power_set_bits-24"><a href="#list:power_set_bits-24" aria-hidden="true" tabindex="-1"></a>  PS<span class="op">.</span>push_back<span class="op">(</span>A<span class="op">);</span></span>
+<span id="list:power_set_bits-25"><a href="#list:power_set_bits-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> PS<span class="op">;</span></span>
+<span id="list:power_set_bits-26"><a href="#list:power_set_bits-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The complexity of this function is, not surprisingly, <span class="math inline">\(O(2^{|S|})\)</span>. We also pay a constant price of <span class="math inline">\(32\)</span> for each number we loop through since we need to inspect all of its bits. The proposed implementation assumes that the size of is <span class="math inline">\(4\)</span> bytes, which is true for most systems.</p>
+<p>Moreover, notice the usage that should be used in all those scenarios when we already know the final size of the collection we are building. This saves time because avoids intermediate allocations and copies that must happen during the resize of the vector.</p>
+<h1 id="appendices">Appendices</h1>
+<h2 class="unnumbered" id="listings">Listings</h2>
+<div class="sourceCode" id="list:listings:hash_pair" data-language="c++" data-caption="Functor used to calculate the hash value for a pair of integers.     \inline{hash_combine} is a free function used to mix several input hash values into a new one." label="list:listings:hash_pair"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="list:listings:hash_pair-1"><a href="#list:listings:hash_pair-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> SeedType<span class="op">,</span> <span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span><span class="op">...</span> Rest<span class="op">&gt;</span></span>
+<span id="list:listings:hash_pair-2"><a href="#list:listings:hash_pair-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> hash_combine<span class="op">(</span>SeedType<span class="op">&amp;</span> seed<span class="op">,</span> <span class="at">const</span> T<span class="op">&amp;</span> v<span class="op">,</span> <span class="at">const</span> Rest<span class="op">&amp;...</span> rest<span class="op">)</span></span>
+<span id="list:listings:hash_pair-3"><a href="#list:listings:hash_pair-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:listings:hash_pair-4"><a href="#list:listings:hash_pair-4" aria-hidden="true" tabindex="-1"></a>    seed <span class="op">^=</span> <span class="bu">std::</span>hash<span class="op">&lt;</span>T<span class="op">&gt;{}(</span>v<span class="op">)</span> <span class="op">+</span> <span class="bn">0x9e3779b9</span> <span class="op">+</span> <span class="op">(</span>seed <span class="op">&lt;&lt;</span> <span class="dv">6</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span>seed <span class="op">&gt;&gt;</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="list:listings:hash_pair-5"><a href="#list:listings:hash_pair-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>hash_combine<span class="op">(</span>seed<span class="op">,</span> rest<span class="op">),</span> <span class="op">...);</span></span>
+<span id="list:listings:hash_pair-6"><a href="#list:listings:hash_pair-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="list:listings:hash_pair-7"><a href="#list:listings:hash_pair-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> PairHasher</span>
+<span id="list:listings:hash_pair-8"><a href="#list:listings:hash_pair-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span> <span class="kw">public</span> <span class="bu">std::</span>unary_function<span class="op">&lt;</span><span class="bu">std::</span>pair<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;,</span> <span class="bu">std::</span>size_t<span class="op">&gt;</span></span>
+<span id="list:listings:hash_pair-9"><a href="#list:listings:hash_pair-9" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="list:listings:hash_pair-10"><a href="#list:listings:hash_pair-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>size_t<span class="op"> </span><span class="kw">operator</span><span class="op">()(</span><span class="at">const</span> <span class="bu">std::</span>pair<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dt">int</span><span class="op">&gt;&amp;</span> k<span class="op">)</span> <span class="at">const</span></span>
+<span id="list:listings:hash_pair-11"><a href="#list:listings:hash_pair-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="list:listings:hash_pair-12"><a href="#list:listings:hash_pair-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> seed <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="list:listings:hash_pair-13"><a href="#list:listings:hash_pair-13" aria-hidden="true" tabindex="-1"></a>    hash_combine<span class="op">(</span>seed<span class="op">,</span><span class="bu">std::</span>get<span class="op">&lt;</span><span class="dv">0</span><span class="op">&gt;(</span>k<span class="op">),</span><span class="bu">std::</span>get<span class="op">&lt;</span><span class="dv">1</span><span class="op">&gt;(</span>k<span class="op">));</span></span>
+<span id="list:listings:hash_pair-14"><a href="#list:listings:hash_pair-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> seed<span class="op">;</span></span>
+<span id="list:listings:hash_pair-15"><a href="#list:listings:hash_pair-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="list:listings:hash_pair-16"><a href="#list:listings:hash_pair-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+</article>
+</body>
+</html>

@@ -7,7 +7,7 @@
 
 
 %\begin{figure} \centering
-%   \includegraphics[width=\textwidth]{sources/remove_duplicated_sorted_array_inplace/images/example1}
+%   \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}.
 %   \label{fig:remove_duplicated_sorted_array_inplace:example1} \end{figure}
 
@@ -79,7 +79,7 @@ Listing \ref{list:remove_duplicated_sorted_array_inplace_stl} shows how we can
 solve this problem with a one-liner solution using \inline{std::unique} and \inline{std::distance} from the STL. 
 
 
-\lstinputlisting[language=c++, caption={One-liner solution using \inline{std::unique}.},label=list:remove_duplicated_sorted_array_inplace_stl]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution3.cpp}
+\lstinputlisting[language=c++, caption={One-liner solution using \inline{std::unique}.},label=list:remove_duplicated_sorted_array_inplace_stl]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution3.cpp}
 
 The code works by first invoking \inline{std::unique} and the entire array, which causes \inline{I} to be split into two parts as described above and returns an iterator to the the first element of the second part. 
 \inline{std::distance} is then used to calculate the number of elements in the first part which is the final answer.
@@ -106,7 +106,7 @@ of this approach is linear in time and space, as in the worst-case scenario (whe
 \ref{list:remove_duplicated_sorted_array_inplace_linearspace}.
 
 
-\lstinputlisting[language=c++, caption={Linear time and space solution using \inline{std::std::unordered_set} to remember what elements have been already encountered.},label=list:remove_duplicated_sorted_array_inplace_linearspace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution2.cpp}
+\lstinputlisting[language=c++, caption={Linear time and space solution using \inline{std::std::unordered_set} to remember what elements have been already encountered.},label=list:remove_duplicated_sorted_array_inplace_linearspace]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution2.cpp}
 
 \subsection{Constant Space}
 \label{sec:remove_duplicated_sorted_array_inplace:constant_space}
@@ -141,7 +141,7 @@ All we have to do is calculate and return its length.
 Listing \ref{list:remove_duplicated_sorted_array_inplace} shows an implementation of such idea.
 
 
-\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:remove_duplicated_sorted_array_inplace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
+\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:remove_duplicated_sorted_array_inplace]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution1.cpp}
 
 Notice that with $x$ we have two important invariants:
 \begin{enumerate}
@@ -164,90 +164,90 @@ Figure \ref{fig:remove_duplicated_sorted_array_inplace:example1_process} depicts
 	\centering
 	\vspace*{0.0in}
 	\begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_1}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_1}
 		\vspace*{-8mm}
 		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_1}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_2}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_2}
 		\vspace*{-8mm}
 		\caption{$1 = I_x \neq I_y = 2$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_2}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_3}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_3}
 		\vspace*{-8mm}
 		\caption{$I_x = I_y$. $y$ only moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_3}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_4}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_4}
 		\vspace*{-8mm}
 		\caption{$2 = I_x \neq I_y = 3$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_4}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_5}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_5}
 		\vspace*{-8mm}
 		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_5}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_7}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_7}
 		\vspace*{-8mm}
 		\caption{$3 = I_x \neq I_y = 4$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_8}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_8}
 		\vspace*{-8mm}
 		\caption{$4 = I_x \neq I_y = 5$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_10}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_10}
 		\vspace*{-8mm}
 		\caption{$5 = I_x \neq I_y = 6$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_11}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_11}
 		\vspace*{-8mm}
 		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_12}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_12}
 		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_13}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_13}
 		\vspace*{-8mm}
 		\caption{$I_x = I_y$. $y$ moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_14}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_14}
 		\vspace*{-8mm}
 		\caption{$6 = I_x \neq I_y = 7$. $I_y$ copied into $I_{x+1}$. $y$ and $x$ are moved forward.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=1\linewidth]{sources/remove_duplicated_sorted_array_inplace/images/example1_15}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/images/example1_15}
 		\vspace*{-8mm}
 		\caption{$y$ is outside the range of valid elements of $I$. The algorithm stops.}
 		\label{fig:remove_duplicated_sorted_array_inplace:example1_6}
@@ -294,7 +294,7 @@ This variant can be solved with minimal changes to the solution presented for th
 We can modify the code shown in the Section \ref{sec:remove_duplicated_sorted_array_inplace:constant_space} so that we keep track of the number of repetitions we have already inserted for a given element.
 This can be implemented as shown in Listing \ref{list:remove_duplicated_sorted_array_inplace_max_two}.
 
-\lstinputlisting[language=c++, caption={Linear time constant space solution to the variation where at most two duplicates are allowed.},label=list:remove_duplicated_sorted_array_inplace_max_two]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution4.cpp}
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the variation where at most two duplicates are allowed.},label=list:remove_duplicated_sorted_array_inplace_max_two]{/home/dspataro/git/algorithm_articles/sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution4.cpp}
 
 
 Notice that the meaning of the variables $x$ and $y$ did not change, and that here we use the variable \inline{consecutive} to keep track of the number of times the element pointed by \inline{x} appears in the array \inline{A}. 

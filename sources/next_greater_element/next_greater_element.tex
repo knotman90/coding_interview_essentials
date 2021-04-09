@@ -7,7 +7,7 @@
 
 
 %\begin{figure} \centering
-%   \includegraphics[width=\textwidth]{sources/next_greater_element/images/example1} \caption[Sample
+%   \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/example1} \caption[Sample
 %   short cpation]{Sample Caption}. \label{fig:next_greater_element:example1} \end{figure}
 
 \chapter{Next Greater Element \RN{1}}
@@ -82,7 +82,7 @@ exists. The subsequent \inline{while} is used to scan the remaining of the array
 of the smallest element that is larger than $A_i$. The complexity of this approach is $O(|A| \times
 |B|)$ as we could potentially do linear  work (proportional to $|B|$) for each and every element of
 $A$. One of such case is when the elements of $A$ appears in the first positions of $B$. 
-\lstinputlisting[language=c++, caption={Brute-force solution to the \textit{next smaller element}.},label=list:next_greater_element:bruteforce]{sources/next_greater_element/next_greater_element_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute-force solution to the \textit{next smaller element}.},label=list:next_greater_element:bruteforce]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/next_greater_element_solution1.cpp}
 
 
 \section{$O(|B|log(|B|))$ time, $O(|B|)$ space solution}
@@ -118,7 +118,7 @@ from the map \inline{C_val} to the return array. The time and space complexity o
 $O(|B|log(|B|))$ (each of the $|B|$ insertions in $N$ costs $O(log(|B|)$) and $O(|B|)$,
 respectively.
 
-\lstinputlisting[language=c++, caption={$O(nlog(n))$ time and linear space solution.},label=list:next_greater_element:set]{sources/next_greater_element/next_greater_element_solution2.cpp}
+\lstinputlisting[language=c++, caption={$O(nlog(n))$ time and linear space solution.},label=list:next_greater_element:set]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/next_greater_element_solution2.cpp}
 
 \section{Common Variation}
 \subsection{First next greater element}
@@ -179,7 +179,7 @@ is therefore the largest processed so far.
 Listing \ref{list:next_greater_element:stack} shows an implementation of this idea.
 
 
-\lstinputlisting[language=c++, caption={linear time solution to the Problem \ref{example:next_greater_element:exercice2} solved using a stack.},label=list:next_greater_element:stack]{sources/next_greater_element/next_greater_element_solution3.cpp}
+\lstinputlisting[language=c++, caption={linear time solution to the Problem \ref{example:next_greater_element:exercice2} solved using a stack.},label=list:next_greater_element:stack]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/next_greater_element_solution3.cpp}
 
 
  \begin{figure}
@@ -187,7 +187,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 	\centering
 	\begin{subfigure}[t]{0.49\textwidth}
 		\begin{framed}
-			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack1}
+			\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/stack1}
 		\end{framed}
 		\caption{The stack is empty. We place $6$ at the top.}
 		\label{fig:next_greater:variation1:stack1}
@@ -195,7 +195,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 	\hfill
 	\begin{subfigure}[t]{0.49\textwidth}
 		\begin{framed}
-			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack2}
+			\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/stack2}
 		\end{framed}
 		\caption{$1$ is smaller than the top of the stack therefore $1$ is placed at the top. $6$ is the answer for $1$.}
 		\label{fig:next_greater:variation1:stack2}
@@ -203,7 +203,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
 		\begin{framed}
-			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack3}
+			\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/stack3}
 		\end{framed}
 		\caption{The top of the stack $1$ is smaller than $2$. We therefore remove $1$ and place to at the top. $6$, also this time is the answer for $2$}
 		\label{fig:next_greater:variation1:stack3}
@@ -211,7 +211,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
 		\begin{framed}
-			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack4}
+			\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/stack4}
 		\end{framed}
 		\caption{Similarly to what we did in Figure \ref{fig:next_greater:variation1:stack3} we remove all the elements at the top until adding the $3$ would preserve the increasing ordering of the stack elements. $2$ is removed and $3$ is the new top. $6$ is the answer for $3$.}
 		\label{fig:next_greater:variation1:stack1}
@@ -219,7 +219,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
 		\begin{framed}
-			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack5}
+			\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/stack5}
 		\end{framed}
 		\caption{We add the $2$ to the stack and return $3$ (the current top of the stack) as the answer for $2$.}
 		\label{fig:next_greater:variation1:stack1}
@@ -227,7 +227,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
 		\begin{framed}
-			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack6}
+			\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/stack6}
 		\end{framed}
 		\caption{$5$ is larger than the first two elements of the stack which are therefore removed.$5$ is the new top and $6$ is the answer for $5$. }
 		\label{fig:next_greater:variation1:stack1}
@@ -235,7 +235,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 	 \hfill
 	 \begin{subfigure}[t]{0.49\textwidth}
 		\begin{framed}
-			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack7}
+			\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/next_greater_element/images/stack7}
 		\end{framed}
 		\caption{$7$ is larger than all the elements currently in the stack. Therefore all the elements are removed and the stack remains empty signalling that $7$ has not greater elements at its right. The process ends here as there are no more elements to process.}
 		\label{fig:next_greater:variation1:stack1}

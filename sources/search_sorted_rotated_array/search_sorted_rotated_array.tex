@@ -56,7 +56,7 @@ Write a function that given an ascending sorted array $A$ of lenght $n$ with no 
 As for the problem of finding the minimum in a sorted and rotated array (Chapter \ref{ch:min_rotated_array}) the brute-force solution is trivial and consist of simply running a linear search in the entire array as shown in Listing \ref{list:search_sorted_rotated_array:bruteforce}.
 Not surprisingly, the complexity of this implementation if linear in time and constant in space.
 
-\lstinputlisting[language=c++, caption={Brute force solution (linear search) to the problem of finding an element in a sorted and potentially rotated array.},label=list:search_sorted_rotated_array:bruteforce]{sources/search_sorted_rotated_array/search_sorted_rotated_array_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute force solution (linear search) to the problem of finding an element in a sorted and potentially rotated array.},label=list:search_sorted_rotated_array:bruteforce]{/home/dspataro/git/algorithm_articles/sources/search_sorted_rotated_array/search_sorted_rotated_array_solution1.cpp}
 
 \subsection{Logarithmic time solution}
 \label{search_sorted_rotated_array:sec:log}
@@ -84,5 +84,5 @@ Also note that the function \inline{midpoint} is not implemented as \inline{(l+r
 Finally, the function \inline{binary_search} implements a simple and canonical recursive binary search. 
 The complexity of the overall implementation is $O(log(n))$ in time and $O(1)$ in space.
 
-\lstinputlisting[language=c++, caption={Log time solution (using binary search) to the problem of finding an element in a sorted and rotated array.},label=list:search_sorted_rotated_array:log]{sources/search_sorted_rotated_array/search_sorted_rotated_array_solution2.cpp}
+\lstinputlisting[language=c++, caption={Log time solution (using binary search) to the problem of finding an element in a sorted and rotated array.},label=list:search_sorted_rotated_array:log]{/home/dspataro/git/algorithm_articles/sources/search_sorted_rotated_array/search_sorted_rotated_array_solution2.cpp}
 

@@ -47,7 +47,7 @@ A profit is achieved when a buy and sell transaction are performed with prices $
 \label{buy_sell_stocks:sec:bruteforce}
 The brute force approach is really straighforward because the only thing we need is to apply the definition of maximum profit we discussed earlier. For all pairs of ordered index $i \leq j$ we can calculate $P_i - P_j$ and return the maximum among all those profit values. Listing \ref{list:buy_sell_stocks:bruteforce} shows an implementation of this approach. Note that a profit of $0$ is always possible by either not performing any transaction or simply performing the buy and sell on the same day. Thus $j = i+1$, because it is pointless to calculate the profit for the same day as we know already it will always be $0$. For this reason we also limit the buy operation to the day before ($i< n-1$) the last, because if we want to have any chance of making a profit we need to at least have one day left after the buy to perform the sell operation. 
 
-\lstinputlisting[language=c++, caption={Brute force $O(n^2)$ solution to the problem of buying and selling stock.},label=list:buy_sell_stocks:bruteforce]{sources/buy_sell_stocks/buy_sell_stocks_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute force $O(n^2)$ solution to the problem of buying and selling stock.},label=list:buy_sell_stocks:bruteforce]{/home/dspataro/git/algorithm_articles/sources/buy_sell_stocks/buy_sell_stocks_solution1.cpp}
 
 \subsection{Linear time solution}
 \label{buy_sell_stocks:sec:linear}
@@ -56,8 +56,8 @@ The idea above can be improved if we look at the problem from slightly different
 We keep a variable $b$ with the maximum price seen so far which is initially $-\infty$. The algorithm starts from day $n$ and for each day checks whether buying that day and selling at the price $b$ (the highest price seen so far) would improve the profit found so far. This approach is correct because the maximum profit happens when the spread between sell and buy price is maximum.
 The implementation of theidea above is shown in Listing \ref{list:buy_sell_stocks:linear}.
 
-\lstinputlisting[language=c++, caption={Dynamic programming linear time, constant space solution to the problem of buying and selling stock.},label=list:buy_sell_stocks:linear]{sources/buy_sell_stocks/buy_sell_stocks_solution2.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming linear time, constant space solution to the problem of buying and selling stock.},label=list:buy_sell_stocks:linear]{/home/dspataro/git/algorithm_articles/sources/buy_sell_stocks/buy_sell_stocks_solution2.cpp}
 
 
 %Multiple transaction variation
-\input{sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2.tex}
+\input{/home/dspataro/git/algorithm_articles/sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2.tex}

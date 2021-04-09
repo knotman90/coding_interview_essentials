@@ -133,10 +133,10 @@ But how does such a range change when visiting down the tree? The idea is simple
 \end{itemize}
 
 The idea above is shown in Listing \ref{list:verify_BST}. Note how short and concise the code can be implemented with recursion.  The complexity of this approach is $O(n)$ time and $O(1)$ space (if you do not count the space on the stack taken by the recursion.
-\lstinputlisting[language=c++, caption=Linear time recursive solution to the problem of verifying the BST property.,label=list:verify_BST]{sources/verify_BST/verify_BST_solution1.cpp}
+\lstinputlisting[language=c++, caption=Linear time recursive solution to the problem of verifying the BST property.,label=list:verify_BST]{/home/dspataro/git/algorithm_articles/sources/verify_BST/verify_BST_solution1.cpp}
 
 
 \subsection{Brute force}
 Another way to solve this problem is to read carefully the definition of BST and realize that, for each node $n$ we need to check if the left subtree contains any element greater than $n$ and whether its right subtree contains any element smaller than $n$. This problem becomes almost trivial provided two functions are available, \lstinline[columns=fixed]{min_tree(TreeNode* root)} and \lstinline[columns=fixed]{max_tree(TreeNode* root)} for retrieving the min and max value respectively of a tree. The idea above can be implemented as shown in Listing \ref{list:verify_BST_bruteforce}
 
-\lstinputlisting[language=c++, caption=Quadratic solution to the problem of verifying the BST property.,label=list:verify_BST_rbuteforce]{sources/verify_BST/verify_BST_solution2.cpp}
+\lstinputlisting[language=c++, caption=Quadratic solution to the problem of verifying the BST property.,label=list:verify_BST_rbuteforce]{/home/dspataro/git/algorithm_articles/sources/verify_BST/verify_BST_solution2.cpp}

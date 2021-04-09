@@ -86,7 +86,7 @@ The first solution we discuss uses an additional space ($2\times$) to store, for
 \end{itemize}
 
 Listing \ref{list:min_stack:stackpairs} shows a possible implementation of this idea.
-\lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a stack of pairs.},label=list:min_stack:stackpairs]{sources/min_stack/min_stack_solution1.cpp}
+\lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a stack of pairs.},label=list:min_stack:stackpairs]{/home/dspataro/git/algorithm_articles/sources/min_stack/min_stack_solution1.cpp}
 
 \subsubsection{Two stacks}
 \label{min_stack:sec:twostacks}
@@ -103,7 +103,7 @@ This solution has the advantage of not using as much space as the one presented 
 
 This idea can be implemented as shown in Listing \ref{list:min_stack:doublestack}
 
- \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a two stacks.},label=list:min_stack:doublestack]{sources/min_stack/min_stack_solution2.cpp}
+ \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack using a two stacks.},label=list:min_stack:doublestack]{/home/dspataro/git/algorithm_articles/sources/min_stack/min_stack_solution2.cpp}
 
 \subsection{Constant space}
 \label{min_stack:sec:constantspace}
@@ -137,7 +137,7 @@ When an element $x$ is less than the current minimum i.e. \inline{x < min_el}, t
 
 The idea above is shown in Listing \ref{list:min_stack:constspace}. Note how the template class will only compile for integral types thanks to \inline{std::enable_if}\cite{cit::std::enableif}. 
 
- \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack of integer working in constant space and linear time. },label=list:min_stack:constspace]{sources/min_stack/min_stack_solution3.cpp}
+ \lstinputlisting[language=c++, caption={Solution to the problem of designing a min stack of integer working in constant space and linear time. },label=list:min_stack:constspace]{/home/dspataro/git/algorithm_articles/sources/min_stack/min_stack_solution3.cpp}
 
 \subsection{Common Variations}
 \begin{exercise}

@@ -70,7 +70,7 @@ Also notice from the example above that letter  at index $j$ is itself mapped to
 
 So to summarize, each character in the input string need to be swapped with its symmetrical sibling (See Listing \ref{list:string_reverse_1}).
 
-\lstinputlisting[language=c++, caption=Iterative solution to the in-place string reverse question.,label=list:string_reverse_1]{sources/string_reverse/string_reverse_solution1.cpp}
+\lstinputlisting[language=c++, caption=Iterative solution to the in-place string reverse question.,label=list:string_reverse_1]{/home/dspataro/git/algorithm_articles/sources/string_reverse/string_reverse_solution1.cpp}
 
 Note how the loop terminates at only half the size of the input string. This is necessary because a swap operations on the index $i<\frac{n}{2}$ involves also an element of the second half of the string (its simmetrycal sibling).  If the loop would not terminate at $\frac{n}{2}$ then for each element $i$ two swap operations would be performed. For instacce for the letter at index $0$ the following swaps would occur:
 \begin{itemize}
@@ -88,9 +88,9 @@ This is considered a good solution because the time and space complexity of List
 \subsection{Out-of-place solution}
 Sometimes the interviewe might ask an easier version of this problem which asks to return a reversed copy of the  original string. This version is easier compared to the in-place version because one can simply construct the reversed string by looping the original string backwards as shown in Listing \ref{list:string_reverse_outplace_rawloop} and Listing \ref{list:string_reverse_outplace_iterators}.
 
-\lstinputlisting[language=c++, caption=Iterative out-of-place solution using raw loops. Both time and space complexity for this version is $O(n)$.,label=list:string_reverse_outplace_rawloop]{sources/string_reverse/string_reverse_solution2.cpp}
+\lstinputlisting[language=c++, caption=Iterative out-of-place solution using raw loops. Both time and space complexity for this version is $O(n)$.,label=list:string_reverse_outplace_rawloop]{/home/dspataro/git/algorithm_articles/sources/string_reverse/string_reverse_solution2.cpp}
 
-\lstinputlisting[language=c++, caption=Alternative implementation of an iterative out-of-place solution using iterators. Both time and space complexity for this version is $O(n)$.,label=list:string_reverse_outplace_iterators]{sources/string_reverse/string_reverse_solution3.cpp}
+\lstinputlisting[language=c++, caption=Alternative implementation of an iterative out-of-place solution using iterators. Both time and space complexity for this version is $O(n)$.,label=list:string_reverse_outplace_iterators]{/home/dspataro/git/algorithm_articles/sources/string_reverse/string_reverse_solution3.cpp}
 
 \subsection{Recursive solution}
 Another commonly asked variation of the string reverse problem is the one in which recursion has to be used. The problem is well suited for recursion infact, a look at the iterative solution shows that at any given point in the loop the status of the string is the following: $a_{n-1}a_{n-2} \ldots \underbrace{a_k a_{k+1} \ldots a_l}_\text{untouched} a_{k-1}a_{k-2} \ldots a_0$. There is always a portion of the string delimited by two indices $k$ and $l$, $k>=l$ which is yet to be processed (i.e. with the original content). This can be easily used to derive a recursive solution. At first the $k=0$ and $l=n-1$ and the string can be reversed by swapping $a_k=0$ and $a_l=n-1$ and by recursively reversing the inner part of the string i.e. in the range $k=1$ and $l=n-2$. This can be continuosly be done until $l > k$. At that point the function can simply terminate (See Equation \ref{eq:string_reversal_recursion} and Listing \ref{list:string_reversal_recursion}).
@@ -105,4 +105,4 @@ Another commonly asked variation of the string reverse problem is the one in whi
 
 The complexity analysis for this case can be a bit controversial because one have to consider also the stack space utilized by the recursion which can be $O(n)$. It is therefore important to clarify this aspect with the interviewer. Discussing this might open the possibility for questions related to this, especially regarding Tail Call Optimization(TCO)\footnote{TCO (Tail Call Optimization) is the process by which a smart compiler can make a call to a function and take no additional stack space.The allocation of a new stack frame for a function can be avoided because the calling function will simply return the value that it gets from the called function. The most common use is tail-recursion, where a recursive function written to take advantage of tail-call optimization can use constant stack space.\nopagebreak}, so one needs to be careful while opening this pandora box.
 
-\lstinputlisting[language=c++, caption=Recursive in-place solution to the string reversal problem.,label=list:string_reversal_recursion]{sources/string_reverse/string_reverse_solution4.cpp}
+\lstinputlisting[language=c++, caption=Recursive in-place solution to the string reversal problem.,label=list:string_reversal_recursion]{/home/dspataro/git/algorithm_articles/sources/string_reverse/string_reverse_solution4.cpp}

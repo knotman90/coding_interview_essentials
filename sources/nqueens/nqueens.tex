@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure} \centering \includegraphics[width=\textwidth]{sources/nqueens/images/example1}
+%\begin{figure} \centering \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/nqueens/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:nqueens:example1} \end{figure}
 
 \chapter{N-Queens}
@@ -149,7 +149,7 @@ no two queens placed at locations $(a,b)$ and $(c,d)$ do not share the same:
 	\end{itemize} 
 \end{itemize}
 
-\lstinputlisting[language=c++, caption={Bruteforce solution to the n-queens problem.},label=list:nqueens:bruteforce]{sources/nqueens/nqueens_solution1.cpp}
+\lstinputlisting[language=c++, caption={Bruteforce solution to the n-queens problem.},label=list:nqueens:bruteforce]{/home/dspataro/git/algorithm_articles/sources/nqueens/nqueens_solution1.cpp}
 
 \subsection{One row one queen}
 \label{nqueens:sec:onerowonequeen}
@@ -160,7 +160,7 @@ Therefore, we can place a queen at row $i$ and then try to place the remaining q
 This approach significantly reduces the number of possible arrangements as there are $n^n$ ways of doing so ($n$ choices per each row).
 Listings \ref{list:nqueens:oneperrow} shows an implementation of this idea.
 
-\lstinputlisting[language=c++, caption={Solution to the n-queens problem where we do not place more than one queen on the same row.},label=list:nqueens:oneperrow]{sources/nqueens/nqueens_solution2.cpp}
+\lstinputlisting[language=c++, caption={Solution to the n-queens problem where we do not place more than one queen on the same row.},label=list:nqueens:oneperrow]{/home/dspataro/git/algorithm_articles/sources/nqueens/nqueens_solution2.cpp}
 
 
 \subsection{One queen per column}
@@ -176,7 +176,7 @@ Listing \ref{list:nqueens:oneperrowcolumn} shows an implementation of this idea 
 \inline{std::next_permutation} function to generate the permutations.
 This approach is in practice significantly faster than the ones presented above.
 
-\lstinputlisting[language=c++, caption={Solution to the n-queens problem where we do not place more than one queen on the same row and column.},label=list:nqueens:oneperrowcolumn]{sources/nqueens/nqueens_solution3.cpp}
+\lstinputlisting[language=c++, caption={Solution to the n-queens problem where we do not place more than one queen on the same row and column.},label=list:nqueens:oneperrowcolumn]{/home/dspataro/git/algorithm_articles/sources/nqueens/nqueens_solution3.cpp}
 
 
 
@@ -191,4 +191,4 @@ Notice that the function \inline{can_add_queen} is pretty much a copy and paste 
 difference that it only checks whether is it legal to add a queen at the position specified by its second argument when you have already a number of queens placed in the board which positions are defined in its first parameter.
 This solution has performance that are very much comparable to the fastest one shown in this chapter, Listing \ref{list:nqueens:oneperrowcolumn}.
 
-\lstinputlisting[language=c++, caption={Revised brute-force solution to the n-queens problem optimized by using  an early prunining tecnique.},label=list:nqueens:bruteforcerevised]{sources/nqueens/nqueens_solution4.cpp}
+\lstinputlisting[language=c++, caption={Revised brute-force solution to the n-queens problem optimized by using  an early prunining tecnique.},label=list:nqueens:bruteforcerevised]{/home/dspataro/git/algorithm_articles/sources/nqueens/nqueens_solution4.cpp}

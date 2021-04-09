@@ -54,7 +54,7 @@ are able to reach the last cell of the array, false otherwise.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{sources/can_jump/images/can_jump_example1}
+	\includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/can_jump/images/can_jump_example1}
 	\caption[Implicit graph for the Example \ref{ex:can_jump_example1}.]
 	{Visual representation (implicit graph) of the problem instance of Example
 	\ref{ex:can_jump_example1}.}.
@@ -63,7 +63,7 @@ are able to reach the last cell of the array, false otherwise.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{sources/can_jump/images/example2}
+	\includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/can_jump/images/example2}
 	\caption[Implicit graph for the Example \ref{ex:can_jump_example2}.]
 	{Visual representation (implicit graph) of the problem instance of Example
 	\ref{ex:can_jump_example2}.}.
@@ -114,7 +114,7 @@ from cell $N$ to itself is not to jump at all). For all other cells we have that
 	and constant in space\footnote{if we do not consider the spaces utilized by the stack frames
 	during the recursive calls, otherwise it is linear.}.
 
-	\lstinputlisting[language=c++, caption={Exponential time solution to the \textit{jump game} problem where only forward jumps are performed.},label=list:can_jump1_1]{sources/can_jump/can_jump_solution1_1.cpp}
+	\lstinputlisting[language=c++, caption={Exponential time solution to the \textit{jump game} problem where only forward jumps are performed.},label=list:can_jump1_1]{/home/dspataro/git/algorithm_articles/sources/can_jump/can_jump_solution1_1.cpp}
  
 \section{DFS}
 \label{can_jump:sec:DFS}
@@ -128,7 +128,7 @@ cell whether all the other cells have been already visited. Listing \ref{list:ca
 implementation of this idea. 
 
 
-\lstinputlisting[language=c++, caption={Quadratic time and linear space DFS solution to the \textit{jump game} problem using a visited array.},label=list:can_jump1]{sources/can_jump/can_jump_solution1.cpp}
+\lstinputlisting[language=c++, caption={Quadratic time and linear space DFS solution to the \textit{jump game} problem using a visited array.},label=list:can_jump1]{/home/dspataro/git/algorithm_articles/sources/can_jump/can_jump_solution1.cpp}
 
 Notice that one optimization from which this solution (and perhaps also Listing
 \ref{list:can_jump1_1}) can benefit would be to always try to jump the longest distance possible.
@@ -165,5 +165,5 @@ then $x$ is the new leftmost cell from which we can reach the end of the array, 
 Otherwise we continue by processing cell $x-1$ in a similar manner. Eventually we will have
 processed all cells and therefore we can return true if $m = 0$ meaning that cell $0$ is the
 leftmost cell from which we can jump to location $|I|-1$, and false otherwise.
-\lstinputlisting[language=c++, caption={Greedy solution where we use the fact that the DP solution described by Equation \ref{eq:can_jump:dpformula} can be optimized if we only consider if it is possible to reach the closest cell from which we can jump to the end of the array. },label=list:can_jump]{sources/can_jump/can_jump_solution2.cpp}
+\lstinputlisting[language=c++, caption={Greedy solution where we use the fact that the DP solution described by Equation \ref{eq:can_jump:dpformula} can be optimized if we only consider if it is possible to reach the closest cell from which we can jump to the end of the array. },label=list:can_jump]{/home/dspataro/git/algorithm_articles/sources/can_jump/can_jump_solution2.cpp}
 

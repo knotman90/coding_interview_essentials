@@ -63,19 +63,19 @@ Given an array $A$ of $n$ integers, arrange the numbers in a wave-like fashion. 
 \begin{figure}
 	\centering
 	\begin{subfigure}[t]{0.80\textwidth}
-		\includegraphics[width=1\linewidth]{sources/wave_array/images/example1.png}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/wave_array/images/example1.png}
 		\caption{Input and solutions for Example \ref{ex:wave_array:example1}.}
 		\label{fig:dice_rolls:12faces_dice}
 	 \end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.80\textwidth}
-		\includegraphics[width=1\linewidth]{sources/wave_array/images/example1.png}
+		\includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/wave_array/images/example1.png}
 		\caption{Input and solutions for Example \ref{ex:wave_array:example2}.}
 		\label{fig:dice_rolls:6faces_dice}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.80\textwidth}
-		 \includegraphics[width=1\linewidth]{sources/wave_array/images/example1.png}
+		 \includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/wave_array/images/example1.png}
 		 \caption{Input and solutions for Example \ref{ex:wave_array:example3}.}
 		 \label{fig:dice_rolls:20faces_dice}
 	  \end{subfigure}
@@ -117,7 +117,7 @@ We can enumerate all permutations of an array quite easily by using a function l
 
 This idea is implemented in Listing \ref{list:wave_array_linear_bruteforce}.
 
-\lstinputlisting[language=c++, caption=Brute-force time solution to the wave array problem.,label=list:wave_array_linear_bruteforce]{sources/wave_array/wave_array_solution3.cpp}
+\lstinputlisting[language=c++, caption=Brute-force time solution to the wave array problem.,label=list:wave_array_linear_bruteforce]{/home/dspataro/git/algorithm_articles/sources/wave_array/wave_array_solution3.cpp}
 
 
 \subsection{Sorting solution}
@@ -139,7 +139,7 @@ Similarly $a_5$ is now placed at index $4$ and it is surrounded by the elements 
 We can
 use this observation to solve this problem efficiently and elegantly as shown in  Listing \ref{list:wave_array_sorting}.
 
-\lstinputlisting[language=c++, caption=Solution to the wave array problem using sorting.,label=list:wave_array_sorting]{sources/wave_array/wave_array_solution1.cpp}
+\lstinputlisting[language=c++, caption=Solution to the wave array problem using sorting.,label=list:wave_array_sorting]{/home/dspataro/git/algorithm_articles/sources/wave_array/wave_array_solution1.cpp}
 
 The code above works by creating a copy of the input array $A$ named $B$, which is subsequently sorted. The code then proceeds in swapping every element located at an even location with the element after it. You can see the \inline{swap} operation is applied to the iterators \inline{it} and \inline{it+1} and that at the end of each iteration \inline{it} is incremented by $2$. This, together with the fact \inline{it} initially pointer to the first even element  at location $0$, effectively means that only pairs of items at indices of the form $(2i, 2i+1)$ are swapped.
 
@@ -168,7 +168,7 @@ At this point we have effectively placed the largest among $x_{2i-1},x_{2i},x_{2
 
 See Listing \ref{list:wave_array_linear} for a possible implementation of this idea.
 
-\lstinputlisting[language=c++, caption=Linear time solution to the wave array problem.,label=list:wave_array_linear]{sources/wave_array/wave_array_solution2.cpp}
+\lstinputlisting[language=c++, caption=Linear time solution to the wave array problem.,label=list:wave_array_linear]{/home/dspataro/git/algorithm_articles/sources/wave_array/wave_array_solution2.cpp}
 
 Notice that the code above performs some checks on the corner elements so that we do not perform out-of-bound accesses.
 

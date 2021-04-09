@@ -116,7 +116,7 @@ and Listing \ref{list:two_number_sum_bruteforce}), respectively.
 \end{algorithm}
 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/brute_force.cpp}
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/brute_force.cpp}
 
 \textbf{The time complexity of this solution is $O(n^2)$} because there is a quadratic number of ordered pairs and in the worst case, we will look at \textbf{all} of them.
 The number of iteration of the internal loop depends on the value of $i$ and
@@ -156,7 +156,7 @@ Algorithm \ref{algo:two_number_sum_hashset} and Listing \ref{list:two_number_sum
 \end{algorithm}
 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem using hashing.",label=list:two_number_sum_hashing]{sources/two_numbers_sum/hashset.cpp}
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem using hashing.",label=list:two_number_sum_hashing]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/hashset.cpp}
 
 
 
@@ -222,7 +222,7 @@ Listing \ref{list:two_number_sum_sorting} shows a C++ implementation of this ide
 
 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
 
 
 \subsection{Sorting and two pointers technique}
@@ -248,7 +248,7 @@ Moving	$p_e$ to the left has the effect of making the sum of the values pointed 
 
 Listing \ref{list:two_number_sum_two_pointers} shows an implementation of the idea above.  Notice that compared to the solution using the binary search, this one is shorter and simpler to write. Moreover does not use library functions. 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
+\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
 
 Despite the overall time complexity is still $O(n log(n))$ this solution is likely to be faster than
 the one using binary search, mostly due to the fact that the array is scanned linearly (which makes caches happier) by the two pointers and not in a scattered way as in the case of binary search.
@@ -287,7 +287,7 @@ We can solve this problem very easily by using the same approach we have describ
 The idea is that we can use four nested loops and enumerate all possible 4-elements tuples of indices. Listing \ref{list:two_number_sum_naive} shows how such an idea can be implemented.
 Goes without saying, that this is not the fastest solution we can come up with, considering it has a time complexity of $O(n^4)$
 
-\lstinputlisting[language=c++, caption="Brute force na\"ive solution to the four numbers sum problem.",label=list:two_number_sum_naive]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp}
+\lstinputlisting[language=c++, caption="Brute force na\"ive solution to the four numbers sum problem.",label=list:two_number_sum_naive]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp}
 
 
 \subsection{$O(n^3)$ solution}
@@ -304,7 +304,7 @@ Listing \ref{list:two_number_sum_cubic} shows an implementation of such idea.
 Notice that in order to obtain the maximum saving in terms of work avoided the arrays are rearranged in such a way so that $D$ 
 is the longest of the four input arrays. 
 
-\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_cubic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution2.cpp}
+\lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_cubic]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution2.cpp}
 
 
 \subsection{$O(n^2)$ solution using hashing}
@@ -327,7 +327,7 @@ If such a value exists in $CD$ it means that there exists one element in  $A$ an
 one element $C$ and one in $D$ such that they sum up to $T-y$. Summing all these elements up gives: $y+T-y = T$.
 This approach is shown in Listing \ref{list:two_number_sum_quadratic}. 
 
-\lstinputlisting[language=c++, caption="Quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
+\lstinputlisting[language=c++, caption="Quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
 
 Notice that the first thing we do is to fill $AB$ by looping over all possible pairs of elements from $A$ and $B$.
 We then do the same thing for $CD$, and finally, in the last loop, we take care of calculating the answer by searching, for each element $(k,v)$ of $AB$, where $k$ is the sum obtained by one element of $A$ and one of $B$, and $v$ is the number of ways we can obtain it,
@@ -342,4 +342,4 @@ but in practice this mean that we use half the memory and we avoid doing $O(n^2)
 Listing \ref{list:two_number_sum_quadratic_opti} shows this optimized version.
 
 
-\lstinputlisting[language=c++, caption="Space optimized quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic_opti]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution4.cpp}
+\lstinputlisting[language=c++, caption="Space optimized quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic_opti]{/home/dspataro/git/algorithm_articles/sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution4.cpp}
