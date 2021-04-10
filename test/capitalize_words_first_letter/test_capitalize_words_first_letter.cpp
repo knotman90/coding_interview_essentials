@@ -3,6 +3,7 @@
 
 #include "capitalize_words_first_letter_solution1.cpp"
 #include "capitalize_words_first_letter_solution2.cpp"
+#include "capitalize_words_first_letter_solution4.cpp"
 
 using std::string;
 
@@ -38,6 +39,13 @@ TEST(capitalize_words_first_letter, test_one_word_space_front_back)
     EXPECT_NO_THROW(capitalize_words_first_letter_adj_find(ans));
     EXPECT_EQ(expected, ans);
   }
+
+  {
+    std::string ans(lorem_original);
+    EXPECT_NO_THROW(capitalize_words_first_letter_simple(ans));
+    EXPECT_EQ(expected, ans);
+  }
+  
 }
 
 TEST(capitalize_words_first_letter, test_one_word_space_front)
