@@ -23,20 +23,20 @@ We will investigate two different approaches to solve this problem:
     For a non-empty set $S$, let $e$ be an element of $S$ and $T$ be the original set $S$ set minus $e$ ( $T=S \setminus e$), then the power set of $S$ is defined as the union of two distinct power sets:
     \begin{itemize}
         \item   the power set of $T$
-        \item   and the power set of $T$ modified in a such way that $e$ is added to all of its elements. 
-    This idea is formalized in the Equation \ref{eq:power_set_recursive_definition}:
-
-    $\mathcal{P}(S)=\begin{cases} 
-        \{\{\}\} & \text{if } S=\{\} \\
-        \mathcal{P}\{T\} \bigcup \{t \bigcup \{e\} \: : t \in \mathcal{P}\{T\}\} \text{ where }  T = S \setminus \{e\} \text{ } \forall e \in S, & \text{otherwise}
-        \end{cases}$
+        \item   and the power set of $T$ modified in a such way that $e$ is added to all of its elements. (See Equation \ref{eq:power_set_recursive_definition}).  
     \end{itemize}
-    
     \item The second is based on a property of the distribution of the bits in the binary representation of the integers from $0$ to the size of the
     power set. 
 
 \end{enumerate}
 
+\begin{equation}
+    \mathcal{P}(S)=\begin{cases} 
+    \{\{\}\} & \text{if } S=\{\} \\
+    \mathcal{P}\{T\} \bigcup \{t \bigcup \{e\} \: : t \in \mathcal{P}\{T\}\} \text{ where }  T = S \setminus \{e\} \text{ } \forall e \in S, & \text{otherwise}
+    \end{cases}
+    \label{eq:power_set_recursive_definition}
+\end{equation}
 
 
 
