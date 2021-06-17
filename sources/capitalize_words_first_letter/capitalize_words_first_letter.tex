@@ -9,22 +9,31 @@
 \chapter{Capitalize the first letters of every words}
 \label{ch:capitalize_words_first_letter}
 \section*{Introduction}
-Editing text is probably one of the most basic and common operations computers are nowadays still used for. There are a huge number of editors out there, some of them are specialized for a particular kind of users (think of the zoo of editors a programmer can choose from) while others are intended to be for a broader audience like MS Word or LibreOffice writer. 
+Editing text is probably one of the most basic and common operations computers are nowadays still used for. There are a huge number of editors out there, some of them are specialized for a particular kind of users (think of the zoo of editors a programmer can choose from e.g.
+\begin{enumerate*}
+	\item vi,
+	\item GNU Emacs,
+	\item gedit,
+	\item TextPad,
+	\item Visual Studio Code,
+	\item Eclipse,
+	\item Sublime Text,
+	\item Qt Creator,
+	\item etc.
+\end{enumerate*}
+) while others are intended to be for a broader audience like MS Word or LibreOffice writer. 
 
-Imagine for a second to be a software engineer working on a feature for the new version of Word that is supposed to make the tedious tasks of converting a particular piece of text into a variant of the title case\footnote{All words are capitalized, except non-initial articles like “a, the, and”, etc.}.
-The idea is that the user would highlight a portion of text and then have the text modified in place by simply pressing a button instead of manually changing every single letter. 
-
-This simple problem is often part of the preliminary interview stages and it is used as a warm-up problem mostly due to its simplicity. 
-In this chapter, we will discuss how the core such feature can be implemented and we will have a look at a number of possible implementations and solutions approaches. This problem is not hard and therefore the focus of this chapter is more on making sure the final solution is readable and easy to understand rather than coming up with a smarter algorithm.
+Imagine for a second to be a software engineer working on a feature for the new version of Word that is supposed to make the tedious tasks of converting a particular piece of text into a variant of the "title case"\footnote{All words are capitalized, except non-initial articles like “a, the, and”, etc.}.
+The idea is that the user would highlight a portion of text and then have the text modified in place by simply pressing a button instead of manually changing every single letter. Implementing such feature is often part of preliminary stages interviews and it is used as a warm-up problem mostly due to its simplicity. 
+In this chapter, we will discuss how the core such feature can be implemented and we will have a look at a number of possible implementations and solutions approaches. This problem is not hard and therefore the focus of this chapter is more on making sure the final solution is readable and easy to understand rather than coming up with a fancy algorithm.
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that given a string $s$, modifies so that every first letter of every word in $s$ is in upper case while leaving the rest of the characters untouched.
+Write a function that given a string $s$, modifies it so that every first letter of every word in $s$ is in upper case while leaving the rest of the characters untouched.
 
 	\begin{example}
 		\hfill \\
-		Given the string \verb\"  arturo benedetti michelangeli is the best pianist ever     \"
-		The function should turn it into: \verb\"  Arturo Benedetti Michelangeli Is The Best Pianist Ever  \"
+		Given the string \verb\"arturo benedetti michelangeli is the best pianist ever\". The function should turn it into: \verb\"Arturo Benedetti Michelangeli Is The Best Pianist Ever\"\footnote{A.B.M (5 January 1920 - 12 June 1995) was an Italian classical pianist considered as one of the greatest pianists of all times. He was perhaps the most reclusive, enigmatic and obsessive among the handful of the world's legendary pianists.}
 	\end{example}
 
 	\begin{example}
@@ -47,44 +56,43 @@ Write a function that given a string $s$, modifies so that every first letter of
 	
 \section{Discussion}
 \label{capitalize_words_first_letter:sec:discussion}
-This problem does not require coming up with a smart algorithm in order to get the job done. The idea behind this problem is more that you should be able to put a working implementation on the table in a reasonable short amount of time and spend the rest of the time polishing it so that it is clean and easy to understand. 
+This problem does not require coming up with a fancy and complicated algorithm in order to clear the interview.
+The idea behind solving this problem is more about showing you can put together a working implementation in a relatively short amount of time and spend the rest of the time polishing it so that it is clean, readable and easy to understand.
 
-
-What are the practical implications of having to capitalize only the first letter of every word? Let's start by first looking at what makes a letter the first letter of a word. 
-A character is the beginning of a word if it is any of the following is true:
+What are the practical implications of having to capitalize only the first letter of every word? Let's start by first looking at what makes a letter the \textbf{first} letter of a word. 
+A character is the beginning of a word if any of the following is true:
 \begin{itemize}
-	\item is not space and it is preceded by a space,
-	\item is not space and it is the first character of the string.
+	\item it is not space and it is preceded by a space,
+	\item it is not space and it is the first character of the string.
 \end{itemize}
-Any other character is either a space (for which the notion of lower/upper case is not defined) or is in the middle of a word. 
-
-Given this definition, all it is necessary to do to solve this problem is to search for any character in the input string satisfying any of the criteria above as shown in Listing \ref{list:capitalize_words_first_letter_simple}
+Any other character is either a space (for which the notion of lower/upper case does not make much sense) or it is in the middle of a word i.e. surrounded by other letters. Given this definition, all it is necessary to do to solve this problem is to search for any character in the input string satisfying any of the criteria above as shown in Listing \ref{list:capitalize_words_first_letter_simple}.
 
 \lstinputlisting[language=c++, caption=Linear time constant space solution.,label=list:capitalize_words_first_letter_simple]{sources/capitalize_words_first_letter/capitalize_words_first_letter_solution4.cpp}
 
-The code works in two phases:
+Listing \ref{list:capitalize_words_first_letter_simple} works in two phases:
 \begin{enumerate}
-	\item make sure that the first character of $s$ is handled properly,
+	\item make sure that the first character of $s$ is handled properly (depending on whether it is a space or not),
 	\item takes care of the rest of the characters from the position $1$ (skipping the very first one) onward.
 \end{enumerate}
 
-The very same idea discussed above and shown in Listing \ref{list:capitalize_words_first_letter_simple} can be implemented using the function \inline{std::adjacent_find}\cite{cit::std::adjancefind} from the STL which can be used to search, in a range, for a pair of subsequent elements satisfying  user-provided criteria. In the context of this solution, we can use it to find all pairs composed by a space followed by a letter, which we know is the letter that has to be capitalized as it marks the beginning of a word.
+\subsubsection{\texttt{std::adjacent\_find}}
+The very same idea discussed above and shown in Listing \ref{list:capitalize_words_first_letter_simple} can be implemented using the function \inline{std::adjacent_find}\cite{cit::std::adjancefind} from the STL which can be used to search, in a range, for a pair of subsequent elements satisfying  a user-provided criteria. In the context of this solution, we can use it to find all pairs composed by a space followed by a letter, which we know is the letter that has to be capitalized as it marks the beginning of a word.
 Listing \ref{list:capitalize_words_first_letter_adj_find} implements this idea. 
 
 \lstinputlisting[language=c++, caption=Linear time constant space solution using \href{https://en.cppreference.com/w/cpp/algorithm/adjacent_find}{\texttt{std::adjacent\_find}}\cite{cit::std::adjancefind}. by,label=list:capitalize_words_first_letter_adj_find]{sources/capitalize_words_first_letter/capitalize_words_first_letter_solution2.cpp}
 
-The complexity of the Listing \ref{list:capitalize_words_first_letter_adj_find}  is linear in time and constant in space and it has the same asymptotical complexity profile as the one presented in Listing \ref{list:capitalize_words_first_letter_simple} with the added benefit of being more expressive.
+The complexity of the Listing \ref{list:capitalize_words_first_letter_adj_find}  is linear in time and constant in space and it has the same asymptotical complexity profile as the one presented in Listing \ref{list:capitalize_words_first_letter_simple} with the added benefit of being more expressive as the code explicitly uses the definition of "first letter of a word" given above.
 
+\subsubsection{Recursive solution}
 
-Another way of looking at solving this problem is by adopting a recursive approach where we think like follows: 
+Another way of looking at solving this problem is by adopting a recursive approach like the following: 
 \begin{enumerate}
 	\item find the first character in the string 
 	\item transform it in uppercase,
-	\item ignore all the subsequence non-space characters until a space or the end of the string is reached.
+	\item ignores all the subsequence non-space characters until a space or the end of the string is reached.
 \end{enumerate}
-When we hit a space, we repeat the process from the beginning, otherwise, we stop and at , the whole string is modified so that only the first character of every word is in uppercase and the rest of the string is untouched.
-
-These rules can also be easily turned into code as it is shown in Listing \ref{list:capitalize_words_first_letter_iterator}.
+When we hit a space, we repeat the process from the beginning, otherwise we stop as at this point the whole string is modified so that only the first character of every word is in uppercase and the rest of the string is untouched.
+Listing \ref{list:capitalize_words_first_letter_iterator} shows how the steps above con be turned into a working solution. 
 
 \lstinputlisting[language=c++, caption=Linear time constant space solution. ,label=list:capitalize_words_first_letter_iterator]{sources/capitalize_words_first_letter/capitalize_words_first_letter_solution1.cpp}
 
@@ -104,16 +112,15 @@ The complexity of this solution is linear in time, as every letter is read or mo
 \label{capitalize_words_first_letter:sec:variation}
 
 \subsection{Apply an user provided function}
-Sometimes this problem can be posed such that the operation to be applied on the letter is different than capitalization or you can be even asked to write an high order function that takes the operation to be performed as an additional parameter.
+Sometimes this problem can be posed such that the operation to be applied on the letter is different than capitalization or alternatively, you can be even asked to write a high order function that takes the operation to be performed as an additional parameter (as a lambda for instance).
 
 We can use the same core ideas discussed above even if we decided to go for a generic solution where we accept a function from the user. The complications are only syntactical as shown in 
-Listing \ref{list:capitalize_words_first_letter_userdefined} that shows a generic solution can be implemented. The code takes as an input a string and in addition to the other solutions discussed above, a function \inline{char f(char)} which takes as an input a character and returns a character. This function is used in place of the \inline{std::to_upper}.
+Listing \ref{list:capitalize_words_first_letter_userdefined} that shows a generic solution can be implemented. The code takes as an input a string and (in addition to the code code the other solutions discussed above), a function \inline{char f(char)} that takes as an input a character and returns a character. This function is used in place of the \inline{std::to_upper}.
 
 \lstinputlisting[language=c++, caption=Generic version of Listing \ref{list:capitalize_words_first_letter_adj_find},label=list:capitalize_words_first_letter_userdefined]{sources/capitalize_words_first_letter/capitalize_words_first_letter_solution3.cpp}
 
-
 \subsection{Modify the every $k^{th}$ character of every word}
-Another common variation that has been asked in interviews is one where we need to modify every $k^{th}$ character of a word if exists. For instance, you might be asked to:
+Another common variation is one where we need to modify every $k^{th}$ character of a word (if it exists). For instance, you might be asked to:
 
 \begin{exercise}
 Given a string $s$, modify $s$ such that every $3^{rd}$ letter of every word in $s$ is modified according to a function provided by the user. The rest of the string should remain untouched.
