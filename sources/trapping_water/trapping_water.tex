@@ -9,12 +9,21 @@
 \chapter{Trapping Water}
 \label{ch:trapping_water}
 \section*{Introduction}
-This chapter describes a quite challenging and extremely popular and fun problem that is asked at big companies like Google and Microsoft. 
+Imagine to to be the only survivor of a plane crash in the middle of the pacific ocean and that you managed to get ashore to the Manra Island\footnote{Also called Sydney Island, is almost entirely of scrub forest, herbs and grasses. The island is abandoned since 1963.} and that the only cargo item surviving the crash were all a large number of plastic cubic boxes  of $1m^3$ and two long and rigid sheets of plastic. 
+
+Clearly one of your first worries would be to make sure you have enough water to be able to survive long enough for rescuers to find and rescue you.
+Therefore you come up with the idea of arranging the boxes into piles of different heights each placed at a certain distance from each other so that they form concave structures where rainwater can get trapped when the plastic sheets cover the entirety of both sides, as depicted in Figure \ref{fig:trapping_water_example1}. 
+In order to figure out the best ways of arranging boxes so that the structure survives the harsh weather and winds but also collects as much water as possible, you would like to calculate the total amount of water each possible boxes arrangement can hold. 
+
+In this chapter we will investigate how this problem can be solved and, as we shall see, we will learn that there are a number of valid approaches that can be used and we believe it is important to master the core concepts of all of them as their applicability extends further to the limited context of this specific problem and that we can extract valuable lessons from each of them.
+Moreover, this problems has been (and according to what interview across the globe still reports) a mojor hit in top tech companies, where it is frequently asked during interviews.
+
 
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that takes as input an array of length $n$ of non-negative integers representing an elevation map (or an histogram) where the width of each bar is $1$. The function should return the amount of water that is trapped in the histogram after an heavy rain overnight. 
+Write a function that takes as input an array of length $n$ of non-negative integers representing an elevation map (the height of each pile of boxes) where the width of each bar is $1$. 
+The function should return the maximum amount of water that can be potentially trapped in between all piles. 
 
 	\begin{example}
 		\label{ex:trapping_water:exmaple1}
@@ -31,19 +40,19 @@ Write a function that takes as input an array of length $n$ of non-negative inte
 \end{exercise}
 
 \begin{figure}
-		\label{fig:trapping_water_example1}
-		\centering
-		\includegraphics[scale=1.0]{sources/trapping_water/images/example1}
-		\caption{Visual representation of the example \ref{ex:trapping_water:exmaple1}. Blue squares represent water, while the red ones, bricks.}
+	\centering
+	\includegraphics[scale=1.0]{sources/trapping_water/images/example1}
+	\caption{Visual representation of the example \ref{ex:trapping_water:exmaple1}. Blue squares represent water, while the red ones, boxes.}
+	\label{fig:trapping_water_example1}
 \end{figure}
 
 
 
 \begin{figure}
-		\label{fig:trapping_water_example2}
-		\centering
-		\includegraphics[scale=1.0]{sources/trapping_water/images/example2}
-		\caption{Visual representation of the example \ref{ex:trapping_water:exmaple2}. Blue squares represent water, while the red ones, bricks.}
+	\centering
+	\includegraphics[scale=1.0]{sources/trapping_water/images/example2}
+	\caption{Visual representation of the example \ref{ex:trapping_water:exmaple2}. Blue squares represent water, while the red ones, boxes.}
+	\label{fig:trapping_water_example2}
 \end{figure}
 
 %\section{Clarification Questions}
