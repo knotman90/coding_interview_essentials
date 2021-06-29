@@ -9,19 +9,19 @@
 \chapter{String Reverse}
 \label{ch:string_reverse}
 \section*{Introduction}
-Reversing a collection of items or a string is a ubiquitous operation that and because of that is it very often asked during programming interview. Because of its simplicity, this is often part of a set of warm-up problems in the interviewer's question list. 
+Reversing a collection of items or a string is a ubiquitous operation, and because of that it is very often asked during programming interviews. Due to its simplicity, it is often part of a set of warm-up problems in the interviewer's question list. 
 
+There are really only two variations of this problem:
 
-There are two variations of this problem:
 \begin{enumerate}
-  \item in-place where you are asked explicitly not to use any additional space and to modify the input string, or
-  \item out-of-place, where you are free to return a brand new collection.
+  \item in-place where we are asked explicitly not to use any additional space and to modify the input string;
+  \item out-of-place, where we are free to return a brand new collection.
 \end{enumerate}
+If the statement is not clear on this point, then it is important to first clarify which type the interviewer is intending. 
 
-If the statement is not clear on this point, then it important to first clarify which type you are being asked. 
+Let’s first consider how popular and difficult this problem is: it is important to focus on getting the solution right at the first try and in a relatively short time frame; in addiction, we have to make sure the communication is clear, concise, and precise and that we engage the interviewer into following our reasoning process.
+The interviewer is expecting us to have seen (or solved) this question more than once in the past: therefore, more than on the algorithm itself, in order to be able to stand out among all the other candidates, our communication and implementation should be spot-on.
 
-Considering the popularity and the difficulty level of this problem, it is important to focus on getting the solution right at the first try and in a relatively short time frame as well as make sure the communication is clear, concise, and precise and that you engage the interviewer into following your reasoning process.
-The interviewer is expecting you to have seen this question or solved this challenge yourself more than once in the past and therefore more than on the algorithm itself, in order to be able to stand out among all the other candidates, your communication and implementation should be spot-on.
 
 \section{Problem statement}
 \begin{exercise}
@@ -55,30 +55,23 @@ The interviewer is expecting you to have seen this question or solved this chall
 
 \section{Discussion}
 \label{string_reverse:sec:discussion}
-
 We have to reverse a string in place. But what does it exactly mean to do it
-*in-place*? 
-What is means is that no auxiliary storage is allowed and that the input itself will be
-processed and modified by the function and will be eventually transformed into the output.
-Since the original
-content of the input is lost once the function is terminated, in-place algorithms are also called
-*destructive*.
-However, having to use no additional storage space does not literally mean that not even a single additional
-byte of space can be utilized. This constraint should be interpreted more as that a copy of the input is
-disallowed, or that the function should work in $O(1)$ (constant) space.
+\textit{in-place}? 
+What it means is that no auxiliary storage is allowed, that the input itself will be processed and modified by the function, and that it will be eventually transformed into the output.
+Since the original content of the input is lost once the function is terminated, in-place algorithms are also called \textit{destructive}.
+However, having to use no additional storage space does not literally mean that not even a single additional byte of space can be utilized.
+This constraint should be interpreted more like as a copy of the input is disallowed, or as the function should work in $O(1)$ (constant) space.
 
 In order to develop an intuitive idea of how we can solve this problem, it is useful to take a deeper look at what happens to each letter of $s$ once is reversed.
-For instance consider the string $s=a_0 a_1 a_2 a_3 a_4 a_5$ which is transformed into $s'=a_5
-a_4 a_3 a_2 a_1 a_0$. The subscript $i$ in $a_i$ identifies the position in which the letter $a_i$
-appears **in the original input ($s$)**. 
-The core of the problem is to figure out how the letters are shuffled around
-from their original position to their final location in the reversed string.
-In order to do so, let's have a look at how the indices are
-moved during the reverse process by comparing the positions of a letter in the original and in the reversed string.
+For instance, consider the string $s=a_0 a_1 a_2 a_3 a_4 a_5$ which is transformed into $s'=a_5 a_4 a_3 a_2 a_1 a_0$.
+The subscript $i$ in $a_i$ identifies the position in which the letter $a_i$ appears \textbf{in the original input string $s$}. 
+The core of the problem is to figure out how the letters are shuffled around from their original position to their final location in the reversed string.
+In order to do so, let's have a look at how the indices are moved during the reverse process by comparing the positions of a letter in the original and in the reversed string.
 
-
-
-From the example above, we can see that the indices are shuffled as shown in the table below:
+Table \ref{tab:string_reverse:shuffle} shows how indices of string $s=a_0 a_1 a_2 a_3 a_4 a_5$ are shuffled around and contains all the information that is necessary to deduce the function that maps the indices of the original string into the indices of the reversed string.
+An index $i$ gets mapped to an index $j$ s.t. $i+j = n$ (index $2$ goes to $3$ and $2+3=5$ for instance).
+A quick manipulation of that equation shows that $j$ (the index in the reversed string where the letter at index $i$ in the original string is mapped to) is equal to: $j = n-i$.
+We know now which elements to swap in order to obtain a reversed list. This information can be used to reverse the entire string as shown in Listing \ref{list:string_reverse_1}.
 
 \begin{table}[]
 	\centering
@@ -92,68 +85,46 @@ From the example above, we can see that the indices are shuffled as shown in the
 		3                                    & 2                                    \\ \hline
 		2                                    & 3                                    \\ \hline
 	\end{tabular}
+	\caption{Indices shuffling for the reversal of $s=a_0 a_1 a_2 a_3 a_4 a_5$.}
+	\label{tab:string_reverse:shuffle}
 \end{table}
-
-The example contains all the information that is necessary to deduce the function that maps the
-indices of the original string into the indices of the reversed string. An index $i$ gets mapped to
-an index $j$ s.t. $i+j = n$ (index $2$ goes to $3$ and $2+3=5$ for instance).
-A quick manipulation of that equation shows
-that $j$ (the index in the reversed string where the letter at index $i$ in the original string is mapped to)
-is equal to: $j = n-i$. We know now which elements to swap in order to obtain a reversed list, as shown in Listing \ref{list:string_reverse_1}.
 
 
 \lstinputlisting[language=c++, caption=Linear time constant space iterative solution.,label=list:string_reverse_1]{sources/string_reverse/string_reverse_solution1.cpp}
 
-
-An important detail we can notice in this solution is how the loop terminates only after $\frac{n}{2}$ iterations.
-This is necessary because a swap operation on the index $i<\frac{n}{2}$ involves two elements, the element at index $i$ but also an element of the second half of the string, its symmetrical sibling at index $n-i$.
-If the loop would not terminate at $\frac{n}{2}$ then each element $a_i$ would be involved in **two** swap operations. 
+An important detail we can notice in Listing \ref{list:string_reverse_1} is how the loop terminates only after $\frac{n}{2}$ iterations.
+This is necessary because a swap operation on the index $i<\frac{n}{2}$ involves two elements: the element at index $i$, but also its symmetrical sibling at index $n-i$ in the second half of the string.
+If the loop would not terminate at $\frac{n}{2}$, then each element $a_i$ would be involved in \textbf{two} swap operations. 
 For instance, for the letter at index $0$, the following swaps would occur:
 \begin{itemize}
-	\item `swap(0,n-1)`
-	\item `swap(n-1,0)`
+	\item \inline{swap(0,n-1)}
+	\item \inline{swap(n-1,0)}
 \end{itemize}
+Clearly, applying two (or any even number) swap operations on the same indices is equivalent to a no-op, and it results in having the letters involved in the swaps stay at their original locations.
+Therefore, if the loop does not terminate after $\frac{n}{2}$ iterations, then the function would not modify the original string at all! 
 
-
-Clearly applying two( or any even number) swap operations on the same indices is equivalent to a no-op and result in having the letters involved in the two swaps stay at their original location.
-Therefore, if the loop does not terminate after $\frac{n}{2}$ iteration then the function would not
-modify the original string at all!. 
-
-The solution shown above is considered good because, besides being short and expressive it has a time and space complexity of $O(n)$ and $O(1)$, respectively, which are optimal. 
-
-
-
-
-
-
-
-
-
+This solution is considered good because, besides being short and expressive, it has a time and space complexity of $O(n)$ and $O(1)$, respectively, which are optimal.
 
 \section{Common Variation}
 \label{string_reverse:sec:variations}
 
 \subsection{Out-of-place solution}
-Sometimes the interviewer might ask for an easier version of this problem where the memory constraint is relaxed and we are allowed to allocate linear space.
-This version is easier compared to the in-place version because one
-can simply construct the reversed string by looping the original string backward as shown in Listing \ref{list:string_reverse_outplace_rawloop} and Listing \ref{list:string_reverse_outplace_iterators}.
+Sometimes the interviewer might ask for an easier version of this problem, where the memory constraint is relaxed and we are allowed to allocate linear space.
+This version is easier compared to the in-place version: we can simply construct the reversed string by looping the original string backward, as shown in Listing \ref{list:string_reverse_outplace_rawloop} and Listing \ref{list:string_reverse_outplace_iterators}
 
 \lstinputlisting[language=c++, caption=Linear time and space iterative out-of-place solution using raw loops.,label=list:string_reverse_outplace_rawloop]{sources/string_reverse/string_reverse_solution2.cpp}
 
-\lstinputlisting[language=c++, caption=Alternative implementation of a linear time and space iterative iterative out-of-place solution using iterators.,label=list:string_reverse_outplace_iterators]{sources/string_reverse/string_reverse_solution3.cpp}
+\lstinputlisting[language=c++, caption=Linear time and space iterative iterative out-of-place solution using iterators.,label=list:string_reverse_outplace_iterators]{sources/string_reverse/string_reverse_solution3.cpp}
 
 \subsection{Recursive solution}
-In some cases the interviewer might explicitly ask for a recursive implementation.
-This problem is well suited for recursion; in fact, a look at the iterative linear time and constant space solution above shows
-that at any given point in the loop the status of the string is the following: $a_{n-1}a_{n-2}
-\ldots a_k a_{k+1} \ldots a_l a_{k-1}a_{k-2} \ldots a_0$. 
-There is always a portion of the string delimited by two indices $k$ and $l$, $k \leq l$ which is yet to be
-processed (i.e. with the letters un-swapped). 
-This fact can be used to write a recursive solution:
-
+The interviewer might as well explicitly ask for a recursive implementation.
+This problem is well suited for recursion; in fact, a look at the iterative linear time and constant space solution above shows that at any given point in the loop, the status of the string is the following: 
+$a_{n-1}a_{n-2} \ldots a_k a_{k+1} \ldots a_l a_{k-1}a_{k-2} \ldots a_0$. 
+There is always a portion of the string delimited by two indices $k$ and $l$, $k \leq l$, which is yet to be processed (i.e. with the letters un-swapped). 
+This fact can be used to write a recursive solution;
 At first $k=0$ and $l=n-1$ and the string can be reversed by swapping $a_k=0$ and $a_l=n-1$ and
 by recursively reversing the inner part of the string i.e. in the range $k=1$ and $l=n-2$.
-The inner part can be reversed using the same logic, and this reasoning can be applied for all the recursive calls right until $k /geq l$. At that point, the function can simply terminate and the input string is reversed successfully.
+The inner part can be reversed using the same logic, and this reasoning can be applied for all the recursive calls right until $k \geq l$. At that point, the function can simply terminate and the input string is reversed successfully.
 Equation \ref{eq:string_reversal_recursion} formalizes this idea and a possible implementation is shown in Listing \ref{list:string_reversal_recursion}.
 
 \begin{equation}
@@ -175,6 +146,6 @@ It is therefore important to clarify this aspect with the interviewer.
 
 Discussing this topic might open the possibility for questions related
 to recursion, and especially regarding the
-Tail Call Optimization (TCO)\footnote{TCO (Tail Call Optimization) is the process by which a smart compiler can make a call to a function and take no additional stack space. The allocation of a new stack frame for a function can be avoided because the calling function will simply return the value that it gets from the called function. The most common use is tail-recursion, where a recursive function written to take advantage of tail-call optimization can	use constant stack space.\nopagebreak}, so one needs to be careful while opening this pandora box.
+Tail Call Optimization (TCO)\footnote{TCO (Tail Call Optimization) is the process by which a smart compiler can make a call to a function and take no additional stack space. The allocation of a new stack frame for a function can be avoided because the calling function will simply return the value that it gets from the called function. The most common use is tail-recursion, where a recursive function written to take advantage of tail-call optimization can	use constant stack space.}, so one needs to be careful while opening this pandora box.
 
 The time complexity is linear. 
