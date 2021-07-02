@@ -62,7 +62,7 @@ CURRDIR=$(pwd)
 cd $CHAPTERDIR
 
 /home/dspataro/git/rippledoc/rippledoc.py
-sort -t= $CHAPTERDIR/toc.conf -o $CHAPTERDIR/toc.conf
+sort -n -t= $CHAPTERDIR/toc.conf -o $CHAPTERDIR/toc.conf
 /home/dspataro/git/rippledoc/rippledoc.py
 
 cd $CURRDIR
