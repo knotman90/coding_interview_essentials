@@ -59,14 +59,14 @@ $A$ and $B$ con be considered to be proper subsets of a third dataset $C = A \cu
 \begin{figure}
 	\label{fig:median_sorted_arrays:example2}
 	\centering
-	\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/example2}
+	\includegraphics[scale=1.0]{sources/median_sorted_arrays/images/example2}
 	\caption[Example of median of two sorted array.]{Example of median of two sorted array where the total number of elements is odd.}
 \end{figure}
 
 \begin{figure}
 	\label{fig:median_sorted_arrays:example1}
 	\centering
-	\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/example1}
+	\includegraphics[scale=1.0]{sources/median_sorted_arrays/images/example1}
 	\caption[Example of median of two sorted array.]{Example of median of two sorted array where the total number of element is even.}
 \end{figure}
 
@@ -116,7 +116,7 @@ of this approach are $O((n+m)log(n+m))$(because of sorting) and $O(s+m)$(space r
 array), respectively. Despite being suboptimal this solution has the benefit of being very short (only a few lines)
 and easy to read, explain and understand.
 
-\lstinputlisting[language=c++, caption={Naive implementation of solution to the problem of finding the median of two sorted arrays.},label=list:median_sorted_naive]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/median_sorted_arrays_solution1.cpp}
+\lstinputlisting[language=c++, caption={Naive implementation of solution to the problem of finding the median of two sorted arrays.},label=list:median_sorted_naive]{sources/median_sorted_arrays/median_sorted_arrays_solution1.cpp}
 
 
 \subsection{Brute-force improved}
@@ -131,7 +131,7 @@ Listing \ref{list:median_sorted_naive_2} shows how this idea can be coded in C++
 const std::vector<T> &B)} function that 
 is responsible for taking two sorted arrays (pay attention to the \inline{assert}) as input and returning a third sorted one. 
 
-\lstinputlisting[language=c++, caption={Naive implementation of solution to the problem of finding the median of two sorted arrays using the merge part of merge-sort algorithm.},label=list:median_sorted_naive_2]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/median_sorted_arrays_solution2.cpp}
+\lstinputlisting[language=c++, caption={Naive implementation of solution to the problem of finding the median of two sorted arrays using the merge part of merge-sort algorithm.},label=list:median_sorted_naive_2]{sources/median_sorted_arrays/median_sorted_arrays_solution2.cpp}
 
 The time and complexities of this version are both $O(n+m)$, much better than the one from the solution presented in
 Section \ref{median_sorted_arrays:sec:bruteforce} but, it is still suboptimal as this problem can be
@@ -163,14 +163,14 @@ At this point then, as shown in Figure \ref{fig:median_sorted_array:mergearray7}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays0}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays0}
 		\caption{Step $1$: $Z$ is initially empty. itX and itY points to the beginning of $X$ and $Y$, respectively. The element pointed by itX is merged as it is smaller. itX is advanced by one position.}
 		\label{fig:median_sorted_array:mergearray0}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays1}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays1}
 		\caption{Step $2$: itY is smaller than itX, thus it is the one being merged. itB is also advanced by one position. }
 		\label{fig:median_sorted_array:mergearray1}
 	\end{subfigure}
@@ -178,14 +178,14 @@ At this point then, as shown in Figure \ref{fig:median_sorted_array:mergearray7}
 
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays2}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays2}
 		\caption{Step $3$: itX is smaller than itY, thus it is the one being merged. itX is also advanced by one position.}
 		\label{fig:median_sorted_array:mergearray2}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays3}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays3}
 		\caption{Step $4$: itY is smaller than itX, thus it is the one being merged. itB is also advanced by one position. }
 		\label{fig:median_sorted_array:mergearray3}
 	\end{subfigure}
@@ -193,14 +193,14 @@ At this point then, as shown in Figure \ref{fig:median_sorted_array:mergearray7}
 
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays4}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays4}
 		\caption{Step $5$:  itX is smaller than itY, thus it is the one being merged. itX is also advanced by one position.}
 		\label{fig:median_sorted_array:mergearray4}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays5}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays5}
 		\caption{Step $6$:itY is smaller than itX, thus it is the one being merged. itB is also advanced by one position.}
 		\label{fig:median_sorted_array:mergearray5}
 	\end{subfigure}
@@ -208,21 +208,21 @@ At this point then, as shown in Figure \ref{fig:median_sorted_array:mergearray7}
 
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays6}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays6}
 		\caption{ itY now  points to the past-the-end element of $Y$. There are no more element of $Y$ to merge.}
 		\label{fig:median_sorted_array:mergearray6}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays7}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays7}
 		\caption{Step $7$: All the remaning element from the current location of itX to the end of X are merged into $Z$. }
 		\label{fig:median_sorted_array:mergearray7}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.45\textwidth}
 		\centering
-		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/images/mergearrays8}
+		\includegraphics[trim=0 0 0 45,clip,width=\textwidth]{sources/median_sorted_arrays/images/mergearrays8}
 		\caption{All the elements of $X$ and $Y$ have been merged. $Z$ contains the element of $X \cup Y$ and it is sorted.}
 		\label{fig:median_sorted_array:mergearray8}
 	\end{subfigure}
@@ -267,7 +267,7 @@ Thus if $A[i] > B[j]$ we reduce or increase $i$ by doing $r = r-1$.
 Conversely if $A[i] < B[i]$ then $i$ is increased by moving the left boundary of the binary search range: $l = l+1$.
 
 Listing \ref{list:median_sorted_binary} shows an implementation of the idea above.
-\lstinputlisting[language=c++, caption={Binary search solution to the \textit{median of two sorted arrays} problem.},label=list:median_sorted_binary]{/home/dspataro/git/algorithm_articles/sources/median_sorted_arrays/median_sorted_arrays_solution3.cpp}
+\lstinputlisting[language=c++, caption={Binary search solution to the \textit{median of two sorted arrays} problem.},label=list:median_sorted_binary]{sources/median_sorted_arrays/median_sorted_arrays_solution3.cpp}
 
 
 

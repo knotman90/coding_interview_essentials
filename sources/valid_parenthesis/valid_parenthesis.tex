@@ -82,7 +82,7 @@ The recursion terminates when either:
 
 Listing \ref{list:valid_parenthesis:bruteforce} shows a possible recursive implementation of the idea above. The complexity of this approach is exponential in the number of \textit{*}, i.e. $O(3^{n})$, where $n$ is the length of $s$.
 
-\lstinputlisting[language=c++, caption={Brute-force, exponential time solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:bruteforce]{/home/dspataro/git/algorithm_articles/sources/valid_parenthesis/valid_parenthesis_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute-force, exponential time solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:bruteforce]{sources/valid_parenthesis/valid_parenthesis_solution1.cpp}
 
 \subsection{Dynamic Programming}
 \label{valid_parenthesis:sec:dp}
@@ -99,7 +99,7 @@ Note that this solution is nothing else than another way of solving this problem
 
 The DP solution is definitely a better solution than the brute-force but it is still far from the optimal. In the next section we will investigate a much faster solution that has the additional benefit of being also much shorter in length and therefore less error prone than the ones presented so far.
 
-\lstinputlisting[language=c++, caption={Dynamic programming solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:dp]{/home/dspataro/git/algorithm_articles/sources/valid_parenthesis/valid_parenthesis_solution2.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:dp]{sources/valid_parenthesis/valid_parenthesis_solution2.cpp}
 
 Also note that the structure \inline{pair_hash} is necessary so that the \inline{std::unordered_map} knows how to  correctly calculate a hash value for  \inline{std::pair}s. 
 
@@ -162,4 +162,4 @@ When all the characters are processed, the only thing that is left to check is t
 
 Listing \ref{list:valid_parenthesis:linear} shows a possible implementation of this idea. Note how every decrement of \inline{min} is guarded by a check, so to avoid that it goes below $0$.
 
-\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:linear]{/home/dspataro/git/algorithm_articles/sources/valid_parenthesis/valid_parenthesis_solution3.cpp}
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of validating a string of parenthesis with wild-cards.},label=list:valid_parenthesis:linear]{sources/valid_parenthesis/valid_parenthesis_solution3.cpp}

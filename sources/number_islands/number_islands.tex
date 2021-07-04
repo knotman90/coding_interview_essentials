@@ -44,14 +44,14 @@ The input grid is a 2D \inline{std::vector<std::vector<bool>>} of size $n\times 
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/number_islands/images/example1}
+		\includegraphics[width=\textwidth]{sources/number_islands/images/example1}
 		\caption{Visual representation of the example 1 for the problem of counting the number of islands in a map. Cells belonging to the same island share the same color.}
 		\label{fig:number_islands:example1}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/number_islands/images/visited}
+		\includegraphics[width=\textwidth]{sources/number_islands/images/visited}
 		\caption{Visual representation of the example 1 after visiting the cells of the first island.}
 		\label{fig:number_islands:example1_visited}
 	\end{subfigure}
@@ -117,7 +117,7 @@ $O(n\times m)$ for both time and space
 because we visit the whole map at least once and we use space proportional to $n\times m$
 for the array \inline{visited}.
 
-\lstinputlisting[language=c++, caption={Iterative DFS solution to the problem of counting the number of islands in a map.},label=list:number_islands:iterative]{/home/dspataro/git/algorithm_articles/sources/number_islands/number_islands_solution1.cpp}
+\lstinputlisting[language=c++, caption={Iterative DFS solution to the problem of counting the number of islands in a map.},label=list:number_islands:iterative]{sources/number_islands/number_islands_solution1.cpp}
 
 But, do we really need to have a dedicated matrix just to store the information about which cell is visited?
 Turns out that we can store that information in-place in the input matrix. All is necessary, when marking a cell visited, is turning
@@ -127,7 +127,7 @@ space to store the cells to be visited in the stack,
 but the amount of space used will be lower in practice and the overall solution will look cleaner and simpler which is always a plus during an
 interview. 
 
-\lstinputlisting[language=c++, caption={Alternative iterative DFS solution, without dedicated space for marking visited cells,  to the problem of counting the number of islands in a map.},label=list:number_islands:iterative_1]{/home/dspataro/git/algorithm_articles/sources/number_islands/number_islands_solution2.cpp}
+\lstinputlisting[language=c++, caption={Alternative iterative DFS solution, without dedicated space for marking visited cells,  to the problem of counting the number of islands in a map.},label=list:number_islands:iterative_1]{sources/number_islands/number_islands_solution2.cpp}
 
 \subsubsection{DFS recursive}
 \label{sec:num_island:recursive}
@@ -141,4 +141,4 @@ function \inline{count_island_recursive_DFS} is basically the same as the ones w
 previous two solutions \ref{list:number_islands:iterative} and
 \ref{list:number_islands:iterative_1}.
 
-\lstinputlisting[language=c++, caption={Recursive DFS solution, to the problem of counting the number of islands in a map.},label=list:number_islands:recursive]{/home/dspataro/git/algorithm_articles/sources/number_islands/number_islands_solution3.cpp}
+\lstinputlisting[language=c++, caption={Recursive DFS solution, to the problem of counting the number of islands in a map.},label=list:number_islands:recursive]{sources/number_islands/number_islands_solution3.cpp}

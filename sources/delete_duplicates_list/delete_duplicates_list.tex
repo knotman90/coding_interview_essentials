@@ -63,7 +63,7 @@ The easiest solution possible consist in:
 \end{enumerate}
 This solution is straightforward but as you can imagine not optimal. A possible implementation is shown in Listing \ref{list:delete_duplicates_list_brite_force1} where for the step $2$ the  remove-erase idiom\cite{cit::wiki::remove-erase} is used to remove duplicates from the vector(the erase part is actually not necessary in this case).
 
-\lstinputlisting[language=c++, caption={C++ solution $O(n)$ time and $O(n)$ space solution to the problem of removing duplicates from a Linked List using std::remove.},label=list:delete_duplicates_list_brite_force1]{/home/dspataro/git/algorithm_articles/sources/delete_duplicates_list/delete_duplicates_list_solution1.cpp}
+\lstinputlisting[language=c++, caption={C++ solution $O(n)$ time and $O(n)$ space solution to the problem of removing duplicates from a Linked List using std::remove.},label=list:delete_duplicates_list_brite_force1]{sources/delete_duplicates_list/delete_duplicates_list_solution1.cpp}
 
 This solution is optimal in time but we are not taking advantage of the fact that the we can modify the list in place and it is not necessary to create a brand new List to be returned. 
 
@@ -87,7 +87,7 @@ This idea is implemented in Listing \ref{list:delete_duplicates_list_lineartime}
 
 The time and space complexity for this approach are $O(n)$ and $O(1)$, respectively. All the nodes of the list are  visited at most once.
 
-\lstinputlisting[language=c++, caption={C++ solution $O(n)$ time and $O(1)$ space solution to the problem of removing duplicates from a Linked.},label=list:delete_duplicates_list_lineartime]{/home/dspataro/git/algorithm_articles/sources/delete_duplicates_list/delete_duplicates_list_solution2.cpp}
+\lstinputlisting[language=c++, caption={C++ solution $O(n)$ time and $O(1)$ space solution to the problem of removing duplicates from a Linked.},label=list:delete_duplicates_list_lineartime]{sources/delete_duplicates_list/delete_duplicates_list_solution2.cpp}
 
 
 \section{Common Variations and follow-up questions}

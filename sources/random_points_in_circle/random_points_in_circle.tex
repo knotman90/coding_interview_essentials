@@ -53,19 +53,19 @@ Let's start by discussing a common approach that comes naturally to mind. One mi
 \begin{figure}
 	\label{fig:random_points_in_cirle:polar_coordinates}
 	\centering
-	\includegraphics[scale=0.3]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/images/polar-coordinate}
+	\includegraphics[scale=0.3]{sources/random_points_in_circle/images/polar-coordinate}
 	\caption{Generation of a random point in polar coordinates given a random angle $\theta$ and a random radius $r$.}
 \end{figure}
 
 Despite its simplicity this approach is wrong as it does not produce points distributed uniformly in the circle. Before having a quick look at the mathematical proof it is instructive to have a look Figure \ref{fig:random_points_in_cirle:buggy} which is drawing a large number of points on the circle generated using this buggy solution. As you can see the points are not generated uniformly as their density is higher towards the center. 
 The bottom line is, do not use this solution in an interview. A possible matlab implementation of this buggy approach is shown in Listing \ref{list:random_points_in_circle:buggy}.
 
-\lstinputlisting[language=Matlab, caption=Non-uniform random point in a circle generation using Matlab,label=list:random_points_in_circle:buggy]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/buggy_random_point.m}
+\lstinputlisting[language=Matlab, caption=Non-uniform random point in a circle generation using Matlab,label=list:random_points_in_circle:buggy]{sources/random_points_in_circle/buggy_random_point.m}
 
 \begin{figure}
 	\label{fig:random_points_in_cirle:buggy}
 	\centering
-	\includegraphics[scale=0.3]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/images/buggy_points}
+	\includegraphics[scale=0.3]{sources/random_points_in_circle/images/buggy_points}
 	\caption{Large number of points generated using the approach described in Section \ref{random_points_in_circle:sec:buggy}. Note that the density of points is not uniform as more points are packed around the center.}
 \end{figure}
 
@@ -78,13 +78,13 @@ The downside of this method is that we might need to generate a number of points
 \begin{figure}
 	\label{fig:random_points_in_cirle:loop}
 	\centering
-	\includegraphics[scale=0.3]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/images/loop_points}
+	\includegraphics[scale=0.3]{sources/random_points_in_circle/images/loop_points}
 	\caption{Large number of points generated using the approach described in Section \ref{random_points_in_circle:sec:loop}.}
 \end{figure}
 
 A Matlab implementation of this approach is shown in Listing \ref{list:random_points_in_circle:loop}.
 
-\lstinputlisting[language=Matlab, caption=Random point in a circle generation using the exclusion method.,label=list:random_points_in_circle:loop]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/random_point_loop.m}
+\lstinputlisting[language=Matlab, caption=Random point in a circle generation using the exclusion method.,label=list:random_points_in_circle:loop]{sources/random_points_in_circle/random_point_loop.m}
 
 \subsection{Polar Coordinates - The right approach}
 \label{random_points_in_circle:sec:polar_sqrt}
@@ -99,18 +99,18 @@ Consider the area $A$ of a circle of radius $r$ i.e.  $A = \pi r^2$. We can rear
 
 A C++ implementation of this method is shown in Listing \ref{list:random_points_in_circle:sqrtcpp}. Details on the random number generation in Modern C++ can be found in \cite{cit::std::random}.
 
-\lstinputlisting[language=c++, caption=C++ implementation of the function for generating a random point in a circle described in Section \ref{random_points_in_circle:sec:polar_sqrt},label=list:random_points_in_circle:sqrtcpp]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/random_points_in_circle_solution1.cpp}
+\lstinputlisting[language=c++, caption=C++ implementation of the function for generating a random point in a circle described in Section \ref{random_points_in_circle:sec:polar_sqrt},label=list:random_points_in_circle:sqrtcpp]{sources/random_points_in_circle/random_points_in_circle_solution1.cpp}
 
 \begin{figure}
 	\label{fig:random_points_in_cirle:polar_sqrt}
 	\centering
-	\includegraphics[scale=0.3]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/images/sqrt_points}
+	\includegraphics[scale=0.3]{sources/random_points_in_circle/images/sqrt_points}
 	\caption{Large number of points generated using the approach described in Section \ref{random_points_in_circle:sec:polar_sqrt}.}
 \end{figure}
 
 A Matlab implementation of this approach is shown in Listing \ref{list:random_points_in_circle:sqrt}.
 
-\lstinputlisting[language=Matlab, caption=Random point in a circle generation using polar coordinates and the $\approx \sqrt{A}$ dependency of the radius on the area of the circle.,label=list:random_points_in_circle:sqrt]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/random_sqrt_area.m}
+\lstinputlisting[language=Matlab, caption=Random point in a circle generation using polar coordinates and the $\approx \sqrt{A}$ dependency of the radius on the area of the circle.,label=list:random_points_in_circle:sqrt]{sources/random_points_in_circle/random_sqrt_area.m}
 
 \subsection{Conclusion}
 We looked into three two viable methods for generating random points withing a circle. The time and space complexity for all the two methods is constant even if the one presented in Section \ref{random_points_in_circle:sec:polar_sqrt} would most likely have better performances when included in an hot path i.e. in a loop for the generation of many random points.
@@ -118,4 +118,4 @@ We looked into three two viable methods for generating random points withing a c
 All the code used to generate the Figures in this chapter is shown in Listing \ref{list:random_points_in_circle:drivercode}.
 
 
-\lstinputlisting[language=Matlab, caption=Matlab driver code for the generation of all figures in Chapter \ref{ch:random_points_in_circle},label=list:random_points_in_circle:drivercode]{/home/dspataro/git/algorithm_articles/sources/random_points_in_circle/draw_points.m}
+\lstinputlisting[language=Matlab, caption=Matlab driver code for the generation of all figures in Chapter \ref{ch:random_points_in_circle},label=list:random_points_in_circle:drivercode]{sources/random_points_in_circle/draw_points.m}

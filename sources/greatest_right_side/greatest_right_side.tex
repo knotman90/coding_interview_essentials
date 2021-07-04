@@ -53,7 +53,7 @@ Since this is a quite an easy problem, hence it is very important to  to focus o
 As usual one should always start talking to the interviewer right away about the bruteforce solution which in this case is quite straightforward. All it is necessary is scanning the array from left ro right and for each element finding the greatest element among all the elements on its right.
 This can be very easily implemented in C++ using the \texttt{std::max\_element()} function as shown in Listing \ref{list::greatest_right_bruteforce}. Note how the search on the right side is enforced by using as starting point $begin(A)+i+1$ for the range in the \texttt{std::max\_element()} function.
 
-	\lstinputlisting[language=c++, caption=C++ bruteforce solution to the problem of modifying an array in place with the greatest element on the right side.,label=list::greatest_right_bruteforce]{/home/dspataro/git/algorithm_articles/sources/greatest_right_side/greatest_right_bruteforce.cpp}
+	\lstinputlisting[language=c++, caption=C++ bruteforce solution to the problem of modifying an array in place with the greatest element on the right side.,label=list::greatest_right_bruteforce]{sources/greatest_right_side/greatest_right_bruteforce.cpp}
 
 
 
@@ -72,9 +72,9 @@ The approach used in Listing \ref{list::greatest_right_bruteforce} can be greate
 
 The idea above is implemented in Listing \ref{list:greatest_right_final1}
 
-	\lstinputlisting[language=c++, caption=C++ linear time solution to the problem of modifying an array in place with the greatest element on the right side.,label=list:greatest_right_final1]{/home/dspataro/git/algorithm_articles/sources/greatest_right_side/greatest_right_final.cpp}
+	\lstinputlisting[language=c++, caption=C++ linear time solution to the problem of modifying an array in place with the greatest element on the right side.,label=list:greatest_right_final1]{sources/greatest_right_side/greatest_right_final.cpp}
 
 Please note how in Listing \ref{list:greatest_right_final1}the variable $m$ is used to keep track of the old value of the element of A currenlty processed and how the  last element of $A$ is always turned into $-1$.
 An alternative and more condensed implementation  is shown in Listing \ref{list:greatest_right_final2}.
 
-	\lstinputlisting[language=c++, caption=Alternative Listing \ref{list:greatest_right_final1} implementation of C++ linear time solution to the problem of modifying an array in place with the greatest element on the right side.,label=list:greatest_right_final2]{/home/dspataro/git/algorithm_articles/sources/greatest_right_side/greatest_right_final2.cpp}
+	\lstinputlisting[language=c++, caption=Alternative Listing \ref{list:greatest_right_final1} implementation of C++ linear time solution to the problem of modifying an array in place with the greatest element on the right side.,label=list:greatest_right_final2]{sources/greatest_right_side/greatest_right_final2.cpp}

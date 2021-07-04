@@ -95,12 +95,12 @@ A possible implementation of this idea is shown in the Listing
 \ref{list:square_in_matrix:bruteforce1}.
 
 
-\lstinputlisting[language=c++, caption={Brute force soltuion solution to the \textit{square in matrix} problem using incremental side probing.},label=list:square_in_matrix:bruteforce1]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/square_in_matrix_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute force soltuion solution to the \textit{square in matrix} problem using incremental side probing.},label=list:square_in_matrix:bruteforce1]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
 
 \begin{figure}
 	\centering
 	\label{fig:square_in_matrix:squa_matrix_incremental}
-	\includegraphics[width=\textwidth/2]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/images/squa_matrix_incremental}
+	\includegraphics[width=\textwidth/2]{sources/square_in_matrix/images/squa_matrix_incremental}
 	\caption[Square in matrix - Brute-force incremental square construction.]{This figure shows  the
 	squares that are checked by the brute-force approach for solving the square in matrix problem.
 	From the cell $(0,1)$ we first try to build a square of side $2$, and when that is verified to
@@ -144,12 +144,12 @@ top-left cell is computed.
 \begin{figure}
 	\centering
 	\label{fig:square_in_matrix:square_matrix_diagonal}
-	\includegraphics[]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/images/square_matrix_diagonal}
+	\includegraphics[]{sources/square_in_matrix/images/square_matrix_diagonal}
 	\caption[Square in matrix - Brute-force diagonal]{This figure depicts the process of calculating the value of the side of the largest square having as a top-left corner cell $(0,1)$. Each cell is labeled with a number representing the step at which that cell is checked. Note that no cell is checked twice.}
 \end{figure}
 
 
-\lstinputlisting[language=c++, caption={C++ brute force solution using diagonal steps for solving the \textit{square in matrix} problem.  },label=list:square_in_matrix_diagonal]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/square_in_matrix_solution1.cpp}
+\lstinputlisting[language=c++, caption={C++ brute force solution using diagonal steps for solving the \textit{square in matrix} problem.  },label=list:square_in_matrix_diagonal]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
 
 
 \subsection{Dynamic programming}
@@ -159,12 +159,12 @@ Turns out that this problem can be solved faster than $O(N^3M)$ time and in this
 how with the help of dynamic programming. The gist of the idea is based on the fact for any square
 of size $k\times k$ having as bottom-left corner the cell $(x,y)$  has a top, top-left and left
 subsquares of size $(k-1)\times (k-1)$. As an example see Figure
-\ref{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/images/square_decomposition} which shows a square of size $3\times 3$
+\ref{sources/square_in_matrix/images/square_decomposition} which shows a square of size $3\times 3$
 decomoposed into $3$, $2\times 2$ subsquares.
 \begin{figure}
 	\centering
 	\label{fig:square_in_matrix:squa_matrix_incremental2}
-	\includegraphics[width=\textwidth/2]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/images/square_decomposition}
+	\includegraphics[width=\textwidth/2]{sources/square_in_matrix/images/square_decomposition}
 	\caption[Square of side $3$ decomposition into $3$ subsquares of side $2$.]
 			{This figure shows how a square of side $3$ can be decomposed into three smaller
 	subsquares of side $2$.}.
@@ -199,7 +199,7 @@ of size $3$ from $(3,4)$ is limited by the cells above it).
 \begin{figure}
 	\centering
 	\label{fig:square_in_matrix:square_DP_example}
-	\includegraphics[]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/images/square_DP_example}
+	\includegraphics[]{sources/square_in_matrix/images/square_DP_example}
 	\caption{This figure shows the values the of each cell in the original matrix and the
 	corrensponding values for the largest square having that cell as bottom-right corner. Colors are
 	used to highlight the cells that are part of the same square. Note how the cell holding a $3$ in
@@ -232,7 +232,7 @@ dynamic programming algorithm
 \begin{figure}
 	\centering
 	\label{fig:square_in_matrix:recursiontree}
-	\includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/images/recursiontree}
+	\includegraphics[width=\textwidth]{sources/square_in_matrix/images/recursiontree}
 	\caption{This figure is an example of recursion tree for the Equation
 	\ref{eq:square_in_matrix_DPformula}. Note that the nodes are duplicates (they are denoted by the
 	same color). }
@@ -296,7 +296,7 @@ appear in the list).
 
 \lstinputlisting[language=c++, caption={C++ dynamic programming top-down solution for solving the
 				 \textit{square in matrix} problem. },
-				 label=list:square_in_matrix_top_down]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/square_in_matrix_solution4.cpp}
+				 label=list:square_in_matrix_top_down]{sources/square_in_matrix/square_in_matrix_solution4.cpp}
 
 
 
@@ -320,7 +320,7 @@ Listing \ref{list:square_in_matrix_bottom_up} shows a possible implementation of
 such idea.
 \lstinputlisting[language=c++, caption={C++ dynamic programming bottom-up solution for solving the
 				 \textit{square in matrix} problem. },
-label=list:square_in_matrix_bottom_up]{/home/dspataro/git/algorithm_articles/sources/square_in_matrix/square_in_matrix_solution5.cpp}
+label=list:square_in_matrix_bottom_up]{sources/square_in_matrix/square_in_matrix_solution5.cpp}
 This implementation initializes the \inline{ans} variable with $1$ or $0$
 depending if there is a cell set in the first row or column or not. The rest of
 the code loops from the the rest of the cells starting from cell $(1,1)$ and

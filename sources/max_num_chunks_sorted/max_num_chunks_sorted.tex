@@ -7,7 +7,7 @@
 
 
 %\begin{figure} \centering
-%   \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_num_chunks_sorted/images/example1}
+%   \includegraphics[width=\textwidth]{sources/max_num_chunks_sorted/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:max_num_chunks_sorted:example1}
 %   \end{figure}
 
@@ -89,7 +89,7 @@ Listing \ref{list:max_num_chunks_sorted:bruteforce} shows a C++ implementation o
 
 
 
-    \lstinputlisting[language=c++, caption={Bruteforce solution to the problem \textit{Sort the chunks, sort the array}.},label=list:max_num_chunks_sorted:bruteforce]{/home/dspataro/git/algorithm_articles/sources/max_num_chunks_sorted/max_num_chunks_sorted_solution1.cpp}
+    \lstinputlisting[language=c++, caption={Bruteforce solution to the problem \textit{Sort the chunks, sort the array}.},label=list:max_num_chunks_sorted:bruteforce]{sources/max_num_chunks_sorted/max_num_chunks_sorted_solution1.cpp}
 
 
 
@@ -105,7 +105,7 @@ because the element at index $3$ will always appear after the value $4$ (see Fig
 
 \begin{figure}
   \centering
-   \includegraphics[width=0.6\textwidth]{/home/dspataro/git/algorithm_articles/sources/max_num_chunks_sorted/images/example1}
+   \includegraphics[width=0.6\textwidth]{sources/max_num_chunks_sorted/images/example1}
    \caption[]{Input array from the Example \ref{example:max_num_chunks_sorted:example1}. If the 
    sub-array identified by $s$ and $r$ is sorted in isolation, $I$ as a whole cannot be sorted (no matter how elements from $r$ to $|I|-1$ are sorted)
    because $M$ will always appear before $m$, despite the fact $M>m$ and it should appear after.}.
@@ -129,4 +129,4 @@ we are left with no element to process (or equivalently $N$ is empty).
 Listing \ref{list:max_num_chunks_sorted:linear} has a complexity of $O(|I|)$  for both space and time. 
 
 \lstinputlisting[language=c++, caption={Linear time solution to the problem \textit{Sort the chunks, sort the array}.},
-    label=list:max_num_chunks_sorted:linear]{/home/dspataro/git/algorithm_articles/sources/max_num_chunks_sorted/max_num_chunks_sorted_solution2.cpp}
+    label=list:max_num_chunks_sorted:linear]{sources/max_num_chunks_sorted/max_num_chunks_sorted_solution2.cpp}

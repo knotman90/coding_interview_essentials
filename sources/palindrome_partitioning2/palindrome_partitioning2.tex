@@ -83,7 +83,7 @@ necessary to generate the combinations of sizes $1,2,\ldots,|s-1|$ i.e. $\sum_{k
 power-set (see Section \ref{ch:power_set} at page \pageref{sec:powerset:discussion}) which has size
 $2^n$.
 
-\lstinputlisting[language=c++, caption={Exponential time solution to the palindrome partition problem using Listing \ref{list:min_difficulty_job_scheduler:combinations} at page as a sub-routine for the generation of the combinations of size $k$.},label=list:palindrome_partitioning2]{/home/dspataro/git/algorithm_articles/sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
+\lstinputlisting[language=c++, caption={Exponential time solution to the palindrome partition problem using Listing \ref{list:min_difficulty_job_scheduler:combinations} at page as a sub-routine for the generation of the combinations of size $k$.},label=list:palindrome_partitioning2]{sources/palindrome_partitioning2/palindrome_partitioning2_solution1.cpp}
 
 
 \section{Dynamic Programming}
@@ -127,7 +127,7 @@ to be returned immediately. We have used this optimization already other problem
 	\item \textit{\nameref{ch:min_difficulty_job_scheduler}} in Section
 \ref{ch:min_difficulty_job_scheduler} at page \pageref{ch:min_difficulty_job_scheduler}
 \end{enumerate*}.
-\lstinputlisting[language=c++, caption={Quadratic time dynamic programming top-down solution to the palindrome partition problem.},label=list:palindrome_partitioning2:topdown]{/home/dspataro/git/algorithm_articles/sources/palindrome_partitioning2/palindrome_partitioning2_solution2.cpp}
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming top-down solution to the palindrome partition problem.},label=list:palindrome_partitioning2:topdown]{sources/palindrome_partitioning2/palindrome_partitioning2_solution2.cpp}
 
 The complexity of this solution is $O(|s|^3)$ because each of the  $O(|s|)$ distinct (for which we
 might have to execute the whole function code) calls to \inline{palindrome_partitioning2_DP_helper}
@@ -164,9 +164,9 @@ only purpose is to allows us to use \inline{std::pair<int,int>} as keys in the
 functionality can be also implemented iteratively by using a bottom-up DP strategy. Listing
 \ref{list:palindrome_partitioning2:iterativecache} how it can be done.
 
-\lstinputlisting[language=c++, caption={Recursive implementation of a class which allows to answer queries about whether a given substring of a given string is palindrome or not in constant time. },label=list:palindrome_partitioning2:recursivecache]{/home/dspataro/git/algorithm_articles/sources/palindrome_partitioning2/PalindromeSubstringCacheRecursive.h}
+\lstinputlisting[language=c++, caption={Recursive implementation of a class which allows to answer queries about whether a given substring of a given string is palindrome or not in constant time. },label=list:palindrome_partitioning2:recursivecache]{sources/palindrome_partitioning2/PalindromeSubstringCacheRecursive.h}
 
-\lstinputlisting[language=c++, caption={Iterative implementation of a class which allows to answer queries about whether a given substring of a given string is palindrome or not in constant time.},label=list:palindrome_partitioning2:iterativecache]{/home/dspataro/git/algorithm_articles/sources/palindrome_partitioning2/PalindromeSubstringCacheIterative.h}
+\lstinputlisting[language=c++, caption={Iterative implementation of a class which allows to answer queries about whether a given substring of a given string is palindrome or not in constant time.},label=list:palindrome_partitioning2:iterativecache]{sources/palindrome_partitioning2/PalindromeSubstringCacheIterative.h}
 
 Finally in Listing \ref{list:palindrome_partitioning2;topdownquadratic} we can see how such a
 \textit{Substring Palindrome Cache} can be used in order to implement a quadratic solution for the
@@ -179,7 +179,7 @@ is substituted with a query into $B$ which runs in constant time. The complexity
 now $O(|s|^2)$ which is a big improvement from $O(|s|^3)$. The space complexity is also $O(|s|^2)$,
 because of the space used by $B$.
 
-\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2;topdownquadratic]{/home/dspataro/git/algorithm_articles/sources/palindrome_partitioning2/palindrome_partitioning2_solution3.cpp}
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2;topdownquadratic]{sources/palindrome_partitioning2/palindrome_partitioning2_solution3.cpp}
 
 
 
@@ -215,4 +215,4 @@ palindrome partition of $s$ starting at index $0$.
 Listing \ref{list:palindrome_partitioning2:bottomup} implements this idea where we use an array \inline{DP}
 having size $|s|+1$ to store the answers to all sub-problems.
 
-\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2:bottomup]{/home/dspataro/git/algorithm_articles/sources/palindrome_partitioning2/palindrome_partitioning2_solution4.cpp}
+\lstinputlisting[language=c++, caption={Quadratic time dynamic programming bottom-up solution to the palindrome partition problem.},label=list:palindrome_partitioning2:bottomup]{sources/palindrome_partitioning2/palindrome_partitioning2_solution4.cpp}

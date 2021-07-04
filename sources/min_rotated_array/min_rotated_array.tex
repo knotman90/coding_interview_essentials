@@ -15,7 +15,7 @@ This problem is based upon the concept of array rotations. To develop an intuiti
 
 \begin{figure}
 	\centering
-	\includegraphics{/home/dspataro/git/algorithm_articles/sources/min_rotated_array/images/arrayrotation}
+	\includegraphics{sources/min_rotated_array/images/arrayrotation}
 	\caption{Example of rotation of the array  $\{0,1,2,3,4\}$ where every element is moved to the right of $k=2$ positions.}
 	\label{fig:min_rotated_array:arrayrotation}
 \end{figure}
@@ -65,9 +65,9 @@ This way of performing rotation is very common, to the point that there is algor
 \label{min_rotated_array:sec:bruteforce}
 The brute-force solution to this problem is trivial and consist in simply looping through the array and keeping record of the smallest element encountered. In C++ this can be implemented with a one-liner as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual} both having $O(n)$ time $O(1)$ space complexity.
 
-\lstinputlisting[language=c++, caption=One-linear brute force (using C++ STL) solution to the problem of finding the minimum element in a sorted rotated array.,label=list:min_rotated_array_bf]{/home/dspataro/git/algorithm_articles/sources/min_rotated_array/min_rotated_array_solution1.cpp}
+\lstinputlisting[language=c++, caption=One-linear brute force (using C++ STL) solution to the problem of finding the minimum element in a sorted rotated array.,label=list:min_rotated_array_bf]{sources/min_rotated_array/min_rotated_array_solution1.cpp}
 
-\lstinputlisting[language=c++, caption=One-linear brute force solution to the problem of finding the minimum element in a sorted rotated array.,label=list:min_rotated_array_bf_manual]{/home/dspataro/git/algorithm_articles/sources/min_rotated_array/min_rotated_array_solution2.cpp}
+\lstinputlisting[language=c++, caption=One-linear brute force solution to the problem of finding the minimum element in a sorted rotated array.,label=list:min_rotated_array_bf_manual]{sources/min_rotated_array/min_rotated_array_solution2.cpp}
 
 
 This approach should just be mentioned during the interview but no time should be spent in the actual implementation of this idea, as the interviewer is assuming you know how to trivially search for the minimum in an unsorted array. He is clearly looking for a more advanced solution that takes advantage of the fact that the array is sorted (even if rotated).
@@ -97,7 +97,7 @@ The minimum element is the only element s.t. both the elements on its right and 
 
 \begin{figure}
 	\centering
-	\includegraphics{/home/dspataro/git/algorithm_articles/sources/min_rotated_array/images/inflection_point}
+	\includegraphics{sources/min_rotated_array/images/inflection_point}
 	\caption{Inflection point in a rotated sorted array. When the binary search examines both element $7$ and $2$ it is able to determine the inflection point (element $2$). }
 	\label{fig:min_rotated_array:test_element}
 \end{figure}
@@ -128,6 +128,6 @@ By being able to test whether and element is the smallest element in the array, 
 
 An implementation of this idea is shown in the Listing \ref{list:min_rotated_array_log}. This solution as a complexity of $O(log(n))$ time and $O(1)$ space.
 
-\lstinputlisting[language=c++, caption={Logaritmic solution to the problem of finding the minimum element in a sorted and rotated array.},label=list:min_rotated_array_log]{/home/dspataro/git/algorithm_articles/sources/min_rotated_array/min_rotated_array_solution3.cpp}
+\lstinputlisting[language=c++, caption={Logaritmic solution to the problem of finding the minimum element in a sorted and rotated array.},label=list:min_rotated_array_log]{sources/min_rotated_array/min_rotated_array_solution3.cpp}
 
 The code is just a straightforward implementation of the binary search where \inline{l} and \inline{r} determine the range under examination, \inline{middle} is the element in the middle of \inline{l} and \inline{r} while \inline{prec} and \inline{succ} are the element preceeding and succeeding \inline{mid}, respectively. Notice how the modulo operation is used to make sure that both \inline{prec} and \inline{succ} always point a valid element. The time complexity of this implementation is $O(log(n))$ while the space complexity is constant. 

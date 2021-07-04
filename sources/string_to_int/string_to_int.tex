@@ -54,7 +54,7 @@ Using this approach leading zeros are not a problem because they clearly do not 
 
 The idea above can be implemented by looping though the string from right to left and summing up each digit of the string at position $i$  multiplied by $10^i$ as shown in Listing \ref{list:string_to_int1}.
 
-\lstinputlisting[language=c++, caption=C++ solution to the string to integer problem.,label=list:string_to_int1]{/home/dspataro/git/algorithm_articles/sources/string_to_int/string_to_int_solution1.cpp}
+\lstinputlisting[language=c++, caption=C++ solution to the string to integer problem.,label=list:string_to_int1]{sources/string_to_int/string_to_int_solution1.cpp}
 
 
 This is considered a good solution, as its complexity is linear in the size of the input string and handles leading zeros elegantly.
@@ -66,4 +66,4 @@ This is considered a good solution, as its complexity is linear in the size of t
 	\item[-] Raise an exception (or return a certain value) in case of bad input. For instance when letters are present in the string e.g. $s=123f456$.  
 \end{itemize}
 
-\lstinputlisting[language=c++, caption=C++ solution to the string to integer problem with negative number support.,label=list:string_to_int_negative]{/home/dspataro/git/algorithm_articles/sources/string_to_int/string_to_int_solution2.cpp}
+\lstinputlisting[language=c++, caption=C++ solution to the string to integer problem with negative number support.,label=list:string_to_int_negative]{sources/string_to_int/string_to_int_solution2.cpp}

@@ -54,7 +54,7 @@ One way to solve this problem in a blink of an eye is to notice some properties 
 
 This three rules  can be easily converted into code as shown in Listing \ref{list:capitalize_words_first_letter_iterator}. The code is clearly divided into three distint blocks each doing one of the item listed above i.e. processing the text from left to right and, in this order, ignoring all the spaces, until a letter is found, that is capitalized, and finally all the rest of the word is also ignored. The process repeats until the text is fully processed. 
 
-\lstinputlisting[language=c++, caption=Solution to the problem of turning all first letter of every word in a text into capital case. Works by ignoring all the spaces until a letter is found (marking the beginning of a word) and turning it into capital case and then ignoring the rest of the letters of that word. The process repeats until all the text is processed.,label=list:capitalize_words_first_letter_iterator]{/home/dspataro/git/algorithm_articles/sources/capitalize_words_first_letter/capitalize_words_first_letter_solution1.cpp}
+\lstinputlisting[language=c++, caption=Solution to the problem of turning all first letter of every word in a text into capital case. Works by ignoring all the spaces until a letter is found (marking the beginning of a word) and turning it into capital case and then ignoring the rest of the letters of that word. The process repeats until all the text is processed.,label=list:capitalize_words_first_letter_iterator]{sources/capitalize_words_first_letter/capitalize_words_first_letter_solution1.cpp}
 
 Note that the check \lstinline[columns=fixed]{it != end(s)} appears first in the \lstinline[columns=fixed]{&&} expression. If it points to the end of the word then \lstinline[columns=fixed]{*it} is not evaluated (this behavior of \lstinline[columns=fixed]{&&} is known as short circuit\footnote{In a boolean expression the second argument is executed or evaluated only if the first argument does not suffice to determine the value of the expression.}\cite{cit:wiki:shortcircuit}).
 
@@ -71,7 +71,7 @@ The core idea is that when a pair made of a space followed by a  non-space is  f
 
 One way to implement this idea in C++ is by using the standard algorithm \lstinline[columns=fixed]{std::adjacent_find} as shown in Listing \ref{list:capitalize_words_first_letter_adj_find}.
 
-\lstinputlisting[language=c++, caption=Solution to the problem of turning all first letter of every word in a text into capital case. uses the function \href{https://en.cppreference.com/w/cpp/algorithm/adjacent_find}{\texttt{std::adjacent\_find}}\cite{cit::std::adjancefind} to find subsequent occurrence of a space and a letter in the text. This sequence marks the beginning of a word. by,label=list:capitalize_words_first_letter_adj_find]{/home/dspataro/git/algorithm_articles/sources/capitalize_words_first_letter/capitalize_words_first_letter_solution2.cpp}
+\lstinputlisting[language=c++, caption=Solution to the problem of turning all first letter of every word in a text into capital case. uses the function \href{https://en.cppreference.com/w/cpp/algorithm/adjacent_find}{\texttt{std::adjacent\_find}}\cite{cit::std::adjancefind} to find subsequent occurrence of a space and a letter in the text. This sequence marks the beginning of a word. by,label=list:capitalize_words_first_letter_adj_find]{sources/capitalize_words_first_letter/capitalize_words_first_letter_solution2.cpp}
 
 
 The complexity of the solution in Listing is linear in time and constant in space and it is considered a very good solution. This version is asymptotically as fast  as the one presented in Listing \ref{list:capitalize_words_first_letter_adj_iterator} but much more expressive, thus is considered better in a interview.
@@ -82,7 +82,7 @@ The complexity of the solution in Listing is linear in time and constant in spac
 \subsection{User provided function}
 It is not unlikely that this problem can be posed such that the operation to be applied on it is different than the one which capitalize the letter. A way to solve this is to make the solution generic such that it accept the operation from the user.  Listing \ref{list:capitalize_words_first_letter_userdefined} shows a possible implementation of the idea above. The code takes as a input a string and a function which takes as a input a character and return a character and applies it to every first letter of all words in the text.
 
-\lstinputlisting[language=c++, caption=Solution to the problem of modifying all first letter of every word in a text using a user provided function.,label=list:capitalize_words_first_letter_userdefined]{/home/dspataro/git/algorithm_articles/sources/capitalize_words_first_letter/capitalize_words_first_letter_solution3.cpp}
+\lstinputlisting[language=c++, caption=Solution to the problem of modifying all first letter of every word in a text using a user provided function.,label=list:capitalize_words_first_letter_userdefined]{sources/capitalize_words_first_letter/capitalize_words_first_letter_solution3.cpp}
 
 
 \subsection{Modify the every $k^{th}$ character of every word}

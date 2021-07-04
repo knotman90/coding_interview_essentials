@@ -26,7 +26,7 @@ This might seems like an harder problem at first than the version presented in S
 As usual we start our discussion by quickly presenting the brute force solution. In this case this means trying all possible sets of transactions (a valid pair of buy and sell operation not overlapping with any other transaction). We can try all possible sets by using recursion cleverly. However this approach will not take us far because the number of possible sets of transaction grows exponentially.
 We are showing this approach in Listing \ref{list:buy_sell_stocks_2:bruteforce}  only because we think its implementation can be somehow instructive.
 
-\lstinputlisting[language=c++, caption={Bruteforce exponential solution to the problem of buying and selling stock with no limits on the number of transactions.},label=list:buy_sell_stocks_2:bruteforce]{/home/dspataro/git/algorithm_articles/sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2_solution1.cpp}
+\lstinputlisting[language=c++, caption={Bruteforce exponential solution to the problem of buying and selling stock with no limits on the number of transactions.},label=list:buy_sell_stocks_2:bruteforce]{sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2_solution1.cpp}
 
 \section{Linear time solution}
 \label{buy_sell_stocks_2:sec:linear}
@@ -45,4 +45,4 @@ But do we really need to find peaks and valleys? The answer is not as all it is 
 The idea above can be implemented as shown in Listing \ref{list:buy_sell_stocks_2:linear}. 
 
 
-\lstinputlisting[language=c++, caption={$O(n)$ time and $O(1)$ space solution to the problem of buying and selling stock with no limits on the number of transactions.},label=list:buy_sell_stocks_2:linear]{/home/dspataro/git/algorithm_articles/sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2_solution2.cpp}
+\lstinputlisting[language=c++, caption={$O(n)$ time and $O(1)$ space solution to the problem of buying and selling stock with no limits on the number of transactions.},label=list:buy_sell_stocks_2:linear]{sources/buy_sell_stocks/buy_sell_stocks_2/buy_sell_stocks_2_solution2.cpp}

@@ -172,7 +172,7 @@ ready and saved into \inline{all_combinations}. After each recursive call, the l
 is removed from the work-in-progress combination and another number is pushed. The process repeats
 until there is no more number to be pushed.
 
-\lstinputlisting[language=c++, caption={Function that generates all the combinations of size $k$ from the elements $\{0,1,\ldots,l\}$},label=list:min_difficulty_job_scheduler:combinations]{/home/dspataro/git/algorithm_articles/sources/min_difficulty_job_scheduler/generate_combination.h}
+\lstinputlisting[language=c++, caption={Function that generates all the combinations of size $k$ from the elements $\{0,1,\ldots,l\}$},label=list:min_difficulty_job_scheduler:combinations]{sources/min_difficulty_job_scheduler/generate_combination.h}
 
 
 \subsubsection{Wrapping-up}
@@ -188,7 +188,7 @@ $[start, finish]$ (the element pointed by \inline{finish} is included). The func
 \inline{min\_difficulty\_scheduler\_combinations} is the driver that is responsible for keeping
 track of the minimum difficulty among all the processed schedules.
 
-\lstinputlisting[language=c++, caption={Brute-force solution that works by evaluating all the possible schedules generated using Listing \ref{list:min_difficulty_job_scheduler:combinations}},label=list:min_difficulty_job_scheduler:solution_combinations]{/home/dspataro/git/algorithm_articles/sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
+\lstinputlisting[language=c++, caption={Brute-force solution that works by evaluating all the possible schedules generated using Listing \ref{list:min_difficulty_job_scheduler:combinations}},label=list:min_difficulty_job_scheduler:solution_combinations]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution1.cpp}
 
 
 \subsection{Dynamic Programming}
@@ -232,7 +232,7 @@ make more than $|I| \times d$ calls to \inline{min_difficulty_helper}. Because t
 call to \inline{min_difficulty_helper} is linear in $|I|$ the complexity of the whole algorithm is
 $O(|I|^2 d)$
 
-\lstinputlisting[language=c++, caption={Dynamic programming top-down solution.},label=list:min_difficulty_job_scheduler:solutiondp]{/home/dspataro/git/algorithm_articles/sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution2.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming top-down solution.},label=list:min_difficulty_job_scheduler:solutiondp]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution2.cpp}
 
 \subsection{Bottom-up}
 In this section, we are going to have a look at how we can implement the DP idea in a bottom-up
@@ -288,7 +288,7 @@ Clearly the solution to the entire problem is in $T[d][|I|-1]$: the cost of sche
 elements in $I$ in exactly $d$ days. Listing
 \ref{list:min_difficulty_job_scheduler:solutiondpbottomup} shows an implementation of this idea.
 
-\lstinputlisting[language=c++, caption={Dynamic programming bottom-up solution. },label=list:min_difficulty_job_scheduler:solutiondpbottomup]{/home/dspataro/git/algorithm_articles/sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution3.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming bottom-up solution. },label=list:min_difficulty_job_scheduler:solutiondpbottomup]{sources/min_difficulty_job_scheduler/min_difficulty_job_scheduler_solution3.cpp}
 
 This implementation has a space complexity of $O(d*|I|)$, but a closer inspection to the code and to
 Equation \ref{eq:min_difficulty_schedule:generic_bottom_up} should make clear that we do not really

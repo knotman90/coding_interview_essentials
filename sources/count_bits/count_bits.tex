@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure} \centering \includegraphics[width=\textwidth]{/home/dspataro/git/algorithm_articles/sources/count_bits/images/example1}
+%\begin{figure} \centering \includegraphics[width=\textwidth]{sources/count_bits/images/example1}
 %   \caption[Sample short cpation]{Sample Caption}. \label{fig:count_bits:example1} \end{figure}
 
 \chapter{Count the bits}
@@ -56,7 +56,7 @@ idea where we use our own version of the bit counting function \inline{my_pop_co
 showing how this can be implemented. Function \inline{my_pop_count} works by repeatedly inspecting
 the least significant bit of of the input number to check if it is set or not, and after that it
 shifts it to the right by one position so that the next time another bit is inspected.
-\lstinputlisting[language=c++, caption={Bruteforce solution where we manually count the number of bits for each number.},label=list:count_bits:bruteforce]{/home/dspataro/git/algorithm_articles/sources/count_bits/count_bits_solution1.cpp}
+\lstinputlisting[language=c++, caption={Bruteforce solution where we manually count the number of bits for each number.},label=list:count_bits:bruteforce]{sources/count_bits/count_bits_solution1.cpp}
 
 \subsection{DP solution}
 \label{count_bits:sec:dp}
@@ -87,9 +87,9 @@ Listing \ref{list:count_bits:DP} shows an implementation of this approach. You c
 lines) and more compact (and possibly unreadable) but yet equivalent version of the same idea in
 Listing \ref{list:count_bits:DP_short}.
 
-\lstinputlisting[language=c++, caption={DP solution where we calculate the bits for a given number from the its last bit and the answer of the number resulting from removing that last bit.},label=list:count_bits:DP]{/home/dspataro/git/algorithm_articles/sources/count_bits/count_bits_solution2.cpp}
+\lstinputlisting[language=c++, caption={DP solution where we calculate the bits for a given number from the its last bit and the answer of the number resulting from removing that last bit.},label=list:count_bits:DP]{sources/count_bits/count_bits_solution2.cpp}
 
-\lstinputlisting[language=c++, caption={ Shorter version of Listing \ref{list:count_bits:DP}.},label=list:count_bits:DP_short]{/home/dspataro/git/algorithm_articles/sources/count_bits/count_bits_solution3.cpp}
+\lstinputlisting[language=c++, caption={ Shorter version of Listing \ref{list:count_bits:DP}.},label=list:count_bits:DP_short]{sources/count_bits/count_bits_solution3.cpp}
 
 \subsection{Another efficient approach}
 \label{count_bits:sec:pattern}
@@ -140,7 +140,7 @@ $2^{k+1}-1$, until we reach $n+1$.
 The complexity of this approach is $\Theta(n)$ and also in this
 case we do not pay the constant factor associated with a brute-force count of the bits in an
 integer.
-\lstinputlisting[language=c++, caption={Alternative efficient solution where the number of bits set in a integer $k$ is found by using the number of bits set for a smaller integer: $k-(2^{\floor{log_2{k}}})$ (see Equation \ref{eq:count_bits:dpformula_powers}).},label=list:count_bits:powers]{/home/dspataro/git/algorithm_articles/sources/count_bits/count_bits_solution4.cpp}
+\lstinputlisting[language=c++, caption={Alternative efficient solution where the number of bits set in a integer $k$ is found by using the number of bits set for a smaller integer: $k-(2^{\floor{log_2{k}}})$ (see Equation \ref{eq:count_bits:dpformula_powers}).},label=list:count_bits:powers]{sources/count_bits/count_bits_solution4.cpp}
 
 Notice that the same approach can be easily adopted to obtain a top-down implementation where we memoize and reuse the answer to how many bits a given integer has set.
 We leave this an exercise to the reader \footnote{The recurrent relation the number of bits set in $k$ is as shown in Equation \ref{eq:count_bits:dpformula_powers} where $B(x)$ is a function returning the number of bits set in the binary representation of the integer $x$:

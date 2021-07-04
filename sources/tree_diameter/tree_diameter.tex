@@ -26,7 +26,7 @@ The problem described in this chapter is quite simple and can be solved very ele
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.6]{/home/dspataro/git/algorithm_articles/sources/tree_diameter/images/example1}
+	\includegraphics[scale=0.6]{sources/tree_diameter/images/example1}
 	\caption{Visual representation of the example $1$ of the problem calculating the tree of a diameter.}
 	\label{fig:tree_diameter:example1}
 \end{figure}
@@ -61,12 +61,12 @@ To summarize:  the diameter of a tree $T$ is the largest of the following quanti
 
 Listing \ref{list:tree_diameter:diameter} shows a recursive implementation of this idea. The complexity of this approach is $O(n^2)$ where $n$ is the number of node in the tree. Why is that the case? Consider a list like tree $T_1$. It's height is $n$, and each call to diameter involves a call to \inline{height} which has a linear complexity. So for each node we need to do linear work. We can do better than this with if we are willing to sacrifice some space for time. 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:tree_diameter:diameter]{/home/dspataro/git/algorithm_articles/sources/tree_diameter/tree_diameter_solution1.cpp}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:tree_diameter:diameter]{sources/tree_diameter/tree_diameter_solution1.cpp}
 
 \subsection{Linear time and space}
 \label{tree_diameter:sec:linear}
 The key idea allowing us to go from quadratic to linear time is to realize that in order to calculate the height of a node we also need to calculate the height of all of its descendants. Therefore while we calculate the height of a node, we can save the height for all its descendants so that we do not have to recalculate it over and over. If we inspect the function \inline{depth} in Listing \ref{list:tree_diameter:diameter} we can notice that in order to calculate the height of the current node we also calculate the height of its left and right child!
 Therefore all it is necessary is to cache the result of height and use the cache in the shown in Listing \ref{list:tree_diameter:linear}. This solution has linear complexity because we will the full visit of the tree will only be done once and then all subsequents queries to \inline{height} will be available in the cache. 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:tree_diameter:linear]{/home/dspataro/git/algorithm_articles/sources/tree_diameter/tree_diameter_solution1.cpp}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:tree_diameter:linear]{sources/tree_diameter/tree_diameter_solution1.cpp}
 

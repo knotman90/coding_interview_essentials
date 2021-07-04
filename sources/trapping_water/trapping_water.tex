@@ -33,7 +33,7 @@ Write a function that takes as input an array of length $n$ of non-negative inte
 \begin{figure}
 		\label{fig:trapping_water_example1}
 		\centering
-		\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/trapping_water/images/example1}
+		\includegraphics[scale=1.0]{sources/trapping_water/images/example1}
 		\caption{Visual representation of the example \ref{ex:trapping_water:exmaple1}. Blue squares represent water, while the red ones, bricks.}
 \end{figure}
 
@@ -42,7 +42,7 @@ Write a function that takes as input an array of length $n$ of non-negative inte
 \begin{figure}
 		\label{fig:trapping_water_example2}
 		\centering
-		\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/trapping_water/images/example2}
+		\includegraphics[scale=1.0]{sources/trapping_water/images/example2}
 		\caption{Visual representation of the example \ref{ex:trapping_water:exmaple2}. Blue squares represent water, while the red ones, bricks.}
 \end{figure}
 
@@ -79,7 +79,7 @@ If the current element is higher than both the highest bars on its left and righ
 \begin{figure}
 		\label{fig:trapping_water_example3}
 		\centering
-		\includegraphics[scale=1.0]{/home/dspataro/git/algorithm_articles/sources/trapping_water/images/example3}
+		\includegraphics[scale=1.0]{sources/trapping_water/images/example3}
 		\caption{This figure shows how the contribution of a single element of the histogram can be calculated using the information about the highest bar on its left and right.}
 \end{figure}
 
@@ -95,7 +95,7 @@ Moreover note that the first and the last element will never be able to contain 
 
 Listing \ref{list:trapping_water:bruteforce} shows a possible implementation of this idea. Note how the \inline{std::max_element} function from C++ STL can be employed elegantly to calculate $b_l$ and $b_r$.
 
-\lstinputlisting[language=c++, caption=Brute-force solution to the problem of calculating the amount of water trapped between buildings.,label=list:trapping_water:bruteforce]{/home/dspataro/git/algorithm_articles/sources/trapping_water/trapping_water_solution1.cpp}
+\lstinputlisting[language=c++, caption=Brute-force solution to the problem of calculating the amount of water trapped between buildings.,label=list:trapping_water:bruteforce]{sources/trapping_water/trapping_water_solution1.cpp}
 
 
 
@@ -117,19 +117,19 @@ Figures \ref{fig:trapping_water_DPL} and \ref{fig:trapping_water_DPR} show a rep
 \begin{figure}
 \centering
 \begin{subfigure}[b]{0.95\textwidth}
-   \includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/trapping_water/images/DPR}
+   \includegraphics[width=1\linewidth]{sources/trapping_water/images/DPR}
    \caption{Representation of the highest value on the right of each element. A cell colored in \textcolor[HTML]{3268d5}{$\blacksquare$} have at least a pile with height higher or equal to the cell itself on its \textbf{right}. }
    \label{fig:trapping_water_DPL}
 \end{subfigure}
 
 \begin{subfigure}[b]{0.95\textwidth}
-   \includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/trapping_water/images/DPL}
+   \includegraphics[width=1\linewidth]{sources/trapping_water/images/DPL}
    \caption{Representation of the highest value on the right of each element. A cell colored in \textcolor[HTML]{32d579}{$\blacksquare$} have at least a pile with height higher or equal to the cell itself on its \textbf{left}.}
    \label{fig:trapping_water_DPR}
 \end{subfigure}
 
 \begin{subfigure}[b]{0.95\textwidth}
-   \includegraphics[width=1\linewidth]{/home/dspataro/git/algorithm_articles/sources/trapping_water/images/DPLR}
+   \includegraphics[width=1\linewidth]{sources/trapping_water/images/DPLR}
    \caption{Superimposition of Figures \ref{fig:trapping_water_DPL} and \ref{fig:trapping_water_DPR}. Cells colored in \textcolor[HTML]{5aa1c7}{$\blacksquare$} represent the intersection between cells colored in \textcolor[HTML]{3268d5}{$\blacksquare$} in Figure \ref{fig:trapping_water_DPL} and cells colored in \textcolor[HTML]{32d579}{$\blacksquare$} in Figure \ref{fig:trapping_water_DPR}. Those cells are the ones that can be filled up with water.}
    \label{fig:trapping_water_DPRL}
 \end{subfigure}
@@ -137,7 +137,7 @@ Figures \ref{fig:trapping_water_DPL} and \ref{fig:trapping_water_DPR} show a rep
 \end{figure}
 
 
-\lstinputlisting[language=c++, caption={Dynamic programming, $O(n)$ time and space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:dp]{/home/dspataro/git/algorithm_articles/sources/trapping_water/trapping_water_solution2.cpp}
+\lstinputlisting[language=c++, caption={Dynamic programming, $O(n)$ time and space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:dp]{sources/trapping_water/trapping_water_solution2.cpp}
 
 This solution has a time complexity of $O(n)$ because the computation of $L$ and $R$ can be done in linear time, while calculating the final answer can be done in a single pass over the array. The space complexity if linear as well because the arrays $L$ and $R$ are both of size proportional to the size of $n$.
 
@@ -156,7 +156,7 @@ While moving the pointers the variables $m_l$ or $m_r$ are updated and the contr
 
 An implementation of the idea above is shown in Listing \ref{list:trapping_water:two_pointers}. Note that all the elements of the input array will be eventually considered because $l$ and $r$ are moved one by one against each other. 
 
-\lstinputlisting[language=c++, caption={Two pointers solution, $O(n)$ time and  $O(1)$ space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:two_pointers]{/home/dspataro/git/algorithm_articles/sources/trapping_water/trapping_water_solution3.cpp}
+\lstinputlisting[language=c++, caption={Two pointers solution, $O(n)$ time and  $O(1)$ space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:two_pointers]{sources/trapping_water/trapping_water_solution3.cpp}
 
 This approach has a time complexity of $O(n)$ (we cannot do better than this because at least we have to touch all the elements of the input at least once) and a space complexity of $O(1)$. This is therefore the optimal approach to solve this problem  and we believe this should be your solution during an actual interview.
 
@@ -170,4 +170,4 @@ Given the stack $S=[s_0, s_1,s_2]$ where $s_0 \geq s_1 \geq s_2$ (remember they 
 A possible implementation of this idea is shown in Listing \ref{list:trapping_water:stack}. Note how all the real work happens inside the \inline{while} loop and that the bar we calculate the contribution is named top while the bar on the left and right are named \inline{bar_left} and \inline{bar_right} respectively. Moreover, no matter the stack is unwounded or not the \inline{bar_right} is \textbf{added} to the stack because when controls reaches line $21$ it will be either the only bar in the stack of it will be smaller than the current top.
 
 
-\lstinputlisting[language=c++, caption={Stack based solution, $O(n)$ time and  space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:stack]{/home/dspataro/git/algorithm_articles/sources/trapping_water/trapping_water_solution4.cpp}
+\lstinputlisting[language=c++, caption={Stack based solution, $O(n)$ time and  space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:stack]{sources/trapping_water/trapping_water_solution4.cpp}

@@ -166,7 +166,7 @@ both the \inline{initialize} and \inline{add} function can be implemented:
 Listing \ref{list:kth_largest_in_stream:array} shows an implementation where the initialization
 phase is perfomed using a normal sort and the add is implemented by using an approach a\' la
 insertion-sort.
-\lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using arrays},label=list:kth_largest_in_stream:array]{/home/dspataro/git/algorithm_articles/sources/kth_largest_in_stream/kth_largest_in_stream_solution1.cpp}
+\lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using arrays},label=list:kth_largest_in_stream:array]{sources/kth_largest_in_stream/kth_largest_in_stream_solution1.cpp}
 
 
 \subsection{Ordered set}
@@ -203,7 +203,7 @@ Let's have a look in more details at how the two operations look like in this ca
 
 Listing \ref{list:kth_largest_in_stream:set} shows a possible implementation of this idea using a
 ordered multiset (we use the C++ STL implementation named \inline{std::multiset}). 
-\lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using \inline{std::multiset}},label=list:kth_largest_in_stream:set]{/home/dspataro/git/algorithm_articles/sources/kth_largest_in_stream/kth_largest_in_stream_solution2.cpp}
+\lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using \inline{std::multiset}},label=list:kth_largest_in_stream:set]{sources/kth_largest_in_stream/kth_largest_in_stream_solution2.cpp}
 
 In Listing \ref{} you can see an implementation using a heap instead. Notice that there is not a
 dedicated class in C++ for heaps but instead, we can use an array as a container for the elements
@@ -231,4 +231,4 @@ for implementing the two class functions. Specifically
 \end{description}
 
 
-\lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using a heap},label=list:kth_largest_in_stream:heap]{/home/dspataro/git/algorithm_articles/sources/kth_largest_in_stream/kth_largest_in_stream_solution3.cpp}
+\lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using a heap},label=list:kth_largest_in_stream:heap]{sources/kth_largest_in_stream/kth_largest_in_stream_solution3.cpp}

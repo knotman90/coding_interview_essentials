@@ -24,7 +24,7 @@ echo "Working directory is $WORK_DIR"
 
 # Generate markdown single file from tex
 MAINMD="$WORK_DIR/main.md"
-pandoc -f latex  --mathjax    -s --toc $SOURCE_ROOT/main.tex -o $MAINMD
+pandoc -f latex  --mathjax    -s --toc $SOURCE_ROOT/main_pandoc.tex -o $MAINMD
 
 #exit 0
 #set -x 

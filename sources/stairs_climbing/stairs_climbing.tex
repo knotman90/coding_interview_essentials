@@ -38,7 +38,7 @@ Each time you can either climb $1$ or $2$ steps. In how many distinct ways can y
 \begin{figure}
 	\label{fig:stair_example_3}
 	\centering
-	\includegraphics[scale=0.5]{/home/dspataro/git/algorithm_articles/sources/stairs_climbing/images/3stairs}
+	\includegraphics[scale=0.5]{sources/stairs_climbing/images/3stairs}
 	\caption{All different ways to climb a 3 stairs staricase using steps of size $1$ or $2$.}
 \end{figure}
 
@@ -58,7 +58,7 @@ Each time you can either climb $1$ or $2$ steps. In how many distinct ways can y
 \begin{figure}
 	\label{fig:stair_example_5}
 	\centering
-	\includegraphics[scale=0.5]{/home/dspataro/git/algorithm_articles/sources/stairs_climbing/images/5stairs}
+	\includegraphics[scale=0.5]{sources/stairs_climbing/images/5stairs}
 	\caption{All different ways to climb a four stairs staricase using steps of size $1$ or $2$.}
 \end{figure}
 
@@ -106,7 +106,7 @@ This is probably one problem that it is easier to tackle by first looking at a f
 Looking at the table one thing should be immediately noticed i.e. the number of ways to climb the stair of size $n$ is equal to the $n^th$ element of the \textbf{Fibonacci} sequence (starting with two $1$).
 Once tht is clear then the solution is straightforward as shown in Listing \ref{list:stairs_climbing_fibonacci}.
 
-\lstinputlisting[language=c++, caption=Solution to the stairs climbining problem with steps of size $1$ and $2$ using Fibonacci.,label=list:stairs_climbing_fibonacci]{/home/dspataro/git/algorithm_articles/sources/stairs_climbing/stairs_climbing_solution1.cpp}
+\lstinputlisting[language=c++, caption=Solution to the stairs climbining problem with steps of size $1$ and $2$ using Fibonacci.,label=list:stairs_climbing_fibonacci]{sources/stairs_climbing/stairs_climbing_solution1.cpp}
 
 Now, let's have a look at why the seemingly unrelated fibonacci sequence plays a role in this problem. If the problem is looked at as an iterative process in which at each step a certain number of stairs are climbed. For instance if $n = 3$ and:
 \begin{itemize}

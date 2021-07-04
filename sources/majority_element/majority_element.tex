@@ -59,7 +59,7 @@ We will have a look at three different solution for this problem. We will start 
 The brute force solution is brutally simple and consist in, looping through the array, and for each element counting how many times it occurs in the input array. This approach, despite its simplicity should not be the one provided to the interviewer, as it is far from the optimum and the interviewer is certainly expecting more from us.
 Listing \ref{list:majority_element:bruteforce} shows a possible implementation of this idea. 
 
-\lstinputlisting[language=c++, caption={Sample Caption},label=list:majority_element:bruteforce]{/home/dspataro/git/algorithm_articles/sources/majority_element/majority_element_solution1.cpp}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:majority_element:bruteforce]{sources/majority_element/majority_element_solution1.cpp}
 
 
 \subsection{Hash-map approach}
@@ -70,13 +70,13 @@ The idea described in section \ref{majority_element:sec:bruteforce} can be impro
 A possible implementation of this approach is shown in Listing \ref{list:majority_element:hashmap}.
 The complexity of this approach is $O(n)$ for both space and time. In-fact, in the worst case all the element of the input array are only read and stored once.
 
-\lstinputlisting[language=c++, caption={Solution to the problem of finding the majority element in an array using hash-map.},label=list:majority_element:hashmap]{/home/dspataro/git/algorithm_articles/sources/majority_element/majority_element_solution2.cpp}
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the majority element in an array using hash-map.},label=list:majority_element:hashmap]{sources/majority_element/majority_element_solution2.cpp}
 
 \subsection{Sorting - Counting}
 \label{majority_element:sec:sorting}
 The approach described in section \ref{majority_element:sec:hashmap} is definitely faster then the quadratic brute-force but at a linear price in space. In order not to pay the price in space but to lower the time complexity down from quadratic, we could rely on the fact that in a sort collection of elements all equal elements appear grouped together e.g. in $[1,1,2,2,3,3,3,4,4,9,9]$, all the $1$s appear at the beginning of the array, followed by all the $2$s, etc. We can then count the number of occurrences of each element in constant space as shown in Listing \ref{list:majority_element:sorting}. The complexity of this approach is bounded by the sorting which costs $O(nlog(n)$ time.
 
-\lstinputlisting[language=c++, caption={Solution  to the problem of finding the majority element in an array using sorting.},label=list:majority_element:sorting]{/home/dspataro/git/algorithm_articles/sources/majority_element/majority_element_solution3.cpp}
+\lstinputlisting[language=c++, caption={Solution  to the problem of finding the majority element in an array using sorting.},label=list:majority_element:sorting]{sources/majority_element/majority_element_solution3.cpp}
 
 \subsection{Sorting - Median}
 \label{majority_element:sec:median}
@@ -84,7 +84,7 @@ There is however, another way of taking advantage of the fact that we have a sor
 All is necessary after sorting the array, is to check if the median value appear more than $\floor{\frac{n}{2}}$ times. 
 This idea is implemented in Listing \ref{list:majority_element:median} and has a complexity of $O(nlog(n)$ due to sorting.
 
-\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:median]{/home/dspataro/git/algorithm_articles/sources/majority_element/majority_element_solution4.cpp}
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:median]{sources/majority_element/majority_element_solution4.cpp}
 
 \subsection{Boyer-Moore algorithm}
 \label{majority_element:sec:linear}
@@ -102,6 +102,6 @@ At the end of this process the variable \inline{el} will contain a candidate maj
 
 Listing \ref{list:majority_element:moore} shows a possible implementation of the Boyer-Moore algorithm. The complexity of this approach is $O(n)$ time and $O(1)$ space because the input array is scanned twice and only two additional integer variables are used.
 
-\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:moore]{/home/dspataro/git/algorithm_articles/sources/majority_element/majority_element_solution5.cpp}
+\lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:moore]{sources/majority_element/majority_element_solution5.cpp}
 
 

@@ -73,7 +73,7 @@ Notice that:
     \item the space complexity is constant. 
 \end{itemize}
 
-\lstinputlisting[language=c++, caption=Iterative linear time solution.,label=list:exponentiation_linear]{/home/dspataro/git/algorithm_articles/sources/exponentiation/exponentiation_solution1.cpp}
+\lstinputlisting[language=c++, caption=Iterative linear time solution.,label=list:exponentiation_linear]{sources/exponentiation/exponentiation_solution1.cpp}
 
 
 
@@ -83,7 +83,7 @@ When discussing this solution, the interviewer might explicitly ask for a recurs
     \item we need to use space for the activation record of each of the $O(k)$ recursive calls.
 \end{itemize}
 
-\lstinputlisting[language=c++, caption=Recursive linear solution.,label=list:exponentiation_linear_recursive]{/home/dspataro/git/algorithm_articles/sources/exponentiation/exponentiation_solution5.cpp}
+\lstinputlisting[language=c++, caption=Recursive linear solution.,label=list:exponentiation_linear_recursive]{sources/exponentiation/exponentiation_solution5.cpp}
 
 
 
@@ -114,7 +114,7 @@ This allows for the number of multiplication to be reduced by half all the times
 Clearly, this approach is inherently recursive and
 can be coded as such easily as shown in Listing \ref{list:exponentiation_fast}.
 
-\lstinputlisting[language=c++, caption=Recursive $O(log_2$ solution to the exponentiation problem.,label=list:exponentiation_fast]{/home/dspataro/git/algorithm_articles/sources/exponentiation/exponentiation_solution2.cpp}
+\lstinputlisting[language=c++, caption=Recursive $O(log_2$ solution to the exponentiation problem.,label=list:exponentiation_fast]{sources/exponentiation/exponentiation_solution2.cpp}
 
 The code works similarly to how Listing \ref{list:exponentiation_linear_recursive} works except for the special treatment $k$ receives when it is even. This solution has a time complexity of $log_2(k)$. The intuitive idea is that in the worst-case scenario, every two invocations of the \inline{exponentiation_fast} function we split the value of $k$ in half anyways.
 
@@ -142,7 +142,7 @@ The idea above can be used to implement
 a fast exponentiation iterative solution by looking only at the bits of $k$ and using the formula above to calculates the answers accordingly. 
 Listing \ref{list:exponentiation_fast_iterative} and \ref{list:exponentiation_fast_iterative_alternative} shows two  possible ways of doing this.
 
-\lstinputlisting[language=c++, caption=Logaritmic solution based on the analysis of the bits of the exponent.,label=list:exponentiation_fast_iterative]{/home/dspataro/git/algorithm_articles/sources/exponentiation/exponentiation_solution3.cpp}
+\lstinputlisting[language=c++, caption=Logaritmic solution based on the analysis of the bits of the exponent.,label=list:exponentiation_fast_iterative]{sources/exponentiation/exponentiation_solution3.cpp}
 
 
 The code works by keeping track of two quantities:
@@ -161,7 +161,7 @@ Listing \ref{list:exponentiation_fast_iterative_alternative} shows an alternativ
 In practice, this might not be a real or even measurable advantage.
 
 
-\lstinputlisting[language=c++, caption=Alternative implementation of Listing \ref{list:exponentiation_fast_iterative}.,label=list:exponentiation_fast_iterative_alternative]{/home/dspataro/git/algorithm_articles/sources/exponentiation/exponentiation_solution4.cpp}
+\lstinputlisting[language=c++, caption=Alternative implementation of Listing \ref{list:exponentiation_fast_iterative}.,label=list:exponentiation_fast_iterative_alternative]{sources/exponentiation/exponentiation_solution4.cpp}
 
 
 Finally, it should be noted that, because one of the constraints of the problem is that overflow is guaranteed to never occur, then we are assured that $k$ is a relatively small number and we can safely assume it is smaller than $64$ otherwise we would need data types with a capacity of more than $64$ bits to store the answer.

@@ -65,7 +65,7 @@ First of all let's start by notiving that
 One way to tackle this problem is to look at the sum of all possible subarray and return the largest sum. 
 The idea is that for all elements $A[i]$, the sum of all subarrays having it as starting element can be easily calculated  as shown in Listing \ref{list:max_sum_continguous_subarray_bruteforce}. This approach works but it is unnecessarly slow, havig a time complexity of $O(n^3)$. There are $O(n^2)$ ordered pairs each identifying a subarray, and calculating the sum of a single subarray costs $O(O(n)$ for a grand total of $O(n^3)$. 
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_bruteforce]{/home/dspataro/git/algorithm_articles/sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution1.cpp}
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_bruteforce]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution1.cpp}
 
 This is considered a very poor solution because it is quite far off from the optimal linear time complexity solution that exists for this problem. 
 
@@ -76,7 +76,7 @@ $Y[j]-Y[i-1]$ where $Y[-1] = 0$.
 
 The code in Listing \ref{list:max_sum_continguous_subarray_bruteforce_improved} shows a $O(n^2)$ implementation of the bruteforce method described in Section \ref{sec:max_sum_continguous_subarray_bruteforce}  using prefix sum for constant time computation of subarrays sum.
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_bruteforce_improved]{/home/dspataro/git/algorithm_articles/sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution3.cpp}
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_bruteforce_improved]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution3.cpp}
 
 Despite the dramatic improvement in time complexity the version shown in Listing \ref{list:max_sum_continguous_subarray_bruteforce_improved} is, compared to the raw bruteforce solution, it is still considered a rather poor solution. Factoring in the fact that the prefix sum approach uses additional space and the popularity of this interview question, during a real interview a linear time and constant space solution is expected to be presented.
 
@@ -90,11 +90,11 @@ Note how $B[i]$ is incrementally constructed by reusing the information about in
 	\item extending the best subarray ending at index $i-1$ by adding $A[i]$ to it. The sum of the best subarray ending t $i-1$ is already computed and stored in $B[i-1]$. By doing so we are effectively avoiding a lot of re-computation, and this is the reason why Kadane's algorithm is so fast.
 \end{enumerate}
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_kadane_additional_space]{/home/dspataro/git/algorithm_articles/sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution2.cpp}
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_kadane_additional_space]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution2.cpp}
 
 But, is the additional space used by $B$ really necessary? A closer look at the implementation in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space} provides the answer which is, no. Infact every value of $B$ is only used once, and then ignored for the rest of the execution. Thus the algorithm can be modified so it only uses a single variable to store the latest calculated value of $B$ i.e. the value for the index $i-1$ as shown in Listing \ref{list:max_sum_continguous_subarray_kadane}
 
-\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_kadane]{/home/dspataro/git/algorithm_articles/sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution4.cpp}
+\lstinputlisting[language=c++, caption=Sample Caption,label=list:max_sum_continguous_subarray_kadane]{sources/max_sum_continguous_subarray/max_sum_continguous_subarray_solution4.cpp}
 
 Note how the variable \texttt{max\_ending\_here} is doing the job that the variable \texttt{B[i-1]} was doing in Listing \ref{list:max_sum_continguous_subarray_kadane_additional_space} and also how the final answer is the maximum among all values taken by \texttt{max\_ending\_here}.
 

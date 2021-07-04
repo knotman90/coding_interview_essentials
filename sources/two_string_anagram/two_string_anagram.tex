@@ -142,7 +142,7 @@ Moreover, enumerating all the arrangements is no trivial task unless we use a  l
 
 Listings \ref{list:two_string_anagram_bruteforce} shows a C++ implementation of the idea above.
 
-\lstinputlisting[language=c++, caption="Brute force C++ solution to the two string anagram problem.",label=list:two_string_anagram_bruteforce]{/home/dspataro/git/algorithm_articles/sources/two_string_anagram/two_string_anagram_brute_force.cpp}
+\lstinputlisting[language=c++, caption="Brute force C++ solution to the two string anagram problem.",label=list:two_string_anagram_bruteforce]{sources/two_string_anagram/two_string_anagram_brute_force.cpp}
 
 
 \subsection{Sorting}
@@ -161,7 +161,7 @@ appearing in $a$ and $b$: the order in which characters in both $a$ and $b$ appe
 
 Listings \ref{list:two_string_anagram_sorting}  shows how we can take advantage of this fact and write a fast solution for this problem.
 
- 	\lstinputlisting[language=c++, caption="Brute force C++ solution to the two string anagram problem.",label=list:two_string_anagram_sorting]{/home/dspataro/git/algorithm_articles/sources/two_string_anagram/two_string_anagram_sorting.cpp}
+ 	\lstinputlisting[language=c++, caption="Brute force C++ solution to the two string anagram problem.",label=list:two_string_anagram_sorting]{sources/two_string_anagram/two_string_anagram_sorting.cpp}
 
 Notice that, if the input was mutable, then, the additional space occupied by the copies of the string \inline{aa} and \inline{bb}
 could have been avoided. 
@@ -200,7 +200,7 @@ The answer to this problem is, therefore, the sum of all the positive numbers of
 
 Listings \ref{list:two_string_anagram_histogram} shows a possible implemenetation of the idea above.
 
-\lstinputlisting[language=c++, caption="C++ solution to the two string anagram problem using the histogram approach.",label=list:two_string_anagram_histogram]{/home/dspataro/git/algorithm_articles/sources/two_string_anagram/two_string_anagram_histogram.cpp}
+\lstinputlisting[language=c++, caption="C++ solution to the two string anagram problem using the histogram approach.",label=list:two_string_anagram_histogram]{sources/two_string_anagram/two_string_anagram_histogram.cpp}
 
 
 Notice how the array of differences of frequencies $D$ can be easily calculated without explicitly
