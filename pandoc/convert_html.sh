@@ -26,10 +26,12 @@ echo "Working directory is $WORK_DIR"
 MAINMD="$WORK_DIR/main.md"
 pandoc -f latex  --mathjax    -s --toc $SOURCE_ROOT/main.tex -o $MAINMD
 
-
+#exit 0
+#set -x 
+set -u
+#set -e
 # fix code blocks
 grep -e "\`\`\` {" $MAINMD  | while read -r line ; do
-echo " "
     LABEL=$(echo $line | cut -d'{' -f2- | cut -d' ' -f1)
     LABEL_LST=$(echo $LABEL |  sed 's/#list/#lst/g')
     LANG=$(echo $line | cut -d'{' -f2- | cut -d' ' -f2)
@@ -39,8 +41,8 @@ echo " "
     CAPTION_DOUBLE_QUOTES_REMOVED=$(echo $CAPTION | sed 's/\\"//g');
     SUB="~~~{$LABEL_LST $LANGESC $CAPTION_DOUBLE_QUOTES_REMOVED}"
 
-
-    sed -i '0,/``` {#.*language.*caption.*/{s/``` {#.*language.*caption.*/'"$SUB"'/}'  $MAINMD
+    SUB_ESCAPED=$(echo $SUB | sed 's_/_\\/_g')
+    sed -i '0,/``` {#.*language.*caption.*/{s/``` {#.*language.*caption.*/'"$SUB_ESCAPED"'/}'  $MAINMD
     
 done
 
@@ -65,7 +67,7 @@ echo "% Coding interview Essentials" > $CHAPTERDIR/index.md
 idx=1 
 cat "$TOCMD" | while read line 
 do
-   FILENAME=$CHAPTERDIR/$idx.$(echo $line | sed 's/ /_/g').md;
+   FILENAME=$CHAPTERDIR/$idx.$(echo $line | sed 's/ /_/g' | sed 's/,/_/g'| sed -r 's/[\^{}\$]//g').md;
    touch $FILENAME
    echo $FILENAME
    echo "% $idx. $line" > $FILENAME
@@ -73,9 +75,10 @@ do
    sed -n '/^12$/,/^15$/p' $MAINMD | sed '1d;$d'
 
    echo "from $line to next chapter"
-   echo "sed -n -E -e '/^# $line/,/^# /p' $MAINMD"
+   LINE_ESCAPED=$(echo $line | sed -r 's/\^/\\^/g' | sed -r 's/\$/\\$/g')
+   echo "sed -n '/^# $LINE_ESCAPED/,/^# /p' $MAINMD"
 
-   cat $MAINMD | sed -n -E -e "/^# $line/,/^# /p"  | head -n -1 >> $FILENAME
+   cat $MAINMD | sed -n  "/^# $LINE_ESCAPED/,/^# /p"  | head -n -1 >> $FILENAME
    let "idx+=1" 
 
 done
