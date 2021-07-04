@@ -173,9 +173,9 @@ This fact can be exploited to keep track of which positive numbers from
 $1$ to $n$ are present in $A$. We can use an array of booleans flags of size $n$ to store this information. Therefore, all we have to do is, for each number  $x$ in $A$ in the range $[1,n]$, to set the $x^{th}$ flag to true.
 Eventually, this array of flags contains the answer, which can be found by scanning through it linearly to find the first \textbf{false} element which signals that this is the first missing element.
 
-An implementation of the idea above is found in Listing \ref{list:first_positive_missing_linear_space}.
+An implementation of the idea above is found in Listing \ref{list:first_positive_missing_constant_space}.
 
-\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_linear_space]{/home/dspataro/git/algorithm_articles/sources/first_positive_missing/first_positive_missing_solution2.cpp}
+\lstinputlisting[language=c++, caption=Solution to the problem of finding the smallest missing positive integer in an array.,label=list:first_positive_missing_constant_space]{/home/dspataro/git/algorithm_articles/sources/first_positive_missing/first_positive_missing_solution2.cpp}
 
 
 The code works in two phases:
@@ -191,7 +191,7 @@ been already seen as the array is scanned from left to right. This might have ad
 
 
 \subsection{Linear time and constant space solution}
-\label{first_positive_missing:sec:linear_space}
+\label{first_positive_missing:sec:constant_space}
 As mentioned above, the optimal solution does not use any additional space but shares the idea of keeping track of which element has been found with the solution described in Section \ref{first_positive_missing:sec:linear_space}. 
 
 In order not to use additional space, we have to somehow implement the functionality the array \inline{F} (in the code above) provides using the input array itself! Doing so sounds harder than it really is, especially until we realize that we can store the information about a positive number being present in $A$ in the sign of some other cell.
