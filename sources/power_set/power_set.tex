@@ -130,6 +130,8 @@ it gets.
 \lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
 
 
+
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{sources/power_set/images/tree}
@@ -192,8 +194,15 @@ bits one can represent $2^n$ numbers, each corresponding to one and only one sub
 Listing \ref{list:power_set_bits} shows  a possible C++ implementation of the idea above.
 
 
-\lstinputlisting[language=c++, caption="",label=list:power_set_bits]{sources/power_set/power_set_bit_manipulation.cpp}
+\begin{lstlisting}[language=c++, caption=Binary tree definition used in this exercice.,label=list:verify_BST:tree_structure]
 
+    struct TreeNode {
+        int val;
+        TreeNode *left;
+        TreeNode *right;
+        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    };
+    \end{lstlisting}
 
 The complexity of this function is, not surprisingly, $O(2^{|S|})$. 
 We also pay a constant price of $32$ for each number we loop through since we need to inspect all of its bits.

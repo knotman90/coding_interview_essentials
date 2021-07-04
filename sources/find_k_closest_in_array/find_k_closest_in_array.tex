@@ -105,7 +105,7 @@ sorting to $O(nlog(k))$ of the partial sort. Fortunately, making this change in 
 easily and it is only matter of calling \inline{std::partial_sort} instead of \inline{std::sort} as
 shown in Listing \ref{list:find_k_closest_in_array2}.
 
-\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array1]{sources/find_k_closest_in_array/find_k_closest_in_array_solution2.cpp}
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array2]{sources/find_k_closest_in_array/find_k_closest_in_array_solution2.cpp}
 
 \subsection{Binary Search}
 \label{find_k_closest_in_array:sec:binary_search}
@@ -152,7 +152,7 @@ Turns out that binary search can be used to find such an element (we even have S
 support for such operation). 
 In particular we can use it to identify the index of the first element that is larger or equal than $x$:
 a value that is commonly known as \textit{lower bound}.
-Armed with this information let's have a look at Listing \ref{list:find_k_closest_in_array2} showing
+Armed with this information let's have a look at Listing \ref{list:find_k_closest_in_array3} showing
 the implementation of the idea above where we use the STL \inline{std::lower\_bound} function to find
 the index $o$ of the first element greater or equal than $x$.
 We then compare such value with the value at index $p = o-1$ (if exists)
@@ -160,10 +160,10 @@ and we promote $o$ or $p$ to be the index to closest element to $x$ in the array
 absolute difference to $x$.
 The closest of the two to $x$ is chosen to be the designated starting value for the algorithm described above.
 
-\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using \inline{std::lower\_bound}.},label=list:find_k_closest_in_array2]{sources/find_k_closest_in_array/find_k_closest_in_array_solution3.cpp}
+\lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using \inline{std::lower\_bound}.},label=list:find_k_closest_in_array3]{sources/find_k_closest_in_array/find_k_closest_in_array_solution3.cpp}
 
 For completeness, in Listing \ref{list:find_k_closest_in_array:binary_lower_bound} we also show an implementation of "in-house" version of \inline{std::lower\_bound}. You might be asked 
 to show you can code binary search. 
 
 
-	\lstinputlisting[language=c++, caption={Implementation of a function for the calculation of the \textit{lower\_bound} that can be using in substitution of \inline{std::lower\_bound} in Listing \ref{list:find_k_closest_in_array2}.},label=list:find_k_closest_in_array:binary_lower_bound]{sources/find_k_closest_in_array/my_lower_bound.h}
+\lstinputlisting[language=c++, caption={Implementation of a function for the calculation of the \textit{lower\_bound} that can be using in substitution of \inline{std::lower\_bound} in Listing \ref{list:find_k_closest_in_array2}.},label=list:find_k_closest_in_array:binary_lower_bound]{sources/find_k_closest_in_array/my_lower_bound.h}
