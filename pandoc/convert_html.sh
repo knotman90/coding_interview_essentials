@@ -2,7 +2,21 @@
 
 set -u 
 ROOT="/home/dspataro/git/algorithm_articles/"
+WORK_DIR=$(mktemp -d -t book-XXXXXXXXXX)
+
+cp -r $ROOT/* $WORK_DIR
+ROOT="$WORK_DIR"
 SOURCE_ROOT=$ROOT/sources
+
+cd $ROOT
+
+for texfile in $(find $ROOT -iname "*.tex" )
+do
+    echo "$texfile"
+    sed -i 's#sources/#'"$SOURCE_ROOT"'/#g' $texfile
+done
+
+
 
 for pdfimage in $(find $SOURCE_ROOT -iname "*.pdf" | grep images)
 do
@@ -19,12 +33,14 @@ done
 
 
 
-WORK_DIR=$(mktemp -d -t book-XXXXXXXXXX)
 echo "Working directory is $WORK_DIR"
 
 # Generate markdown single file from tex
 MAINMD="$WORK_DIR/main.md"
-pandoc -f latex  --mathjax    -s --toc $SOURCE_ROOT/main_pandoc.tex -o $MAINMD
+MAINTEX="$WORK_DIR/main_pandoc.tex"
+cp $SOURCE_ROOT/main_pandoc.tex  $MAINTEX
+
+pandoc -f latex  --mathjax    -s --toc $MAINTEX -o $MAINMD
 
 #exit 0
 #set -x 
