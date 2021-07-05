@@ -9,18 +9,55 @@
 \chapter{Verify BST property}
 \label{ch:verify_BST}
 \section*{Introduction}
-This problem is binary search trees, which are one of the most discussed data structures during coding interviews. This problem has been asked at \textbf{Microsoft, Google, Amazon, Ebay} and it is among the group of questions that should be well understood and digested because its solution's structure can be applied to many others on binary trees.
+Data structures is a topic that lies at the heart of the entire field of computer science and of virtually every computer code running in the globe.
+Algorithms are built around a particular data arrangements. Clearly there some arrangements are more convenient than others and often choosing the right one could mean the difference between waiting years for a piece of code to come to completion versus seconds. 
+Among the vast number of the mainstream data structures, trees, and specially the binary kind, are probably one of the most used because they naturally allow to represent hierarically data which are at the basis of, for example, DOM \footnote{Document Object Model is a way of representing documents as a trees wherein each node is an object represents a part of the document (See Figure \ref{fig:verify:DOM}).} (XML,HTML) and  JSON documents.
+Trees are also fundamental for compilers as they are used to represent the syntactic structure of a source code for programming languages.
+
+Trees can be defined recursively as a collection of nodes, which contains some data and a lsit of references to other nodes, the "children". There is a special node called the root with the property that no other nodes have reference to it. Moreover a node can only be referenced once (i.e. there should be one and only one father). See Figure \ref{fig:verify:generic_tree} for an example of a generic tree.
+
+
+
+
+\begin{figure}
+	\vspace*{-0.5in}
+	\centering
+	\begin{subfigure}[t]{0.46\textwidth}
+		\includegraphics[width=1\linewidth]{sources/verify_BST/images/generic_tree}
+		\caption[]{Example of a generic tree.}
+		\label{fig:verify:generic_tree}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.46\textwidth}
+		\includegraphics[width=1\linewidth]{sources/verify_BST/images/DOM-model}
+		\caption[]{Example of DOM in a HTML document.}
+		\label{fig:verify:DOM}}
+	 \end{subfigure}
+	 \caption[]{}
+	  \label{fig:verify:trees}
+\end{figure}
+
+
+
+Binary search trees are a special kind of trees that are extremely useful when we need to arrange data on which the following operations need to be performed
+\begin{itemize}
+	\item insert
+	\item delete
+	\item search
+	\item ceil/floor
+\end{itemize}.
+In this chapter we are going to look at a common interview question in which we will have to determine whether a given tree is a binary search tree or not. 
+
+This classic problem should be really well understood as the structure of and the insights behind it solutions can be applied to many others binary tree problems.
 
 \section{Problem statement}
 \begin{exercise}
-Given a binary tree \cite{cit:wiki:BST}, determine if it is a valid binary search tree.
-
-Assume a BST is defined as follows:
+Given a binary tree \cite{cit:wiki:BST}, determine if it is a valid binary search tree (BST) which is defined as follows:
 \begin{itemize}
     \item The left subtree of a node contains only nodes with keys less than the node's key.
     \item The right subtree of a node contains only nodes with keys greater than the node's key.
 \end{itemize}
-You can assume that the tree structure is defined as shown in Listing \ref{list:verify_BST:tree_structure}: 
+You can assume the function receives a pointer or a reference to a structure name \inline{TreeNode} which defined is shown in Listing \ref{list:verify_BST:tree_structure}. 
 
 \end{exercise}
 
@@ -36,43 +73,51 @@ You can assume that the tree structure is defined as shown in Listing \ref{list:
 
 
 \begin{example}
+	\label{example:verify_BST:example1}
 	\hfill \\
-	For the following tree the function should return \textbf{false}.
-	\begin{verbatim}
-	    5
-	   / \
-	  1   4
-	     / \
-	    3   6
-	\end{verbatim}
-\end{example}
-
-\begin{example}
-	\hfill \\
-	For the following tree the function should return \textbf{true}.
-	\begin{verbatim}
-	    2
-	   / \
-	  1   3
-	\end{verbatim}
+	For the tree shown in Figure \ref{fig:verify:example1} the function should return \textbf{false}.
 	
 \end{example}
 
 \begin{example}
-\label{example:verify_BST_:one}
+	\label{example:verify_BST:example3}
 	\hfill \\
-	For the following tree the function should return \textbf{true}.
-	\begin{verbatim}
-	    10
-	   / \
-	  1   14
-	 / \    \
-0  9     16
-        /  \
-       15   19
-	\end{verbatim}
+	For the tree shown in Figure \ref{fig:verify:example3} the function should return \textbf{true}.
 	
 \end{example}
+
+\begin{example}
+\label{example:verify_BST:example4}
+	\hfill \\
+	For the tree shown in Figure \ref{fig:verify:example4} the function should return \textbf{true}.
+
+\end{example}
+
+
+\begin{figure}
+	\vspace*{-0.5in}
+	\centering
+	\begin{subfigure}[t]{0.30\textwidth}
+		\includegraphics[width=1\linewidth]{sources/verify_BST/images/example1}
+		\caption[]{Tree in Example \ref{example:verify_BST:example1}}
+		\label{fig:verify:example1}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.30\textwidth}
+		\includegraphics[width=1\linewidth]{sources/verify_BST/images/example3}
+		\caption[]{Tree in Example \ref{example:verify_BST:example3}}
+		\label{fig:verify:example3}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.30\textwidth}
+		 \includegraphics[width=1\linewidth]{sources/verify_BST/images/example4}
+		 \caption[]{Tree in Example \ref{example:verify_BST:example4}}
+		 \label{fig:verify:example4}
+	  \end{subfigure}
+	 \caption[]{}
+	  \label{fig:verify:trees}
+\end{figure}
+
 
 
 \section{Clarification Questions}
@@ -97,14 +142,15 @@ A tree $T$ is a binary search tree if:
 	\item given a node $n$ in the tree \textbf{all} the nodes in its left subtree are smaller than the value in $n$.
 	\item additionally,  \textbf{all} nodes in the right subtree are larger.
 \end{enumerate}
-For instance the tree in the example \ref{ex:verify_BST:no_BST} is not a valid BST because node $15$ is a right descendent of the root but is it not greater than it. 
-\begin{lstlisting}[language=c++,frame=single,caption={Binary tree, but not a binary search tree.}",label=ex:verify_BST:no_BST, numbers=none]
-	    20
-	    / \
-	   10 30
-	     / \
-	    15  40
-\end{lstlisting}
+For instance the tree in Figure \ref{ex:verify_BST:no_BST} is not a valid BST because node $15$ is a right descendent of the root but is it not greater than it. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.3\linewidth]{sources/verify_BST/images/no_BST}
+	\caption{Example of a binary tree that is not a BST.}
+	\label{ex:verify_BST:no_BST}
+\end{figure}
+
 
 
 \subsection{A common mistake}
