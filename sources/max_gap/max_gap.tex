@@ -107,9 +107,9 @@ Radix sort will perform better than a standard $O(nlogn)$ algorithm when there i
 the values of the input array. If we assume that such bound is the largest value a standard 4 bytes
 \inline{int} can hold then radix sort will have a complexity of $O(n)$.
 
-Radix sort works by sorting the input array $d$ times, where $d = \floor{log_{10}k+1}$ and $k$ is
+Radix sort works by sorting the input array $d$ times, where $d = \lfloor log_{10 \rfloor k+1}$ and $k$ is
 the largest number in $I$. $d$ is just the number of digits of the largest number in the list. For a
-standard \inline{int} $d=\floor{log_{10}(2147483647) + 1}=10$. The sorting is obtained by repeatedly
+standard \inline{int} $d=\lfloor log_{10 \rfloor(2147483647) + 1}=10$. The sorting is obtained by repeatedly
 sorting the input list from the least to the most significant digit where each of the intermediate
 sorting steps is performed using counting-sort. For instance given $I =
 \{329,457,657,839,436,720,355\}$ the first pass of radix sort will sort $I$ based on the value of

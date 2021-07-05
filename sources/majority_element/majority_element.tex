@@ -13,7 +13,7 @@ The problem described in this chapter has been asked at Microsoft, Google, Amazo
 
 \section{Problem statement}
 \begin{exercise}
-Given an array $N$ of size $n$, find the majority element i.e. that element that appears more than $\floor{\frac{n}{2}}$ times.
+Given an array $N$ of size $n$, find the majority element i.e. that element that appears more than $\lfloor \frac{n}{2} \rfloor$ times.
 If such element does not exists, returns $-1$.
 	\begin{example}
 		\hfill \\
@@ -65,7 +65,7 @@ Listing \ref{list:majority_element:bruteforce} shows a possible implementation o
 \subsection{Hash-map approach}
 \label{majority_element:sec:hashmap}
 
-The idea described in section \ref{majority_element:sec:bruteforce} can be improved by using an hash-map to store the number of occurrence of each element in the input array. There cannot be more than $n$ different numbers in the the array $N$, thus with a single pass of the input and with a linear cost in space we can calculate the number of occurrence of each element and check if any of the counters at any points gets higher than $\floor{\frac{n}{2}}$.
+The idea described in section \ref{majority_element:sec:bruteforce} can be improved by using an hash-map to store the number of occurrence of each element in the input array. There cannot be more than $n$ different numbers in the the array $N$, thus with a single pass of the input and with a linear cost in space we can calculate the number of occurrence of each element and check if any of the counters at any points gets higher than $\lfloor \frac{n}{2} \rfloor$.
 
 A possible implementation of this approach is shown in Listing \ref{list:majority_element:hashmap}.
 The complexity of this approach is $O(n)$ for both space and time. In-fact, in the worst case all the element of the input array are only read and stored once.
@@ -81,7 +81,7 @@ The approach described in section \ref{majority_element:sec:hashmap} is definite
 \subsection{Sorting - Median}
 \label{majority_element:sec:median}
 There is however, another way of taking advantage of the fact that we have a sorted collection. The key idea here is that if a majority element exists than, this element \textbf{must be the median}. After all, by definition , the median if the element that is right in the middle of the sorted collection. Since the majority element will be occupy \textbf{more} than half positions of the array, it also occupies the median position.
-All is necessary after sorting the array, is to check if the median value appear more than $\floor{\frac{n}{2}}$ times. 
+All is necessary after sorting the array, is to check if the median value appear more than $\lfloor \frac{n}{2} \rfloor$ times. 
 This idea is implemented in Listing \ref{list:majority_element:median} and has a complexity of $O(nlog(n)$ due to sorting.
 
 \lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:median]{sources/majority_element/majority_element_solution4.cpp}

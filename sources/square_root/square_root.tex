@@ -31,17 +31,17 @@ as well as a much faster and elegant logarithmic time solution.
 
 	\begin{example}
 	\hfill \\
-	Given $n=9$ the function returns $3$: $\ceil{\sqrt{9}}=3$
+	Given $n=9$ the function returns $3$: $\lceil\sqrt{9 \rceil}=3$
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Given $n=11$ the function returns $3$: $\ceil{\sqrt{11}}\approx\ceil{3.316624}=3$
+		Given $n=11$ the function returns $3$: $\lceil\sqrt{11 \rceil}\approx\lceil3.316624 \rceil=3$
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Given $n=18$ the function returns $4$: $\ceil{\sqrt{11}}\approx\ceil{4.242640}=4$
+		Given $n=18$ the function returns $4$: $\lceil\sqrt{11 \rceil}\approx\lceil4.242640 \rceil=4$
 	\end{example}
 	
 \end{exercise}
@@ -72,7 +72,7 @@ For instance $\sqrt{5} \approx 2.2360$ and $2^2=4 \leq 5$ and $3^2=9 > 5$.
 
 We can use this last property to blindly loop through all the integers $k=0,1,2,\ldots$ until 
 the following is true: $k^2\leq n$ and $(k+1)^2 > n$.
-A solution is guaranteed to be found because eventually, $k$ will be equal to $\floor{y}$.
+A solution is guaranteed to be found because eventually, $k$ will be equal to $\lfloor y \rfloor$.
 Moreover, it is clear that no more than $\sqrt{n}$ numbers will be tested, which proves that the time complexity of this approach is $O(\sqrt{n})$.
 
 Listing \ref{list:square_root_brute_force} shows a C++ implementation of this idea.
@@ -109,7 +109,7 @@ Clearly, \textbf{the answer we are looking for is the greatest value $k$ s.t. $F
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
-		$0$ & $1$ & $2$   & $\floor{\sqrt{n}}$ & $\floor{\sqrt{n}}+1$ & \ldots   & $n$ \\ \hline
+		$0$ & $1$ & $2$   & $\lfloor \sqrt{n \rfloor}$ & $\lfloor \sqrt{n \rfloor}+1$ & \ldots   & $n$ \\ \hline
 		$0$ & $0$ & \ldots & $1$ & $1$ & \ldots & $1$   \\ \hline
 	\end{tabular}
 	\caption{Partition of the search space according to the function in Eq.
@@ -117,7 +117,7 @@ Clearly, \textbf{the answer we are looking for is the greatest value $k$ s.t. $F
 	\label{tab:sqrt_split_space}
 \end{table}
 
-Notice that every number in the left part of the search space, $0 \leq l \leq \floor{n}$ has $F(l) = 0$, while the elements in the right side,$\floor{n}+1 \leq r \leq n$, have $F(r) = 1$.
+Notice that every number in the left part of the search space, $0 \leq l \leq \lfloor n \rfloor$ has $F(l) = 0$, while the elements in the right side,$\lfloor n \rfloor+1 \leq r \leq n$, have $F(r) = 1$.
 Because the function $F(k)$ splits the search space into two parts, we can use
 binary search to find the end of the first partition (this is actually true in general, and if you ever recognize a problem has these characteristics, you can apply binary search to it). 
 We can do that because if we pick an integer from in $[0,n]$, say $k$, and $F(k) = 1$ we know that $k$ is not the solution and 
