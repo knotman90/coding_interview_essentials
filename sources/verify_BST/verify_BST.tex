@@ -32,7 +32,7 @@ Trees can be defined recursively as a collection of nodes, which contains some d
 	\begin{subfigure}[t]{0.46\textwidth}
 		\includegraphics[width=1\linewidth]{sources/verify_BST/images/DOM-model}
 		\caption[]{Example of DOM in a HTML document.}
-		\label{fig:verify:DOM}}
+		\label{fig:verify:DOM}
 	 \end{subfigure}
 	 \caption[]{}
 	  \label{fig:verify:trees}
@@ -101,19 +101,19 @@ You can assume the input tree is given as a pointer or a reference to a structur
 	\centering
 	\begin{subfigure}[t]{0.30\textwidth}
 		\includegraphics[width=1\linewidth]{sources/verify_BST/images/example1}
-		\caption[]{Tree in Example \ref{example:verify_BST:example1}}
+		\subcaption[]{Tree in Example \ref{example:verify_BST:example1}}
 		\label{fig:verify:example1}
 	 \end{subfigure}
 	\hfill
 	\begin{subfigure}[t]{0.30\textwidth}
 		\includegraphics[width=1\linewidth]{sources/verify_BST/images/example3}
-		\caption[]{Tree in Example \ref{example:verify_BST:example3}}
+		\subcaption[]{Tree in Example \ref{example:verify_BST:example3}}
 		\label{fig:verify:example3}
 	 \end{subfigure}
 	 \hfill
 	 \begin{subfigure}[t]{0.30\textwidth}
 		 \includegraphics[width=1\linewidth]{sources/verify_BST/images/example4}
-		 \caption[]{Tree in Example \ref{example:verify_BST:example4}}
+		 \subcaption[]{Tree in Example \ref{example:verify_BST:example4}}
 		 \label{fig:verify:example4}
 	  \end{subfigure}
 	 \caption[]{}
@@ -151,13 +151,6 @@ From the definition given above we know that tree $T$ is a BST when:
 For instance, the tree in Figure \ref{ex:verify_BST:no_BST} is not a valid BST because node $15$ is a right descendant of the root but is it not greater than it. On the other hand, the trees in Figure \ref{example:verify_BST:example3} and \ref{example:verify_BST:example4} are valid BST. The tree in Figure \ref{fig:verify:generic_tree} is not a valid BST because it is not a binary tree as node $0$ has three children.
 
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.3\linewidth]{sources/verify_BST/images/no_BST}
-	\caption{Example of a binary tree that is not a BST.}
-	\label{ex:verify_BST:no_BST}
-\end{figure}
-
 
 Therefore, in order to solve this problem we must be able to prove the conditions above hold for each and every node of the input tree. 
 
@@ -178,27 +171,73 @@ This problem becomes almost trivial if approached using recursion and we are abl
 \begin{enumerate}
 	\item every node can be thought as the root of a tree for which the BST property needs to be verified;
 	\item empty trees satisfy the BST property by definition;
-	\item every node must contain a value within a range that is determined by its ancestors. For instance, consider the node $15$ in the Figure \ref{example:verify_BST:example4}}; it must be within the range $(14,16)$ for the tree to be a valid BST. Why is that? Because its parent, the node $16$ must be within the range $(14,+\infty)$ and additionally node $15$, being the left subtree of node $16$ must be lower than its parent. 
+	\item every node must contain a value within a range that is determined by its ancestors. For instance, consider the node $15$ in the Figure \ref{example:verify_BST:example4}; it must be within the range $(14,16)$ for the tree to be a valid BST. Why is that? Because its parent, the node $16$ must be within the range $(14,+\infty)$ and additionally node $15$, being the left subtree of node $16$ must be lower than its parent. 
 	The same reasoning can be applied recursively up to the root of the tree where the range of the value is simply $(-\infty, +\infty)$ (no constraints at all). 
 
-	The node $9$ in the Figure \ref{example:verify_BST:example4}} must be within the range $(1,10)$ for equivalent reasons.
+	The node $9$ in the Figure \ref{example:verify_BST:example4} must be within the range $(1,10)$ for equivalent reasons.
 \end{enumerate}
 
 To summarize, we can visit the tree in a top-down fashion and maintain a range ov values that the current node must satisfy. We can start with a range equal to $(-\infty, +\infty)$ for the root (meaning that de-facto, there is no restriction on the value the root can take).
 Once the value is checked against this range, then the same function can be applied recursively to the right and left children but with the shrewdness of making sure that the range is modified accordingly when recurring on the children. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% review till here
-But how does such a range change when visiting down the tree? The idea is simple: Given a node $n$ with parent $p$ and range \( (l_p, u_p) \) then:
+The fulcrum of the problem seems to be the update of such a range change when visiting down the tree. How should it change when visiting a new node? 
+The idea is quite simple:
+Given a node $n$ with parent $p$ and range \( (l_p, u_p) \) then:
 \begin{itemize}
-	\item if $n$ is the right child of $p$, then the range for $n$ is: $(p, u_p)$: all nodes in the right subtree of $p$ must be \textbf{higher} than $p$. Note that $p > l_p$ (otherwise the BST property would be violeted when checking $p$) and thus the range for $n$ becomes smaller meaning that all the constrains coming from the ancestors of $p$ will also be satisfied with the new range $(p, u_p)$.
-	\item A similar reasoning applies if $n$ is the left child of $p$. The range for $n$ is then : $(l_u,p)$.
+	\item if $n$ is the right child of $p$, the range for $n$ is: $(p, u_p)$:
+	all nodes in the right subtree of $p$ must be have a value \textbf{higher} than $p$. 
+	Note that $p > l_p$ (otherwise the BST property would be violeted when checking $p$) and thus the range for $n$ becomes smaller meaning that all the constrains coming from the ancestors of $p$ will also be satisfied with the new range $(p, u_p)$.
+	\item A similar reasoning applies if $n$ is the left child of $p$: in this case the range is $(l_u,p)$.
 \end{itemize}
+See Figure \ref{ex:verify_BST:example4_ranges} showing what the ranges look like for the tree in Figure \ref{ex:verify_BST:example4}. 
 
-The idea above is shown in Listing \ref{list:verify_BST}. Note how short and concise the code can be implemented with recursion.  The complexity of this approach is $O(n)$ time and $O(1)$ space (if you do not count the space on the stack taken by the recursion.
+
+\begin{figure}
+	\vspace*{-0.5in}
+	\centering
+	\begin{subfigure}[t]{0.52\textwidth}
+		\includegraphics[width=1\linewidth]{sources/verify_BST/images/example4_ranges}
+		\caption{Example of tree where each node is label with the range of values it should lie within.}
+		\label{ex:verify_BST:example4_ranges}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.35\textwidth}
+		\includegraphics[width=1\linewidth]{sources/verify_BST/images/no_BST}
+		\caption{Example of a binary tree that is not a BST.}
+		\label{ex:verify_BST:no_BST}
+	 \end{subfigure}
+	 \caption[]{}
+	  \label{fig:verify:trees_ranges_generic}
+\end{figure}
+
+
+
+
+An implementation of the idea above is shown in Listing \ref{list:verify_BST}. 
+
 \lstinputlisting[language=c++, caption=Linear time recursive solution to the problem of verifying the BST property.,label=list:verify_BST]{sources/verify_BST/verify_BST_solution1.cpp}
 
+Note how short and concise the code can be implemented with recursion.  The complexity of this approach is $O(n)$ time and $O(1)$ space (if you do not count the space on the stack taken by the recursion.
 
 \subsection{Brute force}
-Another way to solve this problem is to read carefully the definition of BST and realize that, for each node $n$ we need to check if the left subtree contains any element greater than $n$ and whether its right subtree contains any element smaller than $n$. This problem becomes almost trivial provided two functions are available, \lstinline[columns=fixed]{min_tree(TreeNode* root)} and \lstinline[columns=fixed]{max_tree(TreeNode* root)} for retrieving the min and max value respectively of a tree. The idea above can be implemented as shown in Listing \ref{list:verify_BST_bruteforce}
+Another way to solve this problem comes from the fact that for each node $n$ we need to check if the left subtree contains any element greater than $n$ and whether its right subtree contains any element smaller than $n$ and that, this task is trivial when the two following functions are available:
+\begin{enumerate}
+	\item \inline{tree_min(TreeNode* root)}
+	\item \inline{tree_max(TreeNode* root)}
+\end{enumerate}.
+which return the minimum and the maximum value of a tree, respectively.
+We can verify the BST property of a node $n$ in the tree by comparing the value of $n$ with the values returned by \inline{tree_min} and \inline{tree_max} and checking it lies in between.
 
-\lstinputlisting[language=c++, caption=Quadratic solution to the problem of verifying the BST property.,label=list:verify_BST_rbuteforce]{sources/verify_BST/verify_BST_solution2.cpp}
+Luckly implementing \inline{tree_min(TreeNode* root)} and \inline{tree_max(TreeNode* root)} is easy to do in linear time as all we need to do is traverse the tree (in any order really) and keep track of the smallest/largest element seen. 
+
+The idea above can be implemented as shown in Listing \ref{list:verify_BST_bruteforce}
+
+\lstinputlisting[language=c++, caption=Quadratic solution.,label=list:verify_BST_bruteforce]{sources/verify_BST/verify_BST_solution2.cpp}
+
+Listing \ref{list:verify_BST_bruteforce} has a quadratic time complexity because for each and every node of the tree we perform a linear amount of work. The space complexity is also linear if we consider the space on the stack to perform the recursion.
+
+
+Notice that we can do substantially better than quadratic time if we memoize \inline{tree_min} and \inline{tree_max} at the expense of using linear space. We can, for instance, use a map to store the information for each \inline{TreeNode*} and its associated min and max values. An implementation of this idea is shown in Listing \ref{list:verify_BST_bruteforce_improved}.
+
+\lstinputlisting[language=c++, caption=Linear time solution obtained by memoizing Listing \ref{list:verify_BST_bruteforce_improved}.,label=list:verify_BST_bruteforce]{sources/verify_BST/verify_BST_solution3.cpp}
