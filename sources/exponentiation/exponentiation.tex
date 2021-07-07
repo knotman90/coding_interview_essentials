@@ -9,12 +9,12 @@
 \chapter{Exponentiation}
 \label{ch:exponentiation}
 \section*{Introduction}
-This chapter addresses a common problem that asks you to implement a function to calculate the power of an integer.  
+This chapter addresses a common problem, that ask us to implement a function in order to calculate the power of an integer.  
 It is fairly easy to come up with a good solution that works in linear time and that, 
 when implemented properly, can already be enough to get the green light from the interviewer and pass the interview stage.
 However, in order to be sure to ace the question, we need to push ourselves a bit further than this and develop a more sophisticated and efficient solution.
-In order to achieve this goal We will use an old and well-refined idea: the \textit{exponentiation by squaring} which can be
-applied not only to integers but also to many other mathematical objects such as polynomials or
+In order to achieve this goal, we will use an old and well-refined idea: the *exponentiation by squaring*, which can be
+applied not only to integers but also to many other mathematical objects, such as polynomials or
 matrices (for instance, it can be used to calculate the $k^{th}$ Fibonacci number in $log_2(k)$ steps), and that will be key to the solutions we present here. 
 
 \section{Problem statement}
@@ -45,11 +45,11 @@ Implement a function that given two positive integers $n$ and $k$ calculates $n^
     \item Should the function handles integer overflow?
     \begin{answered}
         \textit{No overflow should not be accounted for. }\footnote{
-            This clarification question can however lead to a follow-up discussion on how such scenario can be handled and it can very well go in the many directions: 
+            This clarification question can however, lead to a follow-up discussion on how such scenario can be handled and it can very well go in the many directions: 
             \begin{itemize}
                 \item how to represent and manipulate infinite precision numbers,
-                \item examples of production libraries providing infinite precision, etc (the \href{https://gmplib.org/}{GMP library}\cite{cit::web::gmplibrary} probably being the most known).
-                \item how overflow errors can be handled? (Exceptions, error codes, UB?)
+                \item examples of production libraries providing infinite precision, etc. (the \href{https://gmplib.org/}{GMP library}\cite{cit::web::gmplibrary} probably being the most known).
+                \item how overflow errors can be handled? (Exceptions, error codes, \href{https://en.cppreference.com/w/cpp/language/ub}{UB}\cite{cit::std::ub}?)
             \end{itemize}
             }
     \end{answered}
@@ -58,73 +58,86 @@ Implement a function that given two positive integers $n$ and $k$ calculates $n^
 
 \section{Discussion}
 \label{exponentiation:sec:discussion}
-Exponentiation is such a basic operation that we all know how to calculate powers by means of performing a number of consecutive multiplications. 
-This method stems  directly from the definition of exponentiation which involves two numbers $n$ (the base) and $k$ (the exponent) and it is usually written as $n^k$ (pronounced as \textit{"$n$ raised to the power of $k$"} or \textit{the ${k^{th}}$ power of $n$"}):
-$n^k = \underbrace{n \times n \times n \times \ldots \times n}_{k \text{ times}}$ which shows that 
-we can multiply the base with itself $k$ times to obtain the result. 
+
+Exponentiation is such a basic operation: we all know how to calculate powers by means of performing a number of consecutive multiplications. 
+This method stems  directly from the definition of exponentiation, which involves two numbers $n$ (the base) and $k$ (the exponent) and it is usually written as $n^k$ (pronounced as *"$n$ raised to the power of $k$"* or *the ${k^{th}}$ power of $n$"*):
+$n^k = n \times n \times n \ldots  \times n$ where we multiply the base exactly $k$ times with itself
+to obtain the result. 
 
 This simple algorithm embedded in the definition can be coded in just a few lines and a possible iterative implementation is shown in Listing
-\ref{list:exponentiation_linear}. The code works by calculating the answer, stored in the variable \inline{ans}, by multiplying \inline{ans} itself and \inline{n}, \inline{k} times like we would do with on a blackboard and exactly like stated in the definition of exponentiation above.
-Notice that:
-\begin{itemize}
-    \item Listing \ref{list:exponentiation_linear} assumes $k >=0$,
-    \item when $k=0$ the while loop is not executed at all and the final result is $1$ (which is correct as any positive to the power of $0$ is $1$.)
-    \item the time complexity is $O(k)$ as the while loop decreases the value of $k$ by $1$ at each iteration and,
-    \item the space complexity is constant. 
-\end{itemize}
+\ref{list:exponentiation_linear}.
+
 
 \lstinputlisting[language=c++, caption=Iterative linear time solution.,label=list:exponentiation_linear]{sources/exponentiation/exponentiation_solution1.cpp}
 
+The code calculates the answer, stored in the variable \inline{ans}, by multiplying \inline{ans} itself and \inline{n}, \inline{k} times like we would do with on a blackboard and exactly like stated in the definition of exponentiation above.
+Notice that:
+\begin{itemize}
+    \item Listing \ref{list:exponentiation_linear} assumes $k >=0$,
+    \item when $k=0$ the while loop is not executed at all and the final result is $1$ (which is correct as the result of raising any positive to the power of $0$ is $1$.)
+    \item the time complexity is $O(k)$ as the while loop decreases the value of $k$ by $1$ at each iteration;
+    \item the space complexity is constant. 
+\end{itemize}
 
+\subsection{Using recursion}
+When discussing this solution, the interviewer might explicitly ask for a recursive solution. The definition of power by repetitive multiplication already provides all the ingredients to write one, and in particular, it should be noticed that we can regroup the operations in the definition above so that: $n^k = n \times n^{k-1}$ which shows that the ${k^{th}}$ power of $n$ is function of its ${(k-1)^{th}}$ power. 
 
-When discussing this solution, the interviewer might explicitly ask for a recursive solution. The definition of power by repetitive multiplication already provides all the ingredients to write one, and in particular it should be noticed that we can regroup the operations in the definition above so that: $n^k = n \times \underbrace{(n \times n \times n \times \ldots \times n)}_{k-1 \text{ times}} = n \times n^{k-1}$ which shows that the ${k^{th}}$ power of $n$ is function of its ${(k-1)^{th}}$ power. Listing \ref{list:exponentiation_linear_recursive} shows a recursive code implementing this idea which runs in $O(k)$ time and space as:
+Listing \ref{list:exponentiation_linear_recursive}  shows a recursive code implementing this idea.
+
+\lstinputlisting[language=c++, caption=Recursive linear solution.,label=list:exponentiation_linear_recursive]{sources/exponentiation/exponentiation_solution5.cpp}
+
+Listing \ref{list:exponentiation_linear_recursive} runs in $O(k)$ time and space as:
 \begin{itemize}
     \item the base case $k=0$ is reached only after $k$ steps as each recursive call decreases the value of $k$ by $1$ and each call costs constant time; 
     \item we need to use space for the activation record of each of the $O(k)$ recursive calls.
 \end{itemize}
 
-\lstinputlisting[language=c++, caption=Recursive linear solution.,label=list:exponentiation_linear_recursive]{sources/exponentiation/exponentiation_solution5.cpp}
-
-
 
 
 \subsection{Binary fast exponentiation}
 \label{exponentiation:sec:fast_exponentiation}
-The recursive solution showed above was built on top of the notion that the ${k^{th}}$ power of $n$ is function of its ${k-1^{th}}$ power. We have obtained this result by simply regrouping the definition of exponentiation given in the introduction of this chapter. However, this is not the only possible way of regrouping these multiplications as for instance we can calculate $n^k$ as $n^{4} \times n^{k-4}$.
-This is possible thanks to two well known properties of powers:
+The recursive solution showed above was built on the notion that the ${k^{th}}$ power of $n$ is function of its ${k-1^{th}}$ power. We have obtained this result by simply regrouping the definition of exponentiation given in the introduction of this chapter. However, this is not the only possible way of regrouping these multiplications as, for instance, we can calculate $n^k$ as $n^{4} \times n^{k-4}$.
+This is possible thanks to the following two well-known properties of powers:
+
 \begin{enumerate}
     \item if $x+y=k$ then, $n^k = n^x  n^y = n^{x+y}$ 
     \item if $x \times y=k$ then, $n^k = (n^x)^y$
 \end{enumerate}
 
-How can we use this fact to speed-up the exponentiation process? Think for instance what happens when  $k$ is a power of $2$.All it takes to calculate $n^k$ is knowning the value of $n^{\frac{k}{2}}$ and in turn all it takes to calculate $n^{\frac{k}{2}}$ is $n^{\frac{\frac{k}{2}}{2}}$ and \ldots. You see where this reasoning is heading towards to.
-Eventually the exponent would be one, and at that point we know the answer right away. Because at every step the exponent is divided by $2$, after $log_2(k)$ steps we have all the ingredients to calculate the answer as $n^k : n^{\frac{k}{2}} \times n^{\frac{k}{2}} = (n^{\frac{k}{4}} \times n^{\frac{k}{4}}) \times (n^{\frac{k}{4}} \times n^{\frac{k}{4}}) = \big ( (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \times (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \big ) \times \big ( (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \times (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \big )  = \ldots $
+How can we use this to speed up the exponentiation process? For instance, let's consider what happens when  $k$ is a power of $2$.
+All it takes to calculate $n^k$ is knowing the value of $n^{\frac{k}{2}}$, and in turn, all it takes to calculate $n^{\frac{k}{2}}$ is $n^{\frac{\frac{k}{2}}{2}}$ and so on, $\ldots$ You see where this reasoning is heading towards.
+Eventually the exponent would be one, and at that point we know the answer right away.
 
-We have effectively reduced the time complexity down to $log_2(k)$ \textbf{when $k$ is a power of two}. But what about the general case? Notice that we can split $k$ in half every time $k$ is even (and that when $k$ is a power of $2$ all the intermediate division lead to an even number), and therefore we can start by applying the idea above only when $k$ is even and relying on the $1$-$k-1$ split in all the other cases. 
+Because at every step the exponent is divided by $2$, after $log_2(k)$ steps we have all the ingredients to calculate the answer as $n^k : n^{\frac{k}{2}} \times n^{\frac{k}{2}} = (n^{\frac{k}{4}} \times n^{\frac{k}{4}}) \times (n^{\frac{k}{4}} \times n^{\frac{k}{4}}) = \big ( (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \times (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \big ) \times \big ( (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \times (n^{\frac{k}{8}} \times n^{\frac{k}{8}}) \big )  = \ldots$
 
-In other words the idea is to calculate the answer by multiplying two smaller powers: $n^p$ and $n^q$ with $p,q < k$. The value of $p$ and $q$ depends on the parity of $k$ (whether $k$ is even or odd) and more in particular we want:
+
+We have effectively reduced the time complexity down to $log_2(k)$ \textbf{when $k$ is a power of two}.
+But what about the general case? Notice that we can split $k$ in half every time $k$ is even (and that when $k$ is a power of $2$ all the intermediate division lead to an even number), and therefore we can start by applying the idea above only when $k$ is even and relying on the ($1$,$k-1$) split in all the other cases. 
+
+
+In other words, the idea is to calculate the answer by multiplying two smaller powers: $n^p$ and $n^q$ with $p,q < k$. The value of $p$ and $q$ depends on the parity of $k$ (whether $k$ is even or odd) and more in particular we want:
   \[
     n^k = \begin{cases}
                 p=q \Longrightarrow n^{\frac{k}{2}} \times n^{\frac{k}{2}}, & \text{if  k even}\\
                 p=1, q=k-1 \Longrightarrow n \times n^{k-1}, & \text{if k odd}\\
             \end{cases}
   \]
-This allows for the number of multiplication to be reduced by half all the times that $k$ is even but also crucially when $k$ is odd as $n^{k-1}$ can be calculated by reducing the number of multiplications by half because $k-1$ is even.
+This allows for the number of multiplication to be reduced by half all the times that $k$ is even but also crucially, when $k$ is odd as $n^{k-1}$ can be calculated by reducing the number of multiplications by half because $k-1$ is even.
 
 Clearly, this approach is inherently recursive and
 can be coded as such easily as shown in Listing \ref{list:exponentiation_fast}.
 
 \lstinputlisting[language=c++, caption=Recursive $O(log_2$ solution to the exponentiation problem.,label=list:exponentiation_fast]{sources/exponentiation/exponentiation_solution2.cpp}
 
-The code works similarly to how Listing \ref{list:exponentiation_linear_recursive} works except for the special treatment $k$ receives when it is even. This solution has a time complexity of $log_2(k)$. The intuitive idea is that in the worst-case scenario, every two invocations of the \inline{exponentiation_fast} function we split the value of $k$ in half anyways.
+The code works similarly to how the linear time recursive solution works except for the special treatment $k$ receives when it is even. 
 
+This solution has a time complexity of $log_2(k)$. The intuitive idea is that in the worst-case scenario, for every two invocations of the \inline{exponentiation_fast} function we split the value of $k$ in half anyways.
 
-
-\subsection{Iterative implementation}
+\subsection{Iterative solution using bit manipulation}
 
 Another way to tackle this problem is by looking at the binary representation of the exponent $k =
-b_0 \times 2^0 + b_1 \times 2^1 + \ldots + b_l \times 2^l$ where $b_i$ is a binary digit.
-When plugging $k$ into the formula for the calculation of $n^k$ the following is obtained (and by applying the properties of powers shown above):
+b_0 \times 2^0 + b_1 \times 2^1 + \ldots + b_l \times 2^l$ where $b_i$ as a binary digit.
+When plugging $k$ into the formula for the calculation of $n^k$, the following is obtained (and by applying the properties of powers shown above):
 \[
     \begin{array}{lcl}
         n^k & = &  n^{b_0 \times 2^0 + b_1 \times 2^1 + \ldots + b_l \times 2^l} \\
@@ -135,40 +148,53 @@ When plugging $k$ into the formula for the calculation of $n^k$ the following is
 \]
 
 It is clear that the term $i^{th}$ in the final multiplication chain contributes to the final result only when the corresponding value of $b_i$ is set to $1$, because if it is $0$ then the term contribution is $1$ (which is the neutral element for multiplication).
-Additionally as $i$ increases, $n$ get squared at each step as $i$ is in the formula an exponent for $2$. 
+Additionally, as $i$ increases, $n$ gets squared at each step, as $i$ is in the formula an exponent for $2$. 
 
 
 The idea above can be used to implement
-a fast exponentiation iterative solution by looking only at the bits of $k$ and using the formula above to calculates the answers accordingly. 
+a fast exponentiation iterative solution by looking only at the bits of $k$, and using the formula above to calculate the answers accordingly.
 Listing \ref{list:exponentiation_fast_iterative} and \ref{list:exponentiation_fast_iterative_alternative} shows two  possible ways of doing this.
 
 \lstinputlisting[language=c++, caption=Logaritmic solution based on the analysis of the bits of the exponent.,label=list:exponentiation_fast_iterative]{sources/exponentiation/exponentiation_solution3.cpp}
 
 
-The code works by keeping track of two quantities:
+The code in Listing \ref{list:exponentiation_fast_iterative}  works by keeping track of two quantities:
 \begin{enumerate}
     \item \inline{ans}: a variable holding the partial calculations of the answers along the multiplication chain and, 
     \item \inline{n} which stores the value of $n$ raised to $2$ to the power of the current iteration index $i$. The value of $n$ is squared at each iteration.
 \end{enumerate}
-The loop is used to inspect the $i^{th}$ bit of $k$ and when it is set, \inline{ans} is multiplied by the current value hold by \inline{n}. 
+The loop is used to inspect the $i^{th}$ bit of $k$ and when it is set, \inline{ans} is multiplied with the current value hold by \inline{n}. 
 
 
-The complexity of this approach is $O(log_2(k))$ because the algorithm does not perform more
-iteration than the number of bits of the exponent $k$. Thus at most $\lfloor log(k) \rfloor$ squaring and
-multiplication are performed. If native types like \inline{unsigned} are used then the complexity is constant as these types have a finite precision and therefore a fixed number of bits (the same reasoning holds for all the solutions discussed in all the sections above). 
+The complexity of this approach is $O(log_2(k))$, because the algorithm does not perform more iteration than the number of bits of the exponent $k$.
+Thus, at most $\lfloor log(k) \rfloor$ squarings and multiplications are performed.
+If native types like \inline{unsigned} are used, then the complexity is constant as these types have a finite precision and therefore a fixed number of bits (the same reasoning holds for all the solutions discussed in all the sections above). 
 
-Listing \ref{list:exponentiation_fast_iterative_alternative} shows an alternative implementation which is slightly more sophisticated and efficient as it stops  as soon as it notices there is no bit set in $k$ anymore,  while Listing \ref{list:exponentiation_fast_iterative} iterates blindly over all the bits of $k$. 
+Listing \ref{list:exponentiation_fast_iterative_alternative} shows an alternative implementation which is slightly more sophisticated and efficient as it stops as soon as it notices there is no bit set in $k$ anymore (when $k$ is zero),  while Listing \ref{list:exponentiation_fast_iterative} iterates blindly over all the bits of $k$.
 In practice, this might not be a real or even measurable advantage.
-
 
 \lstinputlisting[language=c++, caption=Alternative implementation of Listing \ref{list:exponentiation_fast_iterative}.,label=list:exponentiation_fast_iterative_alternative]{sources/exponentiation/exponentiation_solution4.cpp}
 
+Finally, we should note that, because one of the constraints of the problem is that overflow is guaranteed to never occur, then we are assured that $k$ is a relatively small number and we can safely assume it is smaller than $64$, otherwise we would need data types with a capacity of more than $64$ bits to store the answer.
+Under this constraint, the logarithmic time solution might also not provide a measurable speed-up or it might even be slower, due to the fact that the linear time solution features a simple loop with basic operations that can be well optimized by the compiler optimizer.
 
-Finally, it should be noted that, because one of the constraints of the problem is that overflow is guaranteed to never occur, then we are assured that $k$ is a relatively small number and we can safely assume it is smaller than $64$ otherwise we would need data types with a capacity of more than $64$ bits to store the answer.
-Under this constraint the logarithmic time solution might also not provide a measurable speed-up or it might even be slower due to the fact that the linear time solution features a simple loop with basic operations that can be well optimized by the compiler optimizer. 
 
-
-In the introduction, we also mentioned that exponentiation not only applies to numbers but that can be basically applied to a larger class of objects like matrices for instance. The codes we have developed during the discussion of this problem can be easily extended so that work on any type  providing the \inline{operator*()},\inline{operator>>()} and the
+In the introduction, we also mentioned that exponentiation not only applies to numbers but that can be basically applied to a larger class of objects, matrices for instance. The codes developed during the discussion of this problem can be easily extended so that they work on any type providing the \inline{operator*()},\inline{operator>>()} and the
 \inline{operator\&()} operators by using \inline{template}s.
 
-%\subsection{Fast $k^{th}$ Fibonacci calculation}
+
+\section{Common Variations}
+
+\subsection{Fibonacci numbers - Problem statement }
+
+\begin{exercise}
+Write a function that given an integer $n$ returns the $n^{th}$ Fibonacci number. 
+Your solution should run in $O(log(n))$ time. 
+
+    \begin{example}
+        \hfill \\
+        Given $n=44$ the function returns $701408733$
+    \end{example}
+
+\end{exercise}
+
