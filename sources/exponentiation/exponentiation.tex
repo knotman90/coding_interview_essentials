@@ -167,7 +167,7 @@ The loop is used to inspect the $i^{th}$ bit of $k$ and when it is set, \inline{
 
 
 The complexity of this approach is $O(log_2(k))$, because the algorithm does not perform more iteration than the number of bits of the exponent $k$.
-Thus, at most $\left \lfloor{k}\right \rfloor$ squarings and multiplications are performed.
+Thus, at most $\lfloor log(k) \rfloor$ squarings and multiplications are performed.
 If native types like \inline{unsigned} are used, then the complexity is constant as these types have a finite precision and therefore a fixed number of bits (the same reasoning holds for all the solutions discussed in all the sections above). 
 
 Listing \ref{list:exponentiation_fast_iterative_alternative} shows an alternative implementation which is slightly more sophisticated and efficient as it stops as soon as it notices there is no bit set in $k$ anymore (when $k$ is zero),  while Listing \ref{list:exponentiation_fast_iterative} iterates blindly over all the bits of $k$.

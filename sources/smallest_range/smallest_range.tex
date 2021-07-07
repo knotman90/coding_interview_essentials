@@ -51,7 +51,7 @@ each of the elements $-K \leq p \leq K$.
 \end{QandA}
 
 \section{Discussion}
-\label{smallest_range:sec:discussion}
+\label{smallest_range:sec:discussionMain}
 For this problem we are going to skip even discussing a brute-force solution\footnote{Constructing
 	and returning the difference between the largest and smallest element among all of the
 	$2K^{|I|}$ possible arrays you can obtain by adding any of the $2K$ between $-K$ and $K$ to each
@@ -211,7 +211,7 @@ that the gap between the new minimum ($1$, obtained by subtracting $2$ from the 
 with value $3$) and the new maximum element ($6$, obtained by subtracting $2$ from $8$) is now
 $6-3=3$. Similarly Figure \ref{fig:smallest_range:bars3} shows the resulting array for $j=3$. The
 new array minimum and maximum values are now $3$ and $6$, respectively. When $j=2$ or $j=3$, as we
-can see in Figures \ref{fig:smallest_range:bars4} and \ref{fig:smallest_range:bars5} the gap
+can see in Figures \ref{fig:smallest_range:bars4} and \ref{fig:smallest_range:bars15} the gap
 increases w.r.t. to the case where $j=1$. Finally Figure \ref{fig:smallest_range:bars6} shows the
 case where all the new elements are obtained by adding $K$. This scenario leaves the relative
 distance between the elements unchanged w.r.t. to the original values and therefore not surprisingly
@@ -248,14 +248,14 @@ the code, $m'$ is \inline{m_new} and $M'$ is \inline{M_new}.
 		\centering
 		\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars4}
 		\subcaption{$j=1$}
-		\label{fig:smallest_range:bars4}
+		\label{fig:s3mallest_range:bars4}
 	\end{subfigure}
 
 	\begin{subfigure}{0.99\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars5}
-		\caption{$j=1$}
-		\label{fig:smallest_range:bars5}
+		\subcaption{$j=1$}
+		\label{fig:smallest_range:bars15}
 	\end{subfigure}
 \end{figure}
 
@@ -263,14 +263,14 @@ the code, $m'$ is \inline{m_new} and $M'$ is \inline{M_new}.
 	\begin{subfigure}{0.99\textwidth}
 		\centering
 		\includegraphics[width=1\linewidth]{sources/smallest_range/images/bars6}
-		\caption{$j=1$}
+		\subcaption{$j=1$}
 		\label{fig:smallest_range:bars6}
 	\end{subfigure}
 
 	\caption{Execution of the algorithm presented in Section \ref{smallest_range:sec:discussion}
 	for $j=0$ (Figure \ref{fig:smallest_range:bars2}),  $j=1$ (Figure \ref{fig:smallest_range:bars3}),
 	$j=2$ (Figure \ref{fig:smallest_range:bars4}), $j=5$ (Figure \ref{fig:smallest_range:bars4}) 
-	and $j=5$ (Figure \ref{fig:smallest_range:bars5}).
+	and $j=5$ (Figure \ref{fig:smallest_range:bars15}).
 	The highlighted boxes contains the values obtained from the original elements
 	shown in the white boxes.}
 	\label{fig:smallest_range:bars_execution}
