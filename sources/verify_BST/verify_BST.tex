@@ -9,11 +9,11 @@
 \chapter{Verify BST property}
 \label{ch:verify_BST}
 \section*{Introduction}
-Data structures is a topic that lies at the heart of the entire field of computer science and of virtually every computer code running in the globe.
-Algorithms are built around a particular data arrangements and there are some arrangements that are more convenient than others 
+Data structures is a topic that lies at the heart of the entire field of computer science and of virtually every computer code running around the globe.
+Algorithms are built around particular data arrangements and there are some arrangements that are more convenient than others 
 and often choosing the right one could mean the difference between waiting years for a particular algorithm to come to completion versus seconds. 
 
-Among the vast number of the mainstream data structures, trees, and specially the binary kind, are probably one of the most used because they naturally allow to represent hierarically data which is ubiquitous and at the basis, DOM \footnote{Document Object Model is a way of representing documents as a trees wherein each node is an object represents a part of the document (See Figure \ref{fig:verify:DOM}).} (XML,HTML) and  JSON documents, which lies at the heart of the Wolrd Wide Web.
+Among the vast number of the mainstream data structures, trees, and especially the binary kind, are probably one of the most used because they naturally allow representing hierarchical data which is ubiquitous and at the basis, DOM \footnote{Document Object Model is a way of representing documents as trees wherein each node is an object represents a part of the document (See Figure \ref{fig:verify:DOM}).} (XML,HTML) and  JSON documents, which lies at the heart of the Wolrd Wide Web.
 Trees are also fundamental for compilers as they are used to represent the syntactic structure of a source code for programming languages.
 
 Trees can be defined recursively as a collection of nodes, which contains some data and a lsit of references to other nodes, the "children". There is a special node called the root with the property that no other nodes have reference to it. Moreover, a node can only be referenced once (i.e. it can have one and only one father). See Figure \ref{fig:verify:generic_tree} for an example of a generic tree.
@@ -141,35 +141,33 @@ You can assume the input tree is given as a pointer or a reference to a structur
 
 \section{Discussion}
 \label{verify_BST:sec:discussion}
-In order to solve this problem we need to write a function that is able to verify whether a given tree is a valid BST or not. But what does it mean to be valid exactly?
+In order to solve this problem, we need to write a function that is able to verify whether a given tree is a valid BST or not. But what does it mean to be valid exactly?
 From the definition given above we know that tree $T$ is a BST when:
 \begin{enumerate}
 	\item Every node in $T$ has two subtree (which might be also empty and are named \textit{left} and \textit{right}, respectively). In other words, $T$ is a binary tree.
-	\item Given a node $n$ in the tree then \textbf{all} the nodes in its left subtree must be smaller than $n$;
-	\item simmetrically, it must also hold that \textbf{all} nodes in the right subtree are larger than $n$.
+	\item given a node $n$ in the tree then \textbf{all} the nodes in its left subtree must be smaller than $n$;
+	\item symmetrically, it must also hold that \textbf{all} nodes in the right subtree are larger than $n$.
 \end{enumerate}
 For instance, the tree in Figure \ref{ex:verify_BST:no_BST} is not a valid BST because node $15$ is a right descendant of the root but is it not greater than it. On the other hand, the trees in Figure \ref{example:verify_BST:example3} and \ref{example:verify_BST:example4} are valid BST. The tree in Figure \ref{fig:verify:generic_tree} is not a valid BST because it is not a binary tree as node $0$ has three children.
-
-
 
 Therefore, in order to solve this problem we must be able to prove the conditions above hold for each and every node of the input tree. 
 
 \subsection{A common mistake}
-Most candidates can write down the BST properties rather quickly and they dive immediately after into writing a greedy algorithm tha works as follows: for each node $n$ of $T$ check that 
+Most candidates can recall write down the BST properties rather quickly and they dive immediately into writing a greedy algorithm that works as follows: for each node $n$ of $T$ check that 
 \inline{n.val > n->left.val && n.val < n->right.val} i.e. that the payload of the node currently  analyzed is greater than the value of its left child but smaller than its right one.
-This algorithm might even return the correct answer for some input trees but it fails on others, and it is therefore, not correct.
+This algorithm might even return the correct answer for some input trees but it fails on others, and it is, therefore, not correct.
 For example, it returns true if we execute on the tree in Figure \ref{ex:verify_BST:no_BST}.
-Usually this mean the end of the round and very likely a rejection. 
+Usually approching the problem this way means the end of the round and very likely  rejection. 
 
 It becomes clear at this point, that the problem with this approach is that when verifying if the BST property holds for node $n$ we only look $n$ and its children. We must being able to check every node in the left and right subtrees of $n$ and also to somehow, make sure the information in $n$ travels down to $n$'s children and descendants so they can use it (to carry on the check for $n$ itself).
 We will see how this can be done in the next sections.
 
 \subsection{Top Down approach}
 \label{verify_BST:sec:topdown}
-When talking about trees, we should naturally steered onto thinking about a top-down approach and recursion. 
-This problem becomes almost trivial if approached using recursion and we are able to make the following key considerations:
+When talking about trees, we should naturally be steered onto thinking about a top-down approach and recursion. 
+In particular, this problem becomes almost trivial if approached using recursion and we are able to come up with the following insights:
 \begin{enumerate}
-	\item every node can be thought as the root of a tree for which the BST property needs to be verified;
+	\item every node can be thought of as the root of a tree for which the BST property needs to be verified;
 	\item empty trees satisfy the BST property by definition;
 	\item every node must contain a value within a range that is determined by its ancestors. For instance, consider the node $15$ in the Figure \ref{example:verify_BST:example4}; it must be within the range $(14,16)$ for the tree to be a valid BST. Why is that? Because its parent, the node $16$ must be within the range $(14,+\infty)$ and additionally node $15$, being the left subtree of node $16$ must be lower than its parent. 
 	The same reasoning can be applied recursively up to the root of the tree where the range of the value is simply $(-\infty, +\infty)$ (no constraints at all). 
@@ -177,18 +175,17 @@ This problem becomes almost trivial if approached using recursion and we are abl
 	The node $9$ in the Figure \ref{example:verify_BST:example4} must be within the range $(1,10)$ for equivalent reasons.
 \end{enumerate}
 
-To summarize, we can visit the tree in a top-down fashion and maintain a range ov values that the current node must satisfy. We can start with a range equal to $(-\infty, +\infty)$ for the root (meaning that de-facto, there is no restriction on the value the root can take).
+To summarize, we can visit the tree in a top-down fashion and maintain a range of values that the current node must satisfy. We can start with a range equal to $(-\infty, +\infty)$ for the root (meaning that de-facto, there is no restriction on the value the root can take).
 Once the value is checked against this range, then the same function can be applied recursively to the right and left children but with the shrewdness of making sure that the range is modified accordingly when recurring on the children. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% review till here
 The fulcrum of the problem seems to be the update of such a range change when visiting down the tree. How should it change when visiting a new node? 
 The idea is quite simple:
 Given a node $n$ with parent $p$ and range \( (l_p, u_p) \) then:
 \begin{itemize}
 	\item if $n$ is the right child of $p$, the range for $n$ is: $(p, u_p)$:
 	all nodes in the right subtree of $p$ must be have a value \textbf{higher} than $p$. 
-	Note that $p > l_p$ (otherwise the BST property would be violeted when checking $p$) and thus the range for $n$ becomes smaller meaning that all the constrains coming from the ancestors of $p$ will also be satisfied with the new range $(p, u_p)$.
-	\item A similar reasoning applies if $n$ is the left child of $p$: in this case the range is $(l_u,p)$.
+	Note that $p > l_p$ (otherwise the BST property would be violated when checking $p$) and thus the range for $n$ becomes smaller meaning that all the constraints coming from the ancestors of $p$ will also be satisfied with the new range $(p, u_p)$.
+	\item A similar reasoning applies if $n$ is the left child of $p$: in this case, the range is $(l_u,p)$.
 \end{itemize}
 See Figure \ref{ex:verify_BST:example4_ranges} showing what the ranges look like for the tree in Figure \ref{ex:verify_BST:example4}. 
 
@@ -216,24 +213,33 @@ See Figure \ref{ex:verify_BST:example4_ranges} showing what the ranges look like
 
 An implementation of the idea above is shown in Listing \ref{list:verify_BST}. 
 
-\lstinputlisting[language=c++, caption=Linear time recursive solution to the problem of verifying the BST property.,label=list:verify_BST]{sources/verify_BST/verify_BST_solution1.cpp}
+\lstinputlisting[language=c++, caption=Linear time recursive solution.,label=list:verify_BST]{sources/verify_BST/verify_BST_solution1.cpp}
 
-Note how short and concise the code can be implemented with recursion.  The complexity of this approach is $O(n)$ time and $O(1)$ space (if you do not count the space on the stack taken by the recursion.
+The function \inline{isValidBST_top_down} is a simple entry point for the recursive function \inline{isValidBST_top_down_helper} which uses the parameters \inline{lower} and \inline{upper} to keep track of the range the node \inline{root} must respect. 
+The interesting bits in this function are the ways the recursive calls are made and specifically in what values are provided to the parameters \inline{lower} and \inline{upper}. 
+When performing the first recursive call on \inline{root->left} the parameter \inline{lower} is kept unchanged while the \inline{upper} is set to be equal to the current value of root because every element in the left subtree of $n$ must indeed be smaller than \inline{root->val}.
+
+Symmetrically for the second recursive call on \inline{root->right}, \inline{upper} stays unchanged and \inline{lower} get the value of \inline{root->val} because all the nodes in $n$'s right subtree must be larger than \inline{root->val}.
+
+The time and space complexities of Listing \ref{list:verify_BST} are $O(n)$  and $O(1)$, respectively space (if we do not keep into consideration the space on the stack taken by the recursion).
 
 \subsection{Brute force}
-Another way to solve this problem comes from the fact that for each node $n$ we need to check if the left subtree contains any element greater than $n$ and whether its right subtree contains any element smaller than $n$ and that, this task is trivial when the two following functions are available:
+We can look at the problem from a different perspective and try to prove the input tree is not  BST rather than trying to prove it is. Clearly, if we fail as proving it is not a BST, then it must indeed be one!
+A tree is not a BST if we are able to find a node $n$ s.t. its left subtree contains any element greater than $n$ and or its right subtree contains any element smaller than $n$.
+This task is trivial when the two following functions are available:
 \begin{enumerate}
 	\item \inline{tree_min(TreeNode* root)}
 	\item \inline{tree_max(TreeNode* root)}
 \end{enumerate}.
 which return the minimum and the maximum value of a tree, respectively.
-We can verify the BST property of a node $n$ in the tree by comparing the value of $n$ with the values returned by \inline{tree_min} and \inline{tree_max} and checking it lies in between.
+
+We can verify the BST property of a node $n$ is not violated by making sure that the maximum value in its left subtree is not larger or equal than $n$ and that the minimum value in its right subtree is not smaller or equal than $n$.
 
 Luckly implementing \inline{tree_min(TreeNode* root)} and \inline{tree_max(TreeNode* root)} is easy to do in linear time as all we need to do is traverse the tree (in any order really) and keep track of the smallest/largest element seen. 
 
 The idea above can be implemented as shown in Listing \ref{list:verify_BST_bruteforce}
 
-\lstinputlisting[language=c++, caption=Quadratic solution.,label=list:verify_BST_bruteforce]{sources/verify_BST/verify_BST_solution2.cpp}
+\lstinputlisting[language=c++, caption=Quadratic solution based on the two functions returning the minimum and maximum value of a tree.,label=list:verify_BST_bruteforce]{sources/verify_BST/verify_BST_solution2.cpp}
 
 Listing \ref{list:verify_BST_bruteforce} has a quadratic time complexity because for each and every node of the tree we perform a linear amount of work. The space complexity is also linear if we consider the space on the stack to perform the recursion.
 
