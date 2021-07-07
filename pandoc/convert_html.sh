@@ -33,6 +33,7 @@ done
 
 
 
+
 echo "Working directory is $WORK_DIR"
 
 # Generate markdown single file from tex
@@ -105,16 +106,63 @@ CURRDIR=$(pwd)
 cd $CHAPTERDIR
 
 
+UPLOAD_FOLDER=$CHAPTERDIR/upload
+mkdir -p $UPLOAD_FOLDER
+
+
 
 /home/dspataro/git/rippledoc/rippledoc.py
 sort -n -t= $CHAPTERDIR/toc.conf -o $CHAPTERDIR/toc.conf
 /home/dspataro/git/rippledoc/rippledoc.py
+
+#upload online with option -u
+if  [[ $1 = "-u" ]]; then
+    
+    #fix the relative paths for images
+
+
+    echo "I am going to upload:"  
+    mv $CHAPTERDIR/*.html $CHAPTERDIR/*.css $UPLOAD_FOLDER
+    ls $UPLOAD_FOLDER
+    set -x
+    for i in $UPLOAD_FOLDER/*.html
+    do
+        sed -i 's#/tmp/.*/sources/#sources/#g' $i
+    done
+
+
+    echo "Backing up files on the webserver:"
+
+    
+    ssh davidespataro.it@ssh.davidespataro.it "zip -r  /customers/b/f/9/davidespataro.it/httpd.www/backupbook/$(date "+%Y-%m-%d-%H-%M-%S").zip /customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/"
+    #ssh davidespataro.it@ssh.davidespataro.it "rm -rf  /customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/*"
+    cd $WORK_DIR
+    for imgdir in sources/**/images
+    do
+        files=($imgdir/*.jpg $imgdir/*.png)
+        if [ ${#files[@]} -gt 0 ]
+        then
+            
+            ssh davidespataro.it@ssh.davidespataro.it "mkdir -p /customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/$imgdir"
+            scp "${files[@]}" davidespataro.it@ssh.davidespataro.it:/customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/$imgdir
+        fi
+    done
+    scp $UPLOAD_FOLDER/* davidespataro.it@ssh.davidespataro.it:/customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/
+else
+    echo "Not going to upload the files to the webserver!"
+fi
+
+cd $CHAPTERDIR
+
+
 
 cd $CURRDIR
 ls -lah $CHAPTERDIR
 
 google-chrome-stable $CHAPTERDIR/index.html
 #sed -n -E -e '/^# Power set/,/^# /p' ./main.md
+
+
 
 
 # ^-\s*\[(.+)\]\((.+)\) 
