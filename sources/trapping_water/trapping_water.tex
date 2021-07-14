@@ -197,13 +197,22 @@ We believe this is the solution the interviewer is hoping to see.
 
 \subsection{Stack based solution}
 \label{trapping_water:sec:stack}
-There is another way of solving this problem in linear time that makes good use of a stack which is manipulated in such a way that, at any moment contains the indexes of the piles that are bounded on their left by some other pile (if the value $x>=0$ is in the stack, it means that there is another pile at indices $y<x$ larger than it).
+There is another way of solving this problem in linear time that makes good use of a stack. The main idea is to loop through $H$ one element $p_i$ (pile at index $i$ in $H$) at the time and try to place $p_i$ on the stack in such a way that the values in the stack are always in a decreasing order (from top to bottom).
+We start with an empty stack $S$ and for each pile $p_i \in H$ we do one of the two following operations depending on whether $p_i$  is lower than the current top of the stack $s_{top}$:
+\begin{description}
+	\item[$p_i < s_{top}$] the current top of the stack is higher than $p_i$ which means that $s_{top}$ bounds $p_i$ from the left. In this case we simply add it to the top of the stack. At this point the stack is still ordered in a decreasing fashion.
+	\item[$p_i \geq s_{top}$] we have a pile that is higher or equal to the $s_{top}$. Therefore if we want to place $p_i$ on the stack and maintain the ordering, we need to remove as many elements as necessary until we are left with a top of the stack that is higher of $p_i$, or the stack is fully empty (this happens for instance, but not only, when $p_i$ is the highest pile in $H$).
+	However each each pile that is removed together with $p_i$  form a rectangular area that can trap some water. Why is that? Well, the removed pile is bounded from the left by some other pile (this is guaranteed by how elements are inserted in the stack, or more simply by the ordering the stack maintains) and to the right by $p_i$ itself. 
+	How much water exactly? 
+	The contribution of the removed element $S_{oldtop}$ is calculated as the area of a rectangle of base equal to the distance between the two bounding bars ($p_i$ and the element before $S_{oldtop}$) and and height that is equal to the minimum of the heights between the two bounding bars \textbf{minus} $S_{oldtop}$. Clearly if there is no bar left in the stack once we remove $S_{oldtop}$, there is no way we can trap water and therefore we add nothing to the final answer. 
+\end{description}
 
-It means that the stack will contain bars in a decreasing order (from the bottom to the top). The idea is that we start with an empty stack $S$ and iterate thought the input array from start to end, and for each bar $b_i$:
-we check whether it is lower than the top of the stack $S_{top}$. If that is the case, the current top of the stack is higher than this element and so it means that the current top bounds the current element from the left. In this case we simply add it to the  top of the stack. If it not the case then we have a bar that is higher or equal to the top. Thus  all the bars in the stack that are smaller or equal of $i$ can trap some water because they are bound from left (by other taller elements in the stack) and to the right by $i$ itself.
-Given the stack $S=[s_0, s_1,s_2]$ where $s_0 \geq s_1 \geq s_2$ (remember they are increasing from top to bottom) we know that we can use bar $i$ and bar $s_1$ to calculate the contribution of $s_2$ to the final answer and we can use bar $i$ and bar $s_0$ to calculate the contribution of $s_1$. The contribution of each element is calculated as the rectangle of base equal to the distance between the two bounding bars and height that is equal to the minimum of the heights between the two bounding bars \textbf{minus} the height of the bar we are calculating the contribution. 
+A possible implementation of this idea is shown in Listing \ref{list:trapping_water:stack}.
+Notice that the real work happens inside the \inline{while} loop and that the pile we calculate the contribution is named \inline{old_top} while the bar on the left and right are named \inline{bar_left} and \inline{bar_right} (equivalent to $p_i$) respectively. 
+Moreover, no matter the stack is unwound or not, \inline{bar_right} is \textbf{added} to the stack because when controls reaches line $21$ it will be either the only bar in the stack of it will be smaller than the current top (order is restored).
 
-A possible implementation of this idea is shown in Listing \ref{list:trapping_water:stack}. Note how all the real work happens inside the \inline{while} loop and that the bar we calculate the contribution is named top while the bar on the left and right are named \inline{bar_left} and \inline{bar_right} respectively. Moreover, no matter the stack is unwounded or not the \inline{bar_right} is \textbf{added} to the stack because when controls reaches line $21$ it will be either the only bar in the stack of it will be smaller than the current top.
+The complexity of this approach is linear in both time and space .
 
+\lstinputlisting[language=c++, caption={Stack based solution, $O(n)$ time and  space solution.},label=list:trapping_water:stack]{sources/trapping_water/trapping_water_solution4.cpp}
 
-\lstinputlisting[language=c++, caption={Stack based solution, $O(n)$ time and  space, solution to the problem of calculating the amount of water trapped between buildings.},label=list:trapping_water:stack]{sources/trapping_water/trapping_water_solution4.cpp}
+ 
