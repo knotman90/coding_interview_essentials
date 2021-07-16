@@ -11,7 +11,7 @@
 \section*{Introduction}
 In this chapter, we will tackle a very popular interview question that has a surprisingly short statement and an obvious linear time solution. However, solving this problem nicely is a different story, and coming up with an elegant and efficient solution requires a fair amount of thinking and careful coding.
 
-This problem is based upon the concept of array rotations. To develop an intuitive understanding of this concept, imagine that we want to *"rotate* the elements of an array, that is to shift all of them to the right by a certain number $k$ of positions. The element that used to be at position zero is now at position $k$, and the element that was at position one is now at $k+1$ and so on (see Figure \ref{fig:min_rotated_array:arrayrotation}  below for an example). When an element at position $x$ is moved to a position $x+k$ which is larger than the total number of elements $n$ in the array, the new position is $(x+k) \Mod{n}$: the elements are wrapped around.
+This problem is based upon the concept of array rotations. To develop an intuitive understanding of this concept, imagine that we want to "rotate" the elements of an array, that is to shift all of them to the right by a certain number $k$ of positions. The element that was used to be at position $0$ is now at position $k$ and the element that was at position one is now at $k+1$ and so on (see Figure \ref{fig:min_rotated_array:arrayrotation} for an example).
 
 \begin{figure}
 	\centering
@@ -23,7 +23,7 @@ This problem is based upon the concept of array rotations. To develop an intuiti
 
 \section{Problem statement}
 \begin{exercise}
-Given an array $A$ sorted in an ascending order with no duplicates and rotated around a pivot, return the smallest element.
+Given an array $A$ sorted in ascending order with no duplicates and rotated around a pivot, return the smallest element.
 
 	\begin{example}
 		\hfill \\
@@ -56,27 +56,21 @@ Given an array $A$ sorted in an ascending order with no duplicates and rotated a
 
 \section{Discussion}
 \label{min_rotated_array:sec:discussion}
-What does it really mean for a sorted array to be rotated around a *pivot* element? Given a sorted array $A=\{a_0, a_1, \ldots,a_{n-1}\}$ s.t. $\forall \: 0 \leq i < n: a_i < a_{i+1}$, rotating $A$ around the pivot element at index $p$ results in: $A_p=\{a_p, a_{p+1}, \ldots,a_{n-1}, a_0, a_1, \ldots, a_{p-1}\}$. 
-In a nutshell, all the elements are rotated in such a way that the element at index $p$ becomes the first element of the rotated array. We would have reached the same result if we applied an offset of $-p$ (negative $p$), or $k=(|A|-p)$, positions to all the elements of the array (like discussed above when we gave an intuitive description of an array rotation.). 
+What does it really mean for a sorted array to be rotated around an element? Given a sorted array $A=\{a_0, a_1, \ldots,a_{n-1}\}$ s.t. $ \forall \: 0 \leq i < n: a_i < a_{i+1}$, rotating A around the pivot element at index $p$ results in: $A_p=\{a_p, a_{p+1}, \ldots,a_{n-1}, a_0, a_1, \ldots, a_{p-1}\}$. In a nutshell all the elements are rotated in such a way that the element at index $p$ becomes the first element of the array. For instance, rotating the array $X=\{1,2,3,4,5\}$ around the element at index $2$, results in $X=\{3,4,5,1,2\}$. We would obtain the same result by applying a offset of either $-2$ or $3=5-2=(|A|-2)$ positions to each and every element of $X$. 
 
-For instance, rotating the array $X=\{1,2,3,4,5\}$ around the element at index $2$, i.e. $A[2]=3$, results in $X=\{3,4,5,1,2\}$. We would obtain the same result by applying a offset of either $-2$ or $3=5-2=(|A|-2)$ positions to each and every element of $X$. 
-
-This way of performing rotation is very common, to the point that there is algorithm in the C++ STL\cite{cit::std::rotate} adoption this API.
-
+This way of performing rotation is quite common, to the point that there is an algorithm in the C++ STL\cite{cit::std::rotate} adopting such API.
 
 \subsection{Brute-force}
 \label{min_rotated_array:sec:bruteforce}
-As already mentioned in the introduction, we hopefully know how to trivially solve this problem, as it simply boils down to finding the minimum element in an array.
-In C++, or for that matter in any other mainstream programming language, this can be achieved with a one-liner, as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual} both having $O(n)$ time $O(1)$ space complexity.
-
-\lstinputlisting[language=c++, caption=One-linear brute force (using C++ STL).,label=list:min_rotated_array_bf]{sources/min_rotated_array/min_rotated_array_solution1.cpp}
+The brute-force solution to this problem is trivial and consists of simply looping through the array and keeping record of the smallest element encountered.
+In C++ this can be implemented with a one-liner as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual} both having $O(n)$ time $O(1)$ space complexity.
 
 \lstinputlisting[language=c++, caption=Brute force solution using an explicit loop.,label=list:min_rotated_array_bf_manual]{sources/min_rotated_array/min_rotated_array_solution2.cpp}
 
+\lstinputlisting[language=c++, caption=One-liner brute force solution.,label=list:min_rotated_array_bf_manual]{sources/min_rotated_array/min_rotated_array_solution2.cpp}
 
-The first of the two solutions uses the \inline{std::min_element} function, while the second explicitly loops over all the elements of the array, keeping track of the smallest examined. 
-
-We feel that this approach should just be briefly mentioned during the interview, but no time should be spent in the actual implementation of this idea, as the interviewer is assuming you (hopefully) know how to search for the minimum in an \textbf{unsorted} array. Yes, we did not use the word \textit{unsorted} unknowingly, because the interviewer is clearly looking for a more advanced solution that takes advantage of the fact that the array is sorted (even if provided in a rotated form), and the solutions presented above clearly ignore this fact and would work equally well on a random, unsorted and/or unrotated arrays.
+This approach should just be mentioned during the interview but, no time should be spent in the actual implementation of this idea, as the interviewer is assuming you know how to trivially search for the minimum in an unsorted array. He is clearly looking for a more advanced solution that takes advantage of the fact that the array is sorted (even if provided in a rotated form).
+Yes, we did not use the word \textit{unsorted} unknowingly, because the interviewer is clearly looking for a more advanced solution that takes advantage of the fact that the array is sorted (even if provided in a rotated form), and the solutions presented above clearly ignore this fact and would work equally well on a random, unsorted and/or unrotated arrays.
 
 \subsection{Logarithmic solution}
 \label{min_rotated_array:sec:log}
@@ -95,7 +89,7 @@ In order to be able to apply binary search effectively to a problem, we need som
 
 The core challenges of this problem lie at steps $2$ and $4$ because we need to be able:
 \begin{itemize}
-	\item  test whether an element is the minimum or not ($2$);
+	\item test whether an element is the minimum or not ($2$)
 	\item decide how to split the space range into two and whether proceed with the search on the right-hand or on the left-hand side ($4$).
 \end{itemize}
 
@@ -113,7 +107,7 @@ Thus, whenever $a_{k-1} > a_{k}$ (meaning that $a_k$ is the minimum and $a_{k+1}
 	\label{fig:min_rotated_array:test_element}
 \end{figure}
 
-The Listing \ref{list:test_answer} below shows the condition that can be used in the binary search to test whether $a_k$ is the answer to the problem. Please note how the modulo operation is used in order to avoid having to specialize this test for the elements at the beginning and at the end of the array (positions $0$ and $(|A|-1)$ which do not have predecessor and successor elements, respectively).
+In short, Listing \ref{list:test_answer} shows the condition that can be used in the binary search to test whether $a_k$ is the answer to the problem. Please note how the modulo operation is used in order to avoid having to specialize this test for the elements at the beginning and at the end of the array (positions $0$ and $A.size()-1$, respectively)..
 
 \begin{lstlisting}[language=c++, caption={Test to verify whether the binary search can stop because an answer has been found.},label=list:test_answer]]{
 	const int curr = A[k];
@@ -137,11 +131,10 @@ For instance, consider the sorted rotated array $\{8,9,10,5,6,7\}$: the minimum 
 
 This is the last piece of information that is needed in order to make the binary search work, because we can use it to determine which portion of the two subarrays (the one to the left or to the right of \textit{middle}) to discard. Therefore, given an element at position $i$ that is not the answer, we will continue the binary search on the subarray to the left of $i$ if $a_i > a_0$, otherwise we will use the right side.
 
-Once we are able to test whether an element is the smallest element in the array, or if it is not, how to split the array and continue the binary search, we have all the ingredients necessary to solve this problem efficiently.
+By being able to test whether an element is the smallest element in the array, and if not, how to split the array and continue the binary search, we have all the ingredients necessary to solve this problem efficiently.
 
-An implementation of this idea is shown in the Listing \ref{list:min_rotated_array_log}. 
-
-\lstinputlisting[language=c++, caption={Logaritmic solution to the problem of finding the minimum element in a sorted and rotated array.},label=list:min_rotated_array_log]{sources/min_rotated_array/min_rotated_array_solution3.cpp}
+An implementation of this idea is shown in the Listing \ref{list:min_rotated_array_log}.
+\lstinputlisting[language=c++, caption={Logarithmic solution implemented using a standard iterative binary search.},label=list:min_rotated_array_log]{sources/min_rotated_array/min_rotated_array_solution3.cpp}
 
 
 This solution as a complexity of $O(log(n))$ time and $O(1)$ space.

@@ -11,10 +11,10 @@ namespace BinaryTree
 template <typename T>
 struct Node
 {
-  int val;
-  Node<T>* left;
-  Node<T>* right;
-  Node<T>(int x) : val(x), left(nullptr), right(nullptr)
+  T val;
+  Node* left{nullptr};
+  Node* right{nullptr};
+  Node(T x) : val(x), left(nullptr), right(nullptr)
   {
   }
 };
