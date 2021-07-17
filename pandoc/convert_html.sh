@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -u 
 ROOT="/home/dspataro/git/algorithm_articles/"
 WORK_DIR=$(mktemp -d -t book-XXXXXXXXXX)
 
@@ -45,7 +44,7 @@ pandoc -f latex  --mathjax    -s --toc $MAINTEX -o $MAINMD
 
 #exit 0
 #set -x 
-set -u
+#set -u
 #set -e
 # fix code blocks
 grep -e "\`\`\` {" $MAINMD  | while read -r line ; do
@@ -75,7 +74,7 @@ grep -P "^-\s*\[(.+)\]\((.+)\)" -o $MAINMD | sed 's/\[/\]/g' | cut -d ']' -f 2 >
 CHAPTERDIR=$WORK_DIR/chapters
 mkdir $CHAPTERDIR
 
-set -u
+#set -u
 
 echo "Copyright 2016–2021 Davide Spataro" > $CHAPTERDIR/_copyright
 

@@ -54,22 +54,23 @@ The power-set of $S$ ($\mathcal{P}(S)$) is the set of all its subsets including 
 \section{Clarification Questions}
 
 \begin{QandA}
-    \item What is the maximum input size?
-    \begin{answered}
-        \textit{The maximum number of elements in $S$ is strictly less than $32$.}
-    \end{answered}
     
-    \item Are all the elements in the collection distinct?
+    \item \begin{questionitem} \begin{question} What is the maximum input size?  \end{question}          
+    \begin{answered}
+           \textit{The maximum number of elements in $S$ is strictly less than $32$.}
+        \end{answered} \end{questionitem}
+    
+    \item \begin{questionitem} \begin{question} Are all the elements in the collection distinct?  \end{question}      
     \begin{answered}
         \textit{No, the elements are not necessarily distinct. $S$ might contain duplicates.}
-    \end{answered}
+    \end{answered} \end{questionitem}
 
-    \item Can the elements of the power-set appear in any order?
+    \item \begin{questionitem} \begin{question} Can the elements of the power-set appear in any order?  \end{question}      
     \begin{answered}
         \textit{Yes, subsets can appear in any order. 
         For example the following is also a valid output for the input shown in Example \ref{ex:power_set:example1}:} 
         $\{\{\}, \{b,c\}, \{a\}, \{a,b\}, \{a,b,c\}, \{b\}, \{a,c\}, \{c\} \}$
-    \end{answered}
+    \end{answered} \end{questionitem}
 \end{QandA}
 
 \section{Discussion}
@@ -128,8 +129,6 @@ it gets.
 
 
 \lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
-
-
 
 
 \begin{figure}
@@ -193,23 +192,15 @@ certain power of two should be added to the final value. With $n$
 bits one can represent $2^n$ numbers, each corresponding to one and only one subset of the power set of those $n$ bits.
 Listing \ref{list:power_set_bits} shows  a possible C++ implementation of the idea above.
 
+\lstinputlisting[language=c++, caption="Solution using bit manipulation.",label=list:power_set_bits]{sources/power_set/power_set_bit_manipulation.cpp}
 
-\begin{lstlisting}[language=c++, caption=Binary tree definition used in this exercice.,label=list:verify_BST:tree_structure]
-
-    struct TreeNode {
-        int val;
-        TreeNode *left;
-        TreeNode *right;
-        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    };
-    \end{lstlisting}
 
 The complexity of this function is, not surprisingly, $O(2^{|S|})$. 
 We also pay a constant price of $32$ for each number we loop through since we need to inspect all of its bits.
 The proposed implementation assumes that the size of \inline{int} is $4$ bytes, which is true for most systems.
 
-Moreover, notice the usage \inline{std::reserve}: it should be used in all those scenarios when we already know the final size of the collection we are building. This saves time because it avoids intermediate allocations and copies that
-must happen during the resize of the vector.
+Moreover, notice the usage \inline{std::reserve}: it should be used in all those scenarios when we already know the final size of the collection we are building.
+This saves time because it avoids intermediate allocations and copies that must happen during the resize of the vector.
 
 
 
