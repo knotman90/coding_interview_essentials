@@ -114,6 +114,38 @@ mkdir -p $UPLOAD_FOLDER
 sort -n -t= $CHAPTERDIR/toc.conf -o $CHAPTERDIR/toc.conf
 /home/dspataro/git/rippledoc/rippledoc.py
 
+
+
+# FIX HTML
+cat $ROOT/pandoc/official_style.css > $CHAPTERDIR/styles.css
+
+
+sed -i '/<body>/a \
+    <script type="text/javascript">\
+    \
+    $(document).ready(function(){\
+    $(".example").prepend("<h3>Example</h3>");\
+    \
+    $(".questionitem").wrap("<ul class=ulquestion></ul>");  \
+    \
+    $(".questionitem .question").wrap("<li></li>");  \
+    $(".questionitem .answered").wrap("<li></li>");  \
+    \
+    \
+    });\
+    </script>\
+' *.html
+
+sed -i '/<head>/a \
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>\
+' *.html
+
+
+
+
+
+
+
 #upload online with option -u
 if  [[ $1 = "-u" ]]; then
     
