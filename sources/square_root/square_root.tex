@@ -118,7 +118,7 @@ be a piece-wise function that partition the search space $[0\ldots n]$ into two 
 \end{table}
 
 Clearly, the answer we are looking for is \textbf{the greatest value $k$ s.t. $F(k) = 0$}. 
-Notice that every number in the left part of the search space, $0 \leq l \leq \lfloor n \rfloor$ has $F(l) = 0$, while the elements in the right side,$\floor{n}+1 \leq r \leq n$, have $F(r) = 1$.
+Notice that every number in the left part of the search space, $0 \leq l \leq \lfloor n \rfloor$ has $F(l) = 0$, while the elements in the right side,$\lfloor n \rfloor +1 \leq r \leq n$, have $F(r) = 1$.
 
 Because the function $F(k)$ splits the search space into two parts, we can use
 binary search to find the end of the first partition (this is true in general, and if we ever recognize a problem that presents these characteristics, we can apply binary search to it). 
