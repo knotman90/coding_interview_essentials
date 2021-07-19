@@ -37,12 +37,12 @@ Implement a function that given two positive integers $n$ and $k$ calculates $n^
 \section{Clarification Questions}
 
 \begin{QandA}
-    \item Should the function handle the case where $k=0$?
+    \item \begin{questionitem} \begin{question} Should the function handle the case where $k=0$?  \end{question}      
     \begin{answered}
         \textit{Yes $k=0$ is a valid input.}
-    \end{answered}
+    \end{answered} \end{questionitem}
     
-    \item Should the function handles integer overflow?
+    \item \begin{questionitem} \begin{question} Should the function handles integer overflow?  \end{question}      
     \begin{answered}
         \textit{No overflow should not be accounted for. }\footnote{
             This clarification question can however, lead to a follow-up discussion on how such scenario can be handled and it can very well go in the many directions: 
@@ -52,7 +52,7 @@ Implement a function that given two positive integers $n$ and $k$ calculates $n^
                 \item how overflow errors can be handled? (Exceptions, error codes, \href{https://en.cppreference.com/w/cpp/language/ub}{UB}\cite{cit::std::ub}?)
             \end{itemize}
             }
-    \end{answered}
+    \end{answered} \end{questionitem}
         
 \end{QandA}
 
