@@ -22,6 +22,9 @@ input or there are duplicates involved.
 In the problem described in this chapter, we are going to investigate
 how we can remove duplicates from an already sorted collection of elements. This problem is trivially solvable when you can use linear space, but doing it \textit{in-place}, and by only using constant space, is going to be slightly more challenging.
 
+
+
+
 \section{Problem statement}
 \begin{exercise}
 \label{example:remove_duplicated_sorted_array_inplace:exercice1}
@@ -100,11 +103,19 @@ linear additional space. You can think of building a list $U$ of unique elements
 	\item insert at the back of $U$ every element of $I$ that is not equal to the last element of $U$.
 \end{enumerate}
 
+
+
 It is important to note that $U$ does not at any moment contain duplicates. Eventually, at the end of this process, $U$ contains an ordered list of all the unique elements in $I$. All we
 have to do is copy $U$ into the first $|U|$ positions of $|I|$ and return $|U|$. The complexity
 of this approach is linear in time and space, as in the worst-case scenario (when $I$ does not contain duplicates) we move the entire array $I$ into $U$, and we then immediately copy $U$ back into $I$. An implementation of this approach is shown below in Listing
 \ref{list:remove_duplicated_sorted_array_inplace_linearspace}.
 
+\begin{figure} 
+	\centering
+   \includegraphics[width=\textwidth]{sources/remove_duplicated_sorted_array_inplace/images/intro}
+   \caption[]{}
+   \label{fig:remove_duplicated_sorted_array_inplace:example1} 
+\end{figure}
 
 \lstinputlisting[language=c++, caption={Linear time and space solution using \inline{std::std::unordered_set} to remember what elements have been already encountered.},label=list:remove_duplicated_sorted_array_inplace_linearspace]{sources/remove_duplicated_sorted_array_inplace/remove_duplicated_sorted_array_inplace_solution2.cpp}
 
