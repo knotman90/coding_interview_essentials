@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -u 
 ROOT="/home/dspataro/git/algorithm_articles/"
 WORK_DIR=$(mktemp -d -t book-XXXXXXXXXX)
 
@@ -45,7 +44,7 @@ pandoc -f latex  --mathjax    -s --toc $MAINTEX -o $MAINMD
 
 #exit 0
 #set -x 
-set -u
+#set -u
 #set -e
 # fix code blocks
 grep -e "\`\`\` {" $MAINMD  | while read -r line ; do
@@ -75,7 +74,7 @@ grep -P "^-\s*\[(.+)\]\((.+)\)" -o $MAINMD | sed 's/\[/\]/g' | cut -d ']' -f 2 >
 CHAPTERDIR=$WORK_DIR/chapters
 mkdir $CHAPTERDIR
 
-set -u
+#set -u
 
 echo "Copyright 2016–2021 Davide Spataro" > $CHAPTERDIR/_copyright
 
@@ -114,6 +113,38 @@ mkdir -p $UPLOAD_FOLDER
 /home/dspataro/git/rippledoc/rippledoc.py
 sort -n -t= $CHAPTERDIR/toc.conf -o $CHAPTERDIR/toc.conf
 /home/dspataro/git/rippledoc/rippledoc.py
+
+
+
+# FIX HTML
+cat $ROOT/pandoc/official_style.css > $CHAPTERDIR/styles.css
+
+
+sed -i '/<body>/a \
+    <script type="text/javascript">\
+    \
+    $(document).ready(function(){\
+    $(".example").prepend("<h3>Example</h3>");\
+    \
+    $(".questionitem").wrap("<ul class=ulquestion></ul>");  \
+    \
+    $(".questionitem .question").wrap("<li></li>");  \
+    $(".questionitem .answered").wrap("<li></li>");  \
+    \
+    \
+    });\
+    </script>\
+' *.html
+
+sed -i '/<head>/a \
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>\
+' *.html
+
+
+
+
+
+
 
 #upload online with option -u
 if  [[ $1 = "-u" ]]; then

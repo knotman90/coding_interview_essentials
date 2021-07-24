@@ -530,8 +530,17 @@ innerbottommargin=5pt]{cBox}
 
 %----------------------------------------------------------------------------------------
 
-\newenvironment{QandA}{\begin{enumerate}[label=\bfseries Q.\arabic*.,leftmargin=2em,rightmargin=2em]\bfseries}{\end{enumerate}}
+\newenvironment{questionitem}
+    {
+    }
+    { 
+    }
+
+\newenvironment{question}{\par\bfseries}{}
 \newenvironment{answered}{\par\normalfont}{}
+\newenvironment{QandA}
+	{\begin{enumerate}[label=\bfseries Q.\arabic*.,leftmargin=2em,rightmargin=2em]\bfseries}
+	{\end{enumerate}}
 %----------------------------------------------------------------------------------------
 %	ALGORITHM
 %----------------------------------------------------------------------------------------
@@ -630,3 +639,5 @@ innerbottommargin=5pt]{cBox}
 
 
 \usepackage{pdfpages} % for the book cover inclusion
+\usepackage{nameref}
+\usepackage{wrapfig}
