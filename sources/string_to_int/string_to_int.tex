@@ -9,7 +9,7 @@
 \chapter{String to Integer}
 \label{ch:string_to_int}
 \section*{Introduction}
-The problem discussed in this chapter is an extremely popular one often used as a warm-up question asked during the onsite interview as well as part of many online assessment exercices. It is important to ask the right questions to the interview so to make sure that the problem is understood well and that all the corner cases are handled properly. For instance the interviewer might ask  to take car care of negative numbers, but that might not be explicitly stated in the problem statement.
+The problem discussed in this chapter is often used as a warm-up question during the onsite interview as well as forming part of many online assessments. It is important to ask the right clarification questions to ensure that the problem is well  understood and that all the corner cases are properly addressed. For example,  the interviewer might want you to take care of negative numbers, but that may not be explicitly stated in the problem statement.
 
 \section{Problem statement}
 \begin{exercise}
@@ -44,7 +44,7 @@ Write a function that given a string $s$ containing only numbers (characters fro
 
 \section{Discussion}
 \label{string_to_int:sec:discussion}
-This problem can be solved very eleganlty by just using the idea behind the decimal positional numeral systems.
+An elegant solution presents itself if we use the idea behind the decimal positional numeral systems.
 In any positional number system, the ultimate numeric value of a digit is determined by the position it holds, not only by the digit itself. Take as an example the number $427$:  although $7$ is thought of as a larger number than 4, the $7$ is worth less than the $4$ in this instance because of its respective position within the number. The value of a digit $d$ at position $i$ is equal to $d\times 10^i$. Thus the value of the a number $n=d_0d_1 \ldots d_k$ is equal to $(d_0 \times 10^0) + (d_1 \times 10^1) + \ldots + (d_k \times 10^k)$.
 Using this approach leading zeros are not a problem because they clearly do not contribute to the final result as $0 \times 10^x = 0$.
 \begin{example}
@@ -52,12 +52,12 @@ Using this approach leading zeros are not a problem because they clearly do not 
 	 $n$ ="22498" then its decimal value is equal to: $(2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 20000 + 2000 + 400 +90 +8 = 22498$
 \end{example}
 
-The idea above can be implemented by looping though the string from right to left and summing up each digit of the string at position $i$  multiplied by $10^i$ as shown in Listing \ref{list:string_to_int1}.
+The concept above can be implemented by looping though the string from right to left and summing up each digit of the string at position $i$  multiplied by $10^i$ as shown in Listing \ref{list:string_to_int1}.
 
 \lstinputlisting[language=c++, caption=C++ solution to the string to integer problem.,label=list:string_to_int1]{sources/string_to_int/string_to_int_solution1.cpp}
 
 
-This is considered a good solution, as its complexity is linear in the size of the input string and handles leading zeros elegantly.
+This is a good solution, as its complexity is linear in the size of the input string and handles leading zeros elegantly.
 
 \subsection{Common Variation}
 \begin{itemize}
