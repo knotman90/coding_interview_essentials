@@ -202,11 +202,11 @@ Let's have a look in more details at how the two operations look like in this ca
 
 
 Listing \ref{list:kth_largest_in_stream:set} shows a possible implementation of this idea using a
-ordered multiset (we use the C++ STL implementation named \inline{std::multiset}). 
+ordered multiset (we use the \CC STL implementation named \inline{std::multiset}). 
 \lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using \inline{std::multiset}},label=list:kth_largest_in_stream:set]{sources/kth_largest_in_stream/kth_largest_in_stream_solution2.cpp}
 
 In Listing \ref{} you can see an implementation using a heap instead. Notice that there is not a
-dedicated class in C++ for heaps but instead, we can use an array as a container for the elements
+dedicated class in \CC for heaps but instead, we can use an array as a container for the elements
 and then manipulate it by using the heap dedicated functions: 
 \begin{itemize}
 	\item \inline{make_heap}, to arrange the elements of an array into a heap

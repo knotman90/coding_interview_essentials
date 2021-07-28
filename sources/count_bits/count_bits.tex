@@ -44,12 +44,12 @@ number of bits set in the number $i$.
 \label{count_bits:sec:bruteforce}
 Let's be honest, this is an easy problem. All we have to do is to brute-force our way by counting
 the numbers of bits set for each and every number from $0$ to $n+1$. Each number has a fixed size
-which on most the common modern C++ implementation is $32$-bit (\inline{sizeof(int)}) and therefore
+which on most the common modern \CC implementation is $32$-bit (\inline{sizeof(int)}) and therefore
 we can come up with a $\Theta(32n)$ solution. Counting the bits of a given integer can be even done
 with
 \href{https://gcc.gnu.org/onlinedocs/gcc-4.9.2/gcc/X86-Built-in-Functions.html}{compiler intrinsics}
 as \inline{__builtin_popcount} which can map directly, when supported by the hardware, to fast
-machine instructions, or by using some simple bit manipulation trickery. From C++20 we also can use
+machine instructions, or by using some simple bit manipulation trickery. From \CC20 we also can use
 the \inline{std::popcount} function, together with a bunch of lot more bit related functions (in the
 header \inline{<bit>}). Listing \ref{list:count_bits:bruteforce} shows an implementation of this
 idea where we use our own version of the bit counting function \inline{my_pop_count} for the sake of

@@ -111,7 +111,7 @@ natural that the very first thing that should come to mind is to:
 
 This approach is clearly correct as it is basically a direct consequence and application of the
 definition of median given above, but it is far from being optimal, as we will see below. Listing
-\ref{list:median_sorted_naive} shows a C++ implementation of this idea. Time and space complexities
+\ref{list:median_sorted_naive} shows a \CC implementation of this idea. Time and space complexities
 of this approach are $O((n+m)log(n+m))$(because of sorting) and $O(s+m)$(space required by the third
 array), respectively. Despite being suboptimal this solution has the benefit of being very short (only a few lines)
 and easy to read, explain and understand.
@@ -127,7 +127,7 @@ this fact and therefore we are forced to sort the entire array $C$ that we creat
 By taking advantage of the fact that the inputs are sorted we can create the array $C$ in a smarter way,
 so that it is already sorted. In order to do so we will use the fact that you can merge two sorted array into a third sorted array in linear time.
 You might be already familiar with this idea if you know how the famous merge-sort algorithm\cite{wiki:mergesort} works as the same operation is one of its two basic building blocks.
-Listing \ref{list:median_sorted_naive_2} shows how this idea can be coded in C++. Notice how most of the code is now taken by the \inline{std::vector<T> mergeSortedArrays(const std::vector<T> &A,
+Listing \ref{list:median_sorted_naive_2} shows how this idea can be coded in \CC. Notice how most of the code is now taken by the \inline{std::vector<T> mergeSortedArrays(const std::vector<T> &A,
 const std::vector<T> &B)} function that 
 is responsible for taking two sorted arrays (pay attention to the \inline{assert}) as input and returning a third sorted one. 
 

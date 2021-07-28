@@ -97,9 +97,9 @@ The fundamental problem with the approch described in Section \ref{random_points
 
 Consider the area $A$ of a circle of radius $r$ i.e.  $A = \pi r^2$. We can rearrange the formula so that $r = \sqrt{\frac{A}{\pi}}$. What this formula is really telling us is that the radius is proportial to $\sqrt{A}$. We have a way of choosing the radius that depends on the area of the circle now. We can simply pick a random area at  random and then calculate the radius accordingly. This will make sure that the radius is picked taking into consideration the area of the circle. Figure \ref{fig:random_points_in_cirle:polar_sqrt} shows many points generate using this method. As you can see the points are generate uniformly across the area of the circle and the picture looks similar to Figure \ref{fig:random_points_in_cirle:loop}.
 
-A C++ implementation of this method is shown in Listing \ref{list:random_points_in_circle:sqrtcpp}. Details on the random number generation in Modern C++ can be found in \cite{cit::std::random}.
+A C++ implementation of this method is shown in Listing \ref{list:random_points_in_circle:sqrtcpp}. Details on the random number generation in Modern \CC can be found in \cite{cit::std::random}.
 
-\lstinputlisting[language=c++, caption=C++ implementation of the function for generating a random point in a circle described in Section \ref{random_points_in_circle:sec:polar_sqrt},label=list:random_points_in_circle:sqrtcpp]{sources/random_points_in_circle/random_points_in_circle_solution1.cpp}
+\lstinputlisting[language=c++, caption=\CC implementation of the function for generating a random point in a circle described in Section \ref{random_points_in_circle:sec:polar_sqrt},label=list:random_points_in_circle:sqrtcpp]{sources/random_points_in_circle/random_points_in_circle_solution1.cpp}
 
 \begin{figure}
 	\label{fig:random_points_in_cirle:polar_sqrt}

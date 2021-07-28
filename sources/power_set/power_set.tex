@@ -122,11 +122,11 @@ This type of problem is naturally solved recursively, with a base case of the re
 to make, meaning that the current subset is ready to be included in the solution (it has been
 produced after $n$ decision steps).
 
-Here below we can see how the C++ code implements this idea. The complexity of this solution is exponential i.e. $O(2^{|S|})$ which as already stated, is as good as
+Here below we can see how the \CC code implements this idea. The complexity of this solution is exponential i.e. $O(2^{|S|})$ which as already stated, is as good as
 it gets.
 
 
-\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
+\lstinputlisting[language=c++, caption="\CC to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
 
 
 \begin{figure}
@@ -187,7 +187,7 @@ The approach is easily understood when we think about the meaning of a bit in th
 can "build" a number $k$ by summing up powers of $2$ where the bits contain the information about whether a
 certain power of two should be added to the final value. With $n$
 bits one can represent $2^n$ numbers, each corresponding to one and only one subset of the power set of those $n$ bits.
-Listing \ref{list:power_set_bits} shows  a possible C++ implementation of the idea above.
+Listing \ref{list:power_set_bits} shows  a possible \CC implementation of the idea above.
 
 \lstinputlisting[language=c++, caption="Solution using bit manipulation.",label=list:power_set_bits]{sources/power_set/power_set_bit_manipulation.cpp}
 

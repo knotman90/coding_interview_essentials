@@ -58,12 +58,12 @@ Given an array $A$ sorted in ascending order with no duplicates and rotated arou
 \label{min_rotated_array:sec:discussion}
 What does it really mean for a sorted array to be rotated around an element? Given a sorted array $A=\{a_0, a_1, \ldots,a_{n-1}\}$ s.t. $ \forall \: 0 \leq i < n: a_i < a_{i+1}$, rotating A around the pivot element at index $p$ results in: $A_p=\{a_p, a_{p+1}, \ldots,a_{n-1}, a_0, a_1, \ldots, a_{p-1}\}$. In a nutshell all the elements are rotated in such a way that the element at index $p$ becomes the first element of the array. For instance, rotating the array $X=\{1,2,3,4,5\}$ around the element at index $2$, results in $X=\{3,4,5,1,2\}$. We would obtain the same result by applying a offset of either $-2$ or $3=5-2=(|A|-2)$ positions to each and every element of $X$. 
 
-This way of performing rotation is quite common, to the point that there is an algorithm in the C++ STL\cite{cit::std::rotate} adopting such API.
+This way of performing rotation is quite common, to the point that there is an algorithm in the \CC STL\cite{cit::std::rotate} adopting such API.
 
 \subsection{Brute-force}
 \label{min_rotated_array:sec:bruteforce}
 The brute-force solution to this problem is trivial and consists of simply looping through the array and keeping record of the smallest element encountered.
-In C++ this can be implemented with a one-liner as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual} both having $O(n)$ time $O(1)$ space complexity.
+In \CC this can be implemented with a one-liner as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual} both having $O(n)$ time $O(1)$ space complexity.
 
 \lstinputlisting[language=c++, caption=Brute force solution using an explicit loop.,label=list:min_rotated_array_bf_manual]{sources/min_rotated_array/min_rotated_array_solution2.cpp}
 

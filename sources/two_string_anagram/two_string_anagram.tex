@@ -121,7 +121,7 @@ Although it is simple to explain, this approach must be considered sub-optimal b
 Moreover, enumerating all the arrangements is no trivial task, unless we use a  library function capable of doing it (for instance, the C++ standard library provides the function \inline{std::next_permutation}\footnote{\href{https://en.cppreference.com/w/cpp/algorithm/next_permutation}{https://en.cppreference.com/w/cpp/algorithm/next\_permutation}} devoted to this purpose).
 
 
-Listings \ref{list:two_string_anagram_bruteforce} shows a C++ implementation of the idea above.
+Listings \ref{list:two_string_anagram_bruteforce} shows a \CC implementation of the idea above.
 
 \lstinputlisting[language=c++, caption="Brute force.",label=list:two_string_anagram_bruteforce]{sources/two_string_anagram/two_string_anagram_brute_force.cpp}
 
@@ -182,7 +182,7 @@ The answer to this problem is, therefore, the sum of all the positive numbers of
 
 Listings \ref{list:two_string_anagram_histogram} shows a possible implementation of the solution above.
 
-\lstinputlisting[language=c++, caption="C++ solution to the two string anagram problem using the histogram approach.",label=list:two_string_anagram_histogram]{sources/two_string_anagram/two_string_anagram_histogram.cpp}
+\lstinputlisting[language=c++, caption="\CC solution to the two string anagram problem using the histogram approach.",label=list:two_string_anagram_histogram]{sources/two_string_anagram/two_string_anagram_histogram.cpp}
 
 Note how the array of differences of frequencies $D$ can be calculated easily without explicitly
 computing the frequencies for the characters of $a$ and $b$ but simply by adding $1$ to $D[\mathrm{c}]$ when the letter $\mathrm{c}$ appears in $a$

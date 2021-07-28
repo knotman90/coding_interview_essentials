@@ -16,7 +16,7 @@ sorting is going to be almost trivial to and we will be able to derive it direct
 statement while the solution based on binary search requires slightly more brain work and typing to
 get it right. We will present two different implementations of the binary search solution: 
 \begin{enumerate*}
-	\item the first based entirely the C++ STL,
+	\item the first based entirely the \CC STL,
 	\item and the other where we will code the binary search algorithm explicitly. 
 \end{enumerate*}
 
@@ -101,7 +101,7 @@ shows a possible implementation of such idea.
 Please note that as in all cases where you actually do not need to have the whole array sorted you
 can use partial sorting instead of full-fledged sorting. In all cases where $k$ is smaller that
 $n$ the complexity is going to be slightly better as we will go from the $O(nlog(n))$ of the normal
-sorting to $O(nlog(k))$ of the partial sort. Fortunately, making this change in C++ is extremely
+sorting to $O(nlog(k))$ of the partial sort. Fortunately, making this change in \CC is extremely
 easily and it is only matter of calling \inline{std::partial_sort} instead of \inline{std::sort} as
 shown in Listing \ref{list:find_k_closest_in_array2}.
 
