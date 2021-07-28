@@ -3,22 +3,48 @@
 
 \section*{How I began writing this book}
 I started writing what eventually become this manuscipt in 2018. 
-Until then, I followed a quite strict daily study routine that consisted of solving at least one coding interview/competitive programming challenge and, only for those worth the effort, to put together a markdown document with a summary of the problem and all the solution approaches plus the thought process that lead me to them that proved effectively in solving the challenge. 
-Therefore, right from the beginning, solving a coding interview question meant for me more than just writing solutions and associated unit-tests. My main goal was writing code and associated notes that I could use to boostrap my understanding of the problem months or years later.
-The idea I had in mind was that, when was time to throw myself into a real interview I could use this material as a reference and sharpen my preparation with material that I was sure it was correct I could absorb and understand.
+Until then, I followed a quite strict daily study routine that consisted of solving at least one coding interview/competitive programming challenge and, only for those worth the effort, to put together a markdown document with a summary of the problem and all the solution approaches plus the thought process that lead me to them.
 
-Over the years I accumulated a lot of material that I eventually started sharing with colleagues at the university and at work. 
+Therefore, right from the beginning, solving a coding interview question meant for me more than just writing solutions and unit-tests.
+My main goal was writing code and notes, like short essays, that I could use to boostrap my understanding of the problem months or years later.
+The idea I had in mind was that, when it was time to throw myself into a real interview I could use this material as a reference and sharpen my preparation with material 
+that I was sure to be correct and I could absorb and understand quickly.
+
+Over the years I accumulated a substantial amount of material that I eventually started sharing with colleagues at the university and at work. 
 Many of them found the content and the format of my notes useful and convinced me to polish, add illustrations and organize them into a proper collection.
 
-\section*{C++ as language for all the solutions}
-Almost all the solution code in this book is written in C++ (C++14 and newer version). 
+\section*{C++ as language of choice}
+Almost all the solution code in this book is written in C++ (C++14/17/20 and newer version). 
 I have been using C++ academically and professionally since I basically started programming and the original material I have collected over the years was almost entirely C++ code. 
 The reason I did not decide to rewrite it in another language is that C++ is still nowadays an extremely popular language and engineers skilled in this language are in big demand which, in turn means that C++ is very much used in interviews!
-C++ is also one of the most adopted languages in the competitive programming community and this makes it easier to find resources on problems.
+Moreover, C++ is also one of the most adopted languages in the competitive programming community and this makes it easier to find resources on problems.
 
-I tried my best not to use any C++ specific features or hacks so that it would be relatively easy to port every piece of code in this book to another mainstream imperative language like Python or Java. 
+I tried my best to stick to standard C++ and not to use any compiler specific features so that it is easy to port every piece of code in this book to different mainstream imperative language like C\#, Python or Java.  
 Eventually during an interview you need to code (hopefully elegant, fast and readable) solutions, but, without the right algorithm, these would be vain efforts. Therefore the focus of this book is more on trying to convey the insights and core ideas of the best algorithms and not on a particular feature of a particular programming languages.
 This does not mean the code you will find in this book is sloppy or C++ unidiomatic. Quite the opposite, I tried to make full use of the its potential.
+
+All the solutions have been compiled and tested using \inline{gcc (GCC) 11.1.0} and \inline{clang version 12.0.1} but I am confident they will compile and work on other toolchain/system. 
+
+\section*{Organization}
+I always try to be consistent in the way I approach a problem:
+\begin{enumerate}
+    \item I start by looking at a few examples and to think about corner cases and unclarities in the problem statement that I could address by asking questions to the interview.
+    \item When I was comfortable with my understanding of the problem, I start thinking in general about the problem by for instance trying to find similarities with other problems I solved in the past or figuring out a lower bound.
+    \item I would then move into summarizing (usually only on paper) the simplest (which is usually the slowest) solution I could think of; this would usually be some sort of brute-force that I can somehow derive from the statement itself.
+    \item  From there I would try to think whether the brute-force solution can improved and be fast enough to be considered good or if I needed to shift my thinking towards other directions.
+\end{enumerate}
+Clearly these steps are not set in stone and sometime I knew right away what the optimal solution is. 
+For the majority of the cases tough, I would go through most of the steps above and this is the reason why each chapter has pretty much the same sections organization where we have:
+\begin{itemize}
+    \item \textit{\quotes{Introduction}}, where I set the stage for the problem.
+    \item A section \textit{\quotes{Problem statement}} enunciating the formal statement for the problem;
+    \item \textit{\quotes{Discussion}}, where I make the firsts observations and deductions that I can use later when crafting solutions.
+    The rest of this Section is usually followed by a number of subsection each describing in detail a solution. These subsections are (as much as possible) sorted by descreasing time complexity, space used and simplicity/readibility and ease of implementation. 
+ \end{itemize}
+
+I believe that coding interviews have a lot of similarities with sport competitions. If you train to be a good tennis player you reharse the same movement over and over again. Interviews are no different. 
+Interviewers are not expecting candidates to be silent and just write code like machines; 
+You need to show your thought process along the entire interview and being comfortable in doing so in a high pressure situation. This is where having a method that you reharsed over and over helps. I  belive the chapter's arrangements of the sections is functional to this goal and that you can use it to reharse solving a problem like you are guiding the interviewer along with you on a journey from the slowest to the best solution. 
 
 
 \section*{Rest}
