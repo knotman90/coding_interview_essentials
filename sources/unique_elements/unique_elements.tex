@@ -11,35 +11,36 @@
 \label{ch:unique_elements}
 \section*{Introduction}
 The problem presented in this Chapter is very popular in coding interviews, 
-possibly because it features an incredibly simple statement and is therefore easily understood.
-We will look first at the intuitive brute-force solution that can be coded in a few minutes and then examine how it 
-can be refined and optimized into a short and efficient one. 
+possibly because it features an incredibly simple statement and is therefore easily understood and used as interview opener. 
+
+The task we are asked to perform is one that programmers encounter almost daily: we are given a list and we need to determine whether it contains duplicates.
+Pretty much every modern programmming languages has a library function dedicated to answer this question and in this chapter we will study two possibly algorithmic strategies by which these function can be implemented.
+We will  first at an intuitive but slow brute-force solution that can be coded in a handul of minutes and then we will refine and rework it to the point it becomes concise and fast.
 
 \section{Problem statement}
 \begin{exercise}
 Given a string $s$ of length $n$, determine whether it does \textbf{not} contain duplicate characters. 
 
 \begin{example}
-\hfill
-	\begin{itemize}
-		\item Given \textit{s="graph"} the function returns \inline{true}. There are no duplicates  in $s$.
-		\item Given \textit{s="tree"} the function returns \inline{false}. Characters at indices $2$ and $3$  are the same.
-	\end{itemize}
+Given \textit{s="graph"} the function returns \inline{true}.
 \end{example}
 
+\begin{example}
+	Given \textit{s="tree"} the function returns \inline{false} as characters at indices $2$ and $3$ are the same.
+	\end{example}
 \end{exercise}
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item \begin{questionitem} \begin{question} What is the maximum size of the input?  \end{question} 	 
+	\item \begin{questionitem} \begin{question} What is the maximum length of the input?  \end{question} 	 
     \begin{answered}
 		\textit{The maximum length for the input string is $10^6$.}
 	\end{answered} \end{questionitem}
 	
 	\item \begin{questionitem} \begin{question} Are all characters upper or lower case?  \end{question} 	 
     \begin{answered}
-		\textit{No, both upper and lower case might be present.}
+		\textit{No, both upper and lower case characters are allowed.}
 	\end{answered} \end{questionitem}
 
 	\item \begin{questionitem} \begin{question} Is the function case-sensitive?  \end{question} 	 
@@ -47,9 +48,13 @@ Given a string $s$ of length $n$, determine whether it does \textbf{not} contain
 		\textit{Yes.}
 	\end{answered} \end{questionitem}
 
-	\item \begin{questionitem} \begin{question} Can I assume only alphanumeric characters are present in the input?  \end{question} 	 
+	\item \begin{questionitem} \begin{question} Can I assume only alphanumeric characters to be present in $s$?  \end{question} 	 
     \begin{answered}
-		\textit{Yes. Upper and lower case Latin letters and numbers only.}
+		\textit{Yes. You can assume that no character other than 
+		\begin{itemize*}
+			\item upper and  lower case Latin letters and
+			\item digits
+		\end{itemize*} are present in $s$. }
 	\end{answered} \end{questionitem}
 \end{QandA}
 

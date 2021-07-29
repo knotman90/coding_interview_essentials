@@ -85,7 +85,7 @@ After all, we are required to output all the elements of the power set, and thus
 
 \subsection{Bruteforce - Backtracking-like approach}
 
-The first approach to solving this problem is based on the [FACT/PREMISE?] that,  during the generation of
+The first approach to solving this problem is based on the fact that,  during the generation of
 one of the power set's elements, a decision must be made for each element $e$ of $S$, on whether or not to include $e$ into the subset.
 Once this is determined, what we are left with are $|S|-1$ decisions
 before we have created a valid subset of $|S|$.
@@ -148,7 +148,7 @@ without making too many implementation mistakes such as forgetting to handle the
 
 \subsection{Bit Manipulation}
 
-The second approach to solving this problem is based on the [FACT/PREMISE?] that the values of the
+The second approach to solving this problem is based on the fact that the values of the
 bits of the numbers $\{0,1,2,\ldots, s^n-1\}$  already provide all the information necessary to decide whether or not to include an element from $S$ into a subset. 
 The main principle is that the binary representation of all the numbers ($2^{|S|}$ of them) from $0$ to $2^{|S|}-1$ is the power set of $n$ bits.
 This means that the binary representation of any of those numbers carries the necessary information that can be used to build one subset of $\mathcal{P}(S)$. 
