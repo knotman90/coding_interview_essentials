@@ -52,7 +52,11 @@
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+\usepackage{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fontspec} % Use 8-bit encoding that has 256 glyphs
+\newfontfamily\test[Path=./fonts/]{PlayfairDisplay-Black.ttf}
+%\usepackage{PlayfairDisplay}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -530,8 +534,17 @@ innerbottommargin=5pt]{cBox}
 
 %----------------------------------------------------------------------------------------
 
-\newenvironment{QandA}{\begin{enumerate}[label=\bfseries Q.\arabic*.,leftmargin=2em,rightmargin=2em]\bfseries}{\end{enumerate}}
+\newenvironment{questionitem}
+    {
+    }
+    { 
+    }
+
+\newenvironment{question}{\par\bfseries}{}
 \newenvironment{answered}{\par\normalfont}{}
+\newenvironment{QandA}
+	{\begin{enumerate}[label=\bfseries Q.\arabic*.,leftmargin=2em,rightmargin=2em]\bfseries}
+	{\end{enumerate}}
 %----------------------------------------------------------------------------------------
 %	ALGORITHM
 %----------------------------------------------------------------------------------------
@@ -630,3 +643,13 @@ innerbottommargin=5pt]{cBox}
 
 
 \usepackage{pdfpages} % for the book cover inclusion
+\usepackage{nameref}
+\usepackage{wrapfig}
+\usepackage[most]{tcolorbox}
+\usepackage{blindtext}
+
+
+\newcommand{\quotes}[1]{``#1''}
+
+%typeset c++ properly
+\def\CC{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}} }

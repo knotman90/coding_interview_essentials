@@ -8,8 +8,8 @@
 \input{sources/preamble.tex}
 
 
-\interfootnotelinepenalty=10000
 
+\interfootnotelinepenalty=10000
 
 
 
@@ -18,17 +18,36 @@
 %\frontmatter
 \input{sources/front_cover.tex}
 
+
 \usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
 
 %\chapterimage{images/header} % Table of contents heading image
-
 \pagestyle{empty} % No headers
+
+\input{sources/titlepage.tex}
+%\input{sources/dedication.tex}
+
+\frontmatter
 
 \tableofcontents % Print the table of contents itself
 
 %\lstlistoflistings
+%\addcontentsline{toc}{chapter}{List of Code Listings}
+
 %\listoffigures
-%\listoftables
+%\addcontentsline{toc}{chapter}{\listfigurename}
+
+\input{sources/preface.tex}
+\input{sources/acknowlegements.tex}
+\input{sources/about_author.tex}
+\input{sources/authors_note.tex}
+
+
+
+\mainmatter
+
+
+
 
 %\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
 
@@ -91,11 +110,14 @@
 \input{sources/decode_string/decode_string.tex}
 \input{sources/nqueens/nqueens.tex}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               Appendices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter*{Appendices}
+\addcontentsline{toc}{chapter}{Appendices}
 \input{sources/appendices/dynamic_programming.tex}
 \input{sources/appendices/Listings.tex}
 %\input{sources/appendices/prefix_sum.tex}
@@ -115,7 +137,15 @@
 %\chapter*{Bibliography}
 %Print the glossary
 \printbibliography	
-	
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\input{sources/license.tex}
+\addcontentsline{toc}{chapter}{GNU LESSER GENERAL PUBLIC LICENSE}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %               INDEX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
@@ -127,5 +157,6 @@
 
 
 	%\backmatter
+
 
 \end{document}

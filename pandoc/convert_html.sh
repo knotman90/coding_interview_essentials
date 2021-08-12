@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -u 
 ROOT="/home/dspataro/git/algorithm_articles/"
 WORK_DIR=$(mktemp -d -t book-XXXXXXXXXX)
 
@@ -33,6 +32,7 @@ done
 
 
 
+
 echo "Working directory is $WORK_DIR"
 
 # Generate markdown single file from tex
@@ -44,7 +44,7 @@ pandoc -f latex  --mathjax    -s --toc $MAINTEX -o $MAINMD
 
 #exit 0
 #set -x 
-set -u
+#set -u
 #set -e
 # fix code blocks
 grep -e "\`\`\` {" $MAINMD  | while read -r line ; do
@@ -74,7 +74,7 @@ grep -P "^-\s*\[(.+)\]\((.+)\)" -o $MAINMD | sed 's/\[/\]/g' | cut -d ']' -f 2 >
 CHAPTERDIR=$WORK_DIR/chapters
 mkdir $CHAPTERDIR
 
-set -u
+#set -u
 
 echo "Copyright 2016–2021 Davide Spataro" > $CHAPTERDIR/_copyright
 
@@ -105,16 +105,95 @@ CURRDIR=$(pwd)
 cd $CHAPTERDIR
 
 
+UPLOAD_FOLDER=$CHAPTERDIR/upload
+mkdir -p $UPLOAD_FOLDER
+
+
 
 /home/dspataro/git/rippledoc/rippledoc.py
 sort -n -t= $CHAPTERDIR/toc.conf -o $CHAPTERDIR/toc.conf
 /home/dspataro/git/rippledoc/rippledoc.py
+
+
+
+# FIX HTML
+cat $ROOT/pandoc/official_style.css > $CHAPTERDIR/styles.css
+
+
+sed -i '/<body>/a \
+    <script type="text/javascript">\
+    \
+    $(document).ready(function(){\
+    $(".example").prepend("<h3>Example</h3>");\
+    \
+    $(".questionitem").wrap("<ul class=ulquestion></ul>");  \
+    \
+    $(".questionitem .question").wrap("<li></li>");  \
+    $(".questionitem .answered").wrap("<li></li>");  \
+    \
+    \
+    });\
+    </script>\
+' *.html
+
+sed -i '/<head>/a \
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>\
+' *.html
+
+
+
+
+
+
+
+#upload online with option -u
+if  [[ $1 = "-u" ]]; then
+    
+    #fix the relative paths for images
+
+
+    echo "I am going to upload:"  
+    mv $CHAPTERDIR/*.html $CHAPTERDIR/*.css $UPLOAD_FOLDER
+    ls $UPLOAD_FOLDER
+    set -x
+    for i in $UPLOAD_FOLDER/*.html
+    do
+        sed -i 's#/tmp/.*/sources/#sources/#g' $i
+    done
+
+
+    echo "Backing up files on the webserver:"
+
+    
+    ssh davidespataro.it@ssh.davidespataro.it "zip -r  /customers/b/f/9/davidespataro.it/httpd.www/backupbook/$(date "+%Y-%m-%d-%H-%M-%S").zip /customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/"
+    #ssh davidespataro.it@ssh.davidespataro.it "rm -rf  /customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/*"
+    cd $WORK_DIR
+    for imgdir in sources/**/images
+    do
+        files=($imgdir/*.jpg $imgdir/*.png)
+        if [ ${#files[@]} -gt 0 ]
+        then
+            
+            ssh davidespataro.it@ssh.davidespataro.it "mkdir -p /customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/$imgdir"
+            scp "${files[@]}" davidespataro.it@ssh.davidespataro.it:/customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/$imgdir
+        fi
+    done
+    scp $UPLOAD_FOLDER/* davidespataro.it@ssh.davidespataro.it:/customers/b/f/9/davidespataro.it/httpd.www/codinginterviewessentials/
+else
+    echo "Not going to upload the files to the webserver!"
+fi
+
+cd $CHAPTERDIR
+
+
 
 cd $CURRDIR
 ls -lah $CHAPTERDIR
 
 google-chrome-stable $CHAPTERDIR/index.html
 #sed -n -E -e '/^# Power set/,/^# /p' ./main.md
+
+
 
 
 # ^-\s*\[(.+)\]\((.+)\) 

@@ -12,8 +12,8 @@ template <typename T>
 struct Node
 {
   T val;
-  Node* left;
-  Node* right;
+  Node* left{nullptr};
+  Node* right{nullptr};
   Node(T x) : val(x), left(nullptr), right(nullptr)
   {
   }
