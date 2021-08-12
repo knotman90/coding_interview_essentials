@@ -12,7 +12,7 @@
 \label{ch:greatest_right}
 \section*{Introduction}
 This chapter discusses a problem that is known for having been asked during on-site interviews at Amazon. 
-It is a relatively easy problem on arrays where, in a nutshell, we are asked to find for each element of the input array the the value of the largest element to its right. 
+It is a relatively easy problem on arrays where, in a nutshell, we are given one as input and we are asked to find for each element of its element the value of the largest element among the ones to its right. 
 
 Since, as we shall see, it is not a particularly challenging problem as all the information to come up with a good solution are hiding in plain sight in its statement, it is essential to focus our efforts towards making a good impression on the interviewer by showing clean reasoning, clear and simple communication as well as an elegant implementation of the solution.
 
@@ -62,38 +62,37 @@ A brute-force solution for this problem is not difficult to conceive because all
 We can think of processing $A$ from left to right and to find the value associated to $A[i]$ by scanning all of the elements to its right. 
 
 
-This can be very conveniently implemented in \CC using the \texttt{std::max\_element()} function as shown in Listing \ref{list::greatest_right_bruteforce}. 
+This can be implemented using a double loop or more conveniently in \CC using the \texttt{std::max\_element()} function as shown in Listing \ref{list::greatest_right_bruteforce}. 
 
 \lstinputlisting[language=c++, caption=\CC brute-force solution using  \texttt{std::max\_element()} from the STL.,label=list::greatest_right_bruteforce]{sources/greatest_right_side/greatest_right_bruteforce.cpp}
 
 Listing \ref{list::greatest_right_bruteforce} works by looping through $A$ from left to right and for each element $A[i]$ issuing a call to \inline{std::max_element()}. The search for the maximum is enforced to be performed only on the elements to the right of $A[i]$ by using as starting point \inline{begin(A)+i+1}\footnote{The \inline{template< class ForwardIt >
 ForwardIt max_element( ForwardIt first, ForwardIt last );} functions operates on a range of elements specified by \inline{first} and \inline{last} \cite{cit::std::maxelement}.}.
+It should be highlighted that for the very last element of $A$, \inline{begin(A)+i+1} correspond to the element past the end and therefore it is always modified into $-1$; this is the only element not having any other fellow elements to its right.
 
-Moreover, we should also notice that the last element of $A$ will always be modified into $-1$ because it is the only element not having elements to its right.
-
-The complexities of this approach are quadratic and constant for time and space, respectively. This solution is to be considered poor as a much faster and more efficient solution exists.
+The complexities of this approach are quadratic and constant for time and space, respectively. 
+This solution is to be considered poor as a much faster and more efficient solution exists.
 
 \subsection{Linear solution}
 \label{sec:greatest_right:linear}
-The approach used in Listing \ref{list::greatest_right_bruteforce} can be greately improved if instead of looping from left to right, the scan is performed from right to left (from index $A.size()-2$ to $0$)\footnote{The starting point is $A.size()-2$ because element at index $A.size()-1$ is always turned into $-1$}. 
-This small modification allows to keep track of the maximum element ($M$) on the right side of an element  to be calculated in constant time because:
+The approach used in Listing \ref{list::greatest_right_bruteforce} can be greately improved if instead of looping from left to right, the scan is performed from right to left.
+We can start inspecting the $A$ from index $A.size()-2$ to $0$ because, as it was mentioned above, the  element at index $A.size()-1$ is always turned into $-1$. 
+This shift in the order we inspect $A$ allows us to keep track of the maximum element ($M$) on the right side of an element to be calculated in constant time as:
 \begin{itemize}
-	\item at first $M=A[A.size()-1]$;
-	\item we can update each element $A[i]$ by copying the value of $M$;
+	\item at first $M=A[A.size()-1]$ (the largest element to the right of element at index $A.size()-2$ is always the element at the back of $A$);
+	\item if $M$ is maintained properly, we can update $A[i]$ by simply copying $M$ in it;
 	\item crucially, we can update $M$ by only using the \textbf{old} value of $A[i]$ (we can remember it by saving it in a temporary before the updated happens): $M= max(M, A_{old}[i])$;
 \end{itemize}
 This idea above is implemented in Listing \ref{list:greatest_right_final1}
 
 \lstinputlisting[language=c++, caption=\CC linear time and constant space solution.,label=list:greatest_right_final1]{sources/greatest_right_side/greatest_right_final.cpp}
 
-The code works by scanning $A$ from right to left ($i$ is initialized to $A.size()-1$) using $M$ as a placeholder for the maximum value among the elements with index higher than $i$. 
+The code works by scanning $A$ from right to left ($i$ is initialized to $A.size()-1$ which allows the last element of $A$ to modified into $-1$ even if we do not set $-1$ explicitely) using $M$ as a placeholder for the maximum value among the elements with index strictly higher than $i$. 
 $m$, instead, contains the value of the largest element among all the elements with index higher or equal to $i$ (it also considers the element being currently processed during the active iteration). 
 Every element $A[i]$ is overwritten with the current value of $M$ which is itself subsequently overwritten with the value hold $m$.
 
-Notice how the last element of $A$ is modified into $-1$ even if we do not set it explicitely. 
-
-An alternative and more condensed implementation of Listing \ref{list:greatest_right_final1} is shown in Listing \ref{list:greatest_right_final2}.
+An alternative and marginally more condensed implementation of Listing \ref{list:greatest_right_final1} is shown in Listing \ref{list:greatest_right_final2}.
 
 \lstinputlisting[language=c++, caption=Alternative implementation of Listing \ref{list:greatest_right_final1}.,label=list:greatest_right_final2]{sources/greatest_right_side/greatest_right_final2.cpp}
 
-The time and space complexities of this approach are linear and constant, respectively which is optimal, as we need to at least read and write every element of $A$ once. 
+The time and space complexities of this approach are linear and constant, respectively. These are optimal figures, as we need to at least read and write every element of $A$ once. 
