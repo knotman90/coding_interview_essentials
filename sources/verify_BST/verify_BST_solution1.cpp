@@ -14,5 +14,6 @@ inline bool isValidBST_helper(const TreeNode* const root,
 bool isValidBST_top_down(TreeNode* root)
 {
   static constexpr long INF = std::numeric_limits<long>::max();
-  return isValidBST_helper(root, -INF, INF);
+  static constexpr long mINF = std::numeric_limits<long>::min();
+  return isValidBST_helper(root, mINF, INF);
 }

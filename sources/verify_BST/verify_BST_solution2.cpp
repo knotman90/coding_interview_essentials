@@ -1,5 +1,3 @@
-#include <iostream>
-
 int tree_min(TreeNode *root)
 {
   if (!root)
