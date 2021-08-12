@@ -115,7 +115,7 @@ and Listing \ref{list:two_number_sum_bruteforce}), respectively.
 \end{algorithm}
 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/brute_force.cpp}
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/brute_force.cpp}
 
 The time complexity of this solution is $O(n^2)$ because there is a quadratic number of
 ordered pairs and in the worst case, we will look at \textbf{all} of them.
@@ -157,7 +157,7 @@ Algorithm \ref{algo:two_number_sum_hashset} and Listing \ref{list:two_number_sum
 \end{algorithm}
 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem using hashing.",label=list:two_number_sum_hashing]{sources/two_numbers_sum/hashset.cpp}
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem using hashing.",label=list:two_number_sum_hashing]{sources/two_numbers_sum/hashset.cpp}
 
 The time complexity of this approach is $O(n)$ (technically is linear on average due to complexity of lookups in hash tables) because the input array is scanned once and for each
 of its elements, only one lookup and insertion are performed in the hash table (both operations costing constant time on average).
@@ -213,11 +213,11 @@ searches, each of them costing $O(log(n))$.
 
 The space complexity is $O(1)$ because no additional space is required, since the array is sorted in place.
 
-Listing \ref{list:two_number_sum_sorting} shows a C++ implementation of this idea. Notice that it uses \inline{std::binary_search} from the C++ standard library and that a possible follow-up question might be to show your own version of the binary search algorithm.
+Listing \ref{list:two_number_sum_sorting} shows a \CC implementation of this idea. Notice that it uses \inline{std::binary_search} from the \CC standard library and that a possible follow-up question might be to show your own version of the binary search algorithm.
 
 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
 
 
 \subsection{Sorting and two pointers technique}
@@ -242,7 +242,7 @@ the two at each step using the following logic:
 
 Listing \ref{list:two_number_sum_two_pointers} shows an implementation of the idea above. Notice that compared to the solution using the binary search, this one is shorter and simpler to write. Moreover, it does not use library functions. 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
 
 Despite the overall time complexity is still $O(n log(n))$, this solution is likely to be faster than
 the one using binary search, mostly due to the fact that the array is scanned linearly (which makes caches happier) by the two pointers and not in a scattered way as in the case of binary search.

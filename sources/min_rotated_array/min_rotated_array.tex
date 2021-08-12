@@ -58,12 +58,12 @@ Given an array $A$ sorted in ascending order with no duplicates and rotated arou
 \label{min_rotated_array:sec:discussion}
 What does it really mean for a sorted array to be rotated around an element? Given a sorted array $A=\{a_0, a_1, \ldots,a_{n-1}\}$ s.t. $ \forall \: 0 \leq i < n: a_i < a_{i+1}$, rotating A around the pivot element at index $p$ results in: $A_p=\{a_p, a_{p+1}, \ldots,a_{n-1}, a_0, a_1, \ldots, a_{p-1}\}$. In a nutshell all the elements are rotated in such a way that the element at index $p$ becomes the first element of the array. For instance, rotating the array $X=\{1,2,3,4,5\}$ around the element at index $2$, results in $X=\{3,4,5,1,2\}$. We would obtain the same result by applying a offset of either $-2$ or $3=5-2=(|A|-2)$ positions to each and every element of $X$. 
 
-This way of performing rotation is quite common, to the point that there is an algorithm in the C++ STL\cite{cit::std::rotate} adopting such API.
+This way of performing rotation is quite common, to the point that there is an algorithm in the \CC STL\cite{cit::std::rotate} adopting such API.
 
 \subsection{Brute-force}
 \label{min_rotated_array:sec:bruteforce}
 The brute-force solution to this problem is trivial and consists of simply looping through the array and keeping record of the smallest element encountered.
-In C++ this can be implemented with a one-liner as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual} both having $O(n)$ time $O(1)$ space complexity.
+In \CC this can be implemented with a one-liner as shown in Listings \ref{list:min_rotated_array_bf} and \ref{list:min_rotated_array_bf_manual} both having $O(n)$ time $O(1)$ space complexity.
 
 \lstinputlisting[language=c++, caption=Brute force solution using an explicit loop.,label=list:min_rotated_array_bf_manual]{sources/min_rotated_array/min_rotated_array_solution2.cpp}
 
@@ -129,7 +129,7 @@ The last part of the algorithm yet to be figured out is how and in which split o
 \end{itemize}
 For instance, consider the sorted rotated array $\{8,9,10,5,6,7\}$: the minimum element $5$ is at index $3$ and all the elements located between index $3$ and $5$ are strictly smaller than the first element $8$ while all the elements to the left of $5$ are larger or equal than $8$.
 
-This is the last piece of information that is needed in order to make the binary search work, because we can use it to determine which portion of the two subarrays (the one to the left or to the right of \textit{middle}) to discard. Therefore, given an element at position $i$ that is not the answer, we will continue the binary search on the subarray to the left of $i$ if $a_i > a_0$, otherwise we will use the right side.
+This is the last piece of information that is needed in order to make the binary search work because we can use it to determine which portion of the two subarrays (the one to the left or to the right of \textit{middle}) to discard. Therefore, given an element at position $i$ that is not the answer, we will continue the binary search on the subarray to the left of $i$ if $a_i > a_0$, otherwise we will use the right side.
 
 By being able to test whether an element is the smallest element in the array, and if not, how to split the array and continue the binary search, we have all the ingredients necessary to solve this problem efficiently.
 
@@ -138,4 +138,4 @@ An implementation of this idea is shown in the Listing \ref{list:min_rotated_arr
 
 
 This solution as a complexity of $O(log(n))$ time and $O(1)$ space.
-The code is just a straightforward implementation of the binary search where \inline{l} and \inline{r} determine the range under examination, \inline{middle} is the element in the middle of \inline{l} and \inline{r} while \inline{prec} and \inline{succ} are the element preceeding and succeeding \inline{mid}, respectively. Notice how the modulo operation is used to make sure that both \inline{prec} and \inline{succ} always point a valid element. 
+The code is just a straightforward implementation of the binary search where \inline{l} and \inline{r} determine the range under examination, \inline{middle} is the element in the middle of \inline{l} and \inline{r} while \inline{prec} and \inline{succ} are the element preceding and succeeding \inline{mid}, respectively. Notice how the modulo operation is used to make sure that both \inline{prec} and \inline{succ} always point to a valid element. 

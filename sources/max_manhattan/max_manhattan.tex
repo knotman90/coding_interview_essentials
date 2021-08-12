@@ -272,7 +272,7 @@ As for all dynamic programming problem, we have two ways to write the solution:
 \subsubsection{Top-down}
 \label{sec:max_manhattan:topdown}
 The top-down approach is possibly the easiest to write as we can  translate $S(K,i,j)$ (see Equation
-\ref{eq:max_manhattan:dpformula}) into a C++ recursive function, and we can use memoization (in the
+\ref{eq:max_manhattan:dpformula}) into a \CC recursive function, and we can use memoization (in the
 form of a cache of size $K\times n\times m$) to store intermediate values of $S$ and avoid duplicate
 work. Listing \ref{list:max_manhattan:dp_topdown} shows an implementation of this approach where
 such a cache is implemented via a hashmap, which maps the arguments of $S$, all triplets $(K,i,j)$,
@@ -281,7 +281,7 @@ the machinery that makes us use tuples of type \inline{std::tuple<int,int,int>} 
 (which has type \inline{std::unordered_map}). \inline{TupleHash} uses \inline{hash\_combine} to
 calculate the hash value for a given \inline{std::tuple<int,int,int>}. The main driver function is
 named \inline{max\_manhattan\_matrix\_k\_DP\_topdown} and the sole purpouse is to create the
-memoization cache and then to call the C++ equivalent of function $S$ (see Equation
+memoization cache and then to call the \CC equivalent of function $S$ (see Equation
 \ref{eq:max_manhattan:dpformula}): \inline{max\_manhattan\_matrix\_k\_DP\_topdown\_helper}. The
 latter is a recursive function that takes as input
 \begin{enumerate*}
