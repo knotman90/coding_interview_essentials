@@ -9,17 +9,18 @@
 \chapter{Clone a linked list with random pointer}
 \label{ch:clone_list_random_pointer}
 \section*{Introduction}
-This section discusses a very cool and interesting problem on linked list. The linked list we are dealing with here is a singly linked one, with an additional pointer that \textbf{might} point to another node in the list. The \CC definition of said list is given in Listing \ref{list:clone_list_random_pointer:list_definition}. Please note the additional field \lstinline[columns=fixed]{random} which differentiates it from other linked list definitions seen in other chapters (See Capter \ref{ch:delete_duplicates_list} and Listing \ref{list:delete_duplicates_list:linked_list}).
+This chapter discusses a very interesting problem on linked list.
+The linked list we are dealing with here is a singly linked one, with an additional pointer that \textbf{might} point to another node in the list. The \CC definition of said list is given in Listing \ref{list:delete_duplicates_list:linked_list} where we can notice the additional field \inline{random} which differentiates it from the other more canonical linked list definitions seen in other chapters (see Chapter \ref{ch:delete_duplicates_list} and Listing \ref{list:delete_duplicates_list:linked_list} for example).
 
 \begin{lstlisting}[language=c++, caption={Definition of a linked list with a random pointer.},label=list:delete_duplicates_list:linked_list]
 
 template <class T> 
 class Node
 {
-    public:
-  T val;
-  Node *next;
-  Node *random;
+  public:
+  T val{};
+  Node *next{nullptr}; //points to the next element in the list
+  Node *random{nullptr}; //nullptr or points to any other node in the list.
 
   Node(const T &_val)
   {
@@ -35,12 +36,13 @@ class Node
 Given a linked list of the type defined in Listing \ref{list:clone_list_random_pointer:list_definition} return a deep-copy of it.
 \end{exercise}
 
-In this chapter we will be representing graphically a list using a list of pairs of integers. Each pair $(v,r)$ represent a node of the list where:
+
+In this chapter we will represent a list by using a sequence of pairs of integers. Each pair $(v,r)$ represent a node of the list where:
 \begin{itemize}
-	\item[-] $v$ is the payload of the node
-	\item[-] $r$ is the index of the node that the random pointer points to. $-1$ represents \lstinline[columns=fixed]{nullptr}.
+	\item $v$ is the payload of the node
+	\item $r$ is the index of the node that the random pointer points to. $-1$ represents \lstinline[columns=fixed]{nullptr}.
 \end{itemize} 
-For instance the list: $[(7,-1),(13,0),(11,4),(10,2),(1,0)]$ represent the list shown in Figure \ref{fig:clone_list_random_pointer:list1}.
+For instance $[(7,-1),(13,0),(11,4),(10,2),(1,0)]$ represent the list shown in Figure \ref{fig:clone_list_random_pointer:list1}.
 
 \begin{figure}
 	\label{fig:clone_list_random_pointer:list1}
