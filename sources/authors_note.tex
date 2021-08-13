@@ -1,0 +1,66 @@
+\chapter*{A note from the author}
+\addcontentsline{toc}{chapter}{A note from the author}
+
+\section*{The birth of this book}
+I started writing what eventually become this manuscript in 2018. 
+Until then, I followed a quite strict daily study routine that consisted of solving at least one coding interview/competitive programming challenge and, only for those worth the effort, to put together a markdown document with a summary of the problem and all the solution approaches plus the thought process that led me to them.
+
+Therefore, right from the beginning, solving a coding interview question meant for me more than just writing solutions and unit tests.
+My main goal was writing code and notes, like short essays, that I could use to bootstrap my understanding of the problem months or years later.
+The idea I had in mind was that when it was time to throw myself into a real interview I could use this material as a reference and sharpen my preparation with material 
+that I was sure to be correct and I could absorb and understand quickly.
+
+Over the years I accumulated a substantial amount of material that I eventually started sharing with colleagues at the university and at work. 
+Many of them found the content and the format of my notes useful and convinced me to polish, add illustrations, and organize them into a proper collection.
+
+\section*{\protect \CC as the language of choice}
+Almost all the solution code in this book is written in \CC (\CC14/17/20). 
+I have been using \CC academically and professionally since I basically started programming and the original material I have collected over the years was almost entirely \CC code. 
+The reason I did not decide to rewrite it in another language is that \CC is still nowadays an extremely popular language and engineers skilled in this language are in big demand which, in turn, means that \CC is very much used in interviews!
+Moreover, \CC is also one of the most adopted languages in the competitive programming community and this makes it easier to find resources on problems.
+
+I tried my best to stick to standard \CC and not to use any compiler-specific features so that it is easy to port every piece of code in this book to different mainstream imperative languages like C\#, Python, or Java.  
+Eventually during an interview you need to code (hopefully elegant, fast and readable) solutions, but, without the right algorithm, these would be vain efforts. Therefore the focus of this book is more on trying to convey the insights and core ideas of the best algorithms and not on a particular feature of a particular programming language.
+This does not mean the code you will find in this book is sloppy or \CC unidiomatic. Quite the opposite, I tried to make full use of its potential.
+
+All the solutions have been compiled and tested using \inline{gcc (GCC) 11.1.0} and \inline{clang version 12.0.1} but I am confident they will compile and work on another toolchain/system. 
+
+\section*{Organization}
+I always try to be consistent in the way I approach a problem:
+\begin{enumerate}
+    \item I start by looking at a few examples and to think about corner cases and unclarities in the problem statement that I could address by asking questions to the interview.
+    \item When I am comfortable with my understanding of the problem, I start thinking in general about it by trying to find similarities with other problems I solved in the past or puzzling out a lower bound.
+    \item I then move into summarizing (usually only on paper) the simplest solution I could think of (which is most of the times the slowest); this would usually be some sort of brute-force that I can somehow derive from the statement itself.
+    \item  From there I  try to think whether the brute-force solution can be sped up enough to be considered good or if I need to shift my thinking towards other directions.
+\end{enumerate}
+
+Clearly, these steps are not set in stone and sometimes it can happen that I know right away an optimal solution. 
+For the majority of the cases though, I would go through most of the steps above and this is the reason why each chapter has pretty much the same organization where we have the following sections:
+\begin{itemize}
+    \item \textit{\quotes{Introduction}}, where I set the stage for the problem.
+    \item \textit{\quotes{Problem statement}}, enunciating the formal statement for the problem along with a few examples.
+    \item \textit{\quotes{Clarification questions}},where I list all the questions for the interviewer. 
+    \item \textit{\quotes{Discussion}}, where I make the firsts observations and deductions that I can use later when crafting solutions. The rest of this Section is usually followed by a number of subsections each describing in detail a solution. These subsections are sorted by decreasing time complexity, space used, simplicity/readability, and ease of implementation. 
+    \item \textit{\quotes{Common variation}}, containing one or more variations of the problem that have been known to be used as an interview question. This section is not present in each and every chapter.
+ \end{itemize}
+
+I believe that coding interviews have a lot of similarities with sports competitions. If you train to be a good tennis player you rehearse the same movement over and over again. Coding interviews are no different. 
+Interviewers are not expecting candidates to be silent and just write code like machines; 
+A good candidate needs to show the thought process along with the entire interview and be comfortable in doing so in a high-pressure situation. 
+I believe the chapter's arrangements of the sections are functional to this goal and that you can use it to rehearse solving a problem like you are guiding the interviewer along with you on a journey from the slowest to the best solution. 
+
+
+\section*{The writing}
+Writing this book was not easy and before I started this journey I had underestimated the amount of work that needs to be put into a manuscript (even a humblest like the one you are reading right now). 
+From dealing with making quality illustrations to managing a large \LaTeX document passing through several rounds of revisions and proofreading, I have spent many many hours on this project. 
+
+However, I have learned a lot in the process, and I feel it was worth the effort and I hope it will be helpful in your preparation and in landing your next job. 
+
+\section*{Audience}
+The intended audience of this book is that of fairly intermediate/experienced software engineers with a degree of prior exposure to coding interviews or competitive programming who prepare for coding interviews.
+You need to have a decent working experience with \CC and especially with the Standard Template Library (which is extensively used) even if the code presented is in no way hard or obscure \CC and I am sure the code is perfectly understandable also by people with experience in C-like languages. 
+
+Having an acquaintance with the most common algorithm design techniques (like Dynamic programming for instance) is recommended but not required as, despite the fact this is not an algorithm design book, the solutions are explained in detail. However, being familiar with the concept of complexity analysis is required as these concepts are used as a tool to analyze each and every solution but are not explained.
+
+
+

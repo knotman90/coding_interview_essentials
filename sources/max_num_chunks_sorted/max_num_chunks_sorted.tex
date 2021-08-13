@@ -58,10 +58,10 @@ such that if each of the sub-array is sorted individually, then $I$ as a whole i
 \section{Clarification Questions}
 
 \begin{QandA}
-    \item Can the chunks overlap? 
+    \item \begin{questionitem} \begin{question} Can the chunks overlap?   \end{question}      
     \begin{answered}
         \textit{No. If you choose to sort two sub-arrays of $I$ $s_1=[p,q], p\leq q$ and $s_2=[x,y], x\leq y$ then either $x > q$ or $p>y$.}
-    \end{answered}
+    \end{answered} \end{questionitem}
     
 \end{QandA}
 
@@ -88,9 +88,9 @@ in time as given a certain $k$ there are ${n \choose k} $ possible way we can di
 Listing \ref{list:max_num_chunks_sorted:bruteforce} shows a C++ implementation of such idea. 
 
 
-\begin{minipage}{\linewidth}
+
     \lstinputlisting[language=c++, caption={Bruteforce solution to the problem \textit{Sort the chunks, sort the array}.},label=list:max_num_chunks_sorted:bruteforce]{sources/max_num_chunks_sorted/max_num_chunks_sorted_solution1.cpp}
-\end{minipage}
+
 
 
 \section{Linear time}

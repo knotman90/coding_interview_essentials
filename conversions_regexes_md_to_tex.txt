@@ -1,0 +1,9 @@
+- Convert `word` into \inline{word}
+
+`(.*?)`
+\inline{$1}
+
+
+- Convert **words** into \textbf{words}
+\*\*(.*?)\*\*
+\\textbf{$1}

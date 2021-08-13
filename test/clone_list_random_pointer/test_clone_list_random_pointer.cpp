@@ -9,9 +9,10 @@ using std::string;
 using std::swap;
 using std::vector;
 
-template <class T> class Node
+template <class T>
+class Node
 {
-    public:
+ public:
   T val;
   Node *next;
   Node *random;
@@ -27,7 +28,8 @@ template <class T> class Node
 #include "clone_list_random_pointer_solution1.cpp"
 #include "clone_list_random_pointer_solution2.cpp"
 
-template <typename T> Node<T> *create_list_from(std::vector<pair<T, int>> &vec)
+template <typename T>
+Node<T> *create_list_from(std::vector<pair<T, int>> &vec)
 {
   using N = Node<T>;
   if (vec.size() <= 0)
@@ -43,15 +45,16 @@ template <typename T> Node<T> *create_list_from(std::vector<pair<T, int>> &vec)
 
   for (int i = 0; i < vec.size(); i++)
     if (vec[i].second < -1 || vec[i].second >= (int)p.size())
-      throw std::invalid_argument("invalid random pointer: " +
-                                  std::to_string(vec[i].second));
+      throw std::invalid_argument("invalid random pointer: "
+                                  + std::to_string(vec[i].second));
     else if (vec[i].second != -1)
       p[i]->random = p[vec[i].second];
 
   return p[0];
 }
 
-template <typename T> auto to_vector(const Node<T> *l1)
+template <typename T>
+auto to_vector(const Node<T> *l1)
 {
   map<const Node<T> *, int> P;
   vector<pair<T, int>> ans;
@@ -87,7 +90,8 @@ bool equal(const Node<T> *const l1, const Node<T> *const l2)
   return lv1 == lv2;
 }
 
-template <typename T> bool share_nodes(Node<T> *l1, Node<T> *l2)
+template <typename T>
+bool share_nodes(Node<T> *l1, Node<T> *l2)
 {
   vector<Node<T> *> vec1;
   vector<Node<T> *> vec2;
@@ -105,7 +109,10 @@ template <typename T> bool share_nodes(Node<T> *l1, Node<T> *l2)
   }
   sort(begin(vec1), end(vec1));
   sort(begin(vec2), end(vec2));
-  std::set_intersection(vec1.begin(), vec1.end(), vec2.begin(), vec2.end(),
+  std::set_intersection(vec1.begin(),
+                        vec1.end(),
+                        vec2.begin(),
+                        vec2.end(),
                         std::inserter(intersection, intersection.begin()));
   return intersection.size() > 0;
 }
@@ -128,9 +135,17 @@ TEST(clone_list_random_pointer, test_empty)
 
 TEST(clone_list_random_pointer, test_no_random)
 {
-  vector<pair<int, int>> lv = {{0, -1}, {1, -1}, {2, -1}, {3, -1},
-                               {4, -1}, {5, -1}, {6, -1}, {7, -1},
-                               {8, -1}, {9, -1}, {10, -1}};
+  vector<pair<int, int>> lv = {{0, -1},
+                               {1, -1},
+                               {2, -1},
+                               {3, -1},
+                               {4, -1},
+                               {5, -1},
+                               {6, -1},
+                               {7, -1},
+                               {8, -1},
+                               {9, -1},
+                               {10, -1}};
 
   Ni *list  = create_list_from(lv);
   Ni *clone = clone_random_list_map(list);
@@ -145,8 +160,17 @@ TEST(clone_list_random_pointer, test_no_random)
 
 TEST(clone_list_random_pointer, test_all_self)
 {
-  vector<pair<int, int>> lv = {{0, 0}, {1, 1}, {2, 2}, {3, 3}, {4, 4},  {5, 5},
-                               {6, 6}, {7, 7}, {8, 8}, {9, 9}, {10, 10}};
+  vector<pair<int, int>> lv = {{0, 0},
+                               {1, 1},
+                               {2, 2},
+                               {3, 3},
+                               {4, 4},
+                               {5, 5},
+                               {6, 6},
+                               {7, 7},
+                               {8, 8},
+                               {9, 9},
+                               {10, 10}};
 
   Ni *list  = create_list_from(lv);
   Ni *clone = clone_random_list_map(list);
@@ -191,9 +215,17 @@ TEST(clone_list_random_pointer, test_all_next_next_toroidal)
 
 TEST(clone_list_random_pointer, test_random)
 {
-  vector<pair<int, int>> lv = {{0, 10}, {1, 3},  {2, 8},  {3, 9},
-                               {4, 8},  {5, 10}, {6, 8},  {7, 2},
-                               {8, 1},  {9, 4},  {10, 10}};
+  vector<pair<int, int>> lv = {{0, 10},
+                               {1, 3},
+                               {2, 8},
+                               {3, 9},
+                               {4, 8},
+                               {5, 10},
+                               {6, 8},
+                               {7, 2},
+                               {8, 1},
+                               {9, 4},
+                               {10, 10}};
 
   Ni *list  = create_list_from(lv);
   Ni *clone = clone_random_list_map(list);

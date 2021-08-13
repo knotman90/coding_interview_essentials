@@ -7,8 +7,9 @@
 
 using std::string;
 
-TEST(greatest_right, given_empty_array_should_return_empty_array) {
-  const std::vector<int> A = {};
+TEST(greatest_right, given_empty_array_should_return_empty_array)
+{
+  const std::vector<int> A  = {};
   std::vector<int> expected = {};
 
   {
@@ -33,8 +34,9 @@ TEST(greatest_right, given_empty_array_should_return_empty_array) {
   }
 }
 
-TEST(greatest_right, given_one_element_array_should_return_empty_array) {
-  std::vector<int> A = {123};
+TEST(greatest_right, given_one_element_array_should_return_empty_array)
+{
+  std::vector<int> A        = {123};
   std::vector<int> expected = {-1};
 
   {
@@ -59,8 +61,9 @@ TEST(greatest_right, given_one_element_array_should_return_empty_array) {
   }
 }
 
-TEST(greatest_right, given_example1_array_should_return_empty_array) {
-  std::vector<int> A = {15, 22, 12, 13, 12, 19, 0, 2};
+TEST(greatest_right, given_example1_array_should_return_empty_array)
+{
+  std::vector<int> A        = {15, 22, 12, 13, 12, 19, 0, 2};
   std::vector<int> expected = {22, 19, 19, 19, 19, 2, 2, -1};
 
   {
@@ -85,8 +88,9 @@ TEST(greatest_right, given_example1_array_should_return_empty_array) {
   }
 }
 
-TEST(greatest_right, given_example2_array_should_return_empty_array) {
-  std::vector<int> A = {2, 3, 1, 9};
+TEST(greatest_right, given_example2_array_should_return_empty_array)
+{
+  std::vector<int> A        = {2, 3, 1, 9};
   std::vector<int> expected = {9, 9, 9, -1};
 
   {
@@ -111,7 +115,8 @@ TEST(greatest_right, given_example2_array_should_return_empty_array) {
   }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

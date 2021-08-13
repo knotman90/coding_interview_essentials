@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 
 project(Book)
 
@@ -26,8 +26,6 @@ if(ENABLE_CLANG_TIDY)
 endif(ENABLE_CLANG_TIDY)
 
 
-
-
 set(EXTRA_WARNING_GNU "-march=native -Wextra -Wdisabled-optimization  -funsafe-loop-optimizations -Wshadow -Wpointer-arith -Wcast-qual -Wunreachable-code ")
 
 #set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=-*,cppcoreguidelines-*, -header-filter=.;)
@@ -46,6 +44,9 @@ if ( MSVC )
 endif ( MSVC )
 
 find_package(GTest REQUIRED)
+
+
+
 
 #tests
 ADD_SUBDIRECTORY(test)

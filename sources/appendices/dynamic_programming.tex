@@ -4,10 +4,10 @@
 % https://www.topcoder.com/community/competitive-programming/tutorials/dynamic-programming-from-novice-to-advanced/
 % file:///home/knotman/Downloads/DYNAMIC_PROGRAMMING_-_ITS_PRINCIPLES_APPLICATIONS_.pdf
 % http://smo.sogang.ac.kr/doc/bellman.pdf 
-\section{Dynamic Programming}
+\section*{Dynamic Programming}
 \label{sect:appendix:DP}
 
-Dynamic programming (DP) is a popular tecnique for solving a certain class of
+Dynamic programming (DP) is a popular technique for solving a certain class of
 optimization problems efficiently and is accredited to the American Scientist
 Richard Bellman\cite{bellman1954}. He conied the term DP in the context of
 solving problems involving a serie of best decision one after the other. 
@@ -15,7 +15,7 @@ The word \textit{programming} can be a bit deceiving for
 computer scientist of programmers in general but it has really little to do with
 computer programming and it is infact intended as a set of rules to 
 follow to solve a certain problem and it is refeered specifically to the
-solution to find an optimal militray schedule for logistics (and has more or
+solution to find an optimal military schedule for logistics (and has more or
 less the same meaning as linear programming or linear optimization).  These rules can of course be coded and
 executed by a computer but can be easily followed on paper for instance. 
 Dynamic programming is better thought as an optimization approach rather than an
@@ -89,13 +89,13 @@ computer science that can be solved by using DP such as the
 In the next section we will shortly review a number of DP problem focusing on
 the key ideas that allow a problem to be approached and solved  using DP.
 
-\subsection{Fibonacci Sequence}
+\subsection*{Fibonacci Sequence}
 Computing the $n^{th}$ number of the Fibonacci sequence is probably one of the
 most common introductionary example of DP. The Fibonacci sequence recursive
 formulation is ready to be solved using a top-down DP approach. Listing
-\ref{list:app:dp:canonical} shows a C++ function that calculated the $n^{th}$ Fibonacci
+\ref{list:app:dp:canonical} shows a \CC function that calculated the $n^{th}$ Fibonacci
 number.
-\lstinputlisting[language=c++, caption={Canonical recursive C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:canonical]{sources/appendices/fibonacci_canonical.cpp}
+\lstinputlisting[language=c++, caption={Canonical recursive \CC implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:canonical]{sources/appendices/fibonacci_canonical.cpp}
 Notice that for instance when $F(6)$ a call tree is produced where the same call
 is repeated more than once as shown in the list below. $F(2)$ has been
 calculated $5$ times!
@@ -111,4 +111,4 @@ Listing \ref{list:app:dp:fib} can be improved dramatically if we memoize the fun
 that have been already calculated. This way no duplicate work is done. W.r.t the
 previous example, from the second time the value of $F(2)$ is needed, no
 additional work is done, as the value in the cache is returned.
-\lstinputlisting[language=c++, caption={Canonical recursive top-down Dynamic Programming C++ implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:fib]{sources/appendices/fibonacci_dp_top_down.cpp}
+\lstinputlisting[language=c++, caption={Canonical recursive top-down Dynamic Programming \CC implementation of a function returning the $n^{th}$ Fibonacci number.},label=list:app:dp:fib]{sources/appendices/fibonacci_dp_top_down.cpp}

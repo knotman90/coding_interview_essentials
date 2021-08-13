@@ -11,7 +11,6 @@ using std::swap;
 
 TEST(buy_sell_stocks, test_empty)
 {
-
   std::vector<int> P     = {};
   constexpr int expected = 0;
 
@@ -21,7 +20,6 @@ TEST(buy_sell_stocks, test_empty)
 
 TEST(buy_sell_stocks, test_single)
 {
-
   std::vector<int> P     = {1};
   constexpr int expected = 0;
 
@@ -31,7 +29,6 @@ TEST(buy_sell_stocks, test_single)
 
 TEST(buy_sell_stocks, test_all_negative)
 {
-
   std::vector<int> P     = {-1, -2, -3, -4, -5, -6, -7, -8, -9};
   constexpr int expected = 0;
 
@@ -41,7 +38,6 @@ TEST(buy_sell_stocks, test_all_negative)
 
 TEST(buy_sell_stocks, test_all_decreasing)
 {
-
   std::vector<int> P     = {9, 8, 7, 6, 5, 4, 3, 2, 1};
   constexpr int expected = 0;
 
@@ -51,7 +47,6 @@ TEST(buy_sell_stocks, test_all_decreasing)
 
 TEST(buy_sell_stocks, test_all_decreasing_negative)
 {
-
   std::vector<int> P     = {-1, -2, -3, -4, -5, -6, -7, -8, -9};
   constexpr int expected = 0;
 
@@ -61,7 +56,6 @@ TEST(buy_sell_stocks, test_all_decreasing_negative)
 
 TEST(buy_sell_stocks, test_all_increasing_negative)
 {
-
   std::vector<int> P     = {-1, -2, -3, -4, -5, -6, -7, -8, -9};
   constexpr int expected = 0;
 
@@ -71,7 +65,6 @@ TEST(buy_sell_stocks, test_all_increasing_negative)
 
 TEST(buy_sell_stocks, test_increasing)
 {
-
   std::vector<int> P     = {1, 2, 3, 4, 5, 6, 7, 8, 9};
   constexpr int expected = 8;
 
@@ -81,7 +74,6 @@ TEST(buy_sell_stocks, test_increasing)
 
 TEST(buy_sell_stocks, test_random_1)
 {
-
   std::vector<int> P     = {7, 1, 5, 3, 6, 4};
   constexpr int expected = 5;
 
@@ -91,7 +83,6 @@ TEST(buy_sell_stocks, test_random_1)
 
 TEST(buy_sell_stocks, test_random_2)
 {
-
   std::vector<int> P     = {96,  573, 861, 437, 986, 121, 155, 532, 608, 730,
                         56,  501, 850, 376, 753, 18,  83,  548, 372, 236,
                         129, 261, 991, 584, 774, 295, 939, 229, 634, 179,
@@ -105,7 +96,6 @@ TEST(buy_sell_stocks, test_random_2)
 
 TEST(buy_sell_stocks, test_random_3)
 {
-
   std::vector<int> P = {
       6071,  6312,  5391,  11435, 7200,  1925,  3429,  1690, 8833,  11901,
       6162,  6887,  3848,  4741,  9967,  5529,  11176, 6660, 12199, 1425,
