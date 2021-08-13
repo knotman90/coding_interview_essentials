@@ -21,26 +21,26 @@
 \section{Problem statement}
 \begin{exercise}
 \label{example:coin_pickup:exercice1}
-You are given a square matrix $M$ of size $n \times n$ where each of its cells contains one of following three integers:
+You are given a square matrix $M$ of size $n \times n$ where each of its cells contains one of the following three integers:
 \begin{enumerate}
 	\item $0$: the cell is empty
 	\item $1$: the cell contains a coin
 	\item $-1$: the cell contains a thorn. 
 \end{enumerate}
-Write a function that return the maximum number of coins you can collect by following the rules below:
+
+Write a function that returns the maximum number of coins you can collect by following the rules below:
 \begin{itemize}
-	\item You start at location $(0,0)$ and you have to reach the cell $(n-1,n-1)$ by only moving down or right.
-	\item From cell  $(n-1,n-1)$ you have to go back to the start location $(0,0)$, by only moving up or left.
+	\item You start at location $(0,0)$ (top-right corner) and you final goal is to reach the cell $(n-1,n-1)$ (bottom-left corner) by only moving down or right.
+	\item From the cell $(n-1,n-1)$ you have to go back to the start location $(0,0)$, by only moving up or left.
 	\item Cells containing $-1$ cannot be traversed.
-	\item If you step into a cell containing a coin, you will automatically collect it and if you step in it another time, you will not collect the coin a second time.
+	\item If you step into a cell containing a coin, you will automatically collect it.
 \end{itemize}
-If it is not possible to reach the cell $(n-1,n-1)$, the function should return $-1$.
 
 	%example1
 	\begin{example}
 		\label{example:coin_pickup:example1}
 		\hfill \\
-		Given $B$  as in Figure \ref{fig:coin_pickup:example_1_0} the function return $4$.
+		Given $M$  as in Figure \ref{fig:coin_pickup:example_1_0} the function return $4$.
 		By starting from the top-left corner you can go twice down and twice right and reach the cell $(2,2)$. In the process
 		you have collected $3$ coins (see highlighted cells in Figure \ref{fig:coin_pickup:example_1_1}).
 		From cell $(2,2)$ you can then move left, then up twice and finally left to reach the starting cell $(0,0)$ again
@@ -51,13 +51,21 @@ If it is not possible to reach the cell $(n-1,n-1)$, the function should return 
 
 \section{Clarification Questions}
 
+
 \begin{QandA}
-	\item 
-	\begin{answered}
-		\textit{}
-	\end{answered}
+	\item \begin{questionitem} \begin{question} Can a coin be collected twice if a cell with one in it is stepped into twice?  \end{question} 	 
+    \begin{answered}
+		\textit{No, once a cell with a coin is visited, it automatically becomes empty.}
+	\end{answered} \end{questionitem}
+
+	\item \begin{questionitem} \begin{question} What should the function return in case it is not possible to reach the botom-left corner of the matrix?   \end{question} 	 
+		\begin{answered}
+			\textit{If it is not possible to reach the cell $(n-1,n-1)$, the function should return $-1$.}
+		\end{answered} \end{questionitem}
 	
+
 \end{QandA}
+
 
 \begin{figure}
 	\centering
