@@ -15,6 +15,20 @@ using std::vector;
 #include "coin_change_solution4.cpp"
 #include "coin_change_solution5.cpp"
 
+
+TEST(coinChangeMinCoins, test_only_one)
+{
+  const std::vector<int> coins = {1};
+  for(int i = 0 ; i < 100 ; i++){
+    const long long amount       = i;
+    const long long expected     = i;
+    ASSERT_EQ(expected, change_ways_bruteforce(coins, amount));
+    ASSERT_EQ(expected, change_ways_DP_topdown(coins, amount));
+    ASSERT_EQ(expected, change_min_ways_bottom_up(amount, coins));
+  }
+}
+
+
 TEST(coinChangeMinCoins, test0)
 {
   const long long amount       = 0;
@@ -22,6 +36,7 @@ TEST(coinChangeMinCoins, test0)
   const long long expected     = 0;
   ASSERT_EQ(expected, change_ways_bruteforce(coins, amount));
   ASSERT_EQ(expected, change_ways_DP_topdown(coins, amount));
+  ASSERT_EQ(expected, change_min_ways_bottom_up(amount, coins));
 }
 
 TEST(coinChangeMinCoins, test1)
@@ -31,6 +46,7 @@ TEST(coinChangeMinCoins, test1)
   const long long expected     = 1;
   ASSERT_EQ(expected, change_ways_bruteforce(coins, amount));
   ASSERT_EQ(expected, change_ways_DP_topdown(coins, amount));
+  ASSERT_EQ(expected, change_min_ways_bottom_up(amount, coins));
 }
 
 TEST(coinChangeMinCoins, test2)
@@ -40,6 +56,7 @@ TEST(coinChangeMinCoins, test2)
   const long long expected     = 2;
   ASSERT_EQ(expected, change_ways_bruteforce(coins, amount));
   ASSERT_EQ(expected, change_ways_DP_topdown(coins, amount));
+  ASSERT_EQ(expected, change_min_ways_bottom_up(amount, coins));
 }
 
 TEST(coinChangeMinCoins, testexample3)
@@ -49,6 +66,7 @@ TEST(coinChangeMinCoins, testexample3)
   const long long expected     = 2;
   ASSERT_EQ(expected, change_ways_bruteforce(coins, amount));
   ASSERT_EQ(expected, change_ways_DP_topdown(coins, amount));
+  ASSERT_EQ(expected, change_min_ways_bottom_up(amount, coins));
 }
 
 TEST(coin_change, test1)
