@@ -11,7 +11,9 @@
 
 \chapter{Max in manhattan neighborhood$^{K}$}
 \label{ch:max_manhattan}
+
 \section*{Introduction}
+
 This chapter discussed a very interesting problem that is based on the concept of the
 \textit{Manhattan distance} \footnote{Also known as \textit{taxicab distance}.} which is as the name
 suggest an alternative way to measure distances that is particularly useful in real life. Imagine
@@ -112,10 +114,10 @@ $
 \section{Clarification Questions}
 
 \begin{QandA}
-    \item 
+    \item \begin{questionitem} \begin{question}   \end{question}      
     \begin{answered}
         \textit{}
-    \end{answered}
+    \end{answered} \end{questionitem}
     
 \end{QandA}
 
@@ -189,12 +191,7 @@ without having to look at all the $12$ cells composing its  manhattan neighborho
     \begin{subfigure}[t]{1.0\textwidth}
         \centering
         \includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDP1_1}
-        \caption[]{Manahtann neighborhoods of size $1$ for the cells \begin{itemize*}
-            \item $(x,y)$ (center)
-            \item $(x+1,y)$ (right)
-            \item $(x-1,y)$ (left)
-            \item $(x,y-1)$ (top)
-            \item $(x,y+1)$ (down) \end{itemize*}}
+        \caption[]{Manahtann neighborhoods of size $1$ for the cells:  $(x,y)$ (center), $(x+1,y)$ (right), $(x-1,y)$ (left), $(x,y-1)$ (top) and $(x,y+1)$ (down).}
         \label{fig:max_manhattan:neighborhoodDP1_1}
      \end{subfigure}
     
@@ -247,12 +244,7 @@ and east cells of $(i,j)$ for the same subproblem where at $K-1$.
     \begin{subfigure}[t]{1.0\textwidth}
         \centering
         \includegraphics[width=\textwidth]{sources/max_manhattan/images/neighborhoodDPK2_1}
-        \caption[]{Manahtann neighborhoods of size $1$ for the cells \begin{itemize*}
-            \item $(x,y)$ (center)
-            \item $(x+1,y)$ (right)
-            \item $(x-1,y)$ (left)
-            \item $(x,y-1)$ (top)
-            \item $(x,y+1)$ (down) \end{itemize*}}
+        \caption[]{Manahtann neighborhoods of size $1$ for the cells: $(x,y)$ (center), $(x+1,y)$ (right), $(x-1,y)$ (left), $(x,y-1)$ (top) and $(x,y+1)$ (down).}
         \label{fig:max_manhattan:neighborhoodDPK2_1}
     \end{subfigure}
     
@@ -270,7 +262,8 @@ and east cells of $(i,j)$ for the same subproblem where at $K-1$.
 \end{figure}
 
 
-As for all dynamic programming problem, we have two ways to write the solution: \begin{enumerate}
+As for all dynamic programming problem, we have two ways to write the solution:
+\begin{enumerate}
     \item top-down, where we use memoization to avoid making duplicate work
     \item bottom-up, where we solve subproblem in an ordered manner, from the simplest one to the
     hardest.
@@ -279,7 +272,7 @@ As for all dynamic programming problem, we have two ways to write the solution: 
 \subsubsection{Top-down}
 \label{sec:max_manhattan:topdown}
 The top-down approach is possibly the easiest to write as we can  translate $S(K,i,j)$ (see Equation
-\ref{eq:max_manhattan:dpformula}) into a C++ recursive function, and we can use memoization (in the
+\ref{eq:max_manhattan:dpformula}) into a \CC recursive function, and we can use memoization (in the
 form of a cache of size $K\times n\times m$) to store intermediate values of $S$ and avoid duplicate
 work. Listing \ref{list:max_manhattan:dp_topdown} shows an implementation of this approach where
 such a cache is implemented via a hashmap, which maps the arguments of $S$, all triplets $(K,i,j)$,
@@ -288,7 +281,7 @@ the machinery that makes us use tuples of type \inline{std::tuple<int,int,int>} 
 (which has type \inline{std::unordered_map}). \inline{TupleHash} uses \inline{hash\_combine} to
 calculate the hash value for a given \inline{std::tuple<int,int,int>}. The main driver function is
 named \inline{max\_manhattan\_matrix\_k\_DP\_topdown} and the sole purpouse is to create the
-memoization cache and then to call the C++ equivalent of function $S$ (see Equation
+memoization cache and then to call the \CC equivalent of function $S$ (see Equation
 \ref{eq:max_manhattan:dpformula}): \inline{max\_manhattan\_matrix\_k\_DP\_topdown\_helper}. The
 latter is a recursive function that takes as input
 \begin{enumerate*}

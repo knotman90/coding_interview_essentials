@@ -48,10 +48,10 @@ consists only of palindrome substrings.
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
-	\begin{answered}
+	\item \begin{questionitem} \begin{question}   \end{question} 	 
+    \begin{answered}
 		\textit{}
-	\end{answered}
+	\end{answered} \end{questionitem}
 	
 \end{QandA}
 
@@ -135,6 +135,7 @@ and each performs $O(|s|^2)$ work: the for loops runs $O(|s|)$ times, and the fu
 \inline{is_palindrome} has a complexity of $O(|s|)$
 
 \subsubsection{Top-down improved}
+\label{sec:palindrome_partitioning2:dptopdownimproved}
 The complexity of code in Listing \ref{list:palindrome_partitioning2:topdown} can be lowered to
 $O(|s|^2)$ if only we were able to answer the question about whether a given substring of $s$ from
 index $i$ to $j>i$ is a palindrome or not. The current implementation blindly process the whole

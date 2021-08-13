@@ -9,7 +9,7 @@
 \label{ch:dice_rolls}
 \section*{Introduction}
 
-Dices have been around for quite a long time: the oldest dice known  were discovered in Iran, as part of a staggering five-thousand-year-old
+Dice have been around for quite a long time: the oldest dice known  were discovered in Iran, as part of a staggering five-thousand-year-old
  Backgammon\footnote{One of the oldest board game. A two-players game where pieces are moved around between twenty-four triangles according to the roll of two 6 faced-dice. The goal of each player is to remove all of their 15 pieces before the other player} set.
 
 If we think about what a die is, the first thing that comes to mind is the fair $6$ faced-die (see Figure \ref{fig:dice_rolls:6faces_dice}), but potentially any polyhedron can be a die: consider for instance a  $20$-faced icosahedron (see Figure
@@ -68,10 +68,10 @@ should be returned modulo $10^9 + 7$.
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item What is the maximum number of dices, faces, and the highest target value possible?
-	\begin{answered}
+	\item \begin{questionitem} \begin{question} What is the maximum number of dices, faces, and the highest target value possible?  \end{question} 	 
+    \begin{answered}
 		$30$,$30$ and $1000$, respectively.
-	\end{answered}
+	\end{answered} \end{questionitem}
 	
 \end{QandA}
 
@@ -101,7 +101,7 @@ should be returned modulo $10^9 + 7$.
 
 Let's start by noticing that the answer can be astronomically high, but more importantly, the number of possible value combinations resulting from rolling $d$ dices is even larger: if each die has
 $f$ faces, then we are looking at $f^d$ possible distinct roll outcomes! 
-During an interview, a brute-force approach, where we go over each and every possible roll outcome of the $d$ dice, is completely out of question  (considering the constraints on the maximum number of dices and faces we might get for input) unless we are willing to wait around  $6 \times 10^{18}$ years. Even if we implement this algorithm so that it can run on the fastest supercomputer available today (which is capable of a staggering $\approx450$ \footnote{\textbf{petaflop}: A petaflop is a measure of a computer's processing speed and can be expressed as: A quadrillion (thousand trillion) floating-point operations per second (FLOPS). A thousand teraflops. 10 to the 15th power FLOPS. 2 to the 50th power FLOPS. A huge number of operations per second.} operations per second), it would still require $\frac{30^{30}}{10e15}$s to run to completion. By that time, humanity will be long gone, the universe will be a dark and cold place, but most importantly, the position you are dreaming about will have gone to somebody else.
+During an interview, a brute-force approach, where we go over each and every possible roll outcome of the $d$ dice, is completely out of question  (considering the constraints on the maximum number of dices and faces we might get for input) unless we are willing to wait around  $6 \times 10^{18}$ years. Even if we implement this algorithm so that it can run on the fastest supercomputer available today (which is capable of a staggering $\approx450$ petaflops \footnote{\textbf{petaflop}: A petaflop is a measure of a computer's processing speed and can be expressed as: A quadrillion (thousand trillion) floating-point operations per second (FLOPS). A thousand teraflops. 10 to the 15th power FLOPS. 2 to the 50th power FLOPS. A huge number of operations per second.} operations per second), it would still require $\frac{30^{30}}{10e15}$s to run to completion. By that time, humanity will be long gone, the universe will be a dark and cold place, but most importantly, the position you are dreaming about will have gone to somebody else.
 
 This type of \textit{"counting"} questions is usually (and crucially more efficiently) solved by using a dynamic programming
 approach. In fact, this question shares a lot of similarities with the classical dynamic programming

@@ -150,7 +150,7 @@ top-left cell is computed.
 \end{figure}
 
 
-\lstinputlisting[language=c++, caption={C++ brute force solution using diagonal steps for solving the \textit{square in matrix} problem.  },label=list:square_in_matrix_diagonal]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
+\lstinputlisting[language=c++, caption={\CC brute force solution using diagonal steps for solving the \textit{square in matrix} problem.  },label=list:square_in_matrix_diagonal]{sources/square_in_matrix/square_in_matrix_solution1.cpp}
 
 
 \subsection{Dynamic programming}
@@ -164,7 +164,7 @@ subsquares of size $(k-1)\times (k-1)$. As an example see Figure
 decomoposed into $3$, $2\times 2$ subsquares.
 \begin{figure}
 	\centering
-	\label{fig:square_in_matrix:squa_matrix_incremental}
+	\label{fig:square_in_matrix:squa_matrix_incremental2}
 	\includegraphics[width=\textwidth/2]{sources/square_in_matrix/images/square_decomposition}
 	\caption[Square of side $3$ decomposition into $3$ subsquares of side $2$.]
 			{This figure shows how a square of side $3$ can be decomposed into three smaller
@@ -295,7 +295,7 @@ in \inline{maximal_square_in_matrix_top_down_helper} and see that no duplicates
 appear in the list).
 
 
-\lstinputlisting[language=c++, caption={C++ dynamic programming top-down solution for solving the
+\lstinputlisting[language=c++, caption={\CC dynamic programming top-down solution for solving the
 				 \textit{square in matrix} problem. },
 				 label=list:square_in_matrix_top_down]{sources/square_in_matrix/square_in_matrix_solution4.cpp}
 
@@ -319,7 +319,7 @@ the largest value in the cache.
 
 Listing \ref{list:square_in_matrix_bottom_up} shows a possible implementation of
 such idea.
-\lstinputlisting[language=c++, caption={C++ dynamic programming bottom-up solution for solving the
+\lstinputlisting[language=c++, caption={\CC dynamic programming bottom-up solution for solving the
 				 \textit{square in matrix} problem. },
 label=list:square_in_matrix_bottom_up]{sources/square_in_matrix/square_in_matrix_solution5.cpp}
 This implementation initializes the \inline{ans} variable with $1$ or $0$

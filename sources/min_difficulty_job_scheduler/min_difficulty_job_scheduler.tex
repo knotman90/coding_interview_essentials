@@ -88,16 +88,17 @@ executed and also that there is at least one task executed every day.
 \section{Clarification Questions}
         
     \begin{QandA}
-            \item What should the function return in the case where it is not possible to make a
+        \item \begin{questionitem} \begin{question} What should the function return in the case where it is not possible to make a
             valid schedule? For instance when $|I| < d$?
+        \end{question} 
         \begin{answered}
             \textit{You can return $-1$ in that case.}
-        \end{answered}
+        \end{answered} \end{questionitem}
 
-        \item It is guaranteed for the complexity values to be positive ($\geq 0$)?
-        \begin{answered}
+        \item \begin{questionitem} \begin{question} It is guaranteed for the complexity values to be positive ($\geq 0$)?  \end{question}          
+    \begin{answered}
             \textit{Yes you can assume complexities are always positive.}
-        \end{answered}
+        \end{answered} \end{questionitem}
     \end{QandA}
 
 \section{Discussion}
@@ -220,6 +221,7 @@ a DP problem has:
 \end{description}
 
 \subsection{Top-down}
+\label{sec:min_difficulty_job_scheduler_solution:dptopdown}
 Without any optimization, the function that we obtain by translating the recursive definition of
 Equation \ref{eq:min_difficulty_job_scheduler:dpformula} is extremely inefficient due to the fact
 problems are recalculated over and over (See Appendix \ref{sect:appendix:DP}). In order to make good
