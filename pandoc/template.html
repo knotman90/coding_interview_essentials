@@ -1,0 +1,762 @@
+
+<!DOCTYPE html>
+<!--
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.2 — by Tristano Ajmone
+==============================================================================
+Copyright © Tristano Ajmone, 2017-2020, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License
+
+Copyright (c) Tristano Ajmone, 2017-2020 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017-2020,
+released under the MIT License (MIT); it contains readaptations of substantial
+portions of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>main</title>
+  <style type="text/css">
+@charset "UTF-8";.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#24292e;font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:16px;line-height:1.5;word-wrap:break-word;box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}.markdown-body a{color:#0366d6;background-color:transparent;text-decoration:none;-webkit-text-decoration-skip:objects}.markdown-body a:active,.markdown-body a:hover{outline-width:0}.markdown-body a:hover{text-decoration:underline}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body strong{font-weight:600}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1{font-size:2em;margin:.67em 0;padding-bottom:.3em;border-bottom:1px solid #eaecef}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid #eaecef}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#6a737d}.markdown-body img{border-style:none}.markdown-body svg:not(:root){overflow:hidden}.markdown-body hr{box-sizing:content-box;height:.25em;margin:24px 0;padding:0;overflow:hidden;background-color:#e1e4e8;border:0}.markdown-body hr::before{display:table;content:""}.markdown-body hr::after{display:table;clear:both;content:""}.markdown-body input{margin:0;overflow:visible;font:inherit;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}.markdown-body *{box-sizing:border-box}.markdown-body blockquote{margin:0}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dd{margin-left:0}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body code{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace}.markdown-body pre{font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;word-wrap:normal}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #dfe2e5}.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body code{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}.markdown-body code::after,.markdown-body code::before{letter-spacing:-.2em;content:" "}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code::after,.markdown-body pre code::before{content:normal}.markdown-body .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}.markdown-body kbd{box-shadow:inset 0 -1px 0 #959da5;display:inline-block;padding:3px 5px;font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;color:#444d56;vertical-align:middle;background-color:#fcfcfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5}.markdown-body :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:3px}.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}.markdown-body::before{display:table;content:""}.markdown-body::after{display:table;clear:both;content:""}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.Alert,.Error,.Note,.Success,.Warning{padding:11px;margin-bottom:24px;border-style:solid;border-width:1px;border-radius:4px}.Alert p,.Error p,.Note p,.Success p,.Warning p{margin-top:0}.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child{margin-bottom:0}.Alert{color:#246;background-color:#e2eef9;border-color:#bac6d3}.Warning{color:#4c4a42;background-color:#fff9ea;border-color:#dfd8c2}.Error{color:#911;background-color:#fcdede;border-color:#d2b2b2}.Success{color:#22662c;background-color:#e2f9e5;border-color:#bad3be}.Note{color:#2f363d;background-color:#f6f8fa;border-color:#d5d8da}.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{color:#246;margin-bottom:0}.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{color:#4c4a42;margin-bottom:0}.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{color:#911;margin-bottom:0}.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{color:#22662c;margin-bottom:0}.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{color:#2f363d;margin-bottom:0}.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{margin-top:0}h1.title,p.subtitle{text-align:center}h1.title.followed-by-subtitle{margin-bottom:0}p.subtitle{font-size:1.5em;font-weight:600;line-height:1.25;margin-top:0;margin-bottom:16px;padding-bottom:.3em}div.line-block{white-space:pre-line}
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+    <article class="markdown-body">
+    <nav id="TOC">
+<h1 class="toc-title">Contents</h1>
+<ul>
+<li><a href="#ch:power_set">Power set generation</a>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#problem-statement">Problem statement</a></li>
+<li><a href="#clarification-questions">Clarification Questions</a></li>
+<li><a href="#sec:powerset:discussion">Discussion</a>
+<ul>
+<li><a href="#bruteforce---backtracking-like-approach">Bruteforce - Backtracking-like approach</a></li>
+<li><a href="#bit-manipulation">Bit Manipulation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:square_root">Square root of an integer</a>
+<ul>
+<li><a href="#introduction-1">Introduction</a></li>
+<li><a href="#problem-statement-1">Problem statement</a></li>
+<li><a href="#clarification-questions-1">Clarification Questions</a></li>
+<li><a href="#discussion">Discussion</a>
+<ul>
+<li><a href="#brute-force">Brute-Force</a></li>
+<li><a href="#logarithmic-solution">Logarithmic Solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:two_string_anagram">Two string anagram</a>
+<ul>
+<li><a href="#introduction-2">Introduction</a></li>
+<li><a href="#problem-statement-2">Problem statement</a></li>
+<li><a href="#clarification-questions-2">Clarification Questions</a></li>
+<li><a href="#discussion-1">Discussion</a>
+<ul>
+<li><a href="#sec:anagrams:bruteforce">Brute-Force</a></li>
+<li><a href="#sec:anagrams:sorting">Sorting</a></li>
+<li><a href="#sec:anagrams:histograms">Histograms</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:two_numbers_sum">Two numbers sum problem</a>
+<ul>
+<li><a href="#introduction-3">Introduction</a></li>
+<li><a href="#problem-statement-3">Problem statement</a></li>
+<li><a href="#clarification-questions-3">Clarification Questions</a></li>
+<li><a href="#discussion-2">Discussion</a>
+<ul>
+<li><a href="#sec:two_numbers:bruteforce">Brute-force</a></li>
+<li><a href="#sec:two_numbers:hashing">Hashing</a></li>
+<li><a href="#sect:two_number_problem_binary_search">Sorting and binary search</a></li>
+<li><a href="#sec:two_numbers:twopointers">Sorting and two pointers technique</a></li>
+</ul></li>
+<li><a href="#common-variations">Common Variations</a>
+<ul>
+<li><a href="#sec:four_number">Four numbers sum problem</a></li>
+<li><a href="#problem-statement-4">Problem statement</a></li>
+<li><a href="#naïve-on4-solution">Naïve <span class="math inline">\(O(n^4)\)</span> solution</a></li>
+<li><a href="#on3-solution"><span class="math inline">\(O(n^3)\)</span> solution</a></li>
+<li><a href="#on2-solution-using-hashing"><span class="math inline">\(O(n^2)\)</span> solution using hashing</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:unique_elements">Unique Elements in a collection</a>
+<ul>
+<li><a href="#introduction-4">Introduction</a></li>
+<li><a href="#problem-statement-5">Problem statement</a></li>
+<li><a href="#clarification-questions-4">Clarification Questions</a></li>
+<li><a href="#discussion-3">Discussion</a>
+<ul>
+<li><a href="#brute-force-1">Brute Force</a></li>
+<li><a href="#linear-time---hashset">Linear time - Hashset</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:greatest_right">Greatest element on the right side</a>
+<ul>
+<li><a href="#introduction-5">Introduction</a></li>
+<li><a href="#problem-statement-6">Problem statement</a></li>
+<li><a href="#clarification-questions-5">Clarification Questions</a></li>
+<li><a href="#discussion-4">Discussion</a>
+<ul>
+<li><a href="#brute-force-2">Brute Force</a></li>
+<li><a href="#sec:greatest_right:linear">Linear solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:string_to_int">String to Integer</a>
+<ul>
+<li><a href="#introduction-6">Introduction</a></li>
+<li><a href="#problem-statement-7">Problem statement</a></li>
+<li><a href="#clarification-questions-6">Clarification Questions</a></li>
+<li><a href="#string_to_int:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#common-variation">Common Variation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:stairs_climbing">Climb the Stairs</a>
+<ul>
+<li><a href="#introduction-7">Introduction</a></li>
+<li><a href="#sec:stairs_climbing_statement_easy">Problem statement</a></li>
+<li><a href="#clarification-questions-7">Clarification Questions</a></li>
+<li><a href="#stairs_climbing:sec:discussion">Discussion</a></li>
+<li><a href="#common-variation-1">Common Variation </a>
+<ul>
+<li><a href="#stairs_climbing:sec:arbitrary_steps">Arbitrary step lengths</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:wave_array">Wave Array</a>
+<ul>
+<li><a href="#introduction-8">Introduction</a></li>
+<li><a href="#problem-statement-8">Problem statement</a></li>
+<li><a href="#clarification-questions-8">Clarification Questions</a></li>
+<li><a href="#wave_array:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#wave_array:sec:bruteforce">Brute-force</a></li>
+<li><a href="#wave_array:sec:sorting">Sorting solution</a></li>
+<li><a href="#linear-time-solution">Linear time solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:first_positive_missing">First positive missing</a>
+<ul>
+<li><a href="#introduction-9">Introduction</a></li>
+<li><a href="#problem-statement-9">Problem statement</a></li>
+<li><a href="#clarification-questions-9">Clarification Questions</a></li>
+<li><a href="#first_positive_missing:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#bruteforce">Bruteforce</a></li>
+<li><a href="#first_positive_missing:sec:sorting">Sorting</a></li>
+<li><a href="#first_positive_missing:sec:linear_space">Linear time and space solution</a></li>
+<li><a href="#first_positive_missing:sec:linear_space">Linear time and constant space solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:exponentiation">Exponentiation</a>
+<ul>
+<li><a href="#introduction-10">Introduction</a></li>
+<li><a href="#problem-statement-10">Problem statement</a></li>
+<li><a href="#clarification-questions-10">Clarification Questions</a></li>
+<li><a href="#exponentiation:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#exponentiation:sec:fast_exponentiation">Binary fast exponentiation</a></li>
+<li><a href="#iterative-implementation">Iterative implementation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:max_sum_continguous_subarray">Max sum contiguous subarray</a>
+<ul>
+<li><a href="#introduction-11">Introduction</a></li>
+<li><a href="#problem-statement-11">Problem statement</a></li>
+<li><a href="#clarification-questions-11">Clarification Questions</a></li>
+<li><a href="#max_sum_continguous_subarray:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#sec:max_sum_continguous_subarray_bruteforce">Brute-force</a></li>
+<li><a href="#max_sum_continguous_subarray:sec:bruteforce_improved">Brute-force improved</a></li>
+<li><a href="#sec:kadane_algorithm">Kadane’s Algorithm</a></li>
+</ul></li>
+<li><a href="#common-variations-1">Common Variations</a>
+<ul>
+<li><a href="#minium-sum-contiguous-subarray">Minium sum contiguous subarray</a></li>
+<li><a href="#longest-positivenegative-contiguous-subarray">Longest positive/negative contiguous subarray</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:string_reverse">String Reverse</a>
+<ul>
+<li><a href="#introduction-12">Introduction</a></li>
+<li><a href="#problem-statement-12">Problem statement</a></li>
+<li><a href="#clarification-questions-12">Clarification Questions</a></li>
+<li><a href="#string_reverse:sec:discussion">Discussion</a></li>
+<li><a href="#string_reverse:sec:variations">Common Variation</a>
+<ul>
+<li><a href="#out-of-place-solution">Out-of-place solution</a></li>
+<li><a href="#recursive-solution">Recursive solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:find_odd_occurring_element">Find the odd occurring element</a>
+<ul>
+<li><a href="#introduction-13">Introduction</a></li>
+<li><a href="#problem-statement-13">Problem statement</a></li>
+<li><a href="#clarification-questions-13">Clarification Questions</a></li>
+<li><a href="#discussion-5">Discussion</a>
+<ul>
+<li><a href="#find_odd_occurring_element:sec:bruteforce">Brute-force</a></li>
+<li><a href="#find_odd_occurring_element:sec:map">Linear time and space solution</a></li>
+<li><a href="#find_odd_occurring_element:sec:constant_space">Linear time and constant space solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:capitalize_words_first_letter">Capitalize the first letters of every words</a>
+<ul>
+<li><a href="#introduction-14">Introduction</a></li>
+<li><a href="#problem-statement-14">Problem statement</a></li>
+<li><a href="#capitalize_words_first_letter:sec:discussion">Discussion</a></li>
+<li><a href="#solution-using-stdadjacent_find">Solution using <code>std::adjacent_find</code></a></li>
+<li><a href="#capitalize_words_first_letter:sec:variation">Common Variations</a>
+<ul>
+<li><a href="#user-provided-function">User provided function</a></li>
+<li><a href="#modify-the-every-kth-character-of-every-word">Modify the every <span class="math inline">\(k^{th}\)</span> character of every word</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:trapping_water">Trapping Water</a>
+<ul>
+<li><a href="#introduction-15">Introduction</a></li>
+<li><a href="#problem-statement-15">Problem statement</a></li>
+<li><a href="#trapping_water:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#trapping_water:sec:bruteforce">Brute-force</a></li>
+<li><a href="#trapping_water:sec:dp">Dynamic Programming</a></li>
+<li><a href="#trapping_water:sec:two_pointers">Two pointers solution</a></li>
+<li><a href="#trapping_water:sec:stack">Stack based solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:min_rotated_array">Minimum element in rotated sorted array</a>
+<ul>
+<li><a href="#introduction-16">Introduction</a></li>
+<li><a href="#problem-statement-16">Problem statement</a></li>
+<li><a href="#clarification-questions-14">Clarification Questions</a></li>
+<li><a href="#min_rotated_array:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#min_rotated_array:sec:bruteforce">Brute-force</a></li>
+<li><a href="#min_rotated_array:sec:log">Logarithmic solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:search_sorted_rotated_array">Search in sorted and rotated array</a>
+<ul>
+<li><a href="#introduction-17">Introduction</a></li>
+<li><a href="#problem-statement-17">Problem statement</a></li>
+<li><a href="#clarification-questions-15">Clarification Questions</a></li>
+<li><a href="#search_sorted_rotated_array:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#search_sorted_rotated_array:sec:bruteforce">Brute-force</a></li>
+<li><a href="#search_sorted_rotated_array:sec:log">Logarithmic time solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:verify_BST">Verify BST property</a>
+<ul>
+<li><a href="#introduction-18">Introduction</a></li>
+<li><a href="#problem-statement-18">Problem statement</a></li>
+<li><a href="#clarification-questions-16">Clarification Questions</a></li>
+<li><a href="#verify_BST:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#a-common-mistake">A common mistake</a></li>
+<li><a href="#verify_BST:sec:topdown">Top Down approach</a></li>
+<li><a href="#brute-force-3">Brute force</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:clone_list_random_pointer">Clone a linked list with random pointer</a>
+<ul>
+<li><a href="#introduction-19">Introduction</a></li>
+<li><a href="#problem-statement-19">Problem statement</a></li>
+<li><a href="#clarification-questions-17">Clarification Questions</a></li>
+<li><a href="#clone_list_random_pointer:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#clone_list_random_pointer:sec:bruteforce">Linear memory solution</a></li>
+<li><a href="#clone_list_random_pointer:sec:interleaved_lists">Constant memory solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:delete_duplicates_list">Delete duplicates from Linked List</a>
+<ul>
+<li><a href="#introduction-20">Introduction</a></li>
+<li><a href="#problem-statement-20">Problem statement</a></li>
+<li><a href="#clarification-questions-18">Clarification Questions</a></li>
+<li><a href="#delete_duplicates_list:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#delete_duplicates_list:sec:bruteforce">Brute-force</a></li>
+<li><a href="#delete_duplicates_list:sec:linear_space">In-place <span class="math inline">\(O(1)\)</span> space solution</a></li>
+</ul></li>
+<li><a href="#common-variations-and-follow-up-questions">Common Variations and follow-up questions</a></li>
+</ul></li>
+<li><a href="#ch:random_points_in_circle">Generate points in circle uniformly</a>
+<ul>
+<li><a href="#introduction-21">Introduction</a></li>
+<li><a href="#problem-statement-21">Problem statement</a></li>
+<li><a href="#clarification-questions-19">Clarification Questions</a></li>
+<li><a href="#random_points_in_circle:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#random_points_in_circle:sec:buggy">Polar Coordinates - The wrong approach</a></li>
+<li><a href="#random_points_in_circle:sec:loop">Loop approach</a></li>
+<li><a href="#random_points_in_circle:sec:polar_sqrt">Polar Coordinates - The right approach</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:buy_sell_stocks">Best time to buy and sell stock</a>
+<ul>
+<li><a href="#introduction-22">Introduction</a></li>
+<li><a href="#sec:buy_sell_stocks:statement1">Problem statement</a></li>
+<li><a href="#clarification-questions-20">Clarification Questions</a></li>
+<li><a href="#buy_sell_stocks:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#buy_sell_stocks:sec:bruteforce">Brute-force</a></li>
+<li><a href="#buy_sell_stocks:sec:linear">Linear time solution</a></li>
+</ul></li>
+<li><a href="#sec:buy_sell_stocks:multiple_transaction">Common Variations - Multiple Transactions</a>
+<ul>
+<li><a href="#problem-statement-22">Problem statement</a></li>
+</ul></li>
+<li><a href="#buy_sell_stocks_2:sec:discussion">Discussion</a></li>
+<li><a href="#buy_sell_stocks_2:sec:bruteforce">Brute force solution</a></li>
+<li><a href="#buy_sell_stocks_2:sec:linear">Linear time solution</a></li>
+</ul></li>
+<li><a href="#ch:cycle_in_list">Find the cycle in a Linked list</a>
+<ul>
+<li><a href="#introduction-23">Introduction</a></li>
+<li><a href="#problem-statement-23">Problem statement</a></li>
+<li><a href="#cycle_in_list:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#cycle_in_list:sec:bruteforce">Linear time and space solution</a></li>
+<li><a href="#cycle_in_list:sec:slowfast">Slow and fast pointer solution - Floyd’s algorithm </a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:list_reverse">Reverse a singly linked list</a>
+<ul>
+<li><a href="#introduction-24">Introduction</a></li>
+<li><a href="#problem-statement-24">Problem statement</a></li>
+<li><a href="#clarification-questions-21">Clarification Questions</a></li>
+<li><a href="#list_reverse:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#constant-space">Constant space</a></li>
+</ul></li>
+<li><a href="#conclusion-1">Conclusion</a></li>
+<li><a href="#common-variation---reserve-a-sublist">Common variation - Reserve a sublist</a>
+<ul>
+<li><a href="#problem-statement-25">Problem statement</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:min_stack">Min stack</a>
+<ul>
+<li><a href="#introduction-25">Introduction</a></li>
+<li><a href="#problem-statement-26">Problem statement</a></li>
+<li><a href="#clarification-questions-22">Clarification Questions</a></li>
+<li><a href="#min_stack:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#min_stack:sec:double_stack">Linear Space solutions</a></li>
+<li><a href="#min_stack:sec:constantspace">Constant space</a></li>
+<li><a href="#common-variations-2">Common Variations</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:majority_element">Find the majority element</a>
+<ul>
+<li><a href="#introduction-26">Introduction</a></li>
+<li><a href="#problem-statement-27">Problem statement</a></li>
+<li><a href="#clarification-questions-23">Clarification Questions</a></li>
+<li><a href="#majority_element:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#majority_element:sec:bruteforce">Brute-force</a></li>
+<li><a href="#majority_element:sec:hashmap">Hash-map approach</a></li>
+<li><a href="#majority_element:sec:sorting">Sorting - Counting</a></li>
+<li><a href="#majority_element:sec:median">Sorting - Median</a></li>
+<li><a href="#majority_element:sec:linear">Boyer-Moore algorithm</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:node_from_the_end"><span class="math inline">\(n^{th}\)</span> node from the end</a>
+<ul>
+<li><a href="#introduction-27">Introduction</a></li>
+<li><a href="#problem-statement-28">Problem statement</a></li>
+<li><a href="#clarification-questions-24">Clarification Questions</a></li>
+<li><a href="#node_from_the_end:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#node_from_the_end:sec:bruteforce">Brute-force</a></li>
+<li><a href="#node_from_the_end:sec:twopointers">Two pointers</a></li>
+<li><a href="#common-variation-2">Common Variation</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:valid_parenthesis">Validate Parenthesized String</a>
+<ul>
+<li><a href="#problem-statement-29">Problem statement</a></li>
+<li><a href="#clarification-questions-25">Clarification Questions</a></li>
+<li><a href="#valid_parenthesis:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#valid_parenthesis:sec:bruteforce">Brute-force</a></li>
+<li><a href="#valid_parenthesis:sec:dp">Dynamic Programming</a></li>
+<li><a href="#valid_parenthesis:sec:linear">Greedy - Linear time</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:tree_diameter">Tree Diameter</a>
+<ul>
+<li><a href="#introduction-28">Introduction</a></li>
+<li><a href="#problem-statement-30">Problem statement</a></li>
+<li><a href="#tree_diameter:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#tree_diameter:sec:bruteforce">Brute-force</a></li>
+<li><a href="#tree_diameter:sec:linear">Linear time and space</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:square_in_matrix">Largest square in a binary matrix</a>
+<ul>
+<li><a href="#introduction-29">Introduction</a></li>
+<li><a href="#problem-statement-31">Problem statement</a></li>
+<li><a href="#square_in_matrix:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#brute-force-4">Brute-force</a></li>
+<li><a href="#dynamic-programming">Dynamic programming</a></li>
+</ul></li>
+<li><a href="#conclusion-2">Conclusion</a></li>
+</ul></li>
+<li><a href="#ch:sudoku">Sudoku</a>
+<ul>
+<li><a href="#introduction-30">Introduction</a></li>
+<li><a href="#problem-statement-32">Problem statement</a></li>
+<li><a href="#clarification-questions-26">Clarification Questions</a></li>
+<li><a href="#sudoku:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#sudoku:sec:bruteforce">Backtacking</a></li>
+</ul></li>
+<li><a href="#conclusion-3">Conclusion</a></li>
+</ul></li>
+<li><a href="#ch:can_jump">Jump Game</a>
+<ul>
+<li><a href="#introduction-31">Introduction</a></li>
+<li><a href="#problem-statement-33">Problem statement</a></li>
+<li><a href="#can_jump:sec:backtracking">Backtracking</a></li>
+<li><a href="#can_jump:sec:DFS">DFS</a></li>
+<li><a href="#can_jump:sec:greedy">Greedy</a></li>
+</ul></li>
+<li><a href="#ch:kth_largest_in_stream"><span class="math inline">\(k^{th}\)</span> largest in a stream</a>
+<ul>
+<li><a href="#introduction-32">Introduction</a></li>
+<li><a href="#problem-statement-34">Problem statement</a></li>
+<li><a href="#clarification-questions-27">Clarification Questions</a></li>
+<li><a href="#kth_largest_in_stream:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#kth_largest_in_stream:sec:bruteforce">Array based solution</a></li>
+<li><a href="#kth_largest_in_stream:sec:map">Ordered set</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:find_k_closest_in_array">Find the <span class="math inline">\(K\)</span> closest elements</a>
+<ul>
+<li><a href="#introduction-33">Introduction</a></li>
+<li><a href="#problem-statement-35">Problem statement</a></li>
+<li><a href="#clarification-questions-28">Clarification Questions</a></li>
+<li><a href="#sec:find_k_closest_in_array:sorting">Sorting</a>
+<ul>
+<li><a href="#find_k_closest_in_array:sec:binary_search">Binary Search</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:mirror_binary_tree">Binary Tree mirroring</a>
+<ul>
+<li><a href="#introduction-34">Introduction</a></li>
+<li><a href="#problem-statement-36">Problem statement</a></li>
+<li><a href="#mirror_binary_tree:sec:discussion">Discussion</a></li>
+</ul></li>
+<li><a href="#ch:number_islands">Count the number of islands</a>
+<ul>
+<li><a href="#problem-statement-37">Problem statement</a></li>
+<li><a href="#clarification-questions-29">Clarification Questions</a></li>
+<li><a href="#number_islands:sec:discussion">Discussion</a></li>
+</ul></li>
+<li><a href="#ch:median_sorted_arrays">Median of two sorted arrays</a>
+<ul>
+<li><a href="#introduction-35">Introduction</a></li>
+<li><a href="#problem-statement-38">Problem statement</a></li>
+<li><a href="#clarification-questions-30">Clarification Questions</a></li>
+<li><a href="#median_sorted_arrays:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#median_sorted_arrays:sec:bruteforce">Brute-force</a></li>
+<li><a href="#median_sorted_arrays:sec:bruteforce_improved">Brute-force improved</a></li>
+<li><a href="#median_sorted_arrays:sec:log">Logarithmic solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:lowest_common_ancestor">BST Lowest Common Ancestor</a>
+<ul>
+<li><a href="#introduction-36">Introduction</a></li>
+<li><a href="#problem-statement-39">Problem statement</a></li>
+<li><a href="#clarification-questions-31">Clarification Questions</a></li>
+<li><a href="#lowest_common_ancestor:sec:discussion">Discussion</a></li>
+</ul></li>
+<li><a href="#ch:distance_between_nodes_in_tree">Distance between nodes in BST</a>
+<ul>
+<li><a href="#introduction-37">Introduction</a></li>
+<li><a href="#sec:distance_between_nodes_in_tree:problem">Problem statement</a></li>
+<li><a href="#clarification-questions-32">Clarification Questions</a></li>
+<li><a href="#distance_between_nodes_in_tree:sec:discussion">Discussion</a></li>
+<li><a href="#conclusion-4">Conclusion</a></li>
+</ul></li>
+<li><a href="#ch:items_in_containers_amazon">Counts the items in the containers</a>
+<ul>
+<li><a href="#introduction-38">Introduction</a></li>
+<li><a href="#problem-statement-40">Problem statement</a></li>
+<li><a href="#clarification-questions-33">Clarification Questions</a></li>
+<li><a href="#items_in_containers_amazon:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#items_in_containers_amazon:sec:bruteforce">Brute-force</a></li>
+<li><a href="#items_in_containers_amazon:sec:lineartime">Linear time solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:min_difficulty_job_scheduler">Minimum difficulty job schedule</a>
+<ul>
+<li><a href="#introduction-39">Introduction</a></li>
+<li><a href="#problem-statement-41">Problem statement</a></li>
+<li><a href="#clarification-questions-34">Clarification Questions</a></li>
+<li><a href="#min_difficulty_job_scheduler:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#min_difficulty_job_scheduler:sec:bruteforce">Brute-force</a></li>
+<li><a href="#dynamic-programming-1">Dynamic Programming</a></li>
+<li><a href="#top-down">Top-down</a></li>
+<li><a href="#bottom-up">Bottom-up</a></li>
+</ul></li>
+<li><a href="#conclusion-5">Conclusion</a></li>
+</ul></li>
+<li><a href="#ch:max_triplet">Max triplet sum</a>
+<ul>
+<li><a href="#introduction-40">Introduction</a></li>
+<li><a href="#problem-statement-42">Problem statement</a></li>
+<li><a href="#clarification-questions-35">Clarification Questions</a></li>
+<li><a href="#max_triplet:sec:discussion">Discussion</a></li>
+<li><a href="#max_triplet:sec:bruteforce">Brute-force</a></li>
+<li><a href="#precalculation-and-binary-search">Precalculation and Binary Search</a></li>
+</ul></li>
+<li><a href="#ch:dice_rolls">Number of Dice Rolls With Target Sum</a>
+<ul>
+<li><a href="#introduction-41">Introduction</a></li>
+<li><a href="#problem-statement-43">Problem statement</a></li>
+<li><a href="#clarification-questions-36">Clarification Questions</a></li>
+<li><a href="#dice_rolls:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#dice_rolls:sec:bruteforce">Brute-force</a></li>
+<li><a href="#dice_rolls:sec:DP">Dynamic Programming - Recursive top-down</a></li>
+</ul></li>
+<li><a href="#dice_rolls:sec:bottom">Dynamic programming - Iterative bottom-up</a></li>
+</ul></li>
+<li><a href="#ch:remove_duplicated_sorted_array_inplace">Remove duplicates in sorted array</a>
+<ul>
+<li><a href="#introduction-42">Introduction</a></li>
+<li><a href="#problem-statement-44">Problem statement</a></li>
+<li><a href="#clarification-questions-37">Clarification Questions</a></li>
+<li><a href="#remove_duplicated_sorted_array_inplace:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#linear-space-solution">Linear space solution</a></li>
+<li><a href="#sec:remove_duplicated_sorted_array_inplace:constant_space">Constant Space</a></li>
+</ul></li>
+<li><a href="#common-variations-3">Common Variations</a>
+<ul>
+<li><a href="#max-2-duplicates-allowed">Max <span class="math inline">\(2\)</span> duplicates allowed</a></li>
+<li><a href="#discussion-6">Discussion</a></li>
+<li><a href="#max-k-duplicates-allowed">Max <span class="math inline">\(k\)</span> duplicates allowed</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:remove_all_occurrences_unsorted_array_inplace">Remove all occurrences - unsorted array</a>
+<ul>
+<li><a href="#introduction-43">Introduction</a></li>
+<li><a href="#problem-statement-45">Problem statement</a></li>
+<li><a href="#clarification-questions-38">Clarification Questions</a></li>
+<li><a href="#remove_all_occurrences_unsorted_array_inplace:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#remove_all_occurrences_unsorted_array_inplace:sec:bruteforce">Linear time and linear space solution</a></li>
+<li><a href="#remove_all_occurrences_unsorted_array_inplace:sec:constant_space">Linear time and constant space solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:max_num_chunks_sorted">Sort the chunks, sort the array.</a>
+<ul>
+<li><a href="#introduction-44">Introduction</a></li>
+<li><a href="#problem-statement-46">Problem statement</a></li>
+<li><a href="#clarification-questions-39">Clarification Questions</a></li>
+<li><a href="#max_num_chunks_sorted:sec:discussion">Discussion</a></li>
+<li><a href="#max_num_chunks_sorted:sec:bruteforce">Brute-force</a></li>
+<li><a href="#max_num_chunks_sorted:sec:lineartime">Linear time</a></li>
+</ul></li>
+<li><a href="#ch:palindrome_partitioning2">Palindrome Partitioning </a>
+<ul>
+<li><a href="#introduction-45">Introduction</a></li>
+<li><a href="#problem-statement-47">Problem statement</a></li>
+<li><a href="#clarification-questions-40">Clarification Questions</a></li>
+<li><a href="#palindrome_partitioning2:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#palindrome_partitioning2:sec:bruteforce">Brute-force</a></li>
+</ul></li>
+<li><a href="#sec:palindrome_partitioning2:DP">Dynamic Programming</a>
+<ul>
+<li><a href="#top-down-1">Top-down</a></li>
+<li><a href="#bottom-up-1">Bottom-up</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:max_gap">Find the largest gap</a>
+<ul>
+<li><a href="#introduction-46">Introduction</a></li>
+<li><a href="#problem-statement-48">Problem statement</a></li>
+<li><a href="#clarification-questions-41">Clarification Questions</a></li>
+<li><a href="#max_gap:sec:trivial">Trivial Solution</a></li>
+<li><a href="#max_gap:sec:radix_sort">Radix Sort</a></li>
+<li><a href="#max_gap:sec:buckets">Buckets and the pigeonhole principle</a></li>
+</ul></li>
+<li><a href="#ch:smallest_range">Smallest Range I and II</a>
+<ul>
+<li><a href="#introduction-47">Introduction</a></li>
+<li><a href="#problem-statement-49">Problem statement</a></li>
+<li><a href="#clarification-questions-42">Clarification Questions</a></li>
+<li><a href="#smallest_range:sec:discussion">Discussion</a></li>
+<li><a href="#common-variations-4">Common Variations</a>
+<ul>
+<li><a href="#smallest-range-ii">Smallest range II </a></li>
+</ul></li>
+<li><a href="#smallest_range:sec:discussion">Discussion</a></li>
+</ul></li>
+<li><a href="#ch:next_greater_element">Next Greater Element I</a>
+<ul>
+<li><a href="#introduction-48">Introduction</a></li>
+<li><a href="#problem-statement-50">Problem statement</a></li>
+<li><a href="#clarification-questions-43">Clarification Questions</a>
+<ul>
+<li><a href="#next_greater_element:sec:bruteforce">Brute-force</a></li>
+</ul></li>
+<li><a href="#next_greater_element:sec:nlogntime"><span class="math inline">\(O(|B|log(|B|))\)</span> time, <span class="math inline">\(O(|B|)\)</span> space solution</a></li>
+<li><a href="#common-variation-3">Common Variation</a>
+<ul>
+<li><a href="#next_greater_element:sec:first">First next greater element</a></li>
+</ul></li>
+<li><a href="#next_greater_element:sec:variation1:discussion">Discussion</a></li>
+</ul></li>
+<li><a href="#ch:count_bits">Count the bits</a>
+<ul>
+<li><a href="#problem-statement-51">Problem statement</a></li>
+<li><a href="#clarification-questions-44">Clarification Questions</a></li>
+<li><a href="#count_bits:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#count_bits:sec:bruteforce">Naïve approach solution</a></li>
+<li><a href="#count_bits:sec:dp">DP solution</a></li>
+<li><a href="#count_bits:sec:pattern">Another efficient approach</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ch:decode_string">Decode the message</a>
+<ul>
+<li><a href="#introduction-49">Introduction</a></li>
+<li><a href="#problem-statement-52">Problem statement</a></li>
+<li><a href="#clarification-questions-45">Clarification Questions</a></li>
+<li><a href="#decode_string:sec:discussion">Discussion</a>
+<ul>
+<li><a href="#decode_string:sec:recursive">Recursive solution</a></li>
+<li><a href="#decode_string:sec:iterative">Iterative solution</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#appendices">Appendices</a>
+<ul>
+<li><a href="#listings">Listings</a></li>
+</ul></li>
+</ul>
+</nav>
+</article>
+</body>
+</html>

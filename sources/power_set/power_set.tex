@@ -10,193 +10,200 @@
 \chapter{Power set generation}
 \label{ch:power_set}
 \section*{Introduction}
-The concept of power set is familiar to many because it is introduced very early during
-introductionary math courses on set theory. The problem described in this chapter is about writing
-an algorithm that is capable of finding the powerset of a given set. Two main solution approach are
-presented here, one that is strightforward deriving immediately from the recursive definition of
-power set\footnote{The following is the recursive definition of powerset. In words the powerset of an empty
-set is a set contains as only element the empty set itself. For a non-empty set, let $e$ be an
-element of the set and T be the original set minus $e$ (relative complement). The powerset can
-be then definied as the union of two distinct powersets. The powerset of T (all the subsets not
-containing $e$) and the powerset of T modified in a way such that $e$ is added to all of its
-element.
+
+Most readers will already be familiar with power sets, i.e.  the set of all the subsets of a set $S$.  Being asked to generate the power set of a given set, both directly and indirectly, is a frequently asked question in coding interviews and therefore, in this chapter, we will investigate  two different solutions.  
+
+\begin{enumerate}
+    \item The first approach derives straightforwardly from the recursive definition of power-set, which states "the power-set of an empty set is a set containing one element only: the empty set itself". 
+    For a non-empty set $S$, let $e$ be an element of $S$ and $T$ be the original set $S$ set minus $e$ ( $T=S \setminus e$), then the power set of $S$ is defined as the union of two distinct power sets:
+    \begin{itemize}
+        \item   the power set of $T$
+        \item   and the power set of $T$ modified in a such way that $e$ is added to all of its elements (See Equation \ref{eq:power_set_recursive_definition}).  
+    \end{itemize}
+    \item The second approach is based on a bit-distribution property in the integers binary representation from $0$ to the size of the power set.
+
+\end{enumerate}
+
+The two proposed solutions have similar performance in terms of time space required, but the latter is easier to explain and results in shorter and simpler code. 
+
 \begin{equation}
-	\mathcal{P}(S)=\begin{cases} 
-\{\{\}\} & \text{if } P=\{\} \\
-P\{T\} \bigcup \{t \in P\{T\} : t \cup \{e\}\} \text{ where } e \in P, \text{ and } T = P \setminus \{e\} & \text{otherwise}
-\end{cases}
-\label{eq:power_set_recursive_definition}
-\end{equation} 
-} (See Equation \ref{eq:power_set_recursive_definition}), while the other is based on a clever
-observation about the distribution of the bits among the integers from $0$ to the size of the
-powerset. The problem is usually presented in a very direct manner with a short and concise
-statement because the interviewer is expecting the candidate to be already familiar with the
-concept.
+    \mathcal{P}(S)=\begin{cases} 
+    \{\{\}\} & \text{if } S=\{\} \\
+    \mathcal{P}\{T\} \bigcup \{t \bigcup \{e\} \: : t \in \mathcal{P}\{T\}\} \text{ where }  T = S \setminus \{e\} \text{ } \forall e \in S, & \text{otherwise}
+    \end{cases}
+    \label{eq:power_set_recursive_definition}
+\end{equation}
 
 
 
 \section{Problem statement}
-	\begin{exercise}
-		Write a function that given a set of elements $P$ returns its power-set. A power-set of a set $P$,
-		(here denoted as $\mathcal{P}(S)$ is the set of all its subsets including the empty subset
-		$\emptyset$ and $P$ itself.
+    \begin{exercise}
+        Write a function that given a set $S$ returns its power set.
+The power-set of $S$ ($\mathcal{P}(S)$) is the set of all its subsets including the empty subset ($\emptyset$) and $S$ itself.
 
-		\begin{example}
-			\hfill \\
-			For example, given the set $P=\{a,b,c\}$, the following two sets are both correct outputs for
-			this problem:
-			\begin{equation*}
-				\{\{\}, \{b,c\}, \{a\}, \{a,b\}, \{a,b,c\}, \{b\}, \{a,c\}, \{c\} \}
-			\end{equation*}
-			\begin{equation*}
-				\{\{\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{b,c\}, \{a,c\}, \{a,b,c\} \}
-			\end{equation*}
-			
-		\end{example}
-	\end{exercise}
+        \begin{example}
+            \label{ex:power_set:example1}
+            \hfill \\
+            Given the set $S=\{a,b,c\}$, the following is a correct output for
+            this problem: $$\{\{\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{b,c\}, \{a,c\}, \{a,b,c\} \}$$
+        \end{example}
+    \end{exercise}
+
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item What is the maximum size of the input?
-	\begin{answered}
-		\textit{The maximum number of element is strictly less than $n < 32$.}
-	\end{answered}
-	
-	\item Are all the element in the collection distinct?
-	\begin{answered}
-		\textit{No, the elements are not necessarily distinct. $S$ can contain duplicates.}
-	\end{answered}
+    
+    \item  \begin{questionitem} \begin{question} What is the maximum input size?  \end{question}      
+    \begin{answered}
+           \textit{The maximum number of elements in $S$ is strictly less than $32$.}
+        \end{answered} \end{questionitem}
+    
+    \item \begin{questionitem} \begin{question} Are all the elements in the collection distinct?  \end{question}
+    \begin{answered}
+        \textit{No, the elements are not necessarily distinct. $S$ might contain duplicates.}
+    \end{answered} \end{questionitem}
 
-	\item Can the subset in the power-set appear in any order?
-	\begin{answered}
-		\textit{Yes, subsets can appear in any order.}
-	\end{answered}
+    \item \begin{questionitem} \begin{question} Can the elements of the power-set appear in any order?  \end{question}
+    \begin{answered}
+        \textit{Yes, subsets can appear in any order. 
+        For example the following is also a valid output for the input shown in Example \ref{ex:power_set:example1}:} 
+        $\{\{\}, \{b,c\}, \{a\}, \{a,b\}, \{a,b,c\}, \{b\}, \{a,c\}, \{c\} \}$
+    \end{answered} \end{questionitem}
 \end{QandA}
 
 \section{Discussion}
 \label{sec:powerset:discussion}
-There is one key point that should immediately be noticed: \textbf{The powerset of a collection of
-	$n$ elements has size} $\boxed{2^n}$\footnote{The proof of this fact is relatively easy and it boils
-	down to the fact that a subset of $P$ is basically $P$ with possibly some of the elements
-	removed from it. Because we two possible choices we can make for every element of $S$ (either
-	remove or not remove and element) then the total number of possible subset is: $2 \times 2
-	\times \ldots \times 2 = 2^{|P|}$. Two choices for the first element, two for the second, and so
-	on until the last element of $P$.} . This fact should be immediately pointed out during the
-	interview, stressing the fact that the constraint $n < 32$ is a strong hint towards the fact
-	that an exponential solution is expected. After-all we are required to output all the elements
-	of the powerset, and thus the complexity of any algorithm solving this problem cannot be less
-	than the size of the powerset itself. Doing so shows general knowledge on set theory and the
-	ability to link and use that knowledge with the problem statement.
+
+The first key point to note is that the power set of a collection of $n$ elements has size $2^n$. The proof is straightforward and based on the fact that a subset of $S$ can be uniquely identified by a list $X=\{x_0,x_1,\ldots x_{|S|-1}\}$ of $|S|$ binary variables each carrying the information about whether $S_i$ is part of the subset; the variable $x_i$ is crucial to answer the question \textbf{should $S_i$ be part of this subset?}: If $x_i$ is true the answer is yes, otherwise, the answer is no.
+We have two possible choices for every element of $S$ (either take it or not), then the total number of distinct $X$s  is: $2 \times 2 \times \ldots \times 2 = 2^{|S|}$. Two choices for the first element, two for the second, and so 
+on until the last element of $S$.
+  
+This, together with the constraint on $|S|$ ($|S| < 32)$ is a strong indicator that an \textbf{exponential time and space} solution is expected.
+After all, we are required to output all the elements of the power set, and thus the number of operations of an algorithm designed for this task cannot be less than the size of the power set itself. 
 
 
-\subsection{Backtracking}
-The first solution presented in this chapter is based on the fact that that during the generation of
-one of the elements of the power-set a decision has to be taken for each element of the original
-set, on whether to include the element or not into the subset. When a decision for the first element
-is taken then what we are left with is $|P|-1$ decisions before we have created a valid subset of
-$|P|$. 
-This kind of process can be easily visualized with a tree where a node at level $i$
-represents a decision for the $i^{th}$ element and a path from the root to a leaf uniquely
-identifies a subset of $P$ i.e. $n$ decisions. 
-All paths from the root to the leafs thus, represent the power set. In
-order to solve this problem we have to explore the entirety of this tree. An example of such tree is
-shown in Figure \ref{ref:power_set_decision_trees}.
 
-One general way to deal with such type of problems is by using backtracking to try all possible
-decision paths for each of the elements. The general idea is that we are going to, for all elements
-starting from the first until the last, to explore the two possibilities: take or exclude the
-element from the subset. Backtracking is a general algorithm that allows to enumerate and explore
-large search spaces like this one. The main idea is that we first try to stick with a decision for
-the first element, and we continue from there to generate all possible subsets where said decision
-is never changed. When there is no more subset to generate, we backtrack and change our first
-decisions to the next possible one and repeat the process of generating all possible subsets.
-The proposed solution will incrementally construct one subset at the time, using an integer variable
-to keep track of which element we are currently
-deciding to include or exclude. The base case of the recursion happen when there is no more decision
-to take, meaning that the current subset is ready to be included in the solution (it has been
+\subsection{Bruteforce - Backtracking-like approach}
+
+The first approach to solving this problem is based on the fact that,  during the generation of
+one of the power set's elements, a decision must be made for each element $e$ of $S$, on whether or not to include $e$ into the subset.
+Once this is determined, what we are left with are $|S|-1$ decisions
+before we have created a valid subset of $|S|$.
+
+This process is inherently recursive and therefore easily visualized with a tree (see the figure below): a node at level $i$
+represents a decision for the $i^{th}$ element of $S$ and a path from the root to a leaf uniquely
+identifies a subset of $S$; after having traversed all the levels down to a leaf, $n$ decisions have been made: 
+one for each of the elements of $S$. 
+
+Collectively, all the paths from the root to the leaves are the power set, and therefore, in
+order to solve the problem, we have to visit the entire tree.
+
+
+A common route to solving such problems is to use a backtracking-like approach in order to try all possible
+decisions (or equivalently to visit every path from the root to a leaf).
+
+The idea is that, for all elements of $S$, from the first to the last one, we are going to
+explore the two available possibilities: either take or exclude
+it from the subset.
+
+We start by making a decision for the first element: From there, we continue to generate all possible subsets
+where the first decision is never changed. 
+When there are no more subsets to generate, we *backtrack* and change our first
+decision and repeat the process of generating all possible subsets.
+
+
+For instance, given $S=\{1,2,3\}$, we might start by deciding to use the element $1$, and include it in all possible subsets from the remaining elements $\{2, 3\}$ only. 
+Once we are done with it, we can repeat the same process, only this time excluding $1$. What we do is: $\mathcal{P}(S)= \{\{1\} \; \bigcup \;\mathcal{P}(\{2,3\})\} \: \bigcup \: \{\mathcal{P}(\{2,3\})\}\} 
+$
+
+The proposed solution will incrementally construct one subset at a time, 
+using an integer variable to keep track of which element we are currently taking the decision for.
+This type of problem is naturally solved recursively, with a base case of the recursion happening when there is no more decision
+to make, meaning that the current subset is ready to be included in the solution (it has been
 produced after $n$ decision steps).
 
-The C++ code implementing the idea above is shown in Listing \ref{list:power_set_backtracking}. The
-complexity of this solution is exponential i.e. $O(2^n)$ which as already pointed out is as good as
+Here below we can see how the \CC code implements this idea. The complexity of this solution is exponential i.e. $O(2^{|S|})$ which as already stated, is as good as
 it gets.
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption="C++ to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
-\end{minipage}
+
+\lstinputlisting[language=c++, caption="\CC to the power set generation using backtracking",label=list:power_set_backtracking]{sources/power_set/power_set_backtracking.cpp}
+
 
 \begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{sources/power_set/images/tree}
-	\caption[Decision tree for the power-set generation using backtracking.]{Decision tree for the power-set generation using backtracking. At level $i$ are the decision for the element $i$ in the original set. A labal marked with yes identifies the decision to take the corrensponding element into the subset, while a node labeled with no the opposite. At the last level is the powerset.}
-	\label{ref:power_set_decision_trees}
+    \centering
+    \includegraphics[width=\textwidth]{sources/power_set/images/tree}
+    \caption[Decision tree for the power-set generation using backtracking.]{Decision tree for the power-set generation using a backtracking-like brute-force approach. At level $i$ are the decisions for the element $i$ in $S$. A label marked with "yes" identifies the decision to add the corresponding element into the subset, while a node labeled with "no" identifies the opposite. Each path from the root to a leaf is an element of the power set. At the last level is the power set.}
+    \label{ref:power_set_decision_trees}
 \end{figure}
 
-The advantages of using the backtracking framework to solve this problem is that, once we notice
-that this problem can be solved by fully exploring the search tree, then we can immediately
-start writing the code and rely on our experience as backtracking algorithm writers to implement a correct
-solution with the added bonuses of being concise and short when written in a recusive form  as well
-as well understood.
-The downside is that the iterative implementation can be a little harder and more verbose to write.
-Regardless of which one you choose, the interviewer is going to be pleased with your code provided you get to the final solution
-without making too many implementation mistakes (forgetting to add the base case, or coding it wrong
-is a pretty common one).
+Using a backtracking-like approach is convenient because, once we identify that a problem can be solved by fully exploring the associated search space tree, we can immediately
+start writing the code and rely on our experience as backtracking expert writers to implement a correct
+solution. It is also concise and short when written in a recursive  form (fewer chances to make mistakes, and less code to debug and explain),  as well
+as easily understood.
+The downside is that, if we decide to use it, an iterative implementation can be a little harder and verbose to write.
+
+Regardless of which type we decide to write, the interviewer will be pleased with the code provided,  although it remains important to get to the final solution
+without making too many implementation mistakes such as forgetting to handle the base case.
+
 
 \subsection{Bit Manipulation}
-Another approach that can be used to solve this problem is based on the fact that the values of the
-bits of the numbers $\{0,1,2,\ldots, s^n-1\}$  already provide all the information necessary to make
-the decision weather to include or not an element from the original set. 
-The main idea is that the binary representation of the numbers from $0$ to $2^{n}-1$ is basically
-the powerset of $n$ bits.
-In other words, the binary representation of any of those numbers can be used to build one subset out
-of the $n$ elements of the input set. 
-For instance given the input $S=\{a,b,c\}$ the Table \ref{tab:mapping_value_bits} shows numbers from $0$ to $2^3-1 = 8$ and their bit
-representation (second column) and how such information about which bit is set or not can be used to construct one
-subset of the power-set of $P$ (third column). When the $i^{th}$ bit is set i.e. its value it $1$, it means that
-corresponding $i^{th}$ element of $P$ is taken, while a non-set bit (with value $0$) means it is
-excluded.
+
+The second approach to solving this problem is based on the fact that the values of the
+bits of the numbers $\{0,1,2,\ldots, s^n-1\}$  already provide all the information necessary to decide whether or not to include an element from $S$ into a subset. 
+The main principle is that the binary representation of all the numbers ($2^{|S|}$ of them) from $0$ to $2^{|S|}-1$ is the power set of $n$ bits.
+This means that the binary representation of any of those numbers carries the necessary information that can be used to build one subset of $\mathcal{P}(S)$. 
+
+
+For example, given the input $S=\{a,b,c\}$ the table below shows numbers from $0$ to $2^3-1 = 7$ and their binary
+representation (second column), as well as how the information about which bit is set can be used to construct one subset of $\mathcal{P}(S)$ (third column).
+\textbf{When the $i^{th}$ bit is set (its value is $1$), it means that
+corresponding $i^{th}$ element of $S$ is chosen, while an unset bit (with value $0$) means it is
+excluded}
 
 \begin{table}
-	\centering
-	\begin{tabular}{|l|l|l|}
-		\hline
-		Value & Bits & Subset\\ \hline
-		0     & 000  & $\{\}$\\ \hline
-		1     & 001  & $\{c\}$\\ \hline
-		2     & 010  & $\{b\}$\\ \hline
-		3     & 011  & $\{b,c\}$\\ \hline
-		4     & 100  & $\{a\}$\\ \hline
-		5     & 101  & $\{a,c\}$\\ \hline
-		6     & 110  & $\{a,b\}$\\ \hline
-		7     & 111  & $\{a,b,c\}$ \\ \hline
-	\end{tabular}
-	\caption[Mapping between bits and element of the powerset.]{This table shows a 1-to-1 mapping between integer values, their binary representation and an element of the powerset.}
-	\label{tab:mapping_value_bits}
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        Number Value & Bits & Subset\\ \hline
+        0     & 000  & $\{\}$\\ \hline
+        1     & 001  & $\{c\}$\\ \hline
+        2     & 010  & $\{b\}$\\ \hline
+        3     & 011  & $\{b,c\}$\\ \hline
+        4     & 100  & $\{a\}$\\ \hline
+        5     & 101  & $\{a,c\}$\\ \hline
+        6     & 110  & $\{a,b\}$\\ \hline
+        7     & 111  & $\{a,b,c\}$ \\ \hline
+    \end{tabular}
+    \caption[Mapping between bits and element of the power set.]{This table shows a 1-to-1 mapping between integer values, their binary representation and an element of the power set.}
+    \label{tab:mapping_value_bits}
 \end{table}
 
-This idea can be used to write an algorithm in which all the numbers in the range $\{0,1,2,\ldots,
-s^n-1\}$ are considered and each of them is used to generate a subset of the final solution.
-Basically every number from such range maps uniquely to a subset of the powerset. It is really not
-surprising when we think about the meaning of a bit in the binary representation of integers. One
-can build a number by summing up powers of $2$ and the bits contains the information on whether a
-certain power of two should be added to the final value for the represented number or not. With $n$
-bits one can represents $2^n$ numbers, each corrensponding to one subset of the powerset of those
-$n$ bits.
 
-Listing \ref{list:power_set_bits} shows  a possible C++ implementation of the idea above\footnote{Notice the usage of the \texttt{reserve}
-function that should be used in all those scenario when we already know the final size of the
-collection we are building. This saves times because avoids intermediate allocation and copy that
-must happen during the resize of the vector.}. The complexity of this implementation is, not
-surprisingly, $O(2^n)$\footnote{Not considering the constant price of $32$ that we pay for each
-subset generation due to the fact that we need to inspect the value of all of the bits}. Also please
-pay attention to the fact that the proposed implementation assumes that the size of
-\lstinline[columns=fixed]{int} is $4$ bytes, which is true for most architecture but not for all\cite{cit::std::fundamentaltypes}. A better
-implementation would use \lstinline[columns=fixed]{std::numeric_limits<int>::digits} instead of
-the magic number $32$.
+This can be used to write an algorithm in which all the numbers in the range $\{0,1,2,\ldots,
+2^{|S|}-1\}$ are considered and each of them is used to generate a subset of the final solution.
+Every number from this range maps uniquely to a subset of $\mathcal{P}(S)$. 
+
+The approach is easily understood when we think about the meaning of a bit in the binary representation of integers. One
+can "build" a number $k$ by summing up powers of $2$ where the bits contain the information about whether a
+certain power of two should be added to the final value. With $n$
+bits one can represent $2^n$ numbers, each corresponding to one and only one subset of the power set of those $n$ bits.
+Listing \ref{list:power_set_bits} shows  a possible \CC implementation of the idea above.
+
+\lstinputlisting[language=c++, caption="Solution using bit manipulation.",label=list:power_set_bits]{sources/power_set/power_set_bit_manipulation.cpp}
 
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption="C++ backtracking solution to the problem of generating the powerset.",label=list:power_set_bits]{sources/power_set/power_set_bit_manipulation.cpp}
-\end{minipage}
+The complexity of this function is, not surprisingly, $O(2^{|S|})$. 
+We also pay a constant price of $32$ for each number we loop through given that we need to inspect all of its bits.
+This proposed implementation assumes that the size of \inline{int} is $4$ bytes, which is true for most systems.
+
+It is important to note the usage \inline{std::reserve} as it should be used in all those scenarios when we already know the final size of the collection we are building.
+This saves time because it avoids intermediate allocations and copies that must happen during the resize of the vector.
+
+
+
+
+
+
 
 %\section{Common variations}
 

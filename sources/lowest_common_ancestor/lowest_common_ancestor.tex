@@ -55,21 +55,21 @@ particular kind: binary search trees. This constraint greatly simplifies the gen
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item What to return in case the input tree is empty?
-	\begin{answered}
+	\item \begin{questionitem} \begin{question} What to return in case the input tree is empty?  \end{question} 	 
+    \begin{answered}
 		\textit{You can return an empty tree.}
-	\end{answered}
+	\end{answered} \end{questionitem}
 
 
-	\item Should I check for the validity of the binary search property for $T$?
-	\begin{answered}
+	\item \begin{questionitem} \begin{question} Should I check for the validity of the binary search property for $T$?  \end{question} 	 
+    \begin{answered}
 		\textit{No, you can assume $T$ to always be a valid binary search tree.}
-	\end{answered}
+	\end{answered} \end{questionitem}
 
-	\item Can I assume $p$ and $q$ to always be always present in $T$?
-	\begin{answered}
+	\item \begin{questionitem} \begin{question} Can I assume $p$ and $q$ to always be always present in $T$?  \end{question} 	 
+    \begin{answered}
 		\textit{Yes}
-	\end{answered}
+	\end{answered} \end{questionitem}
 
 	
 \end{QandA}
@@ -102,9 +102,9 @@ is $O(k)$ where $k$ is the height of $T$ (which for unbalanced trees might be pr
 number of nodes in $T$). Listing \ref{list:lowest_common_ancestor_paths} show an implementation of
 the idea above. 
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption={LCA solution based on the difference of paths from the root.},label=list:lowest_common_ancestor_paths]{sources/lowest_common_ancestor/lowest_common_ancestor_solution2.cpp}
-\end{minipage}
+
 
 This approach is however not optimal as we waste unnecessary space for storing entire paths.
 This is not really necessary as we only really care about the last node that is common. 
@@ -118,9 +118,9 @@ improvement compared to the linear space complexity for Listing
 \ref{list:lowest_common_ancestor_paths}. This optimized version is shown in Listing
 \ref{list:lowest_common_ancestor_paths_optimized}.
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption={Space optimized version of Listing \ref{list:lowest_common_ancestor_paths} },label=list:lowest_common_ancestor_paths_optimized]{sources/lowest_common_ancestor/lowest_common_ancestor_solution3.cpp}
-\end{minipage}
+
 
 
 We can however simplify the implementation shown in Listing
@@ -130,6 +130,6 @@ and keep navigating the tree until by moving left or right until the direction o
 both $p$ and $q$ is the same. When the path diverges we can stop and return the current node which
 is the lowest node shared node in the paths from the root to $p$ and $q$
 
-\begin{minipage}{\linewidth}
+
 	\lstinputlisting[language=c++, caption={Iterative solution to the problem of finding the LCA in a binary search tree.},label=list:lowest_common_ancestor_iterative]{sources/lowest_common_ancestor/lowest_common_ancestor_solution1.cpp}
-\end{minipage}
+

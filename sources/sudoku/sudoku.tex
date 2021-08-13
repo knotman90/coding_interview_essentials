@@ -92,10 +92,10 @@ cells are represented by the character '0'.
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item Is the input string guaranteed to only contains numeric charaters and be the right size?
-	\begin{answered}
+	\item \begin{questionitem} \begin{question} Is the input string guaranteed to only contains numeric charaters and be the right size?  \end{question} 	 
+    \begin{answered}
 		\textit{Yes the string is guaranteed to be encoding a valid sudoku}
-	\end{answered}	
+	\end{answered} \end{questionitem}	
 \end{QandA}
 
 \section{Discussion}
@@ -202,13 +202,13 @@ of all cells belonging to the same row, columns and subsquare. Specifically:
 	the other non-empty cells of the same subsquare. This goal is accomplished in two steps:
 	\begin{enumerate}
 		\item First, the index of the $F(s)$ top left corner of the subsquare $s$ is calculated  by
-		using the following formula: $F(s) = (27 \floor{\frac{s}{3}}) + (3\times (s \mod{3}))$.  In
+		using the following formula: $F(s) = (27 \lfloor \frac{s \rfloor{3}}) + (3\times (s \mod{3}))$.  In
 		order to understand the formula, we need first to note that there subsquares are organized
 		into $3$ rows each of size $3$ (for a total of 9 subsquares, see Figure \ref{fig:sudoku:}).
 		Clearly each subsquare contains $9$ cells, and thus, a full row of subsquares contains
 		$3\times9 =27$ cells. $\frac{s}{3}$ is a value representing how many full subsquares row
 		comes before $s$. Clearly we can skip all the cells belonging to those subsquare, because
-		all cells in them come before $F(s)$. The value $(27 \floor{\frac{s}{3}})$ is thus an index
+		all cells in them come before $F(s)$. The value $(27 \lfloor \frac{s \rfloor{3}})$ is thus an index
 		pointing to a cell at the beginning of the row where $F(s)$ is located. All we need to do
 		now is to advance to the correct subsquare in the row and we can do that by looking at the
 		position of the subsquare \textbf{in the row} which clearly is $(s \Mod{3})$; $s$ can either

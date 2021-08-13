@@ -12,82 +12,74 @@
 \chapter{Two numbers sum problem}
 \label{ch:two_numbers_sum}
 \section*{Introduction}
-The problem described in this section is possibly one of the most asked during coding interview, nowadays mostly 
-asked during the early online stages of the hiring process as the interviewer pretty much expects you to be at least familiar with the problem.
-The problem is hard enough to require non-trivial insight in order to be able to write a non-naive solution for it but at the same time it is not so hard that it would take you 2 hours to come up with something to say to the interviewer.
-We will have a look at a number of solution, starting from the inefficient bruteforce in Section \ref{sec:two_numbers:bruteforce} to a refined version of it in Section \ref{sec:two_numbers:hashing}.
-In Section \ref{sect:two_number_problem_binary_search} we will have a look at an approach that is based on a idea that is radically different than the one the previous two are based on.
-Finally, Section \ref{sec:two_numbers:twopointers} further refines it into  possibly the best solution in terms of overall time and space complexity.
+The problem described in this lesson is probably one of the most asked during coding interviews nowadays, mostly 
+during the early online stages of the hiring process: the interviewer pretty much expects a candidate to be at least familiar with the problem or to have read it at some point during his preparation.
+
+The problem is hard enough to require non-trivial insights in order to be able to write a non-trivial solution but, at the same time, it is not so hard that it would take you hours to come up with something meaningful to say or to write.
+
+We will have a look at a number of solutions: First, we will start from the inefficient brute force approach (and we will later refine it into a fast and time-optimal one);
+Then we will delve also into a radically different approach based on sorting; finally, we will condense the strengths of all the solutions investigated so far into a time and space optimal solution that we think would do better in an interview context. As we will see, the final solution is efficient and not terribly difficult to write and explain (which are fundamental aspects of every successful coding interview).
+
 
 \section{Problem statement}
 
 \begin{exercise}
-Write a function that takes an array of integers and a integer $T$, and returns \textbf{true} if the
-sum of two distinct elements of the array is equal to $T$, \textbf{false} otherwise.
+	Write a function that takes an array of integers $A$ of size $n$ and an integer $T$, and returns \textbf{true} if the sum of any two distinct elements $I$ is equal to $T$, \textbf{false} otherwise.
 
-
-\begin{example}
-\hfill \\
+	More formally: Given an array $=\{a_1,...,a_n\}$ and $T$, where $a_i, T \in
+	\mathcal{N}$, return:
 	\begin{itemize}
-		\item[-] 	$A=\{9, 4, 17, 42, 36, -3 ,15\}$
-		\item[-] 	$T = 14$
+		\item  \textbf{true} if $\: \exists \;i,j \:\: i \neq j$ s.t. $a_i+a_j = T$
+		\item  \textbf{false} otherwise
 	\end{itemize}
-The answer in this case is \textbf{true} because elements we can obtain $14=17+ (-3)$. If $T=17$
-then the answer would be \textbf{false} as there is no way we can sum two numbers together and
-obtain $17$
-\end{example}
+	
 
-\begin{example}
-\hfill \\
-	\begin{itemize}
-		\item[-] 	$A=\{1,3,7\}$
-		\item[-] 	$T = 8$
-	\end{itemize}
-The answer in this case is \textbf{true} because elements we can obtain $8=1+7$. If $T=6$ then the
-answer would be \textbf{false}.
-\end{example}
+	\begin{example}
+	\hfill \\
+		Given $A=\{9, 4, 17, 42, 36, -3 ,15\}$ and $T=14$, the function returns \textbf{true} because we can obtain $14$ by summing
+		up together the elements $17$ and $-3$.
+		If $T=17$ the answer is \textbf{false}.
+	\end{example}
 
+	\begin{example}
+	\hfill \\
+		Given $A=\{1,3,7\}$ and $T=8$, the function returns \textbf{true} because we can obtain $8$ by summing
+		up together the elements $7$ and $1$. If $T=6$ the answer is \textbf{false}.
+	\end{example}
 
-More formally, what the problem asks is: given an array $A=\{a1...an\}$ and $T$, where $a_i, T \in
-\mathcal{N}$, return:
-	\begin{itemize}
-		\item[-] \textbf{true }if $\exists \;i,j \: i \neq j$ s.t. $a_i+a_j = T$
-		\item[-] \textbf{false} otherwise
-	\end{itemize}
 \end{exercise}	
 
 
 \section{Clarification Questions}
 \begin{QandA}
-	\item is the input array modifiable?
-	\begin{answered}
+	\item \begin{questionitem} \begin{question} Is the input array modifiable?  \end{question} 	 
+    \begin{answered}
 		\textit{Yes, the input array can be modified.}
-	\end{answered}
-	
-	\item Are the integers always positive of negative?  
-	\begin{answered}
-		\textit{No, input numbers can be either positive or negative.}
-	\end{answered}
-	\item Are the input integer always from a certain range?
-	\begin{answered}
-		\textit{No, the input is arbitrary. No assumption can be made.}
-	\end{answered}
-	\item Can a pair be considered made from an element and itself?
-	\begin{answered}
-		\textit{No, elements should be distincts.}
-	\end{answered}
-	\item Are all elements in the array unique?
-	\begin{answered}
-		\textit{No, repetition is allowed.}
-	\end{answered}
-	\item Is the input sorted?
-	\begin{answered}
-		\textit{No, array ordering is arbitrary.}
-	\end{answered}
-	\item Shall integer overflow be considered when performing the sum of two integer? 
-	\begin{answered}
-		\textit{No, the input elements are such that no overflow can occur..}
-	\end{answered}
+	\end{answered} \end{questionitem}	
+	\item \begin{questionitem} \begin{question} Are the integers guaranteed to be all positive or all negative?   \end{question} 	 
+    \begin{answered}
+		\textit{No, $A$ can contain positive or negative numbers.}
+	\end{answered} \end{questionitem}
+	\item \begin{questionitem} \begin{question} Are the values in $A$ guaranteed to be from a given range?  \end{question} 	 
+    \begin{answered}
+		\textit{No, the input is arbitrary. No assumption can be made on the magnitude of the elements of $A$.}
+	\end{answered} \end{questionitem}
+	\item \begin{questionitem} \begin{question} Can a pair be made from an element and itself?  \end{question} 	 
+    \begin{answered}
+		\textit{No, the pair's elements should be distinct. You cannot use the same element $a_i$ twice. You can however use two elements at indices $i$ and $j$ s.t. $i \neq j$ and $a_i=a_j$.}
+	\end{answered} \end{questionitem}
+	\item \begin{questionitem} \begin{question} Are all elements in the array unique?  \end{question} 	 
+    \begin{answered}
+		\textit{No, duplicates are allowed.}
+	\end{answered} \end{questionitem}
+	\item \begin{questionitem} \begin{question} Is the input sorted?  \end{question} 	 
+    \begin{answered}
+		\textit{No, the ordering of $A$ is arbitrary.}
+	\end{answered} \end{questionitem}
+	\item \begin{questionitem} \begin{question} Shall the function integer overflow be considered when performing the sum of two integers? Is it possible for two elements of $A$ to sum up to a value that does not fit in a standard \inline{int}?  \end{question} 	 
+    \begin{answered}
+		\textit{No, you do not need to worry about overflow.}
+	\end{answered} \end{questionitem}
 \end{QandA}
 
 
@@ -98,12 +90,13 @@ More formally, what the problem asks is: given an array $A=\{a1...an\}$ and $T$,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Brute-force}
 \label{sec:two_numbers:bruteforce}
-The brute force solution is fairly straightforward because it consists in applying the search method
-described in the formal problem statement. The solution spaces consists of all possible ordered and
-distinct pairs $(a_i,A_j)$, $i < j$ of element of $A$. Two nested loops can be used to enumerate all
-the pairs and for each of them we can check whether their sum is equal to $T$: if that is the case
-then   \textbf{True} can be immediately returned (see Algorithm \ref{algo:two_number_sum_bruteforce}
-and Listing \ref{list:two_number_sum_bruteforce}).
+
+The brute force solution is fairly straightforward because it consists of a direct application of the formal problem statement. 
+The solution space consists of all possible ordered pairs $(a_i,a_j)$, $i < j$. 
+Two nested loops can be used to enumerate all those pairs, and, for each of them, we can check whether their sum is equal to $T$: if that is the case,
+then   \textbf{true} can be immediately returned, otherwise, if we have checked every possible pair and none of them was good, then we can return  \textbf{false}.
+You will find an a fomalization and an implementation of this idea in Algorithm \ref{algo:two_number_sum_bruteforce}
+and Listing \ref{list:two_number_sum_bruteforce}), respectively.
 
 \begin{algorithm}
 	\SetAlgoLined \SetKwFunction{FMain}{solveQuadratic}
@@ -117,26 +110,33 @@ and Listing \ref{list:two_number_sum_bruteforce}).
 		\For{$i\leftarrow 0$ \KwTo $n-1$} {\For{$j\leftarrow i+1$ \KwTo $n$} {\If{$a_i + a_j =
 		T$}{\Return True \;}}} \Return False \;}\textbf{End Function}
 	
-	\label{algo:two_number_sum_bruteforce}
-	\caption{Two loops, quadratic solution to the question in Section \ref{ch:two_numbers_sum} }
+		\caption{Two loops, quadratic solution to the question in Section \ref{ch:two_numbers_sum} }
+		\label{algo:two_number_sum_bruteforce}
 \end{algorithm}
-The following code implements this idea:
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/brute_force.cpp}
 
-The time complexity of this solution is quadratic $O(n^2)$ because there is a quadratic number of
-ordered pairs.\footnote{The number of iteration of the internal loop depends on the value of $i$ and
-it is described by the following function: $f(i) = n-i-1$. The total number of iteration the second
-loop runs in the worst case is the the sum over all values of $i$: $\sum_{0}^{n-2}f(i) = (n-1) +
-(n-2) + (n-3) \dots + 1$ = $\sum_{1}^{n-1} = \frac{n(n-1)}{2} = O(n^2)$}. The space complexity of is
-$O(1)$.
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem with a brute force approach.",label=list:two_number_sum_bruteforce]{sources/two_numbers_sum/brute_force.cpp}
+
+The time complexity of this solution is $O(n^2)$ because there is a quadratic number of
+ordered pairs and in the worst case, we will look at \textbf{all} of them.
+
+The number of iterations of the internal loop depends on the value of $i$ and
+it is described by the function: $f(i) = n-i-1$. The total number of iteration the second
+loop runs in the worst case is the the sum of $f(i)$ for all values of $i$: 
+$\sum_{i=0}^{n-2} f(i) = (n-1) + (n-2) + (n-3) \ldots + 1 =\sum_{x=1}^{n-1} x= \frac{n(n-1)}{2} = O(n^2)$
+
+The space complexity is $O(1)$.
+
+
 
 \subsection{Hashing}
 \label{sec:two_numbers:hashing}
-The internal loop of Listing \ref{list:two_number_sum_bruteforce} can be faster if an hashtable is
-used. The idea is that the input array is scanned one element at the time and a solution exists
-involving $a_i$ is the element $a_j  = a_i-T$ with $j < i$ exists. The key idea here is that all the
-A[j] can be stored in the hash table making the lookup operation lighting fast. 
+The internal loop of the brute force solution above can be eliminated entirely with the help of a hash table.
+The key insight is that if a solution exists involving $a_i$ then, it must the case that exists another element $a_j  = a_i-T$ with $i > j$. 
+
+What this means in practice is that we can loop through $A$ one element at a time and keep track, in a lookup table, of all the elements seen so far, so that the lookup operation for the aforementioned element $a_j$ can be performed in constant time.
+
+Algorithm \ref{algo:two_number_sum_hashset} and Listing \ref{list:two_number_sum_hashing} shows this idea in code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % two_numbers_sum_hashset       
@@ -151,29 +151,33 @@ A[j] can be stored in the hash table making the lookup operation lighting fast.
 		\For{$i\leftarrow 0$ \KwTo $n$} {target $\leftarrow$ $(T-a_i)$ \eIf{H.find(target)} {\Return
 		True} {H.insert($a_i$)}} \Return False\;}\textbf{End Function}
 
-	\label{algo:two_number_sum_hashset}
-	\caption{Hashset, linear solution to the \textit{two number sum} question in Section
-	\ref{ch:two_numbers_sum}.}
+		\caption{Hashset, linear solution to the \textit{two number sum} question in Section
+		\ref{ch:two_numbers_sum}.}
+		\label{algo:two_number_sum_hashset}
 \end{algorithm}
 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem using hashing.",label=list:two_number_sum_hashing]{sources/two_numbers_sum/hashset.cpp}
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem using hashing.",label=list:two_number_sum_hashing]{sources/two_numbers_sum/hashset.cpp}
 
-A common mistake when solving this problem is when the whole input array is inserted into the
-hash-table and only after search for the target value $T-a_i$ (see Algorithm
-\ref{algo:two_numbers_sum_hashset_wrong}). The problem with this approach is that if the target is
-an even number i.e. $ 2 | T$ and $\frac{T}{2} \in A$ exactly once, say it is the element $a_k$, then
-$H.find(T-a_k=\frac{T}{2})$ returns true. The following example exposes the problem:
+The time complexity of this approach is $O(n)$ (technically is linear on average due to complexity of lookups in hash tables) because the input array is scanned once and for each
+of its elements, only one lookup and insertion are performed in the hash table (both operations costing constant time on average).
+
+The space complexity
+is also $O(n)$, as in the worst case the whole input array is stored in the lookup table.
+
+A common mistake when solving this problem using this approach is to insert the whole input array into the lookup table, and only after searching for $(T-a_i)$.
+The mistake becomes evident when $T$ is an even number ($2 | T$) and $\frac{T}{2}$ appears in $A$  exactly once, at index $k$ i.e. $a_k = \frac{T}{2}$ causing \inline{H.find(T-a_k)} to return \textbf{true}, which is wrong because this corresponds to a solution where we sum $a_k$ twice to obtain $T$.
+
+For instance, when $A=\{1,2,5,4\}$ and $T=10$ this approach wrongly returns \textbf{true}, even if there are not two elements at distinct indices in $A$ whose sum is $T$ (we would use $5$ twice to obtain $10$).
 \begin{example}
 	\hfill \\ 
 	\begin{itemize}
 		\item[] $A=\{1,2,5,4\}$
 	\item[] $T = 10$
 \end{itemize}
-The Algorithm \ref{algo:two_numbers_sum_hashset_wrong} return True even if there are not two
-distinct elements in $A$ whose sum is $T$.
+	Algorithm \ref{algo:two_numbers_sum_hashset_wrong} wrongly return true even if there are not two
+	distinct elements whose sum is $10$.
 \end{example}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,71 +194,69 @@ distinct elements in $A$ whose sum is $T$.
 		
 		\For{$i\leftarrow 0$ \KwTo $n$} {target $\leftarrow$ $T-a_i$ \; \If{H.find(target)} {\Return
 		True}} \Return False\;}\textbf{End Function}
-	\label{algo:two_numbers_sum_hashset_wrong}
-	\caption{Hashset, linear solution to the \textit{two number sum} question in Section
+		\caption{Hashset, linear solution to the \textit{two number sum} question in Section
+		\label{algo:two_numbers_sum_hashset_wrong}
 	\ref{ch:two_numbers_sum} }
 \end{algorithm}
-The time complexity of this approach is $O(n)$ because the input array is scanned once and for each
-of its element only one lookup and insertion is performed in the hash-table.  The space complexity
-is also $O(n)$, as in the worst case the whole input array is stored in the lookup table.
+
 
 \subsection{Sorting and binary search}
 \label{sect:two_number_problem_binary_search}
-As always when an array problem is presented, the opportuinity to sort the array often open the
-possibility for fast and efficient solution. In this case a good question to ask is, what happens
-when the array is sorted? This should immediately lead to binary search. In particular, again, the
-internal loop of Listing \ref{list:two_number_sum_bruteforce} can be turned into a binary search if
-the input array is sorted thus lowering the overall complexity down to $O(n log(n))$ becaue it takes
-$O(n log(n))$ to sort the input array in the first place and the actual search costs $n$ binary
-search, each costing $log(n)$. The space complexity is $O(1)$ because no additional space is
-required since the array is sorted in place. 
 
-Listing \ref{list:two_number_sum_sorting} shows a C++ implementation of the idea above using the
-\texttt{std::binary\_search} c++ stardard library function.
+As with countless other problems on arrays, sorting the input often opens the
+way to a faster and more efficient solution. 
 
+We can start by asking ourselves how the problem changes if  $A$ is sorted. Sorted arrays are naturally associated with binary search, and for good reasons! Many problems can be solved efficiently by pairing sorting and binary search on arrays. 
+This problem is not different, and we can use binary search if $A$ is sorted to substitute the internal loop of the brute force solution presented [above](). This way, we can  lower the overall complexity down to $O(n log(n))$; it costs
+$O(n log(n))$ to sort the input array in the first place, and the actual search consists of $n$ binary
+searches, each of them costing $O(log(n))$. 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
+The space complexity is $O(1)$ because no additional space is required, since the array is sorted in place.
+
+Listing \ref{list:two_number_sum_sorting} shows a \CC implementation of this idea. Notice that it uses \inline{std::binary_search} from the \CC standard library and that a possible follow-up question might be to show your own version of the binary search algorithm.
 
 
-\subsection{Two pointers}
+
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem with sorting and binary search.",label=list:two_number_sum_sorting]{sources/two_numbers_sum/two_numbers_sum_sorting.cpp}
+
+
+\subsection{Sorting and two pointers technique}
 \label{sec:two_numbers:twopointers}
-There is a variation to the approach described in Section
-\ref{sect:two_number_problem_binary_search} which still involves sorting but uses two pointers
-tecnique instead of binary search. The key idea of this approach is that once the array is sorted
-two pointers, one starting at the beginning and the other at the end, of the array, respectively.
 
-The algorithm works by looking at the sum of the elements pointed by the pointers and moving one of
-the two at each step using the following logic. Let $p_s$ and $p_e$ be the starting and ending
-pointers, respectively, then:
+There is a variation to the to the approach described in Section
+\ref{sect:two_number_problem_binary_search} which still involves sorting but uses a two-pointers
+technique instead of binary search to finish the job. 
+
+The key idea is that once $A$ is sorted, the algorithm initializes
+two pointers, one starting at the beginning ($p_s$) and the other at the end ($p_e$) of the array, respectively.
+It continues by looking at the sum of the two elements pointed by the two pointers and moving one of
+the two at each step using the following logic: 
 \begin{itemize}
-	\item[-] if $a[p_s]+a[p_e] = T$ a solution has been found. The algorithm returns true.
-	\item[-] if $a[p_s]+a[p_e] > T$, $p_e=p_e-1$. The rightend pointer is moved to the left. Moving
-	$p_e$ to the right makes the sum smaller in the next iteration. 
-	\item[-] if $a[p_s]+a[p_e] < T$, $p_s=p_s+1$. The rightend pointer is moved to the left. Moving
-	$p_s$ to the right makes the sum higher in the next iteration. 
+	\item if $a[p_s]+a[p_e] = T$ a solution has been found. The algorithm returns true.
+	\item if $a[p_s]+a[p_e] > T$, $p_e=p_e-1$. The right pointer is moved to the left. 
+	Moving	$p_e$ to the left has the effect of making the sum of the values pointed by the two pointers smaller (this has an effect at the next iteration). 
+	\item if $a[p_s]+a[p_e] < T$, $p_s=p_s+1$. The right end pointer is moved to the left. Moving $p_s$ to the right has the effect of making the sum of the values pointed by the two pointers larger. 
 \end{itemize}
 
-Listing \ref{list:two_number_sum_two_pointers} shows an implementation of the idea above.  Note that
-this solution has an additional strength i.e.  it is short and simple to write. 
 
-\lstinputlisting[language=c++, caption="C++ solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
 
-Despite the oveall complexity is still $O(n log(n))$ this solution is it likely to be faster than
-the one presented in Section \ref{sect:two_number_problem_binary_search}, mostly because in this
-case the array is search somehow linearly and not in a scattered way as in the case of binary
-search.
+Listing \ref{list:two_number_sum_two_pointers} shows an implementation of the idea above. Notice that compared to the solution using the binary search, this one is shorter and simpler to write. Moreover, it does not use library functions. 
+
+\lstinputlisting[language=c++, caption="\CC solution of the two number sum problem with the two pointers tecnique.",label=list:two_number_sum_two_pointers]{sources/two_numbers_sum/two_numbers_sum_two_pointers.cpp}
+
+Despite the overall time complexity is still $O(n log(n))$, this solution is likely to be faster than
+the one using binary search, mostly due to the fact that the array is scanned linearly (which makes caches happier) by the two pointers and not in a scattered way as in the case of binary search.
 
 %%%%%%%%%%%%%%%%%%%%%
 \section{Common Variations}
-\subsection{Four number sum problem}
+\subsection{Four numbers sum problem}
 \label{sec:four_number}
 
 \subsection{Problem statement}
 
 \begin{exercise}
 Write a function that takes four arrays of integers, $A,B,C,D$ and a integer $T$,
-and returns how many distinct tuple $(i,j,k,l)$ where exist such that 
-$A_i+B_j+C_k+D_l = Y$.
+and returns how many distinct tuple $(i,j,k,l)$ where exist such that $A_i+B_j+C_k+D_l = Y$.
 
 \begin{example}
 \hfill \\
@@ -281,48 +283,56 @@ Goes without saying, that this is not the fastest solution we can come up with, 
 
 \lstinputlisting[language=c++, caption="Brute force na\"ive solution to the four numbers sum problem.",label=list:two_number_sum_naive]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution1.cpp}
 
+Needless to say, that this is not the fastest solution we can come up with, considering it has a time complexity of $O(n^4)$.
 
 \subsection{$O(n^3)$ solution}
 The trivial solution shown in Listing \ref{list:two_number_sum_naive} can be improved by using a similar reason that lead us improve the brute-force 
 quadratic time solution for the two numbers problem in Listing \ref{list:two_number_sum_bruteforce} to the linear time (and space) in Listing \ref{list:two_number_sum_hashing}.
-The idea is that inner-most loop is searching for a value $x$  s.t. if it summed to $A_i+B_j+C_k$ gives us $T$; in other words: $x+(A_i+B_j+C_k)=T$.
+
+The idea is that inner-most loop is searching for a value $D_l = x$  s.t. if it summed to $A_i+B_j+C_k$ gives us $T$; in other words: $x+(A_i+B_j+C_k)=T$.
 Therefore $x = T-(A_i+B_j+C_k)$. If there is a way of avoiding a linear search in the array $D$ for such a value, then we could bring down the complexity from $O(n^4)$ to $O(n^3)$.
 
-Thankfully this is possible if we use a hashmap. If we create a hashmap mapping the value of $D$ and to their frequencies the inner-most loop of Listing \ref{list:two_number_sum_naive} can be substituted with a query to the hashmap which 
-runs in constant time. Listing \ref{list:two_number_sum_cubic} shows an implementation of such idea. 
-Notice that in order to obtain the maximum saving in terms of work avoided the arrays are rearranged in such a way so that $D$ 
-is the longest of the four input arrays. 
+Thankfully, this is possible if we use a hash map. If we create a hashmap mapping the value of $D$ and to their frequencies, the inner-most loop of the $O(n^4)$ solution above can be substituted with a query to the hashmap which runs in constant time (on average). 
+
+Listing \ref{list:two_number_sum_cubic} shows an implementation of such idea. 
+Notice that, in order to obtain the maximum saving in terms of work avoided, the arrays are rearranged in such a way so that $D$ is the longest of the four input arrays. 
+
 \lstinputlisting[language=c++, caption="Brute force cubic time solution to the four numbers sum problem.",label=list:two_number_sum_cubic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution2.cpp}
 
 
 \subsection{$O(n^2)$ solution using hashing}
-This problem can be however be solved in quadratic time if we use hashmaps again, to hold 
-the frequencies of all the values you can obtain by summing up any two elements of $A$ and $B$ and of $C$ and $D$.
-The key idea is that we can build two hashmaps:
+
+This problem can be however be solved in quadratic time if we use hashmaps in a smarter way, to hold 
+the frequencies of all the values we can obtain by summing up any two elements of $A$ and $B$ and of $C$ and $D$.
+The key idea is that we can build two distinct hashmaps:
 \begin{itemize}
 	\item $AB$: holding the frequencies of the values obtainable by summing any two elements of $A$ and $B$
-	\item $AB$: holding the frequencies of the values obtainable by summing any two elements of $C$ and $D$.
+	\item $CD$: holding the frequencies of the values obtainable by summing any two elements of $C$ and $D$.
 \end{itemize}
-The space required for both $AB$ and $CD$ is quadratic, more than the space used by any of the previous solutions, but this extra space
-enable us to solve this problem also in quadratic time. 
+
+The space required for both $AB$ and $CD$ is quadratic, which is more than the space used by any of the previous solutions, but this extra space
+enables us to solve this variation also in quadratic time. 
+
 The idea is that we are going to spend $O(n^2)$ time to construct both $AB$ and $CD$
-and then again  $O(n^2)$ to calculate the final answer. 
+and then again $O(n^2)$ to calculate the final answer 
 by searching into $CD$ for the value $T-y$ where $y$ is an element of $AB$. 
 If such a value exists in $CD$ it means that there exists one element in  $A$ and one in $B$ such that they sum up to $y$ and
 one element $C$ and one in $D$ such that they sum up to $T-y$. Summing all these elements up gives: $y+T-y = T$.
 This approach is shown in Listing \ref{list:two_number_sum_quadratic}. 
-Notice that the first thing we do is to fill $AB$ by looping over all possible pairs of elements from $A$ and $B$.
-We then do the same thing for $CD$, and finally, in the last loop, we take care of calculating the answer by 
-searching, for each element $(k,v)$ of $AB$, where $k$ is the sum obtained by one element of $A$ and one of $B$ and $v$ is the number of ways we can obtain it,
-into $CD$ for the target value $T-k$. If such a value exists into $CD$ then we know we can make $T$. The number of times
-that is possible is dictated by the frequencies of $k$ and of the target value.
+
 \lstinputlisting[language=c++, caption="Quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution3.cpp}
 
+Notice that the first thing we do is to fill $AB$ by looping over all possible pairs of elements from $A$ and $B$.
+We then do the same thing for $CD$, and finally, in the last loop, we take care of calculating the answer by searching, for each element $(k,v)$ of $AB$, where $k$ is the sum obtained by one element of $A$ and one of $B$, and $v$ is the number of ways we can obtain it,
+into $CD$ for the target value $T-k$. If such a value exists into $CD$ then we know we can obtain $T$. The number of times
+that is possible is dictated by the frequencies of $k$ and of the target value in $CD$.
+
 However, you might have already noticed that we do not really need to explicitly create the map $CD$. 
-The idea is that when we create $CD$ we already have all the values of $AB$  and therefore for a given $C_i+D_j$ we can already 
-find out how many pairs in $AB$ exists that we can use to get a total sum of $T$. This optimization does not really change the overall space complexity
+The idea is that when we create $CD$ we already have all the values of $AB$  and therefore for a given $C_i+D_j$ we can already find out how many pairs in $AB$ exists that we can use to get a total sum of $T$. 
+This optimization does not really change the overall space complexity
 but in practice this mean that we use half the memory and we avoid doing $O(n^2)$ work by eliminating the last loop.
+
 Listing \ref{list:two_number_sum_quadratic_opti} shows this optimized version.
 
-\lstinputlisting[language=c++, caption="Space optimized quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic_opti]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution4.cpp}
 
+\lstinputlisting[language=c++, caption="Space optimized quadratic time solution to the four numbers sum problem.",label=list:two_number_sum_quadratic_opti]{sources/two_numbers_sum/variations/four_number_sum/four_number_sum_solution4.cpp}
