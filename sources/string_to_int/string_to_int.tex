@@ -9,29 +9,34 @@
 \chapter{String to Integer}
 \label{ch:string_to_int}
 \section*{Introduction}
-The problem discussed in this chapter is often used as a warm-up question during the onsite interview as well as forming part of many online assessments. It is important to ask the right clarification questions to ensure that the problem is well  understood and that all the corner cases are properly addressed. For example,  the interviewer might want you to take care of negative numbers, but that may not be explicitly stated in the problem statement.
+The problem discussed in this chapter is often used as a warm-up question during onsite interviews or is  part of pre-selections online assessments.
+The question is about converting a string to an integer, a familiar operations in the day of a programmer. 
+Being a straightforward problem,  even a small bug in the actual code or conceptual flaw in the algorithm used in the solution can kill the chance to continue our journey in the hiring process.  
+Therefore, it is imperative to ask good clarification questions to ensure the details of the problem as well as all corner cases are well understood.
+For example,  the interviewer might want us to take care of negative numbers, or to take care or invalid input, but that may not be explicitly mentioned when the problem is presented.
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that given a string $s$ containing only numbers (characters from the range [0-9]), parse it into its integer representation without using any library specific functions (like \texttt{atoi()} in \CC or  \texttt{Integer.parseInt()} in Java).
-\end{exercise}
+Write a function that given a string $s$ containing only numbers (characters from the range $[0-9]$), parse it into its integer representation without using any library specific functions (like \texttt{atoi()} in \CC or  \texttt{Integer.parseInt()} in Java).
 
 
 \begin{example}
+	\label{ex:stringint:example1}
 	\hfill \\
-	If $s$ ="12345", then the function should return the integer $12345$.	
+	If $s$ ="12345", then the function returns the integer $12345$.	
 \end{example}
 
+\end{exercise}
 
 \section{Clarification Questions}
 
 \begin{QandA}
 	\item \begin{questionitem} \begin{question} Does the function need to handle integer overflow?  \end{question} 	 
     \begin{answered}
-		\textit{No, the input will never cause overflow.}
+		\textit{No, the input will never cause overflow. You might assume the integer always fits a standard integer.}
 	\end{answered} \end{questionitem}
 
-	\item \begin{questionitem} \begin{question} Can the string have leading zeros?  \end{question} 	 
+	\item \begin{questionitem} \begin{question} Can the input string have leading zeros?  \end{question} 	 
     \begin{answered}
 		\textit{Yes, the string might have one or more leading zeros.}
 		\begin{example}
@@ -45,25 +50,27 @@ Write a function that given a string $s$ containing only numbers (characters fro
 \section{Discussion}
 \label{string_to_int:sec:discussion}
 An elegant solution presents itself if we use the idea behind the decimal positional numeral systems.
-In any positional number system, the ultimate numeric value of a digit is determined by the position it holds, not only by the digit itself. Take as an example the number $427$:  although $7$ is thought of as a larger number than 4, the $7$ is worth less than the $4$ in this instance because of its respective position within the number. The value of a digit $d$ at position $i$ is equal to $d\times 10^i$. Thus the value of the a number $n=d_0d_1 \ldots d_k$ is equal to $(d_0 \times 10^0) + (d_1 \times 10^1) + \ldots + (d_k \times 10^k)$.
-Using this approach leading zeros are not a problem because they clearly do not contribute to the final result as $0 \times 10^x = 0$.
-\begin{example}
-	\hfill \\
-	 $n$ ="22498" then its decimal value is equal to: $(2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 20000 + 2000 + 400 +90 +8 = 22498$
-\end{example}
+In any positional number system, the ultimate numeric value of a digit is also determined by the position it holds and not only by the digit itself. 
+Take as an example the number $427$:  although $7$ is thought of as a larger number than 4, the $7$ is worth less than the $4$ in this instance because of its respective position within the number. 
+The value of a digit $d$ at position $i$ is equal to $d\times 10^i$. Thus the value of a number represented by the string ($k+1$ characters long) $s=d_0d_1 \ldots d_k$ is equal to $(d_0 \times 10^0) + (d_1 \times 10^1) + \ldots + (d_k \times 10^k)$.
 
-The concept above can be implemented by looping though the string from right to left and summing up each digit of the string at position $i$  multiplied by $10^i$ as shown in Listing \ref{list:string_to_int1}.
+All we need to do to write a solution for this problem is to go through each digit of the number and calcualte the answer using the formula above. For example, given the string \textit{s ="22498"} then its decimal value is equal to: $(2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 20000 + 2000 + 400 +90 +8 = 22498$
 
-\lstinputlisting[language=c++, caption=\CC solution to the string to integer problem.,label=list:string_to_int1]{sources/string_to_int/string_to_int_solution1.cpp}
+It is worth highlighting that using this approach leading zeros are not a problem because they clearly do not contribute to the final result as $0 \times 10^x = 0$. Let's consider \textit{s ="00022498"} for which we can calcualte its decimal value as follows:  $(0 \times \times 10^7) + (0 \times \times 10^6) + (0 \times \times 10^5) + (2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 0+0+0+20000 + 2000 + 400 +90 +8 = 22498$
 
+The concept above can be implemented by looping through the string from right to left and summing up each digit of the string at position $i$  multiplied by $10^i$ as shown in Listing \ref{list:string_to_int1}.
 
-This is a good solution, as its complexity is linear in the size of the input string and handles leading zeros elegantly.
+\lstinputlisting[language=c++, caption=\CC linear time and constant space solution.,label=list:string_to_int1]{sources/string_to_int/string_to_int_solution1.cpp}
+
+Listing \ref{list:string_to_int1} is considered to be good as its time complexity is linear in the lenght of the input string. We cannot do better than this figure as we need to at least inspect each digit once.
 
 \subsection{Common Variation}
+As mentioned above, this problem might is prone to having many variations and below you will find a list of the most common ones: 
 \begin{itemize}
-	\item[-] Add support for negative numbers. One optional char which could either be + or -, at the beginning of the string  signals the sign. See Listing \ref{list:string_to_int_negative}.
-	\item[-] Return $0$ when the answer does not fit into an int.
-	\item[-] Raise an exception (or return a certain value) in case of bad input. For instance when letters are present in the string e.g. $s=123f456$.  
+	\item Add support for negative numbers. One optional char which could either be + or -, at the beginning of the string signals the sign. A solution for this variation is shown in Listing \ref{list:string_to_int_negative}.
+	\item Handle overflow and return $0$ when the answer does not fit into an \inline{int}.
+	\item Raise an exception (or return a certain value) in case of bad input. For instance when invalid digits are present in the string e.g. $s=123f456$.
+	\item Perform the conversion by interpreting $s$ as being represented in base $b$. For instance when Example \ref{ex:stringint:example1} is interpreted as a number in base $8$, the function returns $5349$. 
 \end{itemize}
 
-\lstinputlisting[language=c++, caption=\CC solution to the string to integer problem with negative number support.,label=list:string_to_int_negative]{sources/string_to_int/string_to_int_solution2.cpp}
+\lstinputlisting[language=c++, caption=\CC solution to the string to integer problem with negative number support. It uses Listing \ref{list:string_to_int1} as subroutine.,label=list:string_to_int_negative]{sources/string_to_int/string_to_int_solution2.cpp}

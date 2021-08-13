@@ -19,7 +19,9 @@ void count_sort(vector<int>& I, const unsigned base, const unsigned digit_idx)
   }
 }
 
-void radix_sort(vector<int>& I, const unsigned base = 10, const unsigned num_digits = 10)
+void radix_sort(vector<int>& I,
+                const unsigned base       = 10,
+                const unsigned num_digits = 10)
 {
   for (unsigned digit = 0; digit < num_digits; digit++)
     count_sort(I, base, digit);

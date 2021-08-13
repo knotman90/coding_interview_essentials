@@ -16,27 +16,27 @@ TEST(decode_string, test1)
 {
   using TestInput = std::tuple<std::string, std::string>;
 
-  for (const auto [input, expected] :
-       {
+  for (const auto [input, expected] : {
            /*TestInput("2[abc]3[ab]", "abcabcababab"),
        TestInput("2[abc3[ab]]", "abcababababcababab"),
        TestInput("2[abc]3[cd]ef", "abcabccdcdcdef"),*/
-       TestInput("start2[a3[b4[c2[d]e]f]g]end", "startabcddecddecddecddefbcddecddecddecddefbcddecddecddecddefgabcddecddecddecddefbcddecddecddecddefbcddecddecddecddefgend"),
-       TestInput("10[ciao]", "ciaociaociaociaociaociaociaociaociaociao"),
-
+           TestInput(
+               "start2[a3[b4[c2[d]e]f]g]end",
+               "startabcddecddecddecddefbcddecddecddecddefbcddecddecddecddefgab"
+               "cddecddecddecddefbcddecddecddecddefbcddecddecddecddefgend"),
+           TestInput("10[ciao]", "ciaociaociaociaociaociaociaociaociaociao"),
 
        })
   {
+    {
+      auto ans = decode_string(input);
+      EXPECT_EQ(expected, ans) << "failed for " << input;
+    }
 
-      {
-          auto ans = decode_string(input);
-          EXPECT_EQ(expected, ans) << "failed for "<<input;
-      }
-
-       {
-          auto ans = decode_string_recursive(input);
-          EXPECT_EQ(expected, ans) << "failed for "<<input;
-      }
+    {
+      auto ans = decode_string_recursive(input);
+      EXPECT_EQ(expected, ans) << "failed for " << input;
+    }
   }
 }
 
