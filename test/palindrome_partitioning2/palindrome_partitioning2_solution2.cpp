@@ -3,9 +3,10 @@ using Cache = std::unordered_map<int, int>;
 int palindrome_partitioning2_DP_topdown_helper(const std::string s,
                                                const int start_idx,
                                                Cache& memoization_cache)
-{	
+{
   if (start_idx >= std::ssize(s)
-      || is_palindrome(s, start_idx, std::ssize(s) - 1)) //is the full substring []
+      || is_palindrome(
+          s, start_idx, std::ssize(s) - 1))  // is the full substring []
     return 0;
 
   if (memoization_cache.contains(start_idx))

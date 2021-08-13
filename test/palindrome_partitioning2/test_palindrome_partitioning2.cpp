@@ -9,12 +9,12 @@ using std::string;
 using std::swap;
 using std::vector;
 
+#include "algorithm.h"
 #include "palindrome_partitioning2_solution1.cpp"
 #include "palindrome_partitioning2_solution2.cpp"
 #include "palindrome_partitioning2_solution3.cpp"
-#include "palindrome_partitioning2_solution4.cpp"
 #include "palindrome_partitioning2_solution3_iterative.cpp"
-#include "algorithm.h"
+#include "palindrome_partitioning2_solution4.cpp"
 
 TEST(palindrome_partitioning2, test1)
 {
@@ -56,28 +56,26 @@ TEST(palindrome_partitioning2, random1)
   constexpr size_t size     = 20;
   for (const auto charset : {
            std::string("abc"),
-		   std::string("ab"),
-		   std::string("abzy"),
-		   std::string("a"),
+           std::string("ab"),
+           std::string("abzy"),
+           std::string("a"),
        })
   {
     for (int i = 0; i < numTests; i++)
     {
       const int size_test = Book::Algorithm::get_random_in_range<int>(1, size);
       const std::string s = getRandomString(charset, size_test);
-      const auto x1             = palindrome_partitioning2_bruteforce(s);
-      const auto x2             = palindrome_partitioning2_DP_topdown(s);
-      const auto x3             = palindrome_partitioning2_DP_bottomup(s);
-      const auto x4             = palindrome_partitioning2_DP_topdown_optimized_it(s);
-      const auto x5             = palindrome_partitioning2_DP_topdown_optimized(s);
-      ASSERT_TRUE((x1 == x2) && (x2 == x3) && (x3==x4) && (x4==x5))
+      const auto x1       = palindrome_partitioning2_bruteforce(s);
+      const auto x2       = palindrome_partitioning2_DP_topdown(s);
+      const auto x3       = palindrome_partitioning2_DP_bottomup(s);
+      const auto x4       = palindrome_partitioning2_DP_topdown_optimized_it(s);
+      const auto x5       = palindrome_partitioning2_DP_topdown_optimized(s);
+      ASSERT_TRUE((x1 == x2) && (x2 == x3) && (x3 == x4) && (x4 == x5))
           << "failed for " << s << " x1 = " << x1 << " x2 = " << x2
-          << " x3 = " << x3 <<" x4 = "<<x4<<" x5 = "<<x5;
+          << " x3 = " << x3 << " x4 = " << x4 << " x5 = " << x5;
     }
   }
 }
-
-
 
 int main(int argc, char** argv)
 {

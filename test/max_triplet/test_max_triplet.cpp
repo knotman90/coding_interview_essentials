@@ -16,16 +16,16 @@ using std::vector;
 
 std::string printCollection(const auto& collection)
 {
-    std::ostringstream ss;
-    ss<<"{";
-    for(const auto e : collection){
-        ss<<e<<",";
-    }
-    ss<<"}";
-    ss<<std::endl;
-    return ss.str();
+  std::ostringstream ss;
+  ss << "{";
+  for (const auto e : collection)
+  {
+    ss << e << ",";
+  }
+  ss << "}";
+  ss << std::endl;
+  return ss.str();
 }
-
 
 TEST(max_triplet, example1)
 {
@@ -51,35 +51,29 @@ TEST(max_triplet, example1)
   }
 }
 
-
-
-
 TEST(max_triplet, random)
 {
-    for(int i = 0 ; i < 100 ; i++)
-    {
-        const int size = Book::Algorithm::get_random_in_range(1,200);
-        const int l = Book::Algorithm::get_random_in_range(0,2000);
-        const int r = Book::Algorithm::get_random_in_range(l,l+1000);
-        const auto input = Book::Algorithm::generateRandomCollection<int>(size,l,r);
+  for (int i = 0; i < 100; i++)
+  {
+    const int size = Book::Algorithm::get_random_in_range(1, 200);
+    const int l    = Book::Algorithm::get_random_in_range(0, 2000);
+    const int r    = Book::Algorithm::get_random_in_range(l, l + 1000);
+    const auto input =
+        Book::Algorithm::generateRandomCollection<int>(size, l, r);
 
-        const std::vector<int> answers = {
-            max_triplet_sum_bruteforce(input),
-            max_triplet_sum_prefix_binary_search(input),
-        };
+    const std::vector<int> answers = {
+        max_triplet_sum_bruteforce(input),
+        max_triplet_sum_prefix_binary_search(input),
+    };
 
-        ASSERT_TRUE(
-            std::ranges::all_of(answers, [&](const auto& el){
-            return el==answers[0];
-            })
-        ) <<"failed for "<< printCollection(input)
-        << "answers are:" <<printCollection(answers);
-    }
+    ASSERT_TRUE(std::ranges::all_of(
+        answers, [&](const auto& el) { return el == answers[0]; }))
+        << "failed for " << printCollection(input)
+        << "answers are:" << printCollection(answers);
+  }
 }
 
-
-
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

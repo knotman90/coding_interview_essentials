@@ -143,7 +143,6 @@ Equation \ref{eq:string_reversal_recursion} formalizes this idea and a possible 
 The complexity analysis for this approach can be a bit controversial, especially the one concerning space because we have to consider also
 the stack space utilized by all the recursive calls, which can theoretically amount to $O(n)$. However, a compiler optimizer worth that title would optimize it so as to use constant space. 
 It is therefore important to clarify this aspect with the interviewer.
-
 Discussing this topic might open the possibility for questions related
 to recursion, and especially regarding the
 Tail Call Optimization (TCO)\footnote{TCO (Tail Call Optimization) is the process by which a smart compiler can make a call to a function and take no additional stack space. The allocation of a new stack frame for a function can be avoided because the calling function will simply return the value that it gets from the called function. The most common use is tail-recursion, where a recursive function written to take advantage of tail-call optimization can	use constant stack space.}, so one needs to be careful while opening this pandora box.
