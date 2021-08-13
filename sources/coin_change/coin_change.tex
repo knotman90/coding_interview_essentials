@@ -9,6 +9,16 @@
 \chapter{Coin Change Problem}
 \label{ch:coin_change}
 \section*{Introduction}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \vspace{-20pt}
+    \begin{center}
+        \includegraphics[width=0.48\textwidth]{sources/coin_change/images/coin_stacks}
+    \end{center}
+    %\vspace{-20pt}
+    %\caption{A gull}
+    \vspace{-15pt}
+  \end{wrapfigure}
 The problem discussed in this chapter is considered by many to be a fundamental stepping stone for anyone on the path towards mastering Dynamic Programming (see Section \ref{sect:appendix:DP}).
 This reputation originates from the fact that this problem encompasses all the crucial ingredients of any DP algorithm with the additional benefit of having a very intuitive statement as 
 it features things like coins and change that are concepts we are all familiar with.
@@ -17,6 +27,14 @@ This problem addresses the question of finding the minimum number of coins that 
 Many people, when reading the statement of this problem, are tempted to approach it greedily but, as we will see, this does not always (despite it actually often does) lead to the correct answer. 
 
 The coin change problem can be seen as an archetype for a whole bunch of DP optimization problems that can be reduced and solved, using the techniques shown in this section (see Chapter \ref{ch:dice_rolls} and \ref{ch:can_jump}, for instance).
+
+
+\begin{figure}[t]
+	\label{fig:clone_list_random_pointer:list1}
+	\centering
+	\includegraphics[width=0.7\textwidth]{sources/coin_change/images/coin_stacks}
+	%\caption{}
+\end{figure}
 
 
 \section{Problem statement}
