@@ -1,6 +1,5 @@
-std::vector<int> 
-next_greater_element_I_set(const std::vector<int>& A,
-                           const std::vector<int>& B)
+std::vector<int> next_greater_element_I_set(const std::vector<int>& A,
+                                            const std::vector<int>& B)
 {
   std::vector<int> C(A.size());
   std::set<int> N;

@@ -1,5 +1,5 @@
 int four_sum_hashing(const std::vector<int>& A,
-                    const  std::vector<int>& B,
+                     const std::vector<int>& B,
                      const std::vector<int>& C,
                      const std::vector<int>& D,
                      const int T)
@@ -18,7 +18,7 @@ int four_sum_hashing(const std::vector<int>& A,
   int ans = 0;
   for (const auto [k, v] : ab)
 
-    if (auto it = cd.find(T-k); it != cd.end())
+    if (auto it = cd.find(T - k); it != cd.end())
       ans += v * it->second;
 
   return ans;
