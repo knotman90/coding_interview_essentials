@@ -48,10 +48,9 @@ TEST(smallest_range_1, test1)
   }
 }
 
-
 TEST(smallest_range_2, test1)
 {
-  for ( std::tuple<std::vector<int>, int, int> t : {
+  for (std::tuple<std::vector<int>, int, int> t : {
            std::make_tuple(std::vector<int>({1}), 0, 0),
            std::make_tuple(std::vector<int>({1, 3, 6}), 0, 5),
            std::make_tuple(std::vector<int>({1, 3, 6}), 1, 3),
@@ -79,7 +78,7 @@ TEST(smallest_range_2, test1)
            std::make_tuple(std::vector<int>({-6, -1, -3}), 3, 3),
            std::make_tuple(std::vector<int>({-6, -1, -3}), 4, 5),
            std::make_tuple(std::vector<int>({-6, -1, -3}), 5, 5),
-           std::make_tuple(std::vector<int>({-6, -1, -3}), 50,5 ),
+           std::make_tuple(std::vector<int>({-6, -1, -3}), 50, 5),
            std::make_tuple(std::vector<int>({0, 10}), 2, 6),
        })
   {
@@ -87,8 +86,6 @@ TEST(smallest_range_2, test1)
     EXPECT_EQ(smallest_range_II(I, K), expected);
   }
 }
-
-
 
 int main(int argc, char** argv)
 {
