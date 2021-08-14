@@ -1,6 +1,5 @@
 
 
-
 void nqueen_one_per_row_helper(const unsigned n,
                                const int current_row,
                                Solution& solution_candidate,

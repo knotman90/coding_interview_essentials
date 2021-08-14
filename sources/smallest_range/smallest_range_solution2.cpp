@@ -7,7 +7,7 @@ int smallest_range_II(std::vector<int>& A, const int K)
   {
     const auto m_new = std::min(A.front() + K, A[i] - K);
     const auto M_new = std::max(A[i - 1] + K, A.back() - K);
-    ans          = std::min(ans, M_new - m_new);
+    ans              = std::min(ans, M_new - m_new);
   }
   return ans;
 }
