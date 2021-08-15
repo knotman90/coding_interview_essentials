@@ -52,13 +52,15 @@ Studying this classic problem is important as the structure of and the insights 
 
 \section{Problem statement}
 \begin{exercise}
-Given a binary tree \cite{cit:wiki:BST}, determine if it is a valid binary search tree (BST).
 
-A BST is defined as follows:
+Given a binary tree \cite{cit:wiki:BST}, determine if it is a valid binary search tree.
+
+Assume a BST is defined as follows:
 \begin{itemize}
-    \item the left subtree of a node contains only nodes with keys less than the node's key;
-    \item the right subtree of a node contains only nodes with keys greater than the node's key.
+	\item The left subtree of a node contains only nodes with keys lesser than the node's key.
+	\item The right subtree of a node contains only nodes with keys greater than the node's key.
 \end{itemize}
+
 You can assume the input tree is given as a pointer or a reference to a structure named \inline{TreeNode} which definition is in Listing \ref{list:verify_BST:tree_structure}. 
 
 \end{exercise}
@@ -131,7 +133,7 @@ You can assume the input tree is given as a pointer or a reference to a structur
 	\end{answered} \end{questionitem}
 	\item \begin{questionitem} \begin{question} Are all elements in the tree distinct?  \end{question} 	 
     \begin{answered}
-		\textit{Yes, you can assume all elemets are distinct.}
+		\textit{Yes, you can assume all elements are distinct.}
 	\end{answered} \end{questionitem}
 	\item \begin{questionitem} \begin{question} How many nodes does the tree contain?  \end{question} 	 
     \begin{answered}
@@ -141,12 +143,12 @@ You can assume the input tree is given as a pointer or a reference to a structur
 
 \section{Discussion}
 \label{verify_BST:sec:discussion}
-In order to solve this problem, we need to write a function that is able to verify whether a given tree is a valid BST or not. But what does it mean to be valid exactly?
-From the definition given above we know that tree $T$ is a BST when:
+This problem is asking for a function that verifies whether a given tree is a binary search tree or not, therefore we should begin by defining what that actually means.
+A tree $T$ is a binary search tree if:
 \begin{enumerate}
-	\item Every node in $T$ has two subtree (which might be also empty and are named \textit{left} and \textit{right}, respectively). In other words, $T$ is a binary tree.
-	\item given a node $n$ in the tree then \textbf{all} the nodes in its left subtree must be smaller than $n$;
-	\item symmetrically, it must also hold that \textbf{all} nodes in the right subtree are larger than $n$.
+	\item Every node has two subtrees (named left and right, respectively) i.e. $T$ is a binary tree
+	\item given a node $n$ in the tree \textbf{all} the nodes in its left subtree are smaller than the value in $n$.
+	\item additionally,  \textbf{all} nodes in the right subtree are larger.
 \end{enumerate}
 For instance, the tree in Figure \ref{ex:verify_BST:no_BST} is not a valid BST because node $15$ is a right descendant of the root but is it not greater than it. On the other hand, the trees in Figure \ref{example:verify_BST:example3} and \ref{example:verify_BST:example4} are valid BST. The tree in Figure \ref{fig:verify:generic_tree} is not a valid BST because it is not a binary tree as node $0$ has three children.
 
@@ -164,28 +166,21 @@ We will see how this can be done in the next sections.
 
 \subsection{Top Down approach}
 \label{verify_BST:sec:topdown}
-When talking about trees, we should naturally be steered onto thinking about a top-down approach and recursion. 
-In particular, this problem becomes almost trivial if approached using recursion and we are able to come up with the following insights:
+When talking about trees, one should immediately think about a top down approach and recursion. This problem is no different and in-fact  becomes almost simple if approached using recursion and the following key considerations are addressed:
 \begin{enumerate}
-	\item every node can be thought of as the root of a tree for which the BST property needs to be verified;
-	\item empty trees satisfy the BST property by definition;
-	\item every node must contain a value within a range that is determined by its ancestors. For instance, consider the node $15$ in the Figure \ref{example:verify_BST:example4}; it must be within the range $(14,16)$ for the tree to be a valid BST. Why is that? Because its parent, the node $16$ must be within the range $(14,+\infty)$ and additionally node $15$, being the left subtree of node $16$ must be lower than its parent. 
-	The same reasoning can be applied recursively up to the root of the tree where the range of the value is simply $(-\infty, +\infty)$ (no constraints at all). 
+	\item every node can be thought of as the root of a tree for which the BST property needs to hold (and thus verified). 
+	\item empty trees satisfy the BST property
+	\item every node must be within a certain range that is determined by its parent. For instance, given the node $15$ in the example \ref{example:verify_BST_:one}, in order for the tree to be a valid it must be within the range $(14,16)$. Why is that? Simply put, because its parent, the node $16$,  must be within the range $(14,+\infty)$ and additionally node $15$, being the left subtree of node $16$, must be lower than its parent. The same reasoning can be applied recursively up to the root of the tree where the range of the value is simply $(-\infty, +\infty)$ (no constraints). 
 
-	The node $9$ in the Figure \ref{example:verify_BST:example4} must be within the range $(1,10)$ for equivalent reasons.
+	The node $9$ in the example \ref{example:verify_BST_:one} must be within the range $(1,10)$ for similar reasons.
 \end{enumerate}
 
-To summarize, we can visit the tree in a top-down fashion and maintain a range of values that the current node must satisfy. We can start with a range equal to $(-\infty, +\infty)$ for the root (meaning that de-facto, there is no restriction on the value the root can take).
-Once the value is checked against this range, then the same function can be applied recursively to the right and left children but with the shrewdness of making sure that the range is modified accordingly when recurring on the children. 
+To summarize, we can visit the tree in a top-down fashion and maintain a range that the current node must satisfy starting with a range equal to $(-\infty, +\infty)$ for the root (meaning that de-facto there is no restriction on the value the root can take). Once the value is checked against the range, then the same function can be applied to the right and left children but making sure that the range is modified accordingly when recurring on the children. 
 
-The fulcrum of the problem seems to be the update of such a range change when visiting down the tree. How should it change when visiting a new node? 
-The idea is quite simple:
-Given a node $n$ with parent $p$ and range \( (l_p, u_p) \) then:
+The fulcrum of the problem seems to be the update of such a range change when visiting down the tree. But how does such a range change when visiting down the tree? The idea is simple: given a node $n$ with parent $p$ and range \( (l_p, u_p) \) then:
 \begin{itemize}
-	\item if $n$ is the right child of $p$, the range for $n$ is: $(p, u_p)$:
-	all nodes in the right subtree of $p$ must be have a value \textbf{higher} than $p$. 
-	Note that $p > l_p$ (otherwise the BST property would be violated when checking $p$) and thus the range for $n$ becomes smaller meaning that all the constraints coming from the ancestors of $p$ will also be satisfied with the new range $(p, u_p)$.
-	\item A similar reasoning applies if $n$ is the left child of $p$: in this case, the range is $(l_u,p)$.
+	\item if $n$ is the right child of $p$, then the range for $n$ is: $(p, u_p)$: all nodes in the right subtree of $p$ must be \textbf{higher} than $p$. Note that $p > l_p$ (otherwise the BST property would be violated when checking $p$) and thus the range for $n$ becomes smaller; meaning that all the constrains coming from the ancestors of $p$ will also be satisfied with the new range $(p, u_p)$.
+	\item A similar reasoning applies if $n$ is the left child of $p$. The range for $n$ is then : $(l_u,p)$.
 \end{itemize}
 See Figure \ref{ex:verify_BST:example4_ranges} showing what the ranges look like for the tree in Figure \ref{ex:verify_BST:example4}. 
 

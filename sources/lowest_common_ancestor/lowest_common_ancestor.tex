@@ -8,9 +8,9 @@
 \chapter{BST Lowest Common Ancestor}
 \label{ch:lowest_common_ancestor}
 \section*{Introduction}
-The lowest common ancestor is an important concept in graph theory and it is quite often a topic or
-a fundamental building block of coding interview questions. LCA have important application in graph
-theory for instance in:
+The lowest common ancestor is an important concept in graph theory and is often a topic or
+a fundamental building block of coding interview questions. For example, LCA has important applications in graph
+theory in:
 \begin{itemize}
 	\item computation of \textit{minimum spanning tree},
 	\item finding a \textit{dominator tree}, or
@@ -18,14 +18,14 @@ theory for instance in:
 	searching}.
 \end{itemize}
 Given a tree and two nodes $p$ and $q$, the lowest common ancestor  of $p$ and $q$, ($LCA(p,q)$) is
-defined as the lowest or deepest node that has both $p$ and $q$ as descendant. In other words the
+defined as the lowest or deepest node that has both $p$ and $q$ as descendants. In other words the
 LCA is the shared ancestor or $p$ and $q$ that is the farthest from the root of the tree. 
 
 There are
-several known algorithm for finding the LCA efficiently on a generic tree, one of the most
+several known algorithms for finding the LCA efficiently on a generic tree; one of the most
 fundamental being the one from Harel and Tarjan \cite{harel84,harel80}.
-In this chapter however, we will focus on the (simpler) problem of finding the LCA for  trees of a
-particular kind: binary search trees. This constraint greatly simplifies the general problem of finding LCA. 
+In this chapter, however, we will focus on the (simpler) problem of finding the LCA for trees of a
+particular kind: binary search trees. This constraint greatly simplifies the general problem of finding LCAs. 
 \section{Problem statement}
 \begin{exercise}
 	Write a function that takes a binary search tree $T$, and two nodes $p$ and $q$ and returns
@@ -47,7 +47,7 @@ particular kind: binary search trees. This constraint greatly simplifies the gen
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{sources/lowest_common_ancestor/images/example1}
-	\caption[Sample short cpation]{Binary Search tree of the Example
+	\caption[Sample short caption]{Binary Search tree of the Example
 	\ref{ex:lower_common_ancestor:example1}}.
 	\label{fig:lowest_common_ancestor:example1}
 \end{figure}
@@ -55,7 +55,7 @@ particular kind: binary search trees. This constraint greatly simplifies the gen
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item \begin{questionitem} \begin{question} What to return in case the input tree is empty?  \end{question} 	 
+	\item \begin{questionitem} \begin{question} What should we return in case the input tree is empty?  \end{question} 	 
     \begin{answered}
 		\textit{You can return an empty tree.}
 	\end{answered} \end{questionitem}
@@ -77,27 +77,27 @@ particular kind: binary search trees. This constraint greatly simplifies the gen
 \section{Discussion}
 \label{lowest_common_ancestor:sec:discussion}
 Based on the definition of LCA one of the simplest solution possible would be to compute the path
-from the root to $p$ and $q$ as store them as two separate lists of nodes: $P_q$ and $P_p$. We can
-then compare these lists and notice that they will match up until a certain point, say up to the
+from the root to $p$ and $q$ and store them as two separate lists of nodes: $P_q$ and $P_p$. We can
+then compare these lists knowing that they will match up until a certain point, say up to the
 $k^{th}$ node of the path. After that the lists do not match anymore.
 Therefore the $k^{th}$ element of the list is the LCA for $p$ and $q$. 
-For instance w.r.t the tree in Figure \ref{fig:lowest_common_ancestor:example1}
-the paths from the root to the nodes $5$ and $2$ are the following, respectivey:
+For instance in the tree in Figure \ref{fig:lowest_common_ancestor:example1}
+the paths from the root to the nodes $5$ and $2$ are the following:
 	\begin{flalign}
 		&P_5 = \{\mathbf{13,3},4,12,10,5\} \\
 		&P_2 = \{\mathbf{13,3},1,2\} 
 	\end{flalign}
-As you can see they match up to node $3$ that is indeed their LCA.
+As you can see they match up to node $3$ which is indeed their LCA.
 
-If we try the same approach for the nodes $5$ and $11$ we have that their respective paths from the
+If we try the same approach for the nodes $5$ and $11$ their respective paths from the
 root are:
 	\begin{flalign}
 		&P_5 = \{\mathbf{13,3,4,12,10},5\} \\
 		&P_1 = \{\mathbf{13,3,4,12,10},11\} 
 	\end{flalign}
-$P_5$ and $P_{11}$ match up to until the penultimate node ($10$). Therefore, their LCA is  node $10$.
+$P_5$ and $P_{11}$ match up to the penultimate node ($10$). Therefore, their LCA is  node $10$.
 
-This approach is correct and it is easily implementable, and its time and space complexity
+This approach is correct and is easily implementable. Its time and space complexity
 is $O(k)$ where $k$ is the height of $T$ (which for unbalanced trees might be proportional to the
 number of nodes in $T$). Listing \ref{list:lowest_common_ancestor_paths} show an implementation of
 the idea above. 
@@ -106,14 +106,12 @@ the idea above.
 	\lstinputlisting[language=c++, caption={LCA solution based on the difference of paths from the root.},label=list:lowest_common_ancestor_paths]{sources/lowest_common_ancestor/lowest_common_ancestor_solution2.cpp}
 
 
-This approach is however not optimal as we waste unnecessary space for storing entire paths.
-This is not really necessary as we only really care about the last node that is common. 
+This approach is, however, not optimal as we waste space by storing entire paths which is not necessary as we only really care about the last common node. 
 One way to avoid memorizing the entire paths is to find the path for both $p$ and $q$ simultaneously
-and only remember the last node we visited. It as some point of this visit we find that the the next
-node to visit for $p$ is  different from the direction of the search for $q$ wants us to go, we can
-stop as this is the point where the paths for $p$ and $q$ diverge. We can therefore return the last
-element that was common. Despite the fact this approach does not improve the time complexity w.r.t
-to the other solution, we have in this case only a constant space usage which is a very good
+and only remember the last node we visited. If at some point during this visit we find that the the next
+node to visit for $p$ is  different from the direction that the search for $q$ requires, we can
+stop as this is the point where the paths for $p$ and $q$ diverge and return the last
+element that was common. Despite the fact that this approach does not improve the time complexity we have only a constant space usage which is a very good
 improvement compared to the linear space complexity for Listing
 \ref{list:lowest_common_ancestor_paths}. This optimized version is shown in Listing
 \ref{list:lowest_common_ancestor_paths_optimized}.
@@ -123,13 +121,12 @@ improvement compared to the linear space complexity for Listing
 
 
 
-We can however simplify the implementation shown in Listing
-\ref{list:lowest_common_ancestor_paths_optimized} by rewriting it such that it runs iteratively
+We can also simplify the implementation shown in Listing
+\ref{list:lowest_common_ancestor_paths_optimized} further by rewriting it such that it runs iteratively
 rather than recursively. Listing \ref{list:lowest_common_ancestor_iterative} shows this iterative version which starts at the root of $T$
-and keep navigating the tree until by moving left or right until the direction of the search for
+and keeps navigating the tree by moving left or right until the direction of the search for
 both $p$ and $q$ is the same. When the path diverges we can stop and return the current node which
-is the lowest node shared node in the paths from the root to $p$ and $q$
+is the lowest shared node in the paths from the root to $p$ and $q$
 
 
 	\lstinputlisting[language=c++, caption={Iterative solution to the problem of finding the LCA in a binary search tree.},label=list:lowest_common_ancestor_iterative]{sources/lowest_common_ancestor/lowest_common_ancestor_solution1.cpp}
-

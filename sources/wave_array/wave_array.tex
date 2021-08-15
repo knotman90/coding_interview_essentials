@@ -8,14 +8,11 @@
 \chapter{Wave Array}
 \label{ch:wave_array}
 \section*{Introduction}
-We are used to talking about sorting in terms of arranging items in either ascending or descending order.
-But in general, sorting is the process of arranging items systematically, according to a criterion that can be purely arbitrary.
+We are used to talking about sorting in terms of arranging items in either ascending or descending order, but in fact, sorting is simply the process of arranging items systematically according to a criterion that can be purely arbitrary.
 
-The problem discussed in this lesson is about writing an algorithm for sorting the items of a collection in a rather unusual and peculiar way: the goal is to place elements at even indices such that they all are surrounded by either greater or smaller elements. For instance, the collection: $\{1,3,-1,3,2,4\}$ is properly sorted while $\{1,3,-1,1,2,4\}$ is not.
+The problem discussed in this Chapter concerns writing an algorithm for sorting the elements of a collection in an unusual way by placing them at even indices such that each is surrounded by either greater or smaller elements. For example, the collection: $\{1,3,-1,3,2,4\}$ is properly sorted on these terms whilst $\{1,3,-1,1,2,4\}$ is not.
 
-This question has been asked at companies like \textit{Adobe}, and \textit{Google}, mostly during the firsts on-site interview stages as it is not considered to be a very hard one and it can be solved by writing just a handful of lines.
-In fact, if the candidate comes up with the right idea and makes no implementation mistakes, this problem can be cleared rather quickly.
-However, this problem has proven to be challenging for many, especially in getting it right the first time: once a working draft of the solution is finished, our advise is to spend some time to make sure the code is behaving as expected, especially on corner cases.
+This question often arises at first on-site interview stage for companies like \textit{Adobe}, and \textit{Google}, mostly  as it is not considered particularly difficult and should be solvable by writing just a few lines code. It can, however, prove challenging to get right the first time under pressure therefore, once a working draft of the solution is finished, our advice is to still take time to make sure the code is behaving as expected, especially in edge case scenarios.
 
 \section{Problem statement}
 \begin{exercise}
@@ -99,16 +96,16 @@ Given an array $A$ of $n$ integers, arrange the numbers in a wave-like fashion. 
 
 \section{Discussion}
 \label{wave_array:sec:discussion}
-The challenge confronting us is about the creation of an entirely new array $X$ (we, therefore, know from the very beginning we must make a copy of $A$ at some point) that contains the same elements in $A$, arranged in a form that reminds a wave. 
+The challenge confronting us here is the creation of an entirely new array $X$ (we, therefore, know from the very beginning we must make a copy of $A$ at some point) that contains the same elements in $A$, arranged in a form that reminds a wave. 
 An array of this type has its elements arranged so that they produce a zig-zig-like pattern when plotted on a graph. 
 
 Sequences of numbers of this type can be described as having the property that all of their elements located at even indices are \textbf{all} either 
 \textit{local}  \textbf{minima} or  \textbf{maxima}\footnote{An element is a local minimum/maximum if it is lower/higher than its two immediate neighbors.}. 
-Identifying a local minimum/maximum is easy but, it is only helpful when we want to test whether a sequence is a valid wave array.
+Identifying a local minimum/maximum is easy but it is only helpful when we want to test whether a sequence is a valid wave array.
 
 \subsection{Brute-force}
 \label{wave_array:sec:bruteforce}
-One way to attack this problem is by enumerating every possible arrangement of the elements of $A$ and apply the criteria of wave-array validity discussed above to find a solution. 
+One way to attack this problem is by enumerating every possible arrangement of the elements of $A$ and applying the criteria of wave-array validity discussed above to find a solution. 
 We can enumerate all permutations of an array quite easily by using a function like \inline{std::next_permutation(Iterator first, Iterator last)} which (taken from the docs): \quoteblock{"Rearranges the elements in the range [first,last) into the next lexicographically greater permutation".}
 
 This idea is implemented in Listing \ref{list:wave_array_linear_bruteforce}.
@@ -119,42 +116,42 @@ The code above has a time complexity that is proportional to $n!$ and it is, the
 
 \subsection{Sorting}
 \label{wave_array:sec:sorting}
-As per all array problems, the first question that should come to mind is: \textit{does sorting the elements (we are referring here to a canonical sorting in increasing order) change the difficulty of the problem?}
-Incrementally sorted sequences are easy to reason about, as they provide strong and clear guarantees on how elements relate to each other. Most importantly, the same problem is very often a lot easier to solve on a sorted collection than on an unsorted one.
+As per all array problems, the first thing to consider is: \textit{does sorting the elements (we are referring here to a canonical sorting in increasing order) change the difficulty of the problem?}
+Incrementally sorted sequences are simpler to approach as they provide strong and clear guarantees on how elements relate to each other. More importantly, the same problem is very often easier to solve on a sorted collection than on an unsorted one.
  
 If we apply the wave-array validity criterion (discussed above on local minima/maxima) on a sorted array $S=\{s_0 \leq s_1 \leq \ldots \leq s_{n-1}\}$ we notice that $S$ fails the test as there is only one local minimum and local maximum i.e. $s_0$ and $s_{n-1}$ (which also happen to be the global minimum and maximum).
 
-But how does $S$ change if every element that is located at an even index is swapped with its subsequent neighbor?
-When every elements at indices $2i$ and $2i+1$ ($i=0,1,\ldots$) are swapped, then:
-$S=\{s_1 \geq s_0 \leq s_3 \geq s_2 \leq s_5 \geq s_4 \leq s_7  \geq \ldots\}$ which is now in better shape to pass the wave-array validity test as now every element at even index is surrounded by smaller (or equal) elements. 
+The question is then how does $S$ change if every element that is located at an even index is swapped with its subsequent neighbor?
+When all elements at indices $2i$ and $2i+1$ ($i=0,1,\ldots$) are swapped, then:
+$S=\{s_1 \geq s_0 \leq s_3 \geq s_2 \leq s_5 \geq s_4 \leq s_7  \geq \ldots\}$ which is now in better shape to pass the wave-array validity test as every element at even index is surrounded by smaller (or equal) elements. 
 
-Notice that the elements of $S$ have been shuffled around, and that now the element $a_i$ is not located at index $i$ anymore (contrary to how it was originally).
-We can see that $a_3$ is now located at index $2$ and it is surrounded by $a_0$ and $a_2$, which are both smaller or equal to $a_3$.
-Similarly, $a_5$ is now placed at index $4$ and it is surrounded by the elements $a_2$ and $a_4$, both known to be smaller or equal than $a_5$.
+Notice that the elements of $S$ have been shuffled around and that the element $a_i$ is not located at index $i$ anymore (contrary to its original position).
+We can see that $a_3$ is now located at index $2$ and  is surrounded by $a_0$ and $a_2$, which are both smaller or equal to $a_3$.
+Similarly, $a_5$ is now placed at index $4$ and is surrounded by the elements $a_2$ and $a_4$, both known to be smaller or equal than $a_5$.
 
-We can use this observation to solve this problem efficiently and elegantly as shown in  Listing \ref{list:wave_array_sorting}.
+We can use this observation to solve the problem efficiently and elegantly as shown in  Listing \ref{list:wave_array_sorting}.
 
 \lstinputlisting[language=c++, caption=Solution to the wave array problem using sorting.,label=list:wave_array_sorting]{sources/wave_array/wave_array_solution1.cpp}
 
-Solution \ref{list:wave_array_sorting} works by creating a copy of the input array $A$ named $B$, which is subsequently sorted. The code then proceeds in swapping every element located at an even location with the element after it. 
+Solution \ref{list:wave_array_sorting} works by creating a copy of the input array $A$ named $B$, which is subsequently sorted. The code then proceeds to swap every element located at an even location with the element after it. 
 You can see the \inline{swap} operation is applied to the iterators \inline{it} and \inline{it+1}, and that at the end of each iteration \inline{it} is incremented by $2$.
-This, together with the fact \inline{it} initially pointer to the first even element at location $0$, effectively means that only pairs of items at indices of the form $(2i, 2i+1)$ are swapped.
+This, together with the fact \inline{it} initially pointer to the first even element at location $0$,  means that only pairs of items at indices of the form $(2i, 2i+1)$ are swapped.
 
-This solution is considered to be a good one, as its time and space complexity are both $O(nlog(n))$
-and $O(n)$, respectively.
+This solution is considered good as its time and space complexity are $O(nlog(n))$
+and $O(n)$ respectively.
 
-In some cases, the interviewer might ask to return, among all possible valid arrangements, the one being the lexicographically minimum. If it is the case, the solution proposed below won't work and it should not be attempted.
+Before proceeding with this option, it is worth noting that, should the interviewer ask you to return the lexicographical minimum arrangement amongst all possible arrangements, a Brute Force sorting solution  won't work. In such cases you should consider the solutions proposed at section [FILL THIS IN] instead. 
 
 
 \subsection{Linear time solution}
 
-Despite the solution using sorting presented in Section \ref{wave_array:sec:sorting} is already good enough to
-possibly clear the interview, there exists a solution that works in linear time and that is as easy to
-implement and explain. The core idea is always the same: elements at even index should always be
-greater (or smaller, equivalently) than their adjacents neighbors. Only this time we will enforce it in a single pass on the array, by
+
+Although the solution using sorting presented in Section \ref{wave_array:sec:sorting} is likely sufficient for the interview, there is also a solution that works in linear time and that is as easy to
+implement and explain. The core idea remains the same: elements at even index should always be
+greater (or smaller, equivalently) than their adjacent neighbors. The difference here is that, on this ocassion,  we will enforce it in a single pass on the array by
 swapping elements at even indices with their direct neighbors (to the left and to the right) if they happen to be smaller in such a way that the largest element among  $x_{2i-1},x_{2i},x_{2i+1}$ always ends up going to the location $2i$.
 
-We can do that by iterating over all even indices and performing the following operations:
+We to this by iterating over all even indices and performing the following operations:
 \begin{enumerate}
 	\item if the current element $a_{2i}$ is smaller than the element $a_{2i-1}$ then swap them; 
 	\item if the current element $a_{2i}$ (possibly newly assigned from the previous step) is smaller than the element $a_{2i+1}$ then swap them.
@@ -165,10 +162,10 @@ See Listing \ref{list:wave_array_linear} for a possible implementation of this i
 
 \lstinputlisting[language=c++, caption=Linear time solution to the wave array problem.,label=list:wave_array_linear]{sources/wave_array/wave_array_solution2.cpp}
 
-Notice that the code above performs some checks on the corner elements so that we do not perform out-of-bound accesses.
+Note that the code above performs some checks on the corner elements so that we do not perform out-of-bound accesses.
 This solution is optimal as it runs in $o(n)$ space and time. 
 
-Like the solution using sorting, it does not work when the lexicographical minimum arrangement should be returned.
+As with the Brute Force sorting solution above unfortunately, the linear time solution also does not work when the lexicographical minimum arrangement should be returned so we will address this common variation now. 
 
 \section{Common Variations - Return the lexicographically smallest}
 \label{sec:wave-array:smallest}
@@ -191,3 +188,5 @@ If there are multiple valid answers, the function returns the one that is lexico
 		Given $A=\{1, 2, 3, 4\}$ the function returns \{2, 1, 4, 3\}. Notice that the sequence \{4, 1, 3, 2\} is also a valid wave-array but it is not lexicographically minimal.
 	\end{example}
 \end{exercise}
+
+\section{Conclusions}

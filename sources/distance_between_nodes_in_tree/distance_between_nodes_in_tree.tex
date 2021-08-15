@@ -8,16 +8,16 @@
 \label{ch:distance_between_nodes_in_tree}
 \section*{Introduction}
 
-In the problem described in this chapter  we are going to investigate how we can find the the
+In the problem described in this chapter  we will investigate how to find the
 distance between two nodes in a binary search tree. As we will see this problem can be approached
-and solved very straightforwardly if we are able identify the key idea behind it. This insight can
+and solved easily if we are able identify the key underlying concepts. This will 
 become apparent after we look at a few examples and our advice for approaching this problem (and to
 be honest all problems on graphs and trees) is to draw and discuss quite a few examples with your
 interviewer. This help you get a much better intuitive understanding of what the problem is really
 about, which will eventually lead to the eureka moment.
 
-This is going to be a relatively short chapter because the solution is built on top of the solution
-of a problem discussed in another chapter. In Section
+This is a relatively short chapter because the solution is built on top of the solution
+for the  problem discussed in chapter [REFERENCE]. In Section
 \ref{sec:distance_between_nodes_in_tree:problem} we will have a look at the formal problem statement
 and in Section \ref{distance_between_nodes_in_tree:sec:discussion} we discuss the solution approach
 and we will look into two possible different implementations: recursive and iterative. 
@@ -34,7 +34,7 @@ and we will look into two possible different implementations: recursive and iter
 		Given the tree shown in Figure \ref{fig:distance_between_nodes_in_tree:example1}, $p = 1$
 		and $q=3$, the function returns $D(1,3)=2$ 
 		
-		If $p=3$ and $q=2$ the function returna $1$.
+		If $p=3$ and $q=2$ the function returns $1$.
 	\label{ex:distance_between_nodes_in_tree:example1}
 	\end{example}
 
@@ -63,25 +63,23 @@ and we will look into two possible different implementations: recursive and iter
 
 \section{Discussion}
 \label{distance_between_nodes_in_tree:sec:discussion}
-As already mentioned in the introduction this problem can become quite challenging if we are not
-able to steer our approach in the right direction. The intuitive idea on how this problem should be
-approached is going to be almost self-evident if we look at a couple of examples, solve them by hand
-and then try to look for similarities in their solution.
+As already mentioned in the introduction the key to solving this problem lies in clearly identifying the correct approach from the problem statement by using several examples, solving them by hand
+and then identifying similarities in their solutions.
 
 Let's have a look at some instances of this problem and their solution. If we consider $T$ to the
 tree depicted in Figure \ref{fig:distance_between_nodes_in_tree:example3} then the distance between
 nodes $p=3$ and $q=9$ is $4$ and  
-can be found by walking up the tree from node $3$ up to a node $5$ (follow the red arcs) from which
-we can descend and reach  node $9$ (green arcs). Notice that node $5$ is the first node from which
-we can visit the tree down and reach both nodes $3$ and $9$. You can also see that the same
-reasoning applies also to the trees shown in Figures
+can be found by walking up the tree from node $3$ to a node $5$ (follow the red arcs) from which
+we can descend and reach  node $9$ (green arcs). Note that node $5$ is the first node from which
+we can travel down the tree and reach both nodes $3$ and $9$. You can also see that the same
+reasoning applies to the trees shown in Figures
 \ref{fig:distance_between_nodes_in_tree:example4} and
 \ref{fig:distance_between_nodes_in_tree:example5} where you get the minimum distance by traveling up
 to the first node that allows you to reach the destination node. Notice that in Figure
 \ref{fig:distance_between_nodes_in_tree:example5} the path upwards has length zero as from $p$ you
-can already reach $q$ by visiting down the tree.
+can already reach $q$ by traveling down the tree.
 
-At this point should be clear that the minimum distance between two nodes can be calculated as the
+At this point it should be clear that the minimum distance between two nodes can be calculated as the
 sum of distances from $p$ and $q$ their lowest common ancestor (LCA). The LCA is the lowest node
 from which it is possible to walk in a downward direction and reach both $p$ and $q$. In order to go
 from $p$ to $q$ one must pass through their LCA. If you need to refresh your memory on the topic of
@@ -127,11 +125,11 @@ above.
 		\caption{}
 		\label{fig:distance_between_nodes_in_tree:example5}
 	\end{subfigure}
-	\caption{Various istances of the problem of finding the distance between two nodes in a BST and
+	\caption{Various instances of the problem of finding the distance between two nodes in a BST and
 	their solutions. Figures \ref{fig:distance_between_nodes_in_tree:example3},
 	\ref{fig:distance_between_nodes_in_tree:example4}, and
 	\ref{fig:distance_between_nodes_in_tree:example5} have nodes and arcs in red and green to
-	highlight the paths between the $p$ and $q$ and their LCA, respectively.}
+	highlight the paths between the $p$ and $q$ and their LCA.}
 \end{figure}
 
 
@@ -142,7 +140,7 @@ above.
 
 \section{Conclusion}
 In this chapter we have seen how we can efficiently solve the problem of finding the distance between two nodes in a binary search tree
-by using the concept of LCA (discussed more in details in Chapter \ref{ch:lowest_common_ancestor}). The general strategy is that,
+by using the concept of LCA (discussed more in details in Chapter \ref{ch:lowest_common_ancestor}). The general strategy is that
 we can calculate the distance between the LCA and both $p$ and $q$. The sum of these two distances is the final answer.
 The distance between two nodes in a binary search tree can be found by slightly modifying the standard search algorithm for BSTs so that we return
 the number of recursive calls made instead of a boolean value signaling whether the element to be searched was found or not.

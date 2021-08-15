@@ -8,16 +8,16 @@
 \chapter{$k^{th}$ largest in a stream}
 \label{ch:kth_largest_in_stream}
 \section*{Introduction}
-This chapter deals with a problem where the input data is not statically provided all at once but it
- is instead given as a continuous stream of data. These kind of algorithm are common in real life
+This chapter deals with a problem where the input data is not statically provided all at once but
+ is instead given as a continuous stream of data. These kind of algorithms are common in real life
  and they are becoming increasingly important in fields like medicine (where data from wearable
- devices is used to provide real-time insights on the patient health conditions), or finance where
- an enormous amount of data (usually provided from the exchanges) is used to perform high-frequency
- trading. We are going to study a coding interview question that has been quite popular  during the
- last couple of years and that asks you to design a data structure that is able to deal with a
- stream of integers and can keep track of the $k^{th}$ largest element seen so far. We are going to
+ devices is used to provide real-time insights on the patient's health conditions), or finance where
+ an enormous amount of data (usually provided from the stock exchanges) is used to perform high-frequency
+ trading. We are going to study a coding interview question that has been popular during the
+ last few years and that asks you to design a data structure that is able to deal with a
+ stream of integers and can keep track of the $k^{th}$ largest element seen so far. We will
  present and discuss three solution based on the same fundamental idea (discussed in Section
- \ref{kth_largest_in_stream:sec:discussion}) that are built around  three different data structures:
+ \ref{kth_largest_in_stream:sec:discussion}) but which are built around three different data structures:
  
 \begin{enumerate*}
 	\item a simple array (in Section \ref{kth_largest_in_stream:sec:bruteforce}), 
@@ -27,22 +27,22 @@ This chapter deals with a problem where the input data is not statically provide
 
 \section{Problem statement}
 \begin{exercise}
-	Design a class which task accept a stream of integers one number at the time and to return the
+	Design a class which task is to accept a stream of integers one number at the time and to return the
 	$k^{th}$ largest integer seen so far in the stream. The class has two public functions having
 	the following signatures:
 	\begin{enumerate}
 		\item \inline{void initialize(const std::vector<int>& I, const unsigned K)}: the array
 		\inline{I} contains the first elements of the stream. This function will be called only once
 		upon initialization.
-		\item  \inline{int add(int val)}: this function accept an new element from the stream and
+		\item  \inline{int add(int val)}: this function accepts a new element from the stream and
 		returns the $k^{th}$ largest numbers seen so far. 
 	\end{enumerate}
-Notice that you can assume that the function \inline{void initialize(const std::vector<int>& I,
-const unsigned K)} is called only once before any call of to the function \inline{int add(int val)}.
+Note that you can assume that the function \inline{void initialize(const std::vector<int>& I,
+const unsigned K)} is called only once before any call to the function \inline{int add(int val)}.
 
 \begin{example}
 	\hfill \\
-	Given $K=4$ and the initial array $I=\{1,2,3\}$, the function \inline{int add(int)} behave as
+	Given $K=4$ and the initial array $I=\{1,2,3\}$, the function \inline{int add(int)} behaves as
 	follows:
 	\begin{itemize}
 		\item \inline{add(4)} returns $1$
@@ -56,7 +56,7 @@ const unsigned K)} is called only once before any call of to the function \inlin
 \begin{example}
 	\hfill \\
 	Given $K=4$ and the initial array $I\{1,2,3,4,50,100,150,200\}$ the function \inline{int
-	add(int)} behave as follows:
+	add(int)} behavse as follows:
 	\begin{itemize}
 		\item \inline{add(20)} returns $50$
 		\item \inline{add(250)} returns $100$
@@ -92,46 +92,45 @@ There are two phases associated with this class:
 \begin{enumerate}
 	\item the initialization phase where an initial input array $I$ is provided to the class.
 		Because when calling \inline{add} the $k^{th}$ largest value exists, then we can deduce that
-		the size of the vector $I$ is at least $K-1$ otherwise, the first call of \inline{add} could
+		the size of the vector $I$ is at least $K-1$ otherwise the first call of \inline{add} could
 		not possibly return the correct value. This operations is guaranteed to happen one time only
 		before any call to \inline{add}.
-	\item the stream elements processing phase where the class is ready to accept a new number form
+	\item the stream elements processing phase where the class is ready to accept a new number from
 	the stream and return the answer.
 \end{enumerate}
-The key idea to attack this problem is that during the initialization phase when the initialization
-array comes in, we are forced to remember the largest elements in it. In particular if $|I| \geq K$
+The key to attacking this problem is to understand that during the initialization phase when the initialization
+array comes in, we are forced to remember the largest elements within it. In particular, if $|I| \geq K$
 then we can throw away all the elements that are not among the $K$ largest and keep the rest (this
 should be self-explanatory as those elements will never be used as a return value of \inline{add} as
 there are already $K$ values larger than all of them), otherwise we can remember $I$ as it is (and
-in this case we know that $|I| = K-1$). One might think that is not necessary to remember all $K$
-largest numbers seen so far and that is in fact only necessary to remember the $K^{th}$ largest
+in this case we know that $|I| = K-1$). One might think that it isn't necessary to remember all $K$
+largest numbers seen so far and that it is in fact only necessary to remember the $K^{th}$ largest
 element. We will use Example \ref{ex:kthlargest_in_stream:example2} as a simple counterexample to
-shows why this approach leads incorrect results. First of all, after the initialization phase the
+demonstrate why this leads to incorrect results. First of all, after the initialization phase the
 \nth{4} largest number ($K=4$ in this example) is $50$. Then, after the call to \inline{add(20)} the
 \nth{4} largest number is not changed and the function still returns $50$. But when
-\inline{add(250)} is called, then $50$ suddenly becomes the \nth{5} largest number and here it is
-when remembering the other numbers larger than $50$ becomes important. Without them we would not be
-able now to return the correct value i.e. $100$.
+\inline{add(250)} is called, then $50$ suddenly becomes the \nth{5} largest number and it is at this point that remembering the other numbers larger than $50$ becomes important. Without them we would not now be
+able to return the correct value i.e. $100$.
 
-In short it becomes clear that in order to be able to always give an answer we need to store and
-keep track of all the $K$ largest numbers seen so far. But where and how exactly can we do that?
+In short, in order to be able to always give an answer we need to store and
+keep track of all the $K$ largest numbers seen so far. This naturally leads to the question of where and how we can actually do that?
 Let's name the set of the largest $K$ numbers seen so far $L^K$. Moreover let $m$ be the smallest
 element in $L^K$; $m = \min_{} (L^K)$. When a new number $n$ arrives, we can do one of the following
 operations depending on its value:
 \begin{itemize}
 	\item if $|L^K| < K$  we simply insert $n$ in $L^K$ and return.
-	\item otherwise, if $n \leq m$ then, $n$ can be ignored as it has not influence among the
+	\item otherwise, if $n \leq m$ then, $n$ can be ignored as it has no influence among the
 	elements of $L^K$.
 	\item otherwise ($n > m$), $m$ can be safely removed from $L^K$ as it would become the
 	$K-1^{th}$ largest after the addition of $n$. The new element $n$ can be inserted in $L^K$.
 \end{itemize}
-Notice that the size of $L^K$ never changes after it reaches $K$. The way we decide to store $L^K$
-has a big influence to the cost of the operations listed above namely: 
+Note that the size of $L^K$ never changes after it reaches $K$. The way we decide to store $L^K$
+has a big influence on the cost of the operations listed above, namely: 
 \begin{enumerate*}
 	\item find the minimum element ($m$)
 	\item remove the minimum element ($m$)
 	\item insert a new element ($n$) \end{enumerate*}. In the following Section we will investigate
-three data structures that can be used those hold the values of $L^K$. 
+three data structures that can be used to hold the values of $L^K$. 
 
 \subsection{Array based solution}
 \label{kth_largest_in_stream:sec:bruteforce}
@@ -142,29 +141,29 @@ both the \inline{initialize} and \inline{add} function can be implemented:
 \begin{description}
 	\item[\texttt{initialize($I$,$K$)}:] The initialization phase has to filter the largest $K$
 	elements out of the initialization array $I$. This can be done by sorting $I$ in ascending order
-	first  and then copying in $L^K$ only the first of its $K$ elements (the $K$ largest). The same
-	can be obtained by using a partial sort algorithm which makes sure that  the largest $K$
+	first  and then copying in $L^K$ only the first of its $K$ elements (the $K$ largest). The same outcome
+	can be obtained by using a partial sort algorithm which makes sure that the largest $K$
 	elements are at the front of the array but given no guarantees on the relative ordering of the
 	rest of the array. The complexity of this operation is $O(|I| log(|I|))$ if the whole array $I$
 	is sorted but when a partial sort algorithm is used then the costs becomes $O(|I| log(K))$.
 	\item [\texttt{add(n)}:] When $|L^K|<K$ or  $n$ is inserted in $L^K$. But if $n>m$ then $m$ is
-	 substituted by $n$ (thus effectively removing $m$) and subsequentially the ordering of $L^K$ is
-	 restored. When this happen we will be in a situation where the $L^K$ is sorted except for $n$
-	 that might not be in the right position (for instance when $n$ would be the largest element of
+	 substituted by $n$ (thus effectively removing $m$) and subsequently the ordering of $L^K$ is
+	 restored. When this happens we will be in a situation where the $L^K$ is sorted except for $n$
+	 which might not be in the right position (for instance when $n$ would be the largest element of
 	 $L^K$). So restoring the order on $L^K$ can be achieved either by:
 	 \begin{itemize}
 		 \item fully sorting $L^K$. In this case the complexity of \inline{add} is $O(K log(K))$
 		 \item by moving the newly inserted element from the first location of the array up, by
 		 swapping it with its subsequent element, until it reaches the correct position. This
-		 operation is analogous to how the insertion sort algorithm operates. The cost of this
-		 operation is $O(K)$. In the worst case we need to bubble up $n$ up to the last cell of the
+		 operation is analogous to the way the insertion sort algorithm operates. The cost of this
+		 operation is $O(K)$. In the worst case scenario we need to bubble up $n$ up to the last cell of the
 		 array (when $n$ is effectively the largest element of $L^K$) by performing $K-1$ swap
 		 operations.
 	 \end{itemize}
 \end{description}
 
 Listing \ref{list:kth_largest_in_stream:array} shows an implementation where the initialization
-phase is perfomed using a normal sort and the add is implemented by using an approach a\' la
+phase is performed using a normal sort and the add is implemented by using an approach a\' la
 insertion-sort.
 \lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using arrays},label=list:kth_largest_in_stream:array]{sources/kth_largest_in_stream/kth_largest_in_stream_solution1.cpp}
 
@@ -174,11 +173,11 @@ insertion-sort.
 If instead of an array we use a data structure \footnote{Example of such data structures are:
 \begin{enumerate*}
 	\item ordered multiset (for instance implemented as a self-balancing binary search tree)
-	\item heap or priotiry queue. \end{enumerate*}}that allow us to perform insert/search and min
+	\item heap or priotiry queue. \end{enumerate*}}that allows us to perform insert/search and min
 operations runs in $log$ and constant time, respectively, then we can  substantially improve the
 time complexity of the solution shown in Section \ref{kth_largest_in_stream:sec:bruteforce}.
 
-Let's have a look in more details at how the two operations look like in this case:
+Let's have a more detailed look  at what the two operations would look like in this case:
 \begin{description}
 	\item[\texttt{initialize($I$,$K$)}:] Recall that the final goal of this operation is to keep
 	only  the largest $K$ elements of $I$. This can be easily achieved in $O(|I|log(K))$ by looking
@@ -187,26 +186,26 @@ Let's have a look in more details at how the two operations look like in this ca
 		\item the size of $|L^K| < K$ or 
 		\item if $I_j$ is greater than the smallest element of $L^K$. Additionally in this case, if
 		after the insertion we have that $|L^K|  > K$ then the current smallest element in $L^K$ is
-		removed so to make sure that $|L^K|=K$.
+		removed to make sure that $|L^K|=K$.
 	\end{itemize}
 	Because there are $O(|I|)$ elements that can potentially go in $L^K$ and each insertion costs
-	$O(log(K))$ then the final complexity if $O(|I|log(K))$. Notice that it is not much better than
+	$O(log(K))$ then the final complexity is $O(|I|log(K))$. Note that it is not much better than
 	the array solution in this case.
 	\item [\texttt{add(n)}:] This is where we see the advantages of having the elements of  $L^K$
 	not stored in a plain array. Like in the array solution, we compare $n$ with the smallest
 	element in $L^K$, $m$, and insert $n$ in $L^K$ only if $n>m$. But because the ordered multiset
-	support the \inline{insert} and \inline{min} operations in $O(log)$ and $O(1)$ time,
-	respectively, then the complexity of this operation if $O(log(K))$. Quite an improvement w.r.t.
+	supports the \inline{insert} and \inline{min} operations in $O(log)$ and $O(1)$ time,
+	respectively, then the complexity of this operation if $O(log(K))$. Quite an improvement compared with
 	the array solution.
 \end{description}
 
 
 Listing \ref{list:kth_largest_in_stream:set} shows a possible implementation of this idea using a
-ordered multiset (we use the \CC STL implementation named \inline{std::multiset}). 
+ordered multiset (we use the C++ STL implementation named \inline{std::multiset}). 
 \lstinputlisting[language=c++, caption={Solution to the \textit{$k^{th}$ largest element in a stream problem} using \inline{std::multiset}},label=list:kth_largest_in_stream:set]{sources/kth_largest_in_stream/kth_largest_in_stream_solution2.cpp}
 
-In Listing \ref{} you can see an implementation using a heap instead. Notice that there is not a
-dedicated class in \CC for heaps but instead, we can use an array as a container for the elements
+In Listing \ref{} you can see an implementation using a heap instead. Note that there is no
+dedicated class in C++ for heaps but instead, we can use an array as a container for the elements
 and then manipulate it by using the heap dedicated functions: 
 \begin{itemize}
 	\item \inline{make_heap}, to arrange the elements of an array into a heap
@@ -214,14 +213,14 @@ and then manipulate it by using the heap dedicated functions:
 	\item \inline{pop_heap}, to remove the smallest element from the heap.
 \end{itemize}
 
-Also notice that Listing \ref{list:kth_largest_in_stream:heap} uses a slightly different strategy
+Also note that Listing \ref{list:kth_largest_in_stream:heap} uses a slightly different strategy
 for implementing the two class functions. Specifically
 \begin{description}
 	\item[\texttt{initialize($I$,$K$)}:] We  insert the first $K$ elements of $I$ into an array that
 	we immediately turn into a heap (using \inline{make_heap}). At this point we call
 	\inline{add(n)} for all the remaining elements of $I$.
 	\item [\texttt{add(n)}:] as for the other solution when  $n < m$ the function simply returns the
-	smallest element of $L^K$. On the other hand when this is not the case, it removed the smallest
+	smallest element of $L^K$. On the other hand when this is not the case, it removes the smallest
 	element of the heap by calling \inline{pop_heap}\footnote{\inline{pop_heap} does not really erase
 	anything from the heap. It moves the head of the heap to the end of the array and rearranges all
 	the elements  from the begin of the array to the one before the last into a valid heap thus

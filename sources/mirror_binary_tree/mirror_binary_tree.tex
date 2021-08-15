@@ -9,37 +9,35 @@
 \label{ch:mirror_binary_tree}
 \section*{Introduction}
 Binary trees are one of the most taught and discussed data structures in computer science courses. A
-binary tree is a tree-like data structure where each node has at most two children, which we refeer
-to as right and left children. Trees have been used in computer science for a long time as a mean to
-accessing data stored within the nodes that are usually arranged in some particular way such that
-operations like searching for sorting can be performed more efficiently. Examples of such special
-kind of trees are: 
+binary tree is a tree-like data structure where each node has at most two children, which we refer
+to as right and left children. Trees have long been used in computer science as a way to 
+access data stored within nodes that are usually arranged in a particular order intended to make 
+operations like searching for sorting more efficient. Examples of these special
+types of trees are: 
 \begin{itemize*}
 	\item binary search tree,
 	\item binary heap
 \end{itemize*}
 
-But binary trees are often also used to model data haveing an inherently bifurcating structure, where
-the organization of data into left and right is part of the information we are representing\footnote{In such
+Binary trees are also often used to model data with an inherently bifurcating structure, i.e. where
+the organization of data into left and right is also part of the information we are representing\footnote{In such
 case changing the arrangements of the node would change the meaning of the data.}.
-A tree is recursive a data structure because you can think of it as either being:
+A tree is a recursive data structure because it can be thought of as either being:
 \begin{itemize}
 	\item an empty tree
 	\item or a node having a binary tree as left and right children.
 \end{itemize}
-There are many recursive fundamental algorithms on trees described in the literature that built around this definition, 
-and you can expect recursive solutions to questions about trees to be an effective tool during coding interviews.
-The problem discussed in this chapter is about the manipulation of a binary tree into another binary tree
-such that the latter is a mirror image of the former. As we will see this question is quite vague as it will be quite unclear what 
-being a mirror really means and it will be imperative for you to clear this aspect up by asking relevant questions and 
-creating a few examples cases (which we provide later in this chapter) that make clear to you what the interviewer is expecting. 
+There are many recursive fundamental algorithms on trees described in the literature that build around this definition, 
+and, as such,  recursive solutions to questions about trees are an effective tool in coding interviews.
+The problem discussed in this chapter focuses on the manipulation of a binary tree into another binary tree
+so that the latter is a mirror image of the former. As we will see,  the question is quite vague as it can be unclear what being a mirror actually means in this context so it is important to ask relevant questions really means and perhaps even create a few examples cases (which we provide later in this chapter) that clarify what the interviewer is expecting. 
 
-The tree definition that we will use thoroughout the chapter is shown in Listing \ref{list:binary_tree_definition}.
+The tree definition that we will use throughout the chapter is shown in Listing \ref{list:binary_tree_definition}.
 \lstinputlisting[language=c++, caption={Definition of the tree data structure using in Chapter \ref{ch:mirror_binary_tree}.},label=list:binary_tree_definition]{sources/mirror_binary_tree/binary_tree.h}
 
 \section{Problem statement}
 \begin{exercise}
-	Write a function that given a binary tree, return mirror copy of it.
+	Write a function that given a binary tree, return a mirror copy of it.
 
 	\begin{example}
 		\hfill \\
@@ -117,7 +115,7 @@ The tree definition that we will use thoroughout the chapter is shown in Listing
 
 \section{Discussion}
 \label{mirror_binary_tree:sec:discussion}
-Let's start our discussion by trying to understand how a mirror copy of a tree really looks like. If
+Let's start our discussion by trying to understand what a mirror copy of a tree really looks like. If
 we have a tree $T$ rooted at node $n$ then its mirror image \rotatecharone{$T$} can be defined as
 follows:
 \begin{itemize}
@@ -137,19 +135,18 @@ follows:
 	 right children are first mirrored individually and then swapped. 
 \end{itemize}
 This recursive definition can be refined into the following simple idea: In order to create the
-mirror image of a tree $T$ rooted at $n$ we can first mirror its children individually and only
-after swap them. Given that we can turn a tree into its mirror image all is  necessary is to first create a copy of the origin tree
+mirror image of a tree $T$ rooted at $n$ we first mirror its children individually and only
+after do we swap them. Given that we can turn a tree into its mirror image all that is  necessary is to first create a copy of the origin tree
 and then mirror it (remember that the problem is asking to return a copy). 
-Listing \ref{list:mirror_binary_tree1} shows a recursive implementation of such
+Listing \ref{list:mirror_binary_tree1} shows a recursive implementation of this
 idea.
 \lstinputlisting[language=c++, caption={Solution to the problem of creating a mirror of a binary tree. Works by first creating a copy of the original tree and only then performing the mirroring.},label=list:mirror_binary_tree1]{sources/mirror_binary_tree/mirror_binary_tree_solution1.cpp}
 
 The complexity of the code above is $O(n)$ where $n$ is the number of nodes in $T$.
-However, despite it simplify the reasoning and the implementation,
-splitting the copy and the mirroring steps, is not optimal as we need to traverse the whole tree twice. 
+However, despite the fact that splitting the copying and the mirroring steps simplifies the reasoning and the implementation this is not optimal as we need to traverse the whole tree twice. 
 We can create the copy on the fly as we visit $T$ as shown in Listing \ref{list:mirror_binary_tree2}. 
-This approach does not lower the asymptotic complexity but, it effectively means that 
-we only need to traverse the original tree only once instead of twice. 
+This approach does not lower the asymptotic complexity but it effectively means that 
+we only need to traverse the original tree once instead of twice. 
 
 \lstinputlisting[language=c++, caption={Solution to the problem of creating a mirror of a binary tree. The copy and the mirroring are performed simultaneously while visiting $T$.},label=list:mirror_binary_tree2]{sources/mirror_binary_tree/mirror_binary_tree_solution2.cpp}
 
