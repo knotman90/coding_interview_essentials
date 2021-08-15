@@ -228,7 +228,7 @@ problems are recalculated over and over (See Appendix \ref{sect:appendix:DP}). I
 use of DP, we can therefore use memoization to avoid unnecessary recomputation. Listing
 \ref{list:min_difficulty_job_scheduler:solutiondp} shows a possible implementation of this idea
 where a \inline{std::unordered_map} is used to remember the calls to \inline{min_difficulty_helper}
-(the equivalent of the function $C$). Note that given $I$ and $d$ the function can "only"  be
+(the equivalent of the function $C$). Note that given $I$ and $d$ the function can \quotes{only}  be
 invoked in $|I| \times d$ ways. Therefore, in the worst case scenario,  by using memoization we will never
 make more than $|I| \times d$ calls to \inline{min_difficulty_helper}. Because the cost of a single
 call to \inline{min_difficulty_helper} is linear in $|I|$ the complexity of the whole algorithm is

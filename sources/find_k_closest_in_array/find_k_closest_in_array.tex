@@ -131,7 +131,7 @@ $x$ must either be at index $j+1$ or $j-1$ \footnote{If that was not true it wou
 		\item $\exists k < j-1 \: : I_k < I_{j-1}$ and  $x-I_k < x-I_{j-1}$ or
 		\item $\exists k > j+1 \: : I_k > I_{j+1}$ and  $I_k-x < I_{j+1}-x$ \end{itemize} which is
 	impossible because the input is sorted. \end{itemize}}. Therefore once $x$ has been identified
-	we can select a range of $k$ elements "centered" at $j$. Said range can be found by using a two
+	we can select a range of $k$ elements \quotes{centered} at $j$. Said range can be found by using a two
 	pointers technique. We start by initializing two pointers $l = j$ and $r = j$. Then until $r-l+1
 	< k$ we do one of the following operations:
 \begin{itemize}
@@ -162,7 +162,7 @@ The closest of the two to $x$ is chosen to be the designated starting value for 
 
 \lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using \inline{std::lower\_bound}.},label=list:find_k_closest_in_array3]{sources/find_k_closest_in_array/find_k_closest_in_array_solution3.cpp}
 
-For completeness, in Listing \ref{list:find_k_closest_in_array:binary_lower_bound} we also show an implementation of "in-house" version of \inline{std::lower\_bound}. You might be asked 
+For completeness, in Listing \ref{list:find_k_closest_in_array:binary_lower_bound} we also show an implementation of \quotes{in-house} version of \inline{std::lower\_bound}. You might be asked 
 to show you can code binary search. 
 
 

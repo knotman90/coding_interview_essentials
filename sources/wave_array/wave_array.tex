@@ -106,7 +106,7 @@ Identifying a local minimum/maximum is easy but it is only helpful when we want 
 \subsection{Brute-force}
 \label{wave_array:sec:bruteforce}
 One way to attack this problem is by enumerating every possible arrangement of the elements of $A$ and applying the criteria of wave-array validity discussed above to find a solution. 
-We can enumerate all permutations of an array quite easily by using a function like \inline{std::next_permutation(Iterator first, Iterator last)} which (taken from the docs): \quoteblock{"Rearranges the elements in the range [first,last) into the next lexicographically greater permutation".}
+We can enumerate all permutations of an array quite easily by using a function like \inline{std::next_permutation(Iterator first, Iterator last)} which (taken from the docs): \quoteblock{\quotes{Rearranges the elements in the range [first,last) into the next lexicographically greater permutation}.}
 
 This idea is implemented in Listing \ref{list:wave_array_linear_bruteforce}.
 

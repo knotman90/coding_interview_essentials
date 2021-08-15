@@ -8,7 +8,7 @@
 \chapter{Sudoku}
 \label{ch:sudoku}
 \section*{Introduction}
-The game of \textit{Sudoku}\footnote{The literal meaning of "Su-doku" in Japanese is "the number
+The game of \textit{Sudoku}\footnote{The literal meaning of \quotes{Su-doku} in Japanese is "the number
 that is single".} has become hugely popular in the last 20 years to There are now countless websites and magazines dedicated to these mathematical-logic-based
 number-placement puzzles.  The objective of this is to fill a nine-by-nine (9x9) grid (subdivided in
 $3\times3$ subgrids) with digits so that each:
@@ -44,9 +44,9 @@ cells are represented by the character '0'.
 \begin{example}
 	\hfill \\
 	Given the input string
-	\tiny{\texttt{"000060280709001000860320074900040510007190340003006002002970000300800905500000021"}}
+	\tiny{\texttt{\quotes{000060280709001000860320074900040510007190340003006002002970000300800905500000021}}}
 	{\normalsize the function returns}
-	{\tiny\texttt{"431567289729481653865329174986243517257198346143756892612975438374812965598634721"}}
+	{\tiny\texttt{\quotes{431567289729481653865329174986243517257198346143756892612975438374812965598634721}}}
 	\normalsize. See Table \ref{tab:sudoku:grid_solution} for a 2D-grid representation.
 	
 	\begin{table}[]
@@ -140,8 +140,8 @@ first cell (in this case the puzzle has no solution and it is invalid). A backtr
 would solve a puzzle by placing the digit '1' in the first empty cell and checking if it is allowed
 to be there  (i.e. that no rules are broken). If there are no violations (checking row, column, and box
 constraints) then the algorithm advances to the next cell and places a '1' in the next empty cell.
-When checking for violations, if it is discovered that the "1" is not allowed, the value is advanced
-to "2". If a cell is discovered where none of the 9 digits is allowed, then the algorithm leaves
+When checking for violations, if it is discovered that the \quotes{1} is not allowed, the value is advanced
+to \quotes{2}. If a cell is discovered where none of the 9 digits is allowed, then the algorithm leaves
 that cell blank and moves \textbf{back} to the previous cell. The value in that cell is then
 incremented by one and the whole process repeats. Clearly, this method will eventually find a
 solution if the puzzle is valid because all possible valid states for the grid will be tested. 
