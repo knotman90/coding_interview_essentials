@@ -9,7 +9,7 @@
 \chapter{Min stack}
 \label{ch:min_stack}
 \section*{Introduction}
-This chapter introduces a very popular question among among companies like Yahoo, Amazon, Adobe and Microsoft. The question is very simple and is about designing a data structure for performing stack operations that is also able to keep track of the minimum element that is currently present in the stack. This problem has a simple, short and elegant solution. It is important to learn how to solve it as it is not unlikely you will be asked a very similar problem during the on-line screening steps of the interview process or one of the first on-site.
+This chapter introduces a very popular question among companies like Yahoo, Amazon, Adobe and Microsoft. The question is simple and concerns designing a data structure for performing stack operations that is also able to keep track of the minimum element that is currently present in the stack. There is a simple, short and elegant solution for this problem, however, it is important understand the approach thoroughly as it is likely you may be asked a similar problem during the on-line screening steps of the interview process or during the first on-site.
 
 \section{Problem statement}
 \begin{exercise}
@@ -41,7 +41,7 @@ Design a stack that supports:
 
 	\begin{example}
 		\hfill \\
-		Suppose the following set of operation on the stack are performed on a newly constructed and empty stack $S$:
+		Suppose the following set of operations on the stack are performed on a newly constructed and empty stack $S$:
 		\begin{itemize}
 			\item[-] \lstinline[columns=fixed]{push(3)}: $S=[3]$
 			\item[-] \lstinline[columns=fixed]{push(5)}: $S=[5,3]$
@@ -69,14 +69,14 @@ Design a stack that supports:
 
 \section{Discussion}
 \label{min_stack:sec:discussion}
-This problem can become quite tricky if approached from the wrong angle. We will discuss two solutions to this problem, both of which are good candidates for you to use during an actual interview. 
+This problem can become quite tricky if approached from the wrong angle. We will discuss two solutions both of which are good options to use during an actual interview. 
 
 \subsection{Linear Space solutions}
 \label{min_stack:sec:double_stack}
 
 \subsubsection{Stack of pairs}
 \label{min_stack:sec:stackpairs}
-The first solution we discuss uses an additional space ($2\times$) to store, for each element of the stack, the information about the minimum among the elements still present in the stack. In order to do so we will will use a stack of \textbf{pairs}, where the first item of each pair is the actual element we want to push into out data structure and the second is the minimum value among the elements we have seen so far. Given this set-up the operations can then be implemented as follows:
+This first solution uses an additional space ($2\times$) to store for each element of the stack the information about the minimum among the elements still present in the stack. In order to do so we use a stack of \textbf{pairs}, where the first item of each pair is the actual element we want to push into our data structure and the second is the minimum value among the elements we have seen so far. Given this set-up the operations can then be implemented as follows:
 
 \begin{itemize}
 	\item[-]\lstinline[columns=fixed]{push(x)}. We will store on top of the stack of pair either the pair $\{x,x\}$ if the stack is empty or \lstinline[columns=fixed]{{std::min(x,get_min())}.
@@ -90,16 +90,16 @@ Listing \ref{list:min_stack:stackpairs} shows a possible implementation of this 
 
 \subsubsection{Two stacks}
 \label{min_stack:sec:twostacks}
-The solution presented in Section \ref{min_stack:sec:stackpairs} can be improved in the average case (even if will remain asymptotically the same in the worst case) by realizing that there is no need to have a copy of the minimum element for each element of the stack. What we really need is to have a second stack that contains the sequence of minimum elements as they are inserted. 
+The solution presented in Section \ref{min_stack:sec:stackpairs} can be improved upon (even though will remain asymptotically the same in the worst case) by realizing that there is no need to have a copy of the minimum element for each element of the stack. What we really need is to have a second stack that contains the sequence of minimum elements as they are inserted. 
 
-We can achieve that by using an additional stack to store the minimums. Every-time we will try to push an element that is lower than the top of this stack, we will push it into  Given this additional stack we can implement all the operations as follows:
+We can achieve that by using an additional stack to store the minimums. Every time we try to push an element that is lower than the top of this stack, we will push it into  Given this additional stack we can implement all the operations as follows:
 \begin{itemize}
-	\item[-]\lstinline[columns=fixed]{push(x)}. We will store $x$ on top of the \nth{1} stack (where we store the actual elements are they are given to us)  and only if  \lstinline[columns=fixed]{x <= get_min()} we will also push $x$ to the stack of minimums. This way we keep the information about the current minimum without losing the information about the previous ones, that will be useful whenever in the future will be removed from the stack (if $x$ is the new minimum).
-	\item[-]\lstinline[columns=fixed]{top(x)}  returns the \textbf{first} element of the top of the \nth{1} stack if is not empty, otherwise it throws an exception.
+	\item[-]\lstinline[columns=fixed]{push(x)}. We will store $x$ on top of the \nth{1} stack (where we store the actual elements are they are given to us)  and only if  \lstinline[columns=fixed]{x <= get_min()} we will also push $x$ to the stack of minimums. This way we keep the information about the current minimum without losing the information about the previous ones which will be useful whenever in the future it will be removed from the stack (if $x$ is the new minimum).
+	\item[-]\lstinline[columns=fixed]{top(x)}  returns the \textbf{first} element of the top of the \nth{1} stack if it is not empty, otherwise it throws an exception.
 	\item[-]\lstinline[columns=fixed]{pop(x)} if the stack is not empty, it will call pop on the \nth{1} stack, and if the element we are popping is equal to the top of the stack of minimums we will also pop from that stack. We need to react to the fact that the current minimum is changing.
 	\item[-]\lstinline[columns=fixed]{get_min(x)}  returns the top of the \nth{2} stack (the stack of minimums) if the stack is not empty, otherwise it throws an exception.
 \end{itemize}
-This solution has the advantage of not using as much space as the one presented in Section \ref{min_stack:sec:stackpairs} when for instance a sequence of  increasing number is pushed. In that case the minimum will be the first element, and it will never change. Also note that because of the way the stack of minimum is used, it will always contains a decreasing sequence of values (after all we only push to it if the new element is smaller than the top).
+This solution has the advantage of not using as much space as the one presented in Section \ref{min_stack:sec:stackpairs} when e.g.  a sequence of  increasing number is pushed. In that case the minimum will be the first element, and it will never change. Also note that because of the way the stack of minimums is used, it will always contains a decreasing sequence of values (after all we only push to it if the new element is smaller than the top).
 
 This idea can be implemented as shown in Listing \ref{list:min_stack:doublestack}
 
@@ -107,11 +107,11 @@ This idea can be implemented as shown in Listing \ref{list:min_stack:doublestack
 
 \subsection{Constant space}
 \label{min_stack:sec:constantspace}
-Despite the fact that the solution presented in Section \ref{min_stack:sec:twostacks} is most likely already good enough for any coding interview, we will present here a solution that works only for integral types and that work in constant space. This is a big improvement w.r.t. to the other solutions presented so far, but the downside is that only works for a very limited number of types.
+Despite the fact that the solution presented in Section \ref{min_stack:sec:twostacks} is  likely already sufficient for a coding interview, it is worth considering an additional solution that works only for integral types and that works in constant space. This is a big improvement relative to the other solutions above, however, the downside is that it only works for a very limited number of types.
 
-As already discussed, the main challenge of this question is that we need somehow to be able for each element present in the stack to retrieve the current minimum. How can we store such information without using additional space? The answer is that we need to encode such information  in the elements themselves. 
+If, as already discussed, the key challenge of this problem is how to retrieve the current minimum for each element in the stack and store such information without using additional then the answer may be that we need to encode such information into the elements themselves. 
 
-The idea is simple: We will store the elements in a \lstinline[columns=fixed]{std::stack}, $S$, and we will also keep track of the \textbf{current} minimum element in a variable, \lstinline[columns=fixed]{min_el}. The operations on the data structure can be implemented as follows:
+The idea is simple: we will store the elements in a \lstinline[columns=fixed]{std::stack}, $S$, and we will also keep track of the \textbf{current} minimum element in a variable, \lstinline[columns=fixed]{min_el}. The operations on the data structure can be implemented as follows:
 
 \begin{itemize}
 	\item[-]\lstinline[columns=fixed]{push(x)} we have two cases here:
@@ -128,12 +128,12 @@ The idea is simple: We will store the elements in a \lstinline[columns=fixed]{st
 			\item if \inline{y >= min_el}, $y$ is removed from the stack leaving \inline{min_el} untouched
 			\item otherwise: if \inline{y < min_el}, set \inline{min_el = 2*min_el -y}			
 		\end{enumerate} 
-		The key idea  here is that we can  retrieve the the previous minimum element given the current one and the value that is currently on the stack. 
-	\item[-]\lstinline[columns=fixed]{top()} veri similar to the \inline{pop} operation, without the update on the variable \inline{min_el} 
+		The key idea  here is that we can  retrieve the previous minimum element given the current one and the value that is currently on the stack. 
+	\item[-]\lstinline[columns=fixed]{top()} very similar to the \inline{pop} operation, without the update on the variable \inline{min_el} 
 	\item[-]\lstinline[columns=fixed]{get_min(x)}, returns \inline{min_el}
 \end{itemize}
 
-When an element $x$ is less than the current minimum i.e. \inline{x < min_el}, the value \inline{2*x-min_el} will be inserted in the stack and the minimum set to $x$. The fact that \inline{2*x-min_el < x} (remember that \inline{min_el > x}) is really important because, when this element will be popped out from the stack we will be able to tell that the minimum is changing because we will see that \inline{2*x-min_el < x} and therefore we will update the minimum element accordingly.
+When an element $x$ is less than the current minimum i.e. \inline{x < min_el}, the value \inline{2*x-min_el} will be inserted in the stack and the minimum set to $x$. The fact that \inline{2*x-min_el < x} (remember that \inline{min_el > x}) is  important given that when this element will be popped out from the stack we will be able to tell that the minimum is changing because we will see that \inline{2*x-min_el < x} and therefore we will update the minimum element accordingly.
 
 The idea above is shown in Listing \ref{list:min_stack:constspace}. Note how the template class will only compile for integral types thanks to \inline{std::enable_if}\cite{cit::std::enableif}. 
 

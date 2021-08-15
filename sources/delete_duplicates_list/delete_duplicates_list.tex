@@ -9,10 +9,10 @@
 \chapter{Delete duplicates from Linked List}
 \label{ch:delete_duplicates_list}
 \section*{Introduction}
-The problem presented in this chapter is an easy one on Linked list that has been asked to preliminary interview steps many times already. It is therefore very important that this problem is understood well and you can implement it quickly and most importantly flawlessly during an interview. 
+This chapter deals with a fairly simple problem on linked lists that is popular during the preliminary interview stage. Given it's ubiquity, it is important to have a good understanding of the solution so that you can implement it quickly and, more importantly, flawlessly during a real interview. 
 \section{Problem statement}
 \begin{exercise}
-Given a singly linked link $L$ (see definition at Listing \ref{list:delete_duplicates_list:linked_list}), return a linked list with no duplicated.
+Given a singly linked link $L$ (see definition at Listing \ref{list:delete_duplicates_list:linked_list}), return a linked list with no duplicates.
 \end{exercise}
 \begin{lstlisting}[language=c++, caption=Singly Linked list definition,label=list:delete_duplicates_list:linked_list]
 template<typename T>
@@ -51,35 +51,36 @@ struct Node {
 
 \section{Discussion}
 \label{delete_duplicates_list:sec:discussion}
-As you can imagine there are many approaches that can be adopted in order to solve this problem, but we will focus on basically two, with the second being a refinement of the first which will lead to an elegant yet efficient solution.
+There are several approaches to solving this problem but we will focus on two, the second of which is a refinement of the first intended to allow you to present an elegant and efficient solution in a short time frame.
 
 \subsection{Brute-force}
 \label{delete_duplicates_list:sec:bruteforce}
-The easiest solution possible consist in:
+The easiest solution possible is as follows:
 \begin{enumerate}
-	\item Create a vector that basically contains a copy of the list
+	\item Create a vector that contains a copy of the list
 	\item Remove duplicates from the vector
 	\item Create a new List with the content of the duplicate free vector
 \end{enumerate}
-This solution is straightforward but as you can imagine not optimal. A possible implementation is shown in Listing \ref{list:delete_duplicates_list_brite_force1} where for the step $2$ the  remove-erase idiom\cite{cit::wiki::remove-erase} is used to remove duplicates from the vector(the erase part is actually not necessary in this case).
+This solution is straightforward but not optimal as, while it is optimal in time we are not taking advantage of the fact that we can modify the list in place and thereby avoid creating and returning a brand new list.  
+
+A possible implementation is shown in Listing \ref{list:delete_duplicates_list_brite_force1} where for the step $2$ the  remove-erase idiom\cite{cit::wiki::remove-erase} is used to remove duplicates from the vector(the erase part is actually not necessary in this case).
 
 \lstinputlisting[language=c++, caption={C++ solution $O(n)$ time and $O(n)$ space solution to the problem of removing duplicates from a Linked List using std::remove.},label=list:delete_duplicates_list_brite_force1]{sources/delete_duplicates_list/delete_duplicates_list_solution1.cpp}
 
-This solution is optimal in time but we are not taking advantage of the fact that the we can modify the list in place and it is not necessary to create a brand new List to be returned. 
 
 \subsection{In-place $O(1)$ space solution}
 \label{delete_duplicates_list:sec:linear_space}
-In the solution describe in Section \ref{delete_duplicates_list:sec:discussion} we did use of additional space to both remove the duplicates and also to avoid the pain of rearranging the input list by creating a brand new list containing no duplicates. It is possible though with a bit of thinking to write a in-place solution that uses no additional space. 
+In the solution describe in Section \ref{delete_duplicates_list:sec:discussion} used additional space to both remove the duplicates and also to avoid the pain of rearranging the input list by creating a brand new list containing no duplicates. It is, however,  possible to write a in-place solution that uses no additional space. 
 
-The main idea is that since the list is \textbf{sorted}, duplicate element will be one after the other, and we can take advantage of this fact by simply ignoring pair of consecutive nodes that have the same payload. Ignored nodes can therefore be deleted. The only complications is that we need to make sure to connect the first occurrence of every Node in the list with each other For this reason we need to therefore remember the first Node of a stride of the same value.
+The main idea is that since the list is \textbf{sorted}, duplicate elements will be one after the other. We can take advantage of this by simply ignoring pairs of consecutive nodes that have the same payload. Ignored nodes can therefore be deleted. The only complications is that we need to make sure to connect the first occurrence of every Node in the list with each other. It is f or this reason that we need to remember the first Node of a stride of the same value.
 
-This idea is implemented in Listing \ref{list:delete_duplicates_list_lineartime}. Note that:
+This idea is demonstrated in Listing \ref{list:delete_duplicates_list_lineartime}. Note that:
 
 \begin{itemize}
 	\item[-] The base case \lstinline[columns=fixed]{if(!head || !head->next) return head;} is making sure that if we are examining the last element of the list (or an empty list) then there is no duplicate to ignore and thus we can return this element.
-	\item[-] otherwise, we are looking at a list with \textbf{at least} two elements. These two elements can be potentially the start of a stride of equal element that we want to ignore. We keep a pointer,\lstinline[columns=fixed]{Node<T>* head;} (which is never modified) to the first element  of the stride and advance a second pointer, \lstinline[columns=fixed]{Node<T>* head_n;}, until we either reach the end of the list or we find an element that is different from the first one, \lstinline[columns=fixed]{while ( head_n && head -> val == head_n -> val)}. All the advanced elements are deleted. At the end of the loop the second pointer  is pointing to either:
+	\item[-] otherwise, we are looking at a list with \textbf{at least} two elements. These two elements can be potentially the start of a stride of equal elements that we want to ignore. We keep a pointer,\lstinline[columns=fixed]{Node<T>* head;} (which is never modified) to the first element  of the stride and advance a second pointer, \lstinline[columns=fixed]{Node<T>* head_n;}, until we either reach the end of the list or we find an element that is different from the first one, \lstinline[columns=fixed]{while ( head_n && head -> val == head_n -> val)}. All the advanced elements are deleted. At the end of the loop the second pointer  is pointing to either:
 	\begin{itemize}
-		\item[-] An element different than the element pointed by the first one. The stride of equal elements is processed and  \lstinline[columns=fixed]{head->next} can now point to the second pointer.
+		\item[-] An element different from the element pointed to  by the first one. The stride of equal elements is processed and  \lstinline[columns=fixed]{head->next} can now point to the second pointer.
 		\item[-] \lstinline[columns=fixed]{nullptr}. We have reached the end of the input list. We are done.
 	\end{itemize}
 \end{itemize}
@@ -91,7 +92,7 @@ The time and space complexity for this approach are $O(n)$ and $O(1)$, respectiv
 
 
 \section{Common Variations and follow-up questions}
-One follow-up question that the interviewer might be keen to ask is related to the deletion of the duplicate nodes. In the Listing \ref{list:delete_duplicates_list_lineartime} we see that the nodes are deleted using the \lstinline[columns=fixed]{operator delete}, but what if the list was not allocated using \lstinline[columns=fixed]{operator new}? The question is left for the reader.
+One follow-up question that an interviewer may ask relates to the deletion of the duplicate nodes. In the Listing \ref{list:delete_duplicates_list_lineartime} we see that the nodes are deleted using the \lstinline[columns=fixed]{operator delete}, but what if the list was not allocated using \lstinline[columns=fixed]{operator new}? The question is left for the reader.
 
 \begin{exercise}
 How would the solution change if the nodes were allocated using a custom allocator? (spoiler, a custom deleter is also needed.)

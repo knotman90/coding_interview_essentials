@@ -9,8 +9,8 @@
 \label{ch:dice_rolls}
 \section*{Introduction}
 
-Dice have been around for quite a long time: the oldest dice known  were discovered in Iran, as part of a staggering five-thousand-year-old
- Backgammon\footnote{One of the oldest board game. A two-players game where pieces are moved around between twenty-four triangles according to the roll of two 6 faced-dice. The goal of each player is to remove all of their 15 pieces before the other player} set.
+Dices have been around for centuries. The oldest known dice were discovered in Iran as part of a staggering five-thousand-year-old
+ Backgammon\footnote{One of the oldest known board games, Backgammon is  a two-player game where pieces are moved around between twenty-four triangles according to the roll of two 6 faced-dice. The goal of each player is to remove all of their 15 pieces before the other player} set.
 
 If we think about what a die is, the first thing that comes to mind is the fair $6$ faced-die (see Figure \ref{fig:dice_rolls:6faces_dice}), but potentially any polyhedron can be a die: consider for instance a  $20$-faced icosahedron (see Figure
 \ref{fig:dice_rolls:20faces_dice}), or a $12$-faced dodecahedron (see Figure
@@ -99,14 +99,14 @@ should be returned modulo $10^9 + 7$.
 \section{Discussion}
 \label{dice_rolls:sec:discussion}
 
-Let's start by noticing that the answer can be astronomically high, but more importantly, the number of possible value combinations resulting from rolling $d$ dices is even larger: if each die has
+Let's start by noting that the answer can be astronomically high, but more importantly, that the number of possible value combinations resulting from rolling $d$ dices is even larger. If each die has
 $f$ faces, then we are looking at $f^d$ possible distinct roll outcomes! 
-During an interview, a brute-force approach, where we go over each and every possible roll outcome of the $d$ dice, is completely out of question  (considering the constraints on the maximum number of dices and faces we might get for input) unless we are willing to wait around  $6 \times 10^{18}$ years. Even if we implement this algorithm so that it can run on the fastest supercomputer available today (which is capable of a staggering $\approx450$ petaflops \footnote{\textbf{petaflop}: A petaflop is a measure of a computer's processing speed and can be expressed as: A quadrillion (thousand trillion) floating-point operations per second (FLOPS). A thousand teraflops. 10 to the 15th power FLOPS. 2 to the 50th power FLOPS. A huge number of operations per second.} operations per second), it would still require $\frac{30^{30}}{10e15}$s to run to completion. By that time, humanity will be long gone, the universe will be a dark and cold place, but most importantly, the position you are dreaming about will have gone to somebody else.
+During an interview, a brute-force approach, where we go over each and every possible roll outcome of the $d$ dice, is completely out of question  (considering the constraints on the maximum number of dices and faces we might get for input) unless we are willing to wait around  $6 \times 10^{18}$ years. Even if we implement this algorithm so that it can run on the fastest supercomputer available today (which is capable of a staggering $\approx450$ \footnote{\textbf{petaflop}: A petaflop is a measure of a computer's processing speed and can be expressed as: A quadrillion (thousand trillion) floating-point operations per second (FLOPS). A thousand teraflops. 10 to the 15th power FLOPS. 2 to the 50th power FLOPS. A huge number of operations per second.} operations per second), it would still require $\frac{30^{30}}{10e15}$s to run to completion. By that time, humanity will be long gone, the universe will be a dark and cold place, but most importantly, the position you are dreaming of will have gone to somebody else.
 
 This type of \textit{"counting"} questions is usually (and crucially more efficiently) solved by using a dynamic programming
 approach. In fact, this question shares a lot of similarities with the classical dynamic programming
 \textit{Coin change} problem, to the point that we
-could solve this one using the solution to the other. In fact we can stretch this reasoning so to consider the topic treated in this chapter to be a proper specialization of the *Coin
+could solve this one using the solution to the other. In fact we can stretch this reasoning so as to consider the problem addressed in this chapter to be a proper specialization of the *Coin
 change* problem, where the number of available coins is equal to $d$
 and the denomination of the coins are $1,2,\ldots,f$: we have coins of the same denomination as the
 dice faces.
@@ -118,10 +118,10 @@ dice faces.
 \label{dice_rolls:sec:bruteforce}
 
 
-For science's sake, let's see how a brute-force approach would apply here. As we all know, a brute-force approach evaluates all possible outcomes of rolling $d$ dice and keeps
+For science's sake, let's see how a brute-force approach would be applied here. As we all know, a brute-force approach evaluates all possible outcomes of rolling $d$ dice and keeps
 track of how many yield a total sum of $t$. When dealing with this kind of task, where you have to
 enumerate/generate the elements of a given set, recursion is usually the way to go, especially if the elements (in this case a combination of face values) have a recursive definition.
-In this specific case, we can generate all possible combinations of $d$ faces we can obtain from rolling $d$ dices by:
+In this specific case, we can generate all possible combinations of $d$ faces we can obtain from rolling $d$ dices by doing the following:
 
 \begin{itemize}
 	\item generate the combinations from rolling $d-1$ dice;
@@ -133,7 +133,7 @@ In this specific case, we can generate all possible combinations of $d$ faces we
 \end{itemize}
 
 
-For instance, we can generate all rolls outcome $3$ six-faced dice by:
+For instance, we can generate the all rolls outcome  of $3$ six-faced dice by:
 
 \begin{enumerate}
 	\item Generate all the outcomes for only $2$ of them $C_2$:\\
@@ -194,18 +194,18 @@ For instance, we can generate all rolls outcome $3$ six-faced dice by:
 \end{enumerate}
 
 
-The definition above is correct, but not very useful in practice: it requires making many copies
-of a potentially very large (indeed exponential) set of items. We will therefore use a different approach that will still run in exponential time (this section is named brute-force after all), but it can be used as a basis for developing a more efficient DP solution.
+The definition above is correct but not very useful in practice. It requires making many copies
+of a potentially very large (indeed exponential) set of items. We will therefore use a different approach that will still run in exponential time (this section is named brute-force after all) but that can be used as a basis for developing a more efficient DP solution.
 
-We start by rolling the first die; clearly, we have $f$ possible values we can get, but
-once the value for this specific die is set, say we got the value $x$, we are left with $d-1$ dices
+We start by rolling the first die. Clearly we have $f$ possible values we can get, but
+once the value for this specific die is set (say we got the value $x$)  we are left with $d-1$ dices
 to roll and we still have to make up for $t-x$ with the remaining $d-1$ dice in order to reach our target value
 $t$. 
 Once a die is rolled, we are left with exactly the original problem on a smaller number of dice
 and target value. 
 This is why recursion is handy as we can describe the solution to the entire problem in terms of solutions to
 sub-problems.
-We can continue this recursive process, rolling one die at a time, until we reach one of the following cases:
+We can continue this recursive process - rolling one die at a time - until we reach one of the following cases:
 \begin{enumerate}
 	\item $d<0$ or $t<0$ the answer is $0$. There is no solution to the problem when the number of
 		dice to use is negative or the target number is negative.
@@ -223,7 +223,7 @@ We can continue this recursive process, rolling one die at a time, until we reac
 
 The idea above can be better expressed using the recurrence relation shown in Equation
 \ref{eq:dice_rolls:dpformula} where $S(d,t,f)$ is the number of ways one can obtain a target value
-$t$ by throwing $d$ dice. Notice that the third parameter never changes, and thus it does not play a
+$t$ by throwing $d$ dice. Note that the third parameter never changes and thus it does not play a
 dynamic role in the recurrence. 
 
 \begin{equation}
@@ -238,15 +238,15 @@ dynamic role in the recurrence.
 Listing \ref{list:dice_rolls:bruteforce} shows a possible implementation of such idea. Please note
 that this code is remarkably similar to the brute-force solution for the Coin Change problem in
 Chapter \ref{ch:coin_change}. Section
-\ref{sec:min_difficulty_job_scheduler:generate_all_combination} also discuss the problem of
-generating combinations, and the material discussed there can be adapted and applied here.
+\ref{sec:min_difficulty_job_scheduler:generate_all_combination} also discusses the problem of
+generating combinations and the material discussed there can be adapted and applied here.
 
 \lstinputlisting[language=c++, caption={Brute-force (enumerating all possible combinations) solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:bruteforce]{sources/dice_rolls/dice_rolls_solution1.cpp}
 
 
 The time and space complexity of this approach are exponential and constant, respectively.
  
-The proof of this  can be derived from the solution of the recurrence relation shown in Equation \ref{eq:dice_rolls:dpformula_complexity}:
+The proof of this can be derived from the solution of the recurrence relation shown in Equation \ref{eq:dice_rolls:dpformula_complexity}:
 \begin{equation}
 	S(d,t) = S(d-1,t-1) + S(d-1,t-2)
 \label{eq:dice_rolls:dpformula_complexity}
@@ -266,10 +266,10 @@ exponentially proportional to its height.
 \subsection{Dynamic Programming - Recursive top-down}
 \label{dice_rolls:sec:DP}
 The brute-force solution we laid down in Section \ref{dice_rolls:sec:bruteforce} can  be turned into a nice and
-efficient one with the help of DP, and in particular of memoization. As per many other problems
-solvable with DP out there, the brute-force solution above can be turned into a much more
+efficient one with the help of DP, and in particular of memoization. As with many other problems
+solvable with DP, the brute-force solution above can be turned into a much more
 efficient one by simply realizing that the same sub-problems are solved over and over again.
-For istance, imagine the case where $f=5$. We might end up solving the sub-problem where $d=1$ and
+For instance, imagine the case where $f=5$. We might end up solving the sub-problem where $d=1$ and
 $t=3$  from the sub-problem where $d=2$, $t=4$ (by rolling the face with $1$), or from the
 sub-problem $d=2$, $t=5$ (by rolling the face with $2$).
 
@@ -289,14 +289,13 @@ in Listing \ref{list:dice_rolls:bruteforce} for the following input:
 
 The function \inline{num_rolls_to_target_bruteforce(1,5,6)} is called  $6$ times and the
 sub-problem \inline{num_rolls_to_target_bruteforce(1,4,6)} is solved $5$ times.
-You can verify this yourself if you draw the recursion tree for \inline{num_rolls_to_target_bruteforce(3,6,12)}, or simply add a print statement at the beginning of the function.
-All these duplicate calls are superfluous and they represent work that can be saved if the result of each sub-problem is stored into a
+You can verify this yourself if you draw the recursion tree for \inline{num_rolls_to_target_bruteforce(3,6,12)} or simply add a print statement at the beginning of the function.
+All these duplicate calls are superfluous and they represent work that can be saved if the result of each sub-problem is stored in a
 cache as shown in the following Listing.
 
 
-The function subproblem \inline{num_rolls_to_target_bruteforce(1,5,6)} solved $6$ times and the
-subproblem \inline{num_rolls_to_target_bruteforce(1,4,6)} is solved $5$ times. If you are not
-convinced draw the recursion tree, or add a print statement at the beginning of the function. All
+The function subproblem \inline{num_rolls_to_target_bruteforce(1,5,6)} is solved $6$ times and the
+subproblem \inline{num_rolls_to_target_bruteforce(1,4,6)} is solved $5$ times. All
 these superfluous execution can be avoided if the result of each of the subproblem is stored into a cache as shown in Listing \ref{list:dice_rolls:dp}. 
 
 \lstinputlisting[language=c++, caption={Dynamic programming with memoization top-down recursive  solution for the problem of counting the number of dice rolls summing up to a target number $t$.},label=list:dice_rolls:dp]{sources/dice_rolls/dice_rolls_solution2.cpp}
@@ -304,13 +303,13 @@ these superfluous execution can be avoided if the result of each of the subprobl
 
 This implementation is an almost identical copy
 of the brute-force solution, except for the addition of a cache. Note how \textbf{before} actually trying
-to compute the answer, we first look into the cache (see highlighted lines) to see if it is already present in the cache. If not, we solve the
-problem and before returning the answer we \textbf{save} the result into the cache.
+to compute the answer we first look into the cache (see highlighted lines) to see if it is already present in the cache. If not, we solve the
+problem and before returning the answer we \textbf{save} the result in the cache.
 
 \section{Dynamic programming - Iterative bottom-up}
 \label{dice_rolls:sec:bottom}
 
-Turning the top-down-up solution shown in Section \ref{dice_rolls:sec:DP} into a bottom-up one is relatively easy: the recursive
+Turning the top-down-up solution shown in Section \ref{dice_rolls:sec:DP} into a bottom-up one is relatively easy. The recursive
 definition of the solution (see Equation \ref{eq:dice_rolls:dpformula})   clearly shows that we can
 calculate the answer for a given number of dice $d$ and a target value $t$ if we have already
 calculated the values for targets $t-1, t-2, \ldots, t-f$ and $d-1$. We also know how to easily
@@ -325,10 +324,10 @@ table \inline{DP} (initialized with zeros) with $d+1$ rows and $t+1$ columns whe
 corresponds to the solution of a sub-problem where $d=i$ and $t=j$. The first loop takes care of
 filling the table with \textit{"known" values} for all sub-problems where $d=1$. If we only have a die with
 $f$ faces, there is only one way we can achieve the target values $1,2,\ldots, f$ and no way to
-obtain any higher values. The rest of the code fills the table one row at a time (one dice at a
+obtain any higher values. The rest of the code fills the table one row at a time (one die at a
 time) by using the values of the previous row. 
 
 The time and space complexity of this algorithm are $\Theta(dtf)$ and $\Theta(dt)$, respectively. 
-However, the space complexity can be lowered easily
-down  to $\Theta(t)$ because, as already mentioned, we only need space for two rows of the DP table:
+However, the space complexity can be easily lowered
+ to $\Theta(t)$ because, as already mentioned, we only need space for two rows of the DP table:
 one for the values of the current $d$ and one for the values at $d-1$.

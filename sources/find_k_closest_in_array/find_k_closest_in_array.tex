@@ -8,15 +8,15 @@
 \chapter{Find the $K$ closest elements}
 \label{ch:find_k_closest_in_array}
 \section*{Introduction}
-In this chapter we are going to discuss a problem that asks you to return a subset of a given input
+In this chapter we will discuss a problem that asks you to return a subset of a given input
 array. We will investigate two solutions: one that is based on sorting and the other on binary
-search with the latter being more efficient than the former because we will make good use of the
-fact that the input is going to be provided already sorted. As we will see the solution based on
-sorting is going to be almost trivial to and we will be able to derive it directly from the problem
-statement while the solution based on binary search requires slightly more brain work and typing to
-get it right. We will present two different implementations of the binary search solution: 
+search with the latter being more efficient as we will make good use of the
+fact that the input is provided already sorted. By contrast,  the solution based on
+sorting appears almost trivial to and we can derive it directly from the problem
+statement while the solution based on binary search requires slightly more insight and typing to
+get right. We will present two different implementations of the binary search solution: 
 \begin{enumerate*}
-	\item the first based entirely the \CC STL,
+	\item the first based entirely the C++ STL,
 	\item and the other where we will code the binary search algorithm explicitly. 
 \end{enumerate*}
 
@@ -74,7 +74,7 @@ get it right. We will present two different implementations of the binary search
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item \item \begin{questionitem} \begin{question} What should be the function behavior when resolving ties? What do to when you have two
+	\item \item \begin{questionitem} \begin{question} What should the function behavior be when resolving ties? What should it do when you have two
 	elements that are at the same distance from $x$? \end{question}
 	\begin{answered}
 		\textit{The function should always favor the smaller element in case of a tie.}
@@ -82,46 +82,46 @@ get it right. We will present two different implementations of the binary search
 	
 	\item \begin{questionitem} \begin{question} Is I guaranteed to be sorted in ascending order?  \end{question} 	 
     \begin{answered}
-		\textit{Yes you can assume $I$ to  always sorted in ascending order.}
+		\textit{Yes you can assume $I$ is always sorted in ascending order.}
 	\end{answered} \end{questionitem}
 	
 \end{QandA}
 
 \section{Sorting}
 \label{sec:find_k_closest_in_array:sorting}
-A solution that almost immediately follows from the problem statement is based on the idea of
+A solution that almost immediately follows from the problem statement is based on
 sorting the elements of $I$ according to the criteria shown in Equation
 \ref{eq:kclosest_in_array:sort_criteria}. The idea is that if $I$ is sorted according to the
-absolute value of the different between each number of $I$ and $x$ then, the closest number to $x$
-will be located, after the sorting at the front of $I$. All is necessary at that point is to copy
+absolute value of the difference between each number of $I$ and $x$ then the closest number to $x$
+will be located after the sorting at the front of $I$. All that is necessary at that point is to copy
 the first $K$ element of $I$ into the return array. Listing \ref{list:find_k_closest_in_array1}
-shows a possible implementation of such idea. 
+shows a possible implementation of this idea. 
 \lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array1]{sources/find_k_closest_in_array/find_k_closest_in_array_solution1.cpp}
 
-Please note that as in all cases where you actually do not need to have the whole array sorted you
-can use partial sorting instead of full-fledged sorting. In all cases where $k$ is smaller that
+Please note that -  as in all cases where you actually do not need to have the whole array sorted  - you
+can use partial sorting instead of fully-fledged sorting. In all cases where $k$ is smaller that
 $n$ the complexity is going to be slightly better as we will go from the $O(nlog(n))$ of the normal
-sorting to $O(nlog(k))$ of the partial sort. Fortunately, making this change in \CC is extremely
-easily and it is only matter of calling \inline{std::partial_sort} instead of \inline{std::sort} as
+sorting to $O(nlog(k))$ of the partial sort. Fortunately, making this change in C++ is
+easily as it is only a matter of calling \inline{std::partial_sort} instead of \inline{std::sort} as
 shown in Listing \ref{list:find_k_closest_in_array2}.
 
 \lstinputlisting[language=c++, caption={Solution to the problem of finding the $k$ closest element using sorting.},label=list:find_k_closest_in_array2]{sources/find_k_closest_in_array/find_k_closest_in_array_solution2.cpp}
 
 \subsection{Binary Search}
 \label{find_k_closest_in_array:sec:binary_search}
-The problem description clearly state the fact that the input array is sorted but, the solution we
-devised in Section \ref{sec:find_k_closest_in_array:sorting} is not taking advantage of it at all.
-In fact all it does is invalidating the original ordering so to enforce a different one. Everytime
-the problem statement mention that some input is sorted, you should think how to use such constraint
-to device a more efficient solution rather than questioning whether that information is useful or
-not because no useless information is part of the problem statement. Usually when sorted input is
-involved, there are a bunch of algorithms that should come to mind immediately. Out of this set, binary
-search is probably going to be one of the firsts. But how can binary search be applied to this
+The problem description clearly states that the input array is sorted but the solution we
+devised in Section \ref{sec:find_k_closest_in_array:sorting} does not take advantage of that fact.
+ All it does is invalidate the original ordering in order to enforce a different one. Every time
+the problem statement mentions that some input is sorted, we should think how to use that 
+to devise a more efficient solution rather than questioning whether that information is useful or
+not. It is always wise to assume that there will be no useless information in the problem statement. When sorted input is
+involved, there are several algorithms that should immediately come to mind and, out  of this set, binary
+search is probably first. All that is left is to ask ourselves how binary search could be applied to this
 problem?
 
-Let's take a step back and try to analyze the problem for a slightly different angle. In particular,
+But first, let's take a step back and try to analyze the problem for a slightly different angle. Specifically,
 let's discuss the case where $x \in \: I$. In this case we know for sure that $x$ is going to be
-part of the output vector. Because the input is sorted we can use binary search to search for $x$ in
+part of the output vector. As the input is sorted we can use binary search to search for $x$ in
 $I$. Once we have identified the index $j$ such that $I_j = x$ we know that the closest element to
 $x$ must either be at index $j+1$ or $j-1$ \footnote{If that was not true it would mean that:
 \begin{itemize}
@@ -132,31 +132,31 @@ $x$ must either be at index $j+1$ or $j-1$ \footnote{If that was not true it wou
 		\item $\exists k > j+1 \: : I_k > I_{j+1}$ and  $I_k-x < I_{j+1}-x$ \end{itemize} which is
 	impossible because the input is sorted. \end{itemize}}. Therefore once $x$ has been identified
 	we can select a range of $k$ elements "centered" at $j$. Said range can be found by using a two
-	pointers tecnique. We start by initializing two pointers $l = j$ and $r = j$. THen until $r-l+1
+	pointers technique. We start by initializing two pointers $l = j$ and $r = j$. Then until $r-l+1
 	< k$ we do one of the following operations:
 \begin{itemize}
 	\item if $l = 0$ then $r = r+1$
 	\item if $r = |I|$ then $l = l-1$
-	\item if$ x-I_{l-1} > I_{r+1}-x$ then $r = r+1$. The range is enlarged at the its right end
+	\item if$ x-I_{l-1} > I_{r+1}-x$ then $r = r+1$. The range is enlarged at its right end
 	side.
 	\item symmetrically for the left side: if $x-I_{l-1} > I_{r+1}-x$ then $ l + l+1$. The range is
 	enlarged at its left end side.
 \end{itemize}
-In other words once $x$ has been found, we incrementally include elements around it, by always
+In other words once $x$ has been found, we incrementally include elements around it by always
 choosing between the closest numbers to $x$ between the numbers pointed by the two pointers.
 
-This approach can be easily extended to the case where $x$ is not present in the input array as it
-also work when we try to build the range of elements to be returned around the closest element to
+This approach can easily be extended to the case where $x$ is not present in the input array as it
+also works when we try to build the range of elements to be returned around the closest element to
 $x$ in the array. 
 Turns out that binary search can be used to find such an element (we even have STL
-support for such operation). 
+support for such an operation). 
 In particular we can use it to identify the index of the first element that is larger or equal than $x$:
 a value that is commonly known as \textit{lower bound}.
 Armed with this information let's have a look at Listing \ref{list:find_k_closest_in_array3} showing
 the implementation of the idea above where we use the STL \inline{std::lower\_bound} function to find
 the index $o$ of the first element greater or equal than $x$.
-We then compare such value with the value at index $p = o-1$ (if exists)
-and we promote $o$ or $p$ to be the index to closest element to $x$ in the array depending on their
+We then compare such value with the value at index $p = o-1$ (if it exists)
+and we promote $o$ or $p$ to be the index closest element to $x$ in the array depending on their
 absolute difference to $x$.
 The closest of the two to $x$ is chosen to be the designated starting value for the algorithm described above.
 

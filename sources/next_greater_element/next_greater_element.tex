@@ -17,7 +17,7 @@
 \section{Problem statement}
 \begin{exercise}
 \label{example:next_greater_element:exercice1}
-Write a function that given two arrays with no duplicates $A$ and $B$ where $A \subset B$ returns an
+Write a function that  - given two arrays with no duplicates $A$ and $B$ where $A \subset B$  - returns an
 array $C$ of size $|A|$ where $C_i$ contains the next greater element of $A_i$ among the elements of
 $B$. The next greater element of a number $A_i$ is defined as the smallest element greater than
 $A_i$ among the elements of $B$ from index $j$ to $|B|-1$ where $B_j = A_i$
@@ -31,11 +31,11 @@ into $C$ at index $i$.
 		\label{example:next_greater_element:example1}
 		\hfill \\
 		Given $A=\{4,1,2\}$ and $B=\{1,3,4,2\}$ the function returns $C=\{-1,2,-1\}$. $C_0 = -1$
-		because there $A_0 = 4$ appears in $B$ at index $2$ and there is no cells to the right of
-		$B_2$ that is strictly greater than $4$. $C_1 = 2$ because $1$ appears in $B$ at index $0$
+		because there $A_0 = 4$ appears in $B$ at index $2$ and there is no cell to the right of
+		$B_2$ that is strictly greater than $4$. $C_1 = 2$ and because $1$ appears in $B$ at index $0$
 		and the smallest element larger than $1$ after index $0$ in $B$ is the element $2$ in the
 		last position. $C_2 = -1$ because $A_2 = 2$ appears in $B$ at index $3$ and there is no
-		element ot the right of it. Note that there exists a value in $B$ that is larger than $2$
+		element to the right of it. Note that there exists a value in $B$ that is larger than $2$
 		but we are not considering it because it appears to the left of the cell in $B$ holding
 		value $A_2=2$.
 		
@@ -46,13 +46,13 @@ into $C$ at index $i$.
 		\label{example:next_greater_element:example2}
 		\hfill \\
 		Given $A=\{2,4\}$ and $B=\{9,2,1,4,12,8\}$ the function returns $C=\{4,8\}$. $C_0 = 4$
-		because there $A_0 = 2$ appears in $B$ at index $1$ and  the smallest element larger than
+		because there $A_0 = 2$ appears in $B$ at index $1$ and the smallest element larger than
 		$2$ in $B$ from the cell to the right of the one at index $1$ is $4$.
 		
 		$C_1 = 8$ because there $A_0 = 4$ appears in $B$ at index $3$ and  the smallest element
 		larger than $2$ in $B$ from the cell to the right of the one at index $3$ is $8$, appearing
-		at the very end of $B$. Notice that $12$ is also larger than $4$ and appearing to the right
-		of the index $3$ but is not the right answer because it is not the smallest.
+		at the very end of $B$. Note that $12$ is also larger than $4$ and appears to the right
+		of the index $3$ but is not the correct answer because it is not the smallest.
 	\end{example}
 \end{exercise}
 
@@ -68,30 +68,30 @@ into $C$ at index $i$.
 
 \subsection{Brute-force}
 \label{next_greater_element:sec:bruteforce}
-This problem has a very intuitive brute-force solution that boils down into the following steps:
+This problem has a very intuitive brute-force solution that can be broken down into the following steps:
 \begin{enumerate}
 	\item looping through each element at index $i$ of $A$
-	\item finding the position $j$ in $B$ where the value $A_i$ appear i.e. $B_j = A_i$ (which
+	\item finding the position $j$ in $B$ where the value $A_i$ appears i.e. $B_j = A_i$ (which
 	exists because $A \subset B$)
-	\item find the smallest element larger than $A_i$ in $B$ only considering the positions strictly
+	\item finding the smallest element larger than $A_i$ in $B$ only considering those positions strictly
 	after $j$.
 \end{enumerate}
 An implementation of this approach is shown in Listing \ref{list:next_greater_element:bruteforce}
 where we use \inline{std::find} to the location in $B$ (the iterator \inline{it}) where $A_j$
-exists. The subsequent \inline{while} is used to scan the remaining of the array and to keep track
+exists. The subsequent \inline{while} is used to scan the remainder of the array and to keep track
 of the smallest element that is larger than $A_i$. The complexity of this approach is $O(|A| \times
-|B|)$ as we could potentially do linear  work (proportional to $|B|$) for each and every element of
-$A$. One of such case is when the elements of $A$ appears in the first positions of $B$. 
+|B|)$ as we could potentially do linear  work (proportional to $|B|$) for each  element of
+$A$. One such case is when the elements of $A$ appear in the first positions of $B$. 
 \lstinputlisting[language=c++, caption={Brute-force solution to the \textit{next smaller element}.},label=list:next_greater_element:bruteforce]{sources/next_greater_element/next_greater_element_solution1.cpp}
 
 
 \section{$O(|B|log(|B|))$ time, $O(|B|)$ space solution}
 \label{next_greater_element:sec:nlogntime}
-We can solve this problem much faster than quadratic time if we are willing to use some additional
-space (as it is often the case). In particular the problem would be easily solvable if we would have
+We can solve this problem much faster than quadratic time if, as is often the case,  we are willing to use some additional
+space. In particular the problem is easily solved if we have
 a map containing the information about the next greater element for each of the elements of $B$. We
-could simply loop over all the elements of $A$ and query such a map to get the required answer.
-However we have just shifted the problem which now is, how can we generate such a map?
+could then simply loop over all the elements of $A$ and query such a map to get the required answer.
+However that does raise the question: how can we generate such a map?
 
 The idea is that we can fill the map for each element of $B$ starting from the back and at the same
 time keep a sorted list of all the elements of $B$ that we have already processed. This list can be
@@ -125,12 +125,12 @@ respectively.
 \label{next_greater_element:sec:first}
 There is a common variation of this problem featuring an almost identical statement to the one shown
 in Section \ref{} with the only difference being that for an element of $A_i$ we should return the
-first (and not the necessarily the smallest like in the original variant) element in $B$ that is
+first (and not the necessarily the smallest as in the original variant) element in $B$ that is
 greater than $A_i$.
 
 \begin{exercise}
 	\label{example:next_greater_element:exercice2}
-	Write a function that given two arrays with no duplicates $A$ and $B$ where $A \subset B$
+	Write a function that -  given two arrays with no duplicates $A$ and $B$ where $A \subset B$ - 
 	returns an array $C$ of size $|A|$ where $C_i$ contains the first element greater than $A_i$
 	among the elements of $B$ strictly after the cell at index $j$, where $B_j = A_i$.
 	
@@ -142,39 +142,39 @@ greater than $A_i$.
 
 \section{Discussion}
 \label{next_greater_element:sec:variation1:discussion}
-The difference with the original variation is minimal but is big enough so that we have a
-linear-time solution for this problem. While to solve the original problem  we were forced to keep a
+The difference with the original variation is minimal but big enough such that we have a
+linear-time solution for this version of the problem. While in solving the original problem  we were forced to keep a
 sorted list of all the already processed elements of $B$, this time we can simply keep a stack
 storing only those processed elements of $B$ so that they form an increasing sequence.
 
-Suppose we have a decreasing sequence followed by a greater number: For example, consider the
+Suppose we have a decreasing sequence followed by a greater number. For example, consider the
 following list: $\{7,8,5, 4, 3, 2, 1, 6\}$ (see Figure \ref{fig:next_greater:stack});
 initially the stack is empty and when we process the
-first number ($6$), there clearly no greater element at its right. Because the stack is empty,
+first number ($6$) there  is clearly no greater element to its right. As the stack is empty,
 adding $6$ to it would still preserve the fact that the numbers contained in it form an increasing
 sequence (see Figure \ref{fig:next_greater:variation1:stack1}).
-When the $1$ is processed, then the stack is not empty and $6$ is at the top which is larger
+When the $1$ is processed then the stack is not empty and $6$ is at the top which is larger
 than $1$. Therefore we can use $6$ as an answer for $1$ and add $1$ to the stack because the
 sequence $1,6$ is still increasing (see Figure \ref{fig:next_greater:variation1:stack2}). Things however, are a bit different when $2$ is processed. This
-time at the top of the stack we find a $1$ which is smaller  than $2$. Therefore the top of the
+time at the top of the stack we find a $1$ which is smaller than $2$. As such,  the top of the
 stack cannot be the answer for the element $2$. Moreover the sequence $2,1,6$ would not be
-increasing and therefore the two cannot be placed on top of the stack as-is. What we do is removing
-the elements from the current stack until adding the placing the $2$ at the top
+increasing and therefore the two cannot be placed on top of the stack as-is. What we do here is remove
+the elements from the current stack until placing $2$ at the top
 would make the elements in the stack an
 increasing sequence. 
 So we remove $1$ from the stack and the new stack becomes 
 $2,6$ (see Figure \ref{fig:next_greater:variation1:stack3}). 
-The rest of the execution is described more in detail in Figure \ref{fig:next_greater:stack}.
+The rest of the execution is described in more detail in Figure \ref{fig:next_greater:stack}.
 
 
-From this example we can draw a general approach about how we can solve this problem using a stack. 
+From this example we can draw a general approach to solving this problem using a stack. 
 When we process an element we try to insert it into the stack paying attention to how this element compares to the top of the stack.
-If it is larger than we remove the top of the stack and compare it again with the subsequent element. 
+If it is larger then we remove the top of the stack and compare it again with the subsequent element. 
 We keep repeating and removing elements from the stack until either the element we are 
-trying to place is smaller than the top of the stack or there are no more elements left in it.
-In the former case then the new top  of the stack(after all the necessary removals)
+trying to place is smaller than the top of the stack or there are no more elements left in the stack.
+In the former case then the new top of the stack (after all necessary removals)
 is going to be the answer associated with the element we are processing.
-In the latter, the answer does not exists and the element we are trying to place on the stack
+In the latter case the answer does not exists and the element we are trying to place on the stack
 is therefore the largest processed so far.
 Listing \ref{list:next_greater_element:stack} shows an implementation of this idea.
 
@@ -205,7 +205,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 		\begin{framed}
 			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack3}
 		\end{framed}
-		\caption{The top of the stack $1$ is smaller than $2$. We therefore remove $1$ and place to at the top. $6$, also this time is the answer for $2$}
+		\caption{The top of the stack $1$ is smaller than $2$. We therefore remove $1$ and place [WHAT]? at the top. $6$, is therefore the answer for $2$}
 		\label{fig:next_greater:variation1:stack3}
 	 \end{subfigure}
 	 \hfill
@@ -237,7 +237,7 @@ Listing \ref{list:next_greater_element:stack} shows an implementation of this id
 		\begin{framed}
 			\includegraphics[width=1\linewidth]{sources/next_greater_element/images/stack7}
 		\end{framed}
-		\caption{$7$ is larger than all the elements currently in the stack. Therefore all the elements are removed and the stack remains empty signalling that $7$ has not greater elements at its right. The process ends here as there are no more elements to process.}
+		\caption{$7$ is larger than all the elements currently in the stack. Therefore all the elements are removed and the stack remains empty signalling that $7$ has no greater elements to its right. The process ends here as there are no more elements to process.}
 		\label{fig:next_greater:variation1:stack7}
 	 \end{subfigure}
 	 \caption[]{}

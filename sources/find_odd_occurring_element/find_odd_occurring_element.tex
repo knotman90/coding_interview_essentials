@@ -10,16 +10,16 @@
 \label{ch:find_odd_occurring_element}
 \section*{Introduction}
 
-This chapter describes a problem on arrays and on the XOR (also known as \textit{disjunctive-or} and usually identified by the symbol
+In this chapter we will deal with  a problem on arrays and on the XOR (also known as \textit{disjunctive-or} and usually identified by the symbol
 $\oplus$)\footnote{
 	$\oplus$ is a boolean binary operator that returns true only when its two inputs have different values i.e. when one is true and the other is false.} 
 operation.
 
-There exists a very simple and intuitive yet inefficient brute-force solution that, however, will not lead us a long way in an actual interview and that is conceptually quite different from other approaches that are far faster. For this reason, it can be challenging to use the brute-force solution as a starting point and to iteratively improve it so that we eventually reach optimal time and space complexity. It is way more effective to read the statement carefully and to try to get the right insight right from the beginning instead of getting carried away towards a dead-end by the brute-force approach.
+There is a very simple, intuitive yet inefficient brute-force solution to the problem, however, as it is conceptually very different from other, faster, approaches it is difficult to use even as a starting point during interview to iteratively improve on to reach optimal time and space complexity.  In this instance, it is more effective to begin by reading the problem statement carefully and looking for the right insight immediately rather than getting carried away towards a dead-end by the brute-force approach.
 
 \section{Problem statement}
 \begin{exercise}
-Write a function that given an array $A$ of positive integers where all elements except one appear an even number of times, returns the one and only one element appearing an odd numbers of times.
+Write a function that, given an array $A$ of positive integers where all elements except one appear an even number of times, returns the one and only one element appearing an odd number of times.
 
 	\begin{example}
 		\label{ex:find_odd_occurring_element:example1}
@@ -37,7 +37,7 @@ Write a function that given an array $A$ of positive integers where all elements
     \begin{answered}
 		\textit{Yes the input array can be assumed to be valid.}
 	\end{answered} \end{questionitem}
-	\item \begin{questionitem} \begin{question} Is the range of the input integers known?\footnote{This is very good question because in case the answer is yes one could use an approach similar to the counting sort to keep track using only constant space and linear time, of the number of times an element appears.}  \end{question} 	 
+	\item \begin{questionitem} \begin{question} Is the range of the input integers known?\footnote{This is very good question because if the answer is yes we can use an approach similar to the counting sort to keep track using only constant space and linear time, of the number of times an element appears.}  \end{question} 	 
     \begin{answered}
 		\textit{No it is not. The values of the elements of $A$ is arbitrary.}
 	\end{answered} \end{questionitem}
@@ -49,7 +49,7 @@ Write a function that given an array $A$ of positive integers where all elements
 \subsection{Brute-force}
 \label{find_odd_occurring_element:sec:bruteforce}
 
-The brute-force solution to this problem is very intuitive: we have to count the occurrences of each of the elements of $A$ until we find one appearing an odd number of times.  
+As mentioned above, the brute-force solution to this problem is very intuitive.  We simply have to count the occurrences of each of the elements of $A$ until we find one appearing an odd number of times.  
 Provided that a counting function (which counts the occurrences of a given element in an array) is available, it is only a matter of using that function for all the elements in the array, and return as soon as it returns an odd number. 
 
 Listing \ref{list:find_odd_occurring_element_bruteforce_rawloop} shows a possible implementation in C++ which uses the \inline{std::count} function from the STL to count the number of occurrences of a given number in $A$.
@@ -58,31 +58,31 @@ Listing \ref{list:find_odd_occurring_element_bruteforce_rawloop} shows a possibl
 \lstinputlisting[language=c++, caption=Brute force solution using a counting function.,label=list:find_odd_occurring_element_bruteforce_rawloop]{sources/find_odd_occurring_element/find_odd_occurring_element_solution1.cpp}
 
 What the code above is really trying to do is \textbf{find} the element appearing an odd number of times.
-Instead of using a raw loop for doing so, the code can be made much more expressive (which is always appreciated and positively evaluated by the interviewer) by using the standard \inline{find\_if} metafunction  as shown in the Listing \ref{list:find_odd_occurring_element_bruteforce_standard}.
+Instead of using a raw loop for doing so, the code can be made much more expressive (which is always appreciated  by interviewers) by using the standard \inline{find\_if} metafunction  as shown in the Listing \ref{list:find_odd_occurring_element_bruteforce_standard}.
 
 
 \lstinputlisting[language=c++, caption=Brute force solution using standard libraries functions \inline{std::count} and \inline{std::find_if}.,label=list:find_odd_occurring_element_bruteforce_standard]{sources/find_odd_occurring_element/find_odd_occurring_element_solution2.cpp}
 
-However, this is considered a poor solution: the time complexity is $O(n^2)$ which is quite off from the optimum, while the space complexity is constant. 
+This is, however, a poor solution as the time complexity is $O(n^2)$ which is far from optimal, while the space complexity is constant. 
 
 
-Notice that, in the first brute-force solution (Listing \ref{list:find_odd_occurring_element_bruteforce_standard}), we dereference the iterator returned by \inline{find\_if} directly without checking if it is valid or not. 
-\inline{find_if( InputIt first, InputIt last,UnaryPredicate p)} returns an iterator to the element satisfying the search criteria $p$ (in the form of a lambda)  only if such an element exists, and that otherwise it would return \inline{last} which is in  equal to \inline{std::end(A)}.
-Dereferencing \inline{std::end(A)} would cause UB, but we are guaranteed this case to never happen as an odd occurring element is \textbf{always present} in $A$\footnote{How could we change Listing \ref{list:find_odd_occurring_element_bruteforce_standard} so that it handles bad input safely?}.
+Note that, in the first brute-force solution (Listing \ref{list:find_odd_occurring_element_bruteforce_standard}), we dereference the iterator returned by \inline{find\_if} directly without checking if it is valid or not. 
+\inline{find_if( InputIt first, InputIt last,UnaryPredicate p)} returns an iterator to the element satisfying the search criteria $p$ (in the form of a lambda)  only if such an element exists, and that otherwise it would return \inline{last} which is  equal to \inline{std::end(A)}.
+Dereferencing \inline{std::end(A)} would cause UB, but we can guarantee this won't happen as an odd occurring element is \textbf{always present} in $A$\footnote{How could we change Listing \ref{list:find_odd_occurring_element_bruteforce_standard} so that it handles bad input safely?}.
 
 
-In the second implementation (Listing \ref{list:find_odd_occurring_element_bruteforce_rawloop}), we took a different approach concerning the handling of a bad input and we decided to explicitly throw an exception, in case all elements appear an even number of times or $A$ is empty. 
-Even if the interviewer does not ask for it, it is good to show that we thought about this case, and also that we can handle it without big penalties in expressiveness and performance: we can rest assured this certainly adds a bonus point to our final evaluation. 
-Moreover, we can argue that a throw statement makes explicit and clear that the function is expecting certain characteristics from the input without incurring performance penalties: \footnote{Throwing an exception is cheap when the exception is not raised. This is the case in the main exception model used nowadays (Itanium ABI, VC++ 64 bits Zero-Cost model exceptions)\cite{cit:web:openstd_exception}.)} when the input is  good
+In the second implementation (Listing \ref{list:find_odd_occurring_element_bruteforce_rawloop}), we took a different approach to handling a bad input and decided to explicitly throw an exception in case all elements appear an even number of times or $A$ is empty. 
+Even if the interviewer does not ask for this, it is good to show that we thought about this and also that we can handle it without big penalties in expressiveness and performance: we can rest assured this certainly adds a bonus point to our final evaluation. 
+Moreover, we can argue that a throw statement makes it explicit that the function is expecting certain characteristics from the input without incurring performance penalties: \footnote{Throwing an exception is cheap when the exception is not raised. This is the case in the main exception model used nowadays (Itanium ABI, VC++ 64 bits Zero-Cost model exceptions)\cite{cit:web:openstd_exception}.)} when the input is  good
 (which is safe to assume would be the majority of the times the function gets invoked).
 
 \subsection{Linear time and space solution}
 \label{find_odd_occurring_element:sec:map}
 
-In order to speed up the process of keeping count of how many times each element appear in the input array, we can adopt a map-like structure, where the keys are the numbers in $A$ and the values are integers representing the number of times each element appears in the array.
-If a hash-based map is used to store this key-value information, then this effectively reduces the time complexity of the brute-force approach down to $O(n)$ (on average) at the expense of space that increases to linear as well.
+In order to speed up the process of keeping count of how many times each element appear in the input array, we can adopt a map-like structure where the keys are the numbers in $A$ and the values are integers representing the number of times each element appears in the array.
+If a hash-based map is used to store this key-value information then this effectively reduces the time complexity of the brute-force approach down to $O(n)$ (on average) at the expense of space that increases to linear as well.
 
-Keeping track of the actual number of times an element appears in $A$ is unnecessary and overkill, mainly because all we need is the information about whether or not the number of times it appears is even or odd. We do not care about the actual number, and therefore a single bit is sufficient to store this information. The map structure would then associate integers to booleans, for a substantial saving in the space used. However big the reduction is, the space used remains linear. 
+Keeping track of the actual number of times an element appears in $A$ is actually unnecessary as all we need is the information about whether or not the number of times it appears is even or odd. We do not care about the actual number  therefore a single bit is sufficient to store this information. The map structure would then associate integers to booleans for a substantial saving in the space used. However big the reduction is the space used remains linear. 
 This idea is implemented in Listing \ref{list:find_odd_occurring_element_bruteforce_linearspace}.
 
 \lstinputlisting[language=c++, caption=Linear time and space solution using a map.,label=list:find_odd_occurring_element_bruteforce_linearspace]{sources/find_odd_occurring_element/find_odd_occurring_element_solution3.cpp}
@@ -98,7 +98,7 @@ The time and space complexity are $O(n)$.
 \label{find_odd_occurring_element:sec:constant_space}
 
 However, there is a way to solve this problem in constant space and linear time. 
-This solution is based on the XOR operation which can be thought of as the equivalent of the sum for bits and has some interesting properties that are useful to construct a solution for this problem:
+This solution is based on the XOR operation which can be thought of as the equivalent of the sum for bits and has several interesting properties that are useful in constructing a solution to this problem:
 \begin{enumerate}
 	\item it is a commutative, distributive and associative operation;
 	\item its neutral element is the $0$. What it means is that applying the XOR to a number $x \neq 0$ and $0$  always results in $x$ i.e. $x \oplus 0 = x$ and $0 \oplus x = x$
@@ -106,7 +106,7 @@ This solution is based on the XOR operation which can be thought of as the equiv
 \end{enumerate}
 The practical consequence of these facts is that when xor-ing an element $x$ with itself an odd number of times, the result is $x$ as $(x \oplus x) \oplus x  = (0 \oplus x) = x$, but doing so an even number of times results in $0$ because  $(x \oplus x) \oplus (x \oplus x) = 0 \oplus 0 = 0$.
 
-Why is this useful? It is very useful because we known that all input integers except one are occurring an even number of times! Therefore when all numbers are xor-ed together, all it is left at the end is the number appearing an odd number of times: every number except the answer will be xor-ed an even number of times with itself, resulting in $0$. 
+This is useful because we known that all input integers except one are occurring an even number of times,  therefore when all numbers are xor-ed together, all that is left at the end is the number appearing an odd number of times: every number except the answer will be xor-ed an even number of times with itself, resulting in $0$. 
 
 
 For instance if we try to XOR all the elements of the example \ref{ex:find_odd_occurring_element:example1} above where $A=\{4,3,6,2,4,2,3,4,3,3,6\}$ we obtain: $4 \oplus 3 \oplus  6 \oplus 2 \oplus 4 \oplus 2 \oplus 3 \oplus 4 \oplus 3 \oplus 3 \oplus 6 = 4$. At this point we can use commutativity, associativity and distributivity properties to rearrange it as follows (this would be equivalent to first sort $A$ and then XOR all the elements): 

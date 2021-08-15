@@ -8,22 +8,21 @@
 \chapter{Counts the items in the containers}
 \label{ch:items_in_containers_amazon}
 \section*{Introduction}
-Imagine you are the owner of a successful online store. You would like to be able to query what is
+Imagine you are the owner of a successful online store. You would like to be able to know
 the number of items you still have in the warehouse. The problem is that you cannot just walk into
 the warehouse and count the items as they are stored in closed containers. Thankfully, the warehouse
-is equipped with sensors and it is able to produce a string representing the state of the warehouse
+is equipped with sensors and is able to produce a string representing the state of the warehouse
 and single containers. The problem described in this chapter investigates how we can write an
-algorithm that takes such a string (the state of all the containers in the warehouse) and is able to
+algorithm that takes such a string (the state of all the containers in the warehouse) and be able to
 answer queries on the number of elements that are present in some portions of the warehouse itself. 
 
-This problem has been reported to be asked during Amazon interviews and it is considered a medium
-difficulty problem. We will investigate two solutions:
+Unsurprisingly, this problem has been reported as being asked during Amazon interviews and can be considered as of a medium difficulty. We will investigate two solutions:
 \begin{itemize}
-	\item brute-force, that is going to have a relatively straightforward logic (blindly count the
-	 items in the string) and be easy to code (in Section
+	\item brute-force based on relatively straightforward logic (blindly count the
+	 items in the string) and easy to code (in Section
 	 \ref{items_in_containers_amazon:sec:bruteforce}),
-	\item a more sophisticated one with optimal asymptotic complexity where the input string is
-	preprocessed so that queries can be answered faster.
+	\item a more sophisticated solution with optimal asymptotic complexity where the input string is
+	pre-processed so that queries can be answered faster.
 \end{itemize}
 
 
@@ -39,7 +38,7 @@ difficulty problem. We will investigate two solutions:
 	
 	A container is a closed space within the warehouse and it is represented in $s$ by a pair of
 	\bsq{\texttt{|}}. Items within a container $c$ are represented as \bsq{\texttt{*}} appearing
-	withing the two \bsq{\texttt{|}} defining $c$. You are also given an array of pairs $Q = \{(s_0,
+	within the two \bsq{\texttt{|}} defining $c$. You are also given an array of pairs $Q = \{(s_0,
 	e_0),(s_1, e_2),\ldots,(s_{n-1}, e_{e-1}) : 0 \leq s_i \leq e_i \leq |s|\}$, where each pair in
 	$Q$ identifies a substring in $s$. Each element of $Q$ is a query you must answer to.
 	
@@ -66,8 +65,8 @@ difficulty problem. We will investigate two solutions:
 	Given \texttt{s = \bsq{*|*|}} and $Q = \{(0,2),(1,3)\}$ the function returns $A=\{0,1\}$. $s$
 	has a total of two items and only $1$ closed container containing only a single item.
 
-	The first query refers to the substring $s[0,2]=$ \texttt{\bsq{*|*}}. No closed container are
-	represented in such substring thus the answer in this case must be $0$. However, the second
+	The first query refers to the substring $s[0,2]=$ \texttt{\bsq{*|*}}. No closed containers are
+	represented in such a substring thus the answer in this case must be $0$. However, the second
 	question refers to  $s[1,3]=$ \texttt{\bsq{|*|}} where we can see we have a valid container. We
 	can therefore counts the elements in it.
 \end{example}
@@ -76,7 +75,7 @@ difficulty problem. We will investigate two solutions:
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item \begin{questionitem} \begin{question} Is it guaranteed for the input string $s$ to only contains valid character?  \end{question} 	 
+	\item \begin{questionitem} \begin{question} Is it guaranteed for the input string $s$ to only contains valid characters?  \end{question} 	 
     \begin{answered}
 		\textit{Yes, you do not need to worry about the sanity of the input.}
 	\end{answered} \end{questionitem}
@@ -89,26 +88,26 @@ difficulty problem. We will investigate two solutions:
 
 \subsection{Brute-force}
 \label{items_in_containers_amazon:sec:bruteforce}
-This problem has a straightforward solution that basically loops over all the elements  specified in
+This problem has a straightforward solution that essentially loops over all the elements  specified in
 a query $(s,e) \in Q$ and counts all the elements inside the containers. Because the $|s-e|$ is
 $O(|s|)$ the complexity of this approach is $O(|s|*|Q|)$. Listing
-\ref{list:items_in_containers_amazon_bruteforce} shows an implementation of such idea. Notice that
+\ref{list:items_in_containers_amazon_bruteforce} shows an implementation of this idea. Note that
 most of the code complexity of this solution is in the \inline{count_items_in_substring} function
 that has to make sure only to count items that are within a closed container. It does so by first
 finding the first container wall appearing after the start of the query interval. We can safely skip
-all those items because there are not inside a container. Once we have found the beginning of the
-first container, we can proceed by counting the elements, one container   at the time. 
+all those items because they are not inside a container. Once we have found the beginning of the
+first container, we can proceed by counting the elements one container at a time. 
 \lstinputlisting[language=c++, caption={Na\"ive solution to the \textit{items in the container} problem.},label=list:items_in_containers_amazon_bruteforce]{sources/items_in_containers_amazon/items_in_containers_amazon_solution1.cpp}
 
 \subsection{Linear time solution}
 \label{items_in_containers_amazon:sec:lineartime}
-There is however a much faster solution to this problem that can be easily implemented provided we
-have come precomputed values. Performing some pre-computation in order to speed-up an algorithm is a
-common idea that is useful for the solution of many coding interview questions. In this particular
+There is, however, a much faster solution that can be easily implemented provided we
+have come pre-computed values. Performing some pre-computation in order to speed-up an algorithm is a
+common idea that is useful in solving many coding interview questions. In this particular
 problem, we are going to calculate two values for each character of the input string:
 \begin{description}
-	\item[$C_i$, \textbf{the closest delimiter to the right}]: we want to have for each character $s_i$ of
-	the input string $s$ the information about the index of the closest container delimiter
+	\item[$C_i$, \textbf{the closest delimiter to the right}]: for each character $s_i$ of
+	the input string $s$ we want to have information about the index of the closest container delimiter
 	appearing after it. In other words we are looking for the index $j > i$ such that $s[j]='|'$. If
 	such index does not exists then we assume it is the index of the last character of $s$, i.e.
 	$|s|-1$.
@@ -121,29 +120,29 @@ Given a query $(l,r)$, we can calculate the answer to it by using the informatio
 the closest container delimiter to the right of $l$, $c\geq l$,
 to find the beginning of the first container in the range $(s,e)$. All the elements 
 between $l$ and $c$ can be ignored.
-So now that we have basically transformed our query from $(l,r)$ to $(c,r)$ we are ready to use the prefix sum of the number of elements 
+So now that we have transformed our query from $(l,r)$ to $(c,r)$ we are ready to use the prefix sum of the number of elements 
 in the containers.
 
-We can calculate the answer to $(c,r)$ by simply returning  $P_r - P_l$: the number of elements in the all container up to index $r$ minus, 
+We can calculate the answer to $(c,r)$ by simply returning  $P_r - P_l$: the number of elements in the all container up to index $r$ minus 
 the number of elements in all containers up to the index $l$. 
 
 
 Figure \ref{fig:items_in_containers_amazon:example_prefix} shows the values of $P$ and $C$ for the input string is \inline{s="|**|*|*"}.
-Each value of the array $P_i$ contains the count of the items inside all the containers in the prefix of $s$ u to and including index $i$. 
+Each value of the array $P_i$ contains the count of the items inside all the containers in the prefix of $s$ up to and including index $i$. 
 For instance $P_4=2$ because the substring of $s$ between indices $0$ and $4$ only contains one container with two elements in it while $P_5=3$ because
-between indices $0$ and $5$we have two containers with $2$ and $1$ items inside, respectively.
+between indices $0$ and $5$ we have two containers with $2$ and $1$ items inside, respectively.
 The values in $C_i$ contains the indices of the first character \inline{'|'} in the suffix of $s$ from index $i$.
 For instance $C_1=3$ because the first \inline{'|'} after index $1$ appears at index $3$ in $s$ while
 $C_3=3$ because $s[3]$ contains \inline{'|'} itself.
-Notice that the last element of $s$ always contains $|s|-1$ regarless of the fact $s_{|s|-1}$ is \inline{'|'} or not. 
+Note that the last element of $s$ always contains $|s|-1$ regardless of whether $s_{|s|-1}$ is \inline{'|'} or not. 
 Listing \ref{list:items_in_containers_amazon_lineartime} shows an implementation of the idea above. 
-The main driver function is \inline{items_in_containers_lineartime} which first calls other two functions:
+The main driver function is \inline{items_in_containers_lineartime} which first calls two other functions:
 \begin{enumerate*}
 	\item \inline{find_closest_bars_right} and,
 	\item \inline{prefix_sum_containers_items}
 \end{enumerate*}
 that are responsible for the pre-computation of $C$ and $P$, respectively.
-Notice that in Listing \ref{list:items_in_containers_amazon_lineartime}, 
+Note that in Listing \ref{list:items_in_containers_amazon_lineartime}, 
 for the sake of clarity, $C$ and $P$, are named \inline{closest_bars_right} and \inline{prefix_sum_count_items}, respectively.
 
 \begin{figure}
