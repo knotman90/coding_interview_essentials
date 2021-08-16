@@ -10,16 +10,16 @@
 \chapter{Two string anagram}
 \label{ch:two_string_anagram}
 \section*{Introduction}
-Anagrams are words that share the same character set. This makes it possible to create multiple words by rearranging the letters in a single source word. For example, the letters in the word \textit{"alerting"} can be reordered to create 4 new words:
+Anagrams are words that share the same character set. This makes it possible to create multiple words by rearranging the letters in a single source word. For example, the letters in the word \textit{\quotes{alerting}} can be reordered to create 4 new words:
 \begin{itemize}
-	\item  \textit{"altering"}
-	\item  \textit{"integral"}
-	\item  \textit{"relating"}
-	\item  \textit{"triangle"}.
+	\item  \textit{\quotes{altering}}
+	\item  \textit{\quotes{integral}}
+	\item  \textit{\quotes{relating}}
+	\item  \textit{\quotes{triangle}}.
 \end{itemize}
  
 The creation of anagrams, especially ones that reflect or comment on the source words (for instance turning
-\textit{"Madam Curie"} into \textit{"Radium came"})is difficult. As such, 
+\textit{\quotes{Madam Curie}} into \textit{\quotes{Radium came}})is difficult. As such, 
 computers are often used to find anagrams in longer texts, as well as to generate the so-called anagram dictionaries: a specific kind of dictionary, where all the letters in a word and
 all their transposition are arranged in alphabetical order. Such alphabet dictionaries  are often used in games like
 Scrabble\footnote{https://en.wikipedia.org/wiki/Scrabble}. Often, at the core of such applications lies an efficient algorithm for determining if a word is an anagram of another word.
@@ -47,8 +47,8 @@ solutions, beginning with the slow but easy to understand brute-force in Section
 		\label{ex:two_string_anagram:example1}
 		\hfill \\
 		\begin{itemize}
-			\item 	a = "aaa"
-			\item 	b = "bbb"
+			\item 	a = \quotes{aaa}
+			\item 	b = \quotes{bbb}
 		\end{itemize}
 		The function returns $3$. 
 		All the characters of \textit{a} need to be changed into \textit{'b'}.
@@ -58,8 +58,8 @@ solutions, beginning with the slow but easy to understand brute-force in Section
 	\begin{example}
 		\hfill \\
 		\begin{itemize}
-			\item 	a = "tear"
-			\item	b = "fear"
+			\item 	a = \quotes{tear}
+			\item	b = \quotes{fear}
 		\end{itemize}
 		The function returns $1$. 
 		All that is necessary is turning the first letter \textit{'t'} into a \textit{'f'}.
@@ -68,8 +68,8 @@ solutions, beginning with the slow but easy to understand brute-force in Section
 	\begin{example}
 		\hfill \\
 		\begin{itemize}
-			\item[] 	a = "Protectional"
-			\item[] 	b = "Lactoprotein"
+			\item[] 	a = \quotes{Protectional}
+			\item[] 	b = \quotes{Lactoprotein}
 		\end{itemize}
 		The answer for this case is $0$ because \emph{Protectional} is already an anagram of \emph{Lactoprotein}.
 	\end{example}
@@ -115,7 +115,7 @@ Thus, the only case when the problem has no solution has been isolated: when $n 
 \label{sec:anagrams:bruteforce}
 One of the first options to consider is a solution where we generate all possible arrangements of the letters in $a$, and for each of these arrangements, calculate the number of modifications necessary to convert it into $b$. 
 The key idea is that the cost of transforming a string into another is equal to the number positions having different letters. 
-For instance, the cost of transforming \textit{"abcb"} into \textit{"bbbb"} is $2$ because the two strings differ in the first and third letters. 
+For instance, the cost of transforming \textit{\quotes{abcb}} into \textit{\quotes{bbbb}} is $2$ because the two strings differ in the first and third letters. 
 
 Although it is simple to explain, this approach must be considered sub-optimal because the number of arrangements of a set of $n$ letters grows as fast as $n!$.
 Moreover, enumerating all the arrangements is no trivial task, unless we use a  library function capable of doing it (for instance, the C++ standard library provides the function \inline{std::next_permutation}\footnote{\href{https://en.cppreference.com/w/cpp/algorithm/next_permutation}{https://en.cppreference.com/w/cpp/algorithm/next\_permutation}} devoted to this purpose).
@@ -123,7 +123,7 @@ Moreover, enumerating all the arrangements is no trivial task, unless we use a  
 
 Listings \ref{list:two_string_anagram_bruteforce} shows a \CC implementation of the idea above.
 
-\lstinputlisting[language=c++, caption="Brute force.",label=list:two_string_anagram_bruteforce]{sources/two_string_anagram/two_string_anagram_brute_force.cpp}
+\lstinputlisting[language=c++, caption=\quotes{Brute force.},label=list:two_string_anagram_bruteforce]{sources/two_string_anagram/two_string_anagram_brute_force.cpp}
 
 
 \subsection{Sorting}
@@ -133,7 +133,7 @@ But is it really necessary to turn $a$ into \textbf{exactly} $b$, or is it suffi
 After all, being an anagram is a transitive property: if $a$ is a permutation of $b$ and $b$ is a permutation of $c$, then $a$ must also be a permutation of $c$. 
 
 By definition, an anagram of $b$ is any permutation of its characters, and therefore, the particular permutation in which the characters of $b$ are sorted is a valid anagram on its own. 
-It is much easier than checking all possible permutations, to modify $a$ into the "sorted" anagram of $b$ (where all of its characters are sorted), rather than to exactly $b$ because all we need to do is to create a copy of both $a$ and $b$, sort both of them and then calculate the character-by-character difference.
+It is much easier than checking all possible permutations, to modify $a$ into the \quotes{sorted} anagram of $b$ (where all of its characters are sorted), rather than to exactly $b$ because all we need to do is to create a copy of both $a$ and $b$, sort both of them and then calculate the character-by-character difference.
 \textbf{This approach works because if $x$ is an anagram of $b$ then $x$ is also an
 anagram of `sort(b)`}.
 In other words, it does not matter how the characters are arranged in $a$ and $b$, as the only thing that matters is the set of the characters

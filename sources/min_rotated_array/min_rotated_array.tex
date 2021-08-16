@@ -11,7 +11,7 @@
 \section*{Introduction}
 In this chapter, we will tackle a very popular interview question that has a surprisingly short statement and an obvious linear time solution. Given, however, the aim of impressing an interviewer, we will focus on developing an elegant and efficient solution which requires more thought and careful coding.
 
-This problem is based upon the concept of array rotations. To develop an intuitive understanding of this concept, imagine that we want to "rotate" the elements of an array; that is to shift all of them to the right by a certain number $k$ of positions. The element that used to be at position $0$ is now at position $k$ and the element that was at position one is now at $k+1$ etc. (see Figure \ref{fig:min_rotated_array:arrayrotation}).
+This problem is based upon the concept of array rotations. To develop an intuitive understanding of this concept, imagine that we want to \quotes{rotate} the elements of an array; that is to shift all of them to the right by a certain number $k$ of positions. The element that used to be at position $0$ is now at position $k$ and the element that was at position one is now at $k+1$ etc. (see Figure \ref{fig:min_rotated_array:arrayrotation}).
 
 \begin{figure}
 	\centering
@@ -74,7 +74,7 @@ It is worth mentioning this approach during the interview however, no time shoul
 
 \subsection{Logarithmic solution}
 \label{min_rotated_array:sec:log}
-As usual, when the word \textit{"sorted"} makes its appearance in a problem statement our first thought should be \textbf{binary search} see Appendix \ref{sect:appendix:binary_search}). Indeed, in this problem we are almost forced to consider binary search as it not only involves a sorted input, but it is also about searching. 
+As usual, when the word \textit{\quotes{sorted}} makes its appearance in a problem statement our first thought should be \textbf{binary search} see Appendix \ref{sect:appendix:binary_search}). Indeed, in this problem we are almost forced to consider binary search as it not only involves a sorted input, but it is also about searching. 
 
 How can we use binary search to actually solve this problem, given the fact we have an oddly sorted array? 
 First note that,  despite the fact that the array is not sorted in a canonical manner, it is still very much sorted as there is an index $i$ of the array holding the smallest value from which we could iterate the array forward (and eventually continue from the start when we reach the end) and all we would see is a sorted sequence.

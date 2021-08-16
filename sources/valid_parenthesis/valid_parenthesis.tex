@@ -33,12 +33,12 @@
 
 	\begin{example}
 		\hfill \\
-		Given the input string \textit{s="(**))"} the function returns \textbf{true} because it is possible to obtain from \textit{s} the string \textit{(())} by deleting the first \textit{*} and by turning the second one into a left parenthesis \textit{)}.
+		Given the input string \textit{s=\quotes{(**))}} the function returns \textbf{true} because it is possible to obtain from \textit{s} the string \textit{(())} by deleting the first \textit{*} and by turning the second one into a left parenthesis \textit{)}.
 	\end{example}
 
 	\begin{example}
 		\hfill \\
-		Given the input string s=\textit{"*(*)()(()"} the function returns \textbf{false} because no matter how the 	\inline{*} are arranged there is no way to obtain a well balanced string of parenthesis.
+		Given the input string s=\textit{\quotes{*(*)()(()}} the function returns \textbf{false} because no matter how the 	\inline{*} are arranged there is no way to obtain a well balanced string of parenthesis.
 	\end{example}
 \end{exercise}
 
@@ -133,7 +133,7 @@ For instance given the input string \fbox{s=(*()*} when processing the $i^{th}$ 
 		\item finally we can obtain $-1$ with this string \fbox{((()(} by turning both the \fbox{*} into a \fbox{)}.
 	\end{itemize}
 \end{enumerate}
-Note that the values in the list $P$ can be obtained with different combinations of substitutions and that $P$ is always made of a contiguous element. This last piece of information is important because it allows us to describe $P$ by only using its maximum and minimum value. We are interested in seeing whether at the end of the process we can obtain a value of $0$ meaning that the string is balanced. If the maximum value at any point goes under $0$ it means that we reached a place where we have an excess of closed parenthesis that we cannot fix using all the asterisks we encountered so far. For instance consider the string \fbox{s="(*)))"}. When processing the element number the max and min values for the difference between the open and closed parenthesis will be:
+Note that the values in the list $P$ can be obtained with different combinations of substitutions and that $P$ is always made of a contiguous element. This last piece of information is important because it allows us to describe $P$ by only using its maximum and minimum value. We are interested in seeing whether at the end of the process we can obtain a value of $0$ meaning that the string is balanced. If the maximum value at any point goes under $0$ it means that we reached a place where we have an excess of closed parenthesis that we cannot fix using all the asterisks we encountered so far. For instance consider the string \fbox{s=\quotes{(*)))}}. When processing the element number the max and min values for the difference between the open and closed parenthesis will be:
 \begin{enumerate}
 	\item $(1,1)$
 	\item $(0,2)$

@@ -13,31 +13,59 @@ This chapter deals with a fairly simple problem on linked lists that is popular 
 \section{Problem statement}
 \begin{exercise}
 Given a singly linked link $L$ (see definition at Listing \ref{list:delete_duplicates_list:linked_list}), return a linked list with no duplicates.
+
+	\begin{example}
+		\label{ex:delete_duplicates_list:example1}
+		\hfill \\
+		Given the input list in Figure \ref{fig:delete_duplicates_list:example1_1} the function returns the list in Figure \ref{fig:delete_duplicates_list:example1_2} 
+	\end{example}
+
+	\begin{example}
+		\hfill \\
+		\label{ex:delete_duplicates_list:example2}
+		Given the input list in Figure \ref{fig:delete_duplicates_list:example2_1} the function returns the list in Figure \ref{fig:delete_duplicates_list:example2_2} 
+	\end{example}
 \end{exercise}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/delete_duplicates_list/images/example1_1}
+		\caption{Input list for Example \ref{ex:delete_duplicates_list:example1}}
+		\label{fig:delete_duplicates_list:example1_1}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/delete_duplicates_list/images/example1_2}
+		\caption{List shown in Figure \ref{fig:delete_duplicates_list:example1_1} with duplicates removed.}
+		\label{fig:delete_duplicates_list:example1_2}
+	 \end{subfigure}
+	 \hfill
+	 \begin{subfigure}[t]{0.99\textwidth}
+		\includegraphics[width=1\linewidth]{sources/delete_duplicates_list/images/example2_1}
+		\caption{Input list for Example \ref{ex:delete_duplicates_list:example2}}
+		\label{fig:delete_duplicates_list:example2_1}
+	 \end{subfigure}
+	  \hfill
+	  \begin{subfigure}[t]{0.99\textwidth}
+		  \includegraphics[width=1\linewidth]{sources/delete_duplicates_list/images/example2_2}
+		  \caption{List shown in Figure \ref{fig:delete_duplicates_list:example2_1} with duplicates removed.}
+		  \label{fig:delete_duplicates_list:example2_2}
+	   \end{subfigure}
+	 \caption[]{Input and output for the Examples \ref{ex:delete_duplicates_list:example1} and \ref{ex:delete_duplicates_list:example2}}
+	  \label{fig:delete_duplicates_list:example1}
+\end{figure}
+
+
+
 \begin{lstlisting}[language=c++, caption=Singly Linked list definition,label=list:delete_duplicates_list:linked_list]
 template<typename T>
 struct Node {
-    T val;
-    Node *next;
-    Node(T x) : val(x), next(nullptr) {}
+	T val;
+	Node *next;
+	Node(T x) : val(x), next(nullptr) {}
 };
 \end{lstlisting}
-
-\begin{example}
-	\hfill \\
-	\begin{itemize}
-		\item[-] Input: $1 \rightarrow 1 \rightarrow 2$
-		\item[-] Output: $1 \rightarrow 2$
-	\end{itemize}
-\end{example}
-
-\begin{example}
-	\hfill \\
-	\begin{itemize}
-		\item[-] Input: $1 \rightarrow  2 \rightarrow  2 \rightarrow  2 \rightarrow  2 \rightarrow  3 \rightarrow  4 \rightarrow  4 $
-		\item[-] Output: $1 \rightarrow  2 \rightarrow 3 \rightarrow  4$
-	\end{itemize}
-\end{example}
 
 \section{Clarification Questions}
 

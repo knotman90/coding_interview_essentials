@@ -164,7 +164,7 @@ These invariants are true prior to entering the \inline{while} loop and they are
 As already stated at the beginning of this section, the time complexity is linear but now, as opposed to the other solutions discussed so far, we use only constant space. 
 
 Moreover, because we do not have to care about the state of the elements of $I$ after $x$,
-we can use \href{https://en.cppreference.com/w/cpp/utility/move}{\inline{std::move}}\footnote{\inline{std::move} to indicate that an object t may be "moved from", i.e. allowing the efficient transfer of resources from t to another object without the need for an explicit copy.} to (potentially) avoid expensive copies.
+we can use \href{https://en.cppreference.com/w/cpp/utility/move}{\inline{std::move}}\footnote{\inline{std::move} to indicate that an object t may be \quotes{moved from}, i.e. allowing the efficient transfer of resources from t to another object without the need for an explicit copy.} to (potentially) avoid expensive copies.
 
 Figure \ref{fig:remove_duplicated_sorted_array_inplace:example1_process} depicts the execution of this algorithm on the input of Example \ref{example:remove_duplicated_sorted_array_inplace:example1}, where the shaded part (the left side) of the array contains all the unique elements found so far (among all the elements to the left of $y$): $x$ is a pointer to the last element of this sequence and $y$ is a pointer to the element currently processed.
 

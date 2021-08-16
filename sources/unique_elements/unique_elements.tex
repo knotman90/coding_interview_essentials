@@ -10,7 +10,7 @@
 \chapter{Unique Elements in a collection}
 \label{ch:unique_elements}
 \section*{Introduction}
-The problem presented in this Chapter is very popular in coding interviews, 
+The problem presented in this chapter is very popular in coding interviews, 
 possibly because it features an incredibly simple statement and is therefore easily understood.
 We will look first at the intuitive brute-force solution that can be coded in a few minutes and then examine how it 
 can be refined and optimized into a short and efficient one. 
@@ -22,12 +22,12 @@ Given a string $s$ of length $n$, determine whether it does \textbf{not} contain
 \begin{example}
 \hfill
 	\begin{itemize}
-		\item Given \textit{s="graph"} the function returns \inline{true}. There are no duplicates  in $s$.
+		\item Given \textit{s=\quotes{graph}} the function returns \inline{true}. There are no duplicates  in $s$.
 	\end{itemize}
 \end{example}
 
 	\begin{example}
-		Given \textit{s="tree"} the function returns \inline{false}. Characters at indices $2$ and $3$  are the same.
+		Given \textit{s=\quotes{tree}} the function returns \inline{false}. Characters at indices $2$ and $3$  are the same.
 	\end{example}
 
 \end{exercise}
@@ -107,7 +107,7 @@ We can expand further on this as follows: \textbf{Every string
 with more than $|\Sigma|$ character contains at least one duplicate}(follows from the pigeon
 principle\footnote{The pigeonhole principle (\url{https://en.wikipedia.org/wiki/Pigeonhole_principle}) states that if $n$ items are put into $m$ containers, with
 $n > m$, then at least one container must contain more than one item.}). 
-The longest string with only unique characters is one of the permutations of \textit{"abcde\ldots zABCD \ldots Z123 \ldots 9"}.
+The longest string with only unique characters is one of the permutations of \textit{\quotes{abcde\ldots zABCD \ldots Z123 \ldots 9}}.
 Thus the solution using the hashset has complexity of $O(1)$ because in the worst case 
 we can have $|\Sigma|$ negative lookups.
 For this reason we can limit our investigation to only strings that have size smaller or equal to

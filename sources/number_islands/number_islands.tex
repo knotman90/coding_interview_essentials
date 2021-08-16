@@ -75,7 +75,7 @@ Essentially, what  this problem is asking us to do is identify the number of clu
 One way to do this is by looping through the map one cell at a time until we find a $1$, let's say at cell $(i,j)$.
 Because this particular $1$ must be part of an island, what we can then do is start exploring the island
 one cell at a time, moving from a $1$ to an adjacent one, until there are no $1$s we have not already visited.
-When we visit a land cell we mark it as "visited".
+When we visit a land cell we mark it as \quotes{visited}.
 This is useful because when we resume our normal linear scanning of the map we want to make
 sure we do not count the visited cells as being the starting point of an uncounted island.
 For instance in the example in Figure \ref{fig:number_islands:example1} we can start our visit

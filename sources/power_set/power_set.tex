@@ -14,7 +14,7 @@
 Most readers will already be familiar with power sets, i.e.  the set of all the subsets of a set $S$.  Being asked to generate the power set of a given set, both directly and indirectly, is a frequently asked question in coding interviews and therefore, in this chapter, we will investigate  two different solutions.  
 
 \begin{enumerate}
-    \item The first approach derives straightforwardly from the recursive definition of power-set, which states "the power-set of an empty set is a set containing one element only: the empty set itself". 
+    \item The first approach derives straightforwardly from the recursive definition of power-set, which states \quotes{the power-set of an empty set is a set containing one element only: the empty set itself}. 
     For a non-empty set $S$, let $e$ be an element of $S$ and $T$ be the original set $S$ set minus $e$ ( $T=S \setminus e$), then the power set of $S$ is defined as the union of two distinct power sets:
     \begin{itemize}
         \item   the power set of $T$
@@ -132,7 +132,7 @@ it gets.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{sources/power_set/images/tree}
-    \caption[Decision tree for the power-set generation using backtracking.]{Decision tree for the power-set generation using a backtracking-like brute-force approach. At level $i$ are the decisions for the element $i$ in $S$. A label marked with "yes" identifies the decision to add the corresponding element into the subset, while a node labeled with "no" identifies the opposite. Each path from the root to a leaf is an element of the power set. At the last level is the power set.}
+    \caption[Decision tree for the power-set generation using backtracking.]{Decision tree for the power-set generation using a backtracking-like brute-force approach. At level $i$ are the decisions for the element $i$ in $S$. A label marked with \quotes{yes} identifies the decision to add the corresponding element into the subset, while a node labeled with \quotes{no} identifies the opposite. Each path from the root to a leaf is an element of the power set. At the last level is the power set.}
     \label{ref:power_set_decision_trees}
 \end{figure}
 
@@ -184,7 +184,7 @@ This can be used to write an algorithm in which all the numbers in the range $\{
 Every number from this range maps uniquely to a subset of $\mathcal{P}(S)$. 
 
 The approach is easily understood when we think about the meaning of a bit in the binary representation of integers. One
-can "build" a number $k$ by summing up powers of $2$ where the bits contain the information about whether a
+can \quotes{build} a number $k$ by summing up powers of $2$ where the bits contain the information about whether a
 certain power of two should be added to the final value. With $n$
 bits one can represent $2^n$ numbers, each corresponding to one and only one subset of the power set of those $n$ bits.
 Listing \ref{list:power_set_bits} shows  a possible \CC implementation of the idea above.

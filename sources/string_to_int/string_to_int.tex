@@ -41,7 +41,7 @@ Write a function that given a string $s$ containing only numbers (characters fro
 		\textit{Yes, the string might have one or more leading zeros.}
 		\begin{example}
 			\hfill \\
-			If $s$ ="0000012345", then the function should return the integer $12345$.	
+			If $s$ =\quotes{0000012345}, then the function should return the integer $12345$.	
 		\end{example}
 	\end{answered} \end{questionitem}
 	
@@ -54,9 +54,9 @@ In any positional number system, the ultimate numeric value of a digit is also d
 Take as an example the number $427$:  although $7$ is thought of as a larger number than 4, the $7$ is worth less than the $4$ in this instance because of its respective position within the number. 
 The value of a digit $d$ at position $i$ is equal to $d\times 10^i$. Thus the value of a number represented by the string ($k+1$ characters long) $s=d_0d_1 \ldots d_k$ is equal to $(d_0 \times 10^0) + (d_1 \times 10^1) + \ldots + (d_k \times 10^k)$.
 
-All we need to do to write a solution for this problem is to go through each digit of the number and calcualte the answer using the formula above. For example, given the string \textit{s ="22498"} then its decimal value is equal to: $(2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 20000 + 2000 + 400 +90 +8 = 22498$
+All we need to do to write a solution for this problem is to go through each digit of the number and calcualte the answer using the formula above. For example, given the string \textit{s =\quotes{22498}} then its decimal value is equal to: $(2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 20000 + 2000 + 400 +90 +8 = 22498$
 
-It is worth highlighting that using this approach leading zeros are not a problem because they clearly do not contribute to the final result as $0 \times 10^x = 0$. Let's consider \textit{s ="00022498"} for which we can calcualte its decimal value as follows:  $(0 \times \times 10^7) + (0 \times \times 10^6) + (0 \times \times 10^5) + (2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 0+0+0+20000 + 2000 + 400 +90 +8 = 22498$
+It is worth highlighting that using this approach leading zeros are not a problem because they clearly do not contribute to the final result as $0 \times 10^x = 0$. Let's consider \textit{s =\quotes{00022498}} for which we can calcualte its decimal value as follows:  $(0 \times \times 10^7) + (0 \times \times 10^6) + (0 \times \times 10^5) + (2 \times 10^4) + (2 \times 10^3) + (4 \times 10^2) + (9 \times 10^1) + (8 \times 10^0) = 0+0+0+20000 + 2000 + 400 +90 +8 = 22498$
 
 The concept above can be implemented by looping through the string from right to left and summing up each digit of the string at position $i$  multiplied by $10^i$ as shown in Listing \ref{list:string_to_int1}.
 
