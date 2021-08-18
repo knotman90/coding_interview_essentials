@@ -47,46 +47,48 @@ cells are represented by the character '0'.
 	\tiny{\texttt{\quotes{000060280709001000860320074900040510007190340003006002002970000300800905500000021}}}
 	{\normalsize the function returns}
 	{\tiny\texttt{\quotes{431567289729481653865329174986243517257198346143756892612975438374812965598634721}}}
-	\normalsize. See Table \ref{tab:sudoku:grid_solution} for a 2D-grid representation.
+	\normalsize. See Figures \ref{fig:sudoku:sudo1unsolved} and \ref{fig:sudoku:sudo1solved} for their 2D representation.
 	
-	\begin{table}[]
-	\centering
-		\begin{tabular}{|l|l|}
-			\hline
-			Input & Solution \\ \hline
-			\texttt{
-				\begin{tabular}[c]{@{}l@{}}
-					0 0 4 3 0 0 2 0 9 \\ 
-					0 0 5 0 0 9 0 0 1 \\ 
-					0 7 0 0 6 0 0 4	3 \\
-					0 0 6 0 0 2 0 8 7 \\
-					1 9 0 0 0 7 4 0 0 \\ 
-					0 5 0 0 8 3 0 0 0 \\ 
-					6 0 0 0 0 0 1 0 5 \\ 
-					0 0 3 5 0 8 6 9 0 \\ 
-					0 4 2 9 1 0 3 0 0
-				\end{tabular}
-			} & 
-			\texttt{
-				\begin{tabular}[c]{@{}l@{}}
-					8 6 4 3 7 1 2 5 9 \\
-					3 2 5 8 4 9 7 6 1 \\ 
-					9 7 1 2 6 5 8 4 3 \\ 
-					4 3 6 1 9 2 5 8 7 \\
-					1 9 8 6 5 7 4 3 2 \\ 
-					2 5 7 4 8 3 9 1 6 \\
-					6 8 9 7 3 4 1 2 5 \\
-					7 1 3 5 2 8 6 9 4 \\
-					5 4 2 9 1 6 3 7	8
-				\end{tabular}
-			}
-			\\ \hline
-		\end{tabular}
-	\caption[Example of Sudoku (2D) and its solution.]{Example of Sudoku grid (on the left) and its solution (on the right). Note that empty cells are denoted here with the character '0' (zero).}
-	\label{tab:sudoku:grid_solution}
-	\end{table}
 \end{example}
 
+\begin{figure}
+	\centering
+		\begin{lpsudoku}
+			\framepuzzle
+			\setrow{9}{{},{},4,3,{},{},2,{},9}
+			\setrow{8}{{},{},5,{},{},9,{},{},1}
+			\setrow{7}{{},7,{},{},6,{},{},4,3}
+			\setrow{6}{{},{},6,{},{},2,{},8,7}
+			\setrow{5}{1,9,{},{},{},7,4,{},{}}
+			\setrow{4}{{},5,{},{},8,3,{},{},{}}
+			\setrow{3}{6,{},{},{},{},{},1,{},5}
+			\setrow{2}{{},{},3,5,{},8,6,9,{}}
+			\setrow{1}{{},4,2,9,1,{},3,{},{}}
+		  \end{lpsudoku}
+		  \caption{Example of a $9 \times 9$ sudoku.}
+		\label{fig:sudoku:sudo1unsolved}
+	\end{figure}
+
+
+	\begin{figure}
+		\centering
+			\begin{lpsudoku}
+				\framepuzzle
+				\setrow{9}{8,6,4,3,7,1,2,5,9}
+				\setrow{8}{3,2,5,8,4,9,7,6,1}
+				\setrow{7}{9,7,1,2,6,5,8,4,3}
+				\setrow{6}{4,3,6,1,9,2,5,8,7}
+				\setrow{5}{1,9,8,6,5,7,4,3,2}
+				\setrow{4}{2,5,7,4,8,3,9,1,6}
+				\setrow{3}{6,8,9,7,3,4,1,2,5}
+				\setrow{2}{7,1,3,5,2,8,6,9,4}
+				\setrow{1}{5,4,2,9,1,6,3,7,8}
+			  \end{lpsudoku}
+			  \caption{Solution to the puzzle shown in Figure \ref{fig:sudoku:sudo1unsolved}. }
+			\label{fig:sudoku:sudo1solved}
+	\end{figure}
+
+	 
 
 \section{Clarification Questions}
 
