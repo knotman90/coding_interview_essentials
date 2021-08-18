@@ -9,12 +9,13 @@
 \chapter{Best time to buy and sell stock}
 \label{ch:buy_sell_stocks}
 \section*{Introduction}
-The problem discussed in this Chapter is fairly simple as it is easily solvable in quadratic time using a brute force algorithm. However, a more efficient solution is possible and, given that this is exactly the type of question for which interviewers expect fast and elegant solutions, it's worth taking the time to become familiar with the problem structure and the best approaches to solving it.  
+The problem discussed in this chapter is not particularly difficult as it is easily solvable in quadratic time using a brute-force algorithm. 
+However, a more efficient solution is possible and, given that this is exactly the type of question for which interviewers expect fast and elegant solutions, it's worth taking the time to become familiar with the problem structure and the best approaches to solving it.  
 
 \section{Problem statement}
 \label{sec:buy_sell_stocks:statement1}
 \begin{exercise}
-You are given prices for a stack for a number $n$ of days. The prices are stored in an array $P$ of length $n$ where each cell $i$ of the array contains the price for the stock on the $i^{th}$ day. You are only permitted to perform \textbf{one} buy and \textbf{one} sell operations. What is the maximum profit you can achieve given the prices for the stock in $P$?
+You are given prices for a stock for a number $n$ of days. The prices are stored in an array $P$ of length $n$ where each cell $i$ of the array contains the price for the stock on the $i^{th}$ day. You are only permitted to perform \textbf{one} buy and \textbf{one} sell operations. What is the maximum profit you can achieve given the prices for the stock in $P$?
 
 You have to perform the buy operation \textbf{before} the sell operation. You cannot buy the stock on the \nth{10} day and sell on the \nth{9}.
 
