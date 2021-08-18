@@ -13,6 +13,16 @@
 \chapter{Validate Parenthesized String}
 \label{ch:valid_parenthesis}
 
+\section*{Introduction}
+Analyzing strings is an important operation for computer languges and it lies at the heart of programming languages. 
+For example a calculator would look at an input such as 
+\texttt{33 * 4  + (12\^5 - 22*sqrt(2))} and before proceeding in performing the calculation would check that the input string forms an allowable expression. 
+
+In the problem discussion in this chapter we will study how we can write an efficient parser for a simple grammar on an alphabet consisting only three charaters describing a particular kind of well parenthesized strings.
+What is cool about this probelem is that the techniques as well as the structure of the solutions we will study can be adapted and exploited for other string analysis problems. 
+
+
+
 \section{Problem statement}
 \begin{exercise}
  Given a string \textit{s} containing only three types of characters:
@@ -22,7 +32,6 @@
 	 \item \textit{*}
  \end{enumerate}
  write a function to check whether a string is valid. A string is valid if the following  holds:
-
   \begin{itemize}
 	\item  Any left parenthesis \textit{(} must have a corresponding  right parenthesis \textit{)}.
     \item Any right parenthesis \textit{)}  must have a corresponding left parenthesis \textit{)}.
