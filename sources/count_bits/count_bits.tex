@@ -12,6 +12,17 @@
 \chapter{Count the bits}
 \label{ch:count_bits}
 
+\section*{introduction}
+Computers use binary numeral system to store data and perform computations. In this system a bit
+is the smallest unit of data and can only have value $0$ or $1$. By using several bits we are able to encode information such as documents,  music, books, maps, bitcoins, etc. Ultimately the binary numeral system is just a way of representing numbers and it is not really different from the decimal system we use everyday.
+A binary number is made up of one or more bits, the same way a decimal number is made up of several $0-9$ digits. For instance, the binary number $111111001000011111010110_2$ correspond to the decimal number $16549846$.
+
+In programming, binary numbers are often used as bitsets as a more efficient and memory cheat substitute to arrays of booleans; such use case is so common that in the \CC STL we even have a dedicated class: \href{https://en.cppreference.com/w/cpp/utility/bitset}{\inline{std::bitset}}. However a simple \inline{int} can be used as a bitset and in this chapter we will calculate some statistics on the number of bits that are set to \inline{true} in a bitset (pretty much equivalently to what the function \href{https://en.cppreference.com/w/cpp/numeric/popcount}{\inline{std::popcount(T x)}} does) for a range of numbers.
+
+This problem is aimed at testing our basic bit manipulation skills and all we need to get a woking solution is knowing how to use some basic bit logic operations and functions like \textit{shift} and  \textit{AND}. Besides this basic solution we will also have a look at two more sophisticated and efficient solutions: the former based on DP and the second based on a property of powers of two. 
+
+
+
 \section{Problem statement}
 \begin{exercise}
 \label{example:count_bits:exercice1}
