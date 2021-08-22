@@ -13,13 +13,13 @@
 \chapter{Next Greater Element \RN{1}}
 \label{ch:next_greater_element}
 \section*{Introduction}
-One of the key steps in consistent hashing\footnote{A special type of hashing that avoids having to remap every entry in the hash-table when the bucket size changes (to the contrary of what happens when map keys and buckets via a modular operation). The classic example of its usage is in load-balancing or caching in a distributed environment where a distributed hash-map is to be maintained across a number of machines. One way of distributing objects evenly across the $n$ machinesis to place data $o$ into the machine $h(o) \Mod (n)$.
+One of the key steps in consistent hashing\footnote{A special type of hashing that avoids having to remap every entry in the hash-table when the bucket size changes (to the contrary of what happens when map keys and buckets via a modular operation). The classic example of its usage is in load-balancing or caching in a distributed environment where a distributed hash-map is to be maintained across a number of machines. One way of distributing objects evenly across the $n$ machines is to place data $o$ into the machine $h(o) \Mod (n)$.
 However, if a server is added/removed, the server assignment of a lot of the data in all machines may change.
-This is problematic since servers often go up or down and each. }
-is when we have to retrieve the IP of the machine some data $o$ resides in a nutshell, it works by  first calculating the hash of the data itself $h(o)$ and then find the smallest hashkey $h(s)$ for a server that is larger than $h(o)$.
+This is problematic since servers often go up or down and each and that would cause a large amount of cache misses. }
+is when we have to retrieve the IP of the machine some data $o$ resides in and in a nutshell works by  first calculating the hash of the data itself $h(o)$ and then find the smallest hashkey $h(s)$ for a server that is larger than $h(o)$.
 This operations might be performed thousands of times per seconds in a large system and it is therefore quite important to make it as fast as possible. 
 
-In the problem discussed in this chapter we will analyze a similar problem where we are given a bag of integers and we need to find the \textit{next greater} element for each of them. The number of applications and variations is high and we feel this problem is a must and that the tecniques shown in this chapter can be applicable to a other real-life coding interview problem bein asked out there in the wild. 
+In this chapter we will analyze a similar problem where we are given a bag of integers and we need to find the \textit{next greater} element for each of them. The number of applications and variations is high and we feel this problem is a must and that the tecniques shown in this chapter can be applicable to a other real-life coding interview problem bein asked out there in the wild. 
 
 \section{Problem statement}
 \begin{exercise}
