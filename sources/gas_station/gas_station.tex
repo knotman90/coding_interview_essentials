@@ -121,19 +121,61 @@ Write a function that returns the smallest index $0 \leq k < n$ of a gas station
 	\end{answered}
 \end{QandA}
 
-\section{Discussion}
+\section*{Discussion}
 \label{gas_station:sec:discussion}
+We can start our discussion by noticing that there are certain cases where it is impossible to perform a full loop, and specifically this is the case when the overall costs are higher than the total sum of available gas along the route. 
+Clearly this signal the fact that we need more gas than it is available to complete the route. In this case we can return $-1$.
 
+But are we guaranteed to be able to complete a loop if the available gas is more than the overall cost? The answer is a sound yes.
+
+Moreover when there is only a single station in the route, we can immediately return $0$,regardless of the value we have in $C$, as in order to complete the loop we do not need to move our car at all.
 
 \subsection{Brute-force}
 \label{gas_station:sec:bruteforce}
+A brute-force solution just simulates the car driving. We can perform this simulation by trying each time a different starting gas station. 
+
+The simulation takes care of keeping track of the amount of gas in the tank as we move from station to station and it is implemented in function \inline{can_complete_loop_from_station} in Listing \ref{list:gas_station}.
+This function is called from within a loop feeding it each time with a new starting gas station until either we tried them all or we found one from which is possible to complete a loop. The full implementation is shown in Listing \ref{list:gas_station}.
+
 
 \lstinputlisting[language=c++, caption={Brute-force solution.},label=list:gas_station]{sources/gas_station/gas_station_solution1.cpp}
 
+This solution has a time complexity of $O(n^2)$. The space complexity is constant.
 
 
 \subsection{Linear time}
 \label{gas_station:sec:linear_time}
+Let's have a look at the brute-solution and see if we can find any ineficiencies and fix them. 
+At a closer look it appears that, if we simulatates the car driving starting from a startion $k$ and we are able to drive it up until station $k+x$ then we stop and we start over simulation choosing as a starting point the station at index $k+1$. 
+Is it really necessary? What if we could somehow start from $k+x$ and still be guaranteed we are not missing any potential good starting gas station?
+
+Let's imagine for a second that we start from station $0$ are we are able to drive it up until station $3$ but we run out of gas when trying to drive to station $4$ as shown in Figure \ref{fig:gas_station:example_expl1}. When the brute-force simulation figures that is impossible to continue, it starts the simulation process from the second station (marked as B). But this simulation is useless and it is destined to also fail. Why is that? The reason is that we already know that with the first three legs of the trip we are already in a surplus or at the very least breaking even with the fuel amount. This is because if we were at some kind of deficit we would have not been able to make the three legs journey in the first place.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/gas_station/images/example_expl1}
+	\caption[]{Behavior of the brute-force solution.}.
+	\label{fig:gas_station:fig:gas_station:example_expl1}
+\end{figure}
+
+Therefore starting from station $1$ is not useful as in the previous simulation we arrived at station $1$ (starting from station $0$) with an amount of fuel greater or equal than zero. The same reasoning can be applied to the starting point $2$. Because when we simulated the car driving starting from station $0$ we were able to reach station $3$, this means we reached station $2$ from station $1$ with a surplus of fuel and therefore if we did not make it back then to station $4$, there is no way we can make it now that we start with $0$ liters of fuel from station $2$.
+
+What does this mean in term of our algorithm? We know that when performing the simulation from station $k$, if we run out of fuel at station $k+x$ we can safely start our simulation at index $k+x+1$, saving a lot of work in the process. 
+Moreover, when we finally are able to reach station $0$ again, we can immediately return the last starting station. 
+For instance let's analyze the example shown in Figure \ref{fig:gas_station:fig:gas_station:example_expl2}. When starting from station $0$ we are able to make it up to station $3$. We then use station $4$ as starting point and we make it back to station $0$. We can at this point conclude that station $4$ is the answer because we know that there is an answer for this instance (the sum of the gas is greater or equal than the sum of the costs) and all the previous stations are not valid starting points. 
+
+One can however argue that station $4$ is not a valid starting point because we did not actually check we can make the journey from station $0$ to station $4$ (stations highlighted in light yellow) once we circled back and that maybe station $5$ (in cyan) or $6$ (in blue) are the right station to start from.
+This reasoning is not quite right as again, if we make it to station $5$ or $6$ starting from station $4$, it means we reach those station with some sort of fuel surplus and therefore starting from station $5$ or $6$ would not be more beneficial than starting from station $4$.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/gas_station/images/example_expl2}
+	\caption[]{Behavior of the brute-force solution.}.
+	\label{fig:gas_station:fig:gas_station:example_expl2}
+\end{figure}
+
+
 
 \lstinputlisting[language=c++, caption={Brute-force solution.},label=list:gas_station]{sources/gas_station/gas_station_solution2.cpp}
 
