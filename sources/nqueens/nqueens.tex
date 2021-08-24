@@ -13,16 +13,14 @@
 \label{ch:nqueens}
 \section*{Introduction}
 In this chapter we are going to discuss a problem that is best known for one of its
-specializations; namely the eight queen puzzle . In the eight queen puzzle the challenge is to place
-eight chess queens on an $8 \times 8$ chessboard so that no two queens threaten each other thereby requiring
- that no two queens share the same row, column or diagonal.
+specializations; namely the eight queen puzzle. 
+In the eight queen puzzle the challenge is to place
+eight chess queens on an $8 \times 8$ chessboard so that no two queens threaten each other thereby requiring that no two queens share the same row, column or diagonal.
 
 The n-queens is a classical problem which is used to test various programming techniques such as constraint programming, logic
 programming , recursion and even genetic algorithms. In the context of a programming interview, you
-should aim for precision and for outlining the solution strategy clearly while solving it. The
-interviewer is very likely expecting you to be familiar with the problem already, and possibly also with
-the solution but they will want to see how well you can explain and materialize in code all the steps
- between a purely brute-force and a more sophisticated solution.
+should aim for precision and for outlining the solution strategy clearly while solving it. 
+The interviewer is very likely expecting you to be familiar with the problem already, and possibly also with the solution but they will want to see how well you can explain and materialize in code all the steps between a purely brute-force and a more sophisticated solution.
 
 \begin{figure}
 	 \centering 
@@ -44,11 +42,11 @@ diagonals. Write a function that,  given an integer $1 \leq n$, returns all solu
 $n$-queens puzzle.
 
 A solution is to be returned as a snapshot of the chessboard. A snapshot of the board is an array of
-$n$ strings, each representing a row, where an empty cell is denoted by the symbol '.' and a cell
-occupied by a queen by the letter 'Q'.
+$n$ strings, each representing a row, where an empty cell is denoted by the symbol \singlequotes{.} (dot) and a cell
+occupied by a queen by the letter \singlequotes{Q}.
 
-For instance \textit{"xxxx"} is the snapshot of the board shown in Figure
-\ref{fig:nqueens:chessboard}. 
+For instance, the following is the snapshot of the board shown in Figure
+\ref{fig:nqueens:chessboard}: \\ \texttt{["....Q...","......Q.","...Q....","Q.......","..Q.....",".......Q",\linebreak".....Q..",".Q......"]} . 
 
 	%example1
 	\begin{example}
@@ -121,10 +119,14 @@ whopping $4426165368$ possible arrangements but only $92$ distinct solutions! Th
 extremely easy to implement as the only thing required is to be able to enumerate all the
 queens' arrangements and filter out the ones in which a queen can attack any of the others. This
 last step can be done by checking, for each queen, whether another queen is placed in its row,
-column or diagonals. Listing \ref{list:nqueens:bruteforce} shows an implementation of this idea where we
-use the function \inline{nqueen_bruteforce} as a driver and the function
+column or diagonals. 
+
+Listing \ref{list:nqueens:bruteforce} shows an implementation of this idea where we
+use the function \inline{nqueen_bruteforce} as a driver, the function
 \inline{nqueen_bruteforce_helper} to generate all possible arrangements for the queens and the
-function \ref{is_valid_solution} to evaluate it. An arrangement is a combination of size $n$ taken
+function \inline{is_valid_solution} to evaluate it.
+
+An arrangement is a combination of size $n$ taken
 from a list of all possible board cells \inline{location}. The function
 \inline{nqueen_bruteforce_helper} works similarly to the function \inline{all_combinations} in
 Listing \ref{list:min_difficulty_job_scheduler:combinations} (at page
@@ -132,23 +134,19 @@ Listing \ref{list:min_difficulty_job_scheduler:combinations} (at page
 \ref{ch:min_difficulty_job_scheduler}) with the difference that the combination is just evaluated to
 see if it is a valid solution and only saved if such test is positive.
 
-Function \ref{is_valid_solution} takes care of validating a solution candidate by checking whether
+Function \inline{is_valid_solution} takes care of validating a solution candidate by checking whether
 no two queens placed at locations $(a,b)$ and $(c,d)$ share the same:
 \begin{itemize}
 	\item row (when $a = c$  or $a-c=0$)
 	\item column (when $b = d$  or $b-d=0$) 
 	\item diagonal (either when:
 	\begin{itemize}
-		\item $a-c = b-d$, meaning that you can reach $(c,d)$ by advancing by the same number of
-		rows and column from $(a,b)$ 
-		\item $|a-c| = |b-d|$ and $\sign{(a-c)} \leq \sign{(b-d)}$  which has the geometrical
-		interpretation that you can  reach $(c,d)$ by advancing by the same number of rows and columns
-		from $(a,b)$ but in opposite directions: advance $k$ rows and step back $k$ columns or the
-		other way round.
+		\item $a-c = b-d$, meaning that you can reach $(c,d)$ by advancing by the same number of rows and column from $(a,b)$ 
+		\item $|a-c| = |b-d|$ and $\sign{(a-c)} \leq \sign{(b-d)}$  which has the geometrical interpretation that you can reach $(c,d)$ by advancing by the same number of rows and columns	from $(a,b)$ but in opposite directions: advance $k$ rows and step back $k$ columns or the	other way round.
 	\end{itemize} 
 \end{itemize}
 
-\lstinputlisting[language=c++, caption={Bruteforce solution to the n-queens problem.},label=list:nqueens:bruteforce]{sources/nqueens/nqueens_solution1.cpp}
+\lstinputlisting[language=c++, caption={Bruteforce solution where all possible queens arrangements on the board are enumerated.},label=list:nqueens:bruteforce]{sources/nqueens/nqueens_solution1.cpp}
 
 \subsection{One row one queen}
 \label{nqueens:sec:onerowonequeen}
@@ -179,12 +177,13 @@ This approach is in practice significantly faster than the ones presented above.
 
 
 
-\subsection{Brute-force Revisited}
+\subsection{Brute-force revisited}
 \label{nqueens:sec:bruteforcerevisited}
-The purely bruteforce approach shown in Section \ref{nqueens:sec:bruteforce} can be improved quite dramatically by using an early prunining tecnique that
-does not wait to reject a given arrangements until all the queens are placed, but does so as soon as a conflict is found, even on a partial candidate solution.
+The purely brute-force approach shown in Section \ref{nqueens:sec:bruteforce} can be improved quite dramatically by using an early prunining tecnique that
+does not wait to reject a given arrangement until all the queens are placed, but does so as soon as a conflict is found, even on a partial candidate solution.
 Surprisingly this can be achieved with minimal changes to the Listing \ref{list:nqueens:bruteforce} by adding a call to 
 \inline{is_valid_solution(sol_candidate)} every time an element is added to the candidate solution list.
+
 Listing \ref{list:nqueens:bruteforcerevised} shows how this modified version of the brute-force approach above can be implemented.
 Note that the function \inline{can_add_queen} is basically a copy and paste of the function \inline{is_valid_solution} with the (crucial)
 difference that it only checks whether is it legal to add a queen at the position specified by its second argument when you already have a number of queens placed in the board whose positions are defined in its first parameter.

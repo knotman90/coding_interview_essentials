@@ -74,6 +74,11 @@ struct Node {
     \begin{answered}
 		\textit{Yes.}
 	\end{answered} \end{questionitem}
+
+	\item \begin{questionitem} \begin{question} Is it guaranteed the input list to be a valid list?  \end{question} 	 
+		\begin{answered}
+			\textit{The input list is always a valid singly linked list.}
+		\end{answered} \end{questionitem}
 	
 \end{QandA}
 
@@ -85,9 +90,9 @@ There are several approaches to solving this problem but we will focus on two, t
 \label{delete_duplicates_list:sec:bruteforce}
 The easiest solution possible is as follows:
 \begin{enumerate}
-	\item Create a vector that contains a copy of the list
-	\item Remove duplicates from the vector
-	\item Create a new List with the content of the duplicate free vector
+	\item Create a vector that contains a copy of the list;
+	\item Remove duplicates from the vector;
+	\item Create a brand new list with the content of the duplicate-free vector.
 \end{enumerate}
 This solution is straightforward but not optimal as, while it is optimal in time we are not taking advantage of the fact that we can modify the list in place and thereby avoid creating and returning a brand new list.  
 
