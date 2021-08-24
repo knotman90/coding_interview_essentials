@@ -164,9 +164,10 @@ What does this mean in term of our algorithm? We know that when performing the s
 Moreover, when we finally are able to reach station $0$ again, we can immediately return the last starting station. 
 For instance let's analyze the example shown in Figure \ref{fig:gas_station:fig:gas_station:example_expl2}. When starting from station $0$ we are able to make it up to station $3$. We then use station $4$ as starting point and we make it back to station $0$. We can at this point conclude that station $4$ is the answer because we know that there is an answer for this instance (the sum of the gas is greater or equal than the sum of the costs) and all the previous stations are not valid starting points. 
 
-One can however argue that station $4$ is not a valid starting point because we did not actually check we can make the journey from station $0$ to station $4$ (stations highlighted in light yellow) once we circled back and that maybe station $5$ (in cyan) or $6$ (in blue) are the right station to start from.
+One can however argue that station $4$ (marked with a green circle) is not a valid starting point because we did not actually check we can make the journey from station $0$ to station $4$ (stations highlighted in light yellow) once we circled back and that maybe station $5$ (in cyan) or $6$ (in blue) are the right station to start from.
 This reasoning is not quite right as again, if we make it to station $5$ or $6$ starting from station $4$, it means we reach those station with some sort of fuel surplus and therefore starting from station $5$ or $6$ would not be more beneficial than starting from station $4$.
 
+All these insights above are implemented into a solution in Listing \ref{list:gas_station}.
 
 \begin{figure}
 	\centering
@@ -177,5 +178,12 @@ This reasoning is not quite right as again, if we make it to station $5$ or $6$ 
 
 
 
-\lstinputlisting[language=c++, caption={Brute-force solution.},label=list:gas_station]{sources/gas_station/gas_station_solution2.cpp}
+\lstinputlisting[language=c++, caption={Linear time constant space solution.},label=list:gas_station:linear]{sources/gas_station/gas_station_solution2.cpp}
 
+
+\section{Common Variation - Fuel tank with limited capacity}
+
+\begin{exercise}
+	\label{example:gas_station:exercice1}
+	Solve the problem described in Exercise \ref{} with the additional constraint that the fuel tank of the car has a maximum capacity $k$ that is given as an additional parameter to the function you need to write. 
+\end{exercise}
