@@ -664,3 +664,22 @@ innerbottommargin=5pt]{cBox}
 \usepackage{fontawesome5}
 
 \newcommand{\GoogleLogo}{\faGoogle Google}
+
+
+
+\usepackage{xparse}
+
+%Idea from https://tex.stackexchange.com/a/236668/1952
+\DeclareDocumentCommand\question{o}{%
+    \item\IfNoValueTF{#1}{}{(#1 points)}}
+
+\newenvironment{questions}[1][]{\enumerate[,#1]}{\endenumerate}
+
+\newlist{oneparchoices}{enumerate*}{1}
+\setlist[oneparchoices,1]{label=\Alph*., itemjoin={{\quad}}}
+
+\newlist{choices}{enumerate}{1}
+\setlist[choices,1]{label=\Alph*., itemjoin={{\quad}}}
+
+\newcommand{\choice}{\item}
+
