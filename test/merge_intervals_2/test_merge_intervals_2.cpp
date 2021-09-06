@@ -101,7 +101,35 @@ TEST(merge_intervals_2, test_single_example1)
         EXPECT_EQ(merged_intervals,ans);
     }
 }
+TEST(merge_intervals_2, test_single_example2)
+{
+    std::vector<Interval> intervals = {{1, 2}, {3, 5}, {6 ,7}, {8, 10}, {12, 16}};
 
+    {
+        const Interval newInterval = {4,9};
+        const std::vector<Interval> merged_intervals = {{1, 2}, {3, 10}, {12, 16}};
+
+        const auto ans = merge_intervals_lineartime(intervals, newInterval);
+        EXPECT_EQ(merged_intervals,ans);
+    }
+
+    {
+        const Interval newInterval = {6,12};
+        const std::vector<Interval> merged_intervals = {{1, 2}, {3, 5}, {6, 16}};
+
+        const auto ans = merge_intervals_lineartime(intervals, newInterval);
+        EXPECT_EQ(merged_intervals,ans);
+    }
+
+    {
+        const Interval newInterval = {6,11};
+        const std::vector<Interval> merged_intervals = {{1, 2}, {3, 5}, {6, 11},{12,16}};
+
+        const auto ans = merge_intervals_lineartime(intervals, newInterval);
+        EXPECT_EQ(merged_intervals,ans);
+    }
+
+}
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv); 

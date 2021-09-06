@@ -21,52 +21,35 @@
 \section{Problem statement}
 \begin{exercise}
 \label{example:merge_intervals_2:exercice1}
-\begin{verbatim}
-	
-	Given a sorted list of disjoint (non-overlapping) intervals $I$ and an interval $w$
-	insert $w$ into $I$ so that the 
-	You may assume that the intervals were initially sorted according to their start times.
-	
-	Example 1:
-	
-	Given intervals [1,3],[6,9] insert and merge [2,5] would result in [1,5],[6,9].
-	
-	Example 2:
-	
-	Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] would result in [1,2],[3,10],[12,16].
-	
-	This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
-	
-	Make sure the returned intervals are also sorted.
-\end{verbatim}
+
+Given a sorted list of disjoint (non-overlapping) intervals $I$ and an interval $w$, insert $w$ into $I$ so that the resulting list still contains only disjoint intervals.
+You may assume that the intervals are sorted according to their start times.
 
 	%example1
 	\begin{example}
 		\label{example:merge_intervals_2:example1}
 		\hfill \\
-	
-		
+		Given $I=\{(1,3),(6,9)\}$ and $w=(2,5)$ the function returns $I'=\{(1,5),(6,9)\}$ (see Figure \ref{example:merge_intervals_2:example1}).
 	\end{example}
 
 	%example2
 	\begin{example}
 		\label{example:merge_intervals_2:example2}
 		\hfill \\
-		
+		Given $I=\{(1,2),(3,5),(6,7),(8,10),(12,16)\}$ and $w=(4,9)$ the function returns $I'=\{(1,2),(3,10),(12,16)\}$
 	\end{example}
 
-	\begin{example}
-		\hfill \\
-	
-	\label{ex:merge_intervals_2:example3}
-	\end{example}
-
-	\begin{example}
-		\hfill \\
-
-	\label{ex:merge_intervals_2:example4}	
-	\end{example}
 \end{exercise}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/merge_intervals_2/images/example1}
+	\caption[Implicit graph for the Example \ref{example:merge_intervals_2:example1}.]
+	{Visual representation the problem instance of Example
+	\ref{example:merge_intervals_2:example1}.The \textcolor[HTML]{339966}{$\blacksquare$} green $(1,3)$ and \textcolor[HTML]{3366ff}{$\blacksquare$} blue interval $(2,5)$  are merged together into the \textcolor[HTML]{33cccc}{$\blacksquare$}cyan interval $(1,5)$ below.}
+	\label{fig:merge_intervals_2:example1}
+\end{figure}
+
 
 \section{Clarification Questions}
 

@@ -12,7 +12,6 @@ std::vector<Interval> merge_intervals_lineartime(const std::vector<Interval> &in
     }
     
     size_t i = 0;
-
     bool inserted = false;
 
     for(; i < intervals.size() ;){
