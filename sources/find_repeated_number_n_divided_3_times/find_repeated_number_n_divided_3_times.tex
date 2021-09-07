@@ -14,26 +14,22 @@
 %	\label{fig:find_repeated_number_n_divided_3_times:example1}
 %\end{figure}
 
-\chapter{Find the element repeated $\frac{n}{3}$ times.}
+\section{Find the element repeated $\frac{n}{k}$ times.}
 \label{ch:find_repeated_number_n_divided_3_times}
-\section*{Introduction}
+%\section*{Introduction}
 
-\section{Problem statement}
 \begin{exercise}
 \label{example:find_repeated_number_n_divided_3_times:exercice1}
-Write a function that, given an array of $n$ integers
-return any of its element that occurs more than  $\frac{n}{3}$.
+Write a function that, given an array $A$ of $n$ integers and an integer $k$,
+returns any of its element that occurs more than  $\frac{n}{k}$.
 If such an element does not exists the function returns $-1$.
 
 
-Input: [1 2 3 1 1]
-Output: 1 
-1 occurs 3 times which is more than 5/3 times.
 	%example1
 	\begin{example}
 		\label{example:find_repeated_number_n_divided_3_times:example1}
 		\hfill \\
-		Given $A=\{1,2,1,3,1\}$, the function return $1$ as it occurs $3 > \Big\lfloor\frac{|A|}{3}\Big\rfloor =2$ times.
+		Given $A=\{1,2,1,3,1\}$ and $k=3$, the function return $1$ as it occurs $3 > \Big\lfloor\frac{|A|}{3}\Big\rfloor =2$ times.
 	\end{example}
 
 	%example2
@@ -43,22 +39,17 @@ Output: 1
 	%\end{example}
 \end{exercise}
 
-\section{Clarification Questions}
-
-\begin{QandA}
-	\item 
-	\begin{answered}
-		\textit{}
-	\end{answered}
-	
-\end{QandA}
-
-\section{Discussion}
-\label{find_repeated_number_n_divided_3_times:sec:discussion}
+%\section{Clarification Questions}
+%\begin{QandA}
+	%\item 
+	%\begin{answered}
+		%\textit{}
+	%\end{answered}	
+%\end{QandA}
 
 
-\subsection{Brute-force}
-\label{find_repeated_number_n_divided_3_times:sec:bruteforce}
+\subsection{Boyer-Moore algorithm extended}
+\label{find_repeated_number_n_divided_3_times:sec:boyer_moore_extended}
 Solution approach:
 
 if you have three distinct elements in the array the solution does not change. You can ignore all three of them.
@@ -72,4 +63,3 @@ When you process a new element you can do the following:
 \begin{minipage}{\linewidth}
 	\lstinputlisting[language=c++, caption={Sample Caption},label=list:find_repeated_number_n_divided_3_times]{sources/find_repeated_number_n_divided_3_times/find_repeated_number_n_divided_3_times_solution1.cpp}
 \end{minipage}
-
