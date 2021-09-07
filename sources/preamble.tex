@@ -669,6 +669,48 @@ innerbottommargin=5pt]{cBox}
 
 \usepackage{xparse}
 
+\definecolor{questionmagenta}{RGB}{237,53,114} % Define the orange color used for highlighting throughout the book
+\definecolor{questionanswergreen}{RGB}{119,197,147}
+% coo question box	  
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=questionmagenta!10,
+linecolor=questionmagenta,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=-0pt,
+innerbottommargin=-1ex
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{questionBox}
+\newtheorem{cppexerciseT}{\CC Question}
+\newenvironment{cppquestion}{\begin{questionBox}\begin{cppexerciseT}}{\hfill{\color{ocre}}\end{cppexerciseT}\end{questionBox}}
+
+
+% cpp solution box	  
+\newmdenv[skipabove=7pt,
+skipbelow=1pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=questionanswergreen!10,
+linecolor=questionanswergreen,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=-0pt,
+innerbottommargin=-1ex
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{answerBox}
+\newtheorem{cppanwserT}{\CC Answer}
+\newenvironment{cppanswer}{\begin{answerBox}\begin{cppanwserT}}{\hfill{\color{ocre}}\end{cppanwserT}\end{answerBox}}
+
+
 %Idea from https://tex.stackexchange.com/a/236668/1952
 \DeclareDocumentCommand\question{o}{%
     \item\IfNoValueTF{#1}{}{(#1 points)}}
@@ -682,4 +724,6 @@ innerbottommargin=5pt]{cBox}
 \setlist[choices,1]{label=\Alph*., itemjoin={{\quad}}}
 
 \newcommand{\choice}{\item}
+
+
 
