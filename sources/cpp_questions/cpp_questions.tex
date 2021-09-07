@@ -4,22 +4,22 @@
         \label{cppquestion:q1}
         (Solution \ref{cppquestion:s1} at page \pageref{cppquestion:s1})
         \question \textbf{Which of the following statements is true for the code below:} 
-        \begin{lstlisting}[language=c++,numbers=none, caption={}]
-            struct X {
-                A a;
-                B b;
-                X() : a{}, b{} {}
-                };
-                
-                struct Y : X {
-                    C c;
-                    D d;
-                    Y() : d{}, c{} {}
-                    ~Y() {}
-                    };
-                    
-                    
-                \end{lstlisting} 
+\begin{lstlisting}[language=c++,numbers=none, caption={}]
+struct X
+{
+  A a;
+  B b;
+  X() : a{}, b{}  {}
+};
+
+struct Y : X
+{
+  C c;
+  D d;
+  Y() : d{}, c{}  {}
+  ~Y() {  }
+};                    
+\end{lstlisting} 
                 \begin{choices}
                     \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{A::~A(), B::~B(), D::~D(), C::~C()}
                     \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{A::~A(), B::~B(), C::~C(), D::~D()}
@@ -34,13 +34,13 @@
     (Solution \ref{cppquestion:s2} at page \pageref{cppquestion:s2}) 
     \question \textbf{What will be the result of the code below?} 
     \begin{lstlisting}[language=c++,numbers=none, caption={}]
-        const char* ptr1 = "123456";
-        const char* ptr2 = "1234567";
-        
-        if(ptr1 == ptr2)
-            printf("same address");
-        else
-            printf("different address");
+const char* ptr1 = "123456";
+const char* ptr2 = "1234567";
+
+if(ptr1 == ptr2)
+    printf("same address");
+else
+    printf("different address");
         \end{lstlisting} 
     \begin{choices}
     \choice \quotes{different address}
@@ -66,3 +66,52 @@
     \end{choices}
 \end{cppquestion}
 
+\begin{cppquestion}
+    \label{cppquestion:q4}
+    (Solution \ref{cppquestion:s4} at page \pageref{cppquestion:s4})
+    \question \textbf{Which of the following statements are true for the code below?} 
+    \begin{lstlisting}[language=c++,numbers=none, caption={}]
+class Account
+{
+  mutable std::mutex m_;
+  unsigned balance_;
+
+ public:
+  friend void transfer(Account& src, Account& dst, unsigned amount)
+  {
+    std::lock_guard<std::mutex> lck_src(src.m_);
+    std::lock_guard<std::mutex> lck_dst(dst.m_);
+    src.balance_ -= amount;
+    dst.balance_ += amount;
+  }
+};
+    \end{lstlisting} 
+
+    \begin{choices}
+     \choice Code is thread safe thanks to usage of \inline{lock_guards} that will prevent races and deadlocks.
+     \choice Mutable \inline{std::mutex} makes this code not thread safe.
+     \choice Code is not exception safe.
+     \choice Code is not deadlock-free.
+     \choice Using \inline{std::lock()} would be better to lock the mutexes.
+    \end{choices}
+\end{cppquestion}
+ 
+
+\begin{cppquestion}
+    \label{cppquestion:q5}
+    (Solution \ref{cppquestion:s5} at page \pageref{cppquestion:s5})
+    \question \textbf{What will be the address the \inline{ptr} points to after code execution? Assume that \inline{CHAR_BITS} equals 8.} 
+\begin{lstlisting}[language=c++,numbers=none, caption={}]
+int32_t* ptr = (int32_t*) 0x20000000;
+ptr += 2;
+\end{lstlisting} 
+    \begin{choices}
+     \choice \inline{0x20000000}
+     \choice \inline{0x20000002}
+     \choice \inline{0x20000004}
+     \choice \inline{0x20000006}
+     \choice \inline{0x20000008}
+     \choice \inline{0x20000010}
+     \choice \inline{0x2000000C}
+    \end{choices}
+\end{cppquestion}
