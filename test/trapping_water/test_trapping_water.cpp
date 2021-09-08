@@ -36,7 +36,7 @@ TEST(trapping_water, test_one_zero_alternate_zero_starting)
 {
   const vector<int> A = {0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1};
   const int expected  = 5;
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
@@ -46,7 +46,7 @@ TEST(trapping_water, test_one_zero_alternate_zero_ending)
 {
   const vector<int> A = {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0};
   const int expected  = 5;
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
@@ -56,9 +56,9 @@ TEST(trapping_water, test_one_zero_alternate)
 {
   const vector<int> A = {1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1};
   const int expected  = 5;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -66,9 +66,9 @@ TEST(trapping_water, test_5_4_alternate_zero_starting_ending)
 {
   const vector<int> A = {4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4};
   const int expected  = 5;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -76,9 +76,9 @@ TEST(trapping_water, test_stairs_zero_to_10)
 {
   const vector<int> A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   const int expected  = 0;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -86,9 +86,9 @@ TEST(trapping_water, test_stairs_3_to_0_to_3)
 {
   const vector<int> A = {3, 2, 1, 0, 1, 2, 3};
   const int expected  = 9;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -96,9 +96,9 @@ TEST(trapping_water, test_double_stairs_3_to_0_to_3)
 {
   const vector<int> A = {3, 2, 1, 0, 1, 2, 3, 3, 2, 1, 0, 1, 2, 3};
   const int expected  = 9 + 9;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -112,9 +112,9 @@ TEST(trapping_water, test_double_100_numbers_sequence)
       8,  9,  16, 17, 1,  2,  6,  16, 9,  19, 16, 11, 13, 19, 5,  18, 2,
       2,  9,  19, 19, 14, 16, 5,  7,  7,  7,  12, 16, 10, 20, 8};
   const int expected = 933;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -129,9 +129,9 @@ TEST(trapping_water, test_double_100_numbers_upto_1000_sequence)
       190, 233, 981, 301, 559, 392, 204, 138, 399, 400, 131, 704, 996, 418, 264,
       882, 862, 211, 132, 476, 160, 8,   397, 976, 148};
   const int expected = 43253;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -139,9 +139,9 @@ TEST(trapping_water, test_one_number)
 {
   const vector<int> A = {744};
   const int expected  = 0;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -149,9 +149,9 @@ TEST(trapping_water, test_two_numbers)
 {
   const vector<int> A = {744, 1};
   const int expected  = 0;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -159,9 +159,9 @@ TEST(trapping_water, test_three_numbers_1)
 {
   const vector<int> A = {744, 0, 1598};
   const int expected  = 744;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -169,9 +169,9 @@ TEST(trapping_water, test1)
 {
   const vector<int> A = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
   const int expected  = 6;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 
@@ -179,9 +179,9 @@ TEST(trapping_water, test_stairs_10_to_0)
 {
   const vector<int> A = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
   const int expected  = 0;
+  EXPECT_EQ(expected, trapping_water_brute_force(A));
   EXPECT_EQ(expected, trapping_water_stack(A));
   EXPECT_EQ(expected, trapping_water_DP(A));
-  EXPECT_EQ(expected, trapping_water_two_pointers(A));
   EXPECT_EQ(expected, trapping_water_two_pointers(A));
 }
 

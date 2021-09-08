@@ -17,10 +17,34 @@
 \chapter{Merge Intervals}
 \label{ch:merge_intervals_2}
 \section*{Introduction}
+Intervals are common in programming and they pop-up in numerous applications as they are very versitale and can be used to represent many things, from finite segments in a gemoetry application to time spans for a school timetable.
+
+Intervals are also quite popular in interview questions and this chapter will go through one that is commonly asked at Google where we are asked to, given a list of time intervals, produce a new list where none of the element overlap with another.
+
+We will also investigate a variation of this problem where we are given a list of time intervals where we are guaranteed none of them overlap to begin with and our job is to insert new interval in the list in such a way that the non-overlapping property is maintained. 
 
 \section{Problem statement}
 \begin{exercise}
-\label{example:merge_intervals_2:exercice1}
+\label{example:merge_intervals_2:exercice1_1}
+Write a function that, given a list of intervals $I=\{(s_0, e_0),(s_1, e_1), \ldots,(s_{n-1}, e_{n-1})\}$ represented as a pair of integers, return a copy of the input, $I'$ where all the overlapping intervals have been merged. The resulting list should only contain non-overlapping intervals.
+
+	%example1
+	\begin{example}
+		\label{example:merge_intervals_2:example1_1}
+		\hfill \\
+		Given $I=\{(1, 5), (3, 7), (4, 6), (6, 8) \}$ returns $I'=\{(1,8)\}$.
+	\end{example}
+
+	\begin{example}
+		\label{example:merge_intervals_2:example1_2}
+		\hfill \\
+		Given $I=\{(1, 5), (6, 7), (4, 4), (9, 12) \}$ returns $I'=\{(1,5),(6,7),(9,12)\}$.
+	\end{example}
+\end{exercise}
+
+\section{Problem statement}
+\begin{exercise}
+\label{example:merge_intervals_2:exercice1_2}
 
 Given a sorted list of disjoint (non-overlapping) intervals $I$ and an interval $w$, insert $w$ into $I$ so that the resulting list still contains only disjoint intervals.
 You may assume that the intervals are sorted according to their start times.
