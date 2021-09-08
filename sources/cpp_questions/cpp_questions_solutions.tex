@@ -43,3 +43,21 @@
 
     It is important to notice that you can only use integer as right parameters for the increase and decrease operations on pointers and that you cannot add a pointer to another pointer.
 \end{cppanswer}
+
+
+\begin{cppanswer}
+    \label{cppquestion:s6}
+    (Question \ref{cppquestion:q6} at page \pageref{cppquestion:q6}) \hfill \\
+    Correct answer is \textbf{C}. \\
+    As opposed to overflow/underflow for signed integer where it is indeed undefined behaviour, the standard clearly states that unsigned integers shall obey the arithmetic under $2^n$ modulo:  \href{https://eel.is/c++draft/basic.fundamental#2}{[basic.fundamental]} \quote{\quotes{ n unsigned integer type has the same width $N$ as the corresponding signed integer type. The range of representable values for the unsigned type is 0 to $2^N-1$(inclusive); \textbf{arithmetic for the unsigned type is performed modulo $2^N$}}}.
+   
+\end{cppanswer}
+
+
+\begin{cppanswer}
+    \label{cppquestion:s7}
+    (Question \ref{cppquestion:q7} at page \pageref{cppquestion:q7}) \hfill \\
+    Correct answers are: \textbf{A},\textbf{B} and check the rest. \\       
+\end{cppanswer}
+
+

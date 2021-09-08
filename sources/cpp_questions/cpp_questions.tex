@@ -115,3 +115,64 @@ ptr += 2;
      \choice \inline{0x2000000C}
     \end{choices}
 \end{cppquestion}
+
+
+\begin{cppquestion}
+    \label{cppquestion:q6}
+    (Solution \ref{cppquestion:s6} at page \pageref{cppquestion:s6})
+    \question \textbf{What is the value of \inline{x} after the call to \inline{foo}?} 
+\begin{lstlisting}[language=c++,numbers=none, caption={}]
+uint8_t foo(uint8_t a)
+{
+    return ++a;
+}
+
+int main()
+{
+    uint8_t x = foo(std::numeric_limits<uint8_t>::max(););
+    return 0;
+}
+\end{lstlisting}
+    \begin{choices}
+     \choice \inline{4294967295}
+     \choice \inline{255}
+     \choice \inline{0}
+     \choice \inline{-1}
+     \choice \inline{-2147483647 - 1}
+     \choice \inline{129}
+     \choice \inline{-128}
+     \choice \inline{Compilation error}
+     \choice \inline{Undefined behavior}
+    \end{choices}
+\end{cppquestion}
+
+
+
+\begin{cppquestion}
+    \label{cppquestion:q6}
+    (Solution \ref{cppquestion:s7} at page \pageref{cppquestion:s7})
+    \question \textbf{In which of the following statement is Return Value Optimization (RVO) guaranteed to happen? Assume C++-17 standard.} 
+    \begin{choices}
+     \choice \inline{FooClass a; FooClass b = a;}
+     \choice \inline{auto a = CreateMyClass();}
+     \choice \inline{FooClass a\{ CreateFooClass() \};}
+     \choice \inline{FooClass a; a = CreateFooClass();}
+    \end{choices}
+\end{cppquestion}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
