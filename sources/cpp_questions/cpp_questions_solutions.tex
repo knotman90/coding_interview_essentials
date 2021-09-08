@@ -27,7 +27,19 @@
 \begin{cppanswer}
     \label{cppquestion:s5}
     (Question \ref{cppquestion:q5} at page \pageref{cppquestion:q5}) \hfill \\
-    Correct answer is \textbf{E}. \\
+    Correct answer is \textbf{G}. \\
     Each element pointed by \inline{ptr} is $4$ bytes and therefore we are going to add $8=2\times 4$ to the start address.
 
+    On pointers we can perform the following operations:
+    \begin{itemize}
+        \item Increment \inline{++},\inline{+},\inline{+=}
+        \item Decrement \inline{--},\inline{-},\inline{-=}
+        \item Comparison \inline{==}
+        \item Assignment \inline{=}
+    \end{itemize}
+
+    When performing an increment operation on a pointer \inline{ptr} or type T like: \inline{ptr += 2} the value of the address pointed by \inline{ptr} will be increased by \inline{2*sizeof(T)}. The decrement operation works in a similar fashion.
+    This means that if we have a  pointer \inline{ptr} pointing to the first element in an array \inline{A} i.e. \inline{A[0]}, then, the following causes \inline{ptr} to point to the fifth element in \inline{A} i.e. \inline{A[4]}:   \inline{ptr = ptr + 4};
+
+    It is important to notice that you can only use integer as right parameters for the increase and decrease operations on pointers and that you cannot add a pointer to another pointer.
 \end{cppanswer}
