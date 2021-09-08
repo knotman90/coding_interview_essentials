@@ -20,14 +20,14 @@ struct Y : X
   ~Y() {  }
 };                    
 \end{lstlisting} 
-                \begin{choices}
-                    \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{A::~A(), B::~B(), D::~D(), C::~C()}
-                    \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{A::~A(), B::~B(), C::~C(), D::~D()}
-                    \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{C::~C(), D::~D(), B::~B(), A::~A()}
-                    \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{D::~D(), C::~C(), B::~B(), A::~A()}
-                    \choice Destruction of type \inline{Y} will only call destructors of classes \inline{C} and \inline{D} as the destructor of class \inline{X} is not called from \inline{Y::~Y()}
-                \end{choices}
-        \end{cppquestion}
+        \begin{choices}
+            \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{A::~A(), B::~B(), D::~D(), C::~C()}
+            \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{A::~A(), B::~B(), C::~C(), D::~D()}
+            \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{C::~C(), D::~D(), B::~B(), A::~A()}
+            \choice Destruction of type \inline{Y} will call member destructors in the following order \inline{D::~D(), C::~C(), B::~B(), A::~A()}
+            \choice Destruction of type \inline{Y} will only call destructors of classes \inline{C} and \inline{D} as the destructor of class \inline{X} is not called from \inline{Y::~Y()}
+        \end{choices}
+\end{cppquestion}
             
 \begin{cppquestion}
     \label{cppquestion:q2}
