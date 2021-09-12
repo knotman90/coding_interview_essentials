@@ -1,0 +1,28 @@
+\chapter{Mini Problems}
+
+\section{Greatest Common Divisor}
+\begin{exercise}
+    Write a function to calculate the GCD of two integers.
+    \begin{example}
+        \label{ex:gcd:example1}
+        \hfill \\
+        Given $35$ and $28$ the function returns $7$.
+    \end{example}
+    
+    \begin{example}
+        \label{ex:gcd:example1}
+        \hfill \\
+        Given $15$ and $8$ the function returns $1$.
+    \end{example}
+
+    \end{exercise}
+
+\subsection{\CC Brute-force}
+The GCD of two numbers $x$ and $y$ is defined as the largest integer that divides both $x$ and $y$. A simple and inefficient solution would simply loop over all numbers from the smallest between $x$ and $y$ and would stop as soon as we find one that divides both. We are guaranteed to find such a nuber as the number $1$ will happily divide any number. This solution is shown in Listing \ref{}.
+
+\lstinputlisting[language=c++, caption={Brute-force, linear time solution.},label=list:mirror_binary_tree1]{test/mini_problems/gcd/gcd_bruteforce.cpp}
+
+\subsection{Log-time solution. Euclidean Algorithm}
+
+\subsection{\CC Compile-time}
+
