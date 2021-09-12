@@ -1,14 +1,4 @@
-auto merge(const Interval& a, const Interval& b)
-{
-  Interval ans(a);
-  bool ok = false;
-  if (b.start >= a.start && b.start <= a.end)
-  {
-    ok      = true;
-    ans.end = std::max(a.end, b.end);
-  }
-  return std::make_tuple(ok, ans);
-}
+
 
 std::vector<Interval> merge_list_intervals_entire_list_lin_time(
     std::vector<Interval>& intervals)
