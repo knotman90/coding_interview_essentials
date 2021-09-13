@@ -15,6 +15,8 @@ using std::vector;
 #include "gcd_bruteforce.cpp"
 #include "gcd_euclide.cpp"
 #include "gcd_euclide_iterative.cpp"
+#include "gcd_euclide_pre_cpp11.cpp"
+#include "gcd_euclide_cpp14.cpp"
 
 TEST(gcd, example1)
 {
@@ -28,6 +30,9 @@ TEST(gcd, example1)
 
   ASSERT_EQ(expected, gcd_euclide_iterative(x, y));
   ASSERT_EQ(expected, gcd_euclide_iterative(y, x));
+
+  constexpr auto cpp11ans = GCDEuclidePreCpp11<x, y>::gcd;
+  ASSERT_EQ(expected, cpp11ans);
 }
 
 TEST(gcd, example1_mod)
@@ -42,6 +47,9 @@ TEST(gcd, example1_mod)
 
   ASSERT_EQ(expected, gcd_euclide_iterative(x, y));
   ASSERT_EQ(expected, gcd_euclide_iterative(y, x));
+
+  constexpr auto cpp11ans = GCDEuclidePreCpp11<x, y>::gcd;
+  ASSERT_EQ(expected, cpp11ans);
 }
 
 TEST(gcd, example2)
@@ -56,6 +64,9 @@ TEST(gcd, example2)
 
   ASSERT_EQ(expected, gcd_euclide_iterative(x, y));
   ASSERT_EQ(expected, gcd_euclide_iterative(y, x));
+
+  constexpr auto cpp11ans = GCDEuclidePreCpp11<x, y>::gcd;
+  ASSERT_EQ(expected, cpp11ans);
 }
 
 TEST(gdc, random_generated)
@@ -348,6 +359,610 @@ TEST(gdc, random_generated)
 
     ASSERT_EQ(expected, gcd_euclide_iterative(x, y));
     ASSERT_EQ(expected, gcd_euclide_iterative(y, x));
+  }
+}
+
+TEST(gcd, compiletimeprecpp11)
+{
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<11375, 12161>::gcd;
+    ASSERT_EQ(std::gcd(11375, 12161), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<12161, 11375>::gcd;
+    ASSERT_EQ(std::gcd(11375, 12161), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<31303, 5783>::gcd;
+    ASSERT_EQ(std::gcd(31303, 5783), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<5783, 31303>::gcd;
+    ASSERT_EQ(std::gcd(31303, 5783), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<27927, 19868>::gcd;
+    ASSERT_EQ(std::gcd(27927, 19868), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<19868, 27927>::gcd;
+    ASSERT_EQ(std::gcd(27927, 19868), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<6918, 27117>::gcd;
+    ASSERT_EQ(std::gcd(6918, 27117), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<27117, 6918>::gcd;
+    ASSERT_EQ(std::gcd(6918, 27117), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<4539, 31094>::gcd;
+    ASSERT_EQ(std::gcd(4539, 31094), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<31094, 4539>::gcd;
+    ASSERT_EQ(std::gcd(4539, 31094), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<15208, 21553>::gcd;
+    ASSERT_EQ(std::gcd(15208, 21553), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<21553, 15208>::gcd;
+    ASSERT_EQ(std::gcd(15208, 21553), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<22750, 11051>::gcd;
+    ASSERT_EQ(std::gcd(22750, 11051), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<11051, 22750>::gcd;
+    ASSERT_EQ(std::gcd(22750, 11051), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<30337, 31491>::gcd;
+    ASSERT_EQ(std::gcd(30337, 31491), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<31491, 30337>::gcd;
+    ASSERT_EQ(std::gcd(30337, 31491), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<23713, 16188>::gcd;
+    ASSERT_EQ(std::gcd(23713, 16188), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<16188, 23713>::gcd;
+    ASSERT_EQ(std::gcd(23713, 16188), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<24198, 19638>::gcd;
+    ASSERT_EQ(std::gcd(24198, 19638), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<19638, 24198>::gcd;
+    ASSERT_EQ(std::gcd(24198, 19638), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<31590, 23854>::gcd;
+    ASSERT_EQ(std::gcd(31590, 23854), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23854, 31590>::gcd;
+    ASSERT_EQ(std::gcd(31590, 23854), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<28861, 23200>::gcd;
+    ASSERT_EQ(std::gcd(28861, 23200), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23200, 28861>::gcd;
+    ASSERT_EQ(std::gcd(28861, 23200), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<2922, 29934>::gcd;
+    ASSERT_EQ(std::gcd(2922, 29934), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<29934, 2922>::gcd;
+    ASSERT_EQ(std::gcd(2922, 29934), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<23091, 1466>::gcd;
+    ASSERT_EQ(std::gcd(23091, 1466), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<1466, 23091>::gcd;
+    ASSERT_EQ(std::gcd(23091, 1466), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<24934, 19045>::gcd;
+    ASSERT_EQ(std::gcd(24934, 19045), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<19045, 24934>::gcd;
+    ASSERT_EQ(std::gcd(24934, 19045), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<28730, 23085>::gcd;
+    ASSERT_EQ(std::gcd(28730, 23085), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23085, 28730>::gcd;
+    ASSERT_EQ(std::gcd(28730, 23085), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<4651, 31589>::gcd;
+    ASSERT_EQ(std::gcd(4651, 31589), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<31589, 4651>::gcd;
+    ASSERT_EQ(std::gcd(4651, 31589), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<32216, 4665>::gcd;
+    ASSERT_EQ(std::gcd(32216, 4665), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<4665, 32216>::gcd;
+    ASSERT_EQ(std::gcd(32216, 4665), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<1820, 10230>::gcd;
+    ASSERT_EQ(std::gcd(1820, 10230), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<10230, 1820>::gcd;
+    ASSERT_EQ(std::gcd(1820, 10230), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<5950, 24211>::gcd;
+    ASSERT_EQ(std::gcd(5950, 24211), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<24211, 5950>::gcd;
+    ASSERT_EQ(std::gcd(5950, 24211), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<3591, 12176>::gcd;
+    ASSERT_EQ(std::gcd(3591, 12176), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<12176, 3591>::gcd;
+    ASSERT_EQ(std::gcd(3591, 12176), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<6698, 30159>::gcd;
+    ASSERT_EQ(std::gcd(6698, 30159), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<30159, 6698>::gcd;
+    ASSERT_EQ(std::gcd(6698, 30159), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<4815, 19782>::gcd;
+    ASSERT_EQ(std::gcd(4815, 19782), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<19782, 4815>::gcd;
+    ASSERT_EQ(std::gcd(4815, 19782), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<26214, 17927>::gcd;
+    ASSERT_EQ(std::gcd(26214, 17927), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<17927, 26214>::gcd;
+    ASSERT_EQ(std::gcd(26214, 17927), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<6483, 10847>::gcd;
+    ASSERT_EQ(std::gcd(6483, 10847), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<10847, 6483>::gcd;
+    ASSERT_EQ(std::gcd(6483, 10847), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<23343, 1858>::gcd;
+    ASSERT_EQ(std::gcd(23343, 1858), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<1858, 23343>::gcd;
+    ASSERT_EQ(std::gcd(23343, 1858), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<6244, 24375>::gcd;
+    ASSERT_EQ(std::gcd(6244, 24375), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<24375, 6244>::gcd;
+    ASSERT_EQ(std::gcd(6244, 24375), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<1075, 22982>::gcd;
+    ASSERT_EQ(std::gcd(1075, 22982), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<22982, 1075>::gcd;
+    ASSERT_EQ(std::gcd(1075, 22982), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<29051, 8823>::gcd;
+    ASSERT_EQ(std::gcd(29051, 8823), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<8823, 29051>::gcd;
+    ASSERT_EQ(std::gcd(29051, 8823), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<22259, 10584>::gcd;
+    ASSERT_EQ(std::gcd(22259, 10584), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<10584, 22259>::gcd;
+    ASSERT_EQ(std::gcd(22259, 10584), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<32467, 19682>::gcd;
+    ASSERT_EQ(std::gcd(32467, 19682), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<19682, 32467>::gcd;
+    ASSERT_EQ(std::gcd(32467, 19682), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<21629, 972>::gcd;
+    ASSERT_EQ(std::gcd(21629, 972), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<972, 21629>::gcd;
+    ASSERT_EQ(std::gcd(21629, 972), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<1042, 149>::gcd;
+    ASSERT_EQ(std::gcd(1042, 149), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<149, 1042>::gcd;
+    ASSERT_EQ(std::gcd(1042, 149), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<10057, 1607>::gcd;
+    ASSERT_EQ(std::gcd(10057, 1607), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<1607, 10057>::gcd;
+    ASSERT_EQ(std::gcd(10057, 1607), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<139, 7163>::gcd;
+    ASSERT_EQ(std::gcd(139, 7163), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<7163, 139>::gcd;
+    ASSERT_EQ(std::gcd(139, 7163), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<5754, 3294>::gcd;
+    ASSERT_EQ(std::gcd(5754, 3294), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<3294, 5754>::gcd;
+    ASSERT_EQ(std::gcd(5754, 3294), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<26000, 15968>::gcd;
+    ASSERT_EQ(std::gcd(26000, 15968), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<15968, 26000>::gcd;
+    ASSERT_EQ(std::gcd(26000, 15968), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<16291, 16680>::gcd;
+    ASSERT_EQ(std::gcd(16291, 16680), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<16680, 16291>::gcd;
+    ASSERT_EQ(std::gcd(16291, 16680), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<24674, 3174>::gcd;
+    ASSERT_EQ(std::gcd(24674, 3174), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<3174, 24674>::gcd;
+    ASSERT_EQ(std::gcd(24674, 3174), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<26163, 19794>::gcd;
+    ASSERT_EQ(std::gcd(26163, 19794), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<19794, 26163>::gcd;
+    ASSERT_EQ(std::gcd(26163, 19794), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<19864, 5735>::gcd;
+    ASSERT_EQ(std::gcd(19864, 5735), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<5735, 19864>::gcd;
+    ASSERT_EQ(std::gcd(19864, 5735), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<6347, 32057>::gcd;
+    ASSERT_EQ(std::gcd(6347, 32057), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<32057, 6347>::gcd;
+    ASSERT_EQ(std::gcd(6347, 32057), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<31424, 7591>::gcd;
+    ASSERT_EQ(std::gcd(31424, 7591), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<7591, 31424>::gcd;
+    ASSERT_EQ(std::gcd(31424, 7591), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<1631, 21134>::gcd;
+    ASSERT_EQ(std::gcd(1631, 21134), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<21134, 1631>::gcd;
+    ASSERT_EQ(std::gcd(1631, 21134), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<23709, 12575>::gcd;
+    ASSERT_EQ(std::gcd(23709, 12575), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<12575, 23709>::gcd;
+    ASSERT_EQ(std::gcd(23709, 12575), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<28036, 11052>::gcd;
+    ASSERT_EQ(std::gcd(28036, 11052), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<11052, 28036>::gcd;
+    ASSERT_EQ(std::gcd(28036, 11052), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<18196, 22802>::gcd;
+    ASSERT_EQ(std::gcd(18196, 22802), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<22802, 18196>::gcd;
+    ASSERT_EQ(std::gcd(18196, 22802), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<974, 1608>::gcd;
+    ASSERT_EQ(std::gcd(974, 1608), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<1608, 974>::gcd;
+    ASSERT_EQ(std::gcd(974, 1608), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<18901, 23072>::gcd;
+    ASSERT_EQ(std::gcd(18901, 23072), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23072, 18901>::gcd;
+    ASSERT_EQ(std::gcd(18901, 23072), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<31706, 30119>::gcd;
+    ASSERT_EQ(std::gcd(31706, 30119), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<30119, 31706>::gcd;
+    ASSERT_EQ(std::gcd(31706, 30119), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<5286, 15825>::gcd;
+    ASSERT_EQ(std::gcd(5286, 15825), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<15825, 5286>::gcd;
+    ASSERT_EQ(std::gcd(5286, 15825), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<13826, 6790>::gcd;
+    ASSERT_EQ(std::gcd(13826, 6790), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<6790, 13826>::gcd;
+    ASSERT_EQ(std::gcd(13826, 6790), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<10390, 11275>::gcd;
+    ASSERT_EQ(std::gcd(10390, 11275), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<11275, 10390>::gcd;
+    ASSERT_EQ(std::gcd(10390, 11275), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<6901, 1697>::gcd;
+    ASSERT_EQ(std::gcd(6901, 1697), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<1697, 6901>::gcd;
+    ASSERT_EQ(std::gcd(6901, 1697), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<1454, 6683>::gcd;
+    ASSERT_EQ(std::gcd(1454, 6683), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<6683, 1454>::gcd;
+    ASSERT_EQ(std::gcd(1454, 6683), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<21634, 25566>::gcd;
+    ASSERT_EQ(std::gcd(21634, 25566), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<25566, 21634>::gcd;
+    ASSERT_EQ(std::gcd(21634, 25566), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<32398, 14852>::gcd;
+    ASSERT_EQ(std::gcd(32398, 14852), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<14852, 32398>::gcd;
+    ASSERT_EQ(std::gcd(32398, 14852), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<20454, 26974>::gcd;
+    ASSERT_EQ(std::gcd(20454, 26974), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<26974, 20454>::gcd;
+    ASSERT_EQ(std::gcd(20454, 26974), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<4345, 13774>::gcd;
+    ASSERT_EQ(std::gcd(4345, 13774), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<13774, 4345>::gcd;
+    ASSERT_EQ(std::gcd(4345, 13774), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<28202, 20783>::gcd;
+    ASSERT_EQ(std::gcd(28202, 20783), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<20783, 28202>::gcd;
+    ASSERT_EQ(std::gcd(28202, 20783), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<9758, 31408>::gcd;
+    ASSERT_EQ(std::gcd(9758, 31408), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<31408, 9758>::gcd;
+    ASSERT_EQ(std::gcd(9758, 31408), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<8679, 9239>::gcd;
+    ASSERT_EQ(std::gcd(8679, 9239), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<9239, 8679>::gcd;
+    ASSERT_EQ(std::gcd(8679, 9239), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<8246, 29107>::gcd;
+    ASSERT_EQ(std::gcd(8246, 29107), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<29107, 8246>::gcd;
+    ASSERT_EQ(std::gcd(8246, 29107), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<18380, 24319>::gcd;
+    ASSERT_EQ(std::gcd(18380, 24319), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<24319, 18380>::gcd;
+    ASSERT_EQ(std::gcd(18380, 24319), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<160, 32255>::gcd;
+    ASSERT_EQ(std::gcd(160, 32255), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<32255, 160>::gcd;
+    ASSERT_EQ(std::gcd(160, 32255), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<3204, 7154>::gcd;
+    ASSERT_EQ(std::gcd(3204, 7154), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<7154, 3204>::gcd;
+    ASSERT_EQ(std::gcd(3204, 7154), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<1558, 10946>::gcd;
+    ASSERT_EQ(std::gcd(1558, 10946), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<10946, 1558>::gcd;
+    ASSERT_EQ(std::gcd(1558, 10946), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<11221, 604>::gcd;
+    ASSERT_EQ(std::gcd(11221, 604), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<604, 11221>::gcd;
+    ASSERT_EQ(std::gcd(11221, 604), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<12487, 1059>::gcd;
+    ASSERT_EQ(std::gcd(12487, 1059), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<1059, 12487>::gcd;
+    ASSERT_EQ(std::gcd(12487, 1059), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<27342, 23929>::gcd;
+    ASSERT_EQ(std::gcd(27342, 23929), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23929, 27342>::gcd;
+    ASSERT_EQ(std::gcd(27342, 23929), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<7645, 30404>::gcd;
+    ASSERT_EQ(std::gcd(7645, 30404), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<30404, 7645>::gcd;
+    ASSERT_EQ(std::gcd(7645, 30404), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<9685, 27729>::gcd;
+    ASSERT_EQ(std::gcd(9685, 27729), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<27729, 9685>::gcd;
+    ASSERT_EQ(std::gcd(9685, 27729), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<23095, 9155>::gcd;
+    ASSERT_EQ(std::gcd(23095, 9155), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<9155, 23095>::gcd;
+    ASSERT_EQ(std::gcd(23095, 9155), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<17333, 25406>::gcd;
+    ASSERT_EQ(std::gcd(17333, 25406), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<25406, 17333>::gcd;
+    ASSERT_EQ(std::gcd(17333, 25406), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<20561, 9024>::gcd;
+    ASSERT_EQ(std::gcd(20561, 9024), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<9024, 20561>::gcd;
+    ASSERT_EQ(std::gcd(20561, 9024), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<9061, 29963>::gcd;
+    ASSERT_EQ(std::gcd(9061, 29963), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<29963, 9061>::gcd;
+    ASSERT_EQ(std::gcd(9061, 29963), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<4386, 21387>::gcd;
+    ASSERT_EQ(std::gcd(4386, 21387), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<21387, 4386>::gcd;
+    ASSERT_EQ(std::gcd(4386, 21387), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<26664, 18723>::gcd;
+    ASSERT_EQ(std::gcd(26664, 18723), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<18723, 26664>::gcd;
+    ASSERT_EQ(std::gcd(26664, 18723), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<26237, 26719>::gcd;
+    ASSERT_EQ(std::gcd(26237, 26719), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<26719, 26237>::gcd;
+    ASSERT_EQ(std::gcd(26237, 26719), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<19728, 3497>::gcd;
+    ASSERT_EQ(std::gcd(19728, 3497), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<3497, 19728>::gcd;
+    ASSERT_EQ(std::gcd(19728, 3497), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<4809, 10506>::gcd;
+    ASSERT_EQ(std::gcd(4809, 10506), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<10506, 4809>::gcd;
+    ASSERT_EQ(std::gcd(4809, 10506), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<4499, 12427>::gcd;
+    ASSERT_EQ(std::gcd(4499, 12427), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<12427, 4499>::gcd;
+    ASSERT_EQ(std::gcd(4499, 12427), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<9435, 10977>::gcd;
+    ASSERT_EQ(std::gcd(9435, 10977), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<10977, 9435>::gcd;
+    ASSERT_EQ(std::gcd(9435, 10977), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<8162, 23199>::gcd;
+    ASSERT_EQ(std::gcd(8162, 23199), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23199, 8162>::gcd;
+    ASSERT_EQ(std::gcd(8162, 23199), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<23488, 28157>::gcd;
+    ASSERT_EQ(std::gcd(23488, 28157), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<28157, 23488>::gcd;
+    ASSERT_EQ(std::gcd(23488, 28157), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<20007, 24230>::gcd;
+    ASSERT_EQ(std::gcd(20007, 24230), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<24230, 20007>::gcd;
+    ASSERT_EQ(std::gcd(20007, 24230), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<28269, 20224>::gcd;
+    ASSERT_EQ(std::gcd(28269, 20224), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<20224, 28269>::gcd;
+    ASSERT_EQ(std::gcd(28269, 20224), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<6801, 23145>::gcd;
+    ASSERT_EQ(std::gcd(6801, 23145), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23145, 6801>::gcd;
+    ASSERT_EQ(std::gcd(6801, 23145), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<12002, 3753>::gcd;
+    ASSERT_EQ(std::gcd(12002, 3753), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<3753, 12002>::gcd;
+    ASSERT_EQ(std::gcd(12002, 3753), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<1942, 5484>::gcd;
+    ASSERT_EQ(std::gcd(1942, 5484), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<5484, 1942>::gcd;
+    ASSERT_EQ(std::gcd(1942, 5484), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<2757, 5962>::gcd;
+    ASSERT_EQ(std::gcd(2757, 5962), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<5962, 2757>::gcd;
+    ASSERT_EQ(std::gcd(2757, 5962), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<21732, 12609>::gcd;
+    ASSERT_EQ(std::gcd(21732, 12609), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<12609, 21732>::gcd;
+    ASSERT_EQ(std::gcd(21732, 12609), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<8034, 14995>::gcd;
+    ASSERT_EQ(std::gcd(8034, 14995), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<14995, 8034>::gcd;
+    ASSERT_EQ(std::gcd(8034, 14995), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<18342, 11223>::gcd;
+    ASSERT_EQ(std::gcd(18342, 11223), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<11223, 18342>::gcd;
+    ASSERT_EQ(std::gcd(18342, 11223), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<7255, 9392>::gcd;
+    ASSERT_EQ(std::gcd(7255, 9392), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<9392, 7255>::gcd;
+    ASSERT_EQ(std::gcd(7255, 9392), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<14121, 4405>::gcd;
+    ASSERT_EQ(std::gcd(14121, 4405), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<4405, 14121>::gcd;
+    ASSERT_EQ(std::gcd(14121, 4405), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<25030, 23295>::gcd;
+    ASSERT_EQ(std::gcd(25030, 23295), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<23295, 25030>::gcd;
+    ASSERT_EQ(std::gcd(25030, 23295), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<2909, 13527>::gcd;
+    ASSERT_EQ(std::gcd(2909, 13527), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<13527, 2909>::gcd;
+    ASSERT_EQ(std::gcd(2909, 13527), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<26578, 15344>::gcd;
+    ASSERT_EQ(std::gcd(26578, 15344), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<15344, 26578>::gcd;
+    ASSERT_EQ(std::gcd(26578, 15344), cpp11ans2);
+  }
+  {
+    constexpr auto cpp11ans1 = GCDEuclidePreCpp11<29451, 14018>::gcd;
+    ASSERT_EQ(std::gcd(29451, 14018), cpp11ans1);
+    constexpr auto cpp11ans2 = GCDEuclidePreCpp11<14018, 29451>::gcd;
+    ASSERT_EQ(std::gcd(29451, 14018), cpp11ans2);
   }
 }
 

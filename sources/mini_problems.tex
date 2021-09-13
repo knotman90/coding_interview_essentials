@@ -31,11 +31,11 @@ Since this replacement reduces the larger of the two numbers, repeating this pro
 
 It was proven by Gabriel Lamé in 1844 that this algorithm always terminates in less steps than five times the number of digits of the smaller number (in base 10) making this algorithm extremely efficient as the number of digits grows logaritmically compared the number it represents.
 
-Listing \ref{} shows a recursive implementation of this algorithm while Listing \ref{} shows an iterative one. 
+Listing \ref{list:gcd_euclide} shows a recursive implementation of this algorithm while Listing \ref{list:gcd_euclide_iterative} shows an iterative one. 
 
-\lstinputlisting[language=c++, caption={Brute-force, linear time solution.},label=list:gcd_euclide]{test/mini_problems/gcd/gcd_euclide.cpp}
+\lstinputlisting[language=c++, caption={Euclide algorithm, recursive implementation.},label=list:gcd_euclide]{test/mini_problems/gcd/gcd_euclide.cpp}
 
-\lstinputlisting[language=c++, caption={Brute-force, linear time solution.},label=list:gcd_euclide]{test/mini_problems/gcd/gcd_euclide_iterative.cpp}
+\lstinputlisting[language=c++, caption={Euclide algorithm, iterative implementation.},label=list:gcd_euclide]{test/mini_problems/gcd/gcd_euclide_iterative.cpp}
 
 \subsection{\CC Compile-time}
 
