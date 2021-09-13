@@ -35,7 +35,23 @@ Listing \ref{list:gcd_euclide} shows a recursive implementation of this algorith
 
 \lstinputlisting[language=c++, caption={Euclide algorithm, recursive implementation.},label=list:gcd_euclide]{test/mini_problems/gcd/gcd_euclide.cpp}
 
-\lstinputlisting[language=c++, caption={Euclide algorithm, iterative implementation.},label=list:gcd_euclide]{test/mini_problems/gcd/gcd_euclide_iterative.cpp}
+\lstinputlisting[language=c++, caption={Euclide algorithm, iterative implementation.},label=list:gcd_euclide_iterative]{test/mini_problems/gcd/gcd_euclide_iterative.cpp}
 
 \subsection{\CC Compile-time}
+It is quite common to see specific requirements on the compile implementation of the GCD algorithm. Therefore in this section we will see how we can calculate the GCD in \CC at compile time. 
+
+Before C++-11 the only way to do compile time computation was by using templates. In order to calculate GCD using templates we will use a structure with two integral template parameters that we will manipulate in a \inline{static const} variable. An implementation of this idea is shown in \ref{list:gcd_euclide_precpp11}.
+
+\lstinputlisting[language=c++, caption={Pre C++11, compile-time template based solution.},label=list:gcd_euclide_precpp11]{test/mini_problems/gcd/gcd_euclide_pre_cpp11.cpp}
+
+The code works by have a template class with two integral template parameters and a partial specialization that is used to terminate the recursion which is triggered whenever we request the static field \inline{::gcd}.
+
+C++-11 introduces \inline{constexpr} function that can be used to specify function that can be run at compile-time. In C++-11 there are quite some limitation in what statements and operations we can do in a \inline{constexpr} context: for instance we can only have one return statement. Most of these contraints are related in the subsequent versions of the standard. A \inline{constexpr} recursive solution that works in C++-11 is shown in Listing \ref{list:gcd_euclide_cpp11}.
+
+\lstinputlisting[language=c++, caption={C++11 \inline{constexpr} based solution.},label=list:gcd_euclide_cpp11]{test/mini_problems/gcd/gcd_euclide_cpp11.cpp}
+
+Notice that, from C++-14 we can decorate Listing \ref{list:gcd_euclide_iterative} with \inline{constexpr} so that it can be used in compile-time computation.
+
+
+
 
