@@ -24,7 +24,7 @@ std::string decode_string(const std::string& s)
     }
     else if (s[i] == '[')
     {
-      stack.push({rep_f, string()});
+      stack.push({rep_f, std::string()});
       rep_f = 0;
     }
     i++;
