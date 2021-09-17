@@ -664,3 +664,9 @@ innerbottommargin=5pt]{cBox}
 \usepackage{fontawesome5}
 
 \newcommand{\GoogleLogo}{\faGoogle Google}
+\usepackage{multirow}
+\usepackage{lscape}
+
+\newenvironment{rotatepage}%
+    {\clearpage\pagebreak[4]\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 90}}%
+    {\clearpage\pagebreak[4]\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 0}}%
