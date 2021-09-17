@@ -667,6 +667,9 @@ innerbottommargin=5pt]{cBox}
 \usepackage{multirow}
 \usepackage{lscape}
 
-\newenvironment{rotatepage}%
-    {\clearpage\pagebreak[4]\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 90}}%
-    {\clearpage\pagebreak[4]\global\pdfpageattr\expandafter{\the\pdfpageattr/Rotate 0}}%
+\usepackage[utf8]{inputenc}
+
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\usepackage{pgfplotstable}

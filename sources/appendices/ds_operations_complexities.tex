@@ -25,6 +25,84 @@
     Heap                                      & \cellcolor[HTML]{009901}$O(1)$               & \cellcolor[HTML]{656565}N.A.                 & \cellcolor[HTML]{32CB00}$O(log_2(n))$           & \cellcolor[HTML]{32CB00}$O(log_2(n))$          & \cellcolor[HTML]{009901}$O(1)$               & \cellcolor[HTML]{656565}N.A.                 & \cellcolor[HTML]{32CB00}$O(log_2(n))$           & \cellcolor[HTML]{32CB00}$O(log_2(n))$          & \cellcolor[HTML]{FFC702}$O(n)$                            \\ \bottomrule
     \end{tabular}%
     }
-    \caption{Asymptotic complexities for a number of data strucutes. For time, both the average and case is reported, while for space only the worst. $O(1) < O(log_2(n)) < O(log_2(n)) < O(n) < O(nlog_2(n) < O(n^2) < O(n^3) \ldots < O(2^n) < O(n!) < O(n^n))$  }
+    \caption{Asymptotic complexities for a number of data strucutes. For time, both the average and case is reported, while for space only the worst. $O(1) < O(log_2(n)) < O(log_2(n)) < O(n) < O(nlog_2(n) < O(n^2) < O(n^3) \ldots < O(2^n) < O(n!) < O(n^n)$  }
     \label{appendix:ds_complexities}
 \end{table}
+
+
+\begin{figure}
+    \centering
+\begin{tikzpicture}
+    \begin{axis}[
+      grid = major,
+      clip = true,
+      ticks = none,
+      width=0.9\textwidth,
+      height=0.7\textwidth,
+      every axis plot/.append style={very thick},
+      axis line style = ultra thick,
+      clip mode=individual,
+      restrict y to domain=0:40,
+      restrict x to domain=0:20,
+      axis x line = left,
+      axis y line = left,
+      domain = 0.00:10,
+      xmin = 0,
+      xmax = 11,
+      ymin = 0,
+      ymax = 42,
+      xlabel = n,
+      ylabel = no. of operations,
+      xlabel style = {at={(axis description cs:0.5,-0.1)},anchor=south},
+      ylabel style = {at={(axis description cs:-0.08,0.5)},anchor=north},
+      label style = {font=\LARGE\bf},
+    ]
+  \addplot [
+      samples=100, 
+      color=red,
+  ]
+  {x^2}node[above,pos=1,style={font=\Large}]{$\mathcal{O}(n^2)$};
+  \addplot [
+      samples=100, 
+      color=blue,
+  ]
+  {x}node[above,pos=1,style={font=\Large}]{$\mathcal{O}(n)$};
+  \addplot [
+      samples=100, 
+      color=orange,
+  ]
+  {log2 x}node[above,pos=1,style={font=\Large}]{$\mathcal{O}(\log{}n)$};
+  \addplot [
+      samples=100, 
+      color=black,
+  ]
+  {x*(log2 x)}node[above,pos=1,style={font=\Large}]{$\mathcal{O}(n\log{}n)$};
+  \addplot [
+      samples=100, 
+      color=magenta,
+  ]
+  {1}node[above,pos=1,style={font=\Large}]{$\mathcal{O}(1)$};
+  \addplot [
+      samples=100, 
+      color=cyan,
+  ]
+  {x^(2.2)}node[above,pos=1,style={font=\Large}]{$\mathcal{O}(n^3)$};
+  
+
+  \addplot [
+    samples=100,
+    color=green, 
+  ] gnuplot{gamma(x+3)} node[above,pos=1,style={font=\Large}]{$\mathcal{O}(n!)$};
+
+  \addplot [
+    samples=100, 
+    color=yellow,
+]
+{2.5*2^x}node[above,pos=1,style={font=\Large}]{$\mathcal{O}(2^x)$};
+  
+  \end{axis}
+  \end{tikzpicture}
+
+  \caption[]{Graph showing the relative growth rates of common function used to describe algorithms.}
+  \label{fig:ds_complexities:graph}
+\end{figure}
