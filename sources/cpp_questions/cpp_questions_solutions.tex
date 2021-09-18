@@ -3,13 +3,21 @@
 \begin{cppanswer}
     \label{cppquestion:s1}
     (Question \ref{cppquestion:q1} at page \pageref{cppquestion:q1}) \hfill \\
-
+    Correct answer is \textbf{D}. \\
+    The fields of of a class are destructed in the \textbf{reverse} order they appear in the source. 
+    The fields of \inline{Y} are destructed first followed by the fields of \inline{X}. 
+    
+    In general, the base class destructors are invoked in reverse order as they appear in the inheritance list.
 \end{cppanswer}
 
 \begin{cppanswer}
     \label{cppquestion:s2}
     (Question \ref{cppquestion:q2} at page \pageref{cppquestion:q2}) \hfill \\
-    
+    Correct answer is \textbf{A}. \\
+    \inline{ptr1} and \inline{ptr2} are two distinct pointers  pointing at two distinct string literals. 
+
+    Usually string literals are places in  the so called \quotes{read-only-data} section of the binary which gets mapped into the process space as read-only (which is why you can't change it).
+    It does vary by platform. For example, simpler chip architectures may not support read-only memory segments so the data segment will be writable.
 \end{cppanswer}
 
 \begin{cppanswer}
