@@ -30,14 +30,15 @@
 
 \usepackage[english]{babel} % English language/hyphenation
 
-\usepackage{enumitem} % Customize lists
+\usepackage[inline]{enumitem} % Customize lists
 \setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
 
 \usepackage{booktabs} % Required for nicer horizontal rules in tables
 
-\usepackage{xcolor} % Required for specifying colors by name
+\usepackage{xcolor}
+\usepackage{colortbl}
 \definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
-
+\definecolor{darkgreen}{RGB}{0,128,0}
 
 \usepackage{subcaption}
 \usepackage{graphicx}
@@ -51,13 +52,17 @@
 
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 \usepackage[utf8]{inputenc} % Required for including letters with accents
-\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+\usepackage{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fontspec} % Use 8-bit encoding that has 256 glyphs
+\newfontfamily\test[Path=./fonts/]{PlayfairDisplay-Black.ttf}
+%\usepackage{PlayfairDisplay}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
-
-\usepackage[citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\usepackage{csquotes}
+\usepackage[citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{sources/bibliography.bib}
 \defbibheading{bibempty}{}
 
@@ -477,29 +482,8 @@ innerbottommargin=5pt]{cBox}
 \par\vspace*{100\p@}}
 \makeatother
 
-%----------------------------------------------------------------------------------------
-%	HYPERLINKS IN THE DOCUMENTS
-%----------------------------------------------------------------------------------------
+\input{sources/title_and_author.tex}
 
-\usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= ocre,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
-\usepackage{bookmark}
-\bookmarksetup{
-open,
-numbered,
-addtohook={%
-\ifnum\bookmarkget{level}=0 % chapter
-\bookmarksetup{bold}%
-\fi
-\ifnum\bookmarkget{level}=-1 % part
-\bookmarksetup{color=ocre,bold}%
-\fi
-}
-}
-
-%----------------------------------------------------------------------------------------
-%	LISTINGS
-%----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	LISTINGS
 %----------------------------------------------------------------------------------------
@@ -550,8 +534,13 @@ addtohook={%
 
 %----------------------------------------------------------------------------------------
 
-\newenvironment{QandA}{\begin{enumerate}[label=\bfseries Q.\arabic*.,leftmargin=2em,rightmargin=2em]\bfseries}{\end{enumerate}}
+\newenvironment{questionitem}{}{}
+
+\newenvironment{question}{\par\bfseries}{}
 \newenvironment{answered}{\par\normalfont}{}
+\newenvironment{QandA}
+	{\begin{enumerate}[label=\bfseries Q.\arabic*.,leftmargin=2em,rightmargin=2em]\bfseries}
+	{\end{enumerate}}
 %----------------------------------------------------------------------------------------
 %	ALGORITHM
 %----------------------------------------------------------------------------------------
@@ -588,9 +577,12 @@ addtohook={%
 \usepackage[makeroom]{cancel}
 \usepackage[super]{nth}
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
-\newcommand{\inline}[1]{\ \lstinline[columns=fixed]{#1}}
+\newcommand{\inline}[1]{\ \lstinline[breaklines=true]{#1}}
 
 %explicit space
+
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{fancyvrb}
 \fvset{showspaces=true}
 \SaveVerb{verbspace}! !
@@ -599,3 +591,144 @@ addtohook={%
 
 \usepackage{framed}
 \newcommand*{\mybox}[1]{\framebox{#1}}
+
+%Roman numbers
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\renewcommand{\thefootnote}{\textit{\alph{footnote}}}
+\usepackage{pifont}
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+
+
+\def\bsq#1{%both single quotes
+\lq{#1}\rq}
+
+%rotate characters
+\def\rotatecharone#1{\rotatebox[origin=c]{180}{#1}}
+
+\def\rotatechartwo#1{\reflectbox{#1}}
+
+% Load the package
+\usepackage{glossaries}
+% Generate the glossary
+\makeglossaries
+
+\usepackage{siunitx}
+
+\usepackage{xskak}
+\usepackage{chessboard}
+\newcounter{chessex}
+\newcommand\printchessex{\refstepcounter{chessex}Chessboard \thechessex}
+
+
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage[xcolor,leftbars]{changebar}
+
+\usepackage{lipsum}
+
+\newcommand{\quoteblock}[1]{%
+	\cbcolor{ocre}
+	\begin{changebar}
+		#1
+	\end{changebar}%
+}%
+
+
+\setlength{\changebarsep}{2ex}
+
+
+\usepackage{pdfpages} % for the book cover inclusion
+\usepackage{nameref}
+\usepackage{wrapfig}
+\usepackage[most]{tcolorbox}
+\usepackage{blindtext}
+
+
+\newcommand{\quotes}[1]{``#1''}
+\newcommand{\singlequotes}[1]{`#1'}
+
+%typeset c++ properly
+\def\CC{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}} }
+
+
+\usepackage{logicpuzzle}
+
+\usepackage{lscape} 
+\usepackage{placeins}
+
+\usepackage{fontawesome5}
+
+\newcommand{\GoogleLogo}{\faGoogle Google}
+
+
+
+\usepackage{xparse}
+
+\definecolor{questionmagenta}{RGB}{237,53,114} % Define the orange color used for highlighting throughout the book
+\definecolor{questionanswergreen}{RGB}{119,197,147}
+% coo question box	  
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=questionmagenta!10,
+linecolor=questionmagenta,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=-0pt,
+innerbottommargin=-1ex
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{questionBox}
+\newtheorem{cppexerciseT}{\CC Question}
+\newenvironment{cppquestion}{\begin{questionBox}\begin{cppexerciseT}}{\hfill{\color{ocre}}\end{cppexerciseT}\end{questionBox}}
+
+
+% cpp solution box	  
+\newmdenv[skipabove=7pt,
+skipbelow=1pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=questionanswergreen!10,
+linecolor=questionanswergreen,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=-0pt,
+innerbottommargin=-1ex
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{answerBox}
+\newtheorem{cppanwserT}{\CC Answer}
+\newenvironment{cppanswer}{\begin{answerBox}\begin{cppanwserT}}{\hfill{\color{ocre}}\end{cppanwserT}\end{answerBox}}
+
+
+%Idea from https://tex.stackexchange.com/a/236668/1952
+\DeclareDocumentCommand\question{o}{%
+    \item\IfNoValueTF{#1}{}{(#1 points)}}
+
+\newenvironment{questions}[1][]{\enumerate[,#1]}{\endenumerate}
+
+\newlist{oneparchoices}{enumerate*}{1}
+\setlist[oneparchoices,1]{label=\Alph*., itemjoin={{\quad}}}
+
+\newlist{choices}{enumerate}{1}
+\setlist[choices,1]{label=\Alph*., itemjoin={{\quad}}}
+
+\newcommand{\choice}{\item}
+
+
+
+\usepackage{multirow}
+\usepackage{lscape}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\usepackage{pgfplotstable}

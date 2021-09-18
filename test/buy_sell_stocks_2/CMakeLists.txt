@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 
 
 add_executable(test_buy_sell_stocks_2 test_buy_sell_stocks_2.cpp)

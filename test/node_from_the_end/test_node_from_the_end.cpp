@@ -41,7 +41,7 @@ class node_from_end_fixture : public ::testing::Test
 
 TEST_F(node_from_end_fixture, given_list_with_one_element_remove_the_head)
 {
-  std::vector<int> vals = { 1 };
+  std::vector<int> vals = {1};
   given_list_of(vals);
   const int n = 0;
 
@@ -50,18 +50,19 @@ TEST_F(node_from_end_fixture, given_list_with_one_element_remove_the_head)
   EXPECT_EQ(nullptr, ans);
 
   ListNode* ans_two_pointers;
-  EXPECT_NO_THROW(ans_two_pointers = remove_nth_node_from_end_bruteforce(head, n));
+  EXPECT_NO_THROW(ans_two_pointers =
+                      remove_nth_node_from_end_bruteforce(head, n));
   EXPECT_EQ(nullptr, ans_two_pointers);
 }
 
 TEST_F(node_from_end_fixture, given_a_list_with_l_elements_remove_all)
 {
-  const std::vector<int> vals = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+  const std::vector<int> vals = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   for (size_t i = 0; i < vals.size(); i++)
   {
     given_list_of(vals);
     const int n               = 0;
-    std::vector<int> expected = { vals };
+    std::vector<int> expected = {vals};
     expected.erase(expected.begin() + expected.size() - 1 - n);
     {
       ListNode* ans;
@@ -72,7 +73,8 @@ TEST_F(node_from_end_fixture, given_a_list_with_l_elements_remove_all)
     {
       given_list_of(vals);
       ListNode* ans_two_pointers;
-      EXPECT_NO_THROW(ans_two_pointers = remove_nth_node_from_end_bruteforce(head, n));
+      EXPECT_NO_THROW(ans_two_pointers =
+                          remove_nth_node_from_end_bruteforce(head, n));
       EXPECT_NE(nullptr, ans_two_pointers);
       EXPECT_EQ(expected, Book::List::to_vector(ans_two_pointers));
     }

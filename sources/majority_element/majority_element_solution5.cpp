@@ -21,7 +21,7 @@ int find_majority_element_linear(const std::vector<int>& nums)
       count = 1;
     }
   }
-  //check that el appears > n/2 times
+  // check that el appears > n/2 times
   if (std::count(begin(nums), end(nums), el) > nums.size() / 2)
     return el;
   return -1;

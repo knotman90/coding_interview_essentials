@@ -9,12 +9,19 @@
 \chapter{Find the majority element}
 \label{ch:majority_element}
 \section*{Introduction}
-The problem described in this chapter has been asked at Microsoft, Google, Amazon and Yahoo interview for software engineering position and it is considered a problem of easy/medium difficulty.
+It is election time and we are hired to make sure the vote counting is free of mistakes and quick. 
+Our job is to determine the winner of this year election. 
+Votes are collected as an unordered list and our task is to determine whether there is a clear winner i.e. someone with the majority of the votes (i.e. with more than 50\% of them) or
+a new voting session is necessary. 
 
+This problem has been asked at Google and Yahoo interviews for software engineering positions and it is considered medium difficulty. 
+Infact, despite the fact it is almost trivial to solve it in linear space, doing so in constant space proves to be quite a bit more challenging and requires non-trivial insights.
+
+As we will see in the coming sections, this problem (and its solution) is a specialization of a more general problem where we need to find out if there is an element in the input list that appears more than $\frac{n}{k}$ times. Clearly, under this definition, we have the majority element problem when $k=2$.
 \section{Problem statement}
 \begin{exercise}
-Given an array $N$ of size $n$, find the majority element i.e. that element that appears more than $\floor{\frac{n}{2}}$ times.
-If such element does not exists, returns $-1$.
+Given an array $N$ of size $n$, find the majority element i.e. that element that appears more than $\lfloor \frac{n}{2} \rfloor$ times.
+If such element does not exists, return $-1$.
 	\begin{example}
 		\hfill \\
 		Given the array $[1,2,3,2,2,1,1,1]$, the function returns $1$ because it appears $4$ times in an array of length $8$.
@@ -38,26 +45,26 @@ If such element does not exists, returns $-1$.
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item What are the minimum and maximum value an element of the array can take? 
-	\begin{answered}
+	\begin{questionitem} \begin{question} What are the minimum and maximum values an element of the array can take?   \end{question} 	 
+    \begin{answered}
 		\textit{The minimum and maximum values are $[-10^9, 10^9]$, respectively}.
 		This is a good question to ask because if the range is small then we can apply a solution based on bucket counting.
-	\end{answered}
+	\end{answered} \end{questionitem}
 
-	\item Can the input array $N$ be modified or shuffled. 
-	\begin{answered}
+	\begin{questionitem} \begin{question} Can the input array $N$ be modified or shuffled?   \end{question} 	 
+    \begin{answered}
 		\textit{Yes, the input array can be modified.}
-	\end{answered}
+	\end{answered} \end{questionitem}
 \end{QandA}
 
 \section{Discussion}
 \label{majority_element:sec:discussion}
-We will have a look at three different solution for this problem. We will start our discussion by having a look in section \ref{majority_element:sec:bruteforce} at the brute-force approach. Section section \ref{majority_element:sec:sorting} will describe an approach that uses sorting to improve the time complexity on the brute-force approach. Lastly in section \ref{majority_element:sec:linear} we will the optimal approach.
+We will examine three different solutions for this problem. We begin  by looking at the brute-force approach in section \ref{majority_element:sec:bruteforce} Section \ref{majority_element:sec:sorting} will then describe an approach that uses sorting to improve the time complexity of the brute-force approach. Finally,  in section \ref{majority_element:sec:linear} we will examine the optimal approach using the Boyer-Moore algorithm.
 
 \subsection{Brute-force}
 \label{majority_element:sec:bruteforce}
-The brute force solution is brutally simple and consist in, looping through the array, and for each element counting how many times it occurs in the input array. This approach, despite its simplicity should not be the one provided to the interviewer, as it is far from the optimum and the interviewer is certainly expecting more from us.
-Listing \ref{list:majority_element:bruteforce} shows a possible implementation of this idea. 
+The brute force solution is very simple and consist of looping through the array and for each element counting how many times it occurs in the input array. Although this approach is simple, it will not serve you well in an interview scenario as it is far from the optimum and the interviewer is certainly expecting a more sophisticated solution. 
+Listing \ref{list:majority_element:bruteforce} shows a possible implementation of this approach. 
 
 \lstinputlisting[language=c++, caption={Sample Caption},label=list:majority_element:bruteforce]{sources/majority_element/majority_element_solution1.cpp}
 
@@ -65,43 +72,47 @@ Listing \ref{list:majority_element:bruteforce} shows a possible implementation o
 \subsection{Hash-map approach}
 \label{majority_element:sec:hashmap}
 
-The idea described in section \ref{majority_element:sec:bruteforce} can be improved by using an hash-map to store the number of occurrence of each element in the input array. There cannot be more than $n$ different numbers in the the array $N$, thus with a single pass of the input and with a linear cost in space we can calculate the number of occurrence of each element and check if any of the counters at any points gets higher than $\floor{\frac{n}{2}}$.
+A simple improvement on the solution in the section \ref{majority_element:sec:bruteforce} can be made by using a hash-map to store the number of occurrence of each element in the input array. There cannot be more than $n$ different numbers in the the array $N$, thus with a single pass of the input and with a linear cost in space we can calculate the number of occurrence of each element and check if any of the counters at any points gets higher than $\lfloor \frac{n}{2} \rfloor$.
 
 A possible implementation of this approach is shown in Listing \ref{list:majority_element:hashmap}.
-The complexity of this approach is $O(n)$ for both space and time. In-fact, in the worst case all the element of the input array are only read and stored once.
+The complexity of this approach is $O(n)$ for both space and time. In-fact, even in the worst case  all the elements of the input array are only read and stored once.
 
 \lstinputlisting[language=c++, caption={Solution to the problem of finding the majority element in an array using hash-map.},label=list:majority_element:hashmap]{sources/majority_element/majority_element_solution2.cpp}
 
 \subsection{Sorting - Counting}
 \label{majority_element:sec:sorting}
-The approach described in section \ref{majority_element:sec:hashmap} is definitely faster then the quadratic brute-force but at a linear price in space. In order not to pay the price in space but to lower the time complexity down from quadratic, we could rely on the fact that in a sort collection of elements all equal elements appear grouped together e.g. in $[1,1,2,2,3,3,3,4,4,9,9]$, all the $1$s appear at the beginning of the array, followed by all the $2$s, etc. We can then count the number of occurrences of each element in constant space as shown in Listing \ref{list:majority_element:sorting}. The complexity of this approach is bounded by the sorting which costs $O(nlog(n)$ time.
+The approach described in section \ref{majority_element:sec:hashmap} is definitely faster then the quadratic brute-force but at a linear price in space. In order not to pay the price in space and to lower the time complexity down from quadratic, we could rely on the fact that in a sorted collection of elements all equal elements appear grouped together e.g. in $[1,1,2,2,3,3,3,4,4,9,9]$, all the $1$s appear at the beginning of the array, followed by all the $2$s, etc. We can then count the number of occurrences of each element in constant space as shown in Listing \ref{list:majority_element:sorting}. The complexity of this approach is bounded by the sorting which costs $O(nlog(n)$ time.
 
 \lstinputlisting[language=c++, caption={Solution  to the problem of finding the majority element in an array using sorting.},label=list:majority_element:sorting]{sources/majority_element/majority_element_solution3.cpp}
 
 \subsection{Sorting - Median}
 \label{majority_element:sec:median}
-There is however, another way of taking advantage of the fact that we have a sorted collection. The key idea here is that if a majority element exists than, this element \textbf{must be the median}. After all, by definition , the median if the element that is right in the middle of the sorted collection. Since the majority element will be occupy \textbf{more} than half positions of the array, it also occupies the median position.
-All is necessary after sorting the array, is to check if the median value appear more than $\floor{\frac{n}{2}}$ times. 
+We can, however, make even better use of the fact that we have a sorted collection. The key idea here is that if a majority element exists then this element \textbf{must be the median}. After all, by definition , the median element is right in the middle of the sorted collection. Since the majority element will be occupy \textbf{more} than half of the  positions of the array it must also occupy the median position.
+All that is necessary after sorting the array is to check if the median value appears more than $\lfloor \frac{n}{2} \rfloor$ times. 
 This idea is implemented in Listing \ref{list:majority_element:median} and has a complexity of $O(nlog(n)$ due to sorting.
 
 \lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:median]{sources/majority_element/majority_element_solution4.cpp}
 
 \subsection{Boyer-Moore algorithm}
 \label{majority_element:sec:linear}
-There is however better way of solving this problem in linear time and constant space i.e. using the Boyer-Moore algorithm\cite{Boyer1991}.
+The best approach to solving this problem in linear time and constant space is, however,  to use the Boyer-Moore algorithm\cite{Boyer1991}.
 
-The algorithm uses two variables to maintain an candidate element $el$ of the sequence and its current count $count=0$ (initialized to $0$). It processes the elements one by one and will perform the following operations:
+The algorithm uses two variables to maintain a candidate element $el$ of the sequence and its current count $count=0$ (initialized to $0$). It processes the elements one by one and will perform the following operations:
 \begin{itemize}
-	\item if we are processing the very first element  of the sequence or \inline{count=0}, it will set $count=1$ and $el$ to that element (this is out first candidate).
+	\item if we are processing the very first element  of the sequence or \inline{count=0}, it will set $count=1$ and $el$ to that element (this is our first candidate).
 	\item otherwise, if the element currently processed is equal to \inline{el}it increments the counter i.e. \inline{count = count+1}
 	\item if the element currently processed is different, then it decrements the counter i.e. \inline{count = count -1};
 \end{itemize}
 
 
-At the end of this process the variable \inline{el} will contain a candidate majority element. If the array contains a majority element then \inline{el} \textbf{is} the one. The algorithm correctness can be derived from the fact that the counter will be incremented more times than it will be decremented for the majority element. If we cannot assume that a majority element \textbf{always} exists then a second pass  on the array is then necessary, in order to count the number of occurrences of \inline{el} in the input array.
+At the end of this process the variable \inline{el} will contain a candidate majority element. If the array contains a majority element then \inline{el} \textbf{is} the one. The algorithm correctness can be derived from the fact that the counter will be incremented more times than it will be decremented for the majority element. If we cannot assume that a majority element \textbf{always} exists then a second pass  on the array is necessary in order to count the number of occurrences of \inline{el} in the input array.
 
 Listing \ref{list:majority_element:moore} shows a possible implementation of the Boyer-Moore algorithm. The complexity of this approach is $O(n)$ time and $O(1)$ space because the input array is scanned twice and only two additional integer variables are used.
 
 \lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:moore]{sources/majority_element/majority_element_solution5.cpp}
 
+
+
+
+\input{sources/find_repeated_number_n_divided_3_times/find_repeated_number_n_divided_3_times.tex}
 

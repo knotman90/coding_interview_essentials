@@ -2,7 +2,7 @@ template <class T>
 class min_stack_two_stacks
 {
  public:
-  void push(const T&x)
+  void push(const T& x)
   {
     if (x <= getMin() || minimums.size() == 0)
       minimums.push(x);

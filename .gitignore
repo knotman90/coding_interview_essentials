@@ -1,5 +1,6 @@
+*.jpg
 # Add any directories, files, or patterns you don't want to be tracked by version control
-
+*.vscode
 # Created by https://www.gitignore.io/api/latex
 #Build
 build
@@ -17,6 +18,7 @@ bin/
 *.fot
 *.cb
 *.cb2
+*.orig
 
 ## Intermediate documents:
 *.dvi

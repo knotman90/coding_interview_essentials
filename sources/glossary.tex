@@ -1,0 +1,22 @@
+
+%from documentation
+%\newacronym[⟨key-val list⟩]{⟨label ⟩}{⟨abbrv ⟩}{⟨long⟩}
+%above is short version of this
+% \newglossaryentry{⟨label ⟩}{type=\acronymtype,
+% name={⟨abbrv ⟩},
+% description={⟨long⟩},
+% text={⟨abbrv ⟩},
+% first={⟨long⟩ (⟨abbrv ⟩)},
+% plural={⟨abbrv ⟩\glspluralsuffix},
+% firstplural={⟨long⟩\glspluralsuffix\space (⟨abbrv ⟩\glspluralsuffix)},
+% ⟨key-val list⟩}
+
+\newacronym{cd}{CD}{compact disk}
+\newacronym{utc}{UTC}{Coordinated Universal Time}
+%\newacronym{adt}{ADT}{Atlantic Daylight Time}
+%\newacronym{est}{EST}{Eastern Standard Time}
+ 
+% Use the acronyms
+\gls{utc} is 3 hours behind \gls{adt} and 10 hours ahead of \gls{est}.
+
+

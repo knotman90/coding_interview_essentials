@@ -1,17 +1,15 @@
-#include <iostream>
-
 int tree_min(TreeNode *root)
 {
   if (!root)
     return std::numeric_limits<int>::max();
-  return std::min({ root->val, tree_min(root->left), tree_min(root->right) });
+  return std::min({root->val, tree_min(root->left), tree_min(root->right)});
 }
 
 int tree_max(TreeNode *root)
 {
   if (!root)
     return std::numeric_limits<int>::min();
-  return std::max({ root->val, tree_max(root->left), tree_max(root->right) });
+  return std::max({root->val, tree_max(root->left), tree_max(root->right)});
 }
 bool isValidBST_min_max(TreeNode *root)
 {

@@ -9,12 +9,13 @@
 \chapter{Best time to buy and sell stock}
 \label{ch:buy_sell_stocks}
 \section*{Introduction}
-The problem discussed in this Chapter is considered an easy one and as we will see, it is easily solvable in quadratic time using a brute force algorithm but, the problem is also easy enough to allow for an easy discovery more efficient approaches. This problem is an excellent example of problems that you need to be able to solve fast and it is therefore imperative to get familiar with this type of problems.
+The problem discussed in this chapter is not particularly difficult as it is easily solvable in quadratic time using a brute-force algorithm. 
+However, a more efficient solution is possible and, given that this is exactly the type of question for which interviewers expect fast and elegant solutions, it's worth taking the time to become familiar with the problem structure and the best approaches to solving it.  
 
 \section{Problem statement}
 \label{sec:buy_sell_stocks:statement1}
 \begin{exercise}
-You are given prices for a stack for a number $n$ of days. The prices are stored in an array $P$ of length $n$ where each cell $i$ of the array contains the price for the stock on the $i^{th}$ day. You are only permitted to perform \textbf{one} buy and \textbf{one} sell operations. What is the maximum profit you can achieve given the prices for the stock in $P$?
+You are given prices for a stock for a number $n$ of days. The prices are stored in an array $P$ of length $n$ where each cell $i$ of the array contains the price for the stock on the $i^{th}$ day. You are only permitted to perform \textbf{one} buy and \textbf{one} sell operations. What is the maximum profit you can achieve given the prices for the stock in $P$?
 
 You have to perform the buy operation \textbf{before} the sell operation. You cannot buy the stock on the \nth{10} day and sell on the \nth{9}.
 
@@ -33,28 +34,28 @@ You have to perform the buy operation \textbf{before} the sell operation. You ca
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item Can you perform the buy and sell operation on the same day?
-	\begin{answered}
+	\begin{questionitem} \begin{question} Can you perform the buy and sell operation on the same day?  \end{question}      
+    \begin{answered}
 		\textit{Yes, that is possible.}
-	\end{answered}
+	\end{answered} \end{questionitem}
 \end{QandA}
 
 \section{Discussion}
 \label{buy_sell_stocks:sec:discussion}
-A profit is achieved when a buy and sell transaction are performed with prices $p_b$ and $p_s$ respectively and $p_b \leq p_s$. In other words we our goal is to buy at a lower price than we well. The maximum profit is obtained whenever the spread between those two prices is maximum i.e. $\max_{}{(p_s - p_b)}$
+A profit is achieved when a buy and sell transaction are performed with prices $p_b$ and $p_s$ respectively and $p_b \leq p_s$. In other words, our goal is to buy at a lower price than we sell. The maximum profit is obtained whenever the spread between those two prices is maximum i.e. $\max_{}{(p_s - p_b)}$
 
 \subsection{Brute-force}
 \label{buy_sell_stocks:sec:bruteforce}
-The brute force approach is really straighforward because the only thing we need is to apply the definition of maximum profit we discussed earlier. For all pairs of ordered index $i \leq j$ we can calculate $P_i - P_j$ and return the maximum among all those profit values. Listing \ref{list:buy_sell_stocks:bruteforce} shows an implementation of this approach. Note that a profit of $0$ is always possible by either not performing any transaction or simply performing the buy and sell on the same day. Thus $j = i+1$, because it is pointless to calculate the profit for the same day as we know already it will always be $0$. For this reason we also limit the buy operation to the day before ($i< n-1$) the last, because if we want to have any chance of making a profit we need to at least have one day left after the buy to perform the sell operation. 
+The brute force approach is very straightforward as the only thing we need to do is apply the definition of maximum profit we discussed earlier. For all pairs of ordered index $i \leq j$ we can calculate $P_i - P_j$ and return the maximum among all those profit values. Listing \ref{list:buy_sell_stocks:bruteforce} shows an implementation of this approach. Note that a profit of $0$ is always possible by either not performing any transaction or simply performing the buy and sell on the same day. Thus $j = i+1$, because it is pointless to calculate the profit for the same day as we know already it will always be $0$. For this reason we also limit the buy operation to the day before ($i< n-1$) the last, because if we want to have any chance of making a profit we need to at least have one day left after the buy to perform the sell operation. 
 
 \lstinputlisting[language=c++, caption={Brute force $O(n^2)$ solution to the problem of buying and selling stock.},label=list:buy_sell_stocks:bruteforce]{sources/buy_sell_stocks/buy_sell_stocks_solution1.cpp}
 
 \subsection{Linear time solution}
 \label{buy_sell_stocks:sec:linear}
-The idea above can be improved if we look at the problem from slightly different perspective. The idea is that we can process the array from the last day to the first and for each of the day calculate the \textbf{best} profit can be made by selling in any of the days already processed (which happen later in time).
+The solution above can be improved if we look at the problem from slightly different angle. The idea is that we can process the array from the last day to the first and, for each of the days, calculate the \textbf{best} profit to be made by selling on any of the days already processed (which occurs later in time).
 
-We keep a variable $b$ with the maximum price seen so far which is initially $-\infty$. The algorithm starts from day $n$ and for each day checks whether buying that day and selling at the price $b$ (the highest price seen so far) would improve the profit found so far. This approach is correct because the maximum profit happens when the spread between sell and buy price is maximum.
-The implementation of theidea above is shown in Listing \ref{list:buy_sell_stocks:linear}.
+We keep a variable $b$ with the maximum price seen so far which is initially $-\infty$. The algorithm starts from day $n$ and for each day checks whether buying that day and selling at the price $b$ (the highest price seen so far) would improve the profit found thus far. This approach is correct because the maximum profit happens when the spread between sell and buy price is maximum.
+The implementation of the idea above is shown in Listing \ref{list:buy_sell_stocks:linear}.
 
 \lstinputlisting[language=c++, caption={Dynamic programming linear time, constant space solution to the problem of buying and selling stock.},label=list:buy_sell_stocks:linear]{sources/buy_sell_stocks/buy_sell_stocks_solution2.cpp}
 

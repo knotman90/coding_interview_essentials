@@ -12,7 +12,6 @@ using Book::List::Node;
 #include "cycle_in_list_solution1.cpp"
 #include "cycle_in_list_solution2.cpp"
 
-
 template <typename T>
 Node<T> *create_list_from(std::vector<int> &vec, const int loop = -1)
 {
@@ -39,7 +38,6 @@ Node<T> *create_list_from(std::vector<int> &vec, const int loop = -1)
 
 TEST(cycle_in_list, test_no_loop)
 {
-
   std::vector<int> v = {1, 2, 3, 4};
   Node<int> *head    = create_list_from<int>(v, -1);
 
@@ -52,7 +50,6 @@ TEST(cycle_in_list, test_no_loop)
 
 TEST(cycle_in_list, test_loop1)
 {
-
   std::vector<int> v = {1, 2, 3, 4};
   Node<int> *head    = create_list_from<int>(v, 1);
 
@@ -67,7 +64,6 @@ TEST(cycle_in_list, test_loop1)
 
 TEST(cycle_in_list, test_loop_long)
 {
-
   std::vector<int> v = {
       1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 17,
       18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
@@ -78,8 +74,8 @@ TEST(cycle_in_list, test_loop_long)
 
   for (int i = 0; i < v.size() - 1; i++)
   {
-  	const int expected = v[i];
-    Node<int> *head = create_list_from<int>(v, i);
+    const int expected = v[i];
+    Node<int> *head    = create_list_from<int>(v, i);
 
     Node<int> *ans_lin_space = detect_cycle_linear_time_space(head);
     EXPECT_NE(nullptr, ans_lin_space);
