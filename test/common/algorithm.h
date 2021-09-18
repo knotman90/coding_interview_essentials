@@ -1,6 +1,7 @@
-#ifndef BOOK_ALGORITHM
-#define BOOK_ALGORITHM
+#ifndef TEST_COMMON_ALGORITHM
+#define TEST_COMMON_ALGORITHM
 #include <random>
+#include <utility>
 
 namespace Book
 {
@@ -25,6 +26,7 @@ T get_random_in_range(const T& s, const T& e)
 template<typename T>
 auto generate_random_pair_in_range(const T s, const T e)
 {
+  using std::swap;
     assert(s<=e);
      auto M = Book::Algorithm::get_random_in_range<T>(s,e);
      auto m = Book::Algorithm::get_random_in_range<T>(s,e);
@@ -96,4 +98,4 @@ auto generateRandomCollection(const int size, const int l , const int r )
 
 }  // namespace Algorithm
 }  // namespace Book
-#endif  // BOOK_ALGORITHM
+#endif /* TEST_COMMON_ALGORITHM */

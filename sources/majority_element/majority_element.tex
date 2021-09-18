@@ -9,8 +9,15 @@
 \chapter{Find the majority element}
 \label{ch:majority_element}
 \section*{Introduction}
-The problem described in this chapter has been asked at Microsoft, Google, Amazon and Yahoo interview for software engineering position and it is considered a problem of easy/medium difficulty.
+It is election time and we are hired to make sure the vote counting is free of mistakes and quick. 
+Our job is to determine the winner of this year election. 
+Votes are collected as an unordered list and our task is to determine whether there is a clear winner i.e. someone with the majority of the votes (i.e. with more than 50\% of them) or
+a new voting session is necessary. 
 
+This problem has been asked at Google and Yahoo interviews for software engineering positions and it is considered medium difficulty. 
+Infact, despite the fact it is almost trivial to solve it in linear space, doing so in constant space proves to be quite a bit more challenging and requires non-trivial insights.
+
+As we will see in the coming sections, this problem (and its solution) is a specialization of a more general problem where we need to find out if there is an element in the input list that appears more than $\frac{n}{k}$ times. Clearly, under this definition, we have the majority element problem when $k=2$.
 \section{Problem statement}
 \begin{exercise}
 Given an array $N$ of size $n$, find the majority element i.e. that element that appears more than $\lfloor \frac{n}{2} \rfloor$ times.
@@ -38,13 +45,13 @@ If such element does not exists, return $-1$.
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item \begin{questionitem} \begin{question} What are the minimum and maximum values an element of the array can take?   \end{question} 	 
+	\begin{questionitem} \begin{question} What are the minimum and maximum values an element of the array can take?   \end{question} 	 
     \begin{answered}
 		\textit{The minimum and maximum values are $[-10^9, 10^9]$, respectively}.
 		This is a good question to ask because if the range is small then we can apply a solution based on bucket counting.
 	\end{answered} \end{questionitem}
 
-	\item \begin{questionitem} \begin{question} Can the input array $N$ be modified or shuffled?   \end{question} 	 
+	\begin{questionitem} \begin{question} Can the input array $N$ be modified or shuffled?   \end{question} 	 
     \begin{answered}
 		\textit{Yes, the input array can be modified.}
 	\end{answered} \end{questionitem}
@@ -103,4 +110,9 @@ At the end of this process the variable \inline{el} will contain a candidate maj
 Listing \ref{list:majority_element:moore} shows a possible implementation of the Boyer-Moore algorithm. The complexity of this approach is $O(n)$ time and $O(1)$ space because the input array is scanned twice and only two additional integer variables are used.
 
 \lstinputlisting[language=c++, caption={Linear time constant space solution to the problem of finding the majority element in an array.},label=list:majority_element:moore]{sources/majority_element/majority_element_solution5.cpp}
+
+
+
+
+\input{sources/find_repeated_number_n_divided_3_times/find_repeated_number_n_divided_3_times.tex}
 

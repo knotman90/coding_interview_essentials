@@ -1,6 +1,17 @@
 #ifndef TEST_COMMON_TEST_UTILS
 #define TEST_COMMON_TEST_UTILS
 
+#define EXPECT_EQUAL_ELEMENTS(x, y)                                           \
+  do                                                                          \
+  {                                                                           \
+    EXPECT_EQ(x.size(), y.size()) << "Vectors x and y are of unequal length"; \
+    for (size_t i = 0; i < x.size(); ++i)                                        \
+    {                                                                         \
+      EXPECT_EQ(x[i], y[i]) << "Vectors x and y differ at index " << i;       \
+    }                                                                         \
+  } while (0);
+
+
 std::string to_string(const int& v)
 {
     std::ostringstream ss;
@@ -31,5 +42,7 @@ std::string to_string(const std::vector<T>& Q )
     ss<<"]";
     return ss.str();
 }
+
+
 
 #endif /* TEST_COMMON_TEST_UTILS */
