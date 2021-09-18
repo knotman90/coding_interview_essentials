@@ -25,12 +25,12 @@
     Heap                                      & \cellcolor[HTML]{009901}$O(1)$               & \cellcolor[HTML]{656565}N.A.                 & \cellcolor[HTML]{32CB00}$O(log_2(n))$           & \cellcolor[HTML]{32CB00}$O(log_2(n))$          & \cellcolor[HTML]{009901}$O(1)$               & \cellcolor[HTML]{656565}N.A.                 & \cellcolor[HTML]{32CB00}$O(log_2(n))$           & \cellcolor[HTML]{32CB00}$O(log_2(n))$          & \cellcolor[HTML]{FFC702}$O(n)$                            \\ \bottomrule
     \end{tabular}%
     }
-    \caption{Asymptotic complexities for a number of data strucutes. For time, both the average and case is reported, while for space only the worst. $O(1) < O(log_2(n)) < O(log_2(n)) < O(n) < O(nlog_2(n) < O(n^2) < O(n^3) \ldots < O(2^n) < O(n!) < O(n^n)$  }
+    \caption{Asymptotic complexities for a number of data strucutes. For time, both the average and case is reported, while for space only the worst. $O(1) < O(log_2(n)) < O(log_2(n)) < O(n) < O(nlog_2(n) < O(n^2) < O(n^3) \ldots < O(2^n) < O(n!) < O(n^n)$; See Figure \ref{fig:ds_complexities:graph}  }
     \label{appendix:ds_complexities}
 \end{table}
 
 
-\begin{figure}
+\begin{figure*}[!b]
     \centering
 \begin{tikzpicture}
     \begin{axis}[
@@ -38,7 +38,7 @@
       clip = true,
       ticks = none,
       width=0.9\textwidth,
-      height=0.7\textwidth,
+      height=0.8\textwidth,
       every axis plot/.append style={very thick},
       axis line style = ultra thick,
       clip mode=individual,
@@ -51,7 +51,7 @@
       xmax = 11,
       ymin = 0,
       ymax = 42,
-      xlabel = n,
+      xlabel = $n$,
       ylabel = no. of operations,
       xlabel style = {at={(axis description cs:0.5,-0.1)},anchor=south},
       ylabel style = {at={(axis description cs:-0.08,0.5)},anchor=north},
@@ -102,7 +102,7 @@
   
   \end{axis}
   \end{tikzpicture}
-
   \caption[]{Graph showing the relative growth rates of common function used to describe algorithms.}
   \label{fig:ds_complexities:graph}
-\end{figure}
+\end{figure*}
+\FloatBarrier
