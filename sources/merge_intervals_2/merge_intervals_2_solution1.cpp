@@ -11,13 +11,13 @@ std::vector<Interval> merge_intervals_lineartime(const std::vector<Interval> &in
         return ans;
     }
     
-    size_t i = 0;
+    size_t k = 0;
     bool inserted = false;
 
-    for(; i < intervals.size() ;){
-        if(intervals[i].end < newInterval.start){
-            ans.push_back(intervals[i]);
-            i++;
+    for(; k < intervals.size() ;){
+        if(intervals[k].end < newInterval.start){
+            ans.push_back(intervals[k]);
+            k++;
         }else{
             inserted = true;
             ans.push_back(newInterval);
@@ -29,14 +29,14 @@ std::vector<Interval> merge_intervals_lineartime(const std::vector<Interval> &in
         return ans;
     }
     
-    while(i < intervals.size()){
-        if(overlap(intervals[i], ans.back())){
-            ans.back().start = std::min(ans.back().start, intervals[i].start);
-            ans.back().end = std::max(ans.back().end, intervals[i].end);
+    while(k < intervals.size()){
+        if(overlap(intervals[k], ans.back())){
+            ans.back().start = std::min(ans.back().start, intervals[k].start);
+            ans.back().end = std::max(ans.back().end, intervals[k].end);
         }else{
-            ans.push_back(intervals[i]);
+            ans.push_back(intervals[k]);
         }
-        i++;
+        k++;
     }
    
     return ans;

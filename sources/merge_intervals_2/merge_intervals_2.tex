@@ -119,22 +119,21 @@ Listing \ref{list:merge_intervals_2_nlogn} implements this idea.
 
 \lstinputlisting[language=c++, caption={$nlog(n)$ time solution using sorting.},label=list:merge_intervals_2_nlogn]{sources/merge_intervals_2/merge_intervals_2_merge_entire_list_solution1.cpp}
 
-Not surprisingly the first thing this code does is sorting the input list.
+Not surprisingly, the first thing this code does is sorting the input list.
 We then start by pushing the first interval into the output list \inline{ans}.
 We keep merging subsequent elements that overlap with \inline{ans.back} until we find one that does not.
-At this point we are sure that whatever interval is in \inline{ans.back} will definitely not overlap with any other interval in the list.
+At this point, we are sure that whatever interval is in \inline{ans.back} will definitely not overlap with any other interval in the list.
 Therefore we can safely push this new interval into \inline{ans} and repeat the process until all intervals have been analyzed.
 
 Notice that here we are using the same \inline{merge} function used in Listing \ref{list:merge_intervals_2_bruteforce};
 However, because we know elements are sorted we could simplify the condition \inline{if ((a.start >= b.start && a.start <= b.end) || (b.start >= a.start && b.start <= a.end))} as we know that \inline{a.start <= b.start} is always true.
 
 This approach has a time complexity of $nlog(n)$ (due to the sorting) 
-and the space complexity is $O(n)$ (however we really only use linear spcae to store the output list and if we do not account for it the complexity is constant).
+and the space complexity is $O(n)$ (however, we really only use linear spcae to store the output list and if we do not account for it the complexity is constant).
 
 \section{Problem statement}
 \begin{exercise}
 \label{example:merge_intervals_2:exercice1_2}
-
 Given a sorted list of disjoint (non-overlapping) intervals $I$ and an interval $w$, insert $w$ into $I$ so that the resulting list still contains only disjoint intervals.
 You may assume that the intervals are sorted according to their start times.
 
@@ -168,10 +167,32 @@ You may assume that the intervals are sorted according to their start times.
 
 \section{Discussion}
 \label{merge_intervals_2:sec:discussion_1}
+This problem is really not that different from the one described in Section \ref{example:merge_intervals_2:exercice1_1} to the point that you can use almost the same approach to tackle this one. In particular, one can think of simply adding $w$ to $I$ and then proceed to use the algorithms described above to solve the problem. This would grant us a $nlog(n)$ solution for this variation with very little effort. 
+However, there is really no need to do the extra $log(n)$ work to have the entire $I$ plus $w$ sorted, especially considering that $I$ comes already in a sorted state and we can take advantage of that. 
 
+Let's start by imagining that an oracle would tell us the index $k$ (if exists) of the first interval in $I$ having its end field smaller than $w$'s start field.
+Clearly every element before $k$ can be simply copied over into the output list as we are sure they do not overlap with $w$.
 
-\subsection{Brute-force}
-\label{merge_intervals_2:sec:bruteforce_1}
+What we can do at this point is to insert $w$ in the output list and basically use the same algorithm discussed above for solving the main version of this problem. 
+We can do this because we know for a fact that $I_{k+1}$ does not completely fall behing $w$, otherwise we would have had inserted it in the previous step.
+Therefore we are left with two options about the relationship between $I_{k+1}.start$ and $w$:
+\begin{enumerate}
+	\item $I_{k+1}.start$ and $w$ overlap;
+	\item $w$ falls completely behind $I_{k+1}.start$.
+\end{enumerate}
+From these facts we can deduce that we are safe at inserting $w$ after having copied element $k$.
+
+At this point all we are left to do is to try and merge $\{w, I_{k+1},I_{k+2},I_{k+2}\ldots \}$, which we can do  using the same approach discussed above (minus the sorting step, of course).
+
+An implementation of this idea is shown in Listing \ref{list:merge_intervals_2}
 
 \lstinputlisting[language=c++, caption={Linear time solution.},label=list:merge_intervals_2]{sources/merge_intervals_2/merge_intervals_2_solution1.cpp}
 
+The code works in two disting stages represented by the \inline{for} and \inline{while} loops. 
+In the first loop statement we take care of finding the location $k$ at which we can insert $w$. 
+Notice that $k$ might also be the end of the list and this is why we have the \inline{if(!inserted)} check. If every element of $I$ ends before $w.start$ then we are sure $w$ should be placed at the very end of the output list and there is no more work to be done. 
+
+The second loop, like in Listing \ref{list:merge_intervals_2_nlogn} uses \inline{ans.back} as a working variable to merge $w$ with the rest of the overlapping intervals in $I$. 
+When we reach a point $j$ where there is no more element overlapping with \inline{ans.back} then the \inline{else} part of the code will always be executed (as we started off with non-overlapping intervals in $I$) and the remainder of the list gets copied in the output list, completing the exercise.
+
+Both time and space complexities are linear.
