@@ -28,7 +28,10 @@ struct Y : X
             \choice Destruction of type \inline{Y} will only call destructors of classes \inline{C} and \inline{D} as the destructor of class \inline{X} is not called from \inline{Y::~Y()}
         \end{choices}
 \end{cppquestion}
-            
+        
+
+
+
 \begin{cppquestion}
     \label{cppquestion:q2}
     (Solution \ref{cppquestion:s2} at page \pageref{cppquestion:s2}) 
@@ -158,6 +161,36 @@ int main()
      \choice \inline{FooClass a\{ CreateFooClass() \};}
      \choice \inline{FooClass a; a = CreateFooClass();}
     \end{choices}
+\end{cppquestion}
+
+
+
+\begin{cppquestion}
+    \label{cppquestion:q7}
+    (Solution \ref{cppquestion:s7} at page \pageref{cppquestion:s7})
+    \question \textbf{What is the order in which destructors are called when \inline{d} gets out of scope?} 
+\begin{lstlisting}[language=c++,numbers=none, caption={}]
+    struct base0 { ~base0(); };
+    struct base1 { ~base1(); };
+    struct member0 { ~member0(); };
+    struct member1 { ~member1(); };
+    struct local0 { ~local0(); };
+    struct local1 { ~local1(); };
+    struct derived: base0, base1
+    {
+      member0 m0_;
+      member1 m1_;
+      ~derived()
+      {
+        local0 l0;
+        local1 l1;
+      }
+    }
+    void userCode()
+    {
+      derived d;
+    }                 
+\end{lstlisting} 
 \end{cppquestion}
 
 
