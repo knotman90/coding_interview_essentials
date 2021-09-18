@@ -8,6 +8,7 @@
        - run: apt-get update --allow-releaseinfo-change -qq 
        - run: apt-get install -qq -y cmake
        - run: apt-get install -qq -y build-essential
+       - run: apt-get install -qq -y gnuplot
        - run: git clone --depth=1 -b master -q https://github.com/google/googletest.git /googletest
        - run: mkdir -p /googletest/build
        - run: cd /googletest/build && cmake .. && make && make install
