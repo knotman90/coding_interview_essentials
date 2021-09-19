@@ -133,7 +133,8 @@ However, because we know elements are sorted we could simplify the condition \in
 This approach has a time complexity of $nlog(n)$ (due to the sorting) 
 and the space complexity is $O(n)$ (however, we really only use linear spcae to store the output list and if we do not account for it the complexity is constant).
 
-\section{Problem statement}
+\section{Common Variation - Add a new interval}
+\subsection{Problem statement}
 \begin{exercise}
 \label{example:merge_intervals_2:exercice1_2}
 Given a sorted list of disjoint (non-overlapping) intervals $I$ and an interval $w$, insert $w$ into $I$ so that the resulting list still contains only disjoint intervals.
@@ -167,7 +168,7 @@ You may assume that the intervals are sorted according to their start times.
 
 \FloatBarrier
 
-\section{Discussion}
+\subsection{Discussion}
 \label{merge_intervals_2:sec:discussion_1}
 This problem is really not that different from the one described in Section \ref{example:merge_intervals_2:exercice1_1} to the point that you can use almost the same approach to tackle this one. In particular, one can think of simply adding $w$ to $I$ and then proceed to use the algorithms described above to solve the problem. This would grant us a $nlog(n)$ solution for this variation with very little effort. 
 However, there is really no need to do the extra $log(n)$ work to have the entire $I$ plus $w$ sorted, especially considering that $I$ comes already in a sorted state and we can take advantage of that. 
@@ -190,7 +191,7 @@ An implementation of this idea is shown in Listing \ref{list:merge_intervals_2}
 
 \lstinputlisting[language=c++, caption={Linear time solution.},label=list:merge_intervals_2]{sources/merge_intervals_2/merge_intervals_2_solution1.cpp}
 
-The code works in two disting stages represented by the \inline{for} and \inline{while} loops. 
+The code works in two distinct stages represented by the \inline{for} and \inline{while} loops. 
 In the first loop statement we take care of finding the location $k$ at which we can insert $w$. 
 Notice that $k$ might also be the end of the list and this is why we have the \inline{if(!inserted)} check. If every element of $I$ ends before $w.start$ then we are sure $w$ should be placed at the very end of the output list and there is no more work to be done. 
 
@@ -198,3 +199,33 @@ The second loop, like in Listing \ref{list:merge_intervals_2_nlogn} uses \inline
 When we reach a point $j$ where there is no more element overlapping with \inline{ans.back} then the \inline{else} part of the code will always be executed (as we started off with non-overlapping intervals in $I$) and the remainder of the list gets copied in the output list, completing the exercise.
 
 Both time and space complexities are linear.
+
+
+
+
+\section{Common Variation - How many meeting rooms are needed?}
+\subsection{Problem statement}
+\begin{exercise}
+	\label{example:merge_intervals_2:exercice1_2}
+	Given an array of time intervals where each interval $(x,y) \: : x < y$ represent a meeting starting at time $x$ and ending at time $y$(excluded), return the minimum number of conference rooms required to accomodate all meetings.
+	
+		%example1
+		\begin{example}
+			\label{example:merge_intervals_2:example1}
+			\hfill \\
+			Given $I=\{(9,10),(4,9),(5,17)\}$ the function returns $2$. We can schedule $(4,9)$ and $(5,17)$ in two different meeting rooms while $(9,10)$ can be scheduled in the same room of $(4,9)$ after it ends. 
+		\end{example}
+	
+	\end{exercise}
+	
+
+\section{Brute-force}
+Listing \ref{list:merge_intervals_2_nlogn} implements this idea.
+
+\lstinputlisting[language=c++, caption={$O(k^2 + n)$ time and $O(k)$ space solution where $k$ is the time span between the smallest starting  and largest ending time of a meeting.},label=list:merge_intervals_2_nlogn]{sources/merge_intervals_2/meeting_rooms1_solution1.cpp}
+
+\section{$nlog(n)$ solution}
+\lstinputlisting[language=c++, caption={$O(nlog(n))$ time and $O(1)$ space solution. This solution is heavily based on Listing \ref{list:merge_intervals_2_nlogn}.},label=list:merge_intervals_2_nlogn]{sources/merge_intervals_2/meeting_rooms1_solution2.cpp}
+
+
+\section{$nlog(n)$ solution only considering touchpoint times}

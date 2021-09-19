@@ -30,6 +30,11 @@ std::string to_string(const std::pair<int,int>& q)
         return ss.str();
 }
 
+std::string to_string(const Interval& q)
+{
+    return to_string(std::pair(q.start,q.end));
+}
+
 template<typename T>
 std::string to_string(const std::vector<T>& Q )
 {
