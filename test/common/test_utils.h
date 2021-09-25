@@ -1,6 +1,8 @@
 #ifndef TEST_COMMON_TEST_UTILS
 #define TEST_COMMON_TEST_UTILS
 
+#include "merge_intervals_2/Interval.h"
+
 #define EXPECT_EQUAL_ELEMENTS(x, y)                                           \
   do                                                                          \
   {                                                                           \
