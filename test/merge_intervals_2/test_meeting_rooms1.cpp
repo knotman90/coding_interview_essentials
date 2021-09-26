@@ -29,10 +29,6 @@ TEST(meeting_rooms1, test_all_disjoint_all_negative)
     EXPECT_EQ(expected, ans);
   }
 
-    {
-    const auto ans = calculate_number_meeting_rooms2(intervals);
-    EXPECT_EQ(expected, ans);
-  }
 
       {
     const auto ans = calculate_number_meeting_rooms3_touchpoints(intervals);
@@ -125,31 +121,43 @@ TEST(meeting_rooms1, testDisjointOverlappingSeriesShuffled)
 
 TEST(meeting_rooms1, all_solutions_are_equal)
 {
-  std::vector<Interval> Q(10);
-  std::generate(Q.begin(), Q.end(), [&]() {
-    auto p =  Book::Algorithm::generate_random_pair_in_range<int>(0, 100);
-    return Interval{p.first, p.second};
-  });
 
-  std::vector<unsigned> answers;
-{
-  std::vector<Interval> input(Q);
-  answers.push_back(calculate_number_meeting_rooms1(input));
-}
-{
-std::vector<Interval> input(Q);
-  answers.push_back(calculate_number_meeting_rooms3_touchpoints(input));
-}
-{
-std::vector<Interval> input(Q);
-  answers.push_back(calculate_number_meeting_rooms2(input));
-}
+  constexpr size_t num_tests = 1000;
 
-  ASSERT_TRUE(std::all_of(std::begin(answers),
-                          std::end(answers),
-                          [&](const auto& v) { return v == answers.back(); }))
-      << "error for input  = " << to_string(Q) << std::endl
-      << "answers = " << to_string(answers);
+  for(size_t i = 0 ; i < num_tests; i++){
+
+      const size_t input_size = Book::Algorithm::get_random_in_range<size_t>(1,1000);
+      std::vector<Interval> Q(input_size);
+      std::generate(Q.begin(), Q.end(), [&]() {
+        auto p =  Book::Algorithm::generate_random_pair_in_range<int>(0, 100);
+        while(p.first == p.second){
+          p =  Book::Algorithm::generate_random_pair_in_range<int>(0, 100);
+        }
+        return Interval{std::min(p.first, p.second), std::max(p.first, p.second)};
+      });
+
+    for(auto& p : Q){
+      if(p.start > p.end){
+        std::swap(p.start, p.end);
+      }
+    }
+      std::vector<unsigned> answers;
+    {
+      std::vector<Interval> input(Q);
+      answers.push_back(calculate_number_meeting_rooms1(input));
+    }
+    {
+    std::vector<Interval> input(Q);
+      answers.push_back(calculate_number_meeting_rooms3_touchpoints(input));
+    }
+    
+
+      ASSERT_TRUE(std::all_of(std::begin(answers),
+                              std::end(answers),
+                              [&](const auto& v) { return v == answers.back(); }))
+          << "error for input  = " << to_string(Q) << std::endl
+          << "answers = " << to_string(answers);
+    }
 }
 
 
