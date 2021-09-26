@@ -220,13 +220,18 @@ Both time and space complexities are linear.
 	
 
 \section{Brute-force}
-Let's start by noticing that if you have $k$ intervals that are all overlapping with each other, then you need to have $k$ different meeting rooms to accomodate all $k$ meetings.
-We can build on this very simple observation and calculate the number of concurrent meetings for each and every time unit: from the smallest to the largest among all start and end fields of all intervals.
-For instance w.r.t. the Example \ref{example:merge_intervals_2:example1} we know the smallest time among all intervals is $4$ while the largest is $17$. Therefore there are $t=4-17$ time units for which we need to calculate the number of concurrent meetings. 
-We can keep an array of size $t$, where index $0$ maps to time $4$, index $5$ to time $5$ and so on up to the last index of the array ($12$) mapping to time $17$,
-to store the information about the number of meetings happening at that time. Such array can be simply filled by looping through each and every interval $i$ in $I$ and incrementing the aforementioned array only in the cells corresponding to the time spanned by $i$. 
+Let's start by noticing that if you have $k$ intervals that are \textbf{all overlapping with each other}, then you need to have $k$ different meeting rooms to accommodate all $k$ meetings.
+We can build on this simple observation and calculate the number of concurrent meetings for each and every time unit encompassed by $I$: from the earliest start to the latest end of a meeting in $I$ (or in other words,from the smallest to the largest among all start and end fields of all intervals). 
+For instance w.r.t. the Example \ref{example:merge_intervals_2:example1} we know the smallest time among all intervals is $4$ while the largest is $17$.
+Therefore there are $t=4-17$ time units for which we need to calculate the number of concurrent meetings. 
+Our answer will be the largest among these values.
 
-Figure \ref{fig:merge_intervals_2:example1} shows how such an array would look like after being filled with the algorithm discussed above and using the input of Example \ref{example:merge_intervals_2:example1}. We can see how the maximum value there is $2$ signifing that we need at most $2$ meetings rooms to accomodate all meetings.
+We can keep an array of size $t$, where index $0$ maps to time $4$, index $1$ to time $5$ and so on up to the last index of the array ($12$) mapping to time $17$,
+to store the information about the number of meetings happening at that time.
+Such an array can be filled by looping through each and every interval $i=(s_i, e_i)$ in $I$ and incrementing only the cells corrensponding to times from $s_i$ to $e_i$ (the time spanned by the interval $i$). 
+
+Figure \ref{fig:merge_intervals_2:example1} shows how such an array would look like after being filled with the procedure discussed above and using the input of Example \ref{example:merge_intervals_2:example1}. 
+We can see how the maximum value there is $2$ signifing that we need at most $2$ meetings rooms to accomodate all meetings.
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{sources/merge_intervals_2/images/example2_meetings}
@@ -234,16 +239,38 @@ Figure \ref{fig:merge_intervals_2:example1} shows how such an array would look l
 	\label{fig:merge_intervals_2:example1}
 \end{figure}
 
-Listing \ref{list:merge_intervals_2_nlogn} implements this idea. The code is pretty straightforward and we can notice how we have a double loop, one looping through the intervals and the second used to mark each time moment in a single interval. We can also notice how we use the variable \inline{shift==-min_hour} to make sure we always map the smallest time present in $I$ to the index $0$ of the array \inline{meeting_at_time};  
+Listing \ref{list:merge_intervals_2_nlogn} implements this idea. 
+The code is pretty straightforward and we can notice how we have a double loop, one looping through the intervals and the second through the time span of a single interval.
+We can also notice how we use the variable \inline{shift==-min_hour} to map indices of the array \inline{meeting_at_time} to the actual times in $I$.
 
 \lstinputlisting[language=c++, caption={$O(k^2 + n)$ time and $O(k)$ space solution where $k$ is the time span between the smallest starting  and largest ending time of a meeting.},label=list:merge_intervals_2_nlogn]{sources/merge_intervals_2/meeting_rooms1_solution1.cpp}
 
-The complexity of this approach is $O(k^2 + n)$ where $k$ is the difference between the smallest and largest time among all intervals in $I$ and $n$ is the number of such intervals in $I$. The space complexity if $O(k)$.
-If $k$ is constant, this is actually not too bad of a solution, but in general, for this problem both $k$ and $n$ can be considered not to have a particularly favorable bound and we need therefore look for a more efficient solution.
-
-\section{$nlog(n)$ solution}
-
-\lstinputlisting[language=c++, caption={$O(nlog(n))$ time and $O(1)$ space solution. This solution is heavily based on Listing \ref{list:merge_intervals_2_nlogn}.},label=list:merge_intervals_2_nlogn]{sources/merge_intervals_2/meeting_rooms1_solution2.cpp}
+The complexity of this approach is $O(k^2 + n)$ where $k$ is the difference between the smallest and largest time among all intervals in $I$ and $n$ is the number of such intervals.
+The space complexity is $O(k)$. If $k$ is constant, this is actually not too bad of a solution, but in general, for this problem both $k$ and $n$ can be considered not to have a particularly favorable bound and we need therefore look for a more efficient solution.
 
 
-\section{$nlog(n)$ solution only considering touchpoint times}
+\section{$nlog(n)$ - Intervals endpoints}
+\label{example:merge_intervals_2:sorting_2}
+We can enrich our set of observations about this problem with the fact that, if two meetings overlap, then they must overlap either at the start or at the end of a room's booking interval. This allows us to basically avoid to excplicitelly mark every time unit in a interval and focus only only its endpoints. 
+For example in the Example \ref{fig:merge_intervals_2:example1}  we see that interval $(5,17)$ and $(4,9)$ overlaps and also that they start doing so from time $4$ and also that they stop overlapping at time $9$.
+Why is this useful for us? Because if we can somehow avoid looking at the entire time spanned by all intervals in $I$ and just look at the endpoints then the running time of such algorithm would be time complexity $O(n)$. 
+
+Let's imagine for a second we have all the $start$ and $end$ fields stored and then sorted in increasing order into two independent arrays, say \inline{startPoints} and \inline{endPoints}, respectively. The idea is to keep track of two separate indices \inline{idxS} and \inline{idxE} pointing to \inline{startPoints} and \inline{endPoints}, respectively, both initialized to zero. We also keep track of the number of concurrent meetings in a variable \inline{concurrentMeetings} also inizialized to zero.
+We can then compare \inline{startPoints[idxS]} with \inline{endPoints[idxE]} and:
+\begin{enumerate}
+	\item if \inline{startPoints[idxS] < endPoints[idxE]} then we can conclude that we have found a start point of a meeting that is happening before the next (in time) end of a meeting. Therefore we need another room: \inline{concurrentMeetings++}
+	\item  if, on the other hand, \inline{startPoints[idxS] >= endPoints[idxE]} then we have found that the end of a meeting happens to be before the start pointed by \inline{idxS} and we can decrement \inline{concurrentMeetings}.
+\end{enumerate}
+
+This algorithm works because \inline{startPoints} and \inline{endPoints} are sorted for each element of the former there is one that is larger in the latter. This means that \inline{concurrentMeetings} will never be smaller than one in practice after the first iteration (which will always hit the first case above i.e. \inline{startPoints[0] < endPoints[0])}
+
+This idea is implemented in Listing  \ref{list:merge_intervals_2_nlogn_endpoints}. 
+
+\lstinputlisting[language=c++, caption={$O(nlog(n))$ time and $O(1)$ space solution.},label=list:merge_intervals_2_nlogn_endpoints]{sources/merge_intervals_2/meeting_rooms1_solution3.cpp}
+
+The code works by first making sure \inline{startPoints} and \inline{endPoints} are filled and sorted properly. The next step is to loop until we have took a look at each and every element in \inline{startPoints} and increasing the value of the variable \inline{concurrentMeetings} depending on the value of such comparison.
+
+The time and space complexities of this solution are $O(n)$.
+
+
+
