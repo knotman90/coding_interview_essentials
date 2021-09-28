@@ -25,7 +25,6 @@ unsigned calculate_number_meeting_rooms2(std::vector<Interval>& meetings)
   });
 
   unsigned ans = 0;
-  
 
   return ans;
 }

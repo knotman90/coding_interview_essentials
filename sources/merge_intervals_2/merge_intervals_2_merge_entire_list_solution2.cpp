@@ -31,7 +31,7 @@ std::vector<Interval> merge_list_intervals_entire_list_bruteforce(
       continue;
     ans.push_back(intervals[i]);
     excluded[i] = true;
-    for (size_t j = i+1; j < intervals.size(); j++)
+    for (size_t j = i + 1; j < intervals.size(); j++)
     {
       if (const auto [ok, merged] = merge(ans.back(), intervals[j]);
           !excluded[j] && ok)
