@@ -13,8 +13,8 @@ using std::swap;
 using std::vector;
 
 #include "Interval.h"
-#include "merge_intervals_2_merge_entire_list_solution2.cpp"
 #include "merge_intervals_2_merge_entire_list_solution1.cpp"
+#include "merge_intervals_2_merge_entire_list_solution2.cpp"
 
 TEST(merge_intervals_2_entire_list, test_empty)
 {

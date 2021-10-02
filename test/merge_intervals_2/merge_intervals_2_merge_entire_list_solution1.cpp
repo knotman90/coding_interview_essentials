@@ -1,4 +1,21 @@
 
+/// This function returns a tuple of two value: a bool and an Interval and takes
+/// as a input two intervals. If they overlap, the function returns {true, m}
+/// where m is an interval produced by merging the input interval. If they do
+/// not overlap, the function returns {false,a}.
+static auto merge(const Interval& a, const Interval& b)
+{
+  Interval ans(a);
+  bool ok = false;
+  if ((a.start >= b.start && a.start <= b.end)
+      || (b.start >= a.start && b.start <= a.end))
+  {
+    ok        = true;
+    ans.start = std::min(a.start, b.start);
+    ans.end   = std::max(a.end, b.end);
+  }
+  return std::make_tuple(ok, ans);
+}
 
 std::vector<Interval> merge_list_intervals_entire_list_lin_time(
     std::vector<Interval>& intervals)

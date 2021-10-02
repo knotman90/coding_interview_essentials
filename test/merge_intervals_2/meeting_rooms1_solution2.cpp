@@ -1,0 +1,1 @@
+../../sources/merge_intervals_2/meeting_rooms1_solution2.cpp

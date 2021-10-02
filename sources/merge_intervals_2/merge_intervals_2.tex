@@ -17,11 +17,13 @@
 \chapter{Merge Intervals}
 \label{ch:merge_intervals_2}
 \section*{Introduction}
-Intervals are common in programming and they pop up in numerous applications as they are very versatile and are used to represent many things, from finite segments in a gemoetry application to time spans for a school timetable.
+Intervals are common in programming and they pop up in numerous applications as they are very versatile and are used to represent many things, from segments in geometry applications to time spans for timetable building (e.g. for keeping track of the availibility of meeting rooms for instance) or resourse scheduling.
 
 Intervals are also quite popular in interview questions; In this chapter will go through one that is commonly asked (still nowadays) at Google where we are given a list of time intervals and we need to produce a new list where none of the elements overlap with one another.
 
-In addition, we will also investigate, in Section \ref{example:merge_intervals_2:exercice1_2}, a variation of this problem where we are given a list of time intervals where we are guaranteed none of them overlaps wtih one another to begin with and our job is to insert a new interval in the list in such a way that the non-overlapping property is maintained.
+In Section \ref{example:merge_intervals_2:exercice1_2}, a variation of this problem where we are given a list of time intervals where we are guaranteed none of them overlaps wtih one another to begin with and our job is to insert a new interval in the list in such a way that the non-overlapping property is maintained.
+
+
 
 \section{Problem statement}
 \begin{exercise}
@@ -90,7 +92,7 @@ This idea is implemented in Listing \ref{list:merge_intervals_2_bruteforce}.
 
 \lstinputlisting[language=c++, caption={Quadratic time solution.},label=list:merge_intervals_2_bruteforce]{sources/merge_intervals_2/merge_intervals_2_merge_entire_list_solution2.cpp}
 
-The function \inline{merge} contains the logic for merging two intervals and it is used in the main function \inline{merge_list_intervals_entire_list_bruteforce} that loops through the elements of the input list one at the time and carefully uses an array of boolean flags \inline{excluded} to mark intervals that have been already merged.
+The function \inline{mergeNonSorted} contains the logic for merging two intervals and it is used in the main function \inline{merge_list_intervals_entire_list_bruteforce} that loops through the elements of the input list one at the time and carefully uses an array of boolean flags \inline{excluded} to mark intervals that have been already merged.
 If an interval is not yet merged into the output list \inline{ans} then we place it at the back of \inline{ans} and then we try to merge it with the rest of the unmarked intervals (in the innermost loop).
 Whenever it overlaps with some other interval the resulting merged interval is substituted at the back of \inline{ans} and the interval it was merged with is marked as to be excluded from further examination in the future iterations.
 Therefore each and every interval is either used as a starting seed and is tested for overlap and potentially merged with the remaining of the not yet excluded intervals or, it is skipped altogether because was already merged in a previous iteration.
@@ -98,7 +100,7 @@ Notice that the inner loop starts at $j=i+1$ as intervals before position $i$ ha
 
 Using this strategy, we are sure that the output list will never contain any interval that is not covered by one or more intervals in the input list. 
 Similarly, if a value is covered by an interval in $I$ then, we are also guaranteed it will be contained in the output.
-In other words, if you imagine that a list of intervals represent colored segments of a line then $I$ and $I'$ would produce the very same exact coloring of the line.
+In other words, if you imagine that a list of intervals represents colored segments of a line then $I$ and $I'$ would produce the very same exact coloring of the line.
 
 The complexity of this function is quadratic in time; when we have an input list containing only non-overlapping intervals, none of them (except the one we are trying to merge the others with) will ever be excluded and that means a full run of the innerloop will occur.
 
@@ -126,12 +128,28 @@ At this point, we are sure that whatever interval is in \inline{ans.back} will d
 Therefore we can safely push this new interval into \inline{ans} and repeat the process until all intervals have been analyzed.
 
 Notice that here we are using the same \inline{merge} function used in Listing \ref{list:merge_intervals_2_bruteforce};
-However, because we know elements are sorted we could simplify the condition \inline{if ((a.start >= b.start && a.start <= b.end) || (b.start >= a.start && b.start <= a.end))} as we know that \inline{a.start <= b.start} is always true.
+However, because we know elements are sorted we could simplify the condition \inline{if ((a.start >= b.start && a.start <= b.end) || (b.start >= a.start && b.start <= a.end))} as we know that \inline{a.start <= b.start} is always true as shown in Listing \ref{list:merge_interval:newmergefunction}.
+
+\begin{lstlisting}[language=c++, caption={Function to merge two sorted intervals.},label=list:merge_interval:newmergefunction]]{
+	auto merge(const Interval& a, const Interval& b)
+	{
+	  Interval ans(a);
+	  bool ok = false;
+	  if (a.start >= b.start && a.start < b.end)
+	  {
+	    ok        = true;
+	    ans.start = std::min(a.start, b.start);
+	    ans.end   = std::max(a.end, b.end);
+	  }
+	  return std::make_tuple(ok, ans);
+	}             
+\end{lstlisting} 
 
 This approach has a time complexity of $nlog(n)$ (due to the sorting) 
 and the space complexity is $O(n)$ (however, we really only use linear spcae to store the output list and if we do not account for it the complexity is constant).
 
-\section{Problem statement}
+\section{Common Variation - Add a new interval}
+\subsection{Problem statement}
 \begin{exercise}
 \label{example:merge_intervals_2:exercice1_2}
 Given a sorted list of disjoint (non-overlapping) intervals $I$ and an interval $w$, insert $w$ into $I$ so that the resulting list still contains only disjoint intervals.
@@ -165,7 +183,7 @@ You may assume that the intervals are sorted according to their start times.
 
 \FloatBarrier
 
-\section{Discussion}
+\subsection{Discussion}
 \label{merge_intervals_2:sec:discussion_1}
 This problem is really not that different from the one described in Section \ref{example:merge_intervals_2:exercice1_1} to the point that you can use almost the same approach to tackle this one. In particular, one can think of simply adding $w$ to $I$ and then proceed to use the algorithms described above to solve the problem. This would grant us a $nlog(n)$ solution for this variation with very little effort. 
 However, there is really no need to do the extra $log(n)$ work to have the entire $I$ plus $w$ sorted, especially considering that $I$ comes already in a sorted state and we can take advantage of that. 
@@ -188,7 +206,7 @@ An implementation of this idea is shown in Listing \ref{list:merge_intervals_2}
 
 \lstinputlisting[language=c++, caption={Linear time solution.},label=list:merge_intervals_2]{sources/merge_intervals_2/merge_intervals_2_solution1.cpp}
 
-The code works in two disting stages represented by the \inline{for} and \inline{while} loops. 
+The code works in two distinct stages represented by the \inline{for} and \inline{while} loops. 
 In the first loop statement we take care of finding the location $k$ at which we can insert $w$. 
 Notice that $k$ might also be the end of the list and this is why we have the \inline{if(!inserted)} check. If every element of $I$ ends before $w.start$ then we are sure $w$ should be placed at the very end of the output list and there is no more work to be done. 
 
@@ -196,3 +214,78 @@ The second loop, like in Listing \ref{list:merge_intervals_2_nlogn} uses \inline
 When we reach a point $j$ where there is no more element overlapping with \inline{ans.back} then the \inline{else} part of the code will always be executed (as we started off with non-overlapping intervals in $I$) and the remainder of the list gets copied in the output list, completing the exercise.
 
 Both time and space complexities are linear.
+
+
+
+
+\section{Common Variation - How many meeting rooms are needed?}
+\subsection{Problem statement}
+\begin{exercise}
+	\label{example:merge_intervals_2:exercice1_2}
+	Given an array of time intervals where each interval $(x,y) \: : x < y$ represent a meeting starting at time $x$ and ending at time $y$(excluded), return the minimum number of conference rooms required to accomodate all meetings.
+	
+		%example1
+		\begin{example}
+			\label{example:merge_intervals_2:example1}
+			\hfill \\
+			Given $I=\{(9,10),(4,9),(5,17)\}$ the function returns $2$. We can schedule $(4,9)$ and $(5,17)$ in two different meeting rooms while $(9,10)$ can be scheduled in the same room of $(4,9)$ after it ends. 
+		\end{example}
+	
+	\end{exercise}
+	
+
+\section{Brute-force}
+Let's start by noticing that if you have $k$ intervals that are \textbf{all overlapping with each other}, then you need to have $k$ different meeting rooms to accommodate all $k$ meetings.
+We can build on this simple observation and calculate the number of concurrent meetings for each and every time unit encompassed by $I$: from the earliest start to the latest end of a meeting in $I$ (or in other words,from the smallest to the largest among all start and end fields of all intervals). 
+For instance w.r.t. the Example \ref{example:merge_intervals_2:example1} we know the smallest time among all intervals is $4$ while the largest is $17$.
+Therefore there are $t=4-17$ time units for which we need to calculate the number of concurrent meetings. 
+Our answer will be the largest among these values.
+
+We can keep an array of size $t$, where index $0$ maps to time $4$, index $1$ to time $5$ and so on up to the last index of the array ($12$) mapping to time $17$,
+to store the information about the number of meetings happening at that time.
+Such an array can be filled by looping through each and every interval $i=(s_i, e_i)$ in $I$ and incrementing only the cells corrensponding to times from $s_i$ to $e_i$ (the time spanned by the interval $i$). 
+
+Figure \ref{fig:merge_intervals_2:example1} shows how such an array would look like after being filled with the procedure discussed above and using the input of Example \ref{example:merge_intervals_2:example1}. 
+We can see how the maximum value there is $2$ signifing that we need at most $2$ meetings rooms to accomodate all meetings.
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/merge_intervals_2/images/example2_meetings}
+	\caption[]{Number of concurrent meetings throughtout the entire time spanned by all intervals in Exampled \ref{example:merge_intervals_2:example1}.}
+	\label{fig:merge_intervals_2:example1}
+\end{figure}
+
+Listing \ref{list:merge_intervals_2_nlogn} implements this idea. 
+The code is pretty straightforward and we can notice how we have a double loop, one looping through the intervals and the second through the time span of a single interval.
+We can also notice how we use the variable \inline{shift==-min_hour} to map indices of the array \inline{meeting_at_time} to the actual times in $I$.
+
+\lstinputlisting[language=c++, caption={$O(k^2 + n)$ time and $O(k)$ space solution where $k$ is the time span between the smallest starting  and largest ending time of a meeting.},label=list:merge_intervals_2_nlogn]{sources/merge_intervals_2/meeting_rooms1_solution1.cpp}
+
+The complexity of this approach is $O(k^2 + n)$ where $k$ is the difference between the smallest and largest time among all intervals in $I$ and $n$ is the number of such intervals.
+The space complexity is $O(k)$. If $k$ is constant, this is actually not too bad of a solution, but in general, for this problem both $k$ and $n$ can be considered not to have a particularly favorable bound and we need therefore look for a more efficient solution.
+
+
+\section{$nlog(n)$ - Intervals endpoints}
+\label{example:merge_intervals_2:sorting_2}
+We can enrich our set of observations about this problem with the fact that, if two meetings overlap, then they must overlap either at the start or at the end of a room's booking interval. This allows us to basically avoid to excplicitelly mark every time unit in a interval and focus only only its endpoints. 
+For example in the Example \ref{fig:merge_intervals_2:example1}  we see that interval $(5,17)$ and $(4,9)$ overlaps and also that they start doing so from time $4$ and also that they stop overlapping at time $9$.
+Why is this useful for us? Because if we can somehow avoid looking at the entire time spanned by all intervals in $I$ and just look at the endpoints then the running time of such algorithm would be time complexity $O(n)$. 
+
+Let's imagine for a second we have all the $start$ and $end$ fields stored and then sorted in increasing order into two independent arrays, say \inline{startPoints} and \inline{endPoints}, respectively. The idea is to keep track of two separate indices \inline{idxS} and \inline{idxE} pointing to \inline{startPoints} and \inline{endPoints}, respectively, both initialized to zero. We also keep track of the number of concurrent meetings in a variable \inline{concurrentMeetings} also inizialized to zero.
+We can then compare \inline{startPoints[idxS]} with \inline{endPoints[idxE]} and:
+\begin{enumerate}
+	\item if \inline{startPoints[idxS] < endPoints[idxE]} then we can conclude that we have found a start point of a meeting that is happening before the next (in time) end of a meeting. Therefore we need another room: \inline{concurrentMeetings++}
+	\item  if, on the other hand, \inline{startPoints[idxS] >= endPoints[idxE]} then we have found that the end of a meeting happens to be before the start pointed by \inline{idxS} and we can decrement \inline{concurrentMeetings}.
+\end{enumerate}
+
+This algorithm works because \inline{startPoints} and \inline{endPoints} are sorted for each element of the former there is one that is larger in the latter. This means that \inline{concurrentMeetings} will never be smaller than one in practice after the first iteration (which will always hit the first case above i.e. \inline{startPoints[0] < endPoints[0])}
+
+This idea is implemented in Listing  \ref{list:merge_intervals_2_nlogn_endpoints}. 
+
+\lstinputlisting[language=c++, caption={$O(nlog(n))$ time and $O(1)$ space solution.},label=list:merge_intervals_2_nlogn_endpoints]{sources/merge_intervals_2/meeting_rooms1_solution3.cpp}
+
+The code works by first making sure \inline{startPoints} and \inline{endPoints} are filled and sorted properly. The next step is to loop until we have took a look at each and every element in \inline{startPoints} and increasing the value of the variable \inline{concurrentMeetings} depending on the value of such comparison.
+
+The time and space complexities of this solution are $O(n)$.
+
+
+

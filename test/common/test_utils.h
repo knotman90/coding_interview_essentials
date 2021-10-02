@@ -1,6 +1,8 @@
 #ifndef TEST_COMMON_TEST_UTILS
 #define TEST_COMMON_TEST_UTILS
 
+#include "merge_intervals_2/Interval.h"
+
 #define EXPECT_EQUAL_ELEMENTS(x, y)                                           \
   do                                                                          \
   {                                                                           \
@@ -28,6 +30,11 @@ std::string to_string(const std::pair<int,int>& q)
         ss<<std::get<1>(q);
         ss<<") ";
         return ss.str();
+}
+
+std::string to_string(const Interval& q)
+{
+    return to_string(std::pair(q.start,q.end));
 }
 
 template<typename T>
