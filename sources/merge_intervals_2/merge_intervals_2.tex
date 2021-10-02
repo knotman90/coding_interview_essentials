@@ -92,7 +92,7 @@ This idea is implemented in Listing \ref{list:merge_intervals_2_bruteforce}.
 
 \lstinputlisting[language=c++, caption={Quadratic time solution.},label=list:merge_intervals_2_bruteforce]{sources/merge_intervals_2/merge_intervals_2_merge_entire_list_solution2.cpp}
 
-The function \inline{merge} contains the logic for merging two intervals and it is used in the main function \inline{merge_list_intervals_entire_list_bruteforce} that loops through the elements of the input list one at the time and carefully uses an array of boolean flags \inline{excluded} to mark intervals that have been already merged.
+The function \inline{mergeNonSorted} contains the logic for merging two intervals and it is used in the main function \inline{merge_list_intervals_entire_list_bruteforce} that loops through the elements of the input list one at the time and carefully uses an array of boolean flags \inline{excluded} to mark intervals that have been already merged.
 If an interval is not yet merged into the output list \inline{ans} then we place it at the back of \inline{ans} and then we try to merge it with the rest of the unmarked intervals (in the innermost loop).
 Whenever it overlaps with some other interval the resulting merged interval is substituted at the back of \inline{ans} and the interval it was merged with is marked as to be excluded from further examination in the future iterations.
 Therefore each and every interval is either used as a starting seed and is tested for overlap and potentially merged with the remaining of the not yet excluded intervals or, it is skipped altogether because was already merged in a previous iteration.
@@ -100,7 +100,7 @@ Notice that the inner loop starts at $j=i+1$ as intervals before position $i$ ha
 
 Using this strategy, we are sure that the output list will never contain any interval that is not covered by one or more intervals in the input list. 
 Similarly, if a value is covered by an interval in $I$ then, we are also guaranteed it will be contained in the output.
-In other words, if you imagine that a list of intervals represent colored segments of a line then $I$ and $I'$ would produce the very same exact coloring of the line.
+In other words, if you imagine that a list of intervals represents colored segments of a line then $I$ and $I'$ would produce the very same exact coloring of the line.
 
 The complexity of this function is quadratic in time; when we have an input list containing only non-overlapping intervals, none of them (except the one we are trying to merge the others with) will ever be excluded and that means a full run of the innerloop will occur.
 
@@ -128,7 +128,22 @@ At this point, we are sure that whatever interval is in \inline{ans.back} will d
 Therefore we can safely push this new interval into \inline{ans} and repeat the process until all intervals have been analyzed.
 
 Notice that here we are using the same \inline{merge} function used in Listing \ref{list:merge_intervals_2_bruteforce};
-However, because we know elements are sorted we could simplify the condition \inline{if ((a.start >= b.start && a.start <= b.end) || (b.start >= a.start && b.start <= a.end))} as we know that \inline{a.start <= b.start} is always true.
+However, because we know elements are sorted we could simplify the condition \inline{if ((a.start >= b.start && a.start <= b.end) || (b.start >= a.start && b.start <= a.end))} as we know that \inline{a.start <= b.start} is always true as shown in Listing \ref{list:merge_interval:newmergefunction}.
+
+\begin{lstlisting}[language=c++, caption={Function to merge two sorted intervals.},label=list:merge_interval:newmergefunction]]{
+	auto merge(const Interval& a, const Interval& b)
+	{
+	  Interval ans(a);
+	  bool ok = false;
+	  if (a.start >= b.start && a.start < b.end)
+	  {
+	    ok        = true;
+	    ans.start = std::min(a.start, b.start);
+	    ans.end   = std::max(a.end, b.end);
+	  }
+	  return std::make_tuple(ok, ans);
+	}             
+\end{lstlisting} 
 
 This approach has a time complexity of $nlog(n)$ (due to the sorting) 
 and the space complexity is $O(n)$ (however, we really only use linear spcae to store the output list and if we do not account for it the complexity is constant).

@@ -12,7 +12,7 @@ using std::vector;
 #include "Interval.h"
 #include "meeting_rooms1_inputs.h"
 #include "meeting_rooms1_solution1.cpp"
-#include "meeting_rooms1_solution2.cpp"
+
 #include "meeting_rooms1_solution3.cpp"
 
 #include "algorithm.h"

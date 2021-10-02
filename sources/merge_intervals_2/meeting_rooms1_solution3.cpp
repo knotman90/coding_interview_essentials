@@ -1,3 +1,4 @@
+
 unsigned calculate_number_meeting_rooms3_touchpoints(
     const std::vector<Interval>& meetings)
 {
