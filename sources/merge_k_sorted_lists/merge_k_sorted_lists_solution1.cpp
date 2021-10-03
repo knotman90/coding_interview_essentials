@@ -47,6 +47,7 @@ Node<int>* insert_sorted(Node<int>* sinkList, Node<int>* toBeInserted)
   }
   return ans;
 }
+
 Node<int>* merge_k_sorted_list_brute_force(std::vector<Node<int>*> lists)
 {
   if (lists.empty())
