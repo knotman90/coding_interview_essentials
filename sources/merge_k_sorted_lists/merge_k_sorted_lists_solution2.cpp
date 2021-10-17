@@ -1,14 +1,9 @@
-template<typename T>
-struct NodeWrapper{
-    Node<T>* ptr{nullptr};
-    size_t list_idx{};
+template <typename T>
+struct NodeWrapper
+{
+  Node<T>* ptr{nullptr};
+  size_t list_idx{};
 };
-
-template<typename T>
-bool compareNodeWrapper(const NodeWrapper<T>& node1, const NodeWrapper<T>& node2){
-    assert(node1.node && node2.node);
-    return node1.ptr->val < node2.ptr->val;
-}
 
 Node<int>* merge_k_sorted_list_priority_queue(std::vector<Node<int>*> lists)
 {
@@ -17,15 +12,46 @@ Node<int>* merge_k_sorted_list_priority_queue(std::vector<Node<int>*> lists)
   if (lists.size() <= 1)
     return lists.front();
 
-    std::priority_queue<NodeWrapper<int>, std::vector<NodeWrapper<int>>, decltype(compareNodeWrapper<NodeWrapper<int>>)> queue;
+  auto compareNodeWrapper = [](const NodeWrapper<int>& node1,
+                               const NodeWrapper<int>& node2) {
+    assert(node1.ptr && node2.ptr);
+    return node1.ptr->val > node2.ptr->val;
+  };
 
+  std::priority_queue<NodeWrapper<int>,
+                      std::vector<NodeWrapper<int>>,
+                      decltype(compareNodeWrapper)>
+      queue(compareNodeWrapper);
 
-
-  Node<int>* ans = lists.front();
-  for (size_t i = 1; i < lists.size(); i++)
+  std::vector<Node<int>*> lists_pointers(lists.size(), nullptr);
+  for (size_t i = 0; i < lists.size(); i++)
   {
-    ans = insert_sorted(ans, lists[i]);  // insert list nodes into ans
+    lists_pointers[i] = lists[i];
+    if (lists_pointers[i])
+      queue.push(NodeWrapper<int>{lists[i], i});
   }
 
-  return ans;
+  Node<int>* ans_current = nullptr;
+  Node<int>* ans_head    = nullptr;
+  while (!queue.empty())
+  {
+    auto [ptr, idx] = queue.top();
+    queue.pop();
+
+    if (ans_current)
+    {
+      ans_current->next = ptr;
+    }
+    else
+    {
+      ans_head = ptr;
+    }
+    ans_current = ptr;
+    if (lists_pointers[idx]->next)
+    {
+      lists_pointers[idx] = lists_pointers[idx]->next;
+      queue.push(NodeWrapper<int>{lists_pointers[idx], idx});
+    }
+  }
+  return ans_head;
 }

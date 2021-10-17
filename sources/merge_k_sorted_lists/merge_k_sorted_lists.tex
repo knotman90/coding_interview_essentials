@@ -17,10 +17,12 @@
 \chapter{Merge $k$ sorted lists}
 \label{ch:merge_k_sorted_lists}
 \section*{Introduction}
-The problem discusses in this chapter is quite interesting because it is heavily influenced and based on the familiar  merge-sort algorithm\cite{wiki:mergesort} which is a divide and conquer algorithm that works by first splitting a list into smaller and smaller ones (see figure \ref{fig:merge_k_sorted_lists:example_mergesort}) and then sorts them separately and then it merges them a pair at the time preserving the sorting property (see figure \ref{fig:merge_k_sorted_lists:example_mergesort_1}). 
-The merge phase is what we are going to focus in this chapter and in particular we will extend it so that we can merge more than a pair of sorted lists together at the same time. 
+The problem discussed in this chapter is quite interesting because it is rooted on the familiar  merge-sort algorithm\cite{wiki:mergesort} which is a divide and conquer algorithm that works by first splitting a list into smaller and smaller ones (see figure \ref{fig:merge_k_sorted_lists:example_mergesort}) and then sorts them separately and then it merges them a pair at the time preserving the sorting property (see figure \ref{fig:merge_k_sorted_lists:example_mergesort_1}). 
+In this chapter we will focus on the merge phase and, in particular, we will try to find an efficient way to augment it so that we it will be capable of merging more than only a pair of sorted lists. 
 
-Coming up with a brute-force solution for merging $k$ lists together is not hard but the end solution is rather inefficient. A faster and more efficient solution requires a bit more effort, but luckly there are quite a number of different approaches that we can take to get to one of them. In the remaining of the chapter we will have a look at the brute-force solution (in Section \ref{merge_k_sorted_lists:sec:bruteforce}) and then we will look at two approaches we can take to lower the overall time and space complexity (in Section \ref{merge_k_sorted_lists:sec:priorityqueue} and \ref{merge_k_sorted_lists:sec:divideetimpera}).
+Coming up with a brute-force solution for merging $k$ lists is not hard but the resulting end algorithm is rather inefficient. 
+A faster and more efficient approach requires a bit more effort, and in the remainder of the chapter we will investigate a couple of different approaches that we can take to solve this problem efficiently.
+In particular, we will have a look at the brute-force solution (in Section \ref{merge_k_sorted_lists:sec:bruteforce}) and then at two approaches we can take to lower the overall time and space complexity (in Section \ref{merge_k_sorted_lists:sec:priorityqueue} and \ref{merge_k_sorted_lists:sec:divideetimpera}).
 
 
 \begin{figure}
@@ -81,13 +83,13 @@ Write a function that, given $k$ lists that are sorted in ascending order, merge
 \subsection{Brute-force}
 \label{merge_k_sorted_lists:sec:bruteforce}
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:merge_k_sorted_lists]{sources/merge_k_sorted_lists/merge_k_sorted_lists_solution1.cpp}
-\end{minipage}
+	\lstinputlisting[language=c++, caption={Brute-force solution.},label=list:merge_k_sorted_lists_bruteforce]{sources/merge_k_sorted_lists/merge_k_sorted_lists_solution1.cpp}
 
 
 \subsection{Priority-queue approach}
 \label{merge_k_sorted_lists:sec:priorityqueue}
+
+\lstinputlisting[language=c++, caption={Priority-queue-based solution.},label=list:merge_k_sorted_lists_prioqueue]{sources/merge_k_sorted_lists/merge_k_sorted_lists_solution2.cpp}
 
 \subsection{Divide et impera}
 \label{merge_k_sorted_lists:sec:divideetimpera}
