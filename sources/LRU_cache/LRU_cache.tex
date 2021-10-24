@@ -39,7 +39,7 @@ The problem we will solve in this chapter is about implementing a LRU cache so t
 		\caption{Caches in the internet. We can see caches being used at every level. Even the database might cache recently used data in memory.}
 		\label{fig:LRU_cache:web_cache}
 	 \end{subfigure}
-	 \caption[]{dsjfhgdkj}
+	 \caption[]{}
 	  \label{fig:LRU_cache:caches_example}
 \end{figure}
 
@@ -57,9 +57,7 @@ Implement the two two public methods of the \inline{LRUCache} interface below. T
 	\begin{example}
 		\label{example:LRU_cache:example1}
 		\hfill \\ 
-		For instance, given a cache \inline{C} of size $2$ (with char keys and int values) then Table \ref{tab:LRU_cache:example1} shows the content after performing an operation on it:
-
-		
+		For instance, given a cache \inline{C} of size $2$ (with char keys and int values), Table \ref{tab:LRU_cache:example1} shows the content after performing a number of operations on it.		
 	\end{example}
 
 
@@ -93,21 +91,52 @@ Implement the two two public methods of the \inline{LRUCache} interface below. T
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item 
+	\item Is one of the two operations going to be performed more than the other?
 	\begin{answered}
-		\textit{}
+		\textit{No no assumpitons like this can be made. }
 	\end{answered}
 	
 \end{QandA}
 
-\section{Discussion}
-\label{LRU_cache:sec:discussion}
-
+%\section{Discussion}
+%\label{LRU_cache:sec:discussion}
 
 \subsection{Brute-force}
 \label{LRU_cache:sec:bruteforce}
+A very basic solution can be obtained by just storing the key-value pairs alongside a integer value that marks their last usage time into a vector. If we make such vector is always sorted, then 
+the \inline{get} operation can be implemented as a linear search and the \inline{put} would consist of a potential \inline{pop_back()} (that we only do when the cache is full and removes the oldest entry) followed by a \inline{push_back} 
+and a sort. 
+This is quite inefficient as, the \inline{get} operation would run in $O(n)$ time while the \inline{pu}t is even more expensive with its $O(n log(n))$ time complexity.
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:LRU_cache]{sources/LRU_cache/LRU_cache_solution1.cpp}
-\end{minipage}
+In order to improve things what we can do is to store the key-value-timestamp tuple into an \inline{std::unordered_map} and keep a vector of pairs \inline{std::vector<std::pair<Timestamp, Key>>} sorted by the first element of the pair.
+Each pair in the vector contains the information about the last time a given key has been used.
+If we keep this array sorted by such timestamp then we have a way of keeping track which element needs to be deleted when the cache is full.
+Moreover, by storing the tuple in a hashmap we are now able to serve the \inline{get} operation in $O(1)$. The \inline{put} is still pretty expensive as it is still $O(n log(n))$ (actually if we use insertion sort this would most likely be $O(n)$ as we always insert in a almost sorted collection).
 
+The reason why the \inline{put} is expensive is because every time we add a new element we need to sort the entire array again.
+However if instead of a \inline{vector} we use a \inline{map} then we can continue to keep the pairs of timestamp and Keys sorted, only this time at only $O(log(n))$ cost!
+This  idea is shown in Listing \ref{list:LRU_cache:map}
+
+\lstinputlisting[language=c++, caption={Solution using \inline{map} to keep track of the least recently used entry in the cache.},label=list:LRU_cache:map]{sources/LRU_cache/LRU_cache_solution1.cpp}
+
+The class \inline{LRUcache_logn} has three class variables:
+\begin{itemize}
+	\item \inline{VP} of type \inline{ValueMap} that is responsible for the storing the association between a Key and both its value the its timestamp;
+	\item \inline{TK} of type \inline{TimeKeyMap} which basically keeps the Keys sorted by Timestamp;
+	\item \inline{time} that is the global clock. A variable that we only increase and it is used to mark a cache entry when an operation is performed on it.
+\end{itemize}
+
+The \inline{get} function works by first checking whether the requested \inline{key} has been inserted. It is was it retrieves it alongside its timestamp, then proceed to update both \inline{VP} and \inline{TK} by making sure now \inline{key} has a new timestamp associated with it (this will make sure it will be brought to the first position in \inline{TK}).
+
+The \inline{put} function is slightly more complicated as we might have a case where the key is already present in the cache and therefore all we need to do is to perform an update without worrying about cache eviction.
+If on the other hand we are inserting a new key, then we have to further distiguish two cases:
+\begin{enumerate}
+	\item \textbf{the case is not full}: this is the easiest scenario where we simply  ass a new entry in both \inline{VP} and \inline{VK};
+	\item \textbf{the cache is full}: in this case we need to check the \inline{TK} and collect the least recently key. At this point we can proceed in deleting it and safely try again to perform the \inline{put} (which this time will succeed as the cache is not full anymore).
+\end{enumerate}
+One thing to notice is that all operations always increase the global time to make sure that we keep the keys sorted by usage time. 
+
+All the operations on \inline{VP} run in constant time while the operations in \inline{TK} in logarithmic time: therefore both \inline{VP} and \inline{VP} run in logarithmic time.
+
+\subsection{Constant time solution}
+\label{LRU_cache:sec:constanttime}

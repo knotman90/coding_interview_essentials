@@ -94,7 +94,7 @@ class LRUCacheTest : public TimeOuttedTest
     expected = aExpected;
     ans      = exerciseCache(cache, input);
     EXPECT_EQ(expected.size(), ans.size());
-    for (int i = 0; i < ans.size(); ++i)
+    for (size_t i = 0; i < ans.size(); ++i)
     {
       EXPECT_EQ(expected[i], ans[i]) << "Vectors x and y differ at index " << i;
     }
@@ -151,12 +151,12 @@ TEST_F(LRUCacheTestSolution1, Solution1_basic_overflow_capacity)
 }
 
 
-using LRUCacheTestSolutionlogn = LRUCacheTest<LRUCache_logn>;
+using LRUCacheTestSolutionlogn = LRUCacheTest<LRUCache_logn<int,int>>;
 
 TEST_F(LRUCacheTestSolutionlogn, Solution1_basicTest1)
 {
   constexpr size_t kCapacity = 2;
-  LRUCache_logn cache1(kCapacity);
+  LRUCache_logn<int,int> cache1(kCapacity);
   givenCache(cache1);
   givenInput(std::vector<TestUnit>{{Insert, "1 50"}, {Get, "1"}});
   expectCacheToReturn(std::vector<std::optional<int>>{{}, {50}});
@@ -165,7 +165,7 @@ TEST_F(LRUCacheTestSolutionlogn, Solution1_basicTest1)
 TEST_F(LRUCacheTestSolutionlogn, Solution1_basicTest_not_preset)
 {
   constexpr size_t kCapacity = 2;
-  LRUCache_logn cache1(kCapacity);
+  LRUCache_logn<int,int> cache1(kCapacity);
   givenCache(cache1);
   givenInput(std::vector<TestUnit>{{Insert, "1 50"}, {Get, "2"}});
   expectCacheToReturn(std::vector<std::optional<int>>{{}, {}});
@@ -174,7 +174,7 @@ TEST_F(LRUCacheTestSolutionlogn, Solution1_basicTest_not_preset)
 TEST_F(LRUCacheTestSolutionlogn, Solution1_basic_overflow_capacity)
 {
   constexpr size_t kCapacity = 2;
-  LRUCache_logn cache1(kCapacity);
+  LRUCache_logn<int,int> cache1(kCapacity);
   givenCache(cache1);
   givenInput(std::vector<TestUnit>{{Insert, "1 1"},
                                    {Insert, "2 2"},
@@ -239,6 +239,69 @@ TEST_F(LRUCacheTestSolutionlogn_implementation2, Solution1_basic_overflow_capaci
                                       {2},
                                       {3}});
 }
+
+auto get_random_operations_sequence(const int size){
+    std::vector<TestUnit> ans;
+    for(int i =0 ; i < size ; i++){
+        auto isGet  = (rand() %2) ==0;
+        TestUnit unit;
+        if(isGet){
+            std::get<0>(unit) = Get;
+            auto n = rand() % size;
+            std::get<1>(unit) = std::to_string(n);
+            ans.push_back(unit);
+        }else{
+            std::get<0>(unit) = Insert;
+            auto n = rand() % size;
+            auto n1 = rand() % size;
+            std::get<1>(unit) = std::to_string(n)+" "+std::to_string(n1);
+            ans.push_back(unit);
+        }
+    }
+    return ans;
+}
+
+std::string sequence_to_string(auto input)
+{
+    std::ostringstream ss;
+    ss<<'{';
+    for(const auto u : input){
+        ss<<'{';
+        ss<<(!std::get<0>(u) ? "Insert" : "Get");
+        ss<<" , ";
+        ss<<std::get<1>(u);
+        ss<<"}, ";
+    }
+    ss<<'}';
+    return ss.str();
+}
+
+TEST(LRUCacheTest, random_all_solution)
+{
+    auto maxsize = 100000;
+    for(int i = 0 ; i < 100; i++){
+        auto size = (rand() % maxsize)+1;
+        auto  capacity = (rand()% size) +1;
+        auto input = get_random_operations_sequence(size);
+
+        LRUCache_logn<int,int> cache1(capacity);
+        auto ans1      = exerciseCache(cache1, input);
+
+        LRUCache_logn2 cache2(capacity);
+        auto ans2      = exerciseCache(cache2, input);
+
+        LRUCache_solution1 cache3(capacity);
+        auto ans3      = exerciseCache(cache3, input);
+
+        ASSERT_EQ(ans1.size(), ans2.size())<< "error on cap = "<<capacity<< " "<<sequence_to_string(input);
+        ASSERT_EQ(ans1.size(), ans3.size())<< "error on cap = "<<capacity<<" "<<sequence_to_string(input);;
+        for(int i = 0 ; i < ans1.size() ; i++)    {
+            ASSERT_EQ(ans1[i], ans3[i])<< "error on cap = "<<capacity<<" "<<sequence_to_string(input);;
+            ASSERT_EQ(ans2[i], ans3[i])<< "error on cap = "<<capacity<<" "<<sequence_to_string(input);;
+        }
+    }
+}
+
 
 int main(int argc, char** argv)
 {
