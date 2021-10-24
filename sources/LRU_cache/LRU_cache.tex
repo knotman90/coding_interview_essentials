@@ -138,5 +138,30 @@ One thing to notice is that all operations always increase the global time to ma
 
 All the operations on \inline{VP} run in constant time while the operations in \inline{TK} in logarithmic time: therefore both \inline{VP} and \inline{VP} run in logarithmic time.
 
+
+
+Another implementation of the same idea is shown in Listing \ref{list:LRU_cache:map1}.
+
+\lstinputlisting[language=c++, caption={Alternative implementation of the solution discussed in Section \ref{LRU_cache:sec:bruteforce} (see Listing \ref{list:LRU_cache:map}).},label=list:LRU_cache:map1]{sources/LRU_cache/LRU_cache_solution2.cpp}
+
 \subsection{Constant time solution}
 \label{LRU_cache:sec:constanttime}
+By using a \inline{map} we were able to bring down the complexity of both operations to logarithmic time. However we can do even better if we use also keep a sorted list of the keys (sorted based on their insertion time).
+The benefit of using the list is in the fact we can  remove an element from the middle of the list in constant time.
+We can at the same time keep track of the node a given key has been assigned in a \inline{unordered_map}. This way whenever we need to remove an element from the list we just look at the last element of the list and we know immediately the key we need to remove.
+When it is time to update a key, we can use the new \inline{unordered_map} we have introduced to quickly get the node of the list for that key. This way we can move the node to the front of the list, reflecting the fact this key is now the most recently used!
+We can operate in a similar fashion when we need to get the value of a key. All we need to do it to perform a lookup operation to retrive the list's node associated with the key we need the value of and move such node to the front.
+
+We use now only data structures that have constant time complexity operations and therefore we have achieved our goal of implementing both \inline{put} and \inline{get} operation in the most time efficient manner.
+
+An implementation of this idea is shown in Listing \ref{list:LRU_cache:list}
+
+\lstinputlisting[language=c++, caption={Alternative implementation of the solution discussed in Section \ref{LRU_cache:sec:bruteforce} (see Listing \ref{list:LRU_cache:list}).},label=list:LRU_cache:map]{sources/LRU_cache/LRU_cache_solution3.cpp}
+
+
+The code is structureally very similar to both Listing \ref{list:LRU_cache:map} and \ref{list:LRU_cache:map1}.
+The class variable \inline{PositionList PL} is simply a list of Keys and we uses  the variable \inline{PM} to keep track of the association between a Key and an actual node of \inline{PL}.
+
+The helper functions \inline{moveFront} is responsible to mark a key as most recently used by, retrieving the key's list's node, move it to the fron of \inline{PL} and update the mapping between Keys and nodes to reflect this change (i.e. \inline{PM[key]=PL.begin()}).
+
+Erasing the least recently used element is also straightforward as all it is necessary is to retrieve the key associated with the last element of the list \inline{PL} and erase all references in the other maps and in the list itself, of course.
