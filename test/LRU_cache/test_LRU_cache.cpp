@@ -11,6 +11,7 @@ using std::vector;
 
 #include "LRU_cache_solution1.cpp"
 #include "LRU_cache_solution2.cpp"
+#include "LRU_cache_solution3.cpp"
 
 enum Operation
 {
@@ -129,6 +130,96 @@ TEST_F(LRUCacheTestSolution1, Solution1_basic_overflow_capacity)
 {
   constexpr size_t kCapacity = 2;
   LRUCache_solution1 cache1(kCapacity);
+  givenCache(cache1);
+  givenInput(std::vector<TestUnit>{{Insert, "1 1"},
+                                   {Insert, "2 2"},
+                                   {Get, "1"},
+                                   {Get, "2"},
+                                   {Insert, "3 3"},
+                                   {Get, "1"},
+                                   {Get, "2"},
+                                   {Get, "3"}});
+  expectCacheToReturn(
+      std::vector<std::optional<int>>{{},
+                                      {},
+                                      {1},
+                                      {2},
+                                      {},
+                                      {},  // 1 is eviced by insert 3,3
+                                      {2},
+                                      {3}});
+}
+
+
+using LRUCacheTestSolutionlogn = LRUCacheTest<LRUCache_logn>;
+
+TEST_F(LRUCacheTestSolutionlogn, Solution1_basicTest1)
+{
+  constexpr size_t kCapacity = 2;
+  LRUCache_logn cache1(kCapacity);
+  givenCache(cache1);
+  givenInput(std::vector<TestUnit>{{Insert, "1 50"}, {Get, "1"}});
+  expectCacheToReturn(std::vector<std::optional<int>>{{}, {50}});
+}
+
+TEST_F(LRUCacheTestSolutionlogn, Solution1_basicTest_not_preset)
+{
+  constexpr size_t kCapacity = 2;
+  LRUCache_logn cache1(kCapacity);
+  givenCache(cache1);
+  givenInput(std::vector<TestUnit>{{Insert, "1 50"}, {Get, "2"}});
+  expectCacheToReturn(std::vector<std::optional<int>>{{}, {}});
+}
+
+TEST_F(LRUCacheTestSolutionlogn, Solution1_basic_overflow_capacity)
+{
+  constexpr size_t kCapacity = 2;
+  LRUCache_logn cache1(kCapacity);
+  givenCache(cache1);
+  givenInput(std::vector<TestUnit>{{Insert, "1 1"},
+                                   {Insert, "2 2"},
+                                   {Get, "1"},
+                                   {Get, "2"},
+                                   {Insert, "3 3"},
+                                   {Get, "1"},
+                                   {Get, "2"},
+                                   {Get, "3"}});
+  expectCacheToReturn(
+      std::vector<std::optional<int>>{{},
+                                      {},
+                                      {1},
+                                      {2},
+                                      {},
+                                      {},  // 1 is eviced by insert 3,3
+                                      {2},
+                                      {3}});
+}
+
+
+using LRUCacheTestSolutionlogn_implementation2 = LRUCacheTest<LRUCache_logn2>;
+
+TEST_F(LRUCacheTestSolutionlogn_implementation2, Solution1_basicTest1)
+{
+  constexpr size_t kCapacity = 2;
+  LRUCache_logn2 cache1(kCapacity);
+  givenCache(cache1);
+  givenInput(std::vector<TestUnit>{{Insert, "1 50"}, {Get, "1"}});
+  expectCacheToReturn(std::vector<std::optional<int>>{{}, {50}});
+}
+
+TEST_F(LRUCacheTestSolutionlogn_implementation2, Solution1_basicTest_not_preset)
+{
+  constexpr size_t kCapacity = 2;
+  LRUCache_logn2 cache1(kCapacity);
+  givenCache(cache1);
+  givenInput(std::vector<TestUnit>{{Insert, "1 50"}, {Get, "2"}});
+  expectCacheToReturn(std::vector<std::optional<int>>{{}, {}});
+}
+
+TEST_F(LRUCacheTestSolutionlogn_implementation2, Solution1_basic_overflow_capacity)
+{
+  constexpr size_t kCapacity = 2;
+  LRUCache_logn2 cache1(kCapacity);
   givenCache(cache1);
   givenInput(std::vector<TestUnit>{{Insert, "1 1"},
                                    {Insert, "2 2"},
