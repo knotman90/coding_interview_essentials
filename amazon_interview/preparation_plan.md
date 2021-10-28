@@ -5,14 +5,16 @@
 - partition labels https://leetcode.com/problems/partition-labels/
 - Separate decimal part and whole number part from float number
 - Find the largest substring with distinct characters in a string
-- https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
-- https://leetcode.com/problems/lru-cache/
+- https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/ (done) transform the tree in a graph and do bfs
+- https://leetcode.com/problems/lru-cache/ (done) use an hashmap to keep the key,value and a list and another hashmap  with value iterators to the list and key the same as the first hashmap. Whenever you use a value get the iterator from the second hashmap and use it to move it to the front of the list. this way you always know which element is at the back and is the least used
 - https://leetcode.com/discuss/interview-question/411357/
 - https://leetcode.com/problems/rotting-oranges/
 - https://leetcode.com/problems/walls-and-gates/
 - https://leetcode.com/discuss/interview-question/875845/amazon-sde-ii
 - https://leetcode.com/discuss/interview-question/846585/amazon-online-assessment-question-1
 - https://leetcode.com/discuss/interview-question/844979/amazon-online-assessment-question-2
+- https://leetcode.com/problems/lru-cache/ (done)
+- https://leetcode.com/problems/longest-consecutive-sequence/
 
 ## Leadership principles
 
