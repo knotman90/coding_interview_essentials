@@ -7,16 +7,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=\textwidth]{sources/longest_consecutive_sequence/images/example1}
-%	\caption[Sample short cpation]{Sample Caption}.
-%	\label{fig:longest_consecutive_sequence:example1}
-%\end{figure}
+
 
 \chapter{Longest consecutive sequence}
 \label{ch:longest_consecutive_sequence}
 \section*{Introduction}
+The problem discussed in this chapter has been quite popular during virtual on-site interview at Amazon lately as it was reported by interviees many times on reddit and other forums. 
+The basic idea of this problem is that you are given an unsorted list of numbers and you have to tell how long is the longest sequence of consecutive numbers it contains. 
+
+This problem has a super simple solution naive solution which is also not that terrible in terms of time and space complexity but it is not optimal.
+Many candidates think about this solution right away and never go deeper and investigate whether a faster solution exists and therefore they damage their changes of passing the interview, or at least they make sure they are not passing with full grades.
+We will have a look at this intuitive sub-optimal solution in Section \ref{longest_consecutive_sequence:sec:bruteforce}, but the core of the chapter will be in Section \ref{longest_consecutive_sequence:sec:lineartime} where we investigate how to solve this problem optimally. 
 
 \section{Problem statement}
 \begin{exercise}
