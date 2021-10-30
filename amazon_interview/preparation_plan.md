@@ -13,7 +13,7 @@
 - https://leetcode.com/discuss/interview-question/875845/amazon-sde-ii
 - https://leetcode.com/discuss/interview-question/846585/amazon-online-assessment-question-1
 - https://leetcode.com/discuss/interview-question/844979/amazon-online-assessment-question-2
-- https://leetcode.com/problems/lru-cache/ (done)
+- https://leetcode.com/problems/lru-cache/ ✅
 - https://leetcode.com/problems/longest-consecutive-sequence/
 
 ## Leadership principles
