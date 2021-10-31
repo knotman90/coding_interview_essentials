@@ -10,7 +10,7 @@
     \end{example}
     
     \begin{example}
-        \label{ex:gcd:example1}
+        \label{ex:gcd:example2}
         \hfill \\
         Given $15$ and $8$ the function returns $1$.
     \end{example}
@@ -62,19 +62,35 @@ Notice that, from C++-14 we can decorate Listing \ref{list:gcd_euclide_iterative
     \begin{example}
         \label{ex:nary-treedepth:example1}
         \hfill \\
-        Given the tree depicted in Figure \ref{} the function returns $xxx$.
+        Given the tree depicted in Figure \ref{fig:longest_consecutive_sequence:example1} the function returns $3$ (path from node $1$ to node $12$).
     \end{example}
     
     \begin{example}
-        \label{ex:nary-treedepth:example1}
+        \label{ex:nary-treedepth:example2}
         \hfill \\
-        Given the tree depicted in Figure \ref{} the function returns $xxx$.
+        Given the tree depicted in Figure \ref{fig:longest_consecutive_sequence:example2} the function returns $6$ (path from node $1$ to node $40$).
     \end{example}
     \end{exercise}
  
  
+\begin{figure}
+	\centering
+	\begin{subfigure}[]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/mini_problems/n-ary-tree-depth/images/example1}
+		\caption{Input tree for Example \ref{ex:nary-treedepth:example1}.}
+		\label{fig:longest_consecutive_sequence:example1}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[]{0.45\textwidth}
+		\includegraphics[width=1\linewidth]{sources/mini_problems/n-ary-tree-depth/images/example2}
+		\caption{Input tree for Example \ref{ex:nary-treedepth:example2}.}
+		\label{fig:longest_consecutive_sequence:example1}
+	 \end{subfigure}
+	 \caption[]{}
+	  \label{}
+\end{figure}
     
-    \subsection{Discussion}
+\subsection{Discussion}
     This is a classical problem, mostly asked during phone screening due to its simplicity. 
     What the problem, in other words, is asking us to do, is to return the maximum level of any of the tree's nodes.
     The level of a node is the number of its ancestors plus one. 
@@ -118,6 +134,58 @@ The same idea can be implemented iteratively as shown in Listing \ref{list:n-ary
 \lstinputlisting[language=c++, caption={Iterative solution.},label=list:n-ary-treedepth_iterative]{test/mini_problems/n-ary-treedepth/n-ary-treedepth_iterative.cpp}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Assigning cookies \faCookie}
+\begin{exercise}
+    You are the parent of $n$ children and you want to make them happy by giving them a cookies (real ones  \faCookieBite, not HTTP cookie). 
+    However you know that too many cookied are not good for them and therefore you settle for a rule that each child can at most get one cookie.
+    Giving cookies to your children is not easy as they are special and each child $i$ has an integer greed factor $g[i]$ associated,
+    which is the minimum size of a cookie that the child $i$ will be content with; 
+    You have at your disposal a number $m$ of cookies, and each cookie $j$ has an integer size $s[j]$.
+    You can give cookie number $i$ to child number $i$ if and only if $s[j] \ge g[i]$. When a child has a cookie assigned is content.
+    
+    Write a function that given a list  ($G$) of $n$ greed values and a list ($C$) of  $m$ cookie sizes determines the maximum possible of children you can make content.
+     
+    \begin{example}
+        \label{ex:nary-treedepth:example1}
+        \hfill \\
+        Given $G=\{1,2,3\}$ and  $=\{1,1\}$ the function returns $1$. Despite having two cookies we can only make one child happy because we do not have cookies big enough for children number $2$ and $3$.
+    \end{example}
+    
+    \begin{example}
+        \label{ex:nary-treedepth:example2}
+        \hfill \\
+        Given $G=\{1,3\}$ and  $=\{1,4\}$ the function returns $2$. We can give the first cookie to the first child and the second cookie to the second child.
+    \end{example}
 
 
+    \begin{example}
+        \label{ex:nary-treedepth:example3}
+        \hfill \\
+        Given $G=\{1,2,3\}$ and  $=\{1,1,3\}$ the function returns $2$. We can give the first cookie to the first child and the the third cookie to the second child The second cookie remains unassigned and the third child without cookie assigned.
+    \end{example}
+    \end{exercise}
+ 
 
+\subsection{Discussion}
+Let's start by noticing that despite what shown in the Exmaples the input lists are not guaranteed to be sorted and that, sorting actually makes solving this problem much easier.
+The idea is that we have to find a way to assign to each children the smallest cookie possible that has size higher or equal to his greed. If the input array is not sorted then for each greed value we are forced to search $S$ entirely for a suitable cookie. 
+If on the other hand both $G$ and $S$ are sorted then, we can try to accomodate children by increasing greed and keep track and assign progressively larger cookies to them. 
+If a children with greed $i$ can be assigned cookie number $j$, then we can try to assign to child number $i+1$ cookie number $j+1$. If that does not work then we can try with cookie number $j+2$ and so on.
+When we cannot assign a cookie $j$ to a certain child $i$, cookie $j$ will be unused, but that is not an issue because there is no way we can assign cookie $j$ to any other children because the greed values for children $i+1, i+2, \ldots$  will all be greater than the gree of child $i$.
+
+Therefore in order to solve this problem we can:
+\begin{itemize}
+    \item sort $G$;
+    \item sort $S$;
+    \item use two pointers to keep track of the current child and current cookie
+    \item process one child a the time until we ran out of children or cookies
+    \item if the current cookie size is greater than the current child greed then we can advance both pointers
+    \item otherwise we can only hope the next cookie will be assignable and therefore only advance the cookie pointer.
+\end{itemize}
+
+An implementation of this idea is shown in Listing \ref{list:assign_cookies_sorting}. Its time complexity is $O(nlog(n))$ while its the space complexity is $O(1)$.
+
+
+\lstinputlisting[language=c++, caption={Solution using sorting.},label=list:assign_cookies_sorting]{test/mini_problems/assign_cookies/assign_cookies_sorting.cpp}

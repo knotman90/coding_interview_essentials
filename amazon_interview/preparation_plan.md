@@ -22,7 +22,7 @@
 - https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ (!!!)
 - https://leetcode.com/problems/open-the-lock/ (!!!)
 - https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!)
-- https://leetcode.com/problems/maximum-depth-of-n-ary-tree/ (done in 8 minutes recursively)
+- https://leetcode.com/problems/maximum-depth-of-n-ary-tree/ (done in 8 minutes recursively/iteratively, see mini-problems)
 - https://leetcode.com/problems/assign-cookies/
 - https://leetcode.com/problems/lemonade-change/
 - https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/
