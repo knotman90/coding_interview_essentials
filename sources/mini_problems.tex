@@ -189,3 +189,43 @@ An implementation of this idea is shown in Listing \ref{list:assign_cookies_sort
 
 
 \lstinputlisting[language=c++, caption={Solution using sorting.},label=list:assign_cookies_sorting]{test/mini_problems/assign_cookies/assign_cookies_sorting.cpp}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Maximize Sum Of Array After K Negations}
+\begin{exercise}
+    Given an integer array $nums$ and an integer $k$, modify the array in the following way: choose an index $i$ and replace $nums[i]$ with $-nums[i]$.
+    
+    You should apply this process \textbf{exactly} $k$ times. You may choose the same index $i$ multiple times.
+    
+    Return the largest possible sum of all the elements of $nums$ at end of this process.     
+    \begin{example}
+        \label{ex:nary-treedepth:example1}
+        \hfill \\
+        Given $nums=\{4,2,3\}$ and $k=1$ the function returns $5$. We can choose index $1$ and turn the $2$ into $-2$. At the end we will be left with $nums=\{4,-2,3\}$ which totals to $4-2+3=5$.
+    \end{example}
+    
+    \begin{example}
+        \label{ex:nary-treedepth:example2}
+        \hfill \\
+        Given $nums=\{3,-1,0,2\}$ and $k=3$ the function returns $6$. We can choose 
+    \end{example}
+
+
+    \end{exercise}
+ 
+
+\subsection{Discussion}
+One easy way of solving this problem relies on the fact that all we have to do is to apply the change sign change always on the smallest number of the array.
+The intuition behind it is that we should aim at first changing the sign of all the negative numbers first and among them we should prioritize the smallest ones: the number with the largest absolute value and negative sign. Changing the sign of those number will bring the best increase in the overall sum of the array.
+
+If after having changed all negatives into positive we are left with more moved to make then we still have to change the sign of the smallest number in the array as many times as necessary.
+This causes the smallest number of the array to switch sign back and forth until $k=0$ (this step can be optimized by noticing that if the number of moves left is even then the final valud of the smallest number in the array is not going to change, otherwise, it will be negative.We can reach this conclusion without having to actually perform the sign switch). 
+
+To always keep track of the smallest number we can use a \inline{std::priority_queue} as shown in Listing \ref{}.
+
+\lstinputlisting[language=c++, caption={Solution using sorting.},label=list:assign_cookies_sorting]{test/mini_problems/max_sum_array_after_k_negations/max_sum_array_after_k_negotiation_priority_queue.cpp}
+
+The code works by applying the $k$ modifications always to the smallest element of the queue. At the end of the process we simply sum every element in the queue to obtain the answer. The complexity of this approach is $O(klog(n) + nlog(n))$ in time and $O(1)$ in space.
+
