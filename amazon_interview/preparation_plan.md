@@ -19,7 +19,7 @@
 - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
 - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/ (do the others too)
 - https://aonecode.com/amazon-interview-questions
-- https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ (!!!)
+- https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ (!!! important problem) (done)
 - https://leetcode.com/problems/open-the-lock/ (!!!)
 - https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!)
 - https://leetcode.com/problems/maximum-depth-of-n-ary-tree/ (done in 8 minutes recursively/iteratively, see mini-problems)
