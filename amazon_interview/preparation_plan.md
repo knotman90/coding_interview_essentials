@@ -23,12 +23,12 @@
 - https://leetcode.com/problems/open-the-lock/ (!!!)
 - https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!)
 - https://leetcode.com/problems/maximum-depth-of-n-ary-tree/ (done in 8 minutes recursively/iteratively, see mini-problems)
-- https://leetcode.com/problems/assign-cookies/
-- https://leetcode.com/problems/lemonade-change/
-- https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/
-- https://leetcode.com/problems/water-bottles/
-- https://leetcode.com/problems/delete-columns-to-make-sorted/
-- https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/
+- https://leetcode.com/problems/assign-cookies/ (done 5 minutes)
+- https://leetcode.com/problems/lemonade-change/ (done 5 minutes)
+- https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/ (done, always do the smallest number)
+- https://leetcode.com/problems/water-bottles/ (done, simulate the process)
+- https://leetcode.com/problems/delete-columns-to-make-sorted/ 
+- https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/ (sort in ascending order + get as many from the front you need)
 - https://leetcode.com/problems/find-median-from-data-stream/
 - https://leetcode.com/problems/decode-ways-ii/
 - https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/

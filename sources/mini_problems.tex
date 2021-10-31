@@ -229,3 +229,46 @@ To always keep track of the smallest number we can use a \inline{std::priority_q
 
 The code works by applying the $k$ modifications always to the smallest element of the queue. At the end of the process we simply sum every element in the queue to obtain the answer. The complexity of this approach is $O(klog(n) + nlog(n))$ in time and $O(1)$ in space.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Pairs of Songs With Total Durations Divisible by $k$}
+\begin{exercise}
+    You are given a list $T$ of songs where the $i^{th}$ song has a duration of $time[i]$ seconds.
+    Write a function that given $T$ returns the number of distinct unordered pairs of songs for which the sum of their durations is divisible by an integer $k$.
+    
+    In other words,  the function should count the number of indices of $i < j$ such that $(T[i] + T[j]) \mod 60 == 0$.
+
+     
+    \begin{example}
+        \label{ex:song_total_duration:example1}
+        \hfill \\
+        Given $T=\{30,20,150,100,40\}$ and $k=60$, the function returns $3$.
+        We can pair songs at indices:
+        \begin{itemize}
+            \item $0$ and $2$ for a total duration of $180$;
+             \item $1$ and $3$ for a total duration of $120$;
+             \item $1$ and $4$ for a total duration of $60$.
+        \end{itemize}
+    \end{example}
+    
+    \end{exercise}
+ 
+
+\subsection{Discussion}
+This problem is quite similar to the two number sum problem discussed in Chapter \ref{ch:two_numbers_sum} and we will therefore use the very same technique to solve it (we will avoid discussing sub=optimal solution as the these are discussed already in the two number sum problem).
+The difference here is that we are only interested in the number modulo $k$ and out main goal is to find two numbers whose remainder sum up to $0$.
+For instance w.r.t. Example \ref{ex:song_total_duration:example1} we can see that  $T[0]+T[2] = 180$ which is divisible by $60$. 
+If we have a look at their modulos are we notice that: $(T[0] \mod{60}) +(T[2] \mod{60}) = 30+30 = 60 \mod{60} =0$.
+The same holds for the other two pairs of this example:
+\begin{itemize}
+    \item $(T[1] \mod{60}) +(T[3] \mod{60}) = 20+40 = 60 \mod{60} =0$
+    \item $(T[1] \mod{60}) +(T[4] \mod{60}) = 20+40 = 60 \mod{60} =0$
+\end{itemize}
+
+
+Listing \ref{list:song_total_duration:lineartimespace} shows an implementation of this idea.
+
+\lstinputlisting[language=c++, caption={Solution based on the two number sum problem.},label=list:song_total_duration:lineartimespace]{test/mini_problems/song_total_duration/song_total_duration_linear_time_space.cpp}
+
+
