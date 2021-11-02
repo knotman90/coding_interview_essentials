@@ -9,13 +9,14 @@
 \label{ch:can_jump}
 \section*{Introduction}
 In this problem we will investigate whether a solution exists for a game played in an array
-where you are the only player and you are initially located at the first cell of the array. Your goal is to
-get to the last cell by jumping from one cell to another a specified number of times. The array contains
-information about the length of the jump you can take from a cell. 
+where there we are the only player and we are initially located at the first cell of the array.
+Our goal is to get to the last cell by jumping from one cell to another. The values inside the array's cells contain the
+information on the length of the jump we can take from each cell. 
 
-There are a number of possible solutions to this problem and in this Chapter we will discuss two specific approaches. In particular:
+There are a number of possible different solutions to this problem and, in this Chapter, we will discuss the most common. 
+In particular:
 \begin{itemize}
-	\item In Section \ref{can_jump:sec:backtracking} we take a look at the most intuitive approach where we try all possible jumps in a backtracking-like manner.
+	\item In Section \ref{can_jump:sec:backtracking} we take a look at the most intuitive approach where we try all possible jumps in a backtracking-like manner;
 	\item In Section \ref{can_jump:sec:DFS} we will refine the solution of Section
 	\ref{can_jump:sec:backtracking} into one that uses a clever insight to visit the
 	cells efficiently. 
@@ -25,13 +26,14 @@ There are a number of possible solutions to this problem and in this Chapter we 
 
 
 \section{Problem statement}
+\label{ch:can_jump:statement}
 \begin{exercise}
-Write a function that takes as input  an array $I$ of non-negative integers. You are initially
+Write a function that takes as input an array $I$ of non-negative integers. You are initially
 positioned at the beginning of the array (at index $0$) and your goal is to jump from cell to cell
-to the end of the array (cell $|I|-1$). If you are in the at index $j$ you are allowed to jump to
-all cells within the following range: $[j-I_i,j+I_i]$ (each cell of the array contains the
-information about the longest jump you can take from there). The function should return true if you
-are able to reach the last cell of the array, otherwise it returns false.
+to the end of the array (cell $|I|-1$).
+Each cell $i$ of the array contain the maximum lenght for a jump that can be made from cell $i$.
+If you are at index $j$ you are allowed to jump to any cell within the following range: $[j-I_i,j+I_i]$.
+The function should return true if you are able to reach the last cell of the array, otherwise it should returns false.
 
 	\begin{example}
 		\hfill \\
@@ -80,24 +82,32 @@ are able to reach the last cell of the array, otherwise it returns false.
 \section{Backtracking}
 \label{can_jump:sec:backtracking}
 The first solution that we will investigate is based on an idea similar to the DFS where $I$
-is treated as an implicit graph where each cell (a node) is connected to all the others cells that can be
-reached by jumping from it. The set of cells you can reach from a given cell $c$ is identified by
-the length of the jump you can perform from $c$ which is stored within $c$ itself. The idea is to
-use DFS to check whether the the last node of the graph is connected with the first one. In other
-words, whether there is a path from the first to the last node. We can proceed by adopting a
-recursive approach where we try to visit all the nodes that we can reach from the node we currently
+is treated as an implicit graph where each cell can be thought of as being a node of a graph and is connected to all the others cells that can be
+reached by jumping from it.
+The set of cells you can reach from a given cell $c$ is identified by
+the length of the jump you can perform from $c$ (value that is stored within $c$ itself).
+The idea is to use DFS to check whether the last node of the graph is connected with the first one.
+In other words, we want to answer to the following question: is there a path from the first to the last node?
+
+We can proceed by adopting a recursive approach where we try to visit all the nodes that we can reach from the node we currently
 occupy and to continue this process until either we have reached the last node or there is no more
-jump to try; meaning in that case that there is no way to reach the last node (i.e. the last node is
-disconnected). As the implicit graph is not guaranteed to be acyclic, in order to make this
+jump to try; in the latter case,  there is no way to reach the last node (i.e. the last node is
+disconnected). 
+
+As the implicit graph is not guaranteed to be acyclic, in order to make this
 approach work we need to ensure that we not jump back and forth from one cell to another in a
-cycle. This can happen if, for instance,  you jump from a cell $0$ to cell $1$ and then back to cell
-$0$. In order to overcome this issue we can only perform forward jumps so that it will be impossible
-to be stuck in a cycle and still manage to find an answer. When you jump to a cell $i$ from a cell
-$j$ s.t. $j < i$ (you performed a forward jump) you know that you can also visit all cells $ j \leq
-k \leq i$ (all the cells in between $j$ and $i$). If you only jump forward you are not going to need
-to visit any cell $ j \leq k \leq i$ using backward jumps as they are visited anyway when processing
-cells $j$ by performing forward jumps from it. An implementation of this idea is shown in Listing
-\ref{list:can_jump1_1}. This approach is correct and it will eventually find a solution but it is
+cycle. 
+This can happen if, for instance,  you jump from a cell $0$ to cell $1$ and then back to cell
+$0$. In order to overcome this issue, we can only perform forward jumps so that it will be impossible
+to be stuck in a cycle.
+When you jump to a cell $i$ from a cell $j$ s.t. $j < i$ (you performed a forward jump) we know that we can also visit all cells $ j \leq
+k \leq i$ (all the cells in between $j$ and $i$) from $j$.
+If we only jump forward, we are not going to need to visit any cell $ j \leq k \leq i$ using backward jumps as these cells are visited anyway when processing
+cells $j$ by performing forward jumps from it.
+
+An implementation of this idea is shown in Listing
+\ref{list:can_jump1_1}. 
+This approach is correct and it will eventually find a solution but it is
 extremely inefficient. Its complexity is exponential in time as potentially the same cells are
 visited over and over\footnote{Suppose $W(x)$ is the number of possible ways you can jump from
 position $x$ to the end of the array at index $N$. We know that $T(N) = 1$ (the only way to jump
@@ -159,8 +169,55 @@ solution.
 To summarize,  the linear time solution for this problem works as follows: We iterate the array $I$
 right-to-left and for each cell $x$ we check whether we can reach $m$ jumping from $x$. If we can
 then $x$ is the new leftmost cell from which we can reach the end of the array, thus $m = x$.
-Otherwise we continue by processing cell $x-1$ in a similar manner. Eventually we will have
+Otherwise we continue by processing cell $x-1$ in a similar manner. Eventually, we will have
 processed all cells and therefore we can return true if $m = 0$ meaning that cell $0$ is the
 leftmost cell from which we can jump to location $|I|-1$, and false otherwise.
 \lstinputlisting[language=c++, caption={Greedy solution where we use the fact that the DP solution described by Equation \ref{eq:can_jump:dpformula} can be optimized if we only consider if it is possible to reach the closest cell from which we can jump to the end of the array. },label=list:can_jump]{sources/can_jump/can_jump_solution2.cpp}
 
+
+\section{Jump Game 2}
+
+\section{Problem statement}
+\label{can_jump1:sec:statement}
+\begin{exercise}
+	Given an array of non-negative integers $I$, you are initially positioned at the first index of the array.
+	Each element in the array represents your maximum jump length at that position.
+	Your goal is to reach the last index in the minimum number of jumps.	
+	
+	\textbf{You can assume that you can always reach the last index.}
+	\begin{example}
+		\hfill \\
+		Given  $I=[2,3,0,1,4]$ the function returns \textbf{2}. You jump from cell $0$ to $1$ and
+		then take a $3$ cells wide jump to the end of the array. See Figure
+		\ref{fig:can_jump:example1}.
+		\label{ex:can_jump2_example1}
+	\end{example}
+\end{exercise}
+
+\subsection{Discussion}
+The key difference this variation has w.r.t. the version in Section \ref{ch:can_jump:statement} is that here we are guaranteed that it is possible to reach the last location of the array by starting from the beginning and performing some combination of forward jumps. 
+
+When performing the first jump, we know we can reach cells in the range $[0,0+I[0]]$. Which of this cell we should jump to?
+The answer is, always jump to the cell at index $j$ in $[0,0+I[0]]$ that get us the farthest! In other words choose the cell $j$ s.t. $j+I[j]$ is maximum.
+Why is this the case? 
+The reasoning behind it is that, jumping to any other cell other $j$, say cell $0 \leq k \leq 0+I[0]$ with $k \neq j$ does not decrease the overall number of steps to get to the final cell because from cell $j$ we can reach every cell we can reach from cell $k$ plus potentially some more cells that are unreachable from cell $j$.
+For example let's examine Figure \ref{fig:can_jump:can_jump2_example1}. Among all the cells we can reach from cells $0$ (in (\textcolor{red}{red}) the cell at index $1$ is the one though which we can travel the farthest. If we decide to jump at cell at index $2$ nothing would change as we would not be able to reach more cells than the ones we can reach from the cell at index $1$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{sources/can_jump/images/can_jump2_example1}
+	\caption[]{An instance of the problem with cells divided by color into their respective levels.}.
+	\label{fig:can_jump:can_jump2_example1}
+\end{figure}
+
+Another way of looking at this problem is by thinking of the cells in being divided in levels and in order to solve this problem we need to apply a BFS visit to the cells. 
+The cells in the interval $[0,I[0]]$ would belong to level $0$. Level $1$ cells would consist of all cells not in level $0$ and that can be reached from any cell of level $0$. 
+In general, cells in level $i$ are cells that are not in level $i-1$ and can be reached by jumping from a cell at level $i-1$.
+using this definition is it easier to see how the cell that jump the farthest at level $i-1$ would be able to reach all cells of level $i$! There is no other cell in level $i-1$ from which we can reach more cells at the next level.
+Therefore, the min number of jumps necessary is equivalent to the level of the last cell.
+
+
+An implementation of this idea is shown in Listing \ref{list:can_jumps2_1}.
+
+
+\lstinputlisting[language=c++, caption={Quadratic time and linear space DFS solution to the \textit{jump game} problem using a visited array.},label=list:can_jumps2_1]{sources/can_jump/can_jump2_solution1.cpp}
