@@ -1,4 +1,4 @@
-    int jumps(const vector<int>& nums,int pos){
+    int can_jump2_levels(const vector<int>& nums,int pos){
         const int last_pos = nums.size()-1;
         if(pos==last_pos)
             return 0;
