@@ -1,0 +1,82 @@
+\section{Common Variations - Best profit with exactly two transactions}
+\label{sec:buy_sell_stocks3:intro}
+
+\subsection{Problem statement}
+\begin{exercise}
+	You are given an array $P$ where $P[i]$ is the price of a given stock on the $i^th$ day.
+	Write a function that given $P$ finds the max profit you can achieve by performing at most two transactions.
+		
+	Notice that you may not engage in multiple transactions simultaneously meaning that you must sell the stock before you buy it again.
+	
+	 
+	\begin{example}
+	\label{ex:buy_sell_stocks_3:exmaple1}
+		\hfill \\
+		Given $P=\{3,3,5,0,0,3,1,4\}$ the function outputs $6$. 
+		You can buy on the \nth{4} day and sell on the \nth{6}. This transaction yelds a profit of $3$.
+		You can then perform another transaction with buy and sell dates being the \nth{7} and \nth{8} days, respectively, for a total profit of $6$.
+	\end{example}
+
+	\begin{example}
+		\label{ex:buy_sell_stocks_3:exmaple2}
+			\hfill \\
+			Given $P=\{1,2,3,4,5\}$ the function outputs $4$. 
+			The best strategy here is to perform a single transaction where you buy the first and sell the last day. Notice that you can achieve the same total profit by also performing two transactions.
+	\end{example}
+
+	\begin{example}
+		\label{ex:buy_sell_stocks_3:exmaple3}
+			\hfill \\
+			Given $P=\{7,6,4,3,1\}$ the function outputs $0$. 
+			It is best in this case not to trade this stock at all, as all possible transaction leads to a loss.
+	\end{example}
+\end{exercise}
+
+
+\section{Discussion}
+\label{buy_sell_stocks_3:sec:discussion}
+This variation is 
+
+
+\section{DP - Linear time solution}
+\label{buy_sell_stocks_3:sec:linear}
+The final answer can be calculated by maximizing the following formula: $max\{P(i)-m(i) + B(i)\}$ with $B$ as defined in Equation \ref{eq:buy_sell_stocks_3:Bdpformula}.
+
+$m(i)$ and $M(i)$ contain the information about the smallest and largest element to the left and to the right of index $i$, respectively.
+$B(i)$ instead carries the value of the best single transaction that you can make with any values to the left of index $i$ (inclusive).
+In other words, what Equation \ref{} says is that the value of the final answer is the value of the best transaction you can make by selling at exactly index $i$ plus the value of the best transaction you can make with any of the prices to the right of $i$.
+If you take the maximum among all indices, then it is clear that this quantity is indeed the value you can achieve by performing two transactions at most (when $i=0$ or $i=n-1$ you are in practice making only a single transaction.).
+
+\begin{equation}
+    \begin{cases}
+        B(|I|-1) = 0 \\
+        B(i) = max(B(i+1), M(i)-P(i)) \\
+		M(i) = max(P(i+1), P(i+2), \ldots, P(n-1))
+     \end{cases}
+    \label{eq:buy_sell_stocks_3:Bdpformula}
+\end{equation}
+
+\lstinputlisting[language=c++, caption={$O(n)$ time and $O(1)$ space solution to the problem of buying and selling stock with no limits on the number of transactions.},label=list:buy_sell_stocks_3:linear]{sources/buy_sell_stocks/buy_sell_stocks_3/buy_sell_stocks_3_solution1.cpp}
+
+
+
+Approach 3 (O(N) time O(1) space) [ACCEPTED]
+Suppose you make some profit p1 by doing your first transaction in the stock market. Now you are excited to purchase another stock to earn more profit. Suppose the price of the second stock you aim to buy is x. Now, for you, the net effective price that you are spending from your pocket for this stock will be x-p1, because you already have p1 bucks in your hand. Now, if you sell the second stock at price y your net profit p2 will be p2 = y - (x-p1). You have to do nothing but maximize this profit p2. Here's the code:
+\begin{lstlisting}[language=c++,numbers=none, caption={}]
+	      
+	int maxProfit(vector<int>& prices) {
+		if(!prices.size())
+		return 0;
+        int buy1    = INT_MAX;
+        int profit1 = INT_MIN;
+        int buy2    = INT_MAX;
+        int profit2 = INT_MIN;
+        for(int i = 0; i < prices.size(); i++){
+			buy1    = min(buy1, prices[i]);
+            profit1 = max(profit1, prices[i] - buy1);
+            buy2    = min(buy2, prices[i] - profit1);
+            profit2 = max(profit2, prices[i] - buy2);
+			}
+			return profit2;
+			}
+		\end{lstlisting} 
