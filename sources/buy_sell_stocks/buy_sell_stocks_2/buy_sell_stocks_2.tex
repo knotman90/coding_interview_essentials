@@ -3,10 +3,15 @@
 
 \subsection{Problem statement}
 \begin{exercise}
-This problem is a variation of the problem presented in Section \ref{sec:buy_sell_stocks:statement1} where we are allowed to make as many transactions as we like. The question remains the same: what is the maximum profit achievable?
+	You are given an integer array $P$ where $P[i]$ contains the price of a given stock on the $i^{th}$ day.
 
-Note that you may not engage in multiple transactions at the same time i.e., you must sell the stock before you buy again.
+	On each day, you may decide to buy and/or sell the stock. 
+	You can only hold at most one share of the stock at any given time.
+	However, you might engage in multiple transaction over the course of time i.e. you repeat the process of buying a share then sell it after a while (also the next day) multiple times.
+	
+	Write a function that given $P$ returns the maximum profit achievable.
 
+	Notice that you may not engage in multiple transactions at the same time i.e., you must sell the stock before you buy it again.
 	\begin{example}
 	\label{ex:buy_sell_stocks_2:exmaple1}
 		\hfill \\

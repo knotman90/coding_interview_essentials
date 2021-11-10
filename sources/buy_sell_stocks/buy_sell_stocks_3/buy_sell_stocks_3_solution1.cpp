@@ -1,30 +1,29 @@
-int buy_sell_stocks_multiple_transactions_exp_helper(const std::vector<int> &P,
-                                                     const int start)
+
+auto best_transaction_right(const std::vector<int>& prices)
 {
-  const int *x = nullptr;
-  int ans      = 0;
-  for (int buy_day = start; buy_day < std::ssize(P) - 1; buy_day++)
+  const auto size = prices.size();
+  std::vector<int> ans(size, 0);
+  int max_right = prices[size - 1];
+  ans[size - 1] = (max_right - prices[size - 1]);
+  for (int i = size - 2; i >= 0; i--)
   {
-    for (int sell_day = buy_day + 1; sell_day < std::ssize(P); sell_day++)
-    {
-      if (P[buy_day] < P[sell_day])  // pointless to sell otherwise
-      {
-        x                        = &P[0];
-        const int selling_profit = P[sell_day] - P[buy_day];
-        const int profit_rest_transactions =
-            buy_sell_stocks_multiple_transactions_exp_helper(P, sell_day + 1);
-        ans = std::max(ans, selling_profit + profit_rest_transactions);
-      }
-      else
-      {
-        ans = x != nullptr ? *x : 0;
-      }
-    }
+    max_right = std::max(max_right, prices[i]);
+    ans[i]    = std::max(ans[i + 1], max_right - prices[i]);
   }
   return ans;
 }
 
-int buy_sell_stocks_multiple_transactions_exp(const std::vector<int> &P)
+int buy_sell_stocks3_DP(vector<int>& prices)
 {
-  return buy_sell_stocks_multiple_transactions_exp_helper(P, 0);
+  const auto best_right = best_transaction_right(prices);
+  const auto size       = prices.size();
+
+  int ans      = 0;
+  int min_left = prices[0];
+  for (int i = 0; i < size; i++)
+  {
+    min_left = std::min(min_left, prices[i]);
+    ans      = std::max(ans, prices[i] - min_left + best_right[i]);
+  }
+  return ans;
 }
