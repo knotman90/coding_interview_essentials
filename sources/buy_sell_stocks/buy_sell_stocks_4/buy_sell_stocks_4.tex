@@ -41,7 +41,7 @@ Let's start with a simple observation: if $K > \frac{|P|}{2}$ then there is basi
 Despite being interesting is not really key to solving this problem in its generality albeit it might in practice speed up the actual runtime for these specific cases.
 
 
-\section{$O(n^2K)$ time and space}
+\section{$O(n^2K)$ time and $O(nK)$ space}
 \label{buy_sell_stocks4:sec:linerartime1}
 We are going to make an attempt to write a recursive formula similar to Equation \ref{eq:buy_sell_stocks_3:Bdpformula} for the variation number $3$ of this problem, that describes the answer in terms of subproblems.
 Let $DP(i,j)$ be the maximum profit possible by only considering prices up to index $i$ and by using at most $j \leq K$ transactions.
@@ -72,7 +72,7 @@ We could already proceed in turning Equation \ref{eq:buy_sell_stocks_4:Bdpformul
 \label{buy_sell_stocks4:sec:linerartime1}
 However, the solution discussed above can be improved dramatically by noticing that we do not need to calculate the value of the innermost max in the third case of Equation \ref{eq:buy_sell_stocks_4:Bdpformula} as shown in Listing \ref{list:buy_sell_stocks_4:linear2}.
 
-\lstinputlisting[language=c++, caption={$O(nK)$ time and $O(nK)$ space DP solution.},label=list:buy_sell_stocks_4:linear2]{sources/buy_sell_stocks/buy_sell_stocks_4/buy_sell_stocks_4_solution2.cpp}
+\lstinputlisting[language=c++, caption={$O(nK)$ time and $O(nK)$ space DP solution.},label=list:buy_sell_stocks_4:linear2]{sources/buy_sell_stocks/buy_sell_stocks_4/buy_sell_stocks_4_solution1.cpp}
 
 The important and most challenging part of this solution is to make sure that the quantity $L=\underbrace{max\big\{DP(l,j-1)-P[j]\big\}}_{\forall \: \: 0 \leq l < i}$ is calculated as we iterate incrementally over all values of $i$. 
 To understand why let's look at the particular values of $L$ for some incremental values of $i$:
@@ -95,7 +95,7 @@ When the innermost loop ends  and the outermost starts again, the two columns ar
 
 Listing \ref{list:buy_sell_stocks_4:linear3} shows an implementation of this idea.
 
-\lstinputlisting[language=c++, caption={$O(nK)$ time and $O(n)$ space DP solution.},label=list:buy_sell_stocks_4:linear3]{sources/buy_sell_stocks/buy_sell_stocks_4/buy_sell_stocks_4_solution1.cpp}
+\lstinputlisting[language=c++, caption={$O(nK)$ time and $O(n)$ space DP solution.},label=list:buy_sell_stocks_4:linear3]{sources/buy_sell_stocks/buy_sell_stocks_4/buy_sell_stocks_4_solution2.cpp}
 
 The code is extremely similar to Listing \ref{list:buy_sell_stocks_4:linear2}, with the only difference being the size of \inline{DP} is now $O(n)$ and we use two variables \inline{curr_k} and \inline{prec_k} to keep track of the column assigned to the \quotes{current} and \quotes{previous} values of $k$. 
 Notice how at the end of each innermost loop, the two columns are swapped by simply swapping around the values of \inline{curr_k} and \inline{prec_k}.
