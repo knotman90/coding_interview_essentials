@@ -3,53 +3,53 @@
 
 \subsection{Problem statement}
 \begin{exercise}
-	You are given an integer $K$ and an array $P$ where $P[i]$ is the price of a given stock on the $i^th$ day.
-	Write a function that given $P$ and $K$. finds the maximum profit you can achieve by performing at most $K$ transactions.
-	
-	Notice that you may not engage in multiple transactions simultaneously, meaning that you must sell the stock before you buy it again.
-		 
+    You are given an integer $K$ and an array $P$ where $P[i]$ is the price of a given stock on the $i^th$ day.
+    Write a function that given $P$ and $K$. finds the maximum profit you can achieve by performing at most $K$ transactions.
+    
+    Notice that you may not engage in multiple transactions simultaneously, meaning that you must sell the stock before you buy it again.
+         
 
-	\begin{example}
-	\label{ex:buy_sell_stocks4:exmaple1}
-		\hfill \\
-		Given $K=2$ and $P=\{2,4,1\}$ the function outputs $2$. 
-		You can buy on the \nth{1} day and sell on the \nth{2}. This transaction yelds a profit of $2$. Notice that you only use one of the two transactions allowed.
-	\end{example}
+    \begin{example}
+    \label{ex:buy_sell_stocks4:exmaple1}
+        \hfill \\
+        Given $K=2$ and $P=\{2,4,1\}$ the function outputs $2$. 
+        You can buy on the \nth{1} day and sell on the \nth{2}. This transaction yelds a profit of $2$. Notice that you only use one of the two transactions allowed.
+    \end{example}
 
-	\begin{example}
-		\label{ex:buy_sell_stocks4:exmaple2}
-			\hfill \\
-			Given $K=2$ and $P=\{3,2,6,5,0,3\}$ the function outputs $7$. 
-			You can buy on the \nth{2} day and sell on the \nth{3}. You can then make another transaction where you buy on the \nth{5} and sell on the \nth{6} day for a total profit of $4+3=7$.
-	\end{example}
+    \begin{example}
+        \label{ex:buy_sell_stocks4:exmaple2}
+            \hfill \\
+            Given $K=2$ and $P=\{3,2,6,5,0,3\}$ the function outputs $7$. 
+            You can buy on the \nth{2} day and sell on the \nth{3}. You can then make another transaction where you buy on the \nth{5} and sell on the \nth{6} day for a total profit of $4+3=7$.
+    \end{example}
 
-	\begin{example}
-		\label{ex:buy_sell_stocks4:exmaple3}
-			\hfill \\
-			Given $K=4$ and $P=\{4
-			[3,2,6,5,0,3,3,8,2,3,5,5,9]\}$ the function outputs $19$. 
-			Notice that the function would output $19$ even when $K=3$.
-	\end{example}
+    \begin{example}
+        \label{ex:buy_sell_stocks4:exmaple3}
+            \hfill \\
+            Given $K=4$ and $P=\{4
+            [3,2,6,5,0,3,3,8,2,3,5,5,9]\}$ the function outputs $19$. 
+            Notice that the function would output $19$ even when $K=3$.
+    \end{example}
 \end{exercise}
 
 
 \section{Discussion}
 \label{buy_sell_stocks4:sec:discussion}
-The variation discussed is a generalization of the one discussed in Section \ref{sec:buy_sell_stocks3:intro} and now we are allowed to make up to $K$ transaction where $K$ is given to us as a paramter. Clearly when $K=2$ this variation is equivalent to the one in Section \ref{sec:buy_sell_stocks3:intro}. However not knowing precisely how many transaction at most we can make complicates things a bit (but not too much).
+The variation discussed is a generalization of the one discussed in Section \ref{sec:buy_sell_stocks3:intro} and now we are allowed to make up to $K$ transaction where $K$ is given to us as a parameter. Clearly when $K=2$ this variation is equivalent to the one in Section \ref{sec:buy_sell_stocks3:intro}. However not knowing precisely how many transactions at most we can make complicates things a bit (but not too much).
 
-Let's start with a simple observation: if $K > \frac{|P|}{2}$ then there is basically no limit on the number of transaction we can make and this problem can be solved with the same approach shown in Listing \ref{list:buy_sell_stocks_2:linear}.
-Despite being interesting is not really key to solve this problem in its generality.
+Let's start with a simple observation: if $K > \frac{|P|}{2}$ then there is basically no limit on the number of transactions we can make and this problem can be solved with the same approach shown in Listing \ref{list:buy_sell_stocks_2:linear}.
+Despite being interesting is not really key to solving this problem in its generality albeit it might in practice speed up the actual runtime for these specific cases.
 
 
 \section{$O(n^2K)$ time and space}
 \label{buy_sell_stocks4:sec:linerartime1}
-We are going to make an attemp to write a recursive formula similar to Equation \ref{eq:buy_sell_stocks_3:Bdpformula} for the variation number $3$ of this problem, that describe the answer in terms of subproblems.
-Let $DP(i,j)$ be the maximum profit possible with by only considering prices up to index $i$ and by using at most $j \leq K$ transactions.
-Clearly $DP(0,j)=DP(i,0)=0$, as it is impossible to make a transaction only on the first day as well asl when you can make at most $0$ transactions.
+We are going to make an attempt to write a recursive formula similar to Equation \ref{eq:buy_sell_stocks_3:Bdpformula} for the variation number $3$ of this problem, that describes the answer in terms of subproblems.
+Let $DP(i,j)$ be the maximum profit possible by only considering prices up to index $i$ and by using at most $j \leq K$ transactions.
+Clearly $DP(0,j)=DP(i,0)=0$, as it is impossible to make a transaction only on the first day as well as when you can make at most $0$ transactions.
 When calculating a $DP(i,j)$ for the general case we should consider that it can be equivalent to either:
 \begin{itemize}
-	\item $DP(i-1,k)$ the value of the maximum profit you can make up to index $i-1$ with at most $k$ transaction (we are basically saying we ignore the price at index $i$);
-	\item or the maximum profit we can make by performing a transaction that ends in a sell exactly at index $i$. To calculate this value we need to find the best place to perform the buy side of the transaction which can take place at every index $l < i$. This can be calculate with the following formula: $max DP(l,j-1) + (P[i]-P[j])$.
+    \item $DP(i-1,k)$ the value of the maximum profit you can make up to index $i-1$ with at most $k$ transaction (we are basically saying we ignore the price at index $i$);
+    \item or the maximum profit we can make by performing a transaction that ends in a sell exactly at index $i$. To calculate this value we need to find the best place to perform the buy-side of the transaction which can take place at every index $l < i$. This can be calculate with the following formula: $max DP(l,j-1) + (P[i]-P[j])$.
 \end{itemize}
 We can rewrite the general case $DP(i,j)$ in Equation \ref{eq:buy_sell_stocks_4:Bdpformula} as 
 $$DP(i,j) = max(DP(i-1,k), P[i] + max(DP(l,j-1)+-P[j])) \: \: \forall 0 \leq l < i$$ as $P[i]$ is constant in the inner max expression ($l$ is the only variable there).
@@ -59,7 +59,7 @@ Equation \ref{eq:buy_sell_stocks_4:Bdpformula} summarises what we have discussed
     \begin{cases}
         DP(0,j) = 0 \\
         DP(i,0) = 0 \\
-		DP(i,j) = max\Big\{DP(i-1,k), \; P[i] + \underbrace{max\big\{DP(l,j-1)-P[l]\big\}}_{\forall \: \: 0 \leq l < i}\Big\}
+        DP(i,j) = max\Big\{DP(i-1,k), \; P[i] + \underbrace{max\big\{DP(l,j-1)-P[l]\big\}}_{\forall \: \: 0 \leq l < i}\Big\}
      \end{cases}
     \label{eq:buy_sell_stocks_4:Bdpformula}
 \end{equation}
@@ -70,19 +70,19 @@ We could already proceed in turning Equation \ref{eq:buy_sell_stocks_4:Bdpformul
 
 \section{$O(nK)$ time and space}
 \label{buy_sell_stocks4:sec:linerartime1}
-However, the solution discussed above can be improved dramatically by noticing that we do not need to calculate the value of the innermost max in third case of Equation \ref{eq:buy_sell_stocks_4:Bdpformula} as shown in Listing \ref{list:buy_sell_stocks_4:linear2}.
+However, the solution discussed above can be improved dramatically by noticing that we do not need to calculate the value of the innermost max in the third case of Equation \ref{eq:buy_sell_stocks_4:Bdpformula} as shown in Listing \ref{list:buy_sell_stocks_4:linear2}.
 
 \lstinputlisting[language=c++, caption={$O(nK)$ time and $O(nK)$ space DP solution.},label=list:buy_sell_stocks_4:linear2]{sources/buy_sell_stocks/buy_sell_stocks_4/buy_sell_stocks_4_solution2.cpp}
 
 The important and most challenging part of this solution is to make sure that the quantity $L=\underbrace{max\big\{DP(l,j-1)-P[j]\big\}}_{\forall \: \: 0 \leq l < i}$ is calculated as we iterate incrementally over all values of $i$. 
 To understand why let's look at the particular values of $L$ for some incremental values of $i$:
 \begin{itemize}
-	\item if $i=1$ then $L_1=max\big\{DP(0,j-1)-P[0]\big\}$
-	\item if $i=2$ then $L_2=max\big\{DP(0,j-1)-P[0],DP(1,j-1)-P[1]\big\}$; but crucially $DP(0,j-1)-P[0] = L_1$
-	\item if $i=3$ then $L_3=max\big\{DP(0,j-1)-P[0],DP(1,j-1)-P[1],DP(1,j-1)-P[1]\big\}$; thanks to the fact that $l_2 = max \{DP(0,j-1)-P[0],DP(1,j-1)-P[1]\}$ we can simply this expression as  $L_3=max\big\{L_2,DP(1,j-1)-P[1]\big\}$.
-	 crucially $DP(0,j-1)-P[0] = L_1$
-	 \item \ldots
-	 \item In general $L_l = max\big\{L_{l-1}, DP(l,j-1)-P[l]\big\}$
+    \item if $i=1$ then $L_1=max\big\{DP(0,j-1)-P[0]\big\}$
+    \item if $i=2$ then $L_2=max\big\{DP(0,j-1)-P[0],DP(1,j-1)-P[1]\big\}$; but crucially $DP(0,j-1)-P[0] = L_1$
+    \item if $i=3$ then $L_3=max\big\{DP(0,j-1)-P[0],DP(1,j-1)-P[1],DP(1,j-1)-P[1]\big\}$; thanks to the fact that $l_2 = max \{DP(0,j-1)-P[0],DP(1,j-1)-P[1]\}$ we can simply this expression as  $L_3=max\big\{L_2,DP(1,j-1)-P[1]\big\}$.
+     crucially $DP(0,j-1)-P[0] = L_1$
+     \item \ldots
+     \item In general $L_l = max\big\{L_{l-1}, DP(l,j-1)-P[l]\big\}$
 \end{itemize}
 
 This approach allows us to avoid the loop over $l$ each time we calculate an entry in $DP(i,j)$ and to lower the time complexity $O(nK)$: a good improvement w.r.t. the previous solutions!
@@ -98,4 +98,4 @@ Listing \ref{list:buy_sell_stocks_4:linear3} shows an implementation of this ide
 \lstinputlisting[language=c++, caption={$O(nK)$ time and $O(n)$ space DP solution.},label=list:buy_sell_stocks_4:linear3]{sources/buy_sell_stocks/buy_sell_stocks_4/buy_sell_stocks_4_solution1.cpp}
 
 The code is extremely similar to Listing \ref{list:buy_sell_stocks_4:linear2}, with the only difference being the size of \inline{DP} is now $O(n)$ and we use two variables \inline{curr_k} and \inline{prec_k} to keep track of the column assigned to the \quotes{current} and \quotes{previous} values of $k$. 
-NOtice how at the end of each innermost loop, the two columns are swapped by simply swapping around the values of \inline{curr_k} and \inline{prec_k}.
+Notice how at the end of each innermost loop, the two columns are swapped by simply swapping around the values of \inline{curr_k} and \inline{prec_k}.
