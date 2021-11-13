@@ -87,23 +87,11 @@ The loop goal is to calculate $T(i)$ of Equation \ref{eq:buy_sell_stocks_3:Bdpfo
 Listing \ref{list:buy_sell_stocks_3:linear} has linear time and space complexity.
 
 
-\subsection{Linear time and constant space (draft)}
-Suppose you make some profit p1 by doing your first transaction in the stock market. Now you are excited to purchase another stock to earn more profit. Suppose the price of the second stock you aim to buy is x. Now, for you, the net effective price that you are spending from your pocket for this stock will be x-p1, because you already have p1 bucks in your hand. Now, if you sell the second stock at price $y$ your net profit p2 will be p2 = y - (x-p1). You have to do nothing but maximize this profit p2. Here's the code:
-\begin{lstlisting}[language=c++,numbers=none, caption={}]
-          
-    int maxProfit(vector<int>& prices) {
-        if(!prices.size())
-        return 0;
-        int buy1    = INT_MAX;
-        int profit1 = INT_MIN;
-        int buy2    = INT_MAX;
-        int profit2 = INT_MIN;
-        for(int i = 0; i < prices.size(); i++){
-            buy1    = min(buy1, prices[i]);
-            profit1 = max(profit1, prices[i] - buy1);
-            buy2    = min(buy2, prices[i] - profit1);
-            profit2 = max(profit2, prices[i] - buy2);
-            }
-            return profit2;
-            }
-        \end{lstlisting} 
+\subsection{Linear time and constant space}
+Suppose we make some profit $p_1$ by doing our first transaction. 
+When it is time to make the second transaction at the day $i$ we are going to of course pay $P[i]$.
+Now, for us, the net effective price that we are spending from our pocket is actually  $P[i]-p_1$, because we already have $p_1$ currency unit in our hand.
+When it is time to sell our second purchase at time $j>i$ we will do at price $P[j]$ and the net profit $p_2$ for the second transaction will be $p_2 = P[j] - (P[i]-p_1)$.
+All we have to do is maximixing the value of $p_2$ as shown in Listing \ref{list:buy_sell_stocks_3:constantspace}
+
+\lstinputlisting[language=c++, caption={$O(n)$ time and constnt space solution.},label=list:buy_sell_stocks_3:constantspace]{sources/buy_sell_stocks/buy_sell_stocks_3/buy_sell_stocks_3_solution2.cpp}

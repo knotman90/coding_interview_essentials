@@ -36,11 +36,11 @@
 \label{buy_sell_stocks4:sec:discussion}
 The variation discussed here is a generalization of the one discussed in Section \ref{sec:buy_sell_stocks3:intro} where we are allowed to make up to $K$ transaction where $K$ is given to us as a parameter.
 Clearly when $K=2$ this variation is equivalent to the one in Section \ref{sec:buy_sell_stocks3:intro}. 
-However, not knowing precisely the upper bound on the number of posible transactions complicates things a bit (but not too much).
+However, not knowing precisely the upper bound on the number of possible transactions complicates things a bit (but not too much).
 
 Let's start with a simple observation: if $K > \frac{|P|}{2}$ then there is no limit on the number of transactions we can make
 and we can immediately fall back on the same approach used Listing \ref{list:buy_sell_stocks_2:linear}.
-Despite being interesting is not really key to solving this problem in its generality albeit it might, in practice, speed up the actual runtime for these specific cases.
+Despite being interesting is not key to solving this problem in its generality albeit it might, in practice, speed up the actual runtime for these specific cases.
 
 
 \section{$O(n^2K)$ time and $O(nK)$ space}
@@ -69,7 +69,7 @@ We could already proceed in turning Equation \ref{eq:buy_sell_stocks_4:Bdpformul
 respectively, as shown in Listing \ref{list:buy_sell_stocks_4:linear0}.
 
 \lstinputlisting[language=c++, caption={$O(n^2K)$ time and $O(nK)$ space DP solution.},label=list:buy_sell_stocks_4:linear0]{sources/buy_sell_stocks/buy_sell_stocks_4/buy_sell_stocks_4_solution0.cpp}
-Listing \ref{list:buy_sell_stocks_4:linear0} is correct and it would actually not that bad if we could come up with it during an actual interview. 
+Listing \ref{list:buy_sell_stocks_4:linear0} is correct and it would actually not be that bad if we could come up with it during an actual interview. 
 
 \section{$O(nK)$ time and space}
 \label{buy_sell_stocks4:sec:linerartime1}
