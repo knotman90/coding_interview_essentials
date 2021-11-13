@@ -15,7 +15,7 @@ using std::vector;
 
 
 
-TEST(find_repeated_number_n_divided_3_times, test1)
+TEST(find_repeated_number_n_divided_3_times, DISABLED_test1)
 {
 	
 	EXPECT_EQ(0,1);
