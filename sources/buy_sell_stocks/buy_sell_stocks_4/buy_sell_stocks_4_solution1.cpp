@@ -1,4 +1,4 @@
-int maxProfit(int K, vector<int>& P)
+int buy_sell_stock4_DP_time_optimized(const int K, const std::vector<int>& P)
 {
   const int n = P.size();
   if (K == 0 || n <= 1)
