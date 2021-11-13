@@ -1,0 +1,109 @@
+\section{Common Variations - Best profit with exactly two transactions}
+\label{sec:buy_sell_stocks3:intro}
+
+\subsection{Problem statement}
+\begin{exercise}
+    You are given an array $P$ where $P[i]$ is the price of a given stock on the $i^th$ day.
+    Write a function that given $P$ finds the max profit you can achieve by performing at most two transactions.
+        
+    Notice that you may not engage in multiple transactions simultaneously, meaning that you must sell the stock before you buy it again.
+    
+     
+    \begin{example}
+    \label{ex:buy_sell_stocks_3:exmaple1}
+        \hfill \\
+        Given $P=\{3,3,5,0,0,3,1,4\}$ the function outputs $6$. 
+        You can buy on the \nth{4} day and sell on the \nth{6}. This transaction yelds a profit of $3$.
+        You can then perform another transaction with buy and sell dates being the \nth{7} and \nth{8} days, respectively, for a total profit of $6$.
+    \end{example}
+
+    \begin{example}
+        \label{ex:buy_sell_stocks_3:exmaple2}
+            \hfill \\
+            Given $P=\{1,2,3,4,5\}$ the function outputs $4$. 
+            The best strategy here is to perform a single transaction where you buy the first and sell the last day. Notice that you can achieve the same total profit by also performing two transactions.
+    \end{example}
+
+    \begin{example}
+        \label{ex:buy_sell_stocks_3:exmaple3}
+            \hfill \\
+            Given $P=\{7,6,4,3,1\}$ the function outputs $0$. 
+            It is best in this case not to trade this stock at all, as all possible transaction leads to a loss.
+    \end{example}
+\end{exercise}
+
+
+\section{Discussion}
+\label{buy_sell_stocks_3:sec:discussion}
+This variation might seems at first easier than the one presented in Section \ref{sec:buy_sell_stocks:multiple_transaction}. 
+However, not having a limit on the number of transactions you can make allows us to adopt the strategy in which we make 
+all perform all possible transactions that result in a profit. 
+When we have a constraint on the maximum number of transactions we can make, we are suddenly forced to discard some and keep only the best (two in this specific case, but the same reasoning will apply to the variation in Section \ref{buy_sell_stocks4:sec:discussion}).
+This makes solving this problem significantly harder.
+
+
+\section{DP - Linear time solution}
+\label{buy_sell_stocks_3:sec:linear}
+A possible way of solving this problem is by noticing that if you complete the first transaction at day $i$ (day of the sale) then
+you must have made the buying part of the transaction when the price was at its minimum between day $0$ and $i-1$. Say we made a profit of $t^i_1$ ($t^x_y$ represent the profit of the $y^{th}$ transaction completed on day $x$).
+At this point, we still have one more transaction we can make from day $i+1$ to $n-1$. Say that the profit of the best second transaction is $t^i_2$ then you end up with a total profit of $t^i_1+t^i_2$. If we have a way of quickly determining $t_2$ for each $i$ then this problem can be solved relatively easy as we need to return the maximum among $t^i_1+t^i_2$ for all days.
+
+What is exactly $t^i_2$? It is the maximum profit we can make by making a \textbf{single} between days $i+1$ and $n-1$. 
+Luckly we can calculate $t^i_2$ for all $0 \leq i < n$ using DP. We know that the value of $t^{n-1}_2$ is zero. For every other day $i$ 
+we can calculate the answer to $t^i_2$ if we know the answer for $t^{i+1}_2$ because  the value of $t^i_2$ can either be:
+\begin{itemize}
+    \item $t^{i+1}_2$ 
+    \item $M(j > i)-P[i]$ where $M(j)$ is the highest price of the stock for some day after $i$.
+\end{itemize}
+The reasoning behind this is that the best single transaction you can make with the prices from day $i$ to $n-1$ is either the one you make by buying exactly at day $i$ (and therefore selling at the highest price later) or a transaction you make with the prices for the days ahead i.e. from $i+1$ to $n-1$ for which, crucially, we already have an answer. 
+
+
+Equation \ref{eq:buy_sell_stocks_3:Bdpformula} formalizes this idea where the final answer is the maximum among all values of $T(i)$.
+$m(i)$ and $M(i)$ contain the information about the smallest and largest element to the left and to the right of index $i$, respectively.
+$B(i)$ instead carries the value of the best single transaction that you can make with any values to the left of index $i$ (inclusive).
+In other words, what Equation \ref{eq:buy_sell_stocks_3:Bdpformula} states is that the value of the final answer is the value of the best transaction you can make by selling at exactly index $i$\footnote{For which you must have bought at the minimum between $0$ and $i-1$ to make the best profit.} 
+plus the value of the best transaction you can make with any of the prices to the right of $i$.
+If you take the maximum among all indices, then it is clear that this quantity is indeed the value you can achieve by performing two transactions at most (when $i=0$ or $i=n-1$ we are in practice making only a single transaction.).
+
+\begin{equation}
+    \begin{cases}
+        B(|I|-1) = 0 \\
+        B(i) = max(B(i+1), M(i)-P(i)) \\
+        M(i) = max(P(i), P(i+2), \ldots, P(n-1)) \\
+        m(i) = min(P(0), P(1), \ldots, P(i)) \\
+        T(i) = (P[i]-m(i)) + B(i)
+     \end{cases}
+    \label{eq:buy_sell_stocks_3:Bdpformula}
+\end{equation}
+
+Listing \ref{list:buy_sell_stocks_3:linear} shows an implementation of this idea.
+
+\lstinputlisting[language=c++, caption={$O(n)$ time and space DP solution.},label=list:buy_sell_stocks_3:linear]{sources/buy_sell_stocks/buy_sell_stocks_3/buy_sell_stocks_3_solution1.cpp}
+
+The code works by calculating the values of the best transaction we can make with the values to the right of each index $i$ and stores this info in an array of size $n$ (this is $B$ in Equation \ref{eq:buy_sell_stocks_3:Bdpformula}).
+The code then proceeds in calculating the answer by looping over all days and maintaining a variable \inline{min_left} which contains the minimum element seen so far: this value is useful in calculating the profit for the first transaction we can make by selling at index $i$.
+The loop goal is to calculate $T(i)$ of Equation \ref{eq:buy_sell_stocks_3:Bdpformula} and remember the maximum value ever calculated (in the variable \inline{ans}which is eventually returned.
+
+Listing \ref{list:buy_sell_stocks_3:linear} has linear time and space complexity.
+
+
+\subsection{Linear time and constant space (draft)}
+Suppose you make some profit p1 by doing your first transaction in the stock market. Now you are excited to purchase another stock to earn more profit. Suppose the price of the second stock you aim to buy is x. Now, for you, the net effective price that you are spending from your pocket for this stock will be x-p1, because you already have p1 bucks in your hand. Now, if you sell the second stock at price $y$ your net profit p2 will be p2 = y - (x-p1). You have to do nothing but maximize this profit p2. Here's the code:
+\begin{lstlisting}[language=c++,numbers=none, caption={}]
+          
+    int maxProfit(vector<int>& prices) {
+        if(!prices.size())
+        return 0;
+        int buy1    = INT_MAX;
+        int profit1 = INT_MIN;
+        int buy2    = INT_MAX;
+        int profit2 = INT_MIN;
+        for(int i = 0; i < prices.size(); i++){
+            buy1    = min(buy1, prices[i]);
+            profit1 = max(profit1, prices[i] - buy1);
+            buy2    = min(buy2, prices[i] - profit1);
+            profit2 = max(profit2, prices[i] - buy2);
+            }
+            return profit2;
+            }
+        \end{lstlisting} 

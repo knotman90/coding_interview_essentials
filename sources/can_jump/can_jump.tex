@@ -407,3 +407,9 @@ The time and space complexities of Listing \ref{list:can_jumps4_1} are $O(|I|)$ 
 
 \section{Discussion}
 \label{can_jump5:sec:discussion}
+One of the most useful thing we can do to solve this variant of the "jump game" problem is (again) to model it as a graph problem.
+First of all, if we had a graph representation of the problem instance then we would be able to solve this problem by just trying to start a visit from each and every node of the graph and find out which leads to the most visited nodes.
+How many edges would this graph have? If $d = O(|I|)$ in theory we would be able to reach all nodes by starting from any node. If that was the case then the number of edges would be $O(|I|^2)$ and that would of course make the entire algorithm $O(|I|^3)$ (do a complete visit from every node: basically $|I|$ visit of the graph).
+However, if we look closely at the problem statement we realize that we will never run into this many number of edges and the graph will be indeed way more smaller. 
+
+If you can reach a node $j$ from node $i$ it means that every other node in between forms a stricly decreasing sequence. Say $k$ is between $i$ and $j$: we know that $k > j$ and $k < i$.  
