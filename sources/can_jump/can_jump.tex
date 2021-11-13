@@ -361,3 +361,55 @@ The rest of the loop code takes care of inserting the immediate neighbors of cel
 The time and space complexities of Listing \ref{list:can_jumps4_1} are $O(|I|)$ as we never visit the same node twice and int the \inline{EqualIndicesMap} will never find the same indices in vectors belonging to two keys.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Jump Game 5}
+\label{can_jump5:sec:statement}
+\begin{exercise}
+    You are given an array of integers $I$  and an integer $d$.
+    In one step you can jump from index $i$ to index:
+    \begin{itemize}
+        \item $i + x$ where: $i + x < |I|$ and $0 < x <= d$.
+        \item $i - x$ where: $i - x >= 0$ and $0 < x <= d$. 
+    \end{itemize}
+    In addition, you can only jump from index $i$ to index $j$ if and only if $I[i]$ is greater than $I[k]$ for all indices between $i$ and $j$;
+        
+    Write a function that, return the maximum number of cells you can visit by starting from any cell of $I$.
+              
+    \textbf{Clearly, you can not jump outside of the array at any time.}
+    
+    \begin{example}
+        \hfill \\
+        Given  $I=[6,4,14,6,8,13,9,7,10,6,12]$ and $d=2$ the function returns \textbf{4}.
+        One possible jump sequence is the following:
+        $10 \Rightarrow 8 \Rightarrow 6 \Rightarrow 7 $
+        
+        Notice that despite the fact $d=2$ would allow you in theory to perform a jump of length $2$, if you start from the cell at index $6$ you can only reach the cell at index $7$ as $i[8]>I[6]$. Moreover, because $I[5] > I[6]$, you are also disallowed to reach cell at index $4$ despite the fact $I[6] > I[4]$. All cells between the start and end location of a jump must form a strictly decreasing sequence. See Figure \ref{fig:can_jump5_example1}.
+        \label{ex:can_jump5_example1}
+    \end{example}
+
+
+    \begin{example}
+        \hfill \\
+        Given  $I=[7,6,5,4,3,2,1]$ and $d=2$ the function returns \textbf{7}.
+        Starting from index $0$ you can visit all the nodes by making contiguous jumps of length $1$.
+        \label{ex:can_jump5_example2}
+    \end{example}
+\end{exercise}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{sources/can_jump/images/can_jump4_example1}
+    \caption[]
+    {Visual representation of the problem instance  of Example
+    \ref{ex:can_jump5_example1}. The arrow represent the jumps one can make from the last cell.}.
+    \label{fig:can_jump5_example1}
+\end{figure}
+
+\section{Discussion}
+\label{can_jump5:sec:discussion}
+One of the most useful thing we can do to solve this variant of the "jump game" problem is (again) to model it as a graph problem.
+First of all, if we had a graph representation of the problem instance then we would be able to solve this problem by just trying to start a visit from each and every node of the graph and find out which leads to the most visited nodes.
+How many edges would this graph have? If $d = O(|I|)$ in theory we would be able to reach all nodes by starting from any node. If that was the case then the number of edges would be $O(|I|^2)$ and that would of course make the entire algorithm $O(|I|^3)$ (do a complete visit from every node: basically $|I|$ visit of the graph).
+However, if we look closely at the problem statement we realize that we will never run into this many number of edges and the graph will be indeed way more smaller. 
+
+If you can reach a node $j$ from node $i$ it means that every other node in between forms a stricly decreasing sequence. Say $k$ is between $i$ and $j$: we know that $k > j$ and $k < i$.  
