@@ -13,8 +13,40 @@
 - https://leetcode.com/discuss/interview-question/875845/amazon-sde-ii
 - https://leetcode.com/discuss/interview-question/846585/amazon-online-assessment-question-1
 - https://leetcode.com/discuss/interview-question/844979/amazon-online-assessment-question-2
-- https://leetcode.com/problems/lru-cache/ ✅
-- https://leetcode.com/problems/longest-consecutive-sequence/
+- https://leetcode.com/problems/lru-cache/ (done)
+- https://leetcode.com/problems/longest-consecutive-sequence/ (done)
+- https://leetcode.com/discuss/interview-question/369272/Amazon-or-Onsite-or-Linux-Find-Command
+- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
+- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/ (do the others too)
+- https://aonecode.com/amazon-interview-questions
+- https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ (!!! important problem) (done)
+- https://leetcode.com/problems/open-the-lock/ (!!!)
+- https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!)
+- https://leetcode.com/problems/maximum-depth-of-n-ary-tree/ (done in 8 minutes recursively/iteratively, see mini-problems)
+- https://leetcode.com/problems/assign-cookies/ (done 5 minutes)
+- https://leetcode.com/problems/lemonade-change/ (done 5 minutes)
+- https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/ (done, always do the smallest number)
+- https://leetcode.com/problems/water-bottles/ (done, simulate the process)
+- https://leetcode.com/problems/delete-columns-to-make-sorted/ 
+- https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/ (sort in ascending order + get as many from the front you need)
+- https://leetcode.com/problems/find-median-from-data-stream/
+- https://leetcode.com/problems/decode-ways-ii/
+- https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
+- https://leetcode.com/problems/reduce-array-size-to-the-half/
+- https://leetcode.com/problems/word-ladder/
+- https://leetcode.com/problems/text-justification/
+- Generate a maze
+- https://leetcode.com/discuss/interview-question/949185/uber-codesignal-oa
+  - https://leetcode.com/discuss/interview-question/949185/uber-codesignal-oa
+  - ```ex. xzxzx OP: 5
+    x, z, xzx
+	x, zx, zx
+	xz, x, zx
+	xz, xz, x
+	xzx, z, x
+    ```
+-
+
 
 ## Leadership principles
 
