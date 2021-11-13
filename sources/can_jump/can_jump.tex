@@ -8,111 +8,121 @@
 \chapter{Jump Game}
 \label{ch:can_jump}
 \section*{Introduction}
-In this problem we will investigate whether a solution exists for a game played in an array
+In this chapter, we will investigate whether a solution exists for a game played in an array
 where you are the only player and you are initially located at the first cell of the array. Your goal is to
 get to the last cell by jumping from one cell to another a specified number of times. The array contains
 information about the length of the jump you can take from a cell. 
 
-There are a number of possible solutions to this problem and in this Chapter we will discuss two specific approaches. In particular:
+There are several possible different solutions to this problem and, in this Chapter, we will discuss the most common. 
+In particular:
 \begin{itemize}
-	\item In Section \ref{can_jump:sec:backtracking} we take a look at the most intuitive approach where we try all possible jumps in a backtracking-like manner.
-	\item In Section \ref{can_jump:sec:DFS} we will refine the solution of Section
-	\ref{can_jump:sec:backtracking} into one that uses a clever insight to visit the
-	cells efficiently. 
-	\item Finally, in Section \ref{can_jump:sec:greedy} we will discuss an efficient and concise
-	greedy solution.
+    \item In Section \ref{can_jump:sec:backtracking} we take a look at the most intuitive approach where we try all possible jumps in a backtracking-like manner;
+    \item In Section \ref{can_jump:sec:DFS} we will refine the solution of Section
+    \ref{can_jump:sec:backtracking} into one that uses a clever insight to visit the
+    cells efficiently. 
+    \item Finally, in Section \ref{can_jump:sec:greedy} we will discuss an efficient and concise
+    greedy solution.
 \end{itemize}
 
 
 \section{Problem statement}
+\label{ch:can_jump:statement}
 \begin{exercise}
-Write a function that takes as input  an array $I$ of non-negative integers. You are initially
+Write a function that takes as input an array $I$ of non-negative integers. You are initially
 positioned at the beginning of the array (at index $0$) and your goal is to jump from cell to cell
-to the end of the array (cell $|I|-1$). If you are in the at index $j$ you are allowed to jump to
-all cells within the following range: $[j-I_i,j+I_i]$ (each cell of the array contains the
-information about the longest jump you can take from there). The function should return true if you
-are able to reach the last cell of the array, otherwise it returns false.
+to the end of the array (cell $|I|-1$).
+Each cell $i$ of the array contains the maximum length for a jump that can be made from cell $i$.
+If you are at index $j$ you are allowed to jump to any cell within the following range: $[j-I_i,j+I_i]$.
+The function should return true if you can reach the last cell of the array, otherwise, it should return false.
 
-	\begin{example}
-		\hfill \\
-		Given  $I=[2,3,1,1,4]$ the function returns \textbf{true}. You jump from cell $0$ to $1$ and
-		then take a $3$ cells wide jump to the end of the array. See Figure
-		\ref{fig:can_jump:example1}.
-		\label{ex:can_jump_example1}
-	\end{example}
+    \begin{example}
+        \hfill \\
+        Given  $I=[2,3,1,1,4]$ the function returns \textbf{true}. You jump from cell $0$ to $1$ and
+        then take a $3$ cells wide jump to the end of the array. See Figure
+        \ref{fig:can_jump:example1}.
+        \label{ex:can_jump_example1}
+    \end{example}
 
-	\begin{example}
-		\hfill \\
-		Given $I=[3,2,1,0,4]$ the function returns \textbf{false} because it is impossible to reach
-		any cells with index higher than $3$. See Figure \ref{fig:can_jump:example2}: there is no
-		incoming edge for the node with label $4$.
-		\label{ex:can_jump_example2}
-	\end{example}
+    \begin{example}
+        \hfill \\
+        Given $I=[3,2,1,0,4]$ the function returns \textbf{false} because it is impossible to reach
+        any cells with index higher than $3$. See Figure \ref{fig:can_jump:example2}: there is no
+        incoming edge for the node with label $4$.
+        \label{ex:can_jump_example2}
+    \end{example}
 \end{exercise}
 
 \begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{sources/can_jump/images/can_jump_example1}
-	\caption[Implicit graph for the Example \ref{ex:can_jump_example1}.]
-	{Visual representation (implicit graph) of the problem instance of Example
-	\ref{ex:can_jump_example1}.}.
-	\label{fig:can_jump:example1}
+    \centering
+    \includegraphics[width=\textwidth]{sources/can_jump/images/can_jump_example1}
+    \caption[Implicit graph for the Example \ref{ex:can_jump_example1}.]
+    {Visual representation (implicit graph) of the problem instance of Example
+    \ref{ex:can_jump_example1}.}.
+    \label{fig:can_jump:example1}
 \end{figure}
 
 \begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{sources/can_jump/images/example2}
-	\caption[Implicit graph for the Example \ref{ex:can_jump_example2}.]
-	{Visual representation (implicit graph) of the problem instance of Example
-	\ref{ex:can_jump_example2}.}.
-	\label{fig:can_jump:example2}
+    \centering
+    \includegraphics[width=\textwidth]{sources/can_jump/images/example2}
+    \caption[Implicit graph for the Example \ref{ex:can_jump_example2}.]
+    {Visual representation (implicit graph) of the problem instance of Example
+    \ref{ex:can_jump_example2}.}.
+    \label{fig:can_jump:example2}
 \end{figure}
 
 %\section{Clarification Questions}
 
 %\begin{QandA}
-	%\item \begin{answered}
-		%\textit{}
-	%\end{answered} \end{questionitem}
-	
+    %\item \begin{answered}
+        %\textit{}
+    %\end{answered} \end{questionitem}
+    
 %\end{QandA}
 
 \section{Backtracking}
 \label{can_jump:sec:backtracking}
 The first solution that we will investigate is based on an idea similar to the DFS where $I$
-is treated as an implicit graph where each cell (a node) is connected to all the others cells that can be
-reached by jumping from it. The set of cells you can reach from a given cell $c$ is identified by
-the length of the jump you can perform from $c$ which is stored within $c$ itself. The idea is to
-use DFS to check whether the the last node of the graph is connected with the first one. In other
-words, whether there is a path from the first to the last node. We can proceed by adopting a
-recursive approach where we try to visit all the nodes that we can reach from the node we currently
+is treated as an implicit graph where each cell can be thought of as being a node of a graph and is connected to all the other cells that can be
+reached by jumping from it.
+The set of cells you can reach from a given cell $c$ is identified by
+the length of the jump you can perform from $c$ (a value that is stored within $c$ itself).
+The idea is to use DFS to check whether the last node of the graph is connected with the first one.
+In other words, we want to answer the following question: is there a path from the first to the last node?
+
+We can proceed by adopting a recursive approach where we try to visit all the nodes that we can reach from the node we currently
 occupy and to continue this process until either we have reached the last node or there is no more
-jump to try; meaning in that case that there is no way to reach the last node (i.e. the last node is
-disconnected). As the implicit graph is not guaranteed to be acyclic, in order to make this
-approach work we need to ensure that we not jump back and forth from one cell to another in a
-cycle. This can happen if, for instance,  you jump from a cell $0$ to cell $1$ and then back to cell
-$0$. In order to overcome this issue we can only perform forward jumps so that it will be impossible
-to be stuck in a cycle and still manage to find an answer. When you jump to a cell $i$ from a cell
-$j$ s.t. $j < i$ (you performed a forward jump) you know that you can also visit all cells $ j \leq
-k \leq i$ (all the cells in between $j$ and $i$). If you only jump forward you are not going to need
-to visit any cell $ j \leq k \leq i$ using backward jumps as they are visited anyway when processing
-cells $j$ by performing forward jumps from it. An implementation of this idea is shown in Listing
-\ref{list:can_jump1_1}. This approach is correct and it will eventually find a solution but it is
+jump to try; in the latter case,  there is no way to reach the last node (i.e. the last node is
+disconnected). 
+
+As the implicit graph is not guaranteed to be acyclic, to make this
+approach work we need to ensure that we do not jump back and forth from one cell to another in a
+cycle. 
+This can happen if, for instance,  you jump from a cell $0$ to cell $1$ and then back to the cell
+$0$. To overcome this issue, we can only perform forward jumps so that it will be impossible
+to be stuck in a cycle.
+When you jump to a cell $i$ from a cell $j$ s.t. $j < i$ (you performed a forward jump) we know that we can also visit all cells $ j \leq
+k \leq i$ (all the cells in between $j$ and $i$) from $j$.
+If we only jump forward, we are not going to need to visit any cell $ j \leq k \leq i$ using backward jumps as these cells are visited anyway when processing
+cells $j$ by performing forward jumps from it.
+
+An implementation of this idea is shown in Listing
+\ref{list:can_jump1_1}. 
+This approach is correct and it will eventually find a solution but it is
 extremely inefficient. Its complexity is exponential in time as potentially the same cells are
 visited over and over\footnote{Suppose $W(x)$ is the number of possible ways you can jump from
 position $x$ to the end of the array at index $N$. We know that $T(N) = 1$ (the only way to jump
 from cell $N$ to itself is not to jump at all). For all other cells we have that:
-	\begin{align*}
-		W(x) = \sum_{i=x+1}^N W(i) \\
-		 = W(x+1) + \sum_{i=x+2}^N W(i) \\
-		 = W(x+1) + W(x+1) \\
-	  \end{align*}
-	So in order to calculate $W(X)$ we need the values  $W(x+1)$ twice. The recursive tree for
-	$W$ is binary and complete and has height $N$ and therefore contains $O(2^N)$ number of nodes.}
-	and constant in space\footnote{if we do not consider the spaces utilized by the stack frames
-	during the recursive calls, otherwise it is linear}.
+    \begin{align*}
+        W(x) = \sum_{i=x+1}^N W(i) \\
+         = W(x+1) + \sum_{i=x+2}^N W(i) \\
+         = W(x+1) + W(x+1) \\
+      \end{align*}
+    So to calculate $W(X)$ we need the values  $W(x+1)$ twice. The recursive tree for
+    $W$ is binary and complete and has height $N$ and therefore contains $O(2^N)$ number of nodes.}
+    and constant in space\footnote{if we do not consider the spaces utilized by the stack frames
+    during the recursive calls, otherwise, it is linear}.
 
-	\lstinputlisting[language=c++, caption={Exponential time solution to the \textit{jump game} problem where only forward jumps are performed.},label=list:can_jump1_1]{sources/can_jump/can_jump_solution1_1.cpp}
+    \lstinputlisting[language=c++, caption={Exponential time solution to the \textit{jump game} problem where only forward jumps are performed.},label=list:can_jump1_1]{sources/can_jump/can_jump_solution1_1.cpp}
  
 \section{DFS}
 \label{can_jump:sec:DFS}
@@ -120,7 +130,7 @@ Another option for solving the cycle problem arising from the algorithm describe
 \ref{can_jump:sec:backtracking} (this solution can be in-fact thought of as optimized backtracking)
 is to keep track of the cells that we have already visited and every time we are about to perform a
 jump to a cell we first check whether that cell has already been visited and  - if it has - 
-the jump is discarded and not performed. As such, no cell is actually visited twice and consequently the complexity is in this case is $O(|I|^2)$. In the worst-case scenario you must check for each
+the jump is discarded and not performed. As such, no cell is visited twice, and consequently, the complexity is in this case is $O(|I|^2)$. In the worst-case scenario, you must check for each
 cell whether all the other cells have been already visited. Listing \ref{list:can_jump1} shows an
 implementation of this idea. 
 
@@ -140,16 +150,16 @@ array. If we apply the same reasoning to generic index $i$ we end up with what i
 programming approach that -  given $G(x)$ is $1$ if you can reach the end of the array from the cell
 $x$ and $0$ otherwise - is based on the following recursive formula:
 \begin{equation}
-	\begin{cases}
-		G(|I|-1) = 1 \\
-		G(x) = 1 \: \: \text{if} \: \: \exists \: y > x \:\: \text{s.t.} \:\: y < (x+I_x) \: \: \text{and} \: \:G(y) = 1\\
-		\text{otherwise} \: \: G(x) = 0
-	 \end{cases}
-	\label{eq:can_jump:dpformula}
+    \begin{cases}
+        G(|I|-1) = 1 \\
+        G(x) = 1 \: \: \text{if} \: \: \exists \: y > x \:\: \text{s.t.} \:\: y < (x+I_x) \: \: \text{and} \: \:G(y) = 1\\
+        \text{otherwise} \: \: G(x) = 0
+     \end{cases}
+    \label{eq:can_jump:dpformula}
 \end{equation}
 Equation \ref{eq:can_jump:dpformula} shows that a possible implementation would start processing
 cells from the last to the first and that for each element a linear time lookup for a suitable cell
-$y$ might be needed. Therefore the complexity of this solution is quadratic in time. However we can
+$y$ might be needed. Therefore the complexity of this solution is quadratic in time. However, we can
 drastically lower its complexity by noting that when processing cell $x$ all we care about is
 whether the closest cell to the right from which you can reach the end of the array is reachable
 from $x$. We can carry this information into a variable $m$ down from cell $|I|-1$ to cell $0$ and
@@ -159,8 +169,195 @@ solution.
 To summarize,  the linear time solution for this problem works as follows: We iterate the array $I$
 right-to-left and for each cell $x$ we check whether we can reach $m$ jumping from $x$. If we can
 then $x$ is the new leftmost cell from which we can reach the end of the array, thus $m = x$.
-Otherwise we continue by processing cell $x-1$ in a similar manner. Eventually we will have
+Otherwise, we continue by processing cell $x-1$ in a similar manner. Eventually, we will have
 processed all cells and therefore we can return true if $m = 0$ meaning that cell $0$ is the
 leftmost cell from which we can jump to location $|I|-1$, and false otherwise.
 \lstinputlisting[language=c++, caption={Greedy solution where we use the fact that the DP solution described by Equation \ref{eq:can_jump:dpformula} can be optimized if we only consider if it is possible to reach the closest cell from which we can jump to the end of the array. },label=list:can_jump]{sources/can_jump/can_jump_solution2.cpp}
+
+
+\section{Jump Game 2}
+
+\section{Problem statement}
+\label{can_jump1:sec:statement}
+\begin{exercise}
+    Given an array of non-negative integers $I$, you are initially positioned at the first index of the array.
+    Each element in the array represents your maximum jump length at that position.
+    Your goal is to reach the last index in the minimum number of jumps.    
+    
+    \textbf{You can assume that you can always reach the last index.}
+    \begin{example}
+        \hfill \\
+        Given  $I=[2,3,0,1,4]$ the function returns \textbf{2}. You jump from cell $0$ to $1$ and
+        then take a $3$ cells wide jump to the end of the array. See Figure
+        \ref{fig:can_jump:example1}.
+        \label{ex:can_jump2_example1}
+    \end{example}
+\end{exercise}
+
+\subsection{Discussion}
+The key difference this variation has w.r.t. the version in Section \ref{ch:can_jump:statement} is that here we are guaranteed that it is possible to reach the last location of the array by starting from the beginning and performing some combination of forward jumps. 
+
+When performing the first jump, we know we can reach cells in the range $[0,0+I[0]]$. Which of these cells we should jump to?
+The answer is, always jump to the cell at index $j$ in $[0,0+I[0]]$ that gets us the farthest! In other words, choose the cell $j$ s.t. $j+I[j]$ is maximum.
+Why is this the case? 
+The reasoning behind it is that, jumping to any other cell other $j$, say cell $0 \leq k \leq 0+I[0]$ with $k \neq j$ does not decrease the overall number of steps to get to the final cell because from cell $j$ we can reach every cell we can reach from cell $k$ plus potentially some more cells that are unreachable from cell $j$.
+For example let's examine Figure \ref{fig:can_jump:can_jump2_example1}. Among all the cells we can reach from cells $0$ (in (\textcolor{red}{red}) the cell at index $1$ is the one through which we can travel the farthest. If we decide to jump at the cell at index $2$ nothing would change as we would not be able to reach more cells than the ones we can reach from the cell at index $1$.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{sources/can_jump/images/can_jump2_example1}
+    \caption[]{An instance of the problem with cells divided by color into their respective levels.}.
+    \label{fig:can_jump:can_jump2_example1}
+\end{figure}
+
+Another way of looking at this problem is by thinking of the cells being divided into levels and to solve this problem we need to apply a BFS visit to the cells. 
+The cells in the interval $[0,I[0]]$ would belong to level $0$. Level $1$ cells would consist of all cells not in level $0$ and that can be reached from any cell of level $0$. 
+In general, cells in level $i$ are cells that are not in level $i-1$ and can be reached by jumping from a cell at level $i-1$.
+using this definition is it easier to see how the cell that jumps the farthest at level $i-1$ would be able to reach all cells of level $i$! There is no other cell in level $i-1$ from which we can reach more cells at the next level.
+Therefore, the min number of jumps necessary is equivalent to the level of the last cell.
+
+
+An implementation of this idea is shown in Listing \ref{list:can_jumps2_1}.
+
+
+\lstinputlisting[language=c++, caption={Linear time and space solution.},label=list:can_jumps2_1]{sources/can_jump/can_jump2_solution1.cpp}
+
+
+\section{Jump Game 3}
+\label{can_jump3:sec:statement}
+\begin{exercise}
+    You are given an array of non-negative integers $I$ of size $n$ representing jump lengths and a start position $s$.
+    You are initially located at the start index ($0$) of the array. 
+    When you are at index $i$, you can jump to index $i + I[i]$ or $i - I[i]$.
+
+    Write a function that given such an array $I$ and start position $s$ returns true if you can reach a cell of $I$ containing the value $0$ and false otherwise by performing 
+    zero or more jump starting from $s$.
+            
+    \textbf{Clearly, you can not jump outside of the array at any time.}
+    
+    \begin{example}
+        \hfill \\
+        Given  $I=[4,2,3,0,3,1,2]$ and $s=5$ the function returns \textbf{true}.
+        One way to reach cell at index $3$ is by starting from index $5$, then jump to cell $4$, then to cell $1$ and finally to cell $3$.
+        \label{ex:can_jump3_example1}
+    \end{example}
+
+    \begin{example}
+        \hfill \\
+        Given  $I=[3,0,2,1,2]$ and $s=2$ the function returns \textbf{false}.
+        There is no combination of jumps you can make that will ever make you land at index $1$.
+        \label{ex:can_jump3_example2}
+    \end{example}
+\end{exercise}
+
+\subsection{Discussion}
+In the previous variation of this problem discussed in Sections \ref{can_jump1:sec:statement} and \ref{can_jump3:sec:statement} we were allowed to jump from index $i$ to \textbf{any} any cell in the range $[i-I[i],i+I[i]]$, but the variation discussed in this section adds a constraints that forces each jump to be in either of the following two locations:
+\begin{itemize}
+    \item $i-I[i]$
+    \item $i+I[i]$
+\end{itemize}.
+Another difference is that our target destination is not the end of the array and we will be happy to land in any cell containing a $0$.
+
+In our opinion these constraints do not add significant complexity to the problem as at a closer look, like for the other variation, we are dealing with a graph problem where we are asked to check whether we can reach a certain node.
+In general, to be able to reach a node $v$ from another node $u$, we need for $v$ and $u$ to be connected: there must be a path you can take (a series of jumps in this case) that take you from node $v$ to node $u$.
+This condition is easily checkable by performing a DFS or BFS from node $u$.
+For this problem, we are not really interested in a particular node $v$, and provided it contains the value $0$ we are happy.
+
+Therefore we can reframe the problem and ask ourselves whether exist a node with value $0$ in it that is connected to node $s$. 
+This problem is not particularly difficult as all is necessary is to start a visit of the graph from the node $s$ and stop as soon as either of the following is true:
+\begin{itemize}
+    \item we have landed to a node with value $0$;
+    \item we have visited every node reachable from $s$ (every node in the connected component of $s$).
+\end{itemize}
+If the first condition is true, then we can stop the visit and return true as we have indeed managed to find a way to jump from $s$ to a node with value $0$ in it; otherwise, we can return false, because we have visited every possible node reachable from $s$, but none of them is of the type we want.
+
+Listing \ref{list:can_jumps3_1} shows a possible implementation of this idea.
+
+\lstinputlisting[language=c++, caption={DFS solution.},label=list:can_jumps3_1]{sources/can_jump/can_jump3_solution1.cpp}
+
+The code is nothing more than a simple DFS implementation on the implicit $|I|$ nodes and edges defined by the content of $I$ and the jump rules of the problem statement (from each node $i$ there are at most two edges to nodes at indices $i-I[i]$ and $i+I[i]$, respectively).
+Notice that the implicit graph is not guaranteed to be acyclic and some care needs to be taken in order not to visit the same node twice. This is taken care of by the \inline{visited} vector of bools, where we store the information on whether a node has been visited already.
+
+The time complexity of Listing \ref{list:can_jumps3_1} is $O(|I|)$ (the number of edges in the implicit graph is also proportional to $|I|$ as each node can have at most two outgoing edges). Its space complexity is likewise linear in the size of $I$.
+
+Finally, notice that if we knew already that a cell in $I$ can ever have a certain value (for instance because we are told that each element of the input array is non-negative) then we could use $I$ itself to mark a cell as visited, thus lowering to space complexity to constant.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Jump game 4}
+\label{can_jump4:sec:statement}
+\begin{exercise}
+    Given an array of integers $I$, 
+    you are initially positioned at the first index of the array.
+    In one step you can jump from index $i$ to index:
+    \begin{itemize}
+        \item $i + 1$;
+        \item $i-1$;
+        \item any other index $j \neq i$ s.t. $I[i] == I[j]$
+    \end{itemize}.
+    
+           
+    \textbf{Clearly, you can not jump outside of the array at any time.}
+    
+    \begin{example}
+        \hfill \\
+        Given  $I=[100,-23,-23,404,100,23,23,23,3,404]$ the function returns \textbf{3}.
+        You can jump from index $0$ to $4$, then jump to $3$ and finally to cell at index $9$ which is the last cell of the array.
+        \label{ex:can_jump4_example1}
+    \end{example}
+
+    \begin{example}
+        \hfill \\
+        Given  $I=[7]$ the function returns \textbf{0}.
+        We are already at the last cell of the array.
+        \label{ex:can_jump4_example2}
+    \end{example}
+
+    \begin{example}
+        \hfill \\
+        Given  $I=[7,6,9,6,9,6,9,7]$ the function returns \textbf{1}.
+        You can jump directly to the last cell.
+        \label{ex:can_jump4_example3}
+    \end{example}
+
+    \begin{example}
+        \hfill \\
+        Given  $I=[6,1,9]$ the function returns \textbf{2}.
+        \label{ex:can_jump4_example4}
+    \end{example}
+
+    \begin{example}
+        \hfill \\
+        Given  $I=[11,22,7,7,7,7,7,7,7,22,13]$ the function returns \textbf{3}.
+        \label{ex:can_jump4_example5}
+    \end{example}
+\end{exercise}
+
+\section{Discussion}
+\label{can_jump4:sec:statement}
+This variation of the problem differs from the others because now the content of a cell in $I$ does not tell us how far we can jump. From a given cell $i$ we can jump now to any other cell in $I$, irrespective of the jump we have to take to reach it, provided that the landing and start cells have the very same value.
+
+The goal is to tell how many jumps at minimum we need to make to reach the end of the array.
+
+At first, this problem looks quite different than the one discussed in Section \ref{can_jump1:sec:statement} (the other of this series where we needed to return the minimum number of steps to reach the last cell). But is it really that different? The answer to this question is: not really. The idea of visiting the array in a per-level fashion is still valid.
+
+The idea behind the solution presented here is that we will perform a normal BFS visit on a graph having as nodes the cells of $I$ and an edge between each cell at index $i$ and both $i-1$ and $i+1$. In addition to these edges we have also edges going from $i$ to any other cell $j$ in the array where $i \neq i$ and $I[i] = I[j]$.
+
+Whenever we visit a node with a certain value $x$ we know we will also have to visit all the indices with the same value and it is, therefore, useful to store the indices of those cells sharing the value in a map having as key the a value and as value a list of indices.
+
+Using this map we can perform a BFS by starting from the index $0$. Whenever we are visiting a node $i$ we need to make sure we will visit its immediate neighbors and also all the other indices of the array that have value $I[i]$. 
+
+An implementation of this approach is shown in Listing \ref{list:can_jumps4_1}.
+
+\lstinputlisting[language=c++, caption={Graph based solution.},label=list:can_jumps4_1]{sources/can_jump/can_jump4_solution1.cpp}
+
+
+The code works by first calling the function \inline{build_equal_map} that is responsible for constructing the map mentioned above where indices of those cells sharing the same value are grouped together.
+
+The rest of the code performs an iterative BFS visit from cell $0$ and the interesting bit of code is possible when at line $35$ we check whether we have already processed the value of the currently visited cell (\inline{I[curr]}) and if not, we are going to insert in the visit queue all the indices at which we can find such value (in the loop at line $37$).
+The rest of the loop code takes care of inserting the immediate neighbors of cell \inline{curr}: after all those two cells are also neighbors of \inline{curr}.
+
+The time and space complexities of Listing \ref{list:can_jumps4_1} are $O(|I|)$ as we never visit the same node twice and int the \inline{EqualIndicesMap} will never find the same indices in vectors belonging to two keys.
+
 
