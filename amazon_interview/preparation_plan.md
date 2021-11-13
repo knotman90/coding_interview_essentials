@@ -48,7 +48,7 @@
 	xz, xz, x
 	xzx, z, x
     ```
--
+- https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/ (done) make chapter with this
 
 
 ## Leadership principles
