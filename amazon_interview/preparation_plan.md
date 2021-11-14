@@ -8,7 +8,7 @@
 - https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/ (done) transform the tree in a graph and do bfs
 - https://leetcode.com/problems/lru-cache/ (done) use an hashmap to keep the key,value and a list and another hashmap  with value iterators to the list and key the same as the first hashmap. Whenever you use a value get the iterator from the second hashmap and use it to move it to the front of the list. this way you always know which element is at the back and is the least used
 - https://leetcode.com/discuss/interview-question/411357/
-- https://leetcode.com/problems/rotting-oranges/
+- https://leetcode.com/problems/rotting-oranges/ (done) a few attempts due to small bugs
 - https://leetcode.com/problems/walls-and-gates/
 - https://leetcode.com/discuss/interview-question/875845/amazon-sde-ii
 - https://leetcode.com/discuss/interview-question/846585/amazon-online-assessment-question-1
@@ -16,12 +16,15 @@
 - https://leetcode.com/problems/lru-cache/ (done)
 - https://leetcode.com/problems/longest-consecutive-sequence/ (done)
 - https://leetcode.com/discuss/interview-question/369272/Amazon-or-Onsite-or-Linux-Find-Command
-- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
-- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/ (do the others too)
+- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/ (done)
+- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/ (done)
+- - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iV/ (done)
 - https://aonecode.com/amazon-interview-questions
 - https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ (!!! important problem) (done)
-- https://leetcode.com/problems/open-the-lock/ (!!!)
-- https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!)
+- https://leetcode.com/problems/open-the-lock/ (!!!) (done, quite easy but implementation with some mistakes)
+- https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!) (done https://leetcode.com/submissions/detail/581431432/) (done)
+- [jump game IV ](https://leetcode.com/problems/jump-game-iv/submissions/)(done) 
+- https://leetcode.com/problems/jump-game-v/
 - https://leetcode.com/problems/maximum-depth-of-n-ary-tree/ (done in 8 minutes recursively/iteratively, see mini-problems)
 - https://leetcode.com/problems/assign-cookies/ (done 5 minutes)
 - https://leetcode.com/problems/lemonade-change/ (done 5 minutes)
@@ -45,7 +48,7 @@
 	xz, xz, x
 	xzx, z, x
     ```
--
+- https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/ (done) make chapter with this
 
 
 ## Leadership principles
