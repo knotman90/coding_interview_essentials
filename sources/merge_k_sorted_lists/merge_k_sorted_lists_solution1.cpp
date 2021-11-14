@@ -22,8 +22,7 @@ Node<int>* insert_sorted(Node<int>* sinkList, Node<int>* toBeInserted)
     }
 
     Node<int>* const toBeInsertedNext = toBeInserted->next;
-
-    toBeInserted->next = sinkList;
+    toBeInserted->next                = sinkList;
     if (sinkListPrec)
     {
       sinkListPrec->next = toBeInserted;
@@ -36,9 +35,8 @@ Node<int>* insert_sorted(Node<int>* sinkList, Node<int>* toBeInserted)
       ans          = toBeInserted;
       sinkListPrec = ans;
     }
-
     toBeInserted = toBeInsertedNext;
-  }
+  }  // while
 
   // attach the remaining part of toBeinserted list to the end of the sinkList
   if (toBeInserted)
