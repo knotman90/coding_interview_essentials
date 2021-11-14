@@ -81,3 +81,12 @@
     (Question \ref{cppquestion:q8} at page \pageref{cppquestion:q8}) \hfill \\
     The correct answers is:\inline{\~local1()}, \inline{\~local0()}, \inline{\~member1()}, \inline{\~member0()}, \inline{\~base1()} and at last \inline{\~base0()}. \\
 \end{cppanswer}
+
+
+\begin{cppanswer}
+    \label{cppquestion:s9}
+    (Question \ref{cppquestion:q9} at page \pageref{cppquestion:q9}) \hfill \\
+    Correct answers are: \textbf{C},\textbf{D}. \\
+    In particular option \textbf{B} is wrong because \inline{reserve} only allocate spaces for 100 elements but it does not create any of them.
+    \inline{resize} on the other hand actually increases the size of the array and causes the contructor to be called for each of the 100 elements which, for int, mean initialization to the value 0 by default.
+\end{cppanswer}

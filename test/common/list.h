@@ -17,7 +17,7 @@ struct Node
 };
 
 template <typename T>
-std::vector<T> to_vector(Node<T> *head)
+std::vector<T> to_vector(const Node<T> *head)
 {
   std::vector<T> ans;
   for (; head; head = head->next)
@@ -54,6 +54,20 @@ int length(Node<T> *head)
   }
   return ans;
 }
+
+template <typename T>
+bool equal(const Node<T> *head1, const Node<T> *head2)
+{
+  while(head1 && head2)
+  {
+    if(head1->val != head2->val)
+      return false;
+    head1 = head1->next;
+    head2 = head2->next;
+  }
+  return !head1 && !head2;
+}
+
 }  // namespace List
 }  // namespace Test
 
