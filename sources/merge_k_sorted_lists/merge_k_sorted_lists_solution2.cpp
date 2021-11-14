@@ -12,6 +12,7 @@ Node<int>* merge_k_sorted_list_priority_queue(std::vector<Node<int>*> lists)
   if (lists.size() <= 1)
     return lists.front();
 
+
   auto compareNodeWrapper = [](const NodeWrapper<int>& node1,
                                const NodeWrapper<int>& node2) {
     assert(node1.ptr && node2.ptr);
@@ -31,27 +32,27 @@ Node<int>* merge_k_sorted_list_priority_queue(std::vector<Node<int>*> lists)
       queue.push(NodeWrapper<int>{lists[i], i});
   }
 
-  Node<int>* ans_current = nullptr;
-  Node<int>* ans_head    = nullptr;
+  Node<int>* sinkList_current = nullptr;
+  Node<int>* sinkList_head    = nullptr;
   while (!queue.empty())
   {
     auto [ptr, idx] = queue.top();
     queue.pop();
 
-    if (ans_current)
+    if (sinkList_current)
     {
-      ans_current->next = ptr;
+      sinkList_current->next = ptr;
     }
     else
     {
-      ans_head = ptr;
+      sinkList_head = ptr;
     }
-    ans_current = ptr;
+    sinkList_current = ptr;
     if (lists_pointers[idx]->next)
     {
       lists_pointers[idx] = lists_pointers[idx]->next;
       queue.push(NodeWrapper<int>{lists_pointers[idx], idx});
     }
   }
-  return ans_head;
+  return sinkList_head;
 }

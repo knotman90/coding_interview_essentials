@@ -53,11 +53,11 @@ Node<int>* merge_k_sorted_list_brute_force(std::vector<Node<int>*> lists)
   if (lists.size() <= 1)
     return lists.front();
 
-  Node<int>* ans = lists.front();
+  Node<int>* sinkList = lists.front();
   for (size_t i = 1; i < lists.size(); i++)
   {
-    ans = insert_sorted(ans, lists[i]);  // insert list nodes into ans
+    sinkList = insert_sorted(sinkList, lists[i]);  // insert list nodes into sinkList
   }
 
-  return ans;
+  return sinkList;
 }
