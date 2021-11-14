@@ -16,12 +16,13 @@
 - https://leetcode.com/problems/lru-cache/ (done)
 - https://leetcode.com/problems/longest-consecutive-sequence/ (done)
 - https://leetcode.com/discuss/interview-question/369272/Amazon-or-Onsite-or-Linux-Find-Command
-- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
-- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/ (do the others too)
+- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/ (done)
+- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/ (done)
+- - https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iV/ (done)
 - https://aonecode.com/amazon-interview-questions
 - https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/ (!!! important problem) (done)
-- https://leetcode.com/problems/open-the-lock/ (!!!)
-- https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!) (done https://leetcode.com/submissions/detail/581431432/)
+- https://leetcode.com/problems/open-the-lock/ (!!!) (done, quite easy but implementation with some mistakes)
+- https://leetcode.com/problems/jump-game-iii/ (!!!) (do the others!) (done https://leetcode.com/submissions/detail/581431432/) (done)
 - [jump game IV ](https://leetcode.com/problems/jump-game-iv/submissions/)(done) 
 - https://leetcode.com/problems/jump-game-v/
 - https://leetcode.com/problems/maximum-depth-of-n-ary-tree/ (done in 8 minutes recursively/iteratively, see mini-problems)
