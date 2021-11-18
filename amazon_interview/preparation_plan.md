@@ -1,5 +1,7 @@
 # Preparation plan
 
+# distributed system
+
 ## Problem Solving / Algorithm
 - Leetcode problems list
 - partition labels https://leetcode.com/problems/partition-labels/
@@ -33,7 +35,7 @@
 - https://leetcode.com/problems/delete-columns-to-make-sorted/ 
 - https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/ (sort in ascending order + get as many from the front you need)
 - https://leetcode.com/problems/find-median-from-data-stream/
-- https://leetcode.com/problems/decode-ways-ii/
+- https://leetcode.com/problems/decode-ways-ii/ (done recursion + memoization)
 - https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
 - https://leetcode.com/problems/reduce-array-size-to-the-half/
 - https://leetcode.com/problems/word-ladder/
