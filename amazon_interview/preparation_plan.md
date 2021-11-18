@@ -1,5 +1,13 @@
 # Preparation plan
 
+# distributed system
+- http://web.mit.edu/6.033/www/papers/Nothing_Wrong.pdf
+  - As you read, think about the following:
+    What was the Cobalt-60?
+    How did it fail? Why did it fail?
+    What fault(s) contributed to the failure of the Multidata machine?
+    Are there quality-control procedures might have made a difference?
+
 ## Problem Solving / Algorithm
 - Leetcode problems list
 - partition labels https://leetcode.com/problems/partition-labels/
@@ -33,9 +41,9 @@
 - https://leetcode.com/problems/delete-columns-to-make-sorted/ 
 - https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/ (sort in ascending order + get as many from the front you need)
 - https://leetcode.com/problems/find-median-from-data-stream/
-- https://leetcode.com/problems/decode-ways-ii/
+- https://leetcode.com/problems/decode-ways-ii/ (done recursion + memoization)
 - https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
-- https://leetcode.com/problems/reduce-array-size-to-the-half/
+- https://leetcode.com/problems/reduce-array-size-to-the-half/ (done)
 - https://leetcode.com/problems/word-ladder/
 - https://leetcode.com/problems/text-justification/
 - Generate a maze
