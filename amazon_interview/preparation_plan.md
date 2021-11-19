@@ -44,7 +44,7 @@
 - https://leetcode.com/problems/decode-ways-ii/ (done recursion + memoization)
 - https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
 - https://leetcode.com/problems/reduce-array-size-to-the-half/ (done)
-- https://leetcode.com/problems/word-ladder/
+- https://leetcode.com/problems/word-ladder/ (20 minutes worked at first try with DFS)
 - https://leetcode.com/problems/text-justification/
 - Generate a maze
 - https://leetcode.com/discuss/interview-question/949185/uber-codesignal-oa
