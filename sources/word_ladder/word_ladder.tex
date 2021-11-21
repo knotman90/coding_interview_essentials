@@ -24,8 +24,8 @@
     \end{center}
   \end{wrapfigure}
 String is a popular topic in coding interivew and there are literally conuntless examplex of real-world interviews where strings are involved in some ways or another.
-This manuscript contains several string questions in chapters: \ref{ch:string_to_int} (page \pageref{ch:string_to_int}), \ref{ch:string_reverse} (page \pageref{ch:string_reverse}) and \ref{ch:two_string_anagram} (page \pageref{ch:two_string_anagram})).
-Among this pletora of questions, \textit{word ladder} is definitely among the most known and feared (at the time of writing it has one of the lowest acceptance rates on \href{https://leetcode.com/problems/word-ladder/}{leetcode.com}), as is considered a quite challenging and hard problem to solve during live coding interview. 
+This manuscript already contains several string questions in chapters: \ref{ch:string_to_int} (page \pageref{ch:string_to_int}), \ref{ch:string_reverse} (page \pageref{ch:string_reverse}) and \ref{ch:two_string_anagram} (page \pageref{ch:two_string_anagram})).
+Among this plethora of questions, \textit{word ladder} is definitely one of the most known and feared (at the time of writing it has one of the lowest acceptance rates on \href{https://leetcode.com/problems/word-ladder/}{leetcode.com}), as is considered a quite challenging and hard problem to solve during live coding interview. 
 We feel however that its bad reputation is unjustified because, as we will see below, it can be approached by using known algorithmic tools and concepts when framed as a graph connectivity problem.
 
 
@@ -84,13 +84,23 @@ If no transfromation exists the function should return $0$.
 
 \subsection{BFS}
 \label{word_ladder:sec:bruteforce}
+
+
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{sources/word_ladder/images/example1}
-	\caption[n]{Graph representation of Example \ref{example:word_ladder:example1}.}
-	\label{fig:word_ladder:example1}
+	\begin{subfigure}[]{0.95\textwidth}
+		\includegraphics[width=\textwidth]{sources/word_ladder/images/example1}
+		\caption[n]{Graph representation of Example \ref{example:word_ladder:example1}.}
+		\label{fig:word_ladder:example1}
+	 \end{subfigure}
+	\hfill
+	\begin{subfigure}[]{1.17\textwidth}
+		\includegraphics[width=\textwidth]{sources/word_ladder/images/example2}
+		\caption[n]{Graph representation of Example \ref{example:word_ladder:example1} when $e=$\textit{box}. Notice how node \textit{box} is disconnected from the component containing \textit{hit}.}
+		\label{fig:word_ladder:example1}
+	\end{subfigure}
 \end{figure}
-
+    
 
 
 \begin{minipage}{\linewidth}
