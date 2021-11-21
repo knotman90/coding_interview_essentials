@@ -8,10 +8,10 @@
 
 
 %\begin{figure}
-%	\centering
-%	\includegraphics[width=\textwidth]{sources/word_ladder/images/example1}
-%	\caption[Sample short cpation]{Sample Caption}.
-%	\label{fig:word_ladder:example1}
+%   \centering
+%   \includegraphics[width=\textwidth]{sources/word_ladder/images/example1}
+%   \caption[Sample short cpation]{Sample Caption}.
+%   \label{fig:word_ladder:example1}
 %\end{figure}
 
 \chapter{Word Ladder}
@@ -23,9 +23,9 @@
         \includegraphics[scale=0.5]{sources/word_ladder/images/top-word-ladder}
     \end{center}
   \end{wrapfigure}
-String is a popular topic in coding interivew and there are literally conuntless examplex of real-world interviews where strings are involved in some ways or another.
+String is a popular topic in coding interviews and there are literally countless examples of real-world interviews where strings are involved in some way or another.
 This manuscript already contains several string questions in chapters: \ref{ch:string_to_int} (page \pageref{ch:string_to_int}), \ref{ch:string_reverse} (page \pageref{ch:string_reverse}) and \ref{ch:two_string_anagram} (page \pageref{ch:two_string_anagram})).
-Among this plethora of questions, \textit{word ladder} is definitely one of the most known and feared (at the time of writing it has one of the lowest acceptance rates on \href{https://leetcode.com/problems/word-ladder/}{leetcode.com}), as is considered a quite challenging and hard problem to solve during live coding interview. 
+Among this plethora of questions, \textit{word ladder} is definitely one of the most known and feared (at the time of writing it has one of the lowest acceptance rates on \href{https://leetcode.com/problems/word-ladder/}{leetcode.com}), as is considered a quite challenging and hard problem to solve during a live coding interview. 
 We feel however that its bad reputation is unjustified because, as we will see below, it can be approached by using known algorithmic tools and concepts when framed as a graph connectivity problem.
 
 
@@ -35,73 +35,102 @@ We feel however that its bad reputation is unjustified because, as we will see b
 We are given two strings $s$ and $e$ and a list of strings $W=\{w_0, w_1,\ldots,w_{n-1}\}$ of size $n$.
 Let a sequence $S=s_0 = s \rightarrow s_1 \rightarrow s_2 \rightarrow \ldots \rightarrow s_n = e$ be defined as a \textit{transformation} if and only if 
 \begin{itemize}
-	\item $s_i$ differs from from its adjecent neighboring strings in the sequence, $s_{i-1}$ and $s_{i+1}$, in exactly one character;
-	\item each elements of the sequence, from second to last, is also in $W$ i.e. $s_i \in W \: \: 1 \leq n-1 $
+    \item $s_i$ differs from from its adjecent neighboring strings in the sequence, $s_{i-1}$ and $s_{i+1}$, in exactly one character;
+    \item each elements of the sequence, from second to last, is also in $W$ i.e. $s_i \in W \: \: 1 \leq n-1 $
 \end{itemize}
 Write a function that given $s,e$ and $W$ return the length of the smallest valid transformation.
-If no transfromation exists the function should return $0$.
+If no transformation exists the function should return $0$.
 
-	%example1
-	\begin{example}
-		\label{example:word_ladder:example1}
-		\hfill \\
-		Given $s=$\textit{hit},  $e=$\textit{cog} and $W=\{$\textit{hot},\textit{dot},\textit{dog},\textit{lot},\textit{log},\textit{cog}$\}$, the function returns $5$.
-		A possible valid transformation  of minimal length is: \textit{hit} $\rightarrow$ \textit{hot} $\rightarrow$ \textit{dot} $\rightarrow$ \textit{dog} $\rightarrow$ \textit{cog}.
+    %example1
+    \begin{example}
+        \label{example:word_ladder:example1}
+        \hfill \\
+        Given $s=$\textit{hit},  $e=$\textit{cog} and $W=\{$\textit{hot},\textit{dot},\textit{dog},\textit{lot},\textit{log},\textit{cog}$\}$, the function returns $5$.
+        A possible valid transformation  of minimal length is: \textit{hit} $\rightarrow$ \textit{hot} $\rightarrow$ \textit{dot} $\rightarrow$ \textit{dog} $\rightarrow$ \textit{cog}.
 
-		Notice that if for instance $e=$\textit{fog}, the the function would return $0$ as \textit{fog} $\notin W$.
-	\end{example}
+        Notice that if for instance $e=$\textit{fog}, the the function would return $0$ as \textit{fog} $\notin W$.
+    \end{example}
 
 \end{exercise}
 
 \section{Clarification Questions}
 
 \begin{QandA}
-	\item What is the maximum length of each word in $W$?
-	\begin{answered}
-		\textit{Up to $10$ characters.}
-	\end{answered}
-	
-	\item Is it guaranteed for all input strings ($s$ and $e$ included) to be of the same length?
-	\begin{answered}
-		\textit{Yes}
-	\end{answered}
+    \item What is the maximum length of each word in $W$?
+    \begin{answered}
+        \textit{Up to $10$ characters.}
+    \end{answered}
+    
+    \item Is it guaranteed for all input strings ($s$ and $e$ included) to be of the same length?
+    \begin{answered}
+        \textit{Yes}
+    \end{answered}
 
-	\item Are there duplicates in $W$?
-	\begin{answered}
-		\textit{No, you might assume $W$ to only contains unique words.}
-	\end{answered}
+    \item Are there duplicates in $W$?
+    \begin{answered}
+        \textit{No, you might assume $W$ to only contains unique words.}
+    \end{answered}
 
-	\item How many words are in $W$ at most?
-	\begin{answered}
-		\textit{Up to $2\times 10^4$.}
-	\end{answered}
+    \item How many words are in $W$ at most?
+    \begin{answered}
+        \textit{Up to $2\times 10^4$.}
+    \end{answered}
 
 \end{QandA}
 
 \section{Discussion}
 \label{word_ladder:sec:discussion}
+Let's start by noticing that if $e \notin W$ then we can immediately return zero, as the problem requires this condition to be met (see Figure \ref{fig:word_ladder:example1_impossible}).
 
 
 \subsection{BFS}
 \label{word_ladder:sec:bruteforce}
+The key to solving this problem effectively in a coding interview setting is to reframe it as a graph problem. 
+The statement already mentions the concept of a sequence which should naturally lead us into thinking about graph paths of minimal length.
+But how can we construct a graph out of a problem instance?
+Let's imagine a graph $G=(V,E)$ where:
+\begin{itemize}
+    \item all the nodes in $V$ have a one-to-one mapping to the input strings in $W$;
+    \item there is an edge between two nodes $w_i$ and $w_j$ when they differ by one character.
+\end{itemize}
+An example of such a graph depicting Example \ref{example:word_ladder:example1} is given in Figure \ref{example:word_ladder:example1}; we can clearly see how words in $W$ form a graph.
+Once we know we can easily construct a graph out of the problem instance, we have solved the problem as now we can apply a \textbf{BFS} visit to $G$ starting from node $s$ and return the length of the shortest path to $e$.
+Nothing fancier than a simple visit is required to solve this problem.
 
+But is this approach going to be efficient enough? The visit is going to run in $O(|V|+|E|)$ time and $O(|V|)$ space but on top of that, we need to add the time and space required to build $G$ itself. 
+Thankfully, we know right away that the answer is yes because a node will never have more than $10\times 26$ neighbors as:
+\begin{itemize}
+    \item the maximum length of a string in $W$ is $10$;
+    \item each letter can only take values from the set of the lower-case English letters
+\end{itemize}.
+Therefore, the graph will never have more than $|E|=O(260|V|)=O(|V|)=O(|W|)$ edges.
 
-\begin{figure}
-	\centering
-	\begin{subfigure}[]{0.95\textwidth}
-		\includegraphics[width=\textwidth]{sources/word_ladder/images/example1}
-		\caption[n]{Graph representation of Example \ref{example:word_ladder:example1}.}
-		\label{fig:word_ladder:example1}
-	 \end{subfigure}
-	\hfill
-	\begin{subfigure}[]{1.17\textwidth}
-		\includegraphics[width=\textwidth]{sources/word_ladder/images/example2}
-		\caption[n]{Graph representation of Example \ref{example:word_ladder:example1} when $e=$\textit{box}. Notice how node \textit{box} is disconnected from the component containing \textit{hit}.}
-		\label{fig:word_ladder:example1}
-	\end{subfigure}
-\end{figure}
+An implementation of this idea is shown in Listing \ref{list:word_ladder_bfs}
+
+    \begin{figure}[]
+        \centering
+        \includegraphics[width=\textwidth]{sources/word_ladder/images/example1}
+        \caption[n]{Graph representation of Example \ref{example:word_ladder:example1}.}
+        \label{fig:word_ladder:example1}
+    \end{figure}
+    \begin{figure}[]
+        \centering
+        \includegraphics[width=\textwidth]{sources/word_ladder/images/example2}
+        \caption[n]{Graph representation of Example \ref{example:word_ladder:example1} when $e=$\textit{box}. Notice how node \textit{box} is disconnected from the component containing \textit{hit}.}
+        \label{fig:word_ladder:example1_impossible}
+    \end{figure}
     
 
+\lstinputlisting[language=c++, caption={Solution using BFS. Nodes different in exactly one character are connected.},label=list:word_ladder_bfs]{sources/word_ladder/word_ladder_solution1.cpp}
 
-\lstinputlisting[language=c++, caption={Solution using BFS. Nodes different in exactly one character are connected.},label=list:word_ladder]{sources/word_ladder/word_ladder_solution1.cpp}
+The code works by not explicitly constructing $G$ and instead it operates on an implicit graph and only keeps track of the visited nodes. 
+\inline{word_ladder_BFS} is the main driver function and all it does is:
+\begin{itemize}
+    \item copies the element of $W$ into a \inline{std::unordered_set} so that we can quickly check whether a string belongs to $W$ without having to perform a linear search.
+    \item construct a queue of \inline{std::pair<std:string, int>} as for each node we visit we want to remember its level (distance from $s$).
+\end{itemize}.
 
+\inline{addNeighbors} takes care of updating the visit queue by generating all possible neighbors of a word $w$ having level \inline{count}. 
+It does so by creating a copy of $w$ and changing each of its position with each of the possible alternatives. If such a modified copy happens to be in $W$ then it is added to the queue with an incremented \inline{count}.
+
+The complexity of Listing \ref{list:word_ladder_bfs} is $O(|W|)$ for both time and space.
