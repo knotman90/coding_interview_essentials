@@ -58,7 +58,8 @@
     ```
 - https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/ (done) make chapter with this
 
-
+- https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/ (important!)
+- https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/ (could not solve this one!)
 ## Leadership principles
 
 ## Low-level design
