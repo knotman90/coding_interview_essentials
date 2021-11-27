@@ -1,26 +1,81 @@
 using Matrix = std::vector<std::vector<int>>;
-int kth_smallest_in_sorted_matrix_nlogn(const Matrix& M, const size_t k){
-    const int sizei = M.size();
-    const int sizej = M[0].size();
-    int l = M[0][0]; //smallest element
-    int r = M[sizei-1][sizej-1]; //largest
-    while(l < r){
-        const int mid = l + (r-l)/2;
-        int j = sizej-1;
-        int count_less_mid = 0;
-        for(int i = 0 ; i < sizei ; i++){
-            while(j >=0 && M[i][j] > mid){
-                j--;
-            }
-            count_less_mid += j+1;
-        }
-        if(count_less_mid < k){
-            l = mid +1;
-        }
-        else{
-            r = mid;
-        }
 
+bool advanceRight(std::pair<size_t, size_t>& rightPtr,
+                  const std::pair<size_t, size_t>& downPtr,
+                  const size_t n,
+                  const size_t m)
+{
+  rightPtr.second++;
+  if (rightPtr.second >= m)
+  {
+    rightPtr.second = downPtr.second + 1;
+    rightPtr.first++;
+  }
+  return rightPtr.first < n && rightPtr.second < m;
+}
+
+bool advanceDown(std::pair<size_t, size_t>& downPtr,
+                 const std::pair<size_t, size_t>& rightPtr,
+                 const size_t n,
+                 const size_t m)
+{
+  downPtr.first++;
+  if (downPtr.first >= n)
+  {
+    downPtr.first = rightPtr.first + 1;
+    downPtr.second++;
+  }
+  return downPtr.second < m && downPtr.first < n;
+}
+
+int kth_smallest_in_sorted_matrix_brute_force_constant_space(const Matrix& M,
+                                                             const size_t k)
+{
+  const size_t n                     = M.size();
+  const size_t m                     = M[0].size();
+  size_t steps                       = 0;
+  std::pair<size_t, size_t> rightPtr = {0, 1};
+  std::pair<size_t, size_t> downPtr  = {0, 0};
+  bool stopDown = false, stopRight = false;
+  while (!stopRight && !stopDown)
+  {
+    const auto valDown  = M[downPtr.first][downPtr.second];
+    const auto valRight = M[rightPtr.first][rightPtr.second];
+    if (steps == (k - 1))
+    {
+      return std::min(valDown, valRight);
     }
-    return l;
+    if (valDown <= valRight)
+    {
+      stopDown = !advanceDown(downPtr, rightPtr, n, m);
+    }
+    else
+    {
+      stopRight = !advanceRight(rightPtr, downPtr, n, m);
+    }
+    steps++;
+  }
+
+  while (!stopRight)
+  {
+    if (steps == (k - 1))
+    {
+      return M[rightPtr.first][rightPtr.second];
+    }
+    stopRight = !advanceRight(rightPtr, downPtr, n, m);
+    steps++;
+  }
+
+  while (!stopDown)
+  {
+    if (steps == (k - 1))
+    {
+      return M[downPtr.first][downPtr.second];
+    }
+    stopDown = !advanceDown(downPtr, rightPtr, n, m);
+    steps++;
+  }
+
+  throw std::invalid_argument(std::string("Invalid Input for k = ")
+                              + std::to_string(k));
 }
