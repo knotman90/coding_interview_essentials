@@ -45,7 +45,6 @@ TEST(capitalize_words_first_letter, test_one_word_space_front_back)
     EXPECT_NO_THROW(capitalize_words_first_letter_simple(ans));
     EXPECT_EQ(expected, ans);
   }
-  
 }
 
 TEST(capitalize_words_first_letter, test_one_word_space_front)

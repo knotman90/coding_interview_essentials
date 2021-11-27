@@ -10,11 +10,11 @@ int buy_sell_stock4_DP_unoptimized(const int K, const std::vector<int>& P)
     for (int i = 1; i < n; i++)
     {
       int best_l = 0;
-      for(int l=0 ; l < i; l++)
+      for (int l = 0; l < i; l++)
       {
-          best_l = std::max(best_l, DP[l][k-1]+P[i]-P[l]);
+        best_l = std::max(best_l, DP[l][k - 1] + P[i] - P[l]);
       }
-      DP[i][k] = std::max(DP[i-1][k], best_l);
+      DP[i][k] = std::max(DP[i - 1][k], best_l);
     }
   }
   return DP[n - 1][K];

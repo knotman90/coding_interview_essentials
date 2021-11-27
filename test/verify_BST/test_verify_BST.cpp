@@ -64,7 +64,7 @@ TEST(verify_BST, valid_BST_tree_1)
 
 TEST(verify_BST, valid_BST_tree_2)
 {
-  std::vector<int> nodes = {8,3,10,1,6,14,4,7,13};
+  std::vector<int> nodes = {8, 3, 10, 1, 6, 14, 4, 7, 13};
   TreeNode* root         = create_BST(nodes);
   EXPECT_EQ(nodes.size(), BST_size(root));
   EXPECT_TRUE(isValidBST_top_down(root));
@@ -74,7 +74,7 @@ TEST(verify_BST, valid_BST_tree_2)
 
 TEST(verify_BST, valid_BST_tree_2_nobst)
 {
-  std::vector<int> nodes = {8,3,10,1,6,14,4,7,13};
+  std::vector<int> nodes = {8, 3, 10, 1, 6, 14, 4, 7, 13};
   TreeNode* root         = create_BST(nodes);
 
   root->right->right->left->val = 7;
@@ -84,10 +84,9 @@ TEST(verify_BST, valid_BST_tree_2_nobst)
   EXPECT_FALSE(isValidBST_min_max_memoized(root));
 }
 
-
 TEST(verify_BST, valid_BST_tree_3)
 {
-  std::vector<int> nodes = {8,3,10,1,6,14,7};
+  std::vector<int> nodes = {8, 3, 10, 1, 6, 14, 7};
   TreeNode* root         = create_BST(nodes);
   EXPECT_EQ(nodes.size(), BST_size(root));
   EXPECT_TRUE(isValidBST_top_down(root));
@@ -97,7 +96,7 @@ TEST(verify_BST, valid_BST_tree_3)
 
 TEST(verify_BST, valid_BST_tree_3_nobst)
 {
-  std::vector<int> nodes = {8,3,10,1,6,14,7};
+  std::vector<int> nodes = {8, 3, 10, 1, 6, 14, 7};
   TreeNode* root         = create_BST(nodes);
   root->left->right->val = 8;
   EXPECT_EQ(nodes.size(), BST_size(root));
@@ -105,9 +104,6 @@ TEST(verify_BST, valid_BST_tree_3_nobst)
   EXPECT_FALSE(isValidBST_min_max(root));
   EXPECT_FALSE(isValidBST_min_max_memoized(root));
 }
-
-
-
 
 TEST(verify_BST, empty_tree)
 {
@@ -149,7 +145,6 @@ TEST(verify_BST, invalid_BST_tree_1)
   EXPECT_FALSE(isValidBST_top_down(root));
   EXPECT_FALSE(isValidBST_min_max(root));
   EXPECT_FALSE(isValidBST_min_max_memoized(root));
-  
 }
 
 TEST(verify_BST, invalid_BST_tree_list)

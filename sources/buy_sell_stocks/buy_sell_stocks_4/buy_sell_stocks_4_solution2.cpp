@@ -1,4 +1,5 @@
-int buy_sell_stock4_DP_time_and_space_optimized(const int K, const std::vector<int>& P)
+int buy_sell_stock4_DP_time_and_space_optimized(const int K,
+                                                const std::vector<int>& P)
 {
   const int n = P.size();
   if (K == 0 || n <= 1)
@@ -18,7 +19,7 @@ int buy_sell_stock4_DP_time_and_space_optimized(const int K, const std::vector<i
       max_kminus1_to_left_of_i =
           std::max(max_kminus1_to_left_of_i, DP[i][prec_k] - P[i]);
     }
-    swap(curr_k,prec_k);
+    swap(curr_k, prec_k);
   }
   return DP[n - 1][prec_k];
 }

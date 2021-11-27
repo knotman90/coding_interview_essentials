@@ -9,12 +9,12 @@ using std::string;
 using std::swap;
 using std::vector;
 
-#include "can_jump_solution1.cpp"
-#include "can_jump_solution1_1.cpp"
-#include "can_jump_solution2.cpp"
 #include "can_jump2_solution1.cpp"
 #include "can_jump3_solution1.cpp"
 #include "can_jump4_solution1.cpp"
+#include "can_jump_solution1.cpp"
+#include "can_jump_solution1_1.cpp"
+#include "can_jump_solution2.cpp"
 
 TEST(can_jump, impossible_1)
 {
@@ -88,56 +88,55 @@ TEST(can_jump, random06_impossible)
 /////////////////////////////////////////
 TEST(can_jump2, example1)
 {
-  const std::vector<int> N = {2,3,0,1,4};
+  const std::vector<int> N = {2, 3, 0, 1, 4};
 
-  ASSERT_EQ(2,can_jump2_levels(N));
+  ASSERT_EQ(2, can_jump2_levels(N));
 }
 
 TEST(can_jump2, chain)
 {
-  const std::vector<int> N = {1,1,1,1,1,1,1,1,1,1};
+  const std::vector<int> N = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
-  ASSERT_EQ(9,can_jump2_levels(N));
+  ASSERT_EQ(9, can_jump2_levels(N));
 }
 
 /////////////////////////////////////////
 TEST(can_jump4, example1)
 {
-  const std::vector<int> N = {100,-23,-23,404,100,23,23,23,3,404};
+  const std::vector<int> N = {100, -23, -23, 404, 100, 23, 23, 23, 3, 404};
 
-  ASSERT_EQ(3,can_jump4(N));
+  ASSERT_EQ(3, can_jump4(N));
 }
 
 TEST(can_jump4, example2)
 {
   const std::vector<int> N = {7};
 
-  ASSERT_EQ(0,can_jump4(N));
+  ASSERT_EQ(0, can_jump4(N));
 }
 
 TEST(can_jump4, example3)
 {
-  const std::vector<int> N = {11,22,7,7,7,7,7,7,7,22,13};
+  const std::vector<int> N = {11, 22, 7, 7, 7, 7, 7, 7, 7, 22, 13};
 
-  ASSERT_EQ(3,can_jump4(N));
+  ASSERT_EQ(3, can_jump4(N));
 }
 
 TEST(can_jump4, example4)
 {
-  const std::vector<int> N = {6,1,9};
+  const std::vector<int> N = {6, 1, 9};
 
-  ASSERT_EQ(2,can_jump4(N));
+  ASSERT_EQ(2, can_jump4(N));
 }
 
 TEST(can_jump4, example5)
 {
-  const std::vector<int> N = {7,6,9,6,9,6,9,7};
+  const std::vector<int> N = {7, 6, 9, 6, 9, 6, 9, 7};
 
-  ASSERT_EQ(1,can_jump4(N));
+  ASSERT_EQ(1, can_jump4(N));
 }
 
 /////////////////////////////////////////
-
 
 int main(int argc, char **argv)
 {
