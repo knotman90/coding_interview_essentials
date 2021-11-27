@@ -36,7 +36,7 @@ int kth_smallest_in_sorted_matrix_brute_force_constant_space(const Matrix& M,
   size_t steps                       = 0;
   std::pair<size_t, size_t> rightPtr = {0, 1};
   std::pair<size_t, size_t> downPtr  = {0, 0};
-  bool stopDown = false, stopRight = false;
+  bool stopDown = false, stopRight = !(rightPtr.second < m);
   while (!stopRight && !stopDown)
   {
     const auto valDown  = M[downPtr.first][downPtr.second];

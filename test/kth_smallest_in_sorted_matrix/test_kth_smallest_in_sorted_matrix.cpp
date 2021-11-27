@@ -130,6 +130,33 @@ TEST(kth_smallest_in_sorted_matrix, allEqual)
   }
 }
 
+
+TEST(kth_smallest_in_sorted_matrix, oneColumn)
+{
+  Matrix input = {{0}, {1 }, {2}, {3 }, {4 }, {5 }, {6 }};
+  for (int i = 1; i <= 6; i++)
+  {
+    EXPECT_EQ(
+        i-1, kth_smallest_in_sorted_matrix_brute_force_constant_space(input, i));
+    EXPECT_EQ(i-1, kth_smallest_in_sorted_matrix_naive(input, i));
+    EXPECT_EQ(i-1, kth_smallest_in_sorted_matrix_nlogn(input, i));
+  }
+}
+
+
+TEST(kth_smallest_in_sorted_matrix, oneRow)
+{
+  Matrix input = {{0,1,2,3,4,5,6}};
+  for (int i = 1; i <= 6; i++)
+  {
+    EXPECT_EQ(
+        i-1, kth_smallest_in_sorted_matrix_brute_force_constant_space(input, i));
+    EXPECT_EQ(i-1, kth_smallest_in_sorted_matrix_naive(input, i));
+    EXPECT_EQ(i-1, kth_smallest_in_sorted_matrix_nlogn(input, i));
+  }
+}
+
+
 int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
