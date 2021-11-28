@@ -276,21 +276,48 @@ Listing \ref{list:song_total_duration:lineartimespace} shows an implementation o
 
 \section{Trim text}
 \begin{exercise}
-    
+You are given a string $m$ of length $n$ and an integer $k$. $m$ is guaranteed to consists only of English alphabet letters and spaces.
+Write a function that crops $s$ so that it becomes of lenght smaller or equal than $k$. However the cropped messages cannot:
+\begin{itemize}
+    \item crop away part of a word;
+    \item have trailing spaces;
+    \item have length greater than $k$;
+\end{itemize}
+Moreover the cropped string should be as long as possible i.e. any other cropped message satisfying the contraints above should be smaller than the output of your function.
+
      
     \begin{example}
         \label{ex:trim_text:example1}
         \hfill \\
-       
+        Given the input string \underline{\texttt{Lorem ipsum dolor sit amet\textvisiblespace }} and $k=6$ the function returns \underline{\texttt{Lorem}}.
+        If $k=20$ the function returns \underline{\texttt{Lorem ipsum dolor}}.
+        
+        When if for instance $k=2$ or $k=3$ the function returns an empty string.
     \end{example}
     
-    \end{exercise}
+\end{exercise}
  
 
 \subsection{Discussion}
+This problem on strings is all about implementation and there is no algorithmic insight that we need to have to solve it efficiently. 
+However, this does not automatically make this problem an easy one as implementation-focused problems are often hard to get right. 
+However, this specific problem can be tackled quite efficiently if we notice that we can remove characters from the back of $s$ if:
+\begin{itemize}
+    \item they are spaces, regardless of whether the current size of the string (the original string size minus the characters removed so far) is less than $k$;
+    \item they are alphanumeric and the current length is strictly greater than $k$.
+\end{itemize}
+In particular, we can notice that we can safely remove trailing space from the original input as the problem statement clearly states that we cannot return a string with any of them.
+Moreover, when we remove alphanumeric characters from the back of the string we are doing it only because the current size of $s$ is still strictly larger than $k$. 
+When this happens we must remove all of these characters up until we reach a space. This is because we are forced not to crop away parts of words and we have to either keep a word o remove it entirely.
 
 Listing \ref{list:trim_text:lineartime} shows an implementation of this idea.
 
 \lstinputlisting[language=c++, caption={Linear time solution.},label=list:list:trim_text:lineartime:lineartime]{test/mini_problems/trim_text/trim_text_solution1.cpp}
 
+The function \inline{skip} is used to update the variable \inline{pos}, which is an index in \inline{s}. \inline{pos} keeps track of the portion of the input string we have not yet cropped.  
+\inline{skip} moves \inline{pos} backwards until the user-provided function \inline{fn} returns true (and we have not reached the left limit of $s$).
+\inline{skip} is used by the main driver function \inline{trim_text_lineartime} which is a function that repeatedly removes any trailing spaces and then, if the length of $s$ is still too large, proceed in removing an entire word. 
+The word is also (like for spaces) removed by the function \inline{skip} which takes care of removing any character until it reaches the first non-alphanumeric character which we are assured to be a space (there are no other characters allowed in $s$).
+
+The complexity of this approach is linear in time and constant in space (if we do not consider the space necessary for the output).
 
