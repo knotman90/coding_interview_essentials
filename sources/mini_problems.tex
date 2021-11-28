@@ -321,3 +321,47 @@ The word is also (like for spaces) removed by the function \inline{skip} which t
 
 The complexity of this approach is linear in time and constant in space (if we do not consider the space necessary for the output).
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Items and bags}
+\begin{exercise}
+A food bank is developing a system to help reduce its usage of plastic bags. The bank collects food from people that bring it in plastic bags. 
+A plastic bag has a certain capacity $c$, which indicates the amount of food we can fit in it. In particular, a bag with a capacity $c$ can carry up to $c$ unit of goods.
+The goal of the system is to rearrange the food in the warehouse into as few bags as possible to help reduce the waste footprint.
+
+You are given two arrays $F$ and $B$ each consisting of $N$ integers where $F[i]$ is the amount of food currently present in the bag $i$ that has capacity specified in $F[i]$.
+Write a function that returns the minimum number of bags needed to carry all food.
+
+Notice that you are guaranteed $B[i] \geq F[i]$ to always hold.
+    \begin{example}
+        \label{ex:items_and_bags:example1}
+        \hfill \\
+        Given $F=\{1,4,1\}$ and $B=\{,1,5,1\}$ the funcion returns $2$. We could move $1$ unit of food from bag $0$ and put it in the bag $1$ (that currently holds $4$ units of food but has capacity $5$).
+    \end{example}
+    
+    \begin{example}
+        \label{ex:items_and_bags:example2}
+        \hfill \\
+        Given $F=\{2,3,4,2\}$ and $B=\{2,5,7,2\}$ the funcion returns $2$. All food in the bag $0$ can be moved to bag $1$ and all the food in bag $3$ can go in bag $2$.
+    \end{example}
+\end{exercise}
+ 
+
+\subsection{Discussion}
+This problem can be quickly solved with a greedy approach if we realize that we have a total amount of food units equal to $T=\sum F[i]$ that needs to fit into a subset of the $N$ bags we have at our disposal. 
+The optimal arrangement is to fill the bags to their maximum capacity to avoid waste of space and to minimize the number of bags used we better use larger bags firsts as we can stuff more food units in them. 
+Therefore, all we have to do to solve this problem is to sort the bags by capacity in descending order (larger bags first) and to simulate the process of filling them up until all the units of food are stored.
+
+W.r.t to example \ref{ex:items_and_bags:example2}: we have $T=11$ units of food. If we put the first $7$ into the bag $2$ we are left with $T=11-7$ units of food not yet inside a bag. The next biggest bag is the one at index $1$ with a capacity of $5$. This bag can store all the $T$ units of food left. At this point, we can stop the simulation and return $2$.
+
+Listing \ref{list:items_and_bags:solution1} shows an implementation of this idea.
+
+\lstinputlisting[language=c++, caption={Solution based on sorting.},label=list:items_and_bags:solution1]{test/mini_problems/items_and_bags/items_and_bags_solution1.cpp}
+
+The code works by first sorting $B$ in descending order and calculating the total amount of units of food we must store. Notice that we use \inline{std::accumulate} to perform this task instead of an explicit raw loop as it is more idiomatic and expressive.
+The while loop takes care of performing the simulation, and each iteration tries to fill as much food as possible into a bag. The simulation stops when all food is safely inside a bag. 
+Notice that we access \inline{B} using the variable \inline{Bidx} without checking that \inline{Bidx < B.size()} as the problem statement clearly states that there is always enough space among all bags to store all food. Therefore the while loop is guaranteed to put all food inside a bag before we ran out of bags.
+
+The complexity of this approach is $O(Nlog(N))$ due to sorting while the space complexity is $O(1)$.
+
