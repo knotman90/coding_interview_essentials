@@ -1,1 +1,2 @@
 ADD_SUBDIRECTORY(gcd)
+ADD_SUBDIRECTORY(trim_text)

@@ -57,7 +57,7 @@
 	xzx, z, x
     ```
 - https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/ (done) make chapter with this
-
+- https://leetcode.com/problems/minimum-window-substring/ (important!) also do an easier version where the array does not contain duplicate chars https://www.youtube.com/watch?v=5xuvqBjRkok&ab_channel=KeepOnCoding   L
 
 ## Leadership principles
 

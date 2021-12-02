@@ -15,19 +15,18 @@ using std::vector;
 #include "coin_change_solution4.cpp"
 #include "coin_change_solution5.cpp"
 
-
 TEST(coinChangeMinCoins, test_only_one)
 {
   const std::vector<int> coins = {1};
-  for(int i = 0 ; i < 100 ; i++){
-    const long long amount       = i;
-    const long long expected     = i;
+  for (int i = 0; i < 100; i++)
+  {
+    const long long amount   = i;
+    const long long expected = i;
     ASSERT_EQ(expected, change_ways_bruteforce(coins, amount));
     ASSERT_EQ(expected, change_ways_DP_topdown(coins, amount));
     ASSERT_EQ(expected, change_min_ways_bottom_up(amount, coins));
   }
 }
-
 
 TEST(coinChangeMinCoins, test0)
 {

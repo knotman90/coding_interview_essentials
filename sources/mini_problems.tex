@@ -272,3 +272,128 @@ Listing \ref{list:song_total_duration:lineartimespace} shows an implementation o
 \lstinputlisting[language=c++, caption={Solution based on the two number sum problem.},label=list:song_total_duration:lineartimespace]{test/mini_problems/song_total_duration/song_total_duration_linear_time_space.cpp}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Trim text}
+\begin{exercise}
+You are given a string $m$ of length $n$ and an integer $k$. $m$ is guaranteed to consists only of English alphabet letters and spaces.
+Write a function that crops $s$ so that it becomes of lenght smaller or equal than $k$. However the cropped messages cannot:
+\begin{itemize}
+    \item crop away part of a word;
+    \item have trailing spaces;
+    \item have length greater than $k$;
+\end{itemize}
+Moreover the cropped string should be as long as possible i.e. any other cropped message satisfying the contraints above should be smaller than the output of your function.
+
+     
+    \begin{example}
+        \label{ex:trim_text:example1}
+        \hfill \\
+        Given the input string \underline{\texttt{Lorem ipsum dolor sit amet\textvisiblespace }} and $k=6$ the function returns \underline{\texttt{Lorem}}.
+        If $k=20$ the function returns \underline{\texttt{Lorem ipsum dolor}}.
+        
+        When if for instance $k=2$ or $k=3$ the function returns an empty string.
+    \end{example}
+    
+\end{exercise}
+ 
+
+\subsection{Discussion}
+This problem on strings is all about implementation and there is no algorithmic insight that we need to have to solve it efficiently. 
+However, this does not automatically make this problem an easy one as implementation-focused problems are often hard to get right. 
+However, this specific problem can be tackled quite efficiently if we notice that we can remove characters from the back of $s$ if:
+\begin{itemize}
+    \item they are spaces, regardless of whether the current size of the string (the original string size minus the characters removed so far) is less than $k$;
+    \item they are alphanumeric and the current length is strictly greater than $k$.
+\end{itemize}
+In particular, we can notice that we can safely remove trailing space from the original input as the problem statement clearly states that we cannot return a string with any of them.
+Moreover, when we remove alphanumeric characters from the back of the string we are doing it only because the current size of $s$ is still strictly larger than $k$. 
+When this happens we must remove all of these characters up until we reach a space. This is because we are forced not to crop away parts of words and we have to either keep a word o remove it entirely.
+
+Listing \ref{list:trim_text:lineartime} shows an implementation of this idea.
+
+\lstinputlisting[language=c++, caption={Linear time solution.},label=list:trim_text:lineartime]{test/mini_problems/trim_text/trim_text_solution1.cpp}
+
+The function \inline{skip} is used to update the variable \inline{pos}, which is an index in \inline{s}. \inline{pos} keeps track of the portion of the input string we have not yet cropped.  
+\inline{skip} moves \inline{pos} backwards until the user-provided function \inline{fn} returns true (and we have not reached the left limit of $s$).
+\inline{skip} is used by the main driver function \inline{trim_text_lineartime} which is a function that repeatedly removes any trailing spaces and then, if the length of $s$ is still too large, proceed in removing an entire word. 
+The word is also (like for spaces) removed by the function \inline{skip} which takes care of removing any character until it reaches the first non-alphanumeric character which we are assured to be a space (there are no other characters allowed in $s$).
+
+The complexity of this approach is linear in time and constant in space (if we do not consider the space necessary for the output).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Items and bags}
+\begin{exercise}
+A food bank is developing a system to help reduce its usage of plastic bags. The bank collects food from people that bring it in plastic bags. 
+A plastic bag has a certain capacity $c$, which indicates the amount of food we can fit in it. In particular, a bag with a capacity $c$ can carry up to $c$ unit of goods.
+The goal of the system is to rearrange the food in the warehouse into as few bags as possible to help reduce the waste footprint.
+
+You are given two arrays $F$ and $B$ each consisting of $N$ integers where $F[i]$ is the amount of food currently present in the bag $i$ that has capacity specified in $F[i]$.
+Write a function that returns the minimum number of bags needed to carry all food.
+
+Notice that you are guaranteed $B[i] \geq F[i]$ to always hold.
+    \begin{example}
+        \label{ex:items_and_bags:example1}
+        \hfill \\
+        Given $F=\{1,4,1\}$ and $B=\{,1,5,1\}$ the funcion returns $2$. We could move $1$ unit of food from bag $0$ and put it in the bag $1$ (that currently holds $4$ units of food but has capacity $5$).
+    \end{example}
+    
+    \begin{example}
+        \label{ex:items_and_bags:example2}
+        \hfill \\
+        Given $F=\{2,3,4,2\}$ and $B=\{2,5,7,2\}$ the funcion returns $2$. All food in the bag $0$ can be moved to bag $1$ and all the food in bag $3$ can go in bag $2$.
+    \end{example}
+\end{exercise}
+ 
+
+\subsection{Discussion}
+This problem can be quickly solved with a greedy approach if we realize that we have a total amount of food units equal to $T=\sum F[i]$ that needs to fit into a subset of the $N$ bags we have at our disposal. 
+The optimal arrangement is to fill the bags to their maximum capacity to avoid waste of space and to minimize the number of bags used we better use larger bags firsts as we can stuff more food units in them. 
+Therefore, all we have to do to solve this problem is to sort the bags by capacity in descending order (larger bags first) and to simulate the process of filling them up until all the units of food are stored.
+
+W.r.t to example \ref{ex:items_and_bags:example2}: we have $T=11$ units of food. If we put the first $7$ into the bag $2$ we are left with $T=11-7$ units of food not yet inside a bag. The next biggest bag is the one at index $1$ with a capacity of $5$. This bag can store all the $T$ units of food left. At this point, we can stop the simulation and return $2$.
+
+Listing \ref{list:items_and_bags:solution1} shows an implementation of this idea.
+
+\lstinputlisting[language=c++, caption={Solution based on sorting.},label=list:items_and_bags:solution1]{test/mini_problems/items_and_bags/items_and_bags_solution1.cpp}
+
+The code works by first sorting $B$ in descending order and calculating the total amount of units of food we must store. Notice that we use \inline{std::accumulate} to perform this task instead of an explicit raw loop as it is more idiomatic and expressive.
+The while loop takes care of performing the simulation, and each iteration tries to fill as much food as possible into a bag. The simulation stops when all food is safely inside a bag. 
+Notice that we access \inline{B} using the variable \inline{Bidx} without checking that \inline{Bidx < B.size()} as the problem statement clearly states that there is always enough space among all bags to store all food. Therefore the while loop is guaranteed to put all food inside a bag before we ran out of bags.
+
+The complexity of this approach is $O(Nlog(N))$ due to sorting while the space complexity is $O(1)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Coupons}
+\begin{exercise}
+You want to buy $n$ item from Amazon. Their prices is stored in an array $P$ where $P[i] \geq 0$ contains the price for the item $i$. Amazon offers you the possibility to apply coupons to each item before the checkout and this causes the price of that item to halve.
+For instance, if the full price of an item is 4.60\$, then after applying the coupons it costs $2.30\$$. You can apply coupons to an item multiple times, this means that if you apply the coupon three times to an item with price X\$, its final price will be $\frac{\frac{\frac{X}{2}}{2}}{2} = \frac{X}{2^3}$.
+Your task is to write a function that calculates the minimum number of coupons needed in order to lower the cumulative checkout price for all of the $n$ items by half. 
+
+    \begin{example}
+        \label{ex:coupons:example1}
+        \hfill \\
+        Given $P=\{5,19,8,1\}$ the function should return $3$.  Initially the cart price is $5+19+8+1=33$. By applying two coupons to the item at index $1$ the price lowers to $5+\frac{19}{4}+8+1 = 18.75$ which is still higher than $\frac{33}{2}=16.5$. We can apply a third coupon to the item at index $0$ and the total price becomes $\frac{5}{2}+\frac{19}{4}+8+1 = 16.25$ which is good enough. 
+    \end{example}
+    
+\end{exercise}
+ 
+
+\subsection{Discussion}
+When applying a coupon to an item with price $X$ we are going to save $\frac{X}{2}$ from its original price. If we only had one coupon to use, we would naturally apply it to the most expensive item as this will yield the biggest saving. We can extend this reasoning to $n$ coupons and apply the $n^{th}$ coupon to the most expensive item after having used $n-1$ coupons. 
+To solve this problem we can simulate the process of applying coupons. As we use the coupons we must keep track of the item in the cart with the highest price, to which we can apply the coupon. We repeat this process until the amount of money saved is higher than half of the original cart price. 
+
+A \inline{priority_queue} can be used to keep track of the most expensive item in the cart.
+
+Listing \ref{list:coupons:solution1} implements this idea.
+
+\lstinputlisting[language=c++, caption={Priority-queue basedvsolution.},label=list:coupons:solution1]{test/mini_problems/coupons/coupons_solution1.cpp}
+
+The code works by creating a \inline{priority_queue} where prices are sorted in descending order. It is initialized with the prices in $P$.
+The while loop continuously pop elements from the top of the queue, calculate the amount of money saved by applying the coupon to the popped-out element, and adds the halved prices back into the queue.
+
+If it is not difficult to show that the while loop runs at most $n$ times as if we half the price of each element in $P$, we will as a consequence also halve $\sum P[i]$ (the original cart price). 
+Therefore the time complexity is $O(nlog(n))$ (remember that operations on the queue are $O(log(n))$). The space complexity is $O(n)$ due to the space required by the priority queue itself.

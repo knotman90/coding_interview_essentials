@@ -213,12 +213,12 @@ TEST(longest_consecutive_sequence,
   }
 }
 
-
 TEST(longest_consecutive_sequence,
      test_random_vector_100000_elements_from_negative_100000_to_100000)
 {
   const std::vector<int> base_input =
-      Book::Algorithm::generate_random_vector_in_range(1000000, -100000000, 10000000);
+      Book::Algorithm::generate_random_vector_in_range(
+          1000000, -100000000, 10000000);
   std::vector<size_t> solutions = {};
   {
     std::vector<int> input = base_input;
@@ -231,14 +231,12 @@ TEST(longest_consecutive_sequence,
     const auto ans         = longest_consecutive_sequence_lineartime(input);
     solutions.push_back(ans);
   }
-  //ASSERT_TRUE(solutions.size() > 1);
+  // ASSERT_TRUE(solutions.size() > 1);
   for (const auto &sol : solutions)
   {
     ASSERT_EQ(*solutions.begin(), sol);
   }
 }
-
-
 
 int main(int argc, char **argv)
 {
