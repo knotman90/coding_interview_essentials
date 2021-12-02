@@ -2,7 +2,7 @@ int buy_sell_stock3_linear_space(const std::vector<int>& P)
 {
   if (P.empty())
     return 0;
-    
+
   int buy1    = std::numeric_limits<int>::max();
   int profit1 = std::numeric_limits<int>::min();
   int buy2    = std::numeric_limits<int>::max();

@@ -12,7 +12,6 @@ Node<int>* merge_k_sorted_list_priority_queue(std::vector<Node<int>*> lists)
   if (lists.size() <= 1)
     return lists.front();
 
-
   auto compareNodeWrapper = [](const NodeWrapper<int>& node1,
                                const NodeWrapper<int>& node2) {
     assert(node1.ptr && node2.ptr);

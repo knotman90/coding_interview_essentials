@@ -25,9 +25,9 @@ class LRUCache_logn
     {
       ++time;
       const std::pair<Value, UpdateTime>& valTime = VP[key];
-      const auto val = valTime.first;
-      const auto oldTime = valTime.second;
-      VP[key]                    = {val, time};
+      const auto val                              = valTime.first;
+      const auto oldTime                          = valTime.second;
+      VP[key]                                     = {val, time};
       TK.erase(oldTime);
       TK.insert({time, key});
       return val;
