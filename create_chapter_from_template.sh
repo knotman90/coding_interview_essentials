@@ -104,9 +104,7 @@ echo "\section{Discussion}
 \subsection{Brute-force}
 \label{$NAME:sec:bruteforce}
 
-\begin{minipage}{\linewidth}
-	\lstinputlisting[language=c++, caption={Sample Caption},label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
-\end{minipage}
+\lstinputlisting[language=c++, caption={Sample Caption},label=list:$NAME]{$SOURCE_FOLDER/${SOLUTION_FILE}1.cpp}
 " >>  $TEX_FILE
 
 ####################################

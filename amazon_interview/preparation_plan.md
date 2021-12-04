@@ -57,10 +57,15 @@
 	xzx, z, x
     ```
 - https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/ (done) make chapter with this
-- https://leetcode.com/problems/minimum-window-substring/ (important!) also do an easier version where the array does not contain duplicate chars https://www.youtube.com/watch?v=5xuvqBjRkok&ab_channel=KeepOnCoding   L
-
+- https://leetcode.com/problems/minimum-window-substring/ (important!) also do an easier version where the array does not contain duplicate chars https://www.youtube.com/watch?v=5xuvqBjRkok&ab_channel=KeepOnCoding
 - https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/ (important!)
 - https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/ (could not solve this one!)
+- https://leetcode.com/problems/critical-connections-in-a-network/
+- https://leetcode.com/problems/odd-even-linked-list/
+- https://leetcode.com/problems/subarrays-with-k-different-integers/
+- https://leetcode.com/problems/count-vowel-substrings-of-a-string/
+- https://leetcode.com/problems/count-vowel-substrings-of-a-string/
+- https://leetcode.com/problems/longest-substring-without-repeating-characters/
 ## Leadership principles
 
 ## Low-level design
