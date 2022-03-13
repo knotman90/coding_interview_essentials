@@ -14,9 +14,9 @@
 \chapter{Climb the Stairs}
 \label{ch:stairs_climbing}
 \section*{Introduction}
-This chapter deals with a classic problem often set during the interview process for big tech companies like Amazon or Google. It also shares the same underlying structure, key properties and solutions as many other standard interview problems (for example, the coin change problem in Chapter X) and therefore we can apply the techniques discussed in this chapter to all question where the problem statement is structured: \textit{Given a target find minimum (maximum) cost / path / sum to reach the target}.  
+This chapter deals with a classic problem often set during the interview process for big tech companies like Amazon or Google. It also shares the same underlying structure, key properties and solutions as many other standard interview problems (for example, the coin change problem in Chapter \ref{ch:coin_change}) and therefore we can apply the techniques discussed in this chapter to all question where the problem statement is structured: \textit{Given a target value find the minimum (or equivalently the maximum) cost(path or sum) to reach the targe}.  
 
-The basic approach to solving this problem is problem: \textit{Choose minimum/maximum path among all possible paths before the current state, then add the value for the current state.} but we will examine this in more detail in order to clarify what is meant by words such as \quotes{current} and \quotes{state} and also address a common variation on the problem. 
+The basic approach to solving this problem is always: \textit{Choose minimum/maximum path among all possible paths before the current state, then add the value for the current state.} but we will examine this in more detail in order to clarify what is meant by words such as \quotes{current} and \quotes{state} and also address a common variation on the problem. 
 
 \section{Problem statement}
 \label{sec:stairs_climbing_statement_easy}
@@ -28,7 +28,7 @@ Each time you can either climb $1$ or $2$ steps. In how many distinct ways can y
 
 \begin{example}
 	\hfill \\ 
-	Given $n = 3$ the answer is $3$ because there are three ways (See Figure \ref{fig:stair_example_3} to climb to the top of the stairs:
+	Given $n = 3$ the answer is $3$ because there are three ways (See Figure \ref{fig:stair_example_3}) to climb to the top of the stairs:
 	\begin{enumerate}
 		\item $1$ step + $1$ step + $1$ step
 		\item $1$ step + $2$ steps
@@ -41,7 +41,7 @@ Each time you can either climb $1$ or $2$ steps. In how many distinct ways can y
 
 \begin{example}
 	\hfill \\
-	Given $n = 4$ the answer is $5$ because there are five ways (See Figure \ref{fig:stair_example_5} to climb to the top of the stairs:
+	Given $n = 4$ the answer is $5$ because there are five ways (See Figure \ref{fig:stair_example_5}() to climb to the top of the stairs:
 	\begin{enumerate}
 		\item $1$ step + $1$ step + $1$ step + $1$ step
 		\item $2$ steps + $1$ step + $1$ step
